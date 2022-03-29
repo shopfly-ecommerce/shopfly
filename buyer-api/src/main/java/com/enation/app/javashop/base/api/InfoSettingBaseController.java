@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/settings")
 @Api(description = "联系方式设置")
 @Validated
-public class InfoSettingSellerController {
+public class InfoSettingBaseController {
     @Autowired
     private SettingManager settingManager;
 

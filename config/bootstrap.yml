@@ -1,6 +1,0 @@
-spring:
-  cloud:
-    config:
-      uri: http://192.168.2.191:8888
-      profile: dev
-      label: master

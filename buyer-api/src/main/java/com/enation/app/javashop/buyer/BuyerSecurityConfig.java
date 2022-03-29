@@ -2,7 +2,7 @@
  * 易族智汇（北京）科技有限公司 版权所有。
  * 未经许可，您不得使用此文件。
  * 官方地址：www.javamall.com.cn
-*/
+ */
 package com.enation.app.javashop.buyer;
 
 import com.enation.app.javashop.core.base.DomainHelper;
@@ -72,6 +72,15 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new TokenAuthenticationFilter(buyerAuthenticationService),
                         UsernamePasswordAuthenticationFilter.class);
+        //过滤掉base api 的路径
+
+        http.authorizeRequests().antMatchers("/pages/**"
+                , "/captchas/**"
+                , "/uploaders/**/**"
+                , "/settings/**"
+                , "/regions/**"
+                , "/site-show/**"
+                , "/ueditor/**").anonymous();
 
         //过滤掉swagger的路径
         http.authorizeRequests().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**").anonymous();
@@ -79,7 +88,7 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/debugger/**", "/jquery.min.js", "/order/pay/weixin/**", "/order/pay/callback/**", "/order/pay/query/**", "/pintuan/orders/**", "/pintuan/goods", "/pintuan/goods/**", "/goods/**", "/pages/**", "/focus-pictures/**",
                 "/shops/list", "/shops/{spring:[0-9]+}", "/shops/cats/{spring:[0-9]+}", "/shops/navigations/{spring:[0-9]+}", "/promotions/**", "/view",
                 "/shops/sildes/{spring:[0-9]+}", "/members/logout*", "/passport/**", "/trade/goods/**", "/order/pay/return/**",
-                "/members/asks/goods/{spring:[0-9]+}", "/members/comments/goods/{spring:[0-9]+}", "/members/comments/goods/{spring:[0-9]+}/count", "/distribution/su/**", "/passport/connect/pc/WECHAT/**", "/passport/login-binder/pc/**", "/account-binder/**","/wechat/**","/qq/**","/apple/**","/alipay/**").permitAll().and();
+                "/members/asks/goods/{spring:[0-9]+}", "/members/comments/goods/{spring:[0-9]+}", "/members/comments/goods/{spring:[0-9]+}/count", "/distribution/su/**", "/passport/connect/pc/WECHAT/**", "/passport/login-binder/pc/**", "/account-binder/**", "/wechat/**", "/qq/**", "/apple/**", "/alipay/**").permitAll().and();
         //定义有买家权限才可以访问
         http.authorizeRequests().anyRequest().hasRole(Role.BUYER.name());
         http.headers().addHeaderWriter(xFrameOptionsHeaderWriter());

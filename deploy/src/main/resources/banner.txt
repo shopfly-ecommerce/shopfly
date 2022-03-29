@@ -1,0 +1,11 @@
+${Ansi.CYAN}        _                      _                   ______ ___
+${Ansi.CYAN}       | |                    | |                 |____  / _ \
+${Ansi.CYAN}       | | __ ___   ____ _ ___| |__   ___  _ __       / / | | |
+${Ansi.CYAN}   _   | |/ _` \ \ / / _` / __| '_ \ / _ \| '_ \     / /| | | |
+${Ansi.CYAN}  | |__| | (_| |\ V / (_| \__ \ | | | (_) | |_) |   / / | |_| |
+${Ansi.CYAN}   \____/ \__,_| \_/ \__,_|___/_| |_|\___/| .__/   /_(_) \___/
+${Ansi.CYAN}                                          | |${Ansi.GREEN}  _
+${Ansi.CYAN}                                          |_|${Ansi.GREEN} |_ ._   _. _|_ ${AnsiColor.MAGENTA}o${Ansi.GREEN}  _  ._
+${Ansi.GREEN}                                              |_ | | (_|  |_ | (_) | |
+
+${AnsiColor.WHITE} Running Spring Boot ${spring-boot.version}

@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.1.RELEASE</version>
+    </parent>
+
+    <groupId>com.enation.app.javashop</groupId>
+    <artifactId>javashop-b2c</artifactId>
+    <version>7.1.0</version>
+    <modules>
+
+        <module>framework</module>
+        <module>javashop-core</module>
+        <module>config-server</module>
+        <module>buyer-api</module>
+        <module>seller-api</module>
+        <module>base-api</module>
+        <module>consumer</module>
+<!--        <module>deploy</module>-->
+
+    </modules>
+    <packaging>pom</packaging>
+    <name>javashop-b2c</name>
+    <description>javashop 主工程</description>
+
+    <properties>
+        <docker-registry>registry.cn-beijing.aliyuncs.com/enation/</docker-registry>
+        <docker-server-id>docker-aliyun</docker-server-id>
+        <log4j2.version>2.15.0</log4j2.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <configuration>
+                    <imageName>${docker-registry}${project.artifactId}:7.1.0</imageName>
+                    <baseImage>registry.cn-beijing.aliyuncs.com/javashop-k8s-images/java-alpine:8-cn-unlimited</baseImage>
+                    <entryPoint>["java","-jar", "/opt/${project.build.finalName}.jar" ,"-Dfile.encoding=UTF-8"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/opt/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <forceTags>true</forceTags>
+                    <serverId>${docker-server-id}</serverId>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+</project>

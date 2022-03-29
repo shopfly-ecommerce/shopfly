@@ -1,0 +1,28 @@
+{
+  "pageSize": 3,
+  "currentPageNo": 1,
+  "draw": 0,
+  "recordsTotal": 5,
+  "recordsFiltered": 5,
+  "totalPageCount": 2,
+  "data": [
+    {
+      "customer_id": 1,
+      "company_name": "test",
+      "product_name": "123",
+      "version": "2"
+    },
+    {
+      "customer_id": 3,
+      "company_name": "test3",
+      "product_name": "789",
+      "version": "2"
+    },
+    {
+      "customer_id": 4,
+      "company_name": "test4",
+      "product_name": "5454",
+      "version": "3"
+    }
+  ]
+}

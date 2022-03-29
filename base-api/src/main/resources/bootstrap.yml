@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: base-api
+  cloud:
+    config:
+      uri: http://config-service:8888
+      profile: prod
+      label: k8s
+server:
+  port: 7000

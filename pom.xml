@@ -8,24 +8,21 @@
         <version>2.0.1.RELEASE</version>
     </parent>
 
-    <groupId>com.enation.app.javashop</groupId>
-    <artifactId>javashop-b2c</artifactId>
-    <version>7.1.0</version>
+    <groupId>dev.shopflix</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0</version>
     <modules>
 
         <module>framework</module>
-        <module>javashop-core</module>
-        <module>config-server</module>
-        <module>buyer-api</module>
-        <module>seller-api</module>
-        <module>base-api</module>
-        <module>consumer</module>
+        <module>core</module>
+        <module>api</module>
+<!--        <module>consumer</module>-->
 <!--        <module>deploy</module>-->
 
     </modules>
     <packaging>pom</packaging>
-    <name>javashop-b2c</name>
-    <description>javashop 主工程</description>
+    <name>shopflix</name>
+    <description>shopflix</description>
 
     <properties>
         <docker-registry>registry.cn-beijing.aliyuncs.com/enation/</docker-registry>

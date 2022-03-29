@@ -1,0 +1,9 @@
+${Ansi.CYAN}   ____   _                     __  _  _
+${Ansi.CYAN}  / ___| | |__    ___   _ __   / _|| |(_)__  __
+${Ansi.CYAN}  \___ \ | '_ \  / _ \ | '_ \ | |_ | || |\ \/ /
+${Ansi.CYAN}   ___) || | | || (_) || |_) ||  _|| || | >  <
+${Ansi.CYAN}  |____/ |_| |_| \___/ | .__/ |_|  |_||_|/_/\_\
+${Ansi.CYAN}                       |_|
+
+
+${AnsiColor.WHITE} Running Spring Boot ${spring-boot.version}

@@ -15,9 +15,8 @@
 
         <module>framework</module>
         <module>core</module>
+        <module>consumer</module>
         <module>api</module>
-<!--        <module>consumer</module>-->
-<!--        <module>deploy</module>-->
 
     </modules>
     <packaging>pom</packaging>

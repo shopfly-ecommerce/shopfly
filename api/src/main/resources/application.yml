@@ -1,90 +1,81 @@
-#----------------如果是k8s环境以下内容不用动-----------------------#
 spring:
   profiles:
-    active: prod #指定为生产环境
-
-  rabbitmq:
-    host: rabbitmq.ns-rabbitmq
-    #host: 基础设施ip
-    port: 5672
-    #请创建好自己的vhost 和账号
-    username: javashop
-    password: javashop
-    virtual-host: javashop
-  data:
-    elasticsearch:
-      cluster-name: docker-cluster
-      cluster-nodes: elasticsearch-api-service.ns-elasticsearch:9300
-      #cluster-nodes: 基础设施ip:9300
-      index-name: b2b2c_site
-xxl:
-  job:
-    admin:
-      addresses:  http://xxl-job-service.ns-javashop/xxl-job-admin
-      #addresses:  http://基础设施ip:8080/xxl-job-admin
-    executor:
-      appname: job-executer
-      ip:
-      port: 6999
-      logpath:  /opt/xxl-serverlogs
-      logretentiondays: -1
-    accessToken:
-
-  #----------------如果是k8s环境以上内容不用动-----------------------#
+    active: dev #指定为开发环境
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
 
   #数据库配置
   datasource:
-    url: jdbc:mysql://基础设施ip:3306/demo?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://192.168.2.218:3306/b2c_goods?useUnicode=true&characterEncoding=utf8&autoReconnect=true
     username: root
-    password: 123456
+    password: enation752513
     driver-class-name: com.mysql.jdbc.Driver
     druid:
       web-stat-filter:
         enabled: false
       goods:
-        url: jdbc:mysql://基础设施ip:3306/goods?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+        url: jdbc:mysql://192.168.2.218:3306/b2c_goods?useUnicode=true&characterEncoding=utf8&autoReconnect=true
 
       member:
-        url: jdbc:mysql://基础设施ip:3306/member?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+        url: jdbc:mysql://192.168.2.218:3306/b2c_member?useUnicode=true&characterEncoding=utf8&autoReconnect=true
 
       sss:
-        url: jdbc:mysql://基础设施ip:3306/statistics?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+        url: jdbc:mysql://192.168.2.218:3306/b2c_statistics?useUnicode=true&characterEncoding=utf8&autoReconnect=true
 
       system:
-        url: jdbc:mysql://基础设施ip:3306/system?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+        url: jdbc:mysql://192.168.2.218:3306/b2c_system?useUnicode=true&characterEncoding=utf8&autoReconnect=true
 
       trade:
-        url: jdbc:mysql://基础设施ip:3306/trade?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+        url: jdbc:mysql://192.168.2.218:3306/b2c_trade?useUnicode=true&characterEncoding=utf8&autoReconnect=true
 
       distribution:
-        url: jdbc:mysql://基础设施ip:3306/distribution?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+        url: jdbc:mysql://192.168.2.218:3306/b2c_distribution?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+
+  #rabbitmq
+  rabbitmq:
+    host: 192.168.2.219
+    port: 5672
+    username: b2c
+    password: b2c
+    virtual-host: b2c
+
+  #elasticsearch配置
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: 192.168.2.219:9300
+      index-name: b2c
 
 #redis 配置
 redis:
   type: standalone
   config :
     type: manual
-  host: 基础设施ip
-  port: 6379
-  password:
+  host: 192.168.2.219
+  port: 6382
+  password: 123456
   maxIdle: 500
   maxTotal: 500
   maxWaitMillis: -1
 
 
-# 开发环境日志为error
+# 开发环境日志为debug
 logging:
   level:
     org.springframework: ERROR
-    com.enation.app : ERROR
+    com.enation.app : DEBUG
 
 #java 系统配置
-#具体请参考：http://doc.javamall.com.cn/current/devlop/config-server.html
-
 javashop:
   product: stand #定义系统标准产品，微服务指定为： microservice
   license[0]: abcde #license请向售后人员索要
-  token-secret: 123456787980999 #请改为自己的秘钥，且不要透漏给任何人！！
+  #token加密秘钥，请务必更换此词串，且注意保密
+  token-secret: 85d6ce9da4e943ff4dcd367ab3d94164
   timeout:
     accessTokenTimeout:  1200 #访问token失效时间 单位秒
     refreshTokenTimeout: 1800 #刷新token失效时间 单位秒
@@ -97,5 +88,14 @@ javashop:
     mobileBuyer: m.buyer.javamall.com.cn  #配置为您买家端WAP的域名
     callback: api.buyerjavamall.com.cn #请配置为您站点的买家端的api域名，如果不配置此项默认读取站点买家端api的域名，用来做支付新人登录回调
 
-
-
+xxl:
+  job:
+    admin:
+      addresses:  http://192.168.2.218:52526/xxl-job-admin
+    executor:
+      appname: job-executer
+      ip:
+      port: 6999
+      logpath:  /opt/xxl-serverlogs
+      logretentiondays: -1
+    accessToken:

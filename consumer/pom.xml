@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>javashop-b2c</artifactId>
-        <groupId>com.enation.app.javashop</groupId>
-        <version>7.1.0</version>
+        <artifactId>parent</artifactId>
+        <groupId>dev.shopflix</groupId>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>b2c-consumer</artifactId>
+    <artifactId>consumer</artifactId>
 
 
     <dependencies>
@@ -23,11 +23,10 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-
         <dependency>
-            <groupId>com.enation.app.javashop</groupId>
-            <artifactId>b2c-javashop-core</artifactId>
-            <version>7.1.0</version>
+            <groupId>dev.shopflix</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

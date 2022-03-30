@@ -34,7 +34,7 @@ public class JavashopAppRunner implements ApplicationRunner {
 
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     /**
      * 在项目加载时指定认证信息获取者
@@ -45,10 +45,10 @@ public class JavashopAppRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        if (javashopConfig.getTokenSecret() == null) {
+        if (shopflixConfig.getTokenSecret() == null) {
             String errorMsg = "配置异常:未配置token秘钥，请到config配置中心检查如下：\n";
             errorMsg += "===========================\n";
-            errorMsg += "   javashop.token-secret\n";
+            errorMsg += "   shopflix.token-secret\n";
             errorMsg += "===========================";
 
             throw new Exception(errorMsg);

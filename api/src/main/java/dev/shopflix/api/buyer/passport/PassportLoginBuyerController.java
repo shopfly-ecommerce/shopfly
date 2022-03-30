@@ -12,7 +12,7 @@ import dev.shopflix.core.member.MemberErrorCode;
 import dev.shopflix.core.member.model.vo.MemberVO;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.core.passport.service.PassportManager;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.exception.ServiceException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -49,7 +49,7 @@ public class PassportLoginBuyerController {
     @Autowired
     private SmsClient smsClient;
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     @PostMapping(value = "/login/smscode/{mobile}")
     @ApiOperation(value = "发送验证码")
@@ -66,7 +66,7 @@ public class PassportLoginBuyerController {
         passportManager.sendLoginSmsCode(mobile);
         //清清除图片验证码信息
         captchaClient.deleteCode(uuid, captcha, SceneType.LOGIN.name());
-        return javashopConfig.getSmscodeTimout() / 60 + "";
+        return shopflixConfig.getSmscodeTimout() / 60 + "";
     }
 
     @GetMapping("/login")

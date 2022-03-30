@@ -23,7 +23,7 @@ import java.util.List;
  * 2019-02-18 上午11:44
  */
 @Service
-@ConditionalOnProperty(value = "javashop.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
 public class PintuanClientDefaultImpl implements PintuanClient {
     @Autowired
     private PintuanManager pintuanManager;

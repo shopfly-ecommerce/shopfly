@@ -5,7 +5,7 @@
 */
 package dev.shopflix.core.base;
 
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class DomainHelper {
 
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     @Autowired
     private DomainSettings domainSettings;
@@ -50,7 +50,7 @@ public class DomainHelper {
         if (buyerDomain.indexOf("http") != -1) {
             return buyerDomain;
         }
-        return javashopConfig.getScheme() + buyerDomain;
+        return shopflixConfig.getScheme() + buyerDomain;
 
     }
 
@@ -65,7 +65,7 @@ public class DomainHelper {
         if (mobileDomain.indexOf("http") != -1) {
             return mobileDomain;
         }
-        return javashopConfig.getScheme() + mobileDomain;
+        return shopflixConfig.getScheme() + mobileDomain;
 
     }
 
@@ -111,7 +111,7 @@ public class DomainHelper {
         if (callback.indexOf("http") != -1) {
             return callback;
         }
-        return javashopConfig.getScheme() + callback;
+        return shopflixConfig.getScheme() + callback;
     }
 
     /**

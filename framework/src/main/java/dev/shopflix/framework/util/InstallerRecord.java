@@ -10,7 +10,7 @@ import dev.shopflix.framework.context.ThreadContextHolder;
 import javax.servlet.http.HttpServletRequest;
 
 
-public class LoggerPaser {
+public class InstallerRecord {
 
     private static Integer line = 0;
 

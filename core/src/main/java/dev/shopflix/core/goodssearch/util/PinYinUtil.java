@@ -24,7 +24,7 @@ public class PinYinUtil {
 
 	
 	public static void main(String[] args) {
-		String str="javashop网店系统";
+		String str="shopflix网店系统";
 		String pinyin  = getPingYin(str);
 		System.out.println(pinyin);
 		

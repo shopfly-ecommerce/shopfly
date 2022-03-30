@@ -31,7 +31,7 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
     public static final String QR_URL_PREFIX = "weixin://wxpay/bizpayurl[?]pr=";
     public static final String CACHE_KEY_PREFIX = "pay_";
 
-    public final String siteName = "javashop商城订单";
+    public final String siteName = "shopflix商城订单";
 
 
     @Override

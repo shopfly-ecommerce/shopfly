@@ -14,7 +14,7 @@ import dev.shopflix.core.member.model.dto.MemberDTO;
 import dev.shopflix.core.member.model.vo.MemberVO;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.core.passport.service.PassportManager;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.validation.annotation.Mobile;
@@ -57,7 +57,7 @@ public class PassportRegisterBuyerController {
     @Autowired
     private SmsClient smsClient;
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     @PostMapping(value = "/register/smscode/{mobile}")
     @ApiOperation(value = "发送验证码")
@@ -74,7 +74,7 @@ public class PassportRegisterBuyerController {
         passportManager.sendRegisterSmsCode(mobile);
         //清除缓存图片验证码信息
         captchaClient.deleteCode(uuid, captcha, SceneType.REGISTER.name());
-        return javashopConfig.getSmscodeTimout() / 60 + "";
+        return shopflixConfig.getSmscodeTimout() / 60 + "";
     }
 
     @PostMapping("/register/pc")

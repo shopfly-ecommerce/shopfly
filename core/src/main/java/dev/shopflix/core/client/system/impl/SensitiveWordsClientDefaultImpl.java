@@ -21,7 +21,7 @@ import java.util.List;
  * @since v7.0.0
  */
 @Service
-@ConditionalOnProperty(value="javashop.product", havingValue="stand")
+@ConditionalOnProperty(value="shopflix.product", havingValue="stand")
 public class SensitiveWordsClientDefaultImpl implements SensitiveWordsClient {
 
     @Autowired

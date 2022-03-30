@@ -12,7 +12,7 @@ import dev.shopflix.core.member.MemberErrorCode;
 import dev.shopflix.core.member.model.dos.Member;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.core.passport.service.PassportManager;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.auth.Token;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.exception.ResourceNotFoundException;
@@ -48,7 +48,7 @@ public class PassportManagerImpl implements PassportManager {
     @Autowired
     private PassportManager passportManager;
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
     @Autowired
     private TokenManager tokenManager;
 

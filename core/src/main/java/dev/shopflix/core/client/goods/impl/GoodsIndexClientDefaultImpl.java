@@ -22,7 +22,7 @@ import java.util.Map;
  * @since v7.0.0
  */
 @Service
-@ConditionalOnProperty(value="javashop.product", havingValue="stand")
+@ConditionalOnProperty(value="shopflix.product", havingValue="stand")
 public class GoodsIndexClientDefaultImpl implements GoodsIndexClient {
 
     @Autowired

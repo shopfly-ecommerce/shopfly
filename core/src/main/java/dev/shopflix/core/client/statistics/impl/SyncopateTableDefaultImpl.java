@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * 2018-06-22 上午8:41
  */
 @Service
-@ConditionalOnProperty(value = "javashop.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
 public class SyncopateTableDefaultImpl implements SyncopateTableClient {
     @Autowired
     private SyncopateTableManager syncopateTableManager;

@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * javashop配置
+ * shopflix 配置
  *
  * @author zh
  * @version v7.0
@@ -18,40 +18,40 @@ import org.springframework.context.annotation.Configuration;
  * @since v7.0
  */
 @Configuration
-@ConfigurationProperties(prefix = "javashop")
-public class JavashopConfig {
+@ConfigurationProperties(prefix = "shopflix")
+public class ShopflixConfig {
 
     /**
      * token加密秘钥
      */
     private String tokenSecret;
 
-    @Value("${javashop.timeout.accessTokenTimeout:#{null}}")
+    @Value("${shopflix.timeout.accessTokenTimeout:#{null}}")
     private Integer accessTokenTimeout;
-    @Value("${javashop.timeout.refreshTokenTimeout:#{null}}")
+    @Value("${shopflix.timeout.refreshTokenTimeout:#{null}}")
     private Integer refreshTokenTimeout;
-    @Value("${javashop.timeout.appAccessTokenTimeout:#{null}}")
+    @Value("${shopflix.timeout.appAccessTokenTimeout:#{null}}")
     private Integer appAccessTokenTimeout;
-    @Value("${javashop.timeout.appRefreshTokenTimeout:#{null}}")
+    @Value("${shopflix.timeout.appRefreshTokenTimeout:#{null}}")
     private Integer appRefreshTokenTimeout;
-    @Value("${javashop.timeout.captchaTimout:#{null}}")
+    @Value("${shopflix.timeout.captchaTimout:#{null}}")
     private Integer captchaTimout;
-    @Value("${javashop.timeout.smscodeTimout:#{null}}")
+    @Value("${shopflix.timeout.smscodeTimout:#{null}}")
     private Integer smscodeTimout;
-    @Value("${javashop.isDemoSite:#{false}}")
+    @Value("${shopflix.isDemoSite:#{false}}")
     private boolean isDemoSite;
 
-    @Value("${javashop.ssl:#{false}}")
+    @Value("${shopflix.ssl:#{false}}")
     private boolean ssl;
 
-    @Value("${javashop.debugger:#{false}}")
+    @Value("${shopflix.debugger:#{false}}")
     private boolean debugger;
 
 
     /**
      * 小程序二维码分享图片存储位置
      */
-    @Value("${javashop.mini-program.code-unlimit-position:#{null}}")
+    @Value("${shopflix.mini-program.code-unlimit-position:#{null}}")
     @Deprecated
     private String codePosition;
 
@@ -59,19 +59,19 @@ public class JavashopConfig {
     /**
      * 缓冲次数
      */
-    @Value("${javashop.pool.stock.max-update-timet:#{null}}")
+    @Value("${shopflix.pool.stock.max-update-timet:#{null}}")
     private Integer maxUpdateTime;
 
     /**
      * 缓冲区大小
      */
-    @Value("${javashop.pool.stock.max-pool-size:#{null}}")
+    @Value("${shopflix.pool.stock.max-pool-size:#{null}}")
     private Integer maxPoolSize;
 
     /**
      * 缓冲时间（秒数）
      */
-    @Value("${javashop.pool.stock.max-lazy-second:#{null}}")
+    @Value("${shopflix.pool.stock.max-lazy-second:#{null}}")
     private Integer maxLazySecond;
 
     /**
@@ -79,10 +79,10 @@ public class JavashopConfig {
      * false：关闭（如果配置文件中没有配置此项，则默认为false）
      * true：开启（优点：缓解程序压力；缺点：有可能会导致商家中心商品库存数量显示延迟；）
      */
-    @Value("${javashop.pool.stock:#{false}}")
+    @Value("${shopflix.pool.stock:#{false}}")
     private boolean stock;
 
-    public JavashopConfig() {
+    public ShopflixConfig() {
     }
 
 

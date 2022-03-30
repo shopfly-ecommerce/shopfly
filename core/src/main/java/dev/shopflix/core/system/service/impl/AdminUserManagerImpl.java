@@ -13,7 +13,7 @@ import dev.shopflix.core.system.model.vo.AdminLoginVO;
 import dev.shopflix.core.system.model.vo.AdminUserVO;
 import dev.shopflix.core.system.service.AdminUserManager;
 import dev.shopflix.core.system.service.RoleSeller;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.auth.Token;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.ThreadContextHolder;
@@ -52,7 +52,7 @@ public class AdminUserManagerImpl implements AdminUserManager {
     @Autowired
     private RoleSeller roleManager;
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
     @Autowired
     private Cache cache;
     @Autowired

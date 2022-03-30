@@ -8,7 +8,7 @@ package dev.shopflix.core.payment.plugin.alipay;
 import com.alipay.api.AlipayClient;
 import dev.shopflix.core.payment.model.enums.ClientType;
 import dev.shopflix.core.payment.model.vo.PayBill;
-import dev.shopflix.core.payment.plugin.alipay.executor.JavaShopPayClient;
+import dev.shopflix.core.payment.plugin.alipay.executor.SfAlipayPayClient;
 import dev.shopflix.core.payment.service.AbstractPaymentPlugin;
 import dev.shopflix.framework.logs.Debugger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public class AlipayPluginConfig extends AbstractPaymentPlugin {
 
-    protected final String siteName = "javashop商城";
+    protected final String siteName = "shopflix商城";
 
     @Autowired
     private Debugger debugger;
@@ -60,7 +60,7 @@ public class AlipayPluginConfig extends AbstractPaymentPlugin {
         debugger.log("使用如下参数构建client:");
         debugger.log(config.toString());
 
-        AlipayClient alipayClient = new JavaShopPayClient(AlipayConfig.gatewayUrl, appId, merchantPrivateKey, "json", AlipayConfig.charset, alipayPublicKey, AlipayConfig.signType);
+        AlipayClient alipayClient = new SfAlipayPayClient(AlipayConfig.gatewayUrl, appId, merchantPrivateKey, "json", AlipayConfig.charset, alipayPublicKey, AlipayConfig.signType);
 
         return alipayClient;
     }

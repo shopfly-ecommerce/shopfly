@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * javashop阿里支付客户端
+ * shopflix 阿里支付客户端
  *
  * @author zh
  * @version v7.0
@@ -27,7 +27,7 @@ import java.util.*;
  * @since v7.0
  */
 
-public class JavaShopPayClient extends DefaultAlipayClient {
+public class SfAlipayPayClient extends DefaultAlipayClient {
 
     private String serverUrl;
     private String appId;
@@ -46,7 +46,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
         Security.setProperty("jdk.certpath.disabledAlgorithms", "");
     }
 
-    public JavaShopPayClient(String serverUrl, String appId, String privateKey) {
+    public SfAlipayPayClient(String serverUrl, String appId, String privateKey) {
         super(serverUrl, appId, privateKey);
 
         this.serverUrl = serverUrl;
@@ -55,7 +55,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
 
     }
 
-    public JavaShopPayClient(String serverUrl, String appId, String privateKey, String format) {
+    public SfAlipayPayClient(String serverUrl, String appId, String privateKey, String format) {
         super(serverUrl, appId, privateKey, format);
         this.serverUrl = serverUrl;
         this.appId = appId;
@@ -63,7 +63,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
         this.format = format;
     }
 
-    public JavaShopPayClient(String serverUrl, String appId, String privateKey, String format, String charset) {
+    public SfAlipayPayClient(String serverUrl, String appId, String privateKey, String format, String charset) {
         super(serverUrl, appId, privateKey, format, charset);
         this.serverUrl = serverUrl;
         this.appId = appId;
@@ -73,7 +73,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
 
     }
 
-    public JavaShopPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey) {
+    public SfAlipayPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey) {
         super(serverUrl, appId, privateKey, format, charset, alipayPublicKey);
         this.serverUrl = serverUrl;
         this.appId = appId;
@@ -83,7 +83,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
 
     }
 
-    public JavaShopPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey, String signType) {
+    public SfAlipayPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey, String signType) {
         super(serverUrl, appId, privateKey, format, charset, alipayPublicKey, signType);
         this.serverUrl = serverUrl;
         this.appId = appId;
@@ -93,7 +93,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
         this.signType = signType;
     }
 
-    public JavaShopPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey, String signType, String proxyHost, int proxyPort) {
+    public SfAlipayPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey, String signType, String proxyHost, int proxyPort) {
         super(serverUrl, appId, privateKey, format, charset, alipayPublicKey, signType, proxyHost, proxyPort);
         this.serverUrl = serverUrl;
         this.appId = appId;
@@ -103,7 +103,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
         this.signType = signType;
     }
 
-    public JavaShopPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey, String signType, String encryptKey, String encryptType) {
+    public SfAlipayPayClient(String serverUrl, String appId, String privateKey, String format, String charset, String alipayPublicKey, String signType, String encryptKey, String encryptType) {
         super(serverUrl, appId, privateKey, format, charset, alipayPublicKey, signType, encryptKey, encryptType);
         this.serverUrl = serverUrl;
         this.appId = appId;
@@ -114,7 +114,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
         this.encryptType = encryptType;
     }
 
-    public JavaShopPayClient(CertAlipayRequest certAlipayRequest) throws AlipayApiException {
+    public SfAlipayPayClient(CertAlipayRequest certAlipayRequest) throws AlipayApiException {
         super(certAlipayRequest);
     }
 
@@ -145,7 +145,7 @@ public class JavaShopPayClient extends DefaultAlipayClient {
         } else {
             /*******************************************************************************
              * 注意：
-             *     这个类的作用就是覆写这里，目的是形成javashop前端需要的form 和form item格式
+             *     这个类的作用就是覆写这里，目的是形成 shopflix 前端需要的form 和form item格式
              * 原因：
              *     前后端分离，vue无法通过form表单跳转
              *******************************************************************************/

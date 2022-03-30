@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  * 2018-08-14 下午1:39
  */
 @Service
-@ConditionalOnProperty(value = "javashop.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
 public class DistributionOrderClientDefaultImpl implements DistributionOrderClient {
 
     @Autowired

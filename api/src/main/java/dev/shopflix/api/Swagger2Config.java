@@ -184,7 +184,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .title("买家Api文档")
                 .description("买家中心API接口")
                 .version("7.0")
-                .contact(new Contact("Javashop", "http://www.javamall.com.cn", "service@javashop.cn"))
+                .contact(new Contact("shopflix", "https://www.shopflix.dev", "service@shopflix.dev"))
                 .build();
     }
 }

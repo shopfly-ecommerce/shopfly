@@ -14,7 +14,7 @@ import dev.shopflix.core.member.model.dos.Member;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.core.member.service.MemberSecurityManager;
 import dev.shopflix.core.passport.service.PassportManager;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.util.JsonUtil;
@@ -60,7 +60,7 @@ public class PassportFindPasswordBuyerController {
     @Autowired
     private SmsClient smsClient;
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
 
     @ApiOperation(value = "获取账户信息")
@@ -96,7 +96,7 @@ public class PassportFindPasswordBuyerController {
         map.put("mobile", mobile);
         map.put("uname", name.substring(0, 1) + "***" + name.substring(name.length() - 1, name.length()));
         map.put("uuid", uuid);
-        cache.put(uuid, member, javashopConfig.getSmscodeTimout());
+        cache.put(uuid, member, shopflixConfig.getSmscodeTimout());
         return JsonUtil.objectToJson(map);
 
     }
@@ -118,7 +118,7 @@ public class PassportFindPasswordBuyerController {
         Member member = (Member) cache.get(uuid);
         if (member != null) {
             passportManager.sendFindPasswordCode(member.getMobile());
-            return javashopConfig.getSmscodeTimout() / 60 + "";
+            return shopflixConfig.getSmscodeTimout() / 60 + "";
         }
         throw new ServiceException(MemberErrorCode.E119.code(), "请先对当前用户进行身份校验");
     }

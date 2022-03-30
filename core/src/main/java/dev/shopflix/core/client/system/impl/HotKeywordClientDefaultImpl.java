@@ -22,7 +22,7 @@ import java.util.List;
  * @since v7.1.0
  */
 @Service
-@ConditionalOnProperty(value="javashop.product", havingValue="stand")
+@ConditionalOnProperty(value="shopflix.product", havingValue="stand")
 public class HotKeywordClientDefaultImpl implements HotkeywordClient {
 
     @Autowired

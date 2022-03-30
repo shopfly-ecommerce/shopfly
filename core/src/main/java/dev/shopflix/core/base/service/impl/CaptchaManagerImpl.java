@@ -10,7 +10,7 @@ import dev.shopflix.core.base.SettingGroup;
 import dev.shopflix.core.base.service.CaptchaManager;
 import dev.shopflix.core.base.service.SettingManager;
 import dev.shopflix.core.system.model.vo.SiteSetting;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.util.JsonUtil;
@@ -38,7 +38,7 @@ public class CaptchaManagerImpl implements CaptchaManager {
     @Autowired
     private Cache cache;
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
     @Autowired
     private SettingManager settingManager;
 
@@ -108,7 +108,7 @@ public class CaptchaManagerImpl implements CaptchaManager {
             g.setColor(new Color(30 + random.nextInt(80), 30 + random.nextInt(80), 30 + random.nextInt(80)));
             g.drawString(rand, 30 * i + 20, 58);
         }
-        cache.put(CachePrefix.CAPTCHA.getPrefix() + uuid + "_" + scene, sRand.toLowerCase(), javashopConfig.getCaptchaTimout());
+        cache.put(CachePrefix.CAPTCHA.getPrefix() + uuid + "_" + scene, sRand.toLowerCase(), shopflixConfig.getCaptchaTimout());
         // 图象生效
         g.dispose();
         // 输出图象到页面

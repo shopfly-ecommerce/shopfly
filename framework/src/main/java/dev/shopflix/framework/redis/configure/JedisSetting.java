@@ -29,7 +29,7 @@ public class JedisSetting {
 		poolConfig.setMaxIdle(config.getMaxIdle()==null?(GenericObjectPoolConfig.DEFAULT_MAX_IDLE * 2):config.getMaxIdle());
 		poolConfig.setMinIdle(GenericObjectPoolConfig.DEFAULT_MIN_IDLE);
 		poolConfig.setMaxWaitMillis(config.getMaxWaitMillis()==null?1000L:config.getMaxWaitMillis());
-		poolConfig.setJmxNamePrefix("javashop-redis-pool");
+		poolConfig.setJmxNamePrefix("shopflix-redis-pool");
 		poolConfig.setJmxEnabled(true);
 		poolConfig.setTestOnBorrow(true);
 		

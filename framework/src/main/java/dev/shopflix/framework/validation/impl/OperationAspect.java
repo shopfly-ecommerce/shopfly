@@ -5,7 +5,7 @@
 */
 package dev.shopflix.framework.validation.impl;
 
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.exception.SystemErrorCodeV1;
 import dev.shopflix.framework.validation.annotation.Operation;
@@ -29,13 +29,13 @@ import org.springframework.stereotype.Component;
 public class OperationAspect {
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Before("@annotation(operation)")
     public void doAfter(Operation operation) throws Exception {
-        if (javashopConfig.getIsDemoSite()) {
+        if (shopflixConfig.getIsDemoSite()) {
             if (logger.isDebugEnabled()) {
                 logger.debug("演示站点禁止此操作");
             }

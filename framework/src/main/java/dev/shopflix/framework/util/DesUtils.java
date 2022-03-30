@@ -24,7 +24,7 @@ public class DesUtils {
 	/**
 	 * 密钥
  	 */
-	private final static String SECRETKEY = "javashop@enation@89889$#365#$";
+	private final static String SECRETKEY = "shopflix@enation@89889$#365#$";
 
 	/**
 	 * 向量

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-@ConditionalOnProperty(value = "javashop.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
 public class MemberHistoryReceiptDefaultImpl implements MemberHistoryReceiptClient {
 
     @Autowired

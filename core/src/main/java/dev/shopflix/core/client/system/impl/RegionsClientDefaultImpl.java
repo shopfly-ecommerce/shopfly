@@ -22,7 +22,7 @@ import java.util.List;
  * @Date: 2018/7/27 11:18
  */
 @Service
-@ConditionalOnProperty(value = "javashop.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
 public class RegionsClientDefaultImpl implements RegionsClient {
 
     @Autowired

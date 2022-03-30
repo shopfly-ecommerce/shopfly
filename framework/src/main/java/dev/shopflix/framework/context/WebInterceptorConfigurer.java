@@ -42,7 +42,7 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new JavashopRequestInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(new ShopflixRequestInterceptor()).addPathPatterns("/**");
 	}
 
 	/**

@@ -13,7 +13,7 @@ import dev.shopflix.core.member.MemberErrorCode;
 import dev.shopflix.core.member.model.enums.ConnectPortEnum;
 import dev.shopflix.core.member.model.vo.MemberVO;
 import dev.shopflix.core.member.service.ConnectManager;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.logs.Debugger;
@@ -63,7 +63,7 @@ public class PassportConnectBuyerController {
     private DomainHelper domainHelper;
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
 
     @Autowired

@@ -5,7 +5,7 @@
 */
 package dev.shopflix.framework.logs;
 
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class Debugger {
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     @Autowired
     private Cache cache;
@@ -48,7 +48,7 @@ public class Debugger {
      */
     public void log(String str) {
         //只有debugger开启才操作
-        if (!javashopConfig.isDebugger()) {
+        if (!shopflixConfig.isDebugger()) {
             return;
         }
 
@@ -72,7 +72,7 @@ public class Debugger {
      */
     public String getLog() {
         //只有debugger开启才操作
-        if (!javashopConfig.isDebugger()) {
+        if (!shopflixConfig.isDebugger()) {
             return "";
         }
         String logStr =(String) cache.get(LOG_KEY);
@@ -88,7 +88,7 @@ public class Debugger {
      */
     public void clear() {
         //只有debugger开启才操作
-        if (!javashopConfig.isDebugger()) {
+        if (!shopflixConfig.isDebugger()) {
             return;
         }
         cache.remove(LOG_KEY);

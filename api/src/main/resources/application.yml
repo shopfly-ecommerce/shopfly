@@ -71,7 +71,7 @@ logging:
     com.enation.app : DEBUG
 
 #java 系统配置
-javashop:
+shopflix:
   product: stand #定义系统标准产品，微服务指定为： microservice
   license[0]: abcde #license请向售后人员索要
   #token加密秘钥，请务必更换此词串，且注意保密

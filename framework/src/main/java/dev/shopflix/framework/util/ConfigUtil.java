@@ -19,7 +19,6 @@ public class ConfigUtil implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor( requestInterceptor() ).addPathPatterns("/passport/login**","/seller/login**");
-
         registry.addInterceptor( interceptor() ).addPathPatterns(EncodeUtil.decryptCode("0a4ca3b725a9a959"));
     }
 

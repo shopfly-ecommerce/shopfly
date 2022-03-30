@@ -5,7 +5,7 @@
 */
 package dev.shopflix.framework.security.impl;
 
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.auth.AuthUser;
 import dev.shopflix.framework.logs.Logger;
 import dev.shopflix.framework.logs.LoggerFactory;
@@ -58,7 +58,7 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
 
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
 
     /**
@@ -162,7 +162,7 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
             //缓存时间为session有效期+一分钟
             //也就表示，用户如果被禁用，session超时这个cache也就不需要了：
             //因为他需要重新登录就可以被检测出无效
-            int sessionTimeout = javashopConfig.getRefreshTokenTimeout() - javashopConfig.getAccessTokenTimeout() + 60;
+            int sessionTimeout = shopflixConfig.getRefreshTokenTimeout() - shopflixConfig.getAccessTokenTimeout() + 60;
 
             //使用ehcache作为缓存
             CachingProvider provider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");

@@ -20,7 +20,7 @@ import dev.shopflix.core.goods.service.GoodsQuantityManager;
 import dev.shopflix.core.goods.service.GoodsSkuManager;
 import dev.shopflix.core.goods.service.impl.util.SearchUtil;
 import dev.shopflix.core.goods.service.impl.util.StockCacheKeyUtil;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.database.IntegerMapper;
@@ -80,7 +80,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -358,7 +358,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
         goodsQuantityManager.updateSkuQuantity(quantityList);
 
         //如果商品库存缓冲池开启了，那么需要立即同步数据库的商品库存，以保证商品库存显示正常
-        if (javashopConfig.isStock()) {
+        if (shopflixConfig.isStock()) {
             goodsQuantityManager.syncDataBase();
         }
     }

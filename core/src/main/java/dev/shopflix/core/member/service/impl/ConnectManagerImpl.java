@@ -31,7 +31,7 @@ import dev.shopflix.core.member.plugin.weibo.WeiboAbstractConnectLoginPlugin;
 import dev.shopflix.core.member.service.ConnectManager;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.core.system.model.vo.SiteSetting;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.context.UserContext;
@@ -95,7 +95,7 @@ public class ConnectManagerImpl implements ConnectManager {
     private DomainHelper domainHelper;
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     @Autowired
     private SettingClient settingClient;
@@ -310,12 +310,12 @@ public class ConnectManagerImpl implements ConnectManager {
         }
         //将信任登录的相关信息存入redis中
         auth2Token.setType(type);
-        cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token, javashopConfig.getCaptchaTimout());
+        cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token, shopflixConfig.getCaptchaTimout());
 
-        debugger.log("将token信息写入缓存，超时时间为：" + javashopConfig.getCaptchaTimout());
+        debugger.log("将token信息写入缓存，超时时间为：" + shopflixConfig.getCaptchaTimout());
 
         if (logger.isDebugEnabled()) {
-            this.logger.debug(new Date() + " " + uuid + " 登录授权，授权时间为" + javashopConfig.getCaptchaTimout());
+            this.logger.debug(new Date() + " " + uuid + " 登录授权，授权时间为" + shopflixConfig.getCaptchaTimout());
         }
         //如果在会员中心绑定账号，不需要返回新的会员信息
         if ("member".equals(mem)) {

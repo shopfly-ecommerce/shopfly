@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/debugger/payment")
-@ConditionalOnProperty(value = "javashop.debugger", havingValue = "true")
+@ConditionalOnProperty(value = "shopflix.debugger", havingValue = "true")
 public class WeixinPaymentCheckController {
 
     @Autowired

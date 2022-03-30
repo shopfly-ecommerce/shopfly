@@ -5,7 +5,7 @@
 */
 package dev.shopflix.core.payment.plugin.alipay.executor;
 /**
- * javashop支付相应对象
+ * shopflix 支付相应对象
  *
  * @author zh
  * @version v7.0
@@ -16,7 +16,7 @@ package dev.shopflix.core.payment.plugin.alipay.executor;
 import com.alipay.api.AlipayResponse;
 import dev.shopflix.core.payment.model.vo.Form;
 
-public class JavaShopPayResponse extends AlipayResponse {
+public class SfAliPayResponse extends AlipayResponse {
     /**
      * 组织好数据结构的表单信息
      */

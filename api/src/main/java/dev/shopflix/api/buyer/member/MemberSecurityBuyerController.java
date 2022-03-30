@@ -13,7 +13,7 @@ import dev.shopflix.core.member.MemberErrorCode;
 import dev.shopflix.core.member.model.dos.Member;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.core.member.service.MemberSecurityManager;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.UserContext;
 import dev.shopflix.framework.exception.ServiceException;
@@ -56,7 +56,7 @@ public class MemberSecurityBuyerController {
     @Autowired
     private Cache cache;
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     @PostMapping(value = "/security/send")
     @ApiOperation(value = "发送手机验证验证码")
@@ -78,7 +78,7 @@ public class MemberSecurityBuyerController {
         captchaClient.deleteCode(uuid, captcha, SceneType.VALIDATE_MOBILE.name());
         memberSecurityManager.sendValidateSmsCode(member.getMobile());
         //将验证码失效时间返回，用于前端提示
-        return javashopConfig.getSmscodeTimout() / 60 + "";
+        return shopflixConfig.getSmscodeTimout() / 60 + "";
     }
 
 

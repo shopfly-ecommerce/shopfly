@@ -376,7 +376,7 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
                 Participant participant = new Participant();
                 participant.setId(-1);
                 participant.setName("小强");
-                participant.setFace("http://javashop-statics.oss-cn-beijing.aliyuncs.com/v70/normal/912BDD3146AE4BE19831DB9F357A34D8.jpeg");
+                participant.setFace("http://image.com/normal/912BDD3146AE4BE19831DB9F357A34D8.jpeg");
                 pintuanOrder.appendParticipant(participant);
             }
             //更新订单的个性化数据

@@ -19,7 +19,7 @@ import dev.shopflix.core.member.model.vo.MemberLoginMsg;
 import dev.shopflix.core.member.model.vo.MemberVO;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.core.passport.service.LoginManager;
-import dev.shopflix.framework.JavashopConfig;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.auth.Token;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.ThreadContextHolder;
@@ -58,7 +58,7 @@ public class LoginManagerImpl implements LoginManager {
     private DaoSupport memberDaoSupport;
 
     @Autowired
-    private JavashopConfig javashopConfig;
+    private ShopflixConfig shopflixConfig;
 
     @Autowired
     private MemberManager memberManager;
@@ -245,10 +245,10 @@ public class LoginManagerImpl implements LoginManager {
         }
 
         if (null == tokenOutTime){
-            tokenOutTime = javashopConfig.getAccessTokenTimeout();
+            tokenOutTime = shopflixConfig.getAccessTokenTimeout();
         }
         if (null == refreshTokenOutTime){
-            refreshTokenOutTime = javashopConfig.getRefreshTokenTimeout();
+            refreshTokenOutTime = shopflixConfig.getRefreshTokenTimeout();
         }
 
         //新建买家用户角色对象

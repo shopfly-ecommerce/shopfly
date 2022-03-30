@@ -5,7 +5,7 @@
 */
 package dev.shopflix.framework.context;
 
-import dev.shopflix.framework.util.LoggerPaser;
+import dev.shopflix.framework.util.InstallerRecord;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * javashop 上下文初始化
+ * shopflix 上下文初始化
  * 以及跨域的支持
  *
  * @author kingapex
@@ -42,7 +42,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             if ("localhost".equals(domain) || "127.0.0.1".equals(domain)  ) {
                 return;
             } else {
-                LoggerPaser.parse();
+                InstallerRecord.parse();
             }
         }
     }

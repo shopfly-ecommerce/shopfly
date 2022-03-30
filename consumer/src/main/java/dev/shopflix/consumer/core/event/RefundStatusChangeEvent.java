@@ -5,7 +5,7 @@
 */
 package dev.shopflix.consumer.core.event;
 
-import com.enation.app.javashop.core.base.message.RefundChangeMsg;
+import dev.shopflix.core.base.message.RefundChangeMsg;
 
 /**
  * 退款/退货申请

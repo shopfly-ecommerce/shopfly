@@ -6,13 +6,13 @@
 package dev.shopflix.consumer.shop.trade.consumer;
 
 import dev.shopflix.consumer.core.event.TradeIntoDbEvent;
-import com.enation.app.javashop.core.client.member.MemberHistoryReceiptClient;
-import com.enation.app.javashop.core.member.model.dos.ReceiptHistory;
-import com.enation.app.javashop.core.trade.order.model.dto.OrderDTO;
-import com.enation.app.javashop.core.trade.order.model.vo.ReceiptVO;
-import com.enation.app.javashop.core.trade.order.model.vo.TradeVO;
-import com.enation.app.javashop.framework.util.CurrencyUtil;
-import com.enation.app.javashop.framework.util.DateUtil;
+import dev.shopflix.core.client.member.MemberHistoryReceiptClient;
+import dev.shopflix.core.member.model.dos.ReceiptHistory;
+import dev.shopflix.core.trade.order.model.dto.OrderDTO;
+import dev.shopflix.core.trade.order.model.vo.ReceiptVO;
+import dev.shopflix.core.trade.order.model.vo.TradeVO;
+import dev.shopflix.framework.util.CurrencyUtil;
+import dev.shopflix.framework.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

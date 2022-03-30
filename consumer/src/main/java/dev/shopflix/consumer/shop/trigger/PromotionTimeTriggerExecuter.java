@@ -5,10 +5,10 @@
 */
 package dev.shopflix.consumer.shop.trigger;
 
-import com.enation.app.javashop.core.client.goods.GoodsClient;
-import com.enation.app.javashop.core.client.goods.GoodsIndexClient;
-import com.enation.app.javashop.core.promotion.tool.model.dto.PromotionPriceDTO;
-import com.enation.app.javashop.framework.trigger.Interface.TimeTriggerExecuter;
+import dev.shopflix.core.client.goods.GoodsClient;
+import dev.shopflix.core.client.goods.GoodsIndexClient;
+import dev.shopflix.core.promotion.tool.model.dto.PromotionPriceDTO;
+import dev.shopflix.framework.trigger.Interface.TimeTriggerExecuter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

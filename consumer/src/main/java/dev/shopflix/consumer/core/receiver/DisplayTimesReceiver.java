@@ -5,10 +5,10 @@
 */
 package dev.shopflix.consumer.core.receiver;
 
-import com.enation.app.javashop.core.base.rabbitmq.AmqpExchange;
-import com.enation.app.javashop.core.client.goods.GoodsClient;
-import com.enation.app.javashop.core.statistics.model.dos.GoodsPageView;
-import com.enation.app.javashop.core.statistics.service.DisplayTimesManager;
+import dev.shopflix.core.base.rabbitmq.AmqpExchange;
+import dev.shopflix.core.client.goods.GoodsClient;
+import dev.shopflix.core.statistics.model.dos.GoodsPageView;
+import dev.shopflix.core.statistics.service.DisplayTimesManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.ExchangeTypes;

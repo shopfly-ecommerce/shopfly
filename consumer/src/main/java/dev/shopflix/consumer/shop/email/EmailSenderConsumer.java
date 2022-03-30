@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.shop.email;
 
 import dev.shopflix.consumer.core.event.SendEmailEvent;
-import com.enation.app.javashop.core.base.model.vo.EmailVO;
-import com.enation.app.javashop.core.client.system.EmailClient;
+import dev.shopflix.core.base.model.vo.EmailVO;
+import dev.shopflix.core.client.system.EmailClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

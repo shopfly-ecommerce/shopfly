@@ -1,8 +1,8 @@
 package dev.shopflix.consumer.job.handler;
 
-import com.enation.app.javashop.core.base.JobAmqpExchange;
-import com.enation.app.javashop.framework.logs.Logger;
-import com.enation.app.javashop.framework.logs.LoggerFactory;
+import dev.shopflix.core.base.JobAmqpExchange;
+import dev.shopflix.framework.logs.Logger;
+import dev.shopflix.framework.logs.LoggerFactory;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.IJobHandler;
 import com.xxl.job.core.handler.annotation.JobHandler;

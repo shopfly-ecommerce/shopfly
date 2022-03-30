@@ -6,11 +6,11 @@
 package dev.shopflix.consumer.shop.message;
 
 import dev.shopflix.consumer.core.event.MemberMessageEvent;
-import com.enation.app.javashop.core.client.member.MemberClient;
-import com.enation.app.javashop.core.client.member.MemberNoticeLogClient;
-import com.enation.app.javashop.core.client.system.MessageClient;
-import com.enation.app.javashop.core.system.model.dos.Message;
-import com.enation.app.javashop.framework.util.StringUtil;
+import dev.shopflix.core.client.member.MemberClient;
+import dev.shopflix.core.client.member.MemberNoticeLogClient;
+import dev.shopflix.core.client.system.MessageClient;
+import dev.shopflix.core.system.model.dos.Message;
+import dev.shopflix.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -5,7 +5,7 @@
 */
 package dev.shopflix.consumer.core.event;
 
-import com.enation.app.javashop.core.base.message.MemberRegisterMsg;
+import dev.shopflix.core.base.message.MemberRegisterMsg;
 
 /**
  * 会员注册事件

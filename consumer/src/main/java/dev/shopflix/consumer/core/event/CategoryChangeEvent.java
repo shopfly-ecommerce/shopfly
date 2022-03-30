@@ -5,7 +5,7 @@
 */
 package dev.shopflix.consumer.core.event;
 
-import com.enation.app.javashop.core.base.message.CategoryChangeMsg;
+import dev.shopflix.core.base.message.CategoryChangeMsg;
 
 /**
  * 商品分类变化事件

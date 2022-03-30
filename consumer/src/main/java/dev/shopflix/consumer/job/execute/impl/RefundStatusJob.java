@@ -6,7 +6,7 @@
 package dev.shopflix.consumer.job.execute.impl;
 
 import dev.shopflix.consumer.job.execute.EveryHourExecute;
-import com.enation.app.javashop.core.aftersale.service.AfterSaleManager;
+import dev.shopflix.core.aftersale.service.AfterSaleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

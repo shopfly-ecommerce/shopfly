@@ -6,9 +6,9 @@
 package dev.shopflix.consumer.shop.member;
 
 import dev.shopflix.consumer.core.event.MemberLoginEvent;
-import com.enation.app.javashop.core.client.member.MemberClient;
-import com.enation.app.javashop.core.member.model.vo.MemberLoginMsg;
-import com.enation.app.javashop.framework.util.DateUtil;
+import dev.shopflix.core.client.member.MemberClient;
+import dev.shopflix.core.member.model.vo.MemberLoginMsg;
+import dev.shopflix.framework.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

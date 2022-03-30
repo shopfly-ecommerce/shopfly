@@ -6,7 +6,7 @@
 package dev.shopflix.consumer.job.execute.impl;
 
 import dev.shopflix.consumer.job.execute.EveryDayExecute;
-import com.enation.app.javashop.core.statistics.service.DisplayTimesManager;
+import dev.shopflix.core.statistics.service.DisplayTimesManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

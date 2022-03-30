@@ -5,13 +5,13 @@
 */
 package dev.shopflix.consumer.shop.trigger;
 
-import com.enation.app.javashop.core.base.message.PintuanChangeMsg;
-import com.enation.app.javashop.core.base.rabbitmq.TimeExecute;
-import com.enation.app.javashop.core.promotion.pintuan.model.Pintuan;
-import com.enation.app.javashop.core.promotion.pintuan.service.PintuanManager;
-import com.enation.app.javashop.core.promotion.tool.model.enums.PromotionStatusEnum;
-import com.enation.app.javashop.framework.trigger.Interface.TimeTrigger;
-import com.enation.app.javashop.framework.trigger.Interface.TimeTriggerExecuter;
+import dev.shopflix.core.base.message.PintuanChangeMsg;
+import dev.shopflix.core.base.rabbitmq.TimeExecute;
+import dev.shopflix.core.promotion.pintuan.model.Pintuan;
+import dev.shopflix.core.promotion.pintuan.service.PintuanManager;
+import dev.shopflix.core.promotion.tool.model.enums.PromotionStatusEnum;
+import dev.shopflix.framework.trigger.Interface.TimeTrigger;
+import dev.shopflix.framework.trigger.Interface.TimeTriggerExecuter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

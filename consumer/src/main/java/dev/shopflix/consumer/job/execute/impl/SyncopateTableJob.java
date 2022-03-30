@@ -6,7 +6,7 @@
 package dev.shopflix.consumer.job.execute.impl;
 
 import dev.shopflix.consumer.job.execute.EveryDayExecute;
-import com.enation.app.javashop.core.client.statistics.SyncopateTableClient;
+import dev.shopflix.core.client.statistics.SyncopateTableClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

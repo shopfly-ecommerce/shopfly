@@ -6,10 +6,10 @@
 package dev.shopflix.consumer.shop.sss;
 
 import dev.shopflix.consumer.core.event.RefundStatusChangeEvent;
-import com.enation.app.javashop.core.aftersale.model.enums.RefundStatusEnum;
-import com.enation.app.javashop.core.base.message.RefundChangeMsg;
-import com.enation.app.javashop.core.client.statistics.RefundDataClient;
-import com.enation.app.javashop.core.statistics.model.dto.RefundData;
+import dev.shopflix.core.aftersale.model.enums.RefundStatusEnum;
+import dev.shopflix.core.base.message.RefundChangeMsg;
+import dev.shopflix.core.client.statistics.RefundDataClient;
+import dev.shopflix.core.statistics.model.dto.RefundData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

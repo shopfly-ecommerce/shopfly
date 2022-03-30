@@ -5,7 +5,7 @@
 */
 package dev.shopflix.consumer.core.event;
 
-import com.enation.app.javashop.core.base.message.GoodsCommentMsg;
+import dev.shopflix.core.base.message.GoodsCommentMsg;
 
 /**
  * 商品评论事件

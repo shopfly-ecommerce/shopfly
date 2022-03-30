@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.shop.message;
 
 import dev.shopflix.consumer.core.event.SmsSendMessageEvent;
-import com.enation.app.javashop.core.base.model.vo.SmsSendVO;
-import com.enation.app.javashop.core.client.system.SmsClient;
+import dev.shopflix.core.base.model.vo.SmsSendVO;
+import dev.shopflix.core.client.system.SmsClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

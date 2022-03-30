@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.shop.promotion;
 
 import dev.shopflix.consumer.core.event.GoodsChangeEvent;
-import com.enation.app.javashop.core.base.message.GoodsChangeMsg;
-import com.enation.app.javashop.core.promotion.groupbuy.service.GroupbuyGoodsManager;
+import dev.shopflix.core.base.message.GoodsChangeMsg;
+import dev.shopflix.core.promotion.groupbuy.service.GroupbuyGoodsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

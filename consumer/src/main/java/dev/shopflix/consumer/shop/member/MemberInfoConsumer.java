@@ -6,9 +6,9 @@
 package dev.shopflix.consumer.shop.member;
 
 import dev.shopflix.consumer.core.event.MemberInfoChangeEvent;
-import com.enation.app.javashop.core.client.member.MemberClient;
-import com.enation.app.javashop.core.client.member.MemberCommentClient;
-import com.enation.app.javashop.core.member.model.dos.Member;
+import dev.shopflix.core.client.member.MemberClient;
+import dev.shopflix.core.client.member.MemberCommentClient;
+import dev.shopflix.core.member.model.dos.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

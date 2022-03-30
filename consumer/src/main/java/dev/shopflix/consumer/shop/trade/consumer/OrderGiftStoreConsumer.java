@@ -6,14 +6,14 @@
 package dev.shopflix.consumer.shop.trade.consumer;
 
 import dev.shopflix.consumer.core.event.OrderStatusChangeEvent;
-import com.enation.app.javashop.core.base.message.OrderStatusChangeMsg;
-import com.enation.app.javashop.core.goods.model.enums.QuantityType;
-import com.enation.app.javashop.core.promotion.fulldiscount.model.dos.FullDiscountGiftDO;
-import com.enation.app.javashop.core.promotion.fulldiscount.service.FullDiscountGiftManager;
-import com.enation.app.javashop.core.trade.order.model.enums.OrderMetaKeyEnum;
-import com.enation.app.javashop.core.trade.order.model.enums.OrderStatusEnum;
-import com.enation.app.javashop.core.trade.order.service.OrderMetaManager;
-import com.enation.app.javashop.framework.util.JsonUtil;
+import dev.shopflix.core.base.message.OrderStatusChangeMsg;
+import dev.shopflix.core.goods.model.enums.QuantityType;
+import dev.shopflix.core.promotion.fulldiscount.model.dos.FullDiscountGiftDO;
+import dev.shopflix.core.promotion.fulldiscount.service.FullDiscountGiftManager;
+import dev.shopflix.core.trade.order.model.enums.OrderMetaKeyEnum;
+import dev.shopflix.core.trade.order.model.enums.OrderStatusEnum;
+import dev.shopflix.core.trade.order.service.OrderMetaManager;
+import dev.shopflix.framework.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

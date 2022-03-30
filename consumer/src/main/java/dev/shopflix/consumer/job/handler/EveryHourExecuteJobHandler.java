@@ -5,14 +5,14 @@
 */
 package dev.shopflix.consumer.job.handler;
 
-import com.enation.app.javashop.core.base.JobAmqpExchange;
+import dev.shopflix.core.base.JobAmqpExchange;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.IJobHandler;
 import com.xxl.job.core.handler.annotation.JobHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.enation.app.javashop.framework.rabbitmq.MessageSender;
-import com.enation.app.javashop.framework.rabbitmq.MqMessage;
+import dev.shopflix.framework.rabbitmq.MessageSender;
+import dev.shopflix.framework.rabbitmq.MqMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

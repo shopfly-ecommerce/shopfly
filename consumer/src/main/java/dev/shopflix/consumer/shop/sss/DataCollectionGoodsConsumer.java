@@ -5,9 +5,9 @@
 */
 package dev.shopflix.consumer.shop.sss;
 
-import com.enation.app.javashop.core.base.rabbitmq.AmqpExchange;
-import com.enation.app.javashop.core.client.statistics.GoodsDataClient;
-import com.enation.app.javashop.core.statistics.model.dto.GoodsData;
+import dev.shopflix.core.base.rabbitmq.AmqpExchange;
+import dev.shopflix.core.client.statistics.GoodsDataClient;
+import dev.shopflix.core.statistics.model.dto.GoodsData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.ExchangeTypes;

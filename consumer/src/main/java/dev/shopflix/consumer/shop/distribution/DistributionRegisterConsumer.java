@@ -6,13 +6,13 @@
 package dev.shopflix.consumer.shop.distribution;
 
 import dev.shopflix.consumer.core.event.MemberRegisterEvent;
-import com.enation.app.javashop.core.base.CachePrefix;
-import com.enation.app.javashop.core.base.message.MemberRegisterMsg;
-import com.enation.app.javashop.core.client.distribution.CommissionTplClient;
-import com.enation.app.javashop.core.client.distribution.DistributionClient;
-import com.enation.app.javashop.core.distribution.model.dos.CommissionTpl;
-import com.enation.app.javashop.core.distribution.model.dos.DistributionDO;
-import com.enation.app.javashop.framework.cache.Cache;
+import dev.shopflix.core.base.CachePrefix;
+import dev.shopflix.core.base.message.MemberRegisterMsg;
+import dev.shopflix.core.client.distribution.CommissionTplClient;
+import dev.shopflix.core.client.distribution.DistributionClient;
+import dev.shopflix.core.distribution.model.dos.CommissionTpl;
+import dev.shopflix.core.distribution.model.dos.DistributionDO;
+import dev.shopflix.framework.cache.Cache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

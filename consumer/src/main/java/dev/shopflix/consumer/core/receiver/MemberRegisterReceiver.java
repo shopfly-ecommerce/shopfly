@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.core.receiver;
 
 import dev.shopflix.consumer.core.event.MemberRegisterEvent;
-import com.enation.app.javashop.core.base.message.MemberRegisterMsg;
-import com.enation.app.javashop.core.base.rabbitmq.AmqpExchange;
+import dev.shopflix.core.base.message.MemberRegisterMsg;
+import dev.shopflix.core.base.rabbitmq.AmqpExchange;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.ExchangeTypes;

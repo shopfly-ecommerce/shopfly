@@ -5,7 +5,7 @@
 */
 package dev.shopflix.consumer.core.event;
 
-import com.enation.app.javashop.core.trade.order.model.vo.TradeVO;
+import dev.shopflix.core.trade.order.model.vo.TradeVO;
 
 /**
  * 交易入库事件

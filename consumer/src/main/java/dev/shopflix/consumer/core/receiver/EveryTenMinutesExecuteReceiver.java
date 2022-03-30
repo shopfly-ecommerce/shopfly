@@ -2,9 +2,9 @@ package dev.shopflix.consumer.core.receiver;
 
 import cn.hutool.core.collection.CollUtil;
 import dev.shopflix.consumer.job.execute.EveryTenMinutesExecute;
-import com.enation.app.javashop.core.base.JobAmqpExchange;
-import com.enation.app.javashop.framework.logs.Logger;
-import com.enation.app.javashop.framework.logs.LoggerFactory;
+import dev.shopflix.core.base.JobAmqpExchange;
+import dev.shopflix.framework.logs.Logger;
+import dev.shopflix.framework.logs.LoggerFactory;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;

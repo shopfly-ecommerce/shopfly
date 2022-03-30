@@ -6,7 +6,7 @@
 package dev.shopflix.consumer.core.event;
 
 
-import com.enation.app.javashop.core.base.message.OrderStatusChangeMsg;
+import dev.shopflix.core.base.message.OrderStatusChangeMsg;
 
 /**
  * 订单状态变化事件

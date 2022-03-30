@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.core.receiver;
 
 import dev.shopflix.consumer.core.event.MemberLoginEvent;
-import com.enation.app.javashop.core.base.rabbitmq.AmqpExchange;
-import com.enation.app.javashop.core.member.model.vo.MemberLoginMsg;
+import dev.shopflix.core.base.rabbitmq.AmqpExchange;
+import dev.shopflix.core.member.model.vo.MemberLoginMsg;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.ExchangeTypes;

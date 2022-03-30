@@ -5,11 +5,11 @@
 */
 package dev.shopflix.consumer.shop.message;
 
-import com.enation.app.javashop.core.base.SettingGroup;
-import com.enation.app.javashop.core.client.system.SettingClient;
-import com.enation.app.javashop.core.system.model.vo.InformationSetting;
-import com.enation.app.javashop.core.system.model.vo.SiteSetting;
-import com.enation.app.javashop.framework.util.JsonUtil;
+import dev.shopflix.core.base.SettingGroup;
+import dev.shopflix.core.client.system.SettingClient;
+import dev.shopflix.core.system.model.vo.InformationSetting;
+import dev.shopflix.core.system.model.vo.SiteSetting;
+import dev.shopflix.framework.util.JsonUtil;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

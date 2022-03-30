@@ -27,6 +27,12 @@
             <artifactId>core</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>dev.shopflix</groupId>
+            <artifactId>consumer</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

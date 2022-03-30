@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.shop.sss;
 
 import dev.shopflix.consumer.core.event.GoodsChangeEvent;
-import com.enation.app.javashop.core.base.message.GoodsChangeMsg;
-import com.enation.app.javashop.core.client.statistics.GoodsDataClient;
+import dev.shopflix.core.base.message.GoodsChangeMsg;
+import dev.shopflix.core.client.statistics.GoodsDataClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

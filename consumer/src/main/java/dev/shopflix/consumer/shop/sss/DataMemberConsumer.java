@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.shop.sss;
 
 import dev.shopflix.consumer.core.event.MemberRegisterEvent;
-import com.enation.app.javashop.core.base.message.MemberRegisterMsg;
-import com.enation.app.javashop.core.client.statistics.MemberDataClient;
+import dev.shopflix.core.base.message.MemberRegisterMsg;
+import dev.shopflix.core.client.statistics.MemberDataClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

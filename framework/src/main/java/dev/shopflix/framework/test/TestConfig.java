@@ -17,6 +17,6 @@ import org.springframework.context.annotation.Configuration;
  * 2018/7/11
  */
 @Configuration
-@ComponentScan("com.enation.app.javashop")
+@ComponentScan("dev.shopflix")
 public class TestConfig {
 }

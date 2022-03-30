@@ -5,7 +5,7 @@
 */
 package dev.shopflix.consumer.core.event;
 
-import com.enation.app.javashop.core.base.message.CmsManageMsg;
+import dev.shopflix.core.base.message.CmsManageMsg;
 
 /**
  * 移动端首页变化

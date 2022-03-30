@@ -6,14 +6,14 @@
 package dev.shopflix.consumer.shop.trade.consumer;
 
 import dev.shopflix.consumer.core.event.OrderStatusChangeEvent;
-import com.enation.app.javashop.core.base.message.OrderStatusChangeMsg;
-import com.enation.app.javashop.core.payment.model.dos.PaymentMethodDO;
-import com.enation.app.javashop.core.payment.service.PaymentMethodManager;
-import com.enation.app.javashop.core.trade.order.model.dos.OrderDO;
-import com.enation.app.javashop.core.trade.order.model.dos.PayLog;
-import com.enation.app.javashop.core.trade.order.model.enums.OrderStatusEnum;
-import com.enation.app.javashop.core.trade.order.model.enums.PayStatusEnum;
-import com.enation.app.javashop.core.trade.order.service.PayLogManager;
+import dev.shopflix.core.base.message.OrderStatusChangeMsg;
+import dev.shopflix.core.payment.model.dos.PaymentMethodDO;
+import dev.shopflix.core.payment.service.PaymentMethodManager;
+import dev.shopflix.core.trade.order.model.dos.OrderDO;
+import dev.shopflix.core.trade.order.model.dos.PayLog;
+import dev.shopflix.core.trade.order.model.enums.OrderStatusEnum;
+import dev.shopflix.core.trade.order.model.enums.PayStatusEnum;
+import dev.shopflix.core.trade.order.service.PayLogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

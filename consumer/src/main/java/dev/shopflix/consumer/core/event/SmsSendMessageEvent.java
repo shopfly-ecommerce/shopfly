@@ -6,7 +6,7 @@
 package dev.shopflix.consumer.core.event;
 
 
-import com.enation.app.javashop.core.base.model.vo.SmsSendVO;
+import dev.shopflix.core.base.model.vo.SmsSendVO;
 
 /**
  * 发送短信

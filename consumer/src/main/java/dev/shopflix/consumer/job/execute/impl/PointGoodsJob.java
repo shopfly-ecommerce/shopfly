@@ -6,10 +6,10 @@
 package dev.shopflix.consumer.job.execute.impl;
 
 import dev.shopflix.consumer.job.execute.EveryDayExecute;
-import com.enation.app.javashop.core.promotion.tool.model.dos.PromotionGoodsDO;
-import com.enation.app.javashop.core.promotion.tool.model.enums.PromotionTypeEnum;
-import com.enation.app.javashop.framework.database.DaoSupport;
-import com.enation.app.javashop.framework.util.DateUtil;
+import dev.shopflix.core.promotion.tool.model.dos.PromotionGoodsDO;
+import dev.shopflix.core.promotion.tool.model.enums.PromotionTypeEnum;
+import dev.shopflix.framework.database.DaoSupport;
+import dev.shopflix.framework.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

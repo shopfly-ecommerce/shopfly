@@ -6,13 +6,13 @@
 package dev.shopflix.consumer.shop.trade.consumer;
 
 import dev.shopflix.consumer.core.event.OrderStatusChangeEvent;
-import com.enation.app.javashop.core.base.message.OrderStatusChangeMsg;
-import com.enation.app.javashop.core.promotion.seckill.service.SeckillGoodsManager;
-import com.enation.app.javashop.core.trade.order.model.dos.OrderDO;
-import com.enation.app.javashop.core.trade.order.model.enums.OrderOutStatusEnum;
-import com.enation.app.javashop.core.trade.order.model.enums.OrderOutTypeEnum;
-import com.enation.app.javashop.core.trade.order.model.enums.OrderStatusEnum;
-import com.enation.app.javashop.core.trade.order.service.OrderOutStatusManager;
+import dev.shopflix.core.base.message.OrderStatusChangeMsg;
+import dev.shopflix.core.promotion.seckill.service.SeckillGoodsManager;
+import dev.shopflix.core.trade.order.model.dos.OrderDO;
+import dev.shopflix.core.trade.order.model.enums.OrderOutStatusEnum;
+import dev.shopflix.core.trade.order.model.enums.OrderOutTypeEnum;
+import dev.shopflix.core.trade.order.model.enums.OrderStatusEnum;
+import dev.shopflix.core.trade.order.service.OrderOutStatusManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

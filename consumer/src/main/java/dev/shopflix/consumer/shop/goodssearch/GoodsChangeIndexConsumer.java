@@ -6,9 +6,9 @@
 package dev.shopflix.consumer.shop.goodssearch;
 
 import dev.shopflix.consumer.core.event.GoodsChangeEvent;
-import com.enation.app.javashop.core.base.message.GoodsChangeMsg;
-import com.enation.app.javashop.core.client.goods.GoodsClient;
-import com.enation.app.javashop.core.goodssearch.service.GoodsIndexManager;
+import dev.shopflix.core.base.message.GoodsChangeMsg;
+import dev.shopflix.core.client.goods.GoodsClient;
+import dev.shopflix.core.goodssearch.service.GoodsIndexManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

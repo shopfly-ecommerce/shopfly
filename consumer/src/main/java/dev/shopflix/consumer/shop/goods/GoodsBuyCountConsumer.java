@@ -6,12 +6,12 @@
 package dev.shopflix.consumer.shop.goods;
 
 import dev.shopflix.consumer.core.event.OrderStatusChangeEvent;
-import com.enation.app.javashop.core.base.message.OrderStatusChangeMsg;
-import com.enation.app.javashop.core.client.goods.GoodsClient;
-import com.enation.app.javashop.core.trade.order.model.dos.OrderDO;
-import com.enation.app.javashop.core.trade.order.model.enums.OrderStatusEnum;
-import com.enation.app.javashop.core.trade.order.model.vo.OrderSkuVO;
-import com.enation.app.javashop.framework.util.JsonUtil;
+import dev.shopflix.core.base.message.OrderStatusChangeMsg;
+import dev.shopflix.core.client.goods.GoodsClient;
+import dev.shopflix.core.trade.order.model.dos.OrderDO;
+import dev.shopflix.core.trade.order.model.enums.OrderStatusEnum;
+import dev.shopflix.core.trade.order.model.vo.OrderSkuVO;
+import dev.shopflix.framework.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

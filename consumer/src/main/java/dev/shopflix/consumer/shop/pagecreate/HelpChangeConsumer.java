@@ -7,8 +7,8 @@ package dev.shopflix.consumer.shop.pagecreate;
 
 import dev.shopflix.consumer.core.event.HelpChangeEvent;
 import dev.shopflix.consumer.shop.pagecreate.service.PageCreator;
-import com.enation.app.javashop.core.pagecreate.model.PageCreatePrefixEnum;
-import com.enation.app.javashop.core.payment.model.enums.ClientType;
+import dev.shopflix.core.pagecreate.model.PageCreatePrefixEnum;
+import dev.shopflix.core.payment.model.enums.ClientType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

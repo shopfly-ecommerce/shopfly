@@ -6,8 +6,8 @@
 package dev.shopflix.consumer.core.receiver;
 
 import dev.shopflix.consumer.core.event.SendEmailEvent;
-import com.enation.app.javashop.core.base.model.vo.EmailVO;
-import com.enation.app.javashop.core.base.rabbitmq.AmqpExchange;
+import dev.shopflix.core.base.model.vo.EmailVO;
+import dev.shopflix.core.base.rabbitmq.AmqpExchange;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.ExchangeTypes;

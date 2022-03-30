@@ -5,12 +5,12 @@
 */
 package dev.shopflix.consumer.core.trigger;
 
-import com.enation.app.javashop.framework.cache.Cache;
-import com.enation.app.javashop.framework.context.ApplicationContextHolder;
-import com.enation.app.javashop.framework.trigger.Interface.TimeTriggerExecuter;
-import com.enation.app.javashop.framework.trigger.rabbitmq.TimeTriggerConfig;
-import com.enation.app.javashop.framework.trigger.rabbitmq.model.TimeTriggerMsg;
-import com.enation.app.javashop.framework.trigger.util.RabbitmqTriggerUtil;
+import dev.shopflix.framework.cache.Cache;
+import dev.shopflix.framework.context.ApplicationContextHolder;
+import dev.shopflix.framework.trigger.Interface.TimeTriggerExecuter;
+import dev.shopflix.framework.trigger.rabbitmq.TimeTriggerConfig;
+import dev.shopflix.framework.trigger.rabbitmq.model.TimeTriggerMsg;
+import dev.shopflix.framework.trigger.util.RabbitmqTriggerUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

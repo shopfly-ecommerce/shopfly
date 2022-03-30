@@ -6,11 +6,11 @@
 package dev.shopflix.consumer.shop.goodssearch;
 
 import dev.shopflix.consumer.core.event.GoodsIndexInitEvent;
-import com.enation.app.javashop.core.client.goods.GoodsClient;
-import com.enation.app.javashop.core.client.goods.GoodsIndexClient;
-import com.enation.app.javashop.core.system.model.TaskProgressConstant;
-import com.enation.app.javashop.core.system.service.ProgressManager;
-import com.enation.app.javashop.framework.logs.Debugger;
+import dev.shopflix.core.client.goods.GoodsClient;
+import dev.shopflix.core.client.goods.GoodsIndexClient;
+import dev.shopflix.core.system.model.TaskProgressConstant;
+import dev.shopflix.core.system.service.ProgressManager;
+import dev.shopflix.framework.logs.Debugger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,9 +6,9 @@
 package dev.shopflix.consumer.shop.distribution;
 
 import dev.shopflix.consumer.core.event.RefundStatusChangeEvent;
-import com.enation.app.javashop.core.aftersale.model.enums.RefundStatusEnum;
-import com.enation.app.javashop.core.base.message.RefundChangeMsg;
-import com.enation.app.javashop.core.client.distribution.DistributionOrderClient;
+import dev.shopflix.core.aftersale.model.enums.RefundStatusEnum;
+import dev.shopflix.core.base.message.RefundChangeMsg;
+import dev.shopflix.core.client.distribution.DistributionOrderClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

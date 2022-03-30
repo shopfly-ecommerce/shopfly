@@ -5,8 +5,8 @@
 */
 package dev.shopflix.consumer.shop.trigger;
 
-import com.enation.app.javashop.core.promotion.pintuan.service.PintuanOrderManager;
-import com.enation.app.javashop.framework.trigger.Interface.TimeTriggerExecuter;
+import dev.shopflix.core.promotion.pintuan.service.PintuanOrderManager;
+import dev.shopflix.framework.trigger.Interface.TimeTriggerExecuter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

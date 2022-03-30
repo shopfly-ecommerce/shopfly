@@ -6,7 +6,7 @@
 package dev.shopflix.consumer.core.receiver;
 
 import dev.shopflix.consumer.job.execute.EveryHourExecute;
-import com.enation.app.javashop.core.base.JobAmqpExchange;
+import dev.shopflix.core.base.JobAmqpExchange;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.ExchangeTypes;

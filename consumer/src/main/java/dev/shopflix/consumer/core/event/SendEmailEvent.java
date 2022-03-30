@@ -5,7 +5,7 @@
 */
 package dev.shopflix.consumer.core.event;
 
-import com.enation.app.javashop.core.base.model.vo.EmailVO;
+import dev.shopflix.core.base.model.vo.EmailVO;
 
 /**
  * 发送邮件事件

@@ -6,9 +6,9 @@
 package dev.shopflix.consumer.shop.goods;
 
 import dev.shopflix.consumer.core.event.GoodsCommentEvent;
-import com.enation.app.javashop.core.base.message.GoodsCommentMsg;
-import com.enation.app.javashop.core.client.goods.GoodsClient;
-import com.enation.app.javashop.core.member.model.dos.MemberComment;
+import dev.shopflix.core.base.message.GoodsCommentMsg;
+import dev.shopflix.core.client.goods.GoodsClient;
+import dev.shopflix.core.member.model.dos.MemberComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

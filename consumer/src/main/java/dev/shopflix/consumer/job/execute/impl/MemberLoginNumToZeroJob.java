@@ -6,7 +6,7 @@
 package dev.shopflix.consumer.job.execute.impl;
 
 import dev.shopflix.consumer.job.execute.EveryMonthExecute;
-import com.enation.app.javashop.core.client.member.MemberClient;
+import dev.shopflix.core.client.member.MemberClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

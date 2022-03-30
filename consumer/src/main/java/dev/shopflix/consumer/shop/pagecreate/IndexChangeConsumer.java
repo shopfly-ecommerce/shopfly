@@ -10,8 +10,8 @@ import dev.shopflix.consumer.core.event.CategoryChangeEvent;
 import dev.shopflix.consumer.core.event.IndexChangeEvent;
 import dev.shopflix.consumer.core.event.MobileIndexChangeEvent;
 import dev.shopflix.consumer.shop.pagecreate.service.PageCreator;
-import com.enation.app.javashop.core.base.message.CategoryChangeMsg;
-import com.enation.app.javashop.core.base.message.CmsManageMsg;
+import dev.shopflix.core.base.message.CategoryChangeMsg;
+import dev.shopflix.core.base.message.CmsManageMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -48,7 +48,7 @@ public abstract class AbstractPaymentPlugin {
     public static final String REFUND_ERROR_MESSAGE = "{REFUND_ERROR_MESSAGE}";
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

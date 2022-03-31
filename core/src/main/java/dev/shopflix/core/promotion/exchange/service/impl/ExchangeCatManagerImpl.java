@@ -35,7 +35,7 @@ import java.util.List;
 public class ExchangeCatManagerImpl implements ExchangeCatManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

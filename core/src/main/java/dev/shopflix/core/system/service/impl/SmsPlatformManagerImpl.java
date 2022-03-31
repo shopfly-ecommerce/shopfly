@@ -39,7 +39,7 @@ import java.util.Map;
 public class SmsPlatformManagerImpl implements SmsPlatformManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     @Autowired

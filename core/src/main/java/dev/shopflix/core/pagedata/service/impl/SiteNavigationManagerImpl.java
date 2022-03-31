@@ -38,7 +38,7 @@ import java.util.List;
 public class SiteNavigationManagerImpl implements SiteNavigationManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private Cache cache;

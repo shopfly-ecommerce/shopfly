@@ -39,7 +39,7 @@ import java.util.Map;
 public class UploaderManagerImpl implements UploaderManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     @Autowired

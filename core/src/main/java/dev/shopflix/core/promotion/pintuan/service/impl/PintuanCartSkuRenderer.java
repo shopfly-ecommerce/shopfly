@@ -43,7 +43,7 @@ import java.util.List;
 public class PintuanCartSkuRenderer implements CartSkuRenderer {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport tradeDaoSupport;
 
 

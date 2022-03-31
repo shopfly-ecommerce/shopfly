@@ -53,7 +53,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport tradeDaoSupport;
 
 

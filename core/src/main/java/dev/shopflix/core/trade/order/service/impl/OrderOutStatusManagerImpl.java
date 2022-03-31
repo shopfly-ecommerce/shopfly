@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderOutStatusManagerImpl implements OrderOutStatusManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

@@ -57,7 +57,7 @@ import java.util.List;
 public class PromotionGoodsManagerImpl implements PromotionGoodsManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
     @Autowired
     private ExchangeGoodsManager exchangeGoodsManager;

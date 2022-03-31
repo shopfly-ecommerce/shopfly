@@ -43,7 +43,7 @@ import java.util.List;
 public class MemberCollectionGoodsManagerImpl implements MemberCollectionGoodsManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
     @Autowired
     private GoodsClient goodsClient;

@@ -41,7 +41,7 @@ import java.util.Map;
 public class OrderTaskManagerImpl implements OrderTaskManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

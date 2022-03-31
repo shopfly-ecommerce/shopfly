@@ -40,7 +40,7 @@ import java.util.Map;
 public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

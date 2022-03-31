@@ -52,7 +52,7 @@ import java.util.Map;
 public class LoginWeChatManagerImpl implements LoginWeChatManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
 
     @Autowired

@@ -61,7 +61,7 @@ import java.util.Map;
 public class GoodsSkuManagerImpl implements GoodsSkuManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

@@ -26,7 +26,7 @@ import java.time.LocalDate;
 public class SyncopateTableManagerImpl implements SyncopateTableManager {
 
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
     /**

@@ -46,7 +46,6 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
     private MessageSender messageSender;
 
     @Autowired
-    @Qualifier("sssJdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
     @Autowired

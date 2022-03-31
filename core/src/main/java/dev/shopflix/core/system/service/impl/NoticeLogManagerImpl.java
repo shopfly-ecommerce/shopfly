@@ -32,7 +32,7 @@ import java.util.List;
 public class NoticeLogManagerImpl implements NoticeLogManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

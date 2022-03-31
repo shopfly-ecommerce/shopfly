@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderManagerImpl implements OrderManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

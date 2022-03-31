@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 public class ShortUrlManagerImpl implements ShortUrlManager {
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+
     private DaoSupport daoSupport;
 
 

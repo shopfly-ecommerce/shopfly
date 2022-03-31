@@ -49,7 +49,7 @@ import java.util.List;
 public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implements MinusManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

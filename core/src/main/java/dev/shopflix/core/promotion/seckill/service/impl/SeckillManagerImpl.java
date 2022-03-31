@@ -53,7 +53,7 @@ import java.util.Map;
 public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl implements SeckillManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

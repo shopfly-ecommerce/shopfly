@@ -53,7 +53,7 @@ public class GoodsSnapshotManagerImpl implements GoodsSnapshotManager {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

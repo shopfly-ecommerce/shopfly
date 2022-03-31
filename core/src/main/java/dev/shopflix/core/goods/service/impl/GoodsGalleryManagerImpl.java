@@ -36,7 +36,7 @@ import java.util.List;
 public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

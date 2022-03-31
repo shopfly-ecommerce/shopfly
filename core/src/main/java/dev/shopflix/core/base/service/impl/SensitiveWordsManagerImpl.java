@@ -32,7 +32,7 @@ import java.util.List;
 public class SensitiveWordsManagerImpl implements SensitiveWordsManager {
 
 	@Autowired
-	@Qualifier("systemDaoSupport")
+	
 	private DaoSupport daoSupport;
 	@Autowired
 	private Cache cache;

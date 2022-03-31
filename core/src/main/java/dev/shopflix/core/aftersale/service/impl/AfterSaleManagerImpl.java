@@ -70,7 +70,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
 
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Autowired

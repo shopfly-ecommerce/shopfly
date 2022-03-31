@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 public class OrderDataManagerImpl implements OrderDataManager {
 
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

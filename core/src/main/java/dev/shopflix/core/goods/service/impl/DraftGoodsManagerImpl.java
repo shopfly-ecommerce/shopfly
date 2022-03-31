@@ -40,7 +40,7 @@ import java.util.Map;
 public class DraftGoodsManagerImpl implements DraftGoodsManager {
 
 	@Autowired
-	@Qualifier("goodsDaoSupport")
+	
 	private DaoSupport daoSupport;
 
 	@Autowired

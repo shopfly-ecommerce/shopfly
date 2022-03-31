@@ -52,7 +52,7 @@ public class EmailManagerImpl implements EmailManager {
     private Debugger debugger;
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     /**

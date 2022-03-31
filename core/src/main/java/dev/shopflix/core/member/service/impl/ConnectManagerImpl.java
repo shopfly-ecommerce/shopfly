@@ -79,7 +79,7 @@ import java.util.*;
 public class ConnectManagerImpl implements ConnectManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+
     private DaoSupport memberDaoSupport;
 
     @Autowired

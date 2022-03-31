@@ -36,7 +36,7 @@ import java.util.List;
 public class PayLogManagerImpl implements PayLogManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     /**

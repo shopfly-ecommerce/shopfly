@@ -29,7 +29,7 @@ import java.util.Map;
 public class CollectFrontStatisticsManagerImpl implements CollectFrontStatisticsManager {
 
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
     /**

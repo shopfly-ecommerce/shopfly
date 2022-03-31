@@ -39,7 +39,7 @@ import java.util.List;
 public class MemberCouponManagerImpl implements MemberCouponManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

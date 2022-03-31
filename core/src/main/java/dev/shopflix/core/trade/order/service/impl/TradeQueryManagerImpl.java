@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class TradeQueryManagerImpl implements TradeQueryManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

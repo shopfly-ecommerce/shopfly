@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 public class MemberDataManagerImpl implements MemberDataManager {
 
     @Autowired
-    @Qualifier("sssDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

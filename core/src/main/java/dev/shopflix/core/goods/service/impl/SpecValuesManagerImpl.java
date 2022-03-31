@@ -33,7 +33,7 @@ import java.util.List;
 public class SpecValuesManagerImpl implements SpecValuesManager {
 
 	@Autowired
-	@Qualifier("goodsDaoSupport")
+
 	private DaoSupport daoSupport;
 	@Autowired
 	private SpecificationManager specificationManager;

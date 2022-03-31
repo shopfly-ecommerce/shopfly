@@ -38,7 +38,7 @@ public class SmtpManagerImpl implements SmtpManager {
 
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
     @Autowired
     private EmailManager emailManager;

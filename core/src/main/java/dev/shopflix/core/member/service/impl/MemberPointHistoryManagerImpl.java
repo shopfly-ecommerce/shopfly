@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberPointHistoryManagerImpl implements MemberPointHistoryManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
 
     @Override

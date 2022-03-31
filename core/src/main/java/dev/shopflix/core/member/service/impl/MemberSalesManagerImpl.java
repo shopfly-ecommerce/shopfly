@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class MemberSalesManagerImpl implements MemberSalesManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     /**

@@ -58,7 +58,7 @@ import java.util.concurrent.locks.Lock;
 public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl implements SeckillGoodsManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

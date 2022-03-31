@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 public class RefundDataManagerImpl implements RefundDataManager {
 
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

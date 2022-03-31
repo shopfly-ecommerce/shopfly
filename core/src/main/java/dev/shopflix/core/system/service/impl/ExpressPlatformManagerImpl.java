@@ -44,7 +44,7 @@ import java.util.Map;
 public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     @Autowired

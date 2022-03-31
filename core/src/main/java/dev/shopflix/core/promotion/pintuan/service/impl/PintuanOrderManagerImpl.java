@@ -54,7 +54,7 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport tradeDaoSupport;
 
 

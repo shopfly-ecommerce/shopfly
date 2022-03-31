@@ -45,7 +45,7 @@ import java.util.Map;
 public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

@@ -50,7 +50,7 @@ public class GoodsClientDefaultImpl implements GoodsClient {
     private GoodsSkuManager goodsSkuManager;
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private MessageSender messageSender;

@@ -36,7 +36,7 @@ import java.util.List;
 public class ExchangeGoodsManagerImpl implements ExchangeGoodsManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Autowired

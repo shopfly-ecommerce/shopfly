@@ -26,7 +26,7 @@ import java.util.List;
 public class OrderMetaManagerImpl implements OrderMetaManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

@@ -28,7 +28,7 @@ public class WithdrawCountManagerImpl implements WithdrawCountManager {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+
     private DaoSupport daoSupport;
 
     /**

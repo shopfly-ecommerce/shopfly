@@ -32,7 +32,7 @@ import java.util.List;
 public class DraftGoodsSkuManagerImpl implements DraftGoodsSkuManager {
 
 	@Autowired
-	@Qualifier("goodsDaoSupport")
+	
 	private DaoSupport daoSupport;
 	
 	@Override

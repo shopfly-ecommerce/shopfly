@@ -43,7 +43,7 @@ import java.util.*;
 public class CategoryManagerImpl implements CategoryManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+
     private DaoSupport goodsDaoSupport;
 
     @Autowired

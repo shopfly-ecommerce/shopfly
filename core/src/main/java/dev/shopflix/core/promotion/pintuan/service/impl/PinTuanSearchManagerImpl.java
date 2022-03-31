@@ -53,7 +53,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport tradeDaoSupport;
 
     @Autowired

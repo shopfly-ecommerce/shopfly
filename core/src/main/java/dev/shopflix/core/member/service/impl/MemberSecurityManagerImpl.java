@@ -49,7 +49,7 @@ public class MemberSecurityManagerImpl implements MemberSecurityManager {
     @Autowired
     private Cache cache;
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
 
     @Override

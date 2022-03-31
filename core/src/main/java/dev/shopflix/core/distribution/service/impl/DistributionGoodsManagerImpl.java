@@ -32,7 +32,7 @@ public class DistributionGoodsManagerImpl implements DistributionGoodsManager {
 
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+    
     private DaoSupport daoSupport;
 
     /**

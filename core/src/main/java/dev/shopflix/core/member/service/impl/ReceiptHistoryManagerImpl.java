@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReceiptHistoryManagerImpl implements ReceiptHistoryManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+
     private DaoSupport memberDaoSupport;
 
     @Autowired

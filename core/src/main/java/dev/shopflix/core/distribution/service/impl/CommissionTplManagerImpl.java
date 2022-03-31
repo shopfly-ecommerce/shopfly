@@ -32,7 +32,7 @@ import java.util.Map;
 public class CommissionTplManagerImpl implements CommissionTplManager {
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

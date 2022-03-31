@@ -32,7 +32,7 @@ import java.util.List;
 public class GroupbuyQuantityLogManagerImpl implements GroupbuyQuantityLogManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Autowired

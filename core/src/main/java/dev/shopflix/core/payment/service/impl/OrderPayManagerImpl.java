@@ -41,7 +41,7 @@ import java.util.Map;
 public class OrderPayManagerImpl implements OrderPayManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

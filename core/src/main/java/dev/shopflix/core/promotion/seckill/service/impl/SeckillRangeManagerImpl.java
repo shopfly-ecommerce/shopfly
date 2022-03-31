@@ -35,7 +35,7 @@ import java.util.*;
 public class SeckillRangeManagerImpl implements SeckillRangeManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

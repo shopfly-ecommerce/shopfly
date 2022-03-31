@@ -35,7 +35,7 @@ import java.util.List;
 public class TagsManagerImpl implements TagsManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+
     private DaoSupport daoSupport;
 
 

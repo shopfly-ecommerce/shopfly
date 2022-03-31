@@ -56,7 +56,7 @@ import java.util.List;
 public class MemberManagerImpl implements MemberManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
     @Autowired
     private MessageSender messageSender;

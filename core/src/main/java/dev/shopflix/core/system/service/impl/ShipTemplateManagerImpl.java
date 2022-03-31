@@ -46,7 +46,7 @@ import java.util.Map;
 public class ShipTemplateManagerImpl implements ShipTemplateManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

@@ -50,7 +50,7 @@ import java.util.List;
 public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl implements HalfPriceManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

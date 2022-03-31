@@ -53,7 +53,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     private MemberClient memberClient;
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

@@ -11,31 +11,13 @@ spring:
 
   #数据库配置
   datasource:
-    url: jdbc:mysql://192.168.2.218:3306/b2c_goods?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://192.168.2.218:3306/b2c_en?useUnicode=true&characterEncoding=utf8&autoReconnect=true
     username: root
     password: enation752513
     driver-class-name: com.mysql.jdbc.Driver
     druid:
       web-stat-filter:
         enabled: false
-      goods:
-        url: jdbc:mysql://192.168.2.218:3306/b2c_goods?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-
-      member:
-        url: jdbc:mysql://192.168.2.218:3306/b2c_member?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-
-      sss:
-        url: jdbc:mysql://192.168.2.218:3306/b2c_statistics?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-
-      system:
-        url: jdbc:mysql://192.168.2.218:3306/b2c_system?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-
-      trade:
-        url: jdbc:mysql://192.168.2.218:3306/b2c_trade?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-
-      distribution:
-        url: jdbc:mysql://192.168.2.218:3306/b2c_distribution?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-
   #rabbitmq
   rabbitmq:
     host: 192.168.2.219
@@ -56,9 +38,9 @@ redis:
   type: standalone
   config :
     type: manual
-  host: 192.168.2.219
-  port: 6382
-  password: 123456
+  host: localhost
+  port: 6379
+  password:
   maxIdle: 500
   maxTotal: 500
   maxWaitMillis: -1

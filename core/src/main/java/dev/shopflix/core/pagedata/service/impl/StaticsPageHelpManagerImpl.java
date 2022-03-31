@@ -25,7 +25,7 @@ import java.util.List;
 public class StaticsPageHelpManagerImpl implements StaticsPageHelpManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+
     private DaoSupport daoSupport;
 
     /**

@@ -42,7 +42,7 @@ import java.util.Map;
 public class RoleManagerImpl implements RoleSeller {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     @Autowired

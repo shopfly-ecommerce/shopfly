@@ -29,7 +29,7 @@ import java.util.List;
 public abstract class AbstractPromotionRuleManagerImpl {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

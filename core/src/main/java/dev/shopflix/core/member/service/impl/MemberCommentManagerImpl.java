@@ -61,7 +61,7 @@ import java.util.Map;
 public class MemberCommentManagerImpl implements MemberCommentManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private CommentGalleryManager commentGalleryManager;

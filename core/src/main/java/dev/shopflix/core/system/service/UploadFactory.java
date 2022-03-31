@@ -38,7 +38,7 @@ public class UploadFactory {
     private Cache cache;
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
 

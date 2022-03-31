@@ -36,7 +36,7 @@ import java.util.List;
 public class PaymentBillManagerImpl implements PaymentBillManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

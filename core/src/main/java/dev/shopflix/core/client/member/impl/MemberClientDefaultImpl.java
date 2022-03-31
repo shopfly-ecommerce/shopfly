@@ -40,7 +40,7 @@ public class MemberClientDefaultImpl implements MemberClient {
     private MemberPointManager memberPointManager;
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+
     private DaoSupport memberDaoSupport;
 
     @Autowired

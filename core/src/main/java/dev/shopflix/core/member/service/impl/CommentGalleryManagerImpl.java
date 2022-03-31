@@ -33,7 +33,7 @@ import java.util.Map;
 public class CommentGalleryManagerImpl implements CommentGalleryManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

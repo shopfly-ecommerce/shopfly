@@ -47,7 +47,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
 
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

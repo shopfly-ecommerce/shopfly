@@ -50,7 +50,7 @@ public class DistributionManagerImpl implements DistributionManager {
     @Autowired
     private MemberManager memberManager;
     @Autowired
-    @Qualifier("distributionDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

@@ -50,7 +50,7 @@ import java.util.Map;
 public class OrderQueryManagerImpl implements OrderQueryManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

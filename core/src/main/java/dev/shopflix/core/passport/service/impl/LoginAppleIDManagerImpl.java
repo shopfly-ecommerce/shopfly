@@ -57,7 +57,7 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
     private ConnectManager connectManager;
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
 
     @Autowired

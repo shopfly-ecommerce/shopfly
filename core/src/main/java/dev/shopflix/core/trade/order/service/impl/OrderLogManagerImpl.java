@@ -29,7 +29,7 @@ import java.util.List;
 public class OrderLogManagerImpl implements OrderLogManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

@@ -28,7 +28,7 @@ import java.util.List;
 public class TransactionRecordManagerImpl implements TransactionRecordManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

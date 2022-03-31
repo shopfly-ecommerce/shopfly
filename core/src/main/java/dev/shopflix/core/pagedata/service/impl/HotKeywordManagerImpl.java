@@ -37,7 +37,7 @@ import java.util.List;
 public class HotKeywordManagerImpl implements HotKeywordManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

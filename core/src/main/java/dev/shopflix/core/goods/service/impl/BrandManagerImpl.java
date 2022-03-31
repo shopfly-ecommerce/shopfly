@@ -33,7 +33,7 @@ import java.util.List;
 public class BrandManagerImpl implements BrandManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

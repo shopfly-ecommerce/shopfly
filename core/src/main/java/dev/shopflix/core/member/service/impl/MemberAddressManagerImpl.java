@@ -43,7 +43,7 @@ import java.util.Objects;
 public class MemberAddressManagerImpl implements MemberAddressManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
     @Autowired
     private MemberManager memberManager;

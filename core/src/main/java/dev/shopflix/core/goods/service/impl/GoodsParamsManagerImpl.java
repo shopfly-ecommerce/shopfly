@@ -35,7 +35,7 @@ import java.util.Map;
 public class GoodsParamsManagerImpl implements GoodsParamsManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

@@ -36,7 +36,7 @@ import java.util.List;
 public class FocusPictureManagerImpl implements FocusPictureManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

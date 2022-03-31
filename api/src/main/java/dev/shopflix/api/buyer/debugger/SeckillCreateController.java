@@ -64,7 +64,7 @@ public class SeckillCreateController {
     private Cache cache;
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Autowired

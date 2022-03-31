@@ -33,7 +33,7 @@ import java.util.List;
 public class MemberNoticeLogManagerImpl implements MemberNoticeLogManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+
     private DaoSupport memberDaoSupport;
 
     @Override

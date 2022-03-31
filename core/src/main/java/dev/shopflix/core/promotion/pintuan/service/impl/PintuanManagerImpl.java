@@ -53,7 +53,7 @@ public class PintuanManagerImpl implements PintuanManager {
     private static final String TRIGGER_PREFIX = "pintuan_promotion_";
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport tradeDaoSupport;
 
     @Autowired

@@ -35,7 +35,7 @@ import java.util.List;
 public class LogiCompanyManagerImpl implements LogiCompanyManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

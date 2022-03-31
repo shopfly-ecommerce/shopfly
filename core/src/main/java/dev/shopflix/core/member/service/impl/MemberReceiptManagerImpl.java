@@ -39,7 +39,7 @@ import java.util.List;
 public class MemberReceiptManagerImpl implements MemberReceiptManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+
     private DaoSupport memberDaoSupport;
     @Autowired
     private MemberManager memberManager;

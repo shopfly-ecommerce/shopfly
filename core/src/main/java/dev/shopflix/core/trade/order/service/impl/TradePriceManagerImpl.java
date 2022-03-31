@@ -26,7 +26,7 @@ public class TradePriceManagerImpl implements TradePriceManager {
 
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

@@ -54,7 +54,7 @@ public class LoginManagerImpl implements LoginManager {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+    
     private DaoSupport memberDaoSupport;
 
     @Autowired

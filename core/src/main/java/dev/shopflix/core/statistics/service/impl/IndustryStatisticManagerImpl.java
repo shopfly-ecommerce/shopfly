@@ -50,7 +50,7 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
 
     protected final Log logger = LogFactory.getLog(this.getClass());
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
 

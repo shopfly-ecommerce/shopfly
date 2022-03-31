@@ -38,7 +38,7 @@ public class TradeSnCreatorImpl implements TradeSnCreator {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

@@ -31,7 +31,7 @@ import java.util.Map;
 public class GoodsWordsClientDefaultImpl implements GoodsWordsClient {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

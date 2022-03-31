@@ -41,7 +41,7 @@ public class MemberPointManagerImpl implements MemberPointManager {
     private MemberPointHistoryManager memberPointHistoryManager;
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+
     private DaoSupport memberDaoSupport;
 
     @Override

@@ -33,7 +33,7 @@ public class TradeCallbackDevice implements PaymentCallbackDevice {
 
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

@@ -48,7 +48,7 @@ import java.util.List;
 public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl implements FullDiscountManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

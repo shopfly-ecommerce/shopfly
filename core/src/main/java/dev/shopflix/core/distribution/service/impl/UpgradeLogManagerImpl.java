@@ -38,7 +38,7 @@ import java.util.List;
 public class UpgradeLogManagerImpl implements UpgradeLogManager {
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private DistributionManager distributionManager;

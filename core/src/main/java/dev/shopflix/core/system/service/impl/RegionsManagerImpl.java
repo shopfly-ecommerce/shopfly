@@ -37,7 +37,7 @@ import java.util.List;
 public class RegionsManagerImpl implements RegionsManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
     @Autowired
     private Cache cache;

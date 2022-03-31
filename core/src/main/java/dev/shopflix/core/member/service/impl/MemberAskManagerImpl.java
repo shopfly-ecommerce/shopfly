@@ -47,7 +47,7 @@ import java.util.List;
 public class MemberAskManagerImpl implements MemberAskManager {
 
     @Autowired
-    @Qualifier("memberDaoSupport")
+
     private DaoSupport daoSupport;
     @Autowired
     private GoodsClient goodsClient;

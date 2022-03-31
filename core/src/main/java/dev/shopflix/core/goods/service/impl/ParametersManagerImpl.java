@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ParametersManagerImpl implements ParametersManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private ParameterGroupManager parameterGroupManager;

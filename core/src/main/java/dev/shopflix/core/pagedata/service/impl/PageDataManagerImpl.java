@@ -45,7 +45,7 @@ import java.util.Map;
 public class PageDataManagerImpl implements PageDataManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

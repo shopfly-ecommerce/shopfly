@@ -59,7 +59,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private GoodsGalleryManager goodsGalleryManager;

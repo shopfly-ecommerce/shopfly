@@ -59,7 +59,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Autowired

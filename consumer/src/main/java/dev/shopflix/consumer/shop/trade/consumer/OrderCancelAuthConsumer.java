@@ -39,7 +39,7 @@ public class OrderCancelAuthConsumer implements RefundStatusChangeEvent {
     private OrderOperateManager orderOperateManager;
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

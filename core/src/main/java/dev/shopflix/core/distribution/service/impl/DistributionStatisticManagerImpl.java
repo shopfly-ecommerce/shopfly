@@ -31,7 +31,7 @@ import java.util.*;
 public class DistributionStatisticManagerImpl implements DistributionStatisticManager {
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

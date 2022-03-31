@@ -41,7 +41,7 @@ public class MessageManagerImpl implements MessageManager {
     private MessageSender messageSender;
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     @Override

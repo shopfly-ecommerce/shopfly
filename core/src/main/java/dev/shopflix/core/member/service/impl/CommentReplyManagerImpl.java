@@ -38,7 +38,7 @@ import java.util.Map;
 public class CommentReplyManagerImpl implements CommentReplyManager {
 
 	@Autowired
-	@Qualifier("memberDaoSupport")
+	
 	private DaoSupport daoSupport;
 
 	@Autowired

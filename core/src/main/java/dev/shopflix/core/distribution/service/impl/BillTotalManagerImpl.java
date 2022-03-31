@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 public class BillTotalManagerImpl implements BillTotalManager {
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

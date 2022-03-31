@@ -38,7 +38,7 @@ import java.util.Map;
 public class ParameterGroupManagerImpl implements ParameterGroupManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private ParametersManager parametersManager;

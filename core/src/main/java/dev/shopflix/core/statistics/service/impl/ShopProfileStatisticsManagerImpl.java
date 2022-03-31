@@ -42,7 +42,7 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
     /**

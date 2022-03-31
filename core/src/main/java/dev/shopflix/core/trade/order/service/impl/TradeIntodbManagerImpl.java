@@ -58,7 +58,7 @@ public class TradeIntodbManagerImpl implements TradeIntodbManager {
     private Integer orderCacheTimeout = 60 * 60;
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
 

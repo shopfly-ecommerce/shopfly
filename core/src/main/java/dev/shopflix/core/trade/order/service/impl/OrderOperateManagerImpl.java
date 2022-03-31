@@ -54,7 +54,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
 
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

@@ -37,7 +37,7 @@ import java.util.List;
 public class CouponManagerImpl implements CouponManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

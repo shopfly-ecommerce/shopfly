@@ -78,7 +78,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     private BillMemberManager billMemberManager;
 
     @Autowired
-    @Qualifier("distributionDaoSupport")
+
     private DaoSupport daoSupport;
 
     @Override

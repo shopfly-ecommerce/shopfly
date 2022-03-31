@@ -45,7 +45,7 @@ import java.util.Map;
 public class WaybillManagerImpl implements WaybillManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     @Autowired

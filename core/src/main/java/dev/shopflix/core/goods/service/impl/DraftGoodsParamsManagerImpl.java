@@ -34,7 +34,7 @@ import java.util.Map;
 public class DraftGoodsParamsManagerImpl implements DraftGoodsParamsManager {
 
 	@Autowired
-	@Qualifier("goodsDaoSupport")
+	
 	private DaoSupport daoSupport;
 
 	@Override

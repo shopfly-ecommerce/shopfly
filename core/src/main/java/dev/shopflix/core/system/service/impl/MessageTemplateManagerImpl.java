@@ -31,7 +31,7 @@ import java.util.Map;
 public class MessageTemplateManagerImpl implements MessageTemplateManager {
 
 	@Autowired
-	@Qualifier("systemDaoSupport")
+	
 	private DaoSupport daoSupport;
 	
 	@Override

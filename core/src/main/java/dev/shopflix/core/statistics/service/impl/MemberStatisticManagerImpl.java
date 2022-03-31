@@ -41,7 +41,7 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
 
     protected final Log logger = org.apache.commons.logging.LogFactory.getLog(this.getClass());
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

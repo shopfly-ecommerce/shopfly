@@ -61,7 +61,7 @@ import java.util.concurrent.locks.Lock;
 public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl implements GroupbuyGoodsManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

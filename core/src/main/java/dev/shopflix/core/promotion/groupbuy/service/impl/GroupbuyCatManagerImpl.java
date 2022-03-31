@@ -29,7 +29,7 @@ import java.util.List;
 public class GroupbuyCatManagerImpl implements GroupbuyCatManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

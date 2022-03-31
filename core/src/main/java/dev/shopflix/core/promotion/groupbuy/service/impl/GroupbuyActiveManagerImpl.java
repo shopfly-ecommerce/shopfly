@@ -35,7 +35,7 @@ import java.util.List;
 public class GroupbuyActiveManagerImpl extends AbstractPromotionRuleManagerImpl implements GroupbuyActiveManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

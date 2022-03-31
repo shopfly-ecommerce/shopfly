@@ -98,7 +98,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport tradeDaoSupport;
 
 

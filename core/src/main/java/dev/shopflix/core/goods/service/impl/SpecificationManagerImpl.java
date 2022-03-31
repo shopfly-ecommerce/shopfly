@@ -41,7 +41,7 @@ import java.util.Map;
 public class SpecificationManagerImpl implements SpecificationManager {
 
     @Autowired
-    @Qualifier("goodsDaoSupport")
+    
     private DaoSupport daoSupport;
     @Autowired
     private CategoryManager categoryManager;

@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
 public class AdminUserManagerImpl implements AdminUserManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+
     private DaoSupport systemDaoSupport;
     @Autowired
     private RoleSeller roleManager;

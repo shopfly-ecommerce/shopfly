@@ -33,7 +33,7 @@ import java.util.List;
 public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
 
     @Autowired
-    @Qualifier("tradeDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Override

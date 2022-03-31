@@ -33,7 +33,7 @@ public class SettingManagerImpl implements SettingManager {
 
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
     @Autowired

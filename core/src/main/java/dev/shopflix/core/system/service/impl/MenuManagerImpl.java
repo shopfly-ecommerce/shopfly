@@ -36,7 +36,7 @@ import java.util.List;
 public class MenuManagerImpl implements MenuManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport systemDaoSupport;
 
 

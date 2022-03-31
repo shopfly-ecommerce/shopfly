@@ -39,7 +39,7 @@ import java.util.List;
 public class ArticleManagerImpl implements ArticleManager {
 
     @Autowired
-    @Qualifier("systemDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

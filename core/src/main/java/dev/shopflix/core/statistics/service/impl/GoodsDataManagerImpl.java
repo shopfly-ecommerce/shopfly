@@ -39,7 +39,7 @@ public class GoodsDataManagerImpl implements GoodsDataManager {
 
 
     @Autowired
-    @Qualifier("sssDaoSupport")
+    
     private DaoSupport daoSupport;
 
     @Autowired

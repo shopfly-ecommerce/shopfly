@@ -99,7 +99,7 @@ public class PintuanManagerImpl implements PintuanManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Pintuan add(Pintuan pintuan) {
 
         this.verifyParam(pintuan.getStartTime(), pintuan.getEndTime());
@@ -121,7 +121,7 @@ public class PintuanManagerImpl implements PintuanManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Pintuan edit(Pintuan pintuan, Integer id) {
         //获取拼团活动
         Pintuan oldPintaun = this.getModel(id);
@@ -142,7 +142,7 @@ public class PintuanManagerImpl implements PintuanManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         Pintuan pintuan = this.getModel(id);
 

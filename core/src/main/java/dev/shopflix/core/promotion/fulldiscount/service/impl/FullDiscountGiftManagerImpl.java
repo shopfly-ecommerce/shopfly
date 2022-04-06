@@ -98,7 +98,7 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public boolean addGiftQuantity(List<FullDiscountGiftDO> giftDOList) {
         try {
             for (FullDiscountGiftDO giftDO : giftDOList) {
@@ -114,7 +114,7 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public boolean addGiftEnableQuantity(List<FullDiscountGiftDO> giftDOList) {
         try {
             for (FullDiscountGiftDO giftDO : giftDOList) {
@@ -130,7 +130,7 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public boolean reduceGiftQuantity(List<FullDiscountGiftDO> giftDOList, QuantityType type) {
         try {
 

@@ -72,7 +72,7 @@ public class TagsManagerImpl implements TagsManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void saveTagGoods(Integer tagId, Integer[] goodsIds) {
         TagsDO tag = this.getModel(tagId);
         if (tag == null ) {

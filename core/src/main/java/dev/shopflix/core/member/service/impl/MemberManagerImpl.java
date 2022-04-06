@@ -75,7 +75,7 @@ public class MemberManagerImpl implements MemberManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Member edit(Member member, Integer id) {
         //校验邮箱是否已经存在
         if (!StringUtil.isEmpty(member.getEmail())) {
@@ -280,7 +280,7 @@ public class MemberManagerImpl implements MemberManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberVO appLogin(String mobile) {
         //获取用户信息
         Member member = this.mobileLoginValidation(mobile);
@@ -296,7 +296,7 @@ public class MemberManagerImpl implements MemberManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Member register(Member member) {
         //手机号码校验
         Member m = this.getMemberByMobile(member.getMobile());

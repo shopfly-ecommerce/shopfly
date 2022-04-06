@@ -3,7 +3,7 @@
  * 未经许可，您不得使用此文件。
  * 官方地址：www.javamall.com.cn
 */
-package dev.shopflix.api;
+package dev.shopflix.api.config.security.buyer;
 
 import dev.shopflix.framework.auth.AuthUser;
 import dev.shopflix.framework.security.impl.AbstractAuthenticationService;
@@ -27,8 +27,6 @@ public class AuthenticationService extends AbstractAuthenticationService {
     @Override
     protected AuthUser parseToken(String token) {
         AuthUser authUser=  tokenManager.parse(Buyer.class, token);
-//        User user = (User) authUser;
-//        checkUserDisable(Role.BUYER, user.getUid());
         return authUser;
     }
 

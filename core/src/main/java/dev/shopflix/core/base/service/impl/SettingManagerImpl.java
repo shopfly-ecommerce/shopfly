@@ -40,7 +40,7 @@ public class SettingManagerImpl implements SettingManager {
     private Cache cache;
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void save(SettingGroup group, Object settings) {
         String sql = "select cfg_value from es_settings where cfg_group = ?";
         SettingsDO settingsDO = this.systemDaoSupport.queryForObject(sql, SettingsDO.class, group.name());

@@ -66,7 +66,7 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberAddress add(MemberAddress memberAddress) {
         BeanUtil.copyProperties(memberAddress.getRegion(), memberAddress);
         Buyer buyer = UserContext.getBuyer();
@@ -103,7 +103,7 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberAddress edit(MemberAddress memberAddress, Integer id) {
         Buyer buyer = UserContext.getBuyer();
         Member member = memberManager.getModel(buyer.getUid());
@@ -135,7 +135,7 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         Buyer buyer = UserContext.getBuyer();
         MemberAddress address = this.getModel(id);

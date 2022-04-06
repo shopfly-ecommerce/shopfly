@@ -51,7 +51,7 @@ public class FocusPictureManagerImpl implements FocusPictureManager {
 
     @Override
     @Operation
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public FocusPicture add(FocusPicture cmsFocusPicture) {
         //焦点图不能超过5个
         String sql = "select count(0) from es_focus_picture where client_type=?";
@@ -87,7 +87,7 @@ public class FocusPictureManagerImpl implements FocusPictureManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public FocusPicture edit(FocusPicture cmsFocusPicture, Integer id) {
 
         this.daoSupport.update(cmsFocusPicture, id);
@@ -99,7 +99,7 @@ public class FocusPictureManagerImpl implements FocusPictureManager {
 
     @Override
     @Operation
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         FocusPicture cmsFocusPicture = this.getModel(id);
 

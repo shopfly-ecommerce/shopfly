@@ -60,7 +60,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ShipTemplateDO save(ShipTemplateSellerVO template) {
 
         ShipTemplateDO t = new ShipTemplateDO();
@@ -79,7 +79,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ShipTemplateDO edit(ShipTemplateSellerVO template) {
         ShipTemplateDO t = new ShipTemplateDO();
         BeanUtils.copyProperties(template, t);
@@ -249,7 +249,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer templateId) {
         GoodsDO goodsDO = this.goodsClient.checkShipTemplate(templateId);
         if (goodsDO != null) {

@@ -93,7 +93,7 @@ public class CategoryManagerImpl implements CategoryManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public CategoryDO add(CategoryDO category) {
         CategoryDO parent = null;
         //不能添加重复的分类名称
@@ -144,7 +144,7 @@ public class CategoryManagerImpl implements CategoryManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public CategoryDO edit(CategoryDO category, Integer id) {
         CategoryDO parent = null;
 
@@ -191,7 +191,7 @@ public class CategoryManagerImpl implements CategoryManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         List<CategoryVO> list = this.listAllChildren(id);
         if (list != null && list.size() > 0) {

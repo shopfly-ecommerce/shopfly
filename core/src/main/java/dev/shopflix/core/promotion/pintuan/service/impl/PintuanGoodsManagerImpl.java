@@ -76,7 +76,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PintuanGoodsDO add(PintuanGoodsDO pintuanGoods) {
 
         this.tradeDaoSupport.insert(pintuanGoods);
@@ -88,7 +88,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void save(Integer pintuanId, List<PintuanGoodsDO> pintuanGoodsList) {
 
         Pintuan pintuan = pintuanManager.getModel(pintuanId);
@@ -146,14 +146,14 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PintuanGoodsDO edit(PintuanGoodsDO pintuanGoods, Integer id) {
         this.tradeDaoSupport.update(pintuanGoods, id);
         return pintuanGoods;
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.tradeDaoSupport.delete(PintuanGoodsDO.class, id);
     }

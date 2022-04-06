@@ -77,7 +77,7 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 	}
 
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public DraftGoodsDO add(GoodsDTO goodsVO) {
 
 		// 没有规格给这个字段塞0
@@ -113,7 +113,7 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 	}
 
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public DraftGoodsDO edit(GoodsDTO goodsVO, Integer id) {
 
 		DraftGoodsDO draftGoods = this.getModel(id);
@@ -147,7 +147,7 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 	}
 
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void delete(Integer[] draftGoodsIds) {
 		for(Integer id : draftGoodsIds){
 			this.daoSupport.delete(DraftGoodsDO.class, id);
@@ -192,7 +192,7 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 	}
 
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public GoodsDO addMarket(GoodsDTO goodsVO, Integer draftGoodsId) {
 		Integer[] goodsIds = new Integer[]{ draftGoodsId };
 		this.delete(goodsIds);

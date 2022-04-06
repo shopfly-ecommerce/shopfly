@@ -80,14 +80,14 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void confirm(ConfirmVO confirmVO, OrderPermission permission) {
         executeOperate(confirmVO.getOrderSn(), permission, OrderOperateEnum.CONFIRM, confirmVO);
     }
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public OrderDO payOrder(String orderSn, Double payPrice, String returnTradeNo, OrderPermission permission) {
 
         PayParam payParam = new PayParam();
@@ -99,7 +99,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void ship(DeliveryVO deliveryVO, OrderPermission permission) {
 
         String orderSn = deliveryVO.getOrderSn();
@@ -107,7 +107,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void rog(RogVO rogVO, OrderPermission permission) {
 
         String orderSn = rogVO.getOrderSn();
@@ -115,7 +115,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void cancel(CancelVO cancelVO, OrderPermission permission) {
 
         String orderSn = cancelVO.getOrderSn();
@@ -123,7 +123,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void complete(CompleteVO completeVO, OrderPermission permission) {
         String orderSn = completeVO.getOrderSn();
         executeOperate(orderSn, permission, OrderOperateEnum.COMPLETE, completeVO);
@@ -131,14 +131,14 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateServiceStatus(String orderSn, ServiceStatusEnum serviceStatus) {
         String sql = "update es_order set service_status = ?  where sn = ? ";
         this.daoSupport.execute(sql, serviceStatus.value(), orderSn);
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public OrderConsigneeVO updateOrderConsignee(OrderConsigneeVO orderConsignee) {
 
         OrderDO orderDO = this.orderQueryManager.getDoByOrderSn(orderConsignee.getOrderSn());
@@ -164,7 +164,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateOrderPrice(String orderSn, Double orderPrice) {
 
         //修改的订单价格不能小于等于0
@@ -227,21 +227,21 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateCommentStatus(String orderSn, CommentStatusEnum commentStatus) {
         String sql = "update es_order set comment_status = ? where sn = ? ";
         this.daoSupport.execute(sql, commentStatus.name(), orderSn);
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateItemJson(String itemsJson, String orderSn) {
         String sql = "update es_order set items_json = ? where  sn = ? ";
         this.daoSupport.execute(sql, itemsJson, orderSn);
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateOrderStatus(String orderSn, OrderStatusEnum orderStatus) {
 
         StringBuffer sqlBuffer = new StringBuffer("update es_order set order_status = ? ");
@@ -257,7 +257,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void executeOperate(String orderSn, OrderPermission permission, OrderOperateEnum orderOperate, Object paramVO) {
         // 获取此订单
         OrderDetailVO orderDetailVO = orderQueryManager.getModel(orderSn, null);
@@ -449,7 +449,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateItemRefundPrice(OrderDetailVO order) {
         //获取订单的满减优惠总额
         double fullMinus = order.getFullMinus();
@@ -513,7 +513,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateOrderServiceStatus(String orderSn, String statusEnum) {
 
         ServiceStatusEnum serviceStatusEnum = ServiceStatusEnum.valueOf(statusEnum);
@@ -529,7 +529,7 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updateOrderItemServiceStatus(String sn, List<OrderSkuDTO> orderSkuDTOList) {
         OrderDetailVO orderDetailVO = this.orderQueryManager.getModel(sn, null);
         List<OrderSkuVO> orderSkuVOList = orderDetailVO.getOrderSkuList();

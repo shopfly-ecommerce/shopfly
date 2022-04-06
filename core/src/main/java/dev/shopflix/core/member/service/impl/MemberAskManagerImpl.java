@@ -101,7 +101,7 @@ public class MemberAskManagerImpl implements MemberAskManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberAsk add(String askContent, Integer goodsId) {
         CacheGoods goods = goodsClient.getFromCache(goodsId);
 
@@ -126,7 +126,7 @@ public class MemberAskManagerImpl implements MemberAskManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
 
         //将状态变成已删除状态
@@ -141,7 +141,7 @@ public class MemberAskManagerImpl implements MemberAskManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberAsk reply(@NotEmpty(message = "请输入回复内容") String replyContent, Integer askId) {
         MemberAsk ask = this.getModel(askId);
         if (ask.getReplyStatus() == 1) {
@@ -164,7 +164,7 @@ public class MemberAskManagerImpl implements MemberAskManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void auth(Integer askId, String authStatus) {
 
         // 校验是否有管理端权限

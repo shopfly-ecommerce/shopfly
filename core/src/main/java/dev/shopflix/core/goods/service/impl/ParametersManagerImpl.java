@@ -47,7 +47,7 @@ public class ParametersManagerImpl implements ParametersManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ParametersDO add(ParametersDO parameters) {
 
         // 查询参数组
@@ -78,7 +78,7 @@ public class ParametersManagerImpl implements ParametersManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ParametersDO edit(ParametersDO parameters, Integer id) {
 
         ParametersDO temp = this.getModel(id);
@@ -101,7 +101,7 @@ public class ParametersManagerImpl implements ParametersManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(ParametersDO.class, id);
     }

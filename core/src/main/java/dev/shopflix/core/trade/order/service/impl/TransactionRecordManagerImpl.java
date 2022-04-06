@@ -41,21 +41,21 @@ public class TransactionRecordManagerImpl implements TransactionRecordManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public TransactionRecord add(TransactionRecord transactionRecord) {
         this.daoSupport.insert(transactionRecord);
         return transactionRecord;
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public TransactionRecord edit(TransactionRecord transactionRecord, Integer id) {
         this.daoSupport.update(transactionRecord, id);
         return transactionRecord;
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(TransactionRecord.class, id);
     }

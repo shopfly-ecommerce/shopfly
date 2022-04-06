@@ -33,7 +33,7 @@ public class DistributionRefundConsumer implements RefundStatusChangeEvent {
 
 
     @Override
-    @Transactional(value = "distributionTransactionManager", rollbackFor = Exception.class)
+    @Transactional( rollbackFor = Exception.class)
     public void refund(RefundChangeMsg refundChangeMsg) {
         try {
             if (refundChangeMsg.getRefundStatusEnum().equals(RefundStatusEnum.PASS)) {

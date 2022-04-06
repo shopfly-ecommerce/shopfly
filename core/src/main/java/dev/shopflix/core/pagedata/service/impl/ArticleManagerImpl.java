@@ -81,7 +81,7 @@ public class ArticleManagerImpl implements ArticleManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Article add(Article article) {
 
         article.setShowPosition(ArticleShowPosition.OTHER.name());
@@ -94,7 +94,7 @@ public class ArticleManagerImpl implements ArticleManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Article edit(Article article, Integer id) {
 
         Article art = this.getModel(id);
@@ -108,7 +108,7 @@ public class ArticleManagerImpl implements ArticleManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
 
         Article article = this.getModel(id);

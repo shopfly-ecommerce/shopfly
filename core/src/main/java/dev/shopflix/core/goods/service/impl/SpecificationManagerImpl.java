@@ -56,7 +56,7 @@ public class SpecificationManagerImpl implements SpecificationManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public SpecificationDO add(SpecificationDO specification) {
 
 
@@ -77,7 +77,7 @@ public class SpecificationManagerImpl implements SpecificationManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public SpecificationDO edit(SpecificationDO specification, Integer id) {
 
         SpecificationDO model = this.getModel(id);
@@ -97,7 +97,7 @@ public class SpecificationManagerImpl implements SpecificationManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer[] ids) {
 
         List<Object> term = new ArrayList<>();

@@ -45,7 +45,7 @@ public class MemberPointManagerImpl implements MemberPointManager {
     private DaoSupport memberDaoSupport;
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void pointOperation(@Valid MemberPointHistory memberPointHistory) {
         this.checkMemberPoint(memberPointHistory);
         //添加历史记录

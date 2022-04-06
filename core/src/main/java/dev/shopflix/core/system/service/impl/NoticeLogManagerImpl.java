@@ -51,7 +51,7 @@ public class NoticeLogManagerImpl implements NoticeLogManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public NoticeLogDO add(NoticeLogDO shopNoticeLog) {
         this.daoSupport.insert(shopNoticeLog);
 
@@ -60,7 +60,7 @@ public class NoticeLogManagerImpl implements NoticeLogManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer[] ids) {
         List<Object> term = new ArrayList<>();
         String str = SqlUtil.getInSql(ids, term);
@@ -69,7 +69,7 @@ public class NoticeLogManagerImpl implements NoticeLogManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void read(Integer[] ids) {
         List<Object> term = new ArrayList<>();
         String str = SqlUtil.getInSql(ids, term);

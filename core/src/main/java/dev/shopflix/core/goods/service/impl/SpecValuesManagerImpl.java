@@ -39,7 +39,7 @@ public class SpecValuesManagerImpl implements SpecValuesManager {
 	private SpecificationManager specificationManager;
 
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public SpecValuesDO add(SpecValuesDO specValues)	{
 		
 		this.daoSupport.insert(specValues);
@@ -50,7 +50,7 @@ public class SpecValuesManagerImpl implements SpecValuesManager {
 	}
 	
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public SpecValuesDO edit(SpecValuesDO specValues, Integer id){
 		this.daoSupport.update(specValues, id);
 		return specValues;
@@ -72,7 +72,7 @@ public class SpecValuesManagerImpl implements SpecValuesManager {
 	}
 
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public List<SpecValuesDO> saveSpecValue(Integer specId, String[] valueList) {
 
 		//查询规格是否存在

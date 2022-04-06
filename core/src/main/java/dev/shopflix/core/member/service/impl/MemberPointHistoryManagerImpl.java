@@ -39,7 +39,7 @@ public class MemberPointHistoryManagerImpl implements MemberPointHistoryManager 
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberPointHistory add(MemberPointHistory memberPointHistory) {
         this.memberDaoSupport.insert(memberPointHistory);
         return memberPointHistory;

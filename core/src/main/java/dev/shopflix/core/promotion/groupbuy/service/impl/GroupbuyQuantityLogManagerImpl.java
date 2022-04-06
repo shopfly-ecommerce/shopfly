@@ -43,7 +43,7 @@ public class GroupbuyQuantityLogManagerImpl implements GroupbuyQuantityLogManage
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public List<GroupbuyQuantityLog> rollbackReduce(String orderSn) {
         List<GroupbuyQuantityLog> logList = daoSupport.queryForList("select * from es_groupbuy_quantity_log where order_sn=? ", GroupbuyQuantityLog.class, orderSn);
         List<GroupbuyQuantityLog> result = new ArrayList<>();
@@ -61,7 +61,7 @@ public class GroupbuyQuantityLogManagerImpl implements GroupbuyQuantityLogManage
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public GroupbuyQuantityLog add(GroupbuyQuantityLog groupbuyQuantityLog) {
         this.daoSupport.insert(groupbuyQuantityLog);
         return groupbuyQuantityLog;

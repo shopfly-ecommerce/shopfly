@@ -54,7 +54,7 @@ public class CommentReplyManagerImpl implements CommentReplyManager {
 	}
 	
 	@Override
-	@Transactional(value = "memberTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public CommentReply add(CommentReply commentReply)	{
 		this.daoSupport.insert(commentReply);
 		
@@ -62,14 +62,14 @@ public class CommentReplyManagerImpl implements CommentReplyManager {
 	}
 	
 	@Override
-	@Transactional(value = "memberTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public CommentReply edit(CommentReply commentReply, Integer id){
 		this.daoSupport.update(commentReply, id);
 		return commentReply;
 	}
 	
 	@Override
-	@Transactional(value = "memberTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public	void delete( Integer id)	{
 		this.daoSupport.delete(CommentReply.class,	id);
 	}
@@ -100,7 +100,7 @@ public class CommentReplyManagerImpl implements CommentReplyManager {
 	}
 
 	@Override
-	@Transactional(value = "memberTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public CommentReply replyComment(Integer commentId, String reply, Permission permission) {
 		String sql = "select * from es_comment_reply where comment_id = ? and parent_id = 0 ";
 		List list = this.daoSupport.queryForList(sql, commentId);

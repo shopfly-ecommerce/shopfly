@@ -66,7 +66,7 @@ public class PageDataManagerImpl implements PageDataManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PageData add(PageData page) {
         this.daoSupport.insert(page);
         //发送消息
@@ -75,7 +75,7 @@ public class PageDataManagerImpl implements PageDataManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PageData edit(PageData page, Integer id) {
         this.daoSupport.update(page, id);
         //发送消息
@@ -84,7 +84,7 @@ public class PageDataManagerImpl implements PageDataManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(Page.class, id);
         //发送消息
@@ -112,7 +112,7 @@ public class PageDataManagerImpl implements PageDataManager {
 
     @Override
     @Operation
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PageData editByType(PageData pageData) {
         PageData data = this.getByType(pageData.getClientType(), pageData.getPageType());
         //首次保存

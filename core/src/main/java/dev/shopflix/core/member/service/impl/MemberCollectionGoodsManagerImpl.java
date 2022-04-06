@@ -62,7 +62,7 @@ public class MemberCollectionGoodsManagerImpl implements MemberCollectionGoodsMa
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberCollectionGoods add(MemberCollectionGoods memberCollectionGoods) {
         Buyer buyer = UserContext.getBuyer();
         //查询当前会员是否存在
@@ -102,7 +102,7 @@ public class MemberCollectionGoodsManagerImpl implements MemberCollectionGoodsMa
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer goodsId) {
         Buyer buyer = UserContext.getBuyer();
         MemberCollectionGoods memberCollectionGoods = this.memberDaoSupport.queryForObject("select * from es_member_collection_goods where goods_id = ? and member_id = ?", MemberCollectionGoods.class, goodsId, buyer.getUid());

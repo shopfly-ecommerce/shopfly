@@ -31,7 +31,7 @@ public class TradePriceManagerImpl implements TradePriceManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void updatePrice(String tradeSn, Double tradePrice, Double discountPrice) {
         String sql = "update es_trade set total_price=?,discount_price=? where trade_sn=?";
         this.daoSupport.execute(sql, tradePrice, discountPrice, tradeSn);

@@ -36,7 +36,7 @@ public class DraftGoodsSkuManagerImpl implements DraftGoodsSkuManager {
 	private DaoSupport daoSupport;
 	
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void add(GoodsDTO goodsVO, Integer draftGoodsId) {
 		
 		String sql = "delete from es_draft_goods_sku where draft_goods_id = ?";

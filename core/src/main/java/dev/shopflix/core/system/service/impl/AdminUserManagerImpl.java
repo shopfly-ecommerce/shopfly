@@ -66,7 +66,7 @@ public class AdminUserManagerImpl implements AdminUserManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public AdminUser add(AdminUserVO adminUserVO) {
         boolean bool = Pattern.matches("[a-fA-F0-9]{32}", adminUserVO.getPassword());
         if (!bool) {
@@ -96,7 +96,7 @@ public class AdminUserManagerImpl implements AdminUserManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public AdminUser edit(AdminUserVO adminUserVO, Integer id) {
         //对要修改的管理员是否存在进行校验
         AdminUser adminUser = this.getModel(id);
@@ -138,7 +138,7 @@ public class AdminUserManagerImpl implements AdminUserManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         //校验当前管理员是否存在
         AdminUser adminUser = this.getModel(id);

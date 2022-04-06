@@ -118,7 +118,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void add(List<GoodsSkuVO> skuList, GoodsDO goods) {
 
         List<GoodsSkuDO> newSkuList = new ArrayList<>();
@@ -143,7 +143,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void edit(List<GoodsSkuVO> skuList, GoodsDO goods) {
         //新增的sku列表，用于同步这些sku的缓存
         List<GoodsSkuDO> newSkuList  =new ArrayList<>();

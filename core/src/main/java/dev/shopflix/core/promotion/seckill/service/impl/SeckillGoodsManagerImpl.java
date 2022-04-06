@@ -111,7 +111,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     public void addApply(List<SeckillApplyDO> list) {
 
 
@@ -384,7 +384,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     public void rollbackStock(List<PromotionDTO> promotionDTOList) {
 
         List<SeckillGoodsVO> lockedList = new ArrayList<>();
@@ -425,7 +425,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     public void deleteSeckillGoods(Integer goodsId) {
 
         //删除限时抢购已经开始和未开始的商品

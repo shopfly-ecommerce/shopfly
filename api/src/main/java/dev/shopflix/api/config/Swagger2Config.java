@@ -3,7 +3,7 @@
  * 未经许可，您不得使用此文件。
  * 官方地址：www.javamall.com.cn
  */
-package dev.shopflix.api;
+package dev.shopflix.api.config;
 
 import dev.shopflix.core.base.context.Region;
 import dev.shopflix.framework.swagger.AbstractSwagger2;

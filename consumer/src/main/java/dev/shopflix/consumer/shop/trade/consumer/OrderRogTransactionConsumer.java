@@ -35,7 +35,7 @@ public class OrderRogTransactionConsumer implements OrderStatusChangeEvent {
     private TransactionRecordManager transactionRecordManager;
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void orderChange(OrderStatusChangeMsg orderMessage) {
 
         if (orderMessage.getNewStatus().equals(OrderStatusEnum.ROG)) {

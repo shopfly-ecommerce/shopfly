@@ -67,7 +67,7 @@ public class WaybillManagerImpl implements WaybillManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public WayBillDO add(WayBillVO wayBill) {
         WayBillDO wayBillDO = new WayBillDO(wayBill);
         if (wayBill.getId() == null || wayBill.getId().equals(0)) {
@@ -86,7 +86,7 @@ public class WaybillManagerImpl implements WaybillManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public WayBillVO edit(WayBillVO wayBill) {
         List<WayBillVO> vos = this.getWayBills();
         for (WayBillVO vo : vos) {

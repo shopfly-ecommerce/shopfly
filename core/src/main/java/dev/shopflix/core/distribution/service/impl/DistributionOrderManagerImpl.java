@@ -575,7 +575,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
      *
      * @param order
      */
-    @Transactional(value = "distributionTransactionManager", rollbackFor = Exception.class)
+    @Transactional( rollbackFor = Exception.class)
     @Override
     public void confirm(OrderDO order) {
 

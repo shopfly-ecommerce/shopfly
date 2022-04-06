@@ -122,7 +122,7 @@ public class CouponManagerImpl implements CouponManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void addUsedNum(Integer couponId) {
         String sql = "update es_coupon set used_num = used_num+1 where coupon_id=?";
         this.daoSupport.execute(sql, couponId);
@@ -130,7 +130,7 @@ public class CouponManagerImpl implements CouponManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void addReceivedNum(Integer couponId) {
         String sql = "update es_coupon set received_num = received_num+1 where coupon_id=?";
         this.daoSupport.execute(sql, couponId);

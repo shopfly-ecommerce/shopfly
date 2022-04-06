@@ -55,7 +55,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void cancelTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
         int time = this.dayConversionSecond(settingVO.getCancelOrderDay());
@@ -75,7 +75,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void rogTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
         //系统时间
@@ -94,7 +94,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void completeTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
         //系统时间
@@ -122,7 +122,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void payTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
         int time = this.dayConversionSecond(settingVO.getCompleteOrderPay());
@@ -136,7 +136,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void serviceTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
         //系统时间
@@ -153,7 +153,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void commentTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
         int time = this.dayConversionSecond(settingVO.getCommentOrderDay());

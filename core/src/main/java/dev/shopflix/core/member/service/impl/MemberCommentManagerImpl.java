@@ -180,7 +180,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberComment add(CommentScoreDTO comment, Permission permission) {
 
         OrderDetailDTO orderDetail = orderClient.getModel(comment.getOrderSn());
@@ -206,14 +206,14 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberComment edit(MemberComment memberComment, Integer id) {
         this.daoSupport.update(memberComment, id);
         return memberComment;
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         String sql = "update es_member_comment set status  = 0  where comment_id = ? ";
         this.daoSupport.execute(sql, id);
@@ -315,7 +315,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public List<AdditionalCommentDTO> additionalComments(List<AdditionalCommentDTO> comments, Permission permission) {
         for (AdditionalCommentDTO commentDTO : comments) {
             MemberComment memberComment = this.getModel(commentDTO.getCommentId());

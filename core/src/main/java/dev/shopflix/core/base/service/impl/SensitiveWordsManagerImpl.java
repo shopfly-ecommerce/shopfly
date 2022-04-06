@@ -54,7 +54,7 @@ public class SensitiveWordsManagerImpl implements SensitiveWordsManager {
 	}
 	
 	@Override
-	@Transactional(value = "systemTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public SensitiveWords add(SensitiveWords	sensitiveWords)	{
 
 		sensitiveWords.setIsDelete(1);
@@ -68,7 +68,7 @@ public class SensitiveWordsManagerImpl implements SensitiveWordsManager {
 	}
 	
 	@Override
-	@Transactional(value = "systemTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public	SensitiveWords  edit(SensitiveWords	sensitiveWords,Integer id){
 		this.daoSupport.update(sensitiveWords, id);
 		cache.remove(CachePrefix.SENSITIVE_WORDS.getPrefix());
@@ -76,7 +76,7 @@ public class SensitiveWordsManagerImpl implements SensitiveWordsManager {
 	}
 	
 	@Override
-	@Transactional(value = "systemTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public	void delete( Integer id)	{
 		String sql = "update es_sensitive_words set is_delete = 0 where id = ?";
 		this.daoSupport.execute(sql,id);

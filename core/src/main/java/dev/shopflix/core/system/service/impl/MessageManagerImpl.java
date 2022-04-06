@@ -52,7 +52,7 @@ public class MessageManagerImpl implements MessageManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Message add(MessageVO messageVO) {
         if (messageVO.getSendType().equals(1)) {
             if (StringUtil.isEmpty(messageVO.getMemberIds())) {

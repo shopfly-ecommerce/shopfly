@@ -83,7 +83,7 @@ public class GoodsManagerImpl implements GoodsManager {
 
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public GoodsDO add(GoodsDTO goodsVo) {
 
         // 没有规格给这个字段塞0

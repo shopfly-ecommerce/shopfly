@@ -52,7 +52,7 @@ public class MemberNoticeLogManagerImpl implements MemberNoticeLogManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberNoticeLog add(String content, long sendTime, Integer memberId, String title) {
         MemberNoticeLog memberNoticeLog = new MemberNoticeLog();
         memberNoticeLog.setContent(content);

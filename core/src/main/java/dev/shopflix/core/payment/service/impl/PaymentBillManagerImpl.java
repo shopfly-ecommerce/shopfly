@@ -57,7 +57,7 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PaymentBillDO add(PaymentBillDO paymentBill) {
         this.daoSupport.insert(paymentBill);
 
@@ -65,7 +65,7 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void paySuccess(String billSn, String returnTradeNo, TradeType tradeType, double payPrice) {
 
         if (callbackDeviceList == null && callbackDeviceList.isEmpty()) {

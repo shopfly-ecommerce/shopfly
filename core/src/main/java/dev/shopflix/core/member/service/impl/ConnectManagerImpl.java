@@ -288,7 +288,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberVO callBack(String type, String mem, String uuid) {
         //根据回调获取对应的插件，并获取相应的openid
         ConnectTypeEnum connectTypeEnum = ConnectTypeEnum.valueOf(type);
@@ -334,7 +334,7 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void registerBind(String uuid) {
         Buyer buyer = UserContext.getBuyer();
         Member member = memberManager.getModel(buyer.getUid());
@@ -362,7 +362,7 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void unbind(String type) {
         Integer memberId = UserContext.getBuyer().getUid();
 
@@ -383,7 +383,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Map openidBind(String uuid) {
         Map map = new HashMap(4);
         Auth2Token auth2Token = (Auth2Token) cache.get(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid);
@@ -487,7 +487,7 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Map mobileBind(String mobile, String uuid) {
         //校验会员是否存在
         Member member = memberManager.getMemberByMobile(mobile);
@@ -552,7 +552,7 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ConnectSettingDTO save(ConnectSettingDTO connectSettingDTO) {
 
         ConnectSettingDO connectSettingDO = new ConnectSettingDO();
@@ -579,7 +579,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Map bind(String username, String password, String uuidConnect, String uuid) {
         //校验会员账号密码正确性
         Member member = memberManager.validation(username, password);

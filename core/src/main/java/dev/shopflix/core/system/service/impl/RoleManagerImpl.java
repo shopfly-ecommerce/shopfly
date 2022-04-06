@@ -56,7 +56,7 @@ public class RoleManagerImpl implements RoleSeller {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public RoleVO add(RoleVO role) {
         RoleDO roleDO = new RoleDO();
         roleDO.setRoleName(role.getRoleName());
@@ -70,7 +70,7 @@ public class RoleManagerImpl implements RoleSeller {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public RoleVO edit(RoleVO role, Integer id) {
         //校验权限是否存在
         RoleDO roleDO = this.getModel(id);
@@ -88,7 +88,7 @@ public class RoleManagerImpl implements RoleSeller {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         RoleDO roleDO = this.getModel(id);
         if (roleDO == null) {

@@ -73,7 +73,7 @@ shopflix:
 xxl:
   job:
     admin:
-      addresses:  http://192.168.2.218:52526/xxl-job-admin
+      addresses:  http://192.168.2.218:8080/xxl-job-admin
     executor:
       appname: job-executer
       ip:

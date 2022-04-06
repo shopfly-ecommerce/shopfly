@@ -35,7 +35,7 @@ public interface PintuanOrderManager {
      * @param pinTuanOrderId 拼团订单id ，如果为空则为发起拼团，否则参与此拼团
      * @return 拼团订单
      */
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     PintuanOrder createOrder(OrderDTO order, Integer skuId, Integer pinTuanOrderId);
 
     /**
@@ -43,7 +43,7 @@ public interface PintuanOrderManager {
      *
      * @param order 普通订单
      */
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     void payOrder(OrderDO order);
 
 

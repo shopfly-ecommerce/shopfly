@@ -87,7 +87,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PaymentMethodDO add(PaymentPluginVO paymentMethod, String paymentPluginId) {
 
         //删除库中的插件
@@ -188,7 +188,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PaymentMethodDO edit(PaymentMethodDO paymentMethod, Integer id) {
 
         PaymentMethodDO method = this.daoSupport.queryForObject(PaymentMethodDO.class, id);
@@ -210,7 +210,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(PaymentMethodDO.class, id);
 

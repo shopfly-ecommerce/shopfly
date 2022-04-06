@@ -3,7 +3,7 @@
  * 未经许可，您不得使用此文件。
  * 官方地址：www.javamall.com.cn
  */
-package dev.shopflix.api;
+package dev.shopflix.api.config.security.buyer;
 
 import dev.shopflix.core.base.DomainHelper;
 import dev.shopflix.framework.security.TokenAuthenticationFilter;
@@ -39,7 +39,7 @@ import java.net.URISyntaxException;
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DomainHelper domainHelper;
@@ -73,7 +73,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new TokenAuthenticationFilter(buyerAuthenticationService),
                         UsernamePasswordAuthenticationFilter.class);
         //过滤掉base api 的路径
-
         http.authorizeRequests().antMatchers("/pages/**"
                 , "/captchas/**"
                 , "/uploaders/**/**"
@@ -93,7 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().hasRole(Role.BUYER.name());
         http.headers().addHeaderWriter(xFrameOptionsHeaderWriter());
         //禁用缓存
-        http.headers().cacheControl();
+        http.headers().cacheControl().and().contentSecurityPolicy("script-src 'self'");
 
     }
 

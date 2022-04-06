@@ -52,7 +52,7 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void onTradeIntoDb(TradeVO tradeVO) {
 
         List<OrderDTO> orderList = tradeVO.getOrderList();

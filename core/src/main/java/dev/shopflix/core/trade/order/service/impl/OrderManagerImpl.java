@@ -31,7 +31,7 @@ public class OrderManagerImpl implements OrderManager {
     private DaoSupport daoSupport;
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public OrderDetailVO update(OrderDO orderDO) {
 
         this.daoSupport.update(orderDO, orderDO.getOrderId());

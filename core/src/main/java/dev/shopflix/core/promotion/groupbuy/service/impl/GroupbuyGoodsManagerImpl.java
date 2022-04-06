@@ -314,7 +314,7 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public boolean cutQuantity(String orderSn, List<PromotionDTO> promotionDTOList) {
 
         for (PromotionDTO promotionDTO : promotionDTOList) {

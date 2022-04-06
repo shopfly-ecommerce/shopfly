@@ -79,7 +79,7 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public GoodsGalleryDO add(GoodsGalleryDO goodsGallery) {
         this.daoSupport.insert(goodsGallery);
 
@@ -87,7 +87,7 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void add(List<GoodsGalleryDO> goodsGalleryList, Integer goodsId) {
 
         int i = 0;
@@ -109,7 +109,7 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void edit(List<GoodsGalleryDO> goodsGalleryList, Integer goodsId) {
 
         // 删除没有用到的商品相册信息

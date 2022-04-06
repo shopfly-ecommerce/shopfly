@@ -46,7 +46,7 @@ public class ReceiptHistoryManagerImpl implements ReceiptHistoryManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ReceiptHistory add(ReceiptHistory receiptHistory) {
         this.memberDaoSupport.insert(receiptHistory);
         receiptHistory.setHistoryId(memberDaoSupport.getLastId("es_history_receipt"));

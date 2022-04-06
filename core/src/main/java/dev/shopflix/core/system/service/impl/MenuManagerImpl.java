@@ -48,7 +48,7 @@ public class MenuManagerImpl implements MenuManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Menu add(MenuVO menuVO) {
         //对菜单的唯一标识做校验
         Menu valMenu = this.getMenuByIdentifier(menuVO.getIdentifier());
@@ -85,7 +85,7 @@ public class MenuManagerImpl implements MenuManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Menu edit(Menu menu, Integer id) {
         //校验当前菜单是否存在
         Menu valMenu = this.getModel(id);
@@ -147,7 +147,7 @@ public class MenuManagerImpl implements MenuManager {
 
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         Menu menu = this.getModel(id);
         if (menu == null) {

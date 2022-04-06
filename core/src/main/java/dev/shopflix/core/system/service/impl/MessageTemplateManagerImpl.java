@@ -43,7 +43,7 @@ public class MessageTemplateManagerImpl implements MessageTemplateManager {
 	}
 
 	@Override
-	@Transactional(value = "systemTransactionManager",propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public MessageTemplateDO edit(MessageTemplateDTO messageTemplate, Integer id){
 		this.daoSupport.update(messageTemplate, id);
 		return this.getModel(id);

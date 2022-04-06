@@ -43,7 +43,7 @@ public class RegionsManagerImpl implements RegionsManager {
     private Cache cache;
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Regions add(RegionsVO regionsVO) {
 
         //添加地区名称，不允许重复
@@ -79,7 +79,7 @@ public class RegionsManagerImpl implements RegionsManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Regions edit(Regions regions, Integer id) {
 
         //添加地区名称，不允许重复
@@ -103,7 +103,7 @@ public class RegionsManagerImpl implements RegionsManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         //清除缓存
         this.clearRegionsCache();

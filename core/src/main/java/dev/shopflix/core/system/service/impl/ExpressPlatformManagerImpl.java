@@ -66,7 +66,7 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ExpressPlatformVO add(ExpressPlatformVO expressPlatformVO) {
         ExpressPlatformDO expressPlatformDO = new ExpressPlatformDO(expressPlatformVO);
         if (expressPlatformDO.getId() == null || expressPlatformDO.getId() == 0) {
@@ -83,7 +83,7 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ExpressPlatformVO edit(ExpressPlatformVO expressPlatformVO) {
         List<ExpressPlatformVO> vos = this.getPlatform();
         for (ExpressPlatformVO vo : vos) {

@@ -88,7 +88,7 @@ public class TradeIntodbManagerImpl implements TradeIntodbManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED,
+    @Transactional( propagation = Propagation.REQUIRED,
             rollbackFor = {RuntimeException.class, ServiceException.class, Exception.class})
     public void intoDB(TradeVO tradeVO) {
         try {
@@ -120,7 +120,7 @@ public class TradeIntodbManagerImpl implements TradeIntodbManager {
     }
 
 
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void innerIntoDB(TradeVO tradeVO) {
 
         if (tradeVO == null) {

@@ -74,7 +74,7 @@ public class SeckillCreateController {
 
     @ApiOperation(value = "添加限时抢购入库", response = SeckillVO.class)
     @GetMapping
-    @Transactional(value = "tradeTransactionManager",propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     public SeckillDTO add(@NotNull String startTime,@NotNull String endTime,@NotNull String times,@NotNull String skuIds) {
         SeckillDTO seckill = new SeckillDTO();
         seckill.setApplyEndTime(DateUtil.getDateline(endTime,"yyyy-MM-dd HH:mm:ss"));
@@ -92,7 +92,7 @@ public class SeckillCreateController {
         addSeckillGoods(seckill,skuIds);
         return seckill;
     }
-    @Transactional(value = "tradeTransactionManager",propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     void addSeckillGoods(SeckillDTO seckill, String skuIds){
         List<String> skuIdList = this.getSkuIdList(skuIds,";");
         for (int i = 0; i < skuIdList.size(); i++) {

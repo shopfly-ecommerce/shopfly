@@ -51,7 +51,7 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberReceipt add(MemberReceiptVO memberReceiptVO) {
         //校验当前会员是否存在
         Integer memberId = UserContext.getBuyer().getUid();
@@ -96,7 +96,7 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberReceipt edit(MemberReceiptVO memberReceiptVO, Integer id) {
         MemberReceipt memberReceipt = this.getModel(id);
         if (memberReceipt == null || !memberReceipt.getMemberId().equals(UserContext.getBuyer().getUid())) {
@@ -113,7 +113,7 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         MemberReceipt memberReceipt = this.getModel(id);
         if (memberReceipt == null || !memberReceipt.getMemberId().equals(UserContext.getBuyer().getUid())) {
@@ -129,7 +129,7 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void setDefaultReceipt(String receiptType, Integer id) {
         //如果发票id为0，则说明默认发票为个人，需要将其他发票是否为默认修改为否
         this.memberDaoSupport.execute("update es_member_receipt set is_default = 0 where member_id = ? and receipt_type = ?", UserContext.getBuyer().getUid(), receiptType);

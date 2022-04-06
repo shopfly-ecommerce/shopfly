@@ -47,7 +47,7 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void receiveBonus(Integer memberId, Integer couponId) {
         CouponDO couponDO = this.couponClient.getModel(couponId);
 
@@ -142,7 +142,7 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
 
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void usedCoupon(Integer mcId) {
         String sql = "update es_member_coupon set used_status = 1 where mc_id = ?";
         this.daoSupport.execute(sql, mcId);

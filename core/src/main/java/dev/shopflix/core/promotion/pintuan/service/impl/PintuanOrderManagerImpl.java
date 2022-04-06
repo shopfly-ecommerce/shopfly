@@ -79,7 +79,7 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
 
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PintuanOrder createOrder(OrderDTO order, Integer skuId, Integer pinTuanOrderId) {
 
         PintuanOrder pintuanOrder;
@@ -151,7 +151,7 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void payOrder(OrderDO order) {
 
         String orderSn = order.getSn();

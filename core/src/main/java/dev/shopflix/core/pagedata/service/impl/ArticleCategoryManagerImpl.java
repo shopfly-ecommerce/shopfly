@@ -60,7 +60,7 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ArticleCategory add(ArticleCategory articleCategory) {
 
         if (articleCategory.getParentId() == null) {
@@ -107,7 +107,7 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ArticleCategory edit(ArticleCategory articleCategory, Integer id) {
 
         ArticleCategory cat = this.getModel(id);
@@ -154,7 +154,7 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         ArticleCategory cat = this.getModel(id);
         //只有类型为other的,才可以删除

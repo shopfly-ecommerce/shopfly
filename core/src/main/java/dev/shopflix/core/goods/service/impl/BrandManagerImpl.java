@@ -71,7 +71,7 @@ public class BrandManagerImpl implements BrandManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public BrandDO add(BrandDO brand) {
         String sql = "select * from es_brand where name = ? ";
         List list = this.daoSupport.queryForList(sql, brand.getName());
@@ -87,7 +87,7 @@ public class BrandManagerImpl implements BrandManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public BrandDO edit(BrandDO brand, Integer id) {
         BrandDO brandDO = this.getModel(id);
         if (brandDO == null) {
@@ -105,7 +105,7 @@ public class BrandManagerImpl implements BrandManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer[] ids) {
         List term = new ArrayList<>();
 

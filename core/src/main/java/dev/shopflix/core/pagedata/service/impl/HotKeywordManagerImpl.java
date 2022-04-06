@@ -56,7 +56,7 @@ public class HotKeywordManagerImpl implements HotKeywordManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public HotKeyword add(HotKeyword hotKeyword) {
         this.daoSupport.insert(hotKeyword);
         hotKeyword.setId(this.daoSupport.getLastId(""));
@@ -65,7 +65,7 @@ public class HotKeywordManagerImpl implements HotKeywordManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public HotKeyword edit(HotKeyword hotKeyword, Integer id) {
 
         HotKeyword keyword = this.getModel(id);
@@ -80,7 +80,7 @@ public class HotKeywordManagerImpl implements HotKeywordManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(HotKeyword.class, id);
         this.sendMessage();

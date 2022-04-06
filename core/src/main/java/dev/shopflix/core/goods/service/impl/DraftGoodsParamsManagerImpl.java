@@ -38,7 +38,7 @@ public class DraftGoodsParamsManagerImpl implements DraftGoodsParamsManager {
 	private DaoSupport daoSupport;
 
 	@Override
-	@Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void addParams(List<GoodsParamsDO> goodsParamsList, Integer draftGoodsId) {
 		
 		String sql = "delete from es_draft_goods_params where draft_goods_id = ?";

@@ -42,7 +42,7 @@ public class DistributionGoodsManagerImpl implements DistributionGoodsManager {
      * @return
      */
     @Override
-    @Transactional(value = "distributionTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public DistributionGoods edit(DistributionGoods distributionGoods) {
         DistributionGoods old = this.daoSupport.queryForObject("select * from es_distribution_goods where goods_id = ?", distributionGoods.getClass(), distributionGoods.getGoodsId());
         if (null == old) {

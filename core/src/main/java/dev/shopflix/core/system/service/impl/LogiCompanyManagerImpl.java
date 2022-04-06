@@ -48,7 +48,7 @@ public class LogiCompanyManagerImpl implements LogiCompanyManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public LogiCompanyDO add(LogiCompanyDO logi) {
         LogiCompanyDO logicode = this.getLogiByCode(logi.getCode());
         LogiCompanyDO logikdcode = this.getLogiBykdCode(logi.getKdcode());
@@ -77,7 +77,7 @@ public class LogiCompanyManagerImpl implements LogiCompanyManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public LogiCompanyDO edit(@Valid LogiCompanyDO logi, Integer id) {
         LogiCompanyDO model = this.getModel(id);
         if (model == null) {
@@ -105,7 +105,7 @@ public class LogiCompanyManagerImpl implements LogiCompanyManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer[] logiId) {
         for (Integer logi : logiId) {
             LogiCompanyDO model = this.getModel(logi);

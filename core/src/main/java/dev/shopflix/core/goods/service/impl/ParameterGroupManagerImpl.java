@@ -55,7 +55,7 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ParameterGroupDO add(ParameterGroupDO parameterGroup) {
 
         // 查看分类是否存在
@@ -78,7 +78,7 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ParameterGroupDO edit(String groupName, Integer id) {
         ParameterGroupDO group = this.getModel(id);
         if (group == null) {
@@ -91,7 +91,7 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(ParameterGroupDO.class, id);
         // 删除参数组，需要将参数组下的参数同时删除

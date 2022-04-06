@@ -56,7 +56,7 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public SiteNavigation add(SiteNavigation siteNavigation) {
 
         //移动端图片地址必填
@@ -86,7 +86,7 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public SiteNavigation edit(SiteNavigation siteNavigation, Integer id) {
 
         SiteNavigation siteNav = this.getModel(id);
@@ -115,7 +115,7 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
     }
 
     @Override
-    @Transactional(value = "systemTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
 
         SiteNavigation siteNav = this.getModel(id);

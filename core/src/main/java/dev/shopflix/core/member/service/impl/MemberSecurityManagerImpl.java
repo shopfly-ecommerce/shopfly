@@ -79,7 +79,7 @@ public class MemberSecurityManagerImpl implements MemberSecurityManager {
     }
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void updatePassword(Integer memberId, String password) {
         //校验是否经过手机验证而进行此步骤
         Member member = memberManager.getModel(memberId);

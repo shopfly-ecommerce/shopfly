@@ -40,7 +40,7 @@ public class DistributionRegisterConsumer implements MemberRegisterEvent {
     @Autowired
     private Cache cache;
 
-    @Transactional(value = "distributionTransactionManager", rollbackFor = Exception.class)
+    @Transactional( rollbackFor = Exception.class)
     @Override
     public void memberRegister(MemberRegisterMsg memberRegisterMsg) {
         // 注册完毕后 在分销商表中添加会员信息

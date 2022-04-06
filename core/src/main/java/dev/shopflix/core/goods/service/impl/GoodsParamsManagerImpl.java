@@ -73,7 +73,7 @@ public class GoodsParamsManagerImpl implements GoodsParamsManager {
     }
 
     @Override
-    @Transactional(value = "goodsTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void addParams(List<GoodsParamsDO> paramList, Integer goodsId) {
         String sql = "delete from es_goods_params where goods_id = ?";
         this.daoSupport.execute(sql, goodsId);

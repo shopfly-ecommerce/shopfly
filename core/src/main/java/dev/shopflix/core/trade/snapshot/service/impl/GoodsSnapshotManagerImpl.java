@@ -78,7 +78,7 @@ public class GoodsSnapshotManagerImpl implements GoodsSnapshotManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public GoodsSnapshot add(GoodsSnapshot goodsSnapshot) {
         this.daoSupport.insert(goodsSnapshot);
 
@@ -90,14 +90,14 @@ public class GoodsSnapshotManagerImpl implements GoodsSnapshotManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public GoodsSnapshot edit(GoodsSnapshot goodsSnapshot, Integer id) {
         this.daoSupport.update(goodsSnapshot, id);
         return goodsSnapshot;
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(GoodsSnapshot.class, id);
     }

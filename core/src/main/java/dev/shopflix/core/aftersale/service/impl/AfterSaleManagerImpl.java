@@ -95,7 +95,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void applyRefund(BuyerRefundApplyVO refundApply) {
         refundApply.setRefuseType(RefuseTypeEnum.RETURN_MONEY.value());
         RefundDO refund = this.buyerRefund(refundApply);
@@ -103,7 +103,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void applyGoodsReturn(BuyerRefundApplyVO goodsReturnsApply) {
         goodsReturnsApply.setRefuseType(RefuseTypeEnum.RETURN_GOODS.value());
         RefundDO refund = this.buyerRefund(goodsReturnsApply);
@@ -111,7 +111,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void cancelOrder(BuyerCancelOrderVO buyerCancelOrderVO) {
         //获取登录会员
         Buyer buyer = UserContext.getBuyer();
@@ -225,7 +225,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public AdminRefundApprovalVO approval(AdminRefundApprovalVO refundApproval, Permission permission) {
 
         RefundDO refund = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDTO.class,
@@ -415,7 +415,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void update(List<RefundDO> list) {
         if (StringUtil.isNotEmpty(list)) {
             for (RefundDO refund : list) {
@@ -509,7 +509,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void stockIn(String sn, String remark) {
         RefundDO refund = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDO.class,
                 sn);
@@ -551,7 +551,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void refund(String sn, String remark) {
 
         RefundDO refund = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDO.class,
@@ -573,7 +573,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     @Override
-    @Transactional(value = "tradeTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void sysCancelOrder(BuyerCancelOrderVO buyerCancelOrderVO) {
 
         OrderDetailDTO orderDetail = orderQueryManager.getModel(buyerCancelOrderVO.getOrderSn());

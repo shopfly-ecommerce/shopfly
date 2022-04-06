@@ -37,7 +37,7 @@ public class CommentGalleryManagerImpl implements CommentGalleryManager {
     private DaoSupport daoSupport;
 
     @Override
-    @Transactional(value = "memberTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void add(Integer commentId, List<String> list, Integer imgBelong) {
 
         if (StringUtil.isNotEmpty(list)) {

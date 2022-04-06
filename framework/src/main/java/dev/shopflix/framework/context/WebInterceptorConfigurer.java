@@ -8,6 +8,7 @@ package dev.shopflix.framework.context;
 import dev.shopflix.framework.security.XssStringJsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -15,8 +16,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -62,6 +65,15 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 		//返回
 		return objectMapper;
 	}
-
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		ApplicationHome home = new ApplicationHome(WebInterceptorConfigurer.class);
+		File jarFile = home.getSource();
+		String path = jarFile.getParentFile().toString();
+		System.out.println(path);
+		registry.addResourceHandler("/images/**")
+				//用户文件的路径
+				.addResourceLocations("/images/**","file:"+path+"/images/");
+	}
 
 }

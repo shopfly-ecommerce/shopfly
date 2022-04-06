@@ -49,6 +49,7 @@ redis:
 # 开发环境日志为debug
 logging:
   level:
+    root: ERROR
     org.springframework: ERROR
     com.enation.app : DEBUG
 
@@ -66,14 +67,14 @@ shopflix:
   isDemoSite: no
   ssl: off #是否开启ssl
   domain:
-    buyer: buyer.javamall.com.cn #配置为您买家端PC的域名
+    buyer: localhost:8080 #配置为您买家端PC的域名
     mobileBuyer: m.buyer.javamall.com.cn  #配置为您买家端WAP的域名
     callback: api.buyerjavamall.com.cn #请配置为您站点的买家端的api域名，如果不配置此项默认读取站点买家端api的域名，用来做支付新人登录回调
 
 xxl:
   job:
     admin:
-      addresses:  http://192.168.2.218:8080/xxl-job-admin
+      addresses:  http://192.168.2.219:8080/xxl-job-admin
     executor:
       appname: job-executer
       ip:

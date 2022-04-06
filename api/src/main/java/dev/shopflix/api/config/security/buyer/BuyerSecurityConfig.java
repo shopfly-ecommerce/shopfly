@@ -81,6 +81,10 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
                 , "/site-show/**"
                 , "/ueditor/**").anonymous();
 
+        //过滤掉本地的图片及媒体文件
+        //gif,jpg,png,jpeg,mp4,quicktime
+        http.authorizeRequests().antMatchers("/images/**/*.jpeg","/images/**/*.jpg","/images/**/*.gif","/images/**/*.png","/images/**/*.mp4","/images/**/*.quicktime").anonymous();;
+
         //过滤掉swagger的路径
         http.authorizeRequests().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**").anonymous();
         //过滤掉不需要买家权限的api

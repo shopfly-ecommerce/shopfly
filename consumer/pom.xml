@@ -13,8 +13,6 @@
 
 
     <dependencies>
-
-
         <dependency>
             <groupId>dev.shopflix</groupId>
             <artifactId>core</artifactId>

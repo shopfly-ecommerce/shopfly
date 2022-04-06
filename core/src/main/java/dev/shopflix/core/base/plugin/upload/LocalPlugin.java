@@ -11,14 +11,17 @@ import dev.shopflix.core.base.model.vo.ConfigItem;
 import dev.shopflix.core.base.model.vo.FileVO;
 import dev.shopflix.core.base.model.vo.RadioOption;
 import dev.shopflix.framework.context.ThreadContextHolder;
+import dev.shopflix.framework.context.WebInterceptorConfigurer;
 import dev.shopflix.framework.util.AbstractRequestUtil;
 import dev.shopflix.framework.util.DateUtil;
 import dev.shopflix.framework.util.FileUtil;
 import dev.shopflix.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
+import java.io.File;
 import java.util.*;
 
 
@@ -139,25 +142,25 @@ public class LocalPlugin implements Uploader {
         //  拼接文件名
         fileName = DateUtil.toString(new Date(), "mmss") + StringUtil.getRandStr(4) + "." + ext;
         //  返回浏览器路径
-        String path = null;
+        String url = null;
         // 入库路径
         String filePath = null;
         // 拼接路径
-        path = serverName + "/statics/attachment/" + scene + "/";
-        filePath = context.getRealPath("/") + "statics/attachment/" + scene + "/";
-        // 获取当前时间
-        String timePath = this.getTimePath();
-        // 拼接返回浏览器路径
-        path += timePath + fileName;
-        // 拼接入库路径及文件名 */
-        filePath += timePath;
-        filePath += fileName;
+        url = serverName + "/images/" + scene + "/"+fileName;
+
+        ApplicationHome home = new ApplicationHome(WebInterceptorConfigurer.class);
+        File jarFile = home.getSource();
+        String path = jarFile.getParentFile().toString();
+        System.out.println(path);
+        filePath = path+ "/images/" + scene + "/"+fileName;
+
+
         //写入文件
         FileUtil.write(input.getStream(), filePath);
         //  返回浏览器
         FileVO file = new FileVO();
         file.setName(fileName);
-        file.setUrl(path);
+        file.setUrl(url);
         file.setExt(ext);
         return file;
     }

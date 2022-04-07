@@ -66,7 +66,7 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
             }
         }
         //导航名称长度不能超过6
-        if (siteNavigation.getNavigationName().length() > 6) {
+        if (siteNavigation.getNavigationName().length() > 12) {
             throw new ServiceException(SystemErrorCode.E953.code(), "导航栏菜单名称已经超出最大限制");
         }
 
@@ -101,7 +101,7 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
             }
         }
         //导航名称长度不能超过6
-        if (siteNavigation.getNavigationName().length() > 6) {
+        if (siteNavigation.getNavigationName().length() > 12) {
             throw new ServiceException(SystemErrorCode.E953.code(), "导航栏菜单名称已经超出最大限制");
         }
 

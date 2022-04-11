@@ -44,6 +44,9 @@ public class GoodsIndexInitConsumer implements GoodsIndexInitEvent {
     @Override
     public void createGoodsIndex() {
 
+        if (logger.isDebugEnabled()) {
+            logger.debug("开始生成索引");
+        }
         debugger.log("开始生成索引");
 
         String key = TaskProgressConstant.GOODS_INDEX;
@@ -60,6 +63,9 @@ public class GoodsIndexInitConsumer implements GoodsIndexInitEvent {
             //任务结束
             progressManager.taskEnd(key, "索引生成完成");
 
+            if (logger.isDebugEnabled()) {
+                logger.debug("索引生成完成");
+            }
             debugger.log("索引生成完成");
 
             if (goodsResult) {

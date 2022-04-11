@@ -36,15 +36,15 @@ public class GoodsIndexInitReceiver {
 
 	/**
 	 * 初始化商品索引
-	 * 
-	 * @param str
+	 *
 	 */
 	@RabbitListener(bindings = @QueueBinding(
 			value = @Queue(value = AmqpExchange.INDEX_CREATE + "_QUEUE"),
 			exchange = @Exchange(value = AmqpExchange.INDEX_CREATE, type = ExchangeTypes.FANOUT)
 	))
-	public void initGoodsIndex(String str) {
+	public void initGoodsIndex() {
 
+		System.out.println(" rceive index msg");
 		if (events != null) {
 			for (GoodsIndexInitEvent event : events) {
 				try {

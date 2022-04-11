@@ -3,10 +3,15 @@
  * 未经许可，您不得使用此文件。
  * 官方地址：www.javamall.com.cn
 */
-package dev.shopflix.framework;
+package dev.shopflix.core;
 
+import dev.shopflix.core.goodssearch.service.GoodsIndexInitManager;
+import dev.shopflix.framework.ShopflixConfig;
 import dev.shopflix.framework.context.UserContext;
 import dev.shopflix.framework.context.UserHolder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -36,6 +41,12 @@ public class ShopflixRunner implements ApplicationRunner {
     @Autowired
     private ShopflixConfig shopflixConfig;
 
+    @Autowired
+    GoodsIndexInitManager goodsIndexInitManager;
+
+   protected final Logger logger = LoggerFactory.getLogger(ShopflixRunner.class);
+
+
     /**
      * 在项目加载时指定认证信息获取者
      * 默认是由spring 安全上下文中获取
@@ -55,6 +66,9 @@ public class ShopflixRunner implements ApplicationRunner {
         }
 
         UserContext.setHolder(userHolder);
+
+        goodsIndexInitManager.initIndex();
+        logger.debug("Shopflix started");
 
     }
 }

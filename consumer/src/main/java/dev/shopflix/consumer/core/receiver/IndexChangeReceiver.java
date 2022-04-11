@@ -44,7 +44,7 @@ public class IndexChangeReceiver {
 			exchange = @Exchange(value = AmqpExchange.PC_INDEX_CHANGE, type = ExchangeTypes.FANOUT)
 	))
 	public void createIndexPage(CmsManageMsg operation) {
-
+		System.out.println("create index page");
 		if (events != null) {
 			for (IndexChangeEvent event : events) {
 				try {

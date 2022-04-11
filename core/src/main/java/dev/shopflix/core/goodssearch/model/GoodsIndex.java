@@ -30,7 +30,7 @@ public class GoodsIndex {
     @Id
     private Integer goodsId;
 
-    @Field(type = FieldType.text, analyzer = "ik_max_word")
+    @Field(type = FieldType.text)
     private String goodsName;
 
     @Field(type = FieldType.text)

@@ -30,7 +30,6 @@ public class TransactionalMessageListener {
      */
     @TransactionalEventListener(fallbackExecution = true)
     public void handleSupplierBillPush(MqMessage message){
-
         this.amqpTemplate.convertAndSend(message.getExchange(), message.getRoutingKey(), message.getMessage());
 
     }

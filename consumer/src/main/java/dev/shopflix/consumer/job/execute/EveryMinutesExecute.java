@@ -5,17 +5,20 @@
 */
 package dev.shopflix.consumer.job.execute;
 
+import org.springframework.scheduling.annotation.Async;
+
 /**
- * 每日执行
  *
+ * this is a test
  * @author chopper
  * @version v1.0
  * @since v7.0
  * 2018-07-05 下午1:19
  */
-public interface EveryYearExecute {
+public interface EveryMinutesExecute {
     /**
-     * 每年执行
+     * 每日执行
      */
-    void everyYear();
+    @Async
+    void everyMinutes();
 }

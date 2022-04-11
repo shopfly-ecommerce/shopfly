@@ -5,6 +5,7 @@
 */
 package dev.shopflix.core.goodssearch.service.impl;
 
+import dev.shopflix.core.ShopflixRunner;
 import dev.shopflix.core.client.goods.GoodsClient;
 import dev.shopflix.core.client.goods.GoodsWordsClient;
 import dev.shopflix.core.goods.model.dos.CategoryDO;
@@ -18,13 +19,13 @@ import dev.shopflix.core.system.service.ProgressManager;
 import dev.shopflix.framework.elasticsearch.EsConfig;
 import dev.shopflix.framework.elasticsearch.EsSettings;
 import dev.shopflix.framework.logs.Debugger;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
 import dev.shopflix.framework.util.StringUtil;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeAction;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequestBuilder;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;
 import org.elasticsearch.client.IndicesAdminClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.DeleteQuery;
@@ -54,7 +55,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     @Autowired
     protected ElasticsearchTemplate elasticsearchOperations;
 
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(ShopflixRunner.class);
 
 
     @Autowired
@@ -86,17 +87,20 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
             indexQuery.setObject(goodsIndex);
 
             //审核通过且没有下架且没有删除
-            boolean flag = goodsIndex.getDisabled() == 1 && goodsIndex.getMarketEnable() == 1 ;
-            if (flag) {
-
-
-                List<String> wordsList = toWordsList(goodsName);
-
-                // 分词入库
-                this.wordsToDb(wordsList);
-            }
+//            boolean flag = goodsIndex.getDisabled() == 1 && goodsIndex.getMarketEnable() == 1 ;
+//            if (flag) {
+//
+//
+//                List<String> wordsList = toWordsList(goodsName);
+//
+//                // 分词入库
+//                this.wordsToDb(wordsList);
+//            }
 
             elasticsearchOperations.index(indexQuery);
+            if (logger.isDebugEnabled()) {
+                logger.debug("为商品["+goodsName+"]生成索引成功");
+            }
         } catch (Exception e) {
             logger.error("为商品["+goodsName+"]生成索引异常",e);
             debugger.log("为商品["+goodsName+"]生成索引异常", StringUtil.getStackTrace(e));
@@ -122,9 +126,9 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
         String indexName = esConfig.getIndexName()+"_"+ EsSettings.GOODS_INDEX_NAME;
         elasticsearchOperations.delete(indexName, EsSettings.GOODS_TYPE_NAME, goods.get("goods_id").toString());
 
-        String goodsName = goods.get("goods_name").toString();
-        List<String> wordsList = toWordsList(goodsName);
-        this.deleteWords(wordsList);
+//        String goodsName = goods.get("goods_name").toString();
+//        List<String> wordsList = toWordsList(goodsName);
+//        this.deleteWords(wordsList);
 
     }
 
@@ -194,8 +198,8 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
         IndicesAdminClient indicesAdminClient = elasticsearchOperations.getClient().admin().indices();
         AnalyzeRequestBuilder request = new AnalyzeRequestBuilder(indicesAdminClient, AnalyzeAction.INSTANCE, indexName, txt);
         //	分词
-        request.setAnalyzer("ik_max_word");
-        request.setTokenizer("ik_max_word");
+//        request.setAnalyzer("ik_max_word");
+//        request.setTokenizer("ik_max_word");
         List<AnalyzeResponse.AnalyzeToken> listAnalysis = request.execute().actionGet().getTokens();
         for (AnalyzeResponse.AnalyzeToken token : listAnalysis) {
             list.add(token.getTerm());

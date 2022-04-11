@@ -5,6 +5,8 @@
 */
 package dev.shopflix.consumer.job.execute;
 
+import org.springframework.scheduling.annotation.Async;
+
 /**
  * 每日执行
  *
@@ -17,5 +19,6 @@ public interface EveryHourExecute {
     /**
      * 每小时执行
      */
+    @Async
     void everyHour();
 }

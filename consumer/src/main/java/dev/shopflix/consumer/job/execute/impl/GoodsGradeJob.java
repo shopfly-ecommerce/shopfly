@@ -35,7 +35,12 @@ public class GoodsGradeJob implements EveryDayExecute {
     public void everyDay() {
 
         try{
+
+            logger.debug(" goods job start");
+            Thread.sleep(5000);
+
             this.goodsClient.updateGoodsGrade();
+            logger.debug(" goods job end");
         }catch (Exception e) {
             logger.error("计算商品评分出错", e);
         }

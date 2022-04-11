@@ -70,7 +70,7 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 		ApplicationHome home = new ApplicationHome(WebInterceptorConfigurer.class);
 		File jarFile = home.getSource();
 		String path = jarFile.getParentFile().toString();
-		System.out.println(path);
+//		System.out.println(path);
 		registry.addResourceHandler("/images/**")
 				//用户文件的路径
 				.addResourceLocations("/images/**","file:"+path+"/images/");

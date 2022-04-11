@@ -5,6 +5,8 @@
 */
 package dev.shopflix.framework.logs;
 
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 日志工厂，实际上用的还是 slf4j,封装了一层
  * @author kingapex
@@ -21,7 +23,7 @@ public abstract class LoggerFactory {
      * @return
      */
     public  static  Logger getLogger(Class<?> claz) {
-        org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(claz);
-        return new DefaultLoggerImpl(logger);
+        org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(claz.getName());
+         return new DefaultLoggerImpl(logger);
     }
 }

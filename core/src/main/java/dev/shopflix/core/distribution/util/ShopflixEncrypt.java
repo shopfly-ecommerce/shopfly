@@ -8,13 +8,13 @@ package dev.shopflix.core.distribution.util;
 import java.security.MessageDigest;
 
 /**
- * JavashopMd5加密类
+ * Shopflix Md5加密类
  *
  * @author Sylow
  * @version v1.0, 2015-11-18
  * @since v1.0
  */
-public class JavashopEncrypt {
+public class ShopflixEncrypt {
 
     /**
      * 十六进制下数字到字符的映射数组
@@ -105,11 +105,11 @@ public class JavashopEncrypt {
     public static void main(String[] args) {
 
         //加密
-        String md5Str = JavashopEncrypt.md5("http://www.javamall.com.cn");
+        String md5Str = ShopflixEncrypt.md5("http://www.javamall.com.cn");
         System.out.println(md5Str);
 
         //验证
-        boolean result = JavashopEncrypt.authenticatePassword(md5Str, "http://www.javamall.com.cn");
+        boolean result = ShopflixEncrypt.authenticatePassword(md5Str, "http://www.javamall.com.cn");
         System.out.println(result);
     }
 

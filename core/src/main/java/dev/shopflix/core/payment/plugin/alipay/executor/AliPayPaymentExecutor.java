@@ -17,7 +17,7 @@ import dev.shopflix.core.payment.model.enums.PayMode;
 import dev.shopflix.core.payment.model.enums.TradeType;
 import dev.shopflix.core.payment.model.vo.PayBill;
 import dev.shopflix.core.payment.plugin.alipay.AlipayPluginConfig;
-import dev.shopflix.core.payment.plugin.alipay.JavashopAlipayUtil;
+import dev.shopflix.core.payment.plugin.alipay.ShopflixAlipayUtil;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.logs.Debugger;
@@ -115,7 +115,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
             String alipayPublicKey = cfgparams.get("alipay_public_key");
 
             // 验证是否成功
-            if (JavashopAlipayUtil.verify(alipayPublicKey)) {
+            if (ShopflixAlipayUtil.verify(alipayPublicKey)) {
                 //新版本同步没有交易状态
                 double payPrice = StringUtil.toDouble(totalAmount, 0d);
                 //this.paySuccess(billSn, returnTradeNo, tradeType, payPrice);
@@ -160,7 +160,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
             debugger.log(alipayPublicKey);
 
             // 验证成功
-            if (JavashopAlipayUtil.verify(alipayPublicKey)) {
+            if (ShopflixAlipayUtil.verify(alipayPublicKey)) {
                 debugger.log("验证成功");
 
                 if ("TRADE_SUCCESS".equals(tradeStatus) || "TRADE_FINISHED".equals(tradeStatus)) {

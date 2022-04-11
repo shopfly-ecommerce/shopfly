@@ -36,7 +36,7 @@ public class ShortUrlGenerator {
         };
 
         // 对传入网址进行 MD5 加密
-        String sMD5EncryptResult = JavashopEncrypt.md5(key + url);
+        String sMD5EncryptResult = ShopflixEncrypt.md5(key + url);
 
         String hex = sMD5EncryptResult;
         String[] resUrl = new String[4];

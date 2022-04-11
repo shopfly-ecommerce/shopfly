@@ -14,7 +14,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * Javashop项目启动配置
+ * Shopflix 项目启动配置
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(value = 1)
-public class JavashopAppRunner implements ApplicationRunner {
+public class ShopflixRunner implements ApplicationRunner {
 
 
     /**

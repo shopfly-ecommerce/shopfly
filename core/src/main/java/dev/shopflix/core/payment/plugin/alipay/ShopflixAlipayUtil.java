@@ -22,7 +22,7 @@ import java.util.Map;
  * @version 1.0
  * 2015年9月24日下午1:47:42
  */
-public class JavashopAlipayUtil {
+public class ShopflixAlipayUtil {
 
     /**
      * 新版验证  2017年8月1日15:27:48

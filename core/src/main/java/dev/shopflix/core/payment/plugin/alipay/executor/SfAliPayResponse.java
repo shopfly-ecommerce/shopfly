@@ -33,7 +33,7 @@ public class SfAliPayResponse extends AlipayResponse {
 
     @Override
     public String toString() {
-        return "JavaShopPayResponse{" +
+        return "ShopflixPayResponse{" +
                 "form=" + form +
                 '}';
     }

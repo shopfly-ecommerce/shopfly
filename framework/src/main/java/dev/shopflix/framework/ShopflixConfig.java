@@ -88,7 +88,7 @@ public class ShopflixConfig {
 
     @Override
     public String toString() {
-        return "JavashopConfig{" +
+        return "ShopflixConfig{" +
                 "accessTokenTimeout=" + accessTokenTimeout +
                 ", refreshTokenTimeout=" + refreshTokenTimeout +
                 "appAccessTokenTimeout=" + appAccessTokenTimeout +

@@ -11,26 +11,26 @@ spring:
 
   #数据库配置
   datasource:
-    url: jdbc:mysql://192.168.2.218:3306/b2c_en?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://db:3306/shopflix?useUnicode=true&characterEncoding=utf8&autoReconnect=true
     username: root
-    password: enation752513
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     druid:
       web-stat-filter:
         enabled: false
   #rabbitmq
   rabbitmq:
-    host: 192.168.2.219
+    host: mq
     port: 5672
-    username: b2c
-    password: b2c
-    virtual-host: b2c
+    username: guest
+    password: guest
+    virtual-host: /
 
   #elasticsearch配置
   data:
     elasticsearch:
       cluster-name: docker-cluster
-      cluster-nodes: 192.168.2.219:9300
+      cluster-nodes: es:9300
       index-name: b2c
 
 #redis 配置
@@ -38,7 +38,7 @@ redis:
   type: standalone
   config :
     type: manual
-  host: localhost
+  host: redis
   port: 6379
   password:
   maxIdle: 500

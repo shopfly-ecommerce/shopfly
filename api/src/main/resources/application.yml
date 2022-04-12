@@ -67,6 +67,6 @@ shopflix:
   isDemoSite: no
   ssl: off #是否开启ssl
   domain:
-    buyer: localhost:8080 #配置为您买家端PC的域名
-    mobileBuyer: m.buyer.javamall.com.cn  #配置为您买家端WAP的域名
+    buyer: localhost:3000 #配置为您买家端PC的域名
+    mobileBuyer: localhost:3001  #配置为您买家端WAP的域名
     callback: api.buyerjavamall.com.cn #请配置为您站点的买家端的api域名，如果不配置此项默认读取站点买家端api的域名，用来做支付新人登录回调

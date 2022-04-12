@@ -55,8 +55,8 @@ public class GoodsIndexInitManagerImpl implements GoodsIndexInitManager {
             elasticsearchTemplate.putMapping(indexName, EsSettings.GOODS_TYPE_NAME, goodsMapping);
 
             /** 发送索引生成消息 */
-            this.messageSender.send(new MqMessage(AmqpExchange.INDEX_CREATE, AmqpExchange.INDEX_CREATE+"_ROUTING","1"));
-            CmsManageMsg cmsManageMsg = new CmsManageMsg();
+//            this.messageSender.send(new MqMessage(AmqpExchange.INDEX_CREATE, AmqpExchange.INDEX_CREATE+"_ROUTING","1"));
+//            CmsManageMsg cmsManageMsg = new CmsManageMsg();
 
         }else {
             if (logger.isDebugEnabled()) {

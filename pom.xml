@@ -24,8 +24,8 @@
     <description>shopflix</description>
 
     <properties>
-        <docker-registry>registry.cn-beijing.aliyuncs.com/enation/</docker-registry>
-        <docker-server-id>docker-aliyun</docker-server-id>
+        <docker-registry>shopflix/</docker-registry>
+        <docker-server-id>docker-hub</docker-server-id>
         <log4j2.version>2.15.0</log4j2.version>
     </properties>
 
@@ -44,16 +44,13 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
+
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>1.1.1</version>
+                <version>1.2.2</version>
                 <configuration>
-                    <imageName>${docker-registry}${project.artifactId}:1.0.0</imageName>
+                    <imageName>${docker-registry}${project.artifactId}:${project.version}</imageName>
                     <baseImage>registry.cn-beijing.aliyuncs.com/javashop-k8s-images/java-alpine:8-cn-unlimited</baseImage>
                     <entryPoint>["java","-jar", "/opt/${project.build.finalName}.jar" ,"-Dfile.encoding=UTF-8"]</entryPoint>
                     <resources>

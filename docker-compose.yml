@@ -1,0 +1,86 @@
+version: "3.4"
+
+services:
+  api:
+    image: shopflix/api:1.0.0
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+      - mq
+      - es    
+    networks:
+      - shopflix-backend-tier
+
+  db:
+    image: mysql:8.0.28
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    networks:
+      - shopflix-backend-tier
+    volumes:
+      - shopflix-db:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/my.cnf
+      - ./shopflix.sql:/docker-entrypoint-initdb.d/shopflix.sql
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=shopflix
+
+  redis:
+    image: redis:6.2.6-alpine
+    ports:
+      - 6379:6379
+    restart: unless-stopped
+    networks:
+      - shopflix-backend-tier
+    volumes:
+      - shopflix-redis:/data
+
+  mq:
+    image: registry.cn-beijing.aliyuncs.com/javashop-k8s-images/rabbitmq:3.6.14
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: unless-stopped
+    networks:
+      - shopflix-backend-tier
+    # volumes:
+    #   - shopflix-mq:/var/lib/rabbitmq
+
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.23
+    ports:
+      - 9200:9200
+      - 9300:9300
+    restart: unless-stopped
+    networks:
+      - shopflix-backend-tier
+    volumes:
+      - shopflix-es:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+volumes:
+  shopflix-db:
+    driver: local
+  shopflix-redis:
+    driver: local
+  shopflix-mq:
+    driver: local
+  shopflix-es:
+    driver: local
+
+networks:
+  shopflix-backend-tier:
+    driver: bridge

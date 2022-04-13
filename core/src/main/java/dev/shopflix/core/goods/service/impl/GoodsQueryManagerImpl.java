@@ -29,6 +29,7 @@ import dev.shopflix.core.system.model.vo.ShipTemplateVO;
 import dev.shopflix.core.goods.service.*;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.database.DaoSupport;
+import dev.shopflix.framework.database.IntegerMapper;
 import dev.shopflix.framework.database.Page;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.util.JsonUtil;
@@ -473,6 +474,15 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         String idStr = StringUtil.getIdStr(goodsIds, term);
         String sql = "select goods_id,goods_name,price as original_price from es_goods where goods_id in (" + idStr + ")";
         List<Map<String, Object>> result = this.daoSupport.queryForList(sql, term.toArray());
+        return result;
+    }
+
+    @Override
+    public List<Integer> getAllGoodsId() {
+
+        String sql = "select goods_id from es_goods  order by goods_id desc";
+        List<Integer> result = this.daoSupport.queryForList(sql, new IntegerMapper());
+
         return result;
     }
 

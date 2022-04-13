@@ -124,5 +124,10 @@ public interface GoodsQueryManager {
      */
     List<Map<String, Object>> getGoods(Integer[] goodsIds);
 
+    /**
+     * 获取所有商品的id集合
+     * @return
+     */
+    List<Integer> getAllGoodsId();
 
 }

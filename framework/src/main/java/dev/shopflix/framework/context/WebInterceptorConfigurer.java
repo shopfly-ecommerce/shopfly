@@ -68,12 +68,21 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		ApplicationHome home = new ApplicationHome(WebInterceptorConfigurer.class);
+
 		File jarFile = home.getSource();
+		String aPath = jarFile.getAbsolutePath();
 		String path = jarFile.getParentFile().toString();
+		//基于jar运行，则定位同级目录/images
+		if (aPath.endsWith(".jar")){
+			path+="/images/";
+		}else {
+			//如果基于类运行，则定位为工程目录
+			path = path.replaceAll("/framework/target", "/images/");
+		}
 //		System.out.println(path);
 		registry.addResourceHandler("/images/**")
 				//用户文件的路径
-				.addResourceLocations("/images/**","file:"+path+"/images/");
+				.addResourceLocations("/images/**","file:"+path);
 	}
 
 }

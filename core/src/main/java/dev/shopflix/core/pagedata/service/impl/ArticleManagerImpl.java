@@ -13,6 +13,7 @@ import dev.shopflix.core.pagedata.service.ArticleCategoryManager;
 import dev.shopflix.core.pagedata.service.ArticleManager;
 import dev.shopflix.core.system.SystemErrorCode;
 import dev.shopflix.framework.database.DaoSupport;
+import dev.shopflix.framework.database.IntegerMapper;
 import dev.shopflix.framework.database.Page;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.util.DateUtil;
@@ -142,5 +143,12 @@ public class ArticleManagerImpl implements ArticleManager {
         String sql = "select * from es_article where category_id = ? order by sort";
 
         return this.daoSupport.queryForList(sql, Article.class, category.getId());
+    }
+
+    @Override
+    public List<Integer> getAllArticleIds() {
+        String sql = "select article_id from es_article order by article_id desc";
+        return  daoSupport.queryForList(sql, new IntegerMapper());
+
     }
 }

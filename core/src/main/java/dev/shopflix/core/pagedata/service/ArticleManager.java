@@ -76,4 +76,10 @@ public interface ArticleManager {
      * @return
      */
     List<Article> listByCategoryType(String categoryType);
+
+    /**
+     * 获取所有文章id
+     * @return
+     */
+    List<Integer> getAllArticleIds();
 }

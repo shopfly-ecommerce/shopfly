@@ -43,8 +43,8 @@ vi backend.env
 Specifies the address of the API service：
 ```
 API_BASE=your API service address
-API_BUYER==your API service address
-API_SELLER==your API service address
+API_BUYER=your API service address
+API_SELLER=your API service address
 ```
 If you do not specify the API address where the shopflix demo will be used
 
@@ -56,7 +56,7 @@ docker-compose up
 or 
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 Will run in the background
 

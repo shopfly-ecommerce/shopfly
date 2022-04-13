@@ -23,7 +23,7 @@ Shopflix is built based on spring boot + Vue technology, and the infrastructure 
 
     4CPU & 8G Memory
 
-##How to run it?
+## How to run it?
 
 1. Clone the repository:
 
@@ -58,7 +58,7 @@ or
 ```
 docker-compose up
 ```
-will Run in the background
+Will run in the background
 
 # Dashboard Source
 

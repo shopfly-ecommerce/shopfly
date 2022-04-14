@@ -28,8 +28,7 @@ Shopflix is built based on spring boot + Vue technology, and the infrastructure 
 1. Clone the repository:
 
 ```
-git clone https://github.com/shopflix/docker.git
-
+sudo git clone https://github.com/shopflix/docker.git
 ```
 
 
@@ -37,7 +36,7 @@ git clone https://github.com/shopflix/docker.git
 
 ```
 cd docker
-vi backend.env
+sudo vi backend.env
 ```
 
 Specifies the address of the API service：
@@ -59,6 +58,14 @@ or
 docker-compose up -d
 ```
 Will run in the background
+
+## Visit address
+
+storefront: `yourip:3001`
+
+dashboard: `yourip:3002`
+
+api: `yourip:8080`
 
 # Dashboard Source
 

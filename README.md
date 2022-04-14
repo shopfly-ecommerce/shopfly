@@ -1,6 +1,6 @@
 # What is Shopflix?
 
-Shopflix is modular, high performance, headless e-commerce platform built with Springboot, Vue.
+Shopflix is modular, high performance, headless e-commerce(ecommerce) platform built with Springboot, Vue.
 
 # Architecture
 

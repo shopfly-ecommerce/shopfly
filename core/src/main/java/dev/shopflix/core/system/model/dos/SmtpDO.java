@@ -7,6 +7,7 @@ package dev.shopflix.core.system.model.dos;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.shopflix.framework.database.annotation.Column;
 import dev.shopflix.framework.database.annotation.Id;
 import dev.shopflix.framework.database.annotation.PrimaryKeyField;
@@ -53,6 +54,7 @@ public class SmtpDO implements Serializable {
 	/**密码*/
 	@Column(name = "password")
 	@ApiModelProperty(name="password",value="密码",required=false)
+	@JsonIgnore
 	private String password;
 	/**最后发信时间*/
 	@Column(name = "last_send_time")

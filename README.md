@@ -1,10 +1,10 @@
-# What is Shopflix?
+# What is Shopfly?
 
-Shopflix is modular, high performance, headless e-commerce(ecommerce) platform built with Java,Springboot, Vue.
+Shopfly is modular, high performance, headless e-commerce(ecommerce) platform built with Java,Springboot, Vue.
 
 # Architecture
 
-Shopflix is built based on spring boot + Vue technology, and the infrastructure is Mysql, Redis, Elasticsearch, RabbitMq
+Shopfly is built based on spring boot + Vue technology, and the infrastructure is Mysql, Redis, Elasticsearch, RabbitMq
 
 ![Architecture](https://www.shopflix.dev/images/Architecture_Overview.png) 
 

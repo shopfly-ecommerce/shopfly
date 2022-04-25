@@ -40,8 +40,7 @@ public class RateAreaDO implements Serializable {
     @Column(name = "name")
     private String name;
 
-
-    @ApiParam("地区‘，‘分隔   示例参数：北京，山西，天津，上海")
+    @ApiParam(value = "地区‘，‘分隔   示例参数：北京，山西，天津，上海",hidden = true)
     @Column(name = "area")
     private String area;
 

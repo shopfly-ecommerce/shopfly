@@ -39,7 +39,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
         HttpServletRequest req = ThreadContextHolder.getHttpRequest();
         if (req != null) {
             String domain = req.getServerName();
-            if ("localhost".equals(domain) || "127.0.0.1".equals(domain)  ) {
+            if ("localhost".equals(domain) || "127.0.0.1".equals(domain) || "boe1.natapp1.cc".equals(domain) ) {
                 return;
             } else {
                 InstallerRecord.parse();

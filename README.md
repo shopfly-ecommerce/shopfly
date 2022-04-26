@@ -28,7 +28,7 @@ Shopfly is built based on spring boot + Vue technology, and the infrastructure i
 1. Clone the repository:
 
 ```
-sudo git clone https://github.com/shopflix/docker.git
+sudo git clone https://github.com/shopfly-ecommerce/docker.git
 ```
 
 
@@ -61,7 +61,7 @@ Will run in the background
 
 ## Visit address
 
-storefront: `yourip:3001`
+storefront: `yourip:3000`
 
 dashboard: `yourip:3002`
 
@@ -69,11 +69,11 @@ api: `yourip:8080`
 
 # Dashboard Source
 
-https://github.com/shopflix/dashboard
+https://github.com/shopfly-ecommerce/dashboard
 
 # Storefront Source
 
-https://github.com/shopflix/vue-storefront
+https://github.com/shopfly-ecommerce/vue-storefront
 
 
 

@@ -5,14 +5,18 @@ import com.paypal.core.PayPalHttpClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
 import com.paypal.orders.*;
+import dev.shopflix.core.client.trade.OrderClient;
 import dev.shopflix.core.payment.model.enums.ClientType;
 import dev.shopflix.core.payment.model.enums.TradeType;
 import dev.shopflix.core.payment.model.vo.ClientConfig;
 import dev.shopflix.core.payment.model.vo.PayBill;
 import dev.shopflix.core.payment.model.vo.RefundBill;
 import dev.shopflix.core.payment.service.PaymentPluginManager;
+import dev.shopflix.core.trade.order.model.vo.OrderDetailVO;
+import dev.shopflix.core.trade.sdk.model.OrderDetailDTO;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,6 +85,10 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
     public static String paypalOrderId = null;
 
 
+    @Autowired
+    private OrderClient orderClient;
+
+
     @Override
     public String getPluginId() {
         return "paypalPlugin";
@@ -99,9 +107,14 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
     @Override
     public Map pay(PayBill bill) {
 
+        //读取收货地址
+        OrderDetailDTO orderDetailDTO = orderClient.getModel(bill.getSn());
+
+
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.header("prefer","return=representation");
         request.requestBody(buildRequestBody(bill));
+
         try {
             HttpResponse<Order> response = client().execute(request);
 
@@ -246,7 +259,7 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
                                 //货币代码  必需
                                 .currencyCode("USD")
                                 //总金额   必需
-                                .value("220.00"))
+                                .value(bill.getOrderPrice()+""))
 
                 //物流明细 必需
                 .shippingDetail(new ShippingDetail().name(

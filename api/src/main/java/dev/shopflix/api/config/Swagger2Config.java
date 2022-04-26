@@ -40,8 +40,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("微信")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/wechat/**"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/wechat/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -51,8 +51,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("分销")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/distribution/**"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/distribution/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -63,8 +63,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("拼团")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/pintuan/**"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/pintuan/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -75,8 +75,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("售后")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/after-sales/**"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/after-sales/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
     @Bean
@@ -85,8 +85,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("流量")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/view"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/view"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -96,8 +96,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("商品")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/goods/**"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/goods/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -108,8 +108,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("会员认证中心")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.regex("(/seller/passport/.*)"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.regex("(/passport/.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -119,8 +119,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("会员")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.regex("(/seller/members.*)|(/seller/account-binder.*)"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.regex("(/members.*)|(/account-binder.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -130,8 +130,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("楼层")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.regex("(/seller/pages/.*)|(/seller/focus-pictures.*)"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.regex("(/pages/.*)|(/focus-pictures.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -141,8 +141,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("支付")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/order/**"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/order/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -152,8 +152,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("店铺")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/shops/**"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/shops/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -163,8 +163,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("交易")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.regex("(/seller/trade.*)|(/seller/express.*)"))
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.regex("(/trade.*)|(/express.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 
@@ -174,19 +174,8 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("促销")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.ant("/seller/promotions/**"))
-                .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
-    }
-
-    @Bean
-    public Docket allApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("所有")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api"))
-                .paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.buyer.api"))
+                .paths(PathSelectors.ant("/promotions/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
 

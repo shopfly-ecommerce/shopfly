@@ -11,9 +11,9 @@ spring:
 
   #数据库配置
   datasource:
-    url: jdbc:mysql://192.168.2.218:3306/b2c_en?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/b2c_en?useUnicode=true&characterEncoding=utf8&autoReconnect=true
     username: root
-    password: enation752513
+    password: 111111
     driver-class-name: com.mysql.jdbc.Driver
     druid:
       web-stat-filter:
@@ -39,8 +39,8 @@ redis:
   config :
     type: manual
   host: localhost
-  port: 6379
-  password:
+  port: 6378
+  password: 123456
   maxIdle: 500
   maxTotal: 500
   maxWaitMillis: -1
@@ -49,7 +49,7 @@ redis:
 # 开发环境日志为debug
 logging:
   level:
-    org.springframework: DEBUG
+    org.springframework: ERROR
     com.enation.app : DEBUG
 
 #java 系统配置

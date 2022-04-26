@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import java.util.Objects;
+
 /**
  * 收银台参数VO
  *
@@ -31,20 +33,14 @@ public class CashierVO {
     @ApiModelProperty(name = "ship_mobile", value = "收货人手机")
     private String shipMobile;
 
-    @ApiModelProperty(name = "ship_tel", value = "收货人电话")
-    private String shipTel;
+    @ApiModelProperty(name = "ship_country", value = "配送地区-国家")
+    private String shipCountry;
 
-    @ApiModelProperty(name = "ship_province", value = "配送地区-省份")
-    private String shipProvince;
+    @ApiModelProperty(name = "ship_state", value = "配送地区-州/省")
+    private String shipState;
 
     @ApiModelProperty(name = "ship_city", value = "配送地区-城市")
     private String shipCity;
-
-    @ApiModelProperty(name = "ship_county", value = "配送地区-区(县)")
-    private String shipCounty;
-
-    @ApiModelProperty(name = "ship_town", value = "配送街道")
-    private String shipTown;
 
     @ApiModelProperty(name = "need_pay_price", value = "应付金额")
     private Double needPayPrice;
@@ -78,44 +74,12 @@ public class CashierVO {
         this.shipMobile = shipMobile;
     }
 
-    public String getShipTel() {
-        return shipTel;
-    }
-
-    public void setShipTel(String shipTel) {
-        this.shipTel = shipTel;
-    }
-
-    public String getShipProvince() {
-        return shipProvince;
-    }
-
-    public void setShipProvince(String shipProvince) {
-        this.shipProvince = shipProvince;
-    }
-
     public String getShipCity() {
         return shipCity;
     }
 
     public void setShipCity(String shipCity) {
         this.shipCity = shipCity;
-    }
-
-    public String getShipCounty() {
-        return shipCounty;
-    }
-
-    public void setShipCounty(String shipCounty) {
-        this.shipCounty = shipCounty;
-    }
-
-    public String getShipTown() {
-        return shipTown;
-    }
-
-    public void setShipTown(String shipTown) {
-        this.shipTown = shipTown;
     }
 
     public Double getNeedPayPrice() {
@@ -142,46 +106,45 @@ public class CashierVO {
         this.countDown = countDown;
     }
 
+    public String getShipCountry() {
+        return shipCountry;
+    }
+
+    public void setShipCountry(String shipCountry) {
+        this.shipCountry = shipCountry;
+    }
+
+    public String getShipState() {
+        return shipState;
+    }
+
+    public void setShipState(String shipState) {
+        this.shipState = shipState;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         CashierVO cashierVO = (CashierVO) o;
-
-        return new EqualsBuilder()
-                .append(shipName, cashierVO.shipName)
-                .append(shipAddr, cashierVO.shipAddr)
-                .append(shipMobile, cashierVO.shipMobile)
-                .append(shipTel, cashierVO.shipTel)
-                .append(shipProvince, cashierVO.shipProvince)
-                .append(shipCity, cashierVO.shipCity)
-                .append(shipCounty, cashierVO.shipCounty)
-                .append(shipTown, cashierVO.shipTown)
-                .append(needPayPrice, cashierVO.needPayPrice)
-                .append(payTypeText, cashierVO.payTypeText)
-                .isEquals();
+        return Objects.equals(shipName, cashierVO.shipName) &&
+                Objects.equals(shipAddr, cashierVO.shipAddr) &&
+                Objects.equals(shipMobile, cashierVO.shipMobile) &&
+                Objects.equals(shipCountry, cashierVO.shipCountry) &&
+                Objects.equals(shipState, cashierVO.shipState) &&
+                Objects.equals(shipCity, cashierVO.shipCity) &&
+                Objects.equals(needPayPrice, cashierVO.needPayPrice) &&
+                Objects.equals(payTypeText, cashierVO.payTypeText) &&
+                Objects.equals(countDown, cashierVO.countDown);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(shipName)
-                .append(shipAddr)
-                .append(shipMobile)
-                .append(shipTel)
-                .append(shipProvince)
-                .append(shipCity)
-                .append(shipCounty)
-                .append(shipTown)
-                .append(needPayPrice)
-                .append(payTypeText)
-                .toHashCode();
+        return Objects.hash(shipName, shipAddr, shipMobile, shipCountry, shipState, shipCity, needPayPrice, payTypeText, countDown);
     }
 
     @Override
@@ -190,13 +153,12 @@ public class CashierVO {
                 "shipName='" + shipName + '\'' +
                 ", shipAddr='" + shipAddr + '\'' +
                 ", shipMobile='" + shipMobile + '\'' +
-                ", shipTel='" + shipTel + '\'' +
-                ", shipProvince='" + shipProvince + '\'' +
+                ", shipCountry='" + shipCountry + '\'' +
+                ", shipState='" + shipState + '\'' +
                 ", shipCity='" + shipCity + '\'' +
-                ", shipCounty='" + shipCounty + '\'' +
-                ", shipTown='" + shipTown + '\'' +
                 ", needPayPrice=" + needPayPrice +
                 ", payTypeText='" + payTypeText + '\'' +
+                ", countDown=" + countDown +
                 '}';
     }
 }

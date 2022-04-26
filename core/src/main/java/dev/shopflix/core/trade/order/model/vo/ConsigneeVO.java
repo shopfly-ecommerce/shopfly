@@ -8,10 +8,9 @@ package dev.shopflix.core.trade.order.model.vo;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 收货人实体
@@ -31,17 +30,14 @@ public class ConsigneeVO implements Serializable {
     @ApiModelProperty(value = "收货人姓名")
     private String name;
 
-    @ApiModelProperty(value = "省")
-    private String province;
+    @ApiModelProperty(value = "国家")
+    private String country;
 
-    @ApiModelProperty(value = "市")
+    @ApiModelProperty(value = "州名/省名")
+    private String stateName;
+
+    @ApiModelProperty(value = "城市")
     private String city;
-
-    @ApiModelProperty(value = "区")
-    private String county;
-
-    @ApiModelProperty(value = "街道")
-    private String town;
 
     @ApiModelProperty(value = "详细地址")
     private String address;
@@ -49,40 +45,14 @@ public class ConsigneeVO implements Serializable {
     @ApiModelProperty(value = "手机号")
     private String mobile;
 
-    @ApiModelProperty(value = "电话")
-    private String telephone;
+    @ApiModelProperty(value = "Country code")
+    private String countryCode;
 
-    @ApiModelProperty(value = "省ID")
-    private Integer provinceId;
+    @ApiModelProperty(value = "State code")
+    private String stateCode;
 
-    @ApiModelProperty(value = "市ID")
-    private Integer countyId;
-
-    @ApiModelProperty(value = "区ID")
-    private Integer cityId;
-
-    @ApiModelProperty(value = "街道ID")
-    private Integer townId;
-
-
-    @Override
-    public String toString() {
-        return "ConsigneeVO{" +
-                "consigneeId=" + consigneeId +
-                ", name='" + name + '\'' +
-                ", county='" + county + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", town='" + town + '\'' +
-                ", address='" + address + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", countyId=" + countyId +
-                ", provinceId=" + provinceId +
-                ", cityId=" + cityId +
-                ", townId=" + townId +
-                '}';
-    }
+    @ApiModelProperty(value = "Zip code")
+    private String zipCode;
 
     public Integer getConsigneeId() {
         return consigneeId;
@@ -100,20 +70,20 @@ public class ConsigneeVO implements Serializable {
         this.name = name;
     }
 
-    public String getCounty() {
-        return county;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getProvince() {
-        return province;
+    public String getStateName() {
+        return stateName;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
     }
 
     public String getCity() {
@@ -122,14 +92,6 @@ public class ConsigneeVO implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
     }
 
     public String getAddress() {
@@ -148,44 +110,28 @@ public class ConsigneeVO implements Serializable {
         this.mobile = mobile;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-    public Integer getCountyId() {
-        return countyId;
+    public String getStateCode() {
+        return stateCode;
     }
 
-    public void setCountyId(Integer countyId) {
-        this.countyId = countyId;
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
     }
 
-    public Integer getProvinceId() {
-        return provinceId;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setProvinceId(Integer provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public Integer getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
-
-    public Integer getTownId() {
-        return townId;
-    }
-
-    public void setTownId(Integer townId) {
-        this.townId = townId;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     @Override
@@ -193,46 +139,40 @@ public class ConsigneeVO implements Serializable {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         ConsigneeVO that = (ConsigneeVO) o;
-
-        return new EqualsBuilder()
-                .append(consigneeId, that.consigneeId)
-                .append(name, that.name)
-                .append(county, that.county)
-                .append(province, that.province)
-                .append(city, that.city)
-                .append(town, that.town)
-                .append(address, that.address)
-                .append(mobile, that.mobile)
-                .append(telephone, that.telephone)
-                .append(countyId, that.countyId)
-                .append(provinceId, that.provinceId)
-                .append(cityId, that.cityId)
-                .append(townId, that.townId)
-                .isEquals();
+        return Objects.equals(consigneeId, that.consigneeId) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(stateName, that.stateName) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(countryCode, that.countryCode) &&
+                Objects.equals(stateCode, that.stateCode) &&
+                Objects.equals(zipCode, that.zipCode);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(consigneeId)
-                .append(name)
-                .append(county)
-                .append(province)
-                .append(city)
-                .append(town)
-                .append(address)
-                .append(mobile)
-                .append(telephone)
-                .append(countyId)
-                .append(provinceId)
-                .append(cityId)
-                .append(townId)
-                .toHashCode();
+        return Objects.hash(consigneeId, name, country, stateName, city, address, mobile, countryCode, stateCode, zipCode);
+    }
+
+    @Override
+    public String toString() {
+        return "ConsigneeVO{" +
+                "consigneeId=" + consigneeId +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", stateName='" + stateName + '\'' +
+                ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", stateCode='" + stateCode + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
     }
 }

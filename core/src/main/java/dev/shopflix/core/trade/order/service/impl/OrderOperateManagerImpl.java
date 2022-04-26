@@ -143,18 +143,14 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
 
         OrderDO orderDO = this.orderQueryManager.getDoByOrderSn(orderConsignee.getOrderSn());
 
-        orderDO.setShipProvince(orderConsignee.getRegion().getProvince());
-        orderDO.setShipProvinceId(orderConsignee.getRegion().getProvinceId());
-        orderDO.setShipCity(orderConsignee.getRegion().getCity());
-        orderDO.setShipCityId(orderConsignee.getRegion().getCityId());
-        orderDO.setShipCounty(orderConsignee.getRegion().getCounty());
-        orderDO.setShipCountyId(orderConsignee.getRegion().getCountyId());
-        orderDO.setShipTown(orderConsignee.getRegion().getTown());
-        orderDO.setShipTownId(orderConsignee.getRegion().getTownId());
-
+        orderDO.setShipCountry(orderConsignee.getShipCountry());
+        orderDO.setShipCountryCode(orderConsignee.getShipCountryCode());
+        orderDO.setShipState(orderConsignee.getShipState());
+        orderDO.setShipStateCode(orderConsignee.getShipStateCode());
+        orderDO.setShipCity(orderConsignee.getShipCity());
         orderDO.setShipAddr(orderConsignee.getShipAddr());
         orderDO.setShipMobile(orderConsignee.getShipMobile());
-        orderDO.setShipTel(orderConsignee.getShipTel());
+        orderDO.setShipZip(orderConsignee.getShipZip());
         orderDO.setReceiveTime(orderConsignee.getReceiveTime());
         orderDO.setShipName(orderConsignee.getShipName());
         orderDO.setRemark(orderConsignee.getRemark());

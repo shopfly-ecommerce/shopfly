@@ -39,8 +39,8 @@ redis:
   config :
     type: manual
   host: localhost
-  port: 6379
-  password:
+  port: 6378
+  password: 123456
   maxIdle: 500
   maxTotal: 500
   maxWaitMillis: -1
@@ -50,7 +50,7 @@ redis:
 logging:
   level:
     org.springframework: ERROR
-    com.enation.app : DEBUG
+    dev.shopflix : DEBUG
 
 #java 系统配置
 shopflix:

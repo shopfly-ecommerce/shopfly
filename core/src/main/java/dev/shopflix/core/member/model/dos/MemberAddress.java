@@ -5,13 +5,9 @@
 */
 package dev.shopflix.core.member.model.dos;
 
-import dev.shopflix.core.base.context.Region;
-import dev.shopflix.core.base.context.RegionFormat;
 import dev.shopflix.framework.database.annotation.Column;
 import dev.shopflix.framework.database.annotation.Id;
 import dev.shopflix.framework.database.annotation.Table;
-import dev.shopflix.framework.validation.annotation.Mobile;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModel;
@@ -22,6 +18,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 /**
@@ -39,125 +36,96 @@ public class MemberAddress implements Serializable {
 
     private static final long serialVersionUID = 5386739629590247L;
 
-
     /**
-     * 主键ID
+     * primary key ID
      */
     @Id(name = "addr_id")
     @ApiModelProperty(hidden = true)
     private Integer addrId;
     /**
-     * 会员ID
+     * Member ID
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员ID", required = false, hidden = true)
+    @ApiModelProperty(name = "member_id", value = "Member ID", hidden = true)
     private Integer memberId;
     /**
-     * 收货人姓名
+     * Consignee name
      */
     @Column(name = "name")
-    @NotEmpty(message = "收货人姓名不能为空")
-    @ApiModelProperty(name = "name", value = "收货人姓名", required = false)
+    @ApiModelProperty(name = "name", value = "Consignee name", required = true)
+    @NotEmpty(message = "Consignee name is required")
     private String name;
     /**
-     * 收货人国籍
+     * Country name
      */
     @Column(name = "country")
-    @ApiModelProperty(name = "country", value = "收货人国籍", required = false, hidden = true)
+    @ApiModelProperty(name = "country", value = "Country name", required = true)
+    @NotEmpty(message = "Country name is required")
     private String country;
     /**
-     * 所属省份ID
-     */
-    @Column(name = "province_id")
-    @ApiModelProperty(name = "province_id", value = "所属省份ID", required = false, hidden = true)
-    private Integer provinceId;
-    /**
-     * 所属城市ID
-     */
-    @Column(name = "city_id")
-    @ApiModelProperty(name = "city_id", value = "所属城市ID", required = false, hidden = true)
-    private Integer cityId;
-    /**
-     * 所属县(区)ID
-     */
-    @Column(name = "county_id")
-    @ApiModelProperty(name = "county_id", value = "所属县(区)ID", required = false, hidden = true)
-    private Integer countyId;
-    /**
-     * 所属城镇ID
-     */
-    @Column(name = "town_id")
-    @ApiModelProperty(name = "town_id", value = "所属城镇ID", required = false, hidden = true)
-    private Integer townId;
-    /**
-     * 所属县(区)名称
-     */
-    @Column(name = "county")
-    @ApiModelProperty(name = "county", value = "所属县(区)名称", required = false, hidden = true)
-    private String county;
-    /**
-     * 所属城市名称
+     * City name
      */
     @Column(name = "city")
-    @ApiModelProperty(name = "city", value = "所属城市名称", required = false, hidden = true)
+    @ApiModelProperty(name = "city", value = "City name", required = true)
+    @NotEmpty(message = "City name is required")
     private String city;
     /**
-     * 所属省份名称
-     */
-    @Column(name = "province")
-    @ApiModelProperty(name = "province", value = "所属省份名称", required = false, hidden = true)
-    private String province;
-    /**
-     * 所属城镇名称
-     */
-    @Column(name = "town")
-    @ApiModelProperty(name = "town", value = "所属城镇名称", required = false, hidden = true)
-    private String town;
-    /**
-     * 详细地址
+     * Full address
      */
     @Column(name = "addr")
-    @NotEmpty(message = "详细地址不能为空")
-    @ApiModelProperty(name = "addr", value = "详细地址", required = false)
+    @ApiModelProperty(name = "addr", value = "Full address", required = true)
+    @NotEmpty(message = "Full address is required")
     private String addr;
-
     /**
-     * 联系电话(一般指座机)
-     */
-    @Column(name = "tel")
-    @ApiModelProperty(name = "tel", value = "联系电话(一般指座机)", required = false)
-    private String tel;
-    /**
-     * 手机号码
+     * Contact number
      */
     @Column(name = "mobile")
-    @Mobile
-    @ApiModelProperty(name = "mobile", value = "手机号码", required = false)
+    @ApiModelProperty(name = "mobile", value = "Contact number", required = true)
+    @NotEmpty(message = "Contact number is required")
     private String mobile;
     /**
-     * 是否为默认收货地址
+     * Is it the default address
      */
     @Column(name = "def_addr")
-    @Max(value = 1, message = "是否为默认地址参数错误")
-    @Min(value = 0, message = "是否为默认地址参数错误")
-    @NotNull(message = "是否为默认地址不能为空")
-    @ApiModelProperty(name = "def_addr", value = "是否为默认收货地址,1为默认", required = false)
+    @Max(value = 1, message = "Parameter error")
+    @Min(value = 0, message = "Parameter error")
+    @NotNull(message = "Default address is required")
+    @ApiModelProperty(name = "def_addr", value = "Default address", required = true)
     private Integer defAddr;
     /**
-     * 地址别名
+     * Address alias
      */
     @Column(name = "ship_address_name")
-    @ApiModelProperty(name = "ship_address_name", value = "地址别名", required = false)
+    @ApiModelProperty(name = "ship_address_name", value = "Address alias")
     private String shipAddressName;
-
-    @RegionFormat
-    @ApiModelProperty(name = "region", value = "地区")
-    private Region region;
-
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    /**
+     * Country code
+     */
+    @Column(name = "country_code")
+    @ApiModelProperty(name = "country_code", value = "Country code", required = true)
+    @NotEmpty(message = "Country code is required")
+    private String countryCode;
+    /**
+     * State name
+     */
+    @Column(name = "state_name")
+    @ApiModelProperty(name = "state_name", value = "State name", required = true)
+    @NotEmpty(message = "State name is required")
+    private String stateName;
+    /**
+     * State code
+     */
+    @Column(name = "state_code")
+    @ApiModelProperty(name = "state_code", value = "State code", required = true)
+    @NotEmpty(message = "State code is required")
+    private String stateCode;
+    /**
+     * Zip code
+     */
+    @Column(name = "zip_code")
+    @ApiModelProperty(name = "zip_code", value = "Zip code", required = true)
+    @NotEmpty(message = "Zip code is required")
+    private String zipCode;
 
     public Integer getAddrId() {
         return addrId;
@@ -191,46 +159,6 @@ public class MemberAddress implements Serializable {
         this.country = country;
     }
 
-    public Integer getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(Integer provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public Integer getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
-
-    public Integer getCountyId() {
-        return countyId;
-    }
-
-    public void setCountyId(Integer countyId) {
-        this.countyId = countyId;
-    }
-
-    public Integer getTownId() {
-        return townId;
-    }
-
-    public void setTownId(Integer townId) {
-        this.townId = townId;
-    }
-
-    public String getCounty() {
-        return county;
-    }
-
-    public void setCounty(String county) {
-        this.county = county;
-    }
-
     public String getCity() {
         return city;
     }
@@ -239,36 +167,12 @@ public class MemberAddress implements Serializable {
         this.city = city;
     }
 
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
     public String getAddr() {
         return addr;
     }
 
     public void setAddr(String addr) {
         this.addr = addr;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
     }
 
     public String getMobile() {
@@ -295,38 +199,37 @@ public class MemberAddress implements Serializable {
         this.shipAddressName = shipAddressName;
     }
 
-    @JsonIgnore
-    public Region getRegion() {
-        return region;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setRegion(Region region) {
-        this.region = region;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-    @Override
-    public String toString() {
-        return "MemberAddress{" +
-                "addrId=" + addrId +
-                ", memberId=" + memberId +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", provinceId=" + provinceId +
-                ", cityId=" + cityId +
-                ", countyId=" + countyId +
-                ", townId=" + townId +
-                ", county='" + county + '\'' +
-                ", city='" + city + '\'' +
-                ", province='" + province + '\'' +
-                ", town='" + town + '\'' +
-                ", addr='" + addr + '\'' +
-                ", tel='" + tel + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", defAddr=" + defAddr +
-                ", shipAddressName='" + shipAddressName + '\'' +
-                '}';
+    public String getStateName() {
+        return stateName;
     }
 
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -336,98 +239,43 @@ public class MemberAddress implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         MemberAddress that = (MemberAddress) o;
-
-        if (addrId != null ? !addrId.equals(that.addrId) : that.addrId != null) {
-            return false;
-        }
-        if (memberId != null ? !memberId.equals(that.memberId) : that.memberId != null) {
-            return false;
-        }
-        if (name != null ? !name.equals(that.name) : that.name != null) {
-            return false;
-        }
-        if (country != null ? !country.equals(that.country) : that.country != null) {
-            return false;
-        }
-        if (provinceId != null ? !provinceId.equals(that.provinceId) : that.provinceId != null) {
-            return false;
-        }
-        if (cityId != null ? !cityId.equals(that.cityId) : that.cityId != null) {
-            return false;
-        }
-        if (countyId != null ? !countyId.equals(that.countyId) : that.countyId != null) {
-            return false;
-        }
-        if (townId != null ? !townId.equals(that.townId) : that.townId != null) {
-            return false;
-        }
-        if (county != null ? !county.equals(that.county) : that.county != null) {
-            return false;
-        }
-        if (city != null ? !city.equals(that.city) : that.city != null) {
-            return false;
-        }
-        if (province != null ? !province.equals(that.province) : that.province != null) {
-            return false;
-        }
-        if (town != null ? !town.equals(that.town) : that.town != null) {
-            return false;
-        }
-        if (addr != null ? !addr.equals(that.addr) : that.addr != null) {
-            return false;
-        }
-        if (tel != null ? !tel.equals(that.tel) : that.tel != null) {
-            return false;
-        }
-        if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) {
-            return false;
-        }
-        if (defAddr != null ? !defAddr.equals(that.defAddr) : that.defAddr != null) {
-            return false;
-        }
-        if (shipAddressName != null ? !shipAddressName.equals(that.shipAddressName) : that.shipAddressName != null) {
-            return false;
-        }
-        return region != null ? region.equals(that.region) : that.region == null;
+        return Objects.equals(addrId, that.addrId) &&
+                Objects.equals(memberId, that.memberId) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(addr, that.addr) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(defAddr, that.defAddr) &&
+                Objects.equals(shipAddressName, that.shipAddressName) &&
+                Objects.equals(countryCode, that.countryCode) &&
+                Objects.equals(stateName, that.stateName) &&
+                Objects.equals(stateCode, that.stateCode) &&
+                Objects.equals(zipCode, that.zipCode);
     }
 
     @Override
     public int hashCode() {
-        int result = addrId != null ? addrId.hashCode() : 0;
-        result = 31 * result + (memberId != null ? memberId.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (provinceId != null ? provinceId.hashCode() : 0);
-        result = 31 * result + (cityId != null ? cityId.hashCode() : 0);
-        result = 31 * result + (countyId != null ? countyId.hashCode() : 0);
-        result = 31 * result + (townId != null ? townId.hashCode() : 0);
-        result = 31 * result + (county != null ? county.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (province != null ? province.hashCode() : 0);
-        result = 31 * result + (town != null ? town.hashCode() : 0);
-        result = 31 * result + (addr != null ? addr.hashCode() : 0);
-        result = 31 * result + (tel != null ? tel.hashCode() : 0);
-        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
-        result = 31 * result + (defAddr != null ? defAddr.hashCode() : 0);
-        result = 31 * result + (shipAddressName != null ? shipAddressName.hashCode() : 0);
-        result = 31 * result + (region != null ? region.hashCode() : 0);
-        return result;
+        return Objects.hash(addrId, memberId, name, country, city, addr, mobile, defAddr, shipAddressName, countryCode, stateName, stateCode, zipCode);
     }
-    /**
-     * 获取最低级地区
-     * @return
-     */
-    public Integer actualAddress() {
-//        if(this.townId!=null&&townId!=0) {
-//            return townId;
-//        }
-        if(this.countyId!=null&&countyId!=0) {
-            return countyId;
-        }if(this.cityId!=null&&cityId!=0) {
-            return cityId;
-        }
-        return provinceId;
+
+    @Override
+    public String toString() {
+        return "MemberAddress{" +
+                "addrId=" + addrId +
+                ", memberId=" + memberId +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", addr='" + addr + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", defAddr=" + defAddr +
+                ", shipAddressName='" + shipAddressName + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", stateName='" + stateName + '\'' +
+                ", stateCode='" + stateCode + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
     }
 }

@@ -10,9 +10,9 @@ Shopfly is built based on spring boot + Vue technology, and the infrastructure i
 
 # Demo
 
-[**storefront**](http://52.53.155.58:81)
+[**storefront**](http://demo.shopfly.cloud)
 
-[**dashboard**](http://52.53.155.58:82)
+[**dashboard**](http://dashboard.shopfly.cloud)
 
 # Quick Start
 

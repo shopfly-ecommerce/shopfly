@@ -50,7 +50,7 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
     protected TokenManager tokenManager;
 
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     /**
      * 单例模式的cache

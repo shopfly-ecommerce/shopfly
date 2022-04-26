@@ -45,7 +45,7 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
     @Autowired
     private List<PaymentCallbackDevice> callbackDeviceList;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Override
     public Page list(int page, int pageSize) {

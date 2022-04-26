@@ -76,7 +76,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     @Autowired
     private TimeTrigger timeTrigger;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Override
     public Page list(SeckillQueryParam queryParam) {

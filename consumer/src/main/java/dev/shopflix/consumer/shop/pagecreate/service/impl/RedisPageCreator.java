@@ -102,9 +102,7 @@ public class RedisPageCreator implements PageCreator {
 
         } catch (Exception e) {
             debugger.log("首页生成静态页出错，异常如下：", StringUtil.getStackTrace(e));
-            if (logger.isDebugEnabled()) {
-                logger.error("首页生成静态页出错，异常如下：", e);
-            }
+            logger.error("首页生成静态页出错，异常如下：", e);
         }
 
 
@@ -144,9 +142,7 @@ public class RedisPageCreator implements PageCreator {
                     progressManager.taskUpdate(TaskProgressConstant.PAGE_CREATE, pageName);
                 } catch (Exception e) {
                     debugger.log("为商品[" + goods.get("goods_name") + "],id[" + goodsId + "]生成静态页出错，异常如下：", StringUtil.getStackTrace(e));
-                    if (logger.isDebugEnabled()) {
-                        logger.error("为商品[" + goods.get("goods_name") + "],id[" + goodsId + "]生成静态页出错，异常如下：", e);
-                    }
+                    logger.error("为商品[" + goods.get("goods_name") + "],id[" + goodsId + "]生成静态页出错，异常如下：", e);
 
                 }
 
@@ -197,9 +193,7 @@ public class RedisPageCreator implements PageCreator {
                     progressManager.taskUpdate(TaskProgressConstant.PAGE_CREATE, "正在生成[" + pageName + "]");
                 } catch (Exception e) {
                     debugger.log("帮助[" + pageName + "]生成静态页出错，异常如下：", StringUtil.getStackTrace(e));
-                    if (logger.isDebugEnabled()) {
-                        logger.error("为商品[" + pageName + "]生成静态页出错", e);
-                    }
+                    logger.error("为商品[" + pageName + "]生成静态页出错", e);
 
                 }
 

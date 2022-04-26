@@ -51,7 +51,7 @@ import java.util.Map;
 public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
 
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     private DaoSupport daoSupport;

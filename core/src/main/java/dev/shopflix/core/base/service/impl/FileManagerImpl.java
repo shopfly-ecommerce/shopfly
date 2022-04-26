@@ -46,7 +46,7 @@ public class FileManagerImpl implements FileManager {
     @Autowired
     private Cache cache;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Override
     public FileVO upload(FileDTO input, String scene) {

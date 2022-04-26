@@ -37,7 +37,7 @@ import java.util.Map;
 @Component
 public class SmsZtPlugin implements SmsPlatform {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     private Debugger debugger;

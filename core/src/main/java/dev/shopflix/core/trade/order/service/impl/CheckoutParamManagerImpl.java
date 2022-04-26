@@ -135,21 +135,21 @@ public class CheckoutParamManagerImpl implements CheckoutParamManager {
             return;
         }
 
-        List<Integer> addIds = new ArrayList<>();
-        addIds.add(memberAddress.getProvinceId());
-        addIds.add(memberAddress.getCityId());
-        addIds.add(memberAddress.getCountyId());
-        addIds.add(memberAddress.getTownId());
-
-        for (Integer region: addIds) {
-            Regions regions = this.regionsClient.getModel(region);
-            if(regions == null){
-                continue;
-            }
-            if(regions.getCod() == 0){
-                throw new NoPermissionException("["+regions.getLocalName() + "]不支持货到付款");
-            }
-        }
+//        List<Integer> addIds = new ArrayList<>();
+//        addIds.add(memberAddress.getProvinceId());
+//        addIds.add(memberAddress.getCityId());
+//        addIds.add(memberAddress.getCountyId());
+//        addIds.add(memberAddress.getTownId());
+//
+//        for (Integer region: addIds) {
+//            Regions regions = this.regionsClient.getModel(region);
+//            if(regions == null){
+//                continue;
+//            }
+//            if(regions.getCod() == 0){
+//                throw new NoPermissionException("["+regions.getLocalName() + "]不支持货到付款");
+//            }
+//        }
     }
 
 

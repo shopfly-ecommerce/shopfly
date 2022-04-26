@@ -17,10 +17,9 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 /**
@@ -129,59 +128,29 @@ public class TradeDO implements Serializable {
     @ApiModelProperty(name = "consignee_country", value = "收货国家", required = false)
     private String consigneeCountry;
     /**
-     * 收货国家id
+     * 收货国家编码
      */
-    @Column(name = "consignee_country_id")
-    @ApiModelProperty(name = "consignee_country_id", value = "收货国家id", required = false)
-    private Integer consigneeCountryId;
+    @Column(name = "consignee_country_code")
+    @ApiModelProperty(name = "consignee_country_code", value = "收货国家编码", required = false)
+    private String consigneeCountryCode;
     /**
-     * 收货省
+     * 收货州/省名
      */
-    @Column(name = "consignee_province")
-    @ApiModelProperty(name = "consignee_province", value = "收货省", required = false)
-    private String consigneeProvince;
+    @Column(name = "consignee_state")
+    @ApiModelProperty(name = "consignee_state", value = "收货州/省名", required = false)
+    private String consigneeState;
     /**
-     * 收货省id
+     * 收货州/省名编码
      */
-    @Column(name = "consignee_province_id")
-    @ApiModelProperty(name = "consignee_province_id", value = "收货省id", required = false)
-    private Integer consigneeProvinceId;
+    @Column(name = "consignee_state_code")
+    @ApiModelProperty(name = "consignee_state_code", value = "收货州/省名编码", required = false)
+    private String consigneeStateCode;
     /**
      * 收货市
      */
     @Column(name = "consignee_city")
     @ApiModelProperty(name = "consignee_city", value = "收货市", required = false)
     private String consigneeCity;
-    /**
-     * 收货市id
-     */
-    @Column(name = "consignee_city_id")
-    @ApiModelProperty(name = "consignee_city_id", value = "收货市id", required = false)
-    private Integer consigneeCityId;
-    /**
-     * 收货区
-     */
-    @Column(name = "consignee_county")
-    @ApiModelProperty(name = "consignee_county", value = "收货区", required = false)
-    private String consigneeCounty;
-    /**
-     * 收货区id
-     */
-    @Column(name = "consignee_county_id")
-    @ApiModelProperty(name = "consignee_county_id", value = "收货区id", required = false)
-    private Integer consigneeCountyId;
-    /**
-     * 收货镇
-     */
-    @Column(name = "consignee_town")
-    @ApiModelProperty(name = "consignee_town", value = "收货镇", required = false)
-    private String consigneeTown;
-    /**
-     * 收货镇id
-     */
-    @Column(name = "consignee_town_id")
-    @ApiModelProperty(name = "consignee_town_id", value = "收货镇id", required = false)
-    private Integer consigneeTownId;
     /**
      * 收货详细地址
      */
@@ -195,11 +164,11 @@ public class TradeDO implements Serializable {
     @ApiModelProperty(name = "consignee_mobile", value = "收货人手机号", required = false)
     private String consigneeMobile;
     /**
-     * 收货人电话
+     * 收货地址邮编
      */
-    @Column(name = "consignee_telephone")
-    @ApiModelProperty(name = "consignee_telephone", value = "收货人电话", required = false)
-    private String consigneeTelephone;
+    @Column(name = "consignee_zip_code")
+    @ApiModelProperty(name = "consignee_zip_code", value = "收货地址邮编", required = false)
+    private String consigneeZipCode;
     /**
      * 交易创建时间
      */
@@ -336,52 +305,12 @@ public class TradeDO implements Serializable {
         this.consigneeName = consigneeName;
     }
 
-    public String getConsigneeCounty() {
-        return consigneeCounty;
-    }
-
-    public void setConsigneeCounty(String consigneeCounty) {
-        this.consigneeCounty = consigneeCounty;
-    }
-
-    public Integer getConsigneeCountyId() {
-        return consigneeCountyId;
-    }
-
-    public void setConsigneeCountyId(Integer consigneeCountyId) {
-        this.consigneeCountyId = consigneeCountyId;
-    }
-
-    public String getConsigneeProvince() {
-        return consigneeProvince;
-    }
-
-    public void setConsigneeProvince(String consigneeProvince) {
-        this.consigneeProvince = consigneeProvince;
-    }
-
-    public Integer getConsigneeProvinceId() {
-        return consigneeProvinceId;
-    }
-
-    public void setConsigneeProvinceId(Integer consigneeProvinceId) {
-        this.consigneeProvinceId = consigneeProvinceId;
-    }
-
     public String getConsigneeCity() {
         return consigneeCity;
     }
 
     public void setConsigneeCity(String consigneeCity) {
         this.consigneeCity = consigneeCity;
-    }
-
-    public Integer getConsigneeCityId() {
-        return consigneeCityId;
-    }
-
-    public void setConsigneeCityId(Integer consigneeCityId) {
-        this.consigneeCityId = consigneeCityId;
     }
 
     public String getConsigneeCountry() {
@@ -392,36 +321,12 @@ public class TradeDO implements Serializable {
         this.consigneeCountry = consigneeCountry;
     }
 
-    public Integer getConsigneeCountryId() {
-        return consigneeCountryId;
-    }
-
-    public void setConsigneeCountryId(Integer consigneeCountryId) {
-        this.consigneeCountryId = consigneeCountryId;
-    }
-
     public String getOrderJson() {
         return orderJson;
     }
 
     public void setOrderJson(String orderJson) {
         this.orderJson = orderJson;
-    }
-
-    public String getConsigneeTown() {
-        return consigneeTown;
-    }
-
-    public void setConsigneeTown(String consigneeTown) {
-        this.consigneeTown = consigneeTown;
-    }
-
-    public Integer getConsigneeTownId() {
-        return consigneeTownId;
-    }
-
-    public void setConsigneeTownId(Integer consigneeTownId) {
-        this.consigneeTownId = consigneeTownId;
     }
 
     public String getConsigneeAddress() {
@@ -440,14 +345,6 @@ public class TradeDO implements Serializable {
         this.consigneeMobile = consigneeMobile;
     }
 
-    public String getConsigneeTelephone() {
-        return consigneeTelephone;
-    }
-
-    public void setConsigneeTelephone(String consigneeTelephone) {
-        this.consigneeTelephone = consigneeTelephone;
-    }
-
     public Long getCreateTime() {
         return createTime;
     }
@@ -464,86 +361,77 @@ public class TradeDO implements Serializable {
         this.tradeStatus = tradeStatus;
     }
 
+    public String getConsigneeCountryCode() {
+        return consigneeCountryCode;
+    }
+
+    public void setConsigneeCountryCode(String consigneeCountryCode) {
+        this.consigneeCountryCode = consigneeCountryCode;
+    }
+
+    public String getConsigneeState() {
+        return consigneeState;
+    }
+
+    public void setConsigneeState(String consigneeState) {
+        this.consigneeState = consigneeState;
+    }
+
+    public String getConsigneeStateCode() {
+        return consigneeStateCode;
+    }
+
+    public void setConsigneeStateCode(String consigneeStateCode) {
+        this.consigneeStateCode = consigneeStateCode;
+    }
+
+    public String getConsigneeZipCode() {
+        return consigneeZipCode;
+    }
+
+    public void setConsigneeZipCode(String consigneeZipCode) {
+        this.consigneeZipCode = consigneeZipCode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         TradeDO tradeDO = (TradeDO) o;
-
-        return new EqualsBuilder()
-                .append(tradeId, tradeDO.tradeId)
-                .append(tradeSn, tradeDO.tradeSn)
-                .append(memberId, tradeDO.memberId)
-                .append(memberName, tradeDO.memberName)
-                .append(paymentMethodId, tradeDO.paymentMethodId)
-                .append(paymentPluginId, tradeDO.paymentPluginId)
-                .append(paymentMethodName, tradeDO.paymentMethodName)
-                .append(paymentType, tradeDO.paymentType)
-                .append(totalPrice, tradeDO.totalPrice)
-                .append(goodsPrice, tradeDO.goodsPrice)
-                .append(freightPrice, tradeDO.freightPrice)
-                .append(discountPrice, tradeDO.discountPrice)
-                .append(consigneeId, tradeDO.consigneeId)
-                .append(consigneeName, tradeDO.consigneeName)
-                .append(consigneeCountry, tradeDO.consigneeCountry)
-                .append(consigneeCountryId, tradeDO.consigneeCountryId)
-                .append(consigneeProvince, tradeDO.consigneeProvince)
-                .append(consigneeProvinceId, tradeDO.consigneeProvinceId)
-                .append(consigneeCity, tradeDO.consigneeCity)
-                .append(consigneeCityId, tradeDO.consigneeCityId)
-                .append(consigneeCounty, tradeDO.consigneeCounty)
-                .append(consigneeCountyId, tradeDO.consigneeCountyId)
-                .append(consigneeTown, tradeDO.consigneeTown)
-                .append(consigneeTownId, tradeDO.consigneeTownId)
-                .append(consigneeAddress, tradeDO.consigneeAddress)
-                .append(consigneeMobile, tradeDO.consigneeMobile)
-                .append(consigneeTelephone, tradeDO.consigneeTelephone)
-                .append(createTime, tradeDO.createTime)
-                .append(orderJson, tradeDO.orderJson)
-                .append(tradeStatus, tradeDO.tradeStatus)
-                .isEquals();
+        return Objects.equals(tradeId, tradeDO.tradeId) &&
+                Objects.equals(tradeSn, tradeDO.tradeSn) &&
+                Objects.equals(memberId, tradeDO.memberId) &&
+                Objects.equals(memberName, tradeDO.memberName) &&
+                Objects.equals(paymentMethodId, tradeDO.paymentMethodId) &&
+                Objects.equals(paymentPluginId, tradeDO.paymentPluginId) &&
+                Objects.equals(paymentMethodName, tradeDO.paymentMethodName) &&
+                Objects.equals(paymentType, tradeDO.paymentType) &&
+                Objects.equals(totalPrice, tradeDO.totalPrice) &&
+                Objects.equals(goodsPrice, tradeDO.goodsPrice) &&
+                Objects.equals(freightPrice, tradeDO.freightPrice) &&
+                Objects.equals(discountPrice, tradeDO.discountPrice) &&
+                Objects.equals(consigneeId, tradeDO.consigneeId) &&
+                Objects.equals(consigneeName, tradeDO.consigneeName) &&
+                Objects.equals(consigneeCountry, tradeDO.consigneeCountry) &&
+                Objects.equals(consigneeCountryCode, tradeDO.consigneeCountryCode) &&
+                Objects.equals(consigneeState, tradeDO.consigneeState) &&
+                Objects.equals(consigneeStateCode, tradeDO.consigneeStateCode) &&
+                Objects.equals(consigneeCity, tradeDO.consigneeCity) &&
+                Objects.equals(consigneeAddress, tradeDO.consigneeAddress) &&
+                Objects.equals(consigneeMobile, tradeDO.consigneeMobile) &&
+                Objects.equals(consigneeZipCode, tradeDO.consigneeZipCode) &&
+                Objects.equals(createTime, tradeDO.createTime) &&
+                Objects.equals(orderJson, tradeDO.orderJson) &&
+                Objects.equals(tradeStatus, tradeDO.tradeStatus);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(tradeId)
-                .append(tradeSn)
-                .append(memberId)
-                .append(memberName)
-                .append(paymentMethodId)
-                .append(paymentPluginId)
-                .append(paymentMethodName)
-                .append(paymentType)
-                .append(totalPrice)
-                .append(goodsPrice)
-                .append(freightPrice)
-                .append(discountPrice)
-                .append(consigneeId)
-                .append(consigneeName)
-                .append(consigneeCountry)
-                .append(consigneeCountryId)
-                .append(consigneeProvince)
-                .append(consigneeProvinceId)
-                .append(consigneeCity)
-                .append(consigneeCityId)
-                .append(consigneeCounty)
-                .append(consigneeCountyId)
-                .append(consigneeTown)
-                .append(consigneeTownId)
-                .append(consigneeAddress)
-                .append(consigneeMobile)
-                .append(consigneeTelephone)
-                .append(createTime)
-                .append(orderJson)
-                .append(tradeStatus)
-                .toHashCode();
+        return Objects.hash(tradeId, tradeSn, memberId, memberName, paymentMethodId, paymentPluginId, paymentMethodName, paymentType, totalPrice, goodsPrice, freightPrice, discountPrice, consigneeId, consigneeName, consigneeCountry, consigneeCountryCode, consigneeState, consigneeStateCode, consigneeCity, consigneeAddress, consigneeMobile, consigneeZipCode, createTime, orderJson, tradeStatus);
     }
 
     @Override
@@ -564,18 +452,13 @@ public class TradeDO implements Serializable {
                 ", consigneeId=" + consigneeId +
                 ", consigneeName='" + consigneeName + '\'' +
                 ", consigneeCountry='" + consigneeCountry + '\'' +
-                ", consigneeCountryId=" + consigneeCountryId +
-                ", consigneeProvince='" + consigneeProvince + '\'' +
-                ", consigneeProvinceId=" + consigneeProvinceId +
+                ", consigneeCountryCode='" + consigneeCountryCode + '\'' +
+                ", consigneeState='" + consigneeState + '\'' +
+                ", consigneeStateCode='" + consigneeStateCode + '\'' +
                 ", consigneeCity='" + consigneeCity + '\'' +
-                ", consigneeCityId=" + consigneeCityId +
-                ", consigneeCounty='" + consigneeCounty + '\'' +
-                ", consigneeCountyId=" + consigneeCountyId +
-                ", consigneeTown='" + consigneeTown + '\'' +
-                ", consigneeTownId=" + consigneeTownId +
                 ", consigneeAddress='" + consigneeAddress + '\'' +
                 ", consigneeMobile='" + consigneeMobile + '\'' +
-                ", consigneeTelephone='" + consigneeTelephone + '\'' +
+                ", consigneeZipCode='" + consigneeZipCode + '\'' +
                 ", createTime=" + createTime +
                 ", orderJson='" + orderJson + '\'' +
                 ", tradeStatus='" + tradeStatus + '\'' +
@@ -600,20 +483,17 @@ public class TradeDO implements Serializable {
         this.setDiscountPrice(priceDetail.getDiscountPrice());
 
         ConsigneeVO consignee = tradeVO.getConsignee();
-
         this.setConsigneeName(consignee.getName());
         this.setConsigneeAddress(consignee.getAddress());
         this.setConsigneeId(consignee.getConsigneeId());
         this.setConsigneeMobile(consignee.getMobile());
-
-        this.setConsigneeProvince(consignee.getProvince());
+        this.setConsigneeCountry(consignee.getCountry());
+        this.setConsigneeCountryCode(consignee.getCountryCode());
+        this.setConsigneeState(consignee.getStateName());
         this.setConsigneeCity(consignee.getCity());
-        this.setConsigneeCounty(consignee.getCounty());
-
-        this.setConsigneeProvinceId(consignee.getProvinceId());
-        this.setConsigneeCityId(consignee.getCityId());
-        this.setConsigneeCountyId(consignee.getCountyId());
-        this.setConsigneeTown(consignee.getTown());
+        this.setConsigneeCountryCode(consignee.getCountryCode());
+        this.setConsigneeStateCode(consignee.getStateCode());
+        this.setConsigneeZipCode(consignee.getZipCode());
 
         this.setTradeSn(tradeVO.getTradeSn());
         this.setPaymentType(tradeVO.getPaymentType());

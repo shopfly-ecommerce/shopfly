@@ -18,28 +18,28 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 会员地址控制器
+ * API related to the user's shipping address
  *
- * @author zh
+ * @author dmy
  * @version v2.0
  * @since v7.0.0
  * 2018-03-18 15:37:00
  */
 @RestController
 @RequestMapping("/members")
-@Api(description = "会员地址相关API")
+@Api(description = "API related to the user's shipping address")
 public class MemberAddressBuyerController {
 
     @Autowired
     private MemberAddressManager memberAddressManager;
 
-    @ApiOperation(value = "查询当前会员地址列表", response = MemberAddress.class)
+    @ApiOperation(value = "Query the collection of user shipping address information", response = MemberAddress.class)
     @GetMapping(value = "/addresses")
     public List<MemberAddress> list() {
         return this.memberAddressManager.list();
     }
 
-    @ApiOperation(value = "添加会员地址", response = MemberAddress.class)
+    @ApiOperation(value = "Add user shipping address", response = MemberAddress.class)
     @PostMapping(value = "/address")
     public MemberAddress add(@Valid MemberAddress memberAddress) {
         this.memberAddressManager.add(memberAddress);
@@ -47,50 +47,40 @@ public class MemberAddressBuyerController {
     }
 
     @PutMapping(value = "/address/{id}")
-    @ApiOperation(value = "修改会员地址", response = MemberAddress.class)
+    @ApiOperation(value = "Update user shipping address", response = MemberAddress.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "primary key ID", required = true, dataType = "int", paramType = "path")
     })
     public MemberAddress edit(@Valid MemberAddress memberAddress, @PathVariable Integer id) {
-
         return this.memberAddressManager.edit(memberAddress, id);
     }
 
-
     @PutMapping(value = "/address/{id}/default")
-    @ApiOperation(value = "设置地址为默认", response = MemberAddress.class)
+    @ApiOperation(value = "Set as default shipping address", response = MemberAddress.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "primary key ID", required = true, dataType = "int", paramType = "path")
     })
     public String editDefault(@PathVariable Integer id) {
         this.memberAddressManager.editDefault(id);
         return null;
     }
 
-
     @DeleteMapping(value = "/address/{id}")
-    @ApiOperation(value = "删除会员地址")
+    @ApiOperation(value = "Delete user shipping address")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的会员地址id", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "primary key ID", required = true, dataType = "int", paramType = "path")
     })
-    public String delete(@PathVariable Integer id) {
-
+    public void delete(@PathVariable Integer id) {
         this.memberAddressManager.delete(id);
-
-        return "";
     }
 
     @GetMapping(value = "/address/{id}")
-    @ApiOperation(value = "查询当前会员的某个地址")
+    @ApiOperation(value = "Query the details of a user's shipping address")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的地址id", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "primary key ID", required = true, dataType = "int", paramType = "path")
     })
     public MemberAddress get(@PathVariable Integer id) {
-
         MemberAddress memberAddress = this.memberAddressManager.getModel(id);
-
         return memberAddress;
     }
-
-
 }

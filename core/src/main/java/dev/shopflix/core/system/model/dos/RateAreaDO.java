@@ -40,7 +40,11 @@ public class RateAreaDO implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ApiParam(value = "地区‘，‘分隔   示例参数：北京，山西，天津，上海",hidden = true)
+    @ApiParam(value = "地区父子数据")
+    @Column(name = "area_json")
+    private String areaJson;
+
+    @ApiParam(value = "地区‘，‘分隔   示例参数：北京，山西，天津，上海")
     @Column(name = "area")
     private String area;
 
@@ -51,6 +55,14 @@ public class RateAreaDO implements Serializable {
     @Column(name = "create_time")
     private Long createTime;
 
+
+    public String getAreaJson() {
+        return areaJson;
+    }
+
+    public void setAreaJson(String areaJson) {
+        this.areaJson = areaJson;
+    }
 
     public Long getCreateTime() {
         return createTime;

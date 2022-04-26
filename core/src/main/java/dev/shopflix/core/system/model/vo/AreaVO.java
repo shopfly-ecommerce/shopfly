@@ -5,12 +5,10 @@
 */
 package dev.shopflix.core.system.model.vo;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.gson.Gson;
 import dev.shopflix.core.system.model.dos.RateAreaDO;
-import dev.shopflix.core.system.model.dos.ShipTemplateDO;
 import dev.shopflix.framework.database.annotation.Column;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,43 +23,50 @@ import java.util.Map;
 /**
  * @author cs
  * @version v2.0
- * @Description: 区域VO
+ * @Description: 地区VO
  * @date 2018/8/22 15:16
  * @since v7.0.0
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class RateAreaVO extends RateAreaDO implements Serializable {
-
-    @ApiParam("地区列表")
-    @Column(name = "areas")
-    private List<AreaVO> areas;
+public class AreaVO  implements Serializable {
 
 
+    private static final long serialVersionUID = 5022892972090471983L;
 
-    public RateAreaVO() {
+    @ApiParam("code")
+    @Column(name = "code")
+    private String code;
+
+    @ApiParam("name")
+    @Column(name = "name")
+    private String name;
+
+    @ApiModelProperty("子地区列表")
+    private List<AreaVO> children;
 
 
+    public String getCode() {
+        return code;
     }
 
-    public RateAreaVO(RateAreaDO rateAreaDO) {
-
-        this.areas = JSON.parseArray(rateAreaDO.getAreaJson()).toJavaList(AreaVO.class);
-        this.setId(rateAreaDO.getId());
-        this.setArea(rateAreaDO.getArea());
-        this.setAreaId(rateAreaDO.getAreaId());
-        this.setCreateTime(rateAreaDO.getCreateTime());
-        this.setName(rateAreaDO.getName());
-        this.setAreaJson(rateAreaDO.getAreaJson());
-
-
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public List<AreaVO> getAreas() {
-        return areas;
+    public String getName() {
+        return name;
     }
 
-    public void setAreas(List<AreaVO> areas) {
-        this.areas = areas;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<AreaVO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<AreaVO> children) {
+        this.children = children;
     }
 }

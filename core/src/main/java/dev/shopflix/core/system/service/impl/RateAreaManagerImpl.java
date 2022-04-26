@@ -5,11 +5,13 @@
 */
 package dev.shopflix.core.system.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import dev.shopflix.core.base.CachePrefix;
 import dev.shopflix.core.client.system.RegionsClient;
 import dev.shopflix.core.member.model.vo.RegionVO;
 import dev.shopflix.core.system.model.dos.RateAreaDO;
+import dev.shopflix.core.system.model.vo.AreaVO;
 import dev.shopflix.core.system.model.vo.RateAreaVO;
 import dev.shopflix.core.system.service.RateAreaManager;
 import dev.shopflix.framework.cache.Cache;
@@ -38,12 +40,6 @@ public class RateAreaManagerImpl implements RateAreaManager {
     @Autowired
     private DaoSupport daoSupport;
 
-    @Autowired
-    private Cache cache;
-
-    @Autowired
-    private RegionsClient regionsClient;
-
 
     @Override
     public Page list(String name, Integer pageNo, Integer pageSize) {
@@ -66,111 +62,23 @@ public class RateAreaManagerImpl implements RateAreaManager {
         rateAreaDO.setCreateTime(DateUtil.getDateline());
 
         //获取地区id
-        String area = rateAreaVO.getArea();
-        rateAreaDO.setArea(area);
-        Gson gson = new Gson();
-        Map<String, Map> map = new HashMap();
-        map = gson.fromJson(area, map.getClass());
+        List<AreaVO> areas = rateAreaVO.getAreas();
+        rateAreaDO.setAreaJson(JSON.toJSONString(areas));
+
         StringBuffer areaIdBuffer = new StringBuffer(",");
-        // 获取所有的地区
-        Object obj = this.cache.get(CachePrefix.REGIONALL.getPrefix() + 4);
-        List<RegionVO> allRegions = null;
-        if (obj == null) {
-            obj = regionsClient.getRegionByDepth(4);
-        }
-        allRegions = (List<RegionVO>) obj;
-        Map<String, RegionVO> regionsMap = new HashMap();
-        //循环地区放到Map中，便于取出
-        for (RegionVO region : allRegions) {
-            regionsMap.put(region.getId() + "", region);
-        }
-
-        for (String key : map.keySet()) {
-            //拼接地区id
-            areaIdBuffer.append(key + ",");
-            Map dto = map.get(key);
-            //需要取出改地区下面所有的子地区
-            RegionVO provinceRegion = regionsMap.get(key);
-            List<RegionVO> cityRegionList = provinceRegion.getChildren();
-
-            Map<String, RegionVO> cityRegionMap = new HashMap<>();
-            for (RegionVO city : cityRegionList) {
-                cityRegionMap.put(city.getId() + "", city);
-            }
-            //判断下面的地区是否被全选
-            if ((boolean) dto.get("selected_all")) {
-
-                //市
-                for (RegionVO cityRegion : cityRegionList) {
-
-                    areaIdBuffer.append(cityRegion.getId() + ",");
-                    List<RegionVO> regionList = cityRegion.getChildren();
-                    //区
-                    for (RegionVO region : regionList) {
-
-                        areaIdBuffer.append(region.getId() + ",");
-                        List<RegionVO> townList = region.getChildren();
-                        //城镇
-                        if (townList != null) {
-                            for (RegionVO townRegion : townList) {
-
-                                areaIdBuffer.append(townRegion.getId() + ",");
-                            }
-                        }
-                    }
-                }
-            } else {
-                //没有全选，则看选中城市
-                Map<String, Map> citiesMap = (Map<String, Map>) dto.get("children");
-                for (String cityKey : citiesMap.keySet()) {
-
-                    areaIdBuffer.append(cityKey + ",");
-
-                    Map cityMap = citiesMap.get(cityKey);
-
-                    RegionVO cityRegion = cityRegionMap.get(cityKey);
-                    List<RegionVO> regionList = cityRegion.getChildren();
-                    //某个城市如果全部选中，需要取出城市下面的子地区
-                    if ((boolean) cityMap.get("selected_all")) {
-                        //区
-                        for (RegionVO region : regionList) {
-
-                            areaIdBuffer.append(region.getId() + ",");
-                            List<RegionVO> townList = region.getChildren();
-                            //城镇
-                            if (townList != null) {
-                                for (RegionVO townRegion : townList) {
-
-                                    areaIdBuffer.append(townRegion.getId() + ",");
-                                }
-                            }
-                        }
-
-                    } else {
-                        //选中了某个城市下面的几个区
-                        Map<String, Map> regionMap = (Map<String, Map>) cityMap.get("children");
-                        for (String regionKey : regionMap.keySet()) {
-
-                            areaIdBuffer.append(regionKey + ",");
-                            for (RegionVO region : regionList) {
-                                if (("" + region.getId()).equals(regionKey)) {
-                                    List<RegionVO> townList = region.getChildren();
-                                    //城镇
-                                    if (townList != null) {
-                                        for (RegionVO townRegion : townList) {
-
-                                            areaIdBuffer.append(townRegion.getId() + ",");
-                                        }
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
+        StringBuffer areaBuffer = new StringBuffer(",");
+        for (AreaVO vo:areas) {
+            areaIdBuffer.append(vo.getCode()).append(",");
+            areaBuffer.append(vo.getName()).append(",");
+            if (vo.getChildren()!=null&&vo.getChildren().size()>0){
+                for (AreaVO child:vo.getChildren()) {
+                    areaIdBuffer.append(child.getCode()).append(",");
+                    areaBuffer.append(child.getName()).append(",");
                 }
             }
         }
         rateAreaDO.setAreaId(areaIdBuffer.toString());
+        rateAreaDO.setArea(areaBuffer.toString());
         this.daoSupport.insert(rateAreaDO);
         int lastId = daoSupport.getLastId("es_rate_area");
         rateAreaDO.setId(lastId);

@@ -182,7 +182,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
         String sql = "select * from es_ship_template_child where template_id = ?";
         List<ShipTemplateSettingDO> settingDOList = this.daoSupport.queryForList(sql, ShipTemplateSettingDO.class, templateId);
 
-        List<ShipTemplateSettingVO> items = convert(settingDOList,false);
+        List<ShipTemplateSettingVO> items = convert(settingDOList,true);
 
         tpl.setItems(items);
 

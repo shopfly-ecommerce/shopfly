@@ -5,6 +5,7 @@
 */
 package dev.shopflix.core.system.model.vo;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.gson.Gson;
@@ -53,9 +54,9 @@ public class ShipTemplateSettingVO implements Serializable {
     @Column(name = "area_id")
     private String areaId;
 
-    @ApiModelProperty(hidden=true)
-    private List<ShipTemplateChildArea> regions;
-
+    @ApiParam(value = "地区列表",hidden = true)
+    @Column(name = "areas")
+    private List<AreaVO> areas;
 
     @ApiModelProperty(name = "items", value = "指定配送区域", required = true)
     private List<ShipTemplateSettingDO> items;
@@ -72,56 +73,14 @@ public class ShipTemplateSettingVO implements Serializable {
         this.templateId = settingDOs.get(0).getTemplateId();
         this.rateAreaName = rateAreaDO.getName();
         this.setItems(settingDOs);
-        this.regions = getConvertRegions(this.area);
         if(!flag){
+            this.areas = JSON.parseArray(rateAreaDO.getAreaJson()).toJavaList(AreaVO.class);
             this.area = rateAreaDO.getArea();
             this.areaId = rateAreaDO.getAreaId();
         }
     }
 
-    private List<ShipTemplateChildArea> getConvertRegions(String area) {
 
-        List<ShipTemplateChildArea> list = new ArrayList<>();
-
-        Gson gson = new Gson();
-        Map<String, Map> map = new HashMap();
-        map = gson.fromJson(area, map.getClass());
-        for (String key : map.keySet()) {
-
-            ShipTemplateChildArea childArea = new ShipTemplateChildArea();
-
-            Map dto = map.get(key);
-            if ((boolean)dto.get("selected_all")) {
-                childArea.setName(dto.get("local_name").toString());
-                list.add(childArea);
-            } else {
-                //某省份下面的几市
-                Map<String, Map> citiesMap = (Map<String, Map>)dto.get("children");
-
-                for (String cityKey : citiesMap.keySet()) {
-                    Map cityMap = citiesMap.get(cityKey);
-                    ShipTemplateChildArea childArea1 = new ShipTemplateChildArea();
-                    childArea1.setName(cityMap.get("local_name").toString());
-
-                    //如果市没有被全选，则赋值children
-                    if (!(boolean)cityMap.get("selected_all")) {
-                        List<ShipTemplateChildArea> children = new ArrayList<>();
-                        Map<String, Map> regionMap = (Map<String, Map>)cityMap.get("children");
-                        for (String regionKey : regionMap.keySet()) {
-                            Map region = regionMap.get(regionKey);
-                            ShipTemplateChildArea regionArea = new ShipTemplateChildArea();
-                            regionArea.setName(region.get("local_name").toString());
-                            children.add(regionArea);
-                        }
-                        childArea1.setChildren(children);
-                    }
-                    list.add(childArea1);
-                }
-            }
-        }
-        return list;
-
-    }
 
 
     public Integer getTemplateId() {
@@ -132,12 +91,12 @@ public class ShipTemplateSettingVO implements Serializable {
         this.templateId = templateId;
     }
 
-    public List<ShipTemplateChildArea> getRegions() {
-        return regions;
+    public List<AreaVO> getAreas() {
+        return areas;
     }
 
-    public void setRegions(List<ShipTemplateChildArea> regions) {
-        this.regions = regions;
+    public void setAreas(List<AreaVO> areas) {
+        this.areas = areas;
     }
 
     public String getArea() {
@@ -176,7 +135,6 @@ public class ShipTemplateSettingVO implements Serializable {
     public String toString() {
         return "ShipTemplateChildSellerVO{" +
                 "area='" + area + '\'' +
-                ", regions=" + regions +
                 '}';
     }
 }

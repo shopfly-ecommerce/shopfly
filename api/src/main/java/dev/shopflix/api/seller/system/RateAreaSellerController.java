@@ -52,7 +52,7 @@ public class RateAreaSellerController {
             @ApiImplicitParam(name = "name", value = "区域名称", required = true, dataType = "String", paramType = "query")
     })
     @GetMapping
-    public Page list(@ApiIgnore @NotNull(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotNull(message = "每页数量不能为空") Integer pageSize, @NotEmpty(message = "区域名称") String name){
+    public Page list(@ApiIgnore @NotNull(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotNull(message = "每页数量不能为空") Integer pageSize, String name){
         return this.rateAreaManager.list(name,pageNo,pageSize);
     }
 

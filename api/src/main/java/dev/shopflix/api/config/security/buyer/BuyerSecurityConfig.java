@@ -79,8 +79,9 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
                 , "/settings/**"
                 , "/regions/**"
                 , "/site-show/**"
+                , "/countries"
                 , "/countries/**"
-                , "/ueditor/**").anonymous();
+                , "/ueditor/**").permitAll();
 
         //过滤掉本地的图片及媒体文件
         //gif,jpg,png,jpeg,mp4,quicktime

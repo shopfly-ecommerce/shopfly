@@ -5,14 +5,11 @@
 */
 package dev.shopflix.core.member.service.impl;
 
-import dev.shopflix.core.base.CachePrefix;
 import dev.shopflix.core.member.MemberErrorCode;
 import dev.shopflix.core.member.model.dos.Member;
 import dev.shopflix.core.member.model.dos.MemberAddress;
 import dev.shopflix.core.member.service.MemberAddressManager;
 import dev.shopflix.core.member.service.MemberManager;
-import dev.shopflix.core.trade.order.support.CheckoutParamName;
-import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.UserContext;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.database.Page;
@@ -27,7 +24,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -42,12 +38,10 @@ import java.util.Objects;
 public class MemberAddressManagerImpl implements MemberAddressManager {
 
     @Autowired
-    
     private DaoSupport memberDaoSupport;
+
     @Autowired
     private MemberManager memberManager;
-    @Autowired
-    private Cache cache;
 
     /**
      * Query the collection of user shipping address information
@@ -100,14 +94,15 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
         }
         memberAddress.setMemberId(buyer.getUid());
         MemberAddress defAddr = this.getDefaultAddress(buyer.getUid());
-        //默认地址的处理
+        //Handle the logic related to the user's default shipping address
         if (memberAddress.getDefAddr() > 1 || memberAddress.getDefAddr() < 0) {
             memberAddress.setDefAddr(0);
         }
+        //If the user does not have a default delivery address, set the currently added delivery address as the default
         if (defAddr == null) {
             memberAddress.setDefAddr(1);
         } else {
-            //不是第一个，且设置为默认地址了，则更新其它地址为非默认地址
+            //If the currently added shipping address is set as the default by the user, other shipping addresses of the user need to be set as non-default
             if (memberAddress.getDefAddr() == 1) {
                 this.memberDaoSupport.execute("update es_member_address set def_addr = 0 where member_id = ?", buyer.getUid());
             }
@@ -118,24 +113,33 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
         return memberAddress;
     }
 
+    /**
+     * Update user shipping address
+     *
+     * @param memberAddress User shipping address parameter information
+     * @param id            primary key ID
+     * @return The user's delivery address information after the modification is successful
+     */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberAddress edit(MemberAddress memberAddress, Integer id) {
+        //Get currently logged in user information
         Buyer buyer = UserContext.getBuyer();
+        //Verify that the currently logged in user information exists
         Member member = memberManager.getModel(buyer.getUid());
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("The currently logged in user information does not exist");
         }
-        //权限判断
+        //Query the user's shipping address information before modification
         MemberAddress address = this.getModel(id);
         if (address == null || !Objects.equals(address.getMemberId(), buyer.getUid())) {
-            throw new NoPermissionException("无权限操作此地址");
+            throw new NoPermissionException("No permission to operate");
         }
-        //如果要将默认地址修改为非默认地址
+        //Modifying the default address to a non-default address is not allowed
         if (address.getDefAddr() == 1 && memberAddress.getDefAddr() == 0) {
-            throw new ServiceException(MemberErrorCode.E101.code(), "无法更改当前默认地址为非默认地址");
+            throw new ServiceException(MemberErrorCode.E101.code(), "Modifying the default address to a non-default address is not allowed");
         }
-        //如果要将非默认地址修改为默认
+        //Allow modification of non-default address to default address
         if (address.getDefAddr() == 0 && memberAddress.getDefAddr() == 1) {
             this.memberDaoSupport.execute("update es_member_address set def_addr = 0 where member_id = ?", buyer.getUid());
         }
@@ -144,40 +148,43 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
         return address;
     }
 
+    /**
+     * Delete user shipping address
+     *
+     * @param id primary key ID
+     */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         Buyer buyer = UserContext.getBuyer();
         MemberAddress address = this.getModel(id);
         if (address == null || !address.getMemberId().equals(buyer.getUid())) {
-            throw new NoPermissionException("无权限操作此地址");
+            throw new NoPermissionException("No permission to operate");
         }
-        //默认地址不能删除
+        //Default address does not allow deletion
         if(address.getDefAddr().equals(1)){
-            throw new ServiceException(MemberErrorCode.E101.code(), "默认地址不能删除");
+            throw new ServiceException(MemberErrorCode.E101.code(), "Default address does not allow deletion");
         }
         this.memberDaoSupport.delete(MemberAddress.class, id);
-        //会员地址删除后，检测结算参数中的收货地址是否为该地址
-        String key = CachePrefix.CHECKOUT_PARAM_ID_PREFIX.getPrefix() + buyer.getUid();
-        Map<String, Object> map = cache.getHash(key);
-
-        if(map == null){
-            return;
-        }
-        //如果取到了，则取出来生成param
-        Integer addressId = (Integer) map.get("");
-        if(id.equals(addressId)){
-            //查询默认的收货地址
-            MemberAddress defaultAddress = this.getDefaultAddress(buyer.getUid());
-            this.cache.putHash(key, CheckoutParamName.ADDRESS_ID, defaultAddress.getAddrId());
-        }
     }
 
+    /**
+     * Query the details of a user's shipping address
+     *
+     * @param id primary key ID
+     * @return User shipping address details
+     */
     @Override
     public MemberAddress getModel(Integer id) {
         return this.memberDaoSupport.queryForObject(MemberAddress.class, id);
     }
 
+    /**
+     * Get the details of the user's default shipping address
+     *
+     * @param memberId User ID
+     * @return User default shipping address details
+     */
     @Override
     public MemberAddress getDefaultAddress(Integer memberId) {
         String sql = "select * from es_member_address where member_id=? and def_addr=1";
@@ -189,15 +196,20 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
         return address;
     }
 
+    /**
+     * Set as default shipping address
+     *
+     * @param id primary key ID
+     */
     @Override
     public void editDefault(Integer id) {
         MemberAddress memberAddress = this.getModel(id);
         if (memberAddress == null) {
-            throw new NoPermissionException("权限不足");
+            throw new NoPermissionException("No permission to operate");
         }
         Buyer buyer = UserContext.getBuyer();
         if (!buyer.getUid().equals(memberAddress.getMemberId())) {
-            throw new NoPermissionException("权限不足");
+            throw new NoPermissionException("No permission to operate");
         }
         this.memberDaoSupport.execute("update es_member_address set def_addr = 0");
         this.memberDaoSupport.execute("update es_member_address set def_addr = 1 where addr_id = ?", id);

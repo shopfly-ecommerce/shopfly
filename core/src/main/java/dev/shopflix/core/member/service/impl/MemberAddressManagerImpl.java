@@ -22,7 +22,6 @@ import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.security.model.Buyer;
 import dev.shopflix.framework.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +49,11 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
     @Autowired
     private Cache cache;
 
+    /**
+     * Query the collection of user shipping address information
+     *
+     * @return User delivery address collection
+     */
     @Override
     public List<MemberAddress> list() {
         Buyer buer = UserContext.getBuyer();
@@ -57,7 +61,14 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
         return this.memberDaoSupport.queryForList(sql, MemberAddress.class, buer.getUid());
     }
 
-
+    /**
+     * Query the current user's shipping address paginated list
+     *
+     * @param page     Number of paginated pages
+     * @param pageSize Number of paginated display
+     * @param memberId User ID
+     * @return User delivery address collection
+     */
     @Override
     public Page list(int page, int pageSize, Integer memberId) {
         String sql = "select * from es_member_address  where member_id = ? ";
@@ -65,24 +76,29 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
         return webPage;
     }
 
+    /**
+     * Add user shipping address
+     *
+     * @param memberAddress User shipping address parameter information
+     * @return Add the user's shipping address information after successful addition
+     */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberAddress add(MemberAddress memberAddress) {
-        BeanUtil.copyProperties(memberAddress.getRegion(), memberAddress);
+        //Get currently logged in user information
         Buyer buyer = UserContext.getBuyer();
-        //对会员是否存在进行校验
+        //Verify that the currently logged in user information exists
         Member member = memberManager.getModel(buyer.getUid());
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("The currently logged in user information does not exist");
         }
-        //对会员最大地址进行校验
+        //The number of user shipping addresses cannot exceed 20
         String sql = "select count(*) from es_member_address where member_id = ?";
         Integer count = this.memberDaoSupport.queryForInt(sql, buyer.getUid());
         if (count == 20) {
-            throw new ServiceException(MemberErrorCode.E100.code(), "会员地址已达20个上限，无法添加");
+            throw new ServiceException(MemberErrorCode.E100.code(), "The number of user shipping addresses cannot exceed 20");
         }
         memberAddress.setMemberId(buyer.getUid());
-        memberAddress.setCountry("中国");
         MemberAddress defAddr = this.getDefaultAddress(buyer.getUid());
         //默认地址的处理
         if (memberAddress.getDefAddr() > 1 || memberAddress.getDefAddr() < 0) {
@@ -123,13 +139,7 @@ public class MemberAddressManagerImpl implements MemberAddressManager {
         if (address.getDefAddr() == 0 && memberAddress.getDefAddr() == 1) {
             this.memberDaoSupport.execute("update es_member_address set def_addr = 0 where member_id = ?", buyer.getUid());
         }
-        BeanUtil.copyProperties(memberAddress.getRegion(), address);
-        address.setDefAddr(memberAddress.getDefAddr());
-        address.setName(memberAddress.getName());
-        address.setAddr(memberAddress.getAddr());
-        address.setMobile(memberAddress.getMobile());
-        address.setTel(memberAddress.getTel());
-        address.setShipAddressName(memberAddress.getShipAddressName());
+        BeanUtil.copyProperties(memberAddress, address);
         this.memberDaoSupport.update(address, id);
         return address;
     }

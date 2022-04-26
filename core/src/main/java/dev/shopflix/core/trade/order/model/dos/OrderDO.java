@@ -184,50 +184,23 @@ public class OrderDO implements Serializable {
     @ApiModelProperty(name = "ship_mobile", value = "收货人手机", required = false)
     private String shipMobile;
     /**
-     * 收货人电话
-     */
-    @Column(name = "ship_tel")
-    @ApiModelProperty(name = "ship_tel", value = "收货人电话", required = false)
-    private String shipTel;
-    /**
      * 收货时间
      */
     @Column(name = "receive_time")
     @ApiModelProperty(name = "receive_time", value = "收货时间", required = false)
     private String receiveTime;
     /**
-     * 配送地区-省份ID
+     * 配送地区-国家
      */
-    @Column(name = "ship_province_id")
-    @ApiModelProperty(name = "ship_province_id", value = "配送地区-省份ID", required = false)
-    private Integer shipProvinceId;
-
+    @Column(name = "ship_country")
+    @ApiModelProperty(name = "ship_country", value = "配送地区-国家", required = false)
+    private String shipCountry;
     /**
-     * 配送地区-城市ID
+     * 配送地区-州/省
      */
-    @Column(name = "ship_city_id")
-    @ApiModelProperty(name = "ship_city_id", value = "配送地区-城市ID", required = false)
-    private Integer shipCityId;
-
-    /**
-     * 配送地区-区(县)ID
-     */
-    @Column(name = "ship_county_id")
-    @ApiModelProperty(name = "ship_county_id", value = "配送地区-区(县)ID", required = false)
-    private Integer shipCountyId;
-
-    /**
-     * 配送街道id
-     */
-    @Column(name = "ship_town_id")
-    @ApiModelProperty(name = "ship_town_id", value = "配送街道id", required = false)
-    private Integer shipTownId;
-    /**
-     * 配送地区-省份
-     */
-    @Column(name = "ship_province")
-    @ApiModelProperty(name = "ship_province", value = "配送地区-省份", required = false)
-    private String shipProvince;
+    @Column(name = "ship_state")
+    @ApiModelProperty(name = "ship_state", value = "配送地区-州/省", required = false)
+    private String shipState;
     /**
      * 配送地区-城市
      */
@@ -235,17 +208,17 @@ public class OrderDO implements Serializable {
     @ApiModelProperty(name = "ship_city", value = "配送地区-城市", required = false)
     private String shipCity;
     /**
-     * 配送地区-区(县)
+     * 配送地区-国家编码
      */
-    @Column(name = "ship_county")
-    @ApiModelProperty(name = "ship_county", value = "配送地区-区(县)", required = false)
-    private String shipCounty;
+    @Column(name = "ship_country_code")
+    @ApiModelProperty(name = "ship_country_code", value = "配送地区-国家编码", required = false)
+    private String shipCountryCode;
     /**
-     * 配送街道
+     * 配送地区-州/省编码
      */
-    @Column(name = "ship_town")
-    @ApiModelProperty(name = "ship_town", value = "配送街道", required = false)
-    private String shipTown;
+    @Column(name = "ship_state_code")
+    @ApiModelProperty(name = "ship_state_code", value = "配送地区-州/省编码", required = false)
+    private String shipStateCode;
     /**
      * 订单总额
      */
@@ -620,14 +593,6 @@ public class OrderDO implements Serializable {
         this.shipMobile = shipMobile;
     }
 
-    public String getShipTel() {
-        return shipTel;
-    }
-
-    public void setShipTel(String shipTel) {
-        this.shipTel = shipTel;
-    }
-
     public String getReceiveTime() {
         return receiveTime;
     }
@@ -636,68 +601,12 @@ public class OrderDO implements Serializable {
         this.receiveTime = receiveTime;
     }
 
-    public Integer getShipProvinceId() {
-        return shipProvinceId;
-    }
-
-    public void setShipProvinceId(Integer shipProvinceId) {
-        this.shipProvinceId = shipProvinceId;
-    }
-
-    public Integer getShipCityId() {
-        return shipCityId;
-    }
-
-    public void setShipCityId(Integer shipCityId) {
-        this.shipCityId = shipCityId;
-    }
-
-    public Integer getShipCountyId() {
-        return shipCountyId;
-    }
-
-    public void setShipCountyId(Integer shipCountyId) {
-        this.shipCountyId = shipCountyId;
-    }
-
-    public Integer getShipTownId() {
-        return shipTownId;
-    }
-
-    public void setShipTownId(Integer shipTownId) {
-        this.shipTownId = shipTownId;
-    }
-
-    public String getShipProvince() {
-        return shipProvince;
-    }
-
-    public void setShipProvince(String shipProvince) {
-        this.shipProvince = shipProvince;
-    }
-
     public String getShipCity() {
         return shipCity;
     }
 
     public void setShipCity(String shipCity) {
         this.shipCity = shipCity;
-    }
-
-    public String getShipCounty() {
-        return shipCounty;
-    }
-
-    public void setShipCounty(String shipCounty) {
-        this.shipCounty = shipCounty;
-    }
-
-    public String getShipTown() {
-        return shipTown;
-    }
-
-    public void setShipTown(String shipTown) {
-        this.shipTown = shipTown;
     }
 
     public Double getOrderPrice() {
@@ -955,6 +864,38 @@ public class OrderDO implements Serializable {
         this.needReceipt = needReceipt;
     }
 
+    public String getShipCountry() {
+        return shipCountry;
+    }
+
+    public void setShipCountry(String shipCountry) {
+        this.shipCountry = shipCountry;
+    }
+
+    public String getShipState() {
+        return shipState;
+    }
+
+    public void setShipState(String shipState) {
+        this.shipState = shipState;
+    }
+
+    public String getShipCountryCode() {
+        return shipCountryCode;
+    }
+
+    public void setShipCountryCode(String shipCountryCode) {
+        this.shipCountryCode = shipCountryCode;
+    }
+
+    public String getShipStateCode() {
+        return shipStateCode;
+    }
+
+    public void setShipStateCode(String shipStateCode) {
+        this.shipStateCode = shipStateCode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -991,16 +932,8 @@ public class OrderDO implements Serializable {
                 .append(shipAddr, orderDO.shipAddr)
                 .append(shipZip, orderDO.shipZip)
                 .append(shipMobile, orderDO.shipMobile)
-                .append(shipTel, orderDO.shipTel)
                 .append(receiveTime, orderDO.receiveTime)
-                .append(shipProvinceId, orderDO.shipProvinceId)
-                .append(shipCityId, orderDO.shipCityId)
-                .append(shipCountyId, orderDO.shipCountyId)
-                .append(shipTownId, orderDO.shipTownId)
-                .append(shipProvince, orderDO.shipProvince)
                 .append(shipCity, orderDO.shipCity)
-                .append(shipCounty, orderDO.shipCounty)
-                .append(shipTown, orderDO.shipTown)
                 .append(orderPrice, orderDO.orderPrice)
                 .append(goodsPrice, orderDO.goodsPrice)
                 .append(shippingPrice, orderDO.shippingPrice)
@@ -1030,6 +963,10 @@ public class OrderDO implements Serializable {
                 .append(clientType, orderDO.clientType)
                 .append(needReceipt, orderDO.needReceipt)
                 .append(orderType, orderDO.orderType)
+                .append(shipCountry, orderDO.getShipCountry())
+                .append(shipState, orderDO.getShipState())
+                .append(shipCountryCode, orderDO.getShipCountryCode())
+                .append(shipStateCode, orderDO.getShipStateCode())
                 .isEquals();
     }
 
@@ -1059,16 +996,8 @@ public class OrderDO implements Serializable {
                 .append(shipAddr)
                 .append(shipZip)
                 .append(shipMobile)
-                .append(shipTel)
                 .append(receiveTime)
-                .append(shipProvinceId)
-                .append(shipCityId)
-                .append(shipCountyId)
-                .append(shipTownId)
-                .append(shipProvince)
                 .append(shipCity)
-                .append(shipCounty)
-                .append(shipTown)
                 .append(orderPrice)
                 .append(goodsPrice)
                 .append(shippingPrice)
@@ -1098,6 +1027,10 @@ public class OrderDO implements Serializable {
                 .append(clientType)
                 .append(needReceipt)
                 .append(orderType)
+                .append(shipCountry)
+                .append(shipState)
+                .append(shipCountryCode)
+                .append(shipStateCode)
                 .toHashCode();
     }
 
@@ -1127,16 +1060,12 @@ public class OrderDO implements Serializable {
                 ", shipAddr='" + shipAddr + '\'' +
                 ", shipZip='" + shipZip + '\'' +
                 ", shipMobile='" + shipMobile + '\'' +
-                ", shipTel='" + shipTel + '\'' +
                 ", receiveTime='" + receiveTime + '\'' +
-                ", shipProvinceId=" + shipProvinceId +
-                ", shipCityId=" + shipCityId +
-                ", shipCountyId=" + shipCountyId +
-                ", shipTownId=" + shipTownId +
-                ", shipProvince='" + shipProvince + '\'' +
+                ", shipCountry='" + shipCountry + '\'' +
+                ", shipState='" + shipState + '\'' +
                 ", shipCity='" + shipCity + '\'' +
-                ", shipCounty='" + shipCounty + '\'' +
-                ", shipTown='" + shipTown + '\'' +
+                ", shipCountryCode='" + shipCountryCode + '\'' +
+                ", shipStateCode='" + shipStateCode + '\'' +
                 ", orderPrice=" + orderPrice +
                 ", goodsPrice=" + goodsPrice +
                 ", shippingPrice=" + shippingPrice +
@@ -1165,7 +1094,8 @@ public class OrderDO implements Serializable {
                 ", billSn='" + billSn + '\'' +
                 ", clientType='" + clientType + '\'' +
                 ", needReceipt=" + needReceipt +
-                ", orderType=" + orderType +
+                ", orderType='" + orderType + '\'' +
+                ", orderData='" + orderData + '\'' +
                 '}';
     }
 
@@ -1187,22 +1117,17 @@ public class OrderDO implements Serializable {
 
         // 收货人
         ConsigneeVO consignee = orderDTO.getConsignee();
-        shipName = consignee.getName();
-        shipAddr = consignee.getAddress();
-
+        this.shipName = consignee.getName();
+        this.shipAddr = consignee.getAddress();
         this.addressId = consignee.getConsigneeId();
         this.shipMobile = consignee.getMobile();
-        this.shipTel = consignee.getTelephone();
-
-        this.shipProvince = consignee.getProvince();
+        this.shipCountry = consignee.getCountry();
+        this.shipState = consignee.getStateName();
         this.shipCity = consignee.getCity();
-        this.shipCounty = consignee.getCounty();
-        this.shipTown = consignee.getTown();
+        this.shipCountryCode = consignee.getCountryCode();
+        this.shipStateCode = consignee.getStateCode();
+        this.shipZip = consignee.getZipCode();
 
-        this.shipProvinceId = consignee.getProvinceId();
-        this.shipCityId = consignee.getCityId();
-        this.shipCountyId = consignee.getCountyId();
-        this.shipTownId = consignee.getTownId();
 
         // 价格
         PriceDetailVO priceDetail = orderDTO.getPrice();

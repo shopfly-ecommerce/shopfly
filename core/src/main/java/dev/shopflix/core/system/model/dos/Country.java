@@ -14,7 +14,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * @version 1.0
  * @data 2022/4/20 14:55
  **/
-@Table(name = "es_states")
+@Table(name = "es_countries")
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Country {
@@ -24,6 +24,9 @@ public class Country {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "has_state")
+    private Integer hasState;
 
     public String getCode() {
         return code;
@@ -41,11 +44,20 @@ public class Country {
         this.name = name;
     }
 
+    public Integer getHasState() {
+        return hasState;
+    }
+
+    public void setHasState(Integer hasState) {
+        this.hasState = hasState;
+    }
+
     @Override
     public String toString() {
         return "Country{" +
                 "code='" + code + '\'' +
                 ", name='" + name + '\'' +
+                ", hasState=" + hasState +
                 '}';
     }
 

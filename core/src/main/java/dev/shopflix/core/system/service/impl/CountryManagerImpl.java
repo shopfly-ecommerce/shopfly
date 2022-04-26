@@ -23,6 +23,14 @@ public class CountryManagerImpl implements CountryManager {
     @Override
     public List<Country> allCountry() {
         List<Country> list = daoSupport.queryForList("select * from es_countries order by name asc ", Country.class);
+        for (Country country : list) {
+            Integer query = daoSupport.queryForInt("select count(0)  from es_states where country_code=?", country.getCode());
+            if (query > 0) {
+                country.setHasState(1);
+            } else {
+                country.setHasState(0);
+            }
+        }
         return list;
     }
 }

@@ -6,7 +6,7 @@ Shopfly is modular, high performance, headless e-commerce(ecommerce) platform bu
 
 Shopfly is built based on spring boot + Vue technology, and the infrastructure is Mysql, Redis, Elasticsearch, RabbitMq
 
-![Architecture](https://www.shopflix.dev/images/Architecture_Overview.png) 
+![Architecture](https://www.shofly.cloud/images/Architecture_Overview.png) 
 
 # Demo
 

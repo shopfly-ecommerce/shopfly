@@ -11,9 +11,9 @@ import dev.shopflix.framework.database.Page;
 import java.util.List;
 
 /**
- * 会员地址业务层
+ * User delivery address business interface
  *
- * @author zh
+ * @author dmy
  * @version v2.0
  * @since v7.0.0
  * 2018-03-18 15:37:00
@@ -21,67 +21,66 @@ import java.util.List;
 public interface MemberAddressManager {
 
     /**
-     * 查询会员地址列表
+     * Query the collection of user shipping address information
      *
-     * @return 地址集合
+     * @return User delivery address collection
      */
     List<MemberAddress> list();
 
     /**
-     * 查询会员地址列表
+     * Query the current user's shipping address paginated list
      *
-     * @param page     页数
-     * @param pageSize 每页显示数
-     * @param memberId 会员id
-     * @return
+     * @param page     Number of paginated pages
+     * @param pageSize Number of paginated display
+     * @param memberId User ID
+     * @return User delivery address collection
      */
     Page list(int page, int pageSize, Integer memberId);
 
     /**
-     * 添加会员地址
+     * Add user shipping address
      *
-     * @param memberAddress 会员地址
-     * @return MemberAddress 会员地址
+     * @param memberAddress User shipping address parameter information
+     * @return Add the user's shipping address information after successful addition
      */
     MemberAddress add(MemberAddress memberAddress);
 
     /**
-     * 修改会员地址
+     * Update user shipping address
      *
-     * @param memberAddress 会员地址
-     * @param id            会员地址主键
-     * @return MemberAddress 会员地址
+     * @param memberAddress User shipping address parameter information
+     * @param id            primary key ID
+     * @return The user's delivery address information after the modification is successful
      */
     MemberAddress edit(MemberAddress memberAddress, Integer id);
 
     /**
-     * 删除会员地址
+     * Delete user shipping address
      *
-     * @param id 会员地址主键
+     * @param id primary key ID
      */
     void delete(Integer id);
 
     /**
-     * 获取会员地址
+     * Query the details of a user's shipping address
      *
-     * @param id 会员地址主键
-     * @return MemberAddress  会员地址
+     * @param id primary key ID
+     * @return User shipping address details
      */
     MemberAddress getModel(Integer id);
 
     /**
-     * 获取会员默认地址
+     * Get the details of the user's default shipping address
      *
-     * @param memberId 会员id
-     * @return 会员默认地址
+     * @param memberId User ID
+     * @return User default shipping address details
      */
     MemberAddress getDefaultAddress(Integer memberId);
 
-
     /**
-     * 修改地址为默认
+     * Set as default shipping address
      *
-     * @param id 地址的id
+     * @param id primary key ID
      */
     void editDefault(Integer id);
 

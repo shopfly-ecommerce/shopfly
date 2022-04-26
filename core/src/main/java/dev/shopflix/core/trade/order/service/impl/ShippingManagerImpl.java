@@ -157,10 +157,10 @@ public class ShippingManagerImpl implements ShippingManager {
         if (address == null || !address.getMemberId().equals(buyer.getUid())) {
             return;
         }
-        Integer areaId = address.actualAddress();
+//        Integer areaId = address.actualAddress();
 
         // 检测不在配送区域的货品
-        this.checkArea(cartList, areaId);
+//        this.checkArea(cartList, areaId);
 
         for (CartVO cartVo : cartList) {
 
@@ -180,11 +180,11 @@ public class ShippingManagerImpl implements ShippingManager {
             }
 
             // 获取购物车商品运费总计
-            double finalShip = this.getShipPrice(cartVo, areaId);
-            cartVo.getPrice().setFreightPrice(finalShip);
-            if (finalShip > 0) {
-                cartVo.getPrice().setIsFreeFreight(0);
-            }
+//            double finalShip = this.getShipPrice(cartVo, areaId);
+//            cartVo.getPrice().setFreightPrice(finalShip);
+//            if (finalShip > 0) {
+//                cartVo.getPrice().setIsFreeFreight(0);
+//            }
             cartVo.setShippingTypeName("运费");
         }
 

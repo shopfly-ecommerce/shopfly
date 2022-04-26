@@ -10,8 +10,9 @@ import dev.shopflix.core.trade.cart.model.vo.CartVO;
 import dev.shopflix.core.trade.cart.model.vo.PriceDetailVO;
 import dev.shopflix.core.trade.cart.service.cartbuilder.CartPriceCalculator;
 import dev.shopflix.framework.util.CurrencyUtil;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -79,10 +80,12 @@ public class PintuanCartPriceCalculatorImpl implements CartPriceCalculator {
         }
 
 
-        logger.debug("计算完优惠后购物车数据为：");
-        logger.debug(cartList.toString());
-        logger.debug("价格为：");
-        logger.debug(price.toString());
+       if(logger.isDebugEnabled()){
+           logger.debug("计算完优惠后购物车数据为：");
+           logger.debug(cartList.toString());
+           logger.debug("价格为：");
+           logger.debug(price.toString());
+       }
 
         return price;
     }

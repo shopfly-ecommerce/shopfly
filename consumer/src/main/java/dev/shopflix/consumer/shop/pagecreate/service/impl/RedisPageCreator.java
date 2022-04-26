@@ -16,8 +16,6 @@ import dev.shopflix.core.system.model.enums.ClientType;
 import dev.shopflix.core.system.model.vo.PageSetting;
 import dev.shopflix.core.system.service.ProgressManager;
 import dev.shopflix.framework.logs.Debugger;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
 import dev.shopflix.framework.util.JsonUtil;
 import dev.shopflix.framework.util.StringUtil;
 import org.apache.http.client.ClientProtocolException;
@@ -27,6 +25,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,7 @@ import java.util.Map;
 @Component
 public class RedisPageCreator implements PageCreator {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -102,7 +102,9 @@ public class RedisPageCreator implements PageCreator {
 
         } catch (Exception e) {
             debugger.log("首页生成静态页出错，异常如下：", StringUtil.getStackTrace(e));
-            logger.error("首页生成静态页出错，异常如下：", e);
+            if (logger.isDebugEnabled()) {
+                logger.error("首页生成静态页出错，异常如下：", e);
+            }
         }
 
 
@@ -142,7 +144,10 @@ public class RedisPageCreator implements PageCreator {
                     progressManager.taskUpdate(TaskProgressConstant.PAGE_CREATE, pageName);
                 } catch (Exception e) {
                     debugger.log("为商品[" + goods.get("goods_name") + "],id[" + goodsId + "]生成静态页出错，异常如下：", StringUtil.getStackTrace(e));
-                    logger.error("为商品[" + goods.get("goods_name") + "],id[" + goodsId + "]生成静态页出错，异常如下：", e);
+                    if (logger.isDebugEnabled()) {
+                        logger.error("为商品[" + goods.get("goods_name") + "],id[" + goodsId + "]生成静态页出错，异常如下：", e);
+                    }
+
                 }
 
 
@@ -192,7 +197,10 @@ public class RedisPageCreator implements PageCreator {
                     progressManager.taskUpdate(TaskProgressConstant.PAGE_CREATE, "正在生成[" + pageName + "]");
                 } catch (Exception e) {
                     debugger.log("帮助[" + pageName + "]生成静态页出错，异常如下：", StringUtil.getStackTrace(e));
-                    logger.error("为商品[" + pageName + "]生成静态页出错", e);
+                    if (logger.isDebugEnabled()) {
+                        logger.error("为商品[" + pageName + "]生成静态页出错", e);
+                    }
+
                 }
 
 

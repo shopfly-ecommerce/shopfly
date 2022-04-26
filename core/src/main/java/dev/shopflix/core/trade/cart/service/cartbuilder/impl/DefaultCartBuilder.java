@@ -8,8 +8,9 @@ package dev.shopflix.core.trade.cart.service.cartbuilder.impl;
 import dev.shopflix.core.trade.cart.model.enums.CartType;
 import dev.shopflix.core.trade.cart.model.vo.*;
 import dev.shopflix.core.trade.cart.service.cartbuilder.*;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class DefaultCartBuilder implements CartBuilder {
 
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 
     /**

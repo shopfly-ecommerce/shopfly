@@ -16,11 +16,12 @@ import dev.shopflix.core.system.model.vo.UploaderVO;
 import dev.shopflix.core.system.service.UploadFactory;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.exception.ResourceNotFoundException;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.util.StringUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,7 +70,9 @@ public class FileManagerImpl implements FileManager {
             if (file != null && file.getOriginalFilename() != null) {
                 //文件类型
                 String contentType = file.getContentType();
-                logger.debug("++++++++++++++++++文件类型为：++++++++++++" + contentType);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("++++++++++++++++++文件类型为：++++++++++++" + contentType);
+                }
                 FileDTO input = new FileDTO();
                 input.setName(file.getOriginalFilename());
                 input.setStream(file.getInputStream());

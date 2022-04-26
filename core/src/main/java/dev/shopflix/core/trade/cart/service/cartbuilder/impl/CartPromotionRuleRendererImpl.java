@@ -16,8 +16,9 @@ import dev.shopflix.core.trade.cart.service.cartbuilder.CartPromotionRuleRendere
 import dev.shopflix.core.trade.cart.service.rulebuilder.CartCouponRuleBuilder;
 import dev.shopflix.core.trade.cart.service.rulebuilder.CartPromotionRuleBuilder;
 import dev.shopflix.core.trade.cart.service.rulebuilder.SkuPromotionRuleBuilder;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,8 +64,10 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
         //渲染规则
         this.renderRule(cartList, includeCoupon);
 
-        logger.debug("购物车处理完促销规则结果为：");
-        logger.debug(cartList.toString());
+        if(logger.isDebugEnabled()){
+            logger.debug("购物车处理完促销规则结果为：");
+            logger.debug(cartList.toString());
+        }
 
     }
 
@@ -192,7 +195,9 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
                 SkuPromotionRuleBuilder skuRuleBuilder = this.getSkuRuleBuilder(promotionVo.getPromotionType());
 
                 if (skuRuleBuilder == null) {
-                    logger.debug(cartSku.getSkuId() + "的活动类型[" + promotionVo.getPromotionType() + "]没有找到builder");
+                   if (logger.isDebugEnabled()){
+                       logger.debug(cartSku.getSkuId() + "的活动类型[" + promotionVo.getPromotionType() + "]没有找到builder");
+                   }
                     continue;
                 }
 

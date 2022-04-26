@@ -58,7 +58,11 @@ public class ShipTemplateSettingVO implements Serializable {
     @Column(name = "areas")
     private List<AreaVO> areas;
 
-    @ApiModelProperty(name = "items", value = "指定配送区域", required = true)
+    @ApiModelProperty(value = "区域id")
+    @Column(name = "rate_area_id")
+    private Integer rateAreaId;
+
+    @ApiModelProperty(name = "items", value = "指定配送价格", required = true)
     private List<ShipTemplateSettingDO> items;
 
 
@@ -81,7 +85,13 @@ public class ShipTemplateSettingVO implements Serializable {
     }
 
 
+    public Integer getRateAreaId() {
+        return rateAreaId;
+    }
 
+    public void setRateAreaId(Integer rateAreaId) {
+        this.rateAreaId = rateAreaId;
+    }
 
     public Integer getTemplateId() {
         return templateId;

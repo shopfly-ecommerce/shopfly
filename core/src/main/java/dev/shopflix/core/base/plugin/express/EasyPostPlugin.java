@@ -85,4 +85,20 @@ public class EasyPostPlugin implements ExpressPlatform {
             return null;
         }
     }
+
+    public static void main(String[] args) {
+        EasyPost.apiKey = "EZTK6cca1d234b7c4e948ac4cd2d0c1487a4KaXeG4kBUMHzP5uIEM3Flw";
+        Map<String, Object> trackerMap = new HashMap();
+        trackerMap.put("tracking_code","EZ2000000002");
+        trackerMap.put("carrier", "USPS");
+
+        try {
+            Tracker tracker = Tracker.create(trackerMap);
+            System.out.println(JSON.toJSONString(tracker));
+
+        } catch (EasyPostException e) {
+            e.printStackTrace();
+
+        }
+    }
 }

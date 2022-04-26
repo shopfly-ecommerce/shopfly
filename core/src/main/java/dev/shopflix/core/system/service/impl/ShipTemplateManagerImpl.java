@@ -98,10 +98,24 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
      */
     private void addTemplateChildren(List<ShipTemplateSettingVO> items, Integer templateId) {
 
+        List<Integer> rateAreaIds = Lists.newArrayList();
+        for (ShipTemplateSettingVO settingVO : items) {
+                rateAreaIds.add(settingVO.getRateAreaId());
+        }
+
+        List term = new ArrayList<>();
+        String idsStr = SqlUtil.getInSql(rateAreaIds.toArray(new Integer[rateAreaIds.size()]), term);
+
+        //检测是否有分类关联
+        String sql = "select id,name from es_rate_area where id in (" + idsStr + ")";
+        List<RateAreaDO> areaDOList = this.daoSupport.queryForList(sql, term.toArray());
         for (ShipTemplateSettingVO settingVO : items) {
             List<ShipTemplateSettingDO> voItems = settingVO.getItems();
+            RateAreaDO areaDO = areaDOList.stream().filter(rateAreaDO -> rateAreaDO.getId().equals(settingVO.getRateAreaId())).findFirst().get();
             for (ShipTemplateSettingDO  settingDO:voItems) {
                 settingDO.setTemplateId(templateId);
+                settingDO.setRateAreaId(settingVO.getRateAreaId());
+                settingDO.setRateAreaName(areaDO.getName());
                 this.daoSupport.insert(settingDO);
             }
         }

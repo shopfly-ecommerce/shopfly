@@ -17,10 +17,13 @@ import dev.shopflix.core.system.service.RateAreaManager;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.database.Page;
+import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.util.DateUtil;
 import dev.shopflix.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,9 +58,29 @@ public class RateAreaManagerImpl implements RateAreaManager {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     public RateAreaDO add(RateAreaVO rateAreaVO) {
 
         RateAreaDO rateAreaDO = new RateAreaDO();
+        convertDO(rateAreaVO, rateAreaDO);
+        this.daoSupport.insert(rateAreaDO);
+        int lastId = daoSupport.getLastId("es_rate_area");
+        rateAreaDO.setId(lastId);
+        return rateAreaDO;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
+    public RateAreaDO edit(RateAreaVO rateAreaVO) {
+        Integer id = rateAreaVO.getId();
+        RateAreaDO rateAreaDO = new RateAreaDO();
+        convertDO(rateAreaVO, rateAreaDO);
+        rateAreaDO.setId(id);
+        this.daoSupport.update(rateAreaDO,id);
+        return rateAreaDO;
+    }
+
+    private void convertDO(RateAreaVO rateAreaVO, RateAreaDO rateAreaDO) {
         rateAreaDO.setName(rateAreaVO.getName());
         rateAreaDO.setCreateTime(DateUtil.getDateline());
 
@@ -67,11 +90,11 @@ public class RateAreaManagerImpl implements RateAreaManager {
 
         StringBuffer areaIdBuffer = new StringBuffer(",");
         StringBuffer areaBuffer = new StringBuffer(",");
-        for (AreaVO vo:areas) {
+        for (AreaVO vo : areas) {
             areaIdBuffer.append(vo.getCode()).append(",");
             areaBuffer.append(vo.getName()).append(",");
-            if (vo.getChildren()!=null&&vo.getChildren().size()>0){
-                for (AreaVO child:vo.getChildren()) {
+            if (vo.getChildren() != null && vo.getChildren().size() > 0) {
+                for (AreaVO child : vo.getChildren()) {
                     areaIdBuffer.append(child.getCode()).append(",");
                     areaBuffer.append(child.getName()).append(",");
                 }
@@ -79,18 +102,6 @@ public class RateAreaManagerImpl implements RateAreaManager {
         }
         rateAreaDO.setAreaId(areaIdBuffer.toString());
         rateAreaDO.setArea(areaBuffer.toString());
-        this.daoSupport.insert(rateAreaDO);
-        int lastId = daoSupport.getLastId("es_rate_area");
-        rateAreaDO.setId(lastId);
-        return rateAreaDO;
-    }
-
-    @Override
-    public RateAreaDO edit(RateAreaVO rateAreaVO) {
-        Integer id = rateAreaVO.getId();
-        //删除区域
-        this.delete(id);
-        return this.add(rateAreaVO);
     }
 
     @Override
@@ -101,6 +112,10 @@ public class RateAreaManagerImpl implements RateAreaManager {
     @Override
     public RateAreaVO getFromDB(Integer rateAreaId) {
         RateAreaDO rateAreaDO = daoSupport.queryForObject(RateAreaDO.class, rateAreaId);
+
+        if (rateAreaDO==null){
+            return null;
+        }
 
         RateAreaVO rateAreaVO = new RateAreaVO(rateAreaDO);
 

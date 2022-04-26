@@ -45,7 +45,6 @@ public class RateAreaVO extends RateAreaDO implements Serializable {
     }
 
     public RateAreaVO(RateAreaDO rateAreaDO) {
-
         this.areas = JSON.parseArray(rateAreaDO.getAreaJson()).toJavaList(AreaVO.class);
         this.setId(rateAreaDO.getId());
         this.setArea(rateAreaDO.getArea());

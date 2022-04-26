@@ -53,6 +53,10 @@ public class ShipTemplateSettingDO implements Serializable {
     @Column(name = "rate_area_id")
     private Integer rateAreaId;
 
+    @ApiModelProperty(hidden = true)
+    @Column(name = "rate_area_name")
+    private String rateAreaName;
+
     @ApiParam("价格类型：absolute:绝对值；percentage:百分比")
     @Column(name = "amt_type")
     private String amtType;
@@ -79,6 +83,14 @@ public class ShipTemplateSettingDO implements Serializable {
     @Column(name = "sort")
     private Integer sort;
 
+
+    public String getRateAreaName() {
+        return rateAreaName;
+    }
+
+    public void setRateAreaName(String rateAreaName) {
+        this.rateAreaName = rateAreaName;
+    }
 
     public Integer getRateAreaId() {
         return rateAreaId;

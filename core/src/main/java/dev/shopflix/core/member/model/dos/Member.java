@@ -20,6 +20,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 /**
@@ -82,57 +83,35 @@ public class Member implements Serializable {
     @ApiModelProperty(name = "birthday", value = "会员生日", required = false)
     private Long birthday;
     /**
-     * 所属省份ID
+     * Country name
      */
-    @Column(name = "province_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "province_id", value = "所属省份ID", required = false)
-    private Integer provinceId;
+    @Column(name = "country")
+    @ApiModelProperty(name = "country", value = "Country name", required = false)
+    private String country;
     /**
-     * 所属城市ID
+     * Country name
      */
-    @Column(name = "city_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "city_id", value = "所属城市ID", required = false)
-    private Integer cityId;
+    @Column(name = "country_code")
+    @ApiModelProperty(name = "country_code", value = "Country code", required = false)
+    private String countryCode;
     /**
-     * 所属县(区)ID
+     * State name
      */
-    @Column(name = "county_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "county_id", value = "所属县(区)ID", required = false)
-    private Integer countyId;
+    @Column(name = "state_name")
+    @ApiModelProperty(name = "state_name", value = "State name")
+    private String stateName;
     /**
-     * 所属城镇ID
+     * State code
      */
-    @Column(name = "town_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "town_id", value = "所属城镇ID", required = false)
-    private Integer townId;
-    /**
-     * 所属省份名称
-     */
-    @Column(name = "province")
-    @ApiModelProperty(name = "province", value = "所属省份名称", required = false)
-    private String province;
+    @Column(name = "state_code")
+    @ApiModelProperty(name = "state_code", value = "State code")
+    private String stateCode;
     /**
      * 所属城市名称
      */
     @Column(name = "city")
     @ApiModelProperty(name = "city", value = "所属城市名称", required = false)
     private String city;
-    /**
-     * 所属县(区)名称
-     */
-    @Column(name = "county")
-    @ApiModelProperty(name = "county", value = "所属县(区)名称", required = false)
-    private String county;
-    /**
-     * 所属城镇名称
-     */
-    @Column(name = "town")
-    @ApiModelProperty(name = "town", value = "所属城镇名称", required = false)
-    private String town;
     /**
      * 详细地址
      */
@@ -313,53 +292,12 @@ public class Member implements Serializable {
         this.birthday = birthday;
     }
 
-    public Integer getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(Integer provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public Integer getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
-
-
-    public Integer getTownId() {
-        return townId;
-    }
-
-    public void setTownId(Integer townId) {
-        this.townId = townId;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
     }
 
     public String getAddress() {
@@ -507,20 +445,82 @@ public class Member implements Serializable {
         this.nickname = nickname;
     }
 
-    public Integer getCountyId() {
-        return countyId;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountyId(Integer countyId) {
-        this.countyId = countyId;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getCounty() {
-        return county;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Member member = (Member) o;
+        return Objects.equals(memberId, member.memberId) &&
+                Objects.equals(uname, member.uname) &&
+                Objects.equals(email, member.email) &&
+                Objects.equals(password, member.password) &&
+                Objects.equals(createTime, member.createTime) &&
+                Objects.equals(sex, member.sex) &&
+                Objects.equals(birthday, member.birthday) &&
+                Objects.equals(country, member.country) &&
+                Objects.equals(countryCode, member.countryCode) &&
+                Objects.equals(stateName, member.stateName) &&
+                Objects.equals(stateCode, member.stateCode) &&
+                Objects.equals(city, member.city) &&
+                Objects.equals(address, member.address) &&
+                Objects.equals(mobile, member.mobile) &&
+                Objects.equals(tel, member.tel) &&
+                Objects.equals(gradePoint, member.gradePoint) &&
+                Objects.equals(consumPoint, member.consumPoint) &&
+                Objects.equals(msn, member.msn) &&
+                Objects.equals(remark, member.remark) &&
+                Objects.equals(lastLogin, member.lastLogin) &&
+                Objects.equals(loginCount, member.loginCount) &&
+                Objects.equals(isCheked, member.isCheked) &&
+                Objects.equals(registerIp, member.registerIp) &&
+                Objects.equals(recommendPointState, member.recommendPointState) &&
+                Objects.equals(infoFull, member.infoFull) &&
+                Objects.equals(findCode, member.findCode) &&
+                Objects.equals(face, member.face) &&
+                Objects.equals(midentity, member.midentity) &&
+                Objects.equals(disabled, member.disabled) &&
+                Objects.equals(nickname, member.nickname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberId, uname, email, password, createTime, sex, birthday, country, countryCode, stateName, stateCode, city, address, mobile, tel, gradePoint, consumPoint, msn, remark, lastLogin, loginCount, isCheked, registerIp, recommendPointState, infoFull, findCode, face, midentity, disabled, nickname);
     }
 
     @Override
@@ -533,14 +533,11 @@ public class Member implements Serializable {
                 ", createTime=" + createTime +
                 ", sex=" + sex +
                 ", birthday=" + birthday +
-                ", provinceId=" + provinceId +
-                ", cityId=" + cityId +
-                ", countyId=" + countyId +
-                ", townId=" + townId +
-                ", province='" + province + '\'' +
+                ", country='" + country + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", stateName='" + stateName + '\'' +
+                ", stateCode='" + stateCode + '\'' +
                 ", city='" + city + '\'' +
-                ", county='" + county + '\'' +
-                ", town='" + town + '\'' +
                 ", address='" + address + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", tel='" + tel + '\'' +
@@ -560,153 +557,5 @@ public class Member implements Serializable {
                 ", disabled=" + disabled +
                 ", nickname='" + nickname + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Member member = (Member) o;
-
-        if (memberId != null ? !memberId.equals(member.memberId) : member.memberId != null) {
-            return false;
-        }
-        if (uname != null ? !uname.equals(member.uname) : member.uname != null) {
-            return false;
-        }
-        if (email != null ? !email.equals(member.email) : member.email != null) {
-            return false;
-        }
-        if (password != null ? !password.equals(member.password) : member.password != null) {
-            return false;
-        }
-        if (createTime != null ? !createTime.equals(member.createTime) : member.createTime != null) {
-            return false;
-        }
-        if (sex != null ? !sex.equals(member.sex) : member.sex != null) {
-            return false;
-        }
-        if (birthday != null ? !birthday.equals(member.birthday) : member.birthday != null) {
-            return false;
-        }
-        if (provinceId != null ? !provinceId.equals(member.provinceId) : member.provinceId != null) {
-            return false;
-        }
-        if (cityId != null ? !cityId.equals(member.cityId) : member.cityId != null) {
-            return false;
-        }
-        if (countyId != null ? !countyId.equals(member.countyId) : member.countyId != null) {
-            return false;
-        }
-        if (townId != null ? !townId.equals(member.townId) : member.townId != null) {
-            return false;
-        }
-        if (province != null ? !province.equals(member.province) : member.province != null) {
-            return false;
-        }
-        if (city != null ? !city.equals(member.city) : member.city != null) {
-            return false;
-        }
-        if (county != null ? !county.equals(member.county) : member.county != null) {
-            return false;
-        }
-        if (town != null ? !town.equals(member.town) : member.town != null) {
-            return false;
-        }
-        if (address != null ? !address.equals(member.address) : member.address != null) {
-            return false;
-        }
-        if (mobile != null ? !mobile.equals(member.mobile) : member.mobile != null) {
-            return false;
-        }
-        if (tel != null ? !tel.equals(member.tel) : member.tel != null) {
-            return false;
-        }
-        if (gradePoint != null ? !gradePoint.equals(member.gradePoint) : member.gradePoint != null) {
-            return false;
-        }
-        if (consumPoint != null ? !consumPoint.equals(member.consumPoint) : member.consumPoint != null) {
-            return false;
-        }
-        if (msn != null ? !msn.equals(member.msn) : member.msn != null) {
-            return false;
-        }
-        if (remark != null ? !remark.equals(member.remark) : member.remark != null) {
-            return false;
-        }
-        if (lastLogin != null ? !lastLogin.equals(member.lastLogin) : member.lastLogin != null) {
-            return false;
-        }
-        if (loginCount != null ? !loginCount.equals(member.loginCount) : member.loginCount != null) {
-            return false;
-        }
-        if (isCheked != null ? !isCheked.equals(member.isCheked) : member.isCheked != null) {
-            return false;
-        }
-        if (registerIp != null ? !registerIp.equals(member.registerIp) : member.registerIp != null) {
-            return false;
-        }
-        if (recommendPointState != null ? !recommendPointState.equals(member.recommendPointState) : member.recommendPointState != null) {
-            return false;
-        }
-        if (infoFull != null ? !infoFull.equals(member.infoFull) : member.infoFull != null) {
-            return false;
-        }
-        if (findCode != null ? !findCode.equals(member.findCode) : member.findCode != null) {
-            return false;
-        }
-        if (face != null ? !face.equals(member.face) : member.face != null) {
-            return false;
-        }
-        if (midentity != null ? !midentity.equals(member.midentity) : member.midentity != null) {
-            return false;
-        }
-        if (disabled != null ? !disabled.equals(member.disabled) : member.disabled != null) {
-            return false;
-        }
-        return nickname != null ? nickname.equals(member.nickname) : member.nickname == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = memberId != null ? memberId.hashCode() : 0;
-        result = 31 * result + (uname != null ? uname.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        result = 31 * result + (sex != null ? sex.hashCode() : 0);
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (provinceId != null ? provinceId.hashCode() : 0);
-        result = 31 * result + (cityId != null ? cityId.hashCode() : 0);
-        result = 31 * result + (countyId != null ? countyId.hashCode() : 0);
-        result = 31 * result + (townId != null ? townId.hashCode() : 0);
-        result = 31 * result + (province != null ? province.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (county != null ? county.hashCode() : 0);
-        result = 31 * result + (town != null ? town.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
-        result = 31 * result + (tel != null ? tel.hashCode() : 0);
-        result = 31 * result + (gradePoint != null ? gradePoint.hashCode() : 0);
-        result = 31 * result + (consumPoint != null ? consumPoint.hashCode() : 0);
-        result = 31 * result + (msn != null ? msn.hashCode() : 0);
-        result = 31 * result + (remark != null ? remark.hashCode() : 0);
-        result = 31 * result + (lastLogin != null ? lastLogin.hashCode() : 0);
-        result = 31 * result + (loginCount != null ? loginCount.hashCode() : 0);
-        result = 31 * result + (isCheked != null ? isCheked.hashCode() : 0);
-        result = 31 * result + (registerIp != null ? registerIp.hashCode() : 0);
-        result = 31 * result + (recommendPointState != null ? recommendPointState.hashCode() : 0);
-        result = 31 * result + (infoFull != null ? infoFull.hashCode() : 0);
-        result = 31 * result + (findCode != null ? findCode.hashCode() : 0);
-        result = 31 * result + (face != null ? face.hashCode() : 0);
-        result = 31 * result + (midentity != null ? midentity.hashCode() : 0);
-        result = 31 * result + (disabled != null ? disabled.hashCode() : 0);
-        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
-        return result;
     }
 }

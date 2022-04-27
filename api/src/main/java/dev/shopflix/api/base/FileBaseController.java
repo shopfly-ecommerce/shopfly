@@ -56,6 +56,7 @@ public class FileBaseController {
                 throw new ServiceException(SystemErrorCode.E901.code(), "不允许上传的文件格式，请上传gif,jpg,png,jpeg,mp4,mov格式文件。");
             }
             FileDTO input = new FileDTO();
+            input.setSize(file.getSize());
             input.setName(file.getOriginalFilename());
             input.setStream(file.getInputStream());
             //mov格式的contentType是video/quicktime

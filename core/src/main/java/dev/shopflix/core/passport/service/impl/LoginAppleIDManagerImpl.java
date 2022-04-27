@@ -26,13 +26,13 @@ import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.exception.ServiceException;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
 import dev.shopflix.framework.rabbitmq.MessageSender;
 import dev.shopflix.framework.rabbitmq.MqMessage;
 import dev.shopflix.framework.security.TokenManager;
 import dev.shopflix.framework.security.model.Buyer;
 import dev.shopflix.framework.util.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -51,7 +51,7 @@ import java.util.Map;
 @Service
 public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     private ConnectManager connectManager;
@@ -100,7 +100,9 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
         auth2Token.setUnionid(userDTO.getOpenid());
         //openid用于注册绑定时获取登录的微信的信息
         auth2Token.setOpneId(userDTO.getOpenid());
-        logger.debug("QQ登录openId为：" + userDTO.getOpenid());
+        if (logger.isDebugEnabled()) {
+            logger.debug("QQ登录openId为：" + userDTO.getOpenid());
+        }
         cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token);
         MemberVO memberVO = this.connectWeChatLoginHandle(member, uuid,tokenOutTime,refreshTokenOutTime);
         res.put("access_token", memberVO.getAccessToken());

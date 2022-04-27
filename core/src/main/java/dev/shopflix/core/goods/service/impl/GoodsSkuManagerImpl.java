@@ -82,7 +82,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     @Autowired
     private ShopflixConfig shopflixConfig;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 
     @Override

@@ -40,13 +40,14 @@ import dev.shopflix.framework.context.UserContext;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.database.Page;
 import dev.shopflix.framework.exception.ServiceException;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.security.model.Buyer;
 import dev.shopflix.framework.util.*;
 import org.apache.commons.collections.map.HashedMap;
 import dev.shopflix.framework.rabbitmq.MessageSender;
 import dev.shopflix.framework.rabbitmq.MqMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

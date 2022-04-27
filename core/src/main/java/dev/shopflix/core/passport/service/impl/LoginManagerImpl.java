@@ -183,7 +183,7 @@ public class LoginManagerImpl implements LoginManager {
         String  nickname = loginUserDTO.getNickName();
         nickname = StringUtil.isEmpty(nickname)?username: EmojiCharacterUtil.encode(nickname);
         member.setNickname(nickname);
-        member.setProvince(loginUserDTO.getProvince());
+        member.setCountry(loginUserDTO.getCountry());
         member.setCity(loginUserDTO.getCity());
         //设置会员等级积分为0
         member.setGradePoint(0);

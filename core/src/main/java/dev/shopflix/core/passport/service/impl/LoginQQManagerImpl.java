@@ -70,7 +70,7 @@ public class LoginQQManagerImpl implements LoginQQManager {
         }else{
             loginUserDTO.setSex(0);
         }
-        loginUserDTO.setProvince(qqUserDTO.getProvince());
+        loginUserDTO.setCountry(qqUserDTO.getCountry());
         loginUserDTO.setCity(qqUserDTO.getCity());
         return loginManager.loginByUnionId(loginUserDTO);
     }
@@ -102,7 +102,7 @@ public class LoginQQManagerImpl implements LoginQQManager {
         }else{
             loginUserDTO.setSex(0);
         }
-        loginUserDTO.setProvince(jsonObject.getString("province"));
+        loginUserDTO.setCountry(jsonObject.getString("country"));
         loginUserDTO.setCity(jsonObject.getString("city"));
         return loginUserDTO;
     }

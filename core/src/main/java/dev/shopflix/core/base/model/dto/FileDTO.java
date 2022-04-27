@@ -37,6 +37,11 @@ public class FileDTO {
      */
     private String ext;
 
+    /**
+     * file size
+     */
+    private Long size;
+
     public InputStream getStream() {
         return stream;
     }
@@ -59,6 +64,14 @@ public class FileDTO {
 
     public void setExt(String ext) {
         this.ext = ext;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     @Override

@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 运费模版业务类
@@ -108,7 +109,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
 
         //检测是否有分类关联
         String sql = "select id,name from es_rate_area where id in (" + idsStr + ")";
-        List<RateAreaDO> areaDOList = this.daoSupport.queryForList(sql, term.toArray());
+        List<RateAreaDO> areaDOList = this.daoSupport.queryForList(sql,RateAreaDO.class,term.toArray());
         for (ShipTemplateSettingVO settingVO : items) {
             List<ShipTemplateSettingDO> voItems = settingVO.getItems();
             RateAreaDO areaDO = areaDOList.stream().filter(rateAreaDO -> rateAreaDO.getId().equals(settingVO.getRateAreaId())).findFirst().get();
@@ -227,7 +228,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
 
             //检测是否有分类关联
             sql = "select * from es_rate_area where id in (" + idsStr + ")";
-            List<RateAreaDO> areaDOList = this.daoSupport.queryForList(sql, term.toArray());
+            List<RateAreaDO> areaDOList = this.daoSupport.queryForList(sql,RateAreaDO.class, term.toArray());
 
             for (Integer rateAreaId:rateAreaIds) {
                 RateAreaDO rateAreaDO = areaDOList.stream().filter(rateArea -> rateArea.getId().equals(rateAreaId)).findFirst().get();

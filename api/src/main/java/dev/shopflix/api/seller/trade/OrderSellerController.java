@@ -5,8 +5,6 @@
 */
 package dev.shopflix.api.seller.trade;
 
-import dev.shopflix.core.base.context.Region;
-import dev.shopflix.core.base.context.RegionFormat;
 import dev.shopflix.core.client.member.MemberHistoryReceiptClient;
 import dev.shopflix.core.trade.cart.model.dos.OrderPermission;
 import dev.shopflix.core.trade.order.model.dto.OrderQueryParam;

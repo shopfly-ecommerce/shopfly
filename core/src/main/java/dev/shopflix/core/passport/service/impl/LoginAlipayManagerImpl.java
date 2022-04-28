@@ -73,7 +73,7 @@ public class LoginAlipayManagerImpl  implements LoginAlipayManager {
         loginUserDTO.setHeadimgurl(alipayUserInfoShareResponse.getAvatar());
         loginUserDTO.setNickName(alipayUserInfoShareResponse.getNickName());
         loginUserDTO.setSex("F".equals(alipayUserInfoShareResponse.getGender())?0:1);
-        loginUserDTO.setProvince(alipayUserInfoShareResponse.getProvince());
+        loginUserDTO.setCountry(alipayUserInfoShareResponse.getCountryCode());
         loginUserDTO.setCity(alipayUserInfoShareResponse.getCity());
         return loginManager.loginByUnionId(loginUserDTO);
     }

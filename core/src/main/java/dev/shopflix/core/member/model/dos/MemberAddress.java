@@ -109,15 +109,13 @@ public class MemberAddress implements Serializable {
      * State name
      */
     @Column(name = "state_name")
-    @ApiModelProperty(name = "state_name", value = "State name", required = true)
-    @NotEmpty(message = "State name is required")
+    @ApiModelProperty(name = "state_name", value = "State name")
     private String stateName;
     /**
      * State code
      */
     @Column(name = "state_code")
-    @ApiModelProperty(name = "state_code", value = "State code", required = true)
-    @NotEmpty(message = "State code is required")
+    @ApiModelProperty(name = "state_code", value = "State code")
     private String stateCode;
     /**
      * Zip code

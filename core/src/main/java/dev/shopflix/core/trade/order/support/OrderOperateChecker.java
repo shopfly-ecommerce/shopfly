@@ -25,7 +25,7 @@ public class OrderOperateChecker {
 
     private Map<OrderStatusEnum, OrderStep> flow;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     /**
      * 检测程序必须初始化流程
@@ -46,9 +46,7 @@ public class OrderOperateChecker {
     public boolean checkAllowable(OrderStatusEnum status, OrderOperateEnum operate) {
 
         if (flow == null) {
-            if (logger.isErrorEnabled()) {
-                logger.error("status[" + status + "] and operate[" + operate + "] 没找到flow,flow发生为空，强制返回false");
-            }
+            logger.error("status[" + status + "] and operate[" + operate + "] 没找到flow,flow发生为空，强制返回false");
 
             return false;
         }
@@ -56,9 +54,8 @@ public class OrderOperateChecker {
         OrderStep step = flow.get(status);
 
         if (step == null) {
-            if (logger.isErrorEnabled()) {
-                logger.error("status[" + status + "] and operate[" + operate + "] 没找到step,step发生为空，强制返回false");
-            }
+
+            logger.error("status[" + status + "] and operate[" + operate + "] 没找到step,step发生为空，强制返回false");
 
             return false;
         }

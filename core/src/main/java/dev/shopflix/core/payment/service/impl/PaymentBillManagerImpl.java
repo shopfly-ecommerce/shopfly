@@ -14,10 +14,10 @@ import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.database.Page;
 import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.logs.Debugger;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +45,7 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
     @Autowired
     private List<PaymentCallbackDevice> callbackDeviceList;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Override
     public Page list(int page, int pageSize) {
@@ -89,22 +89,30 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
                 throw new RuntimeException("支付回调失败，原因为：【" + tradeType.name() + "类型的交易编号为：" + billSn + "没有找到相应的账单】");
             }
 
-            logger.debug("找到账单：");
+            if(logger.isDebugEnabled()){
+                logger.debug("找到账单：");
+            }
             debugger.log("找到账单：");
-            logger.debug(bill.toString());
+            if(logger.isDebugEnabled()){
+                logger.debug(bill.toString());
+            }
             debugger.log(bill.toString());
 
             String tradeSn = bill.getSn();
 
             //调用回调器完成交易状态的变更
             device.paySuccess(tradeSn, returnTradeNo, payPrice);
-            logger.debug("调用：" + device + "成功");
+            if(logger.isDebugEnabled()){
+                logger.debug("调用：" + device + "成功");
+            }
             debugger.log("调用：" + device + "成功");
 
             //修改支付账单的状态
             daoSupport.execute("update es_payment_bill set is_pay=1,return_trade_no=? where bill_id=?", returnTradeNo, bill.getBillId());
 
-            logger.debug("更改支付账单状态成功");
+            if (logger.isDebugEnabled()){
+                logger.debug("更改支付账单状态成功");
+            }
             debugger.log("更改支付账单状态成功");
         }
 

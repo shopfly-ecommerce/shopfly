@@ -22,13 +22,14 @@ import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.UserContext;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.exception.ServiceException;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.util.Base64;
 import dev.shopflix.framework.util.HttpUtils;
 import dev.shopflix.framework.util.StringUtil;
 import com.google.common.collect.Maps;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,7 +71,7 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
     @Autowired
     private MemberManager memberManager;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     private static final String WX_MINI_SESSIONKEY="{WX}{MINI}{SESSION_KEY}_";
 
@@ -98,7 +99,9 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
     @Override
     public Map wxWapLogin(String code,String uuid,String oldUuid) {
         JSONObject accessTokenJson = this.getAccessToken(code);
-        logger.debug("accessTokenJson==="+accessTokenJson.toString());
+        if (logger.isDebugEnabled()){
+            logger.debug("accessTokenJson==="+accessTokenJson.toString());
+        }
         String access_token = accessTokenJson.getString("access_token");
         String openid = accessTokenJson.getString("openid");
         LoginUserDTO loginUserDTO = new LoginUserDTO();
@@ -137,14 +140,18 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
         loginUserDTO.setTokenOutTime(WX_TOKEN_VAILD_TIME_MINI);
         loginUserDTO.setRefreshTokenOutTime(WX_TOKEN_VAILD_TIME_MINI);
         String content = wxMiniAutoCode(weChatMiniLoginDTO.getCode());
-        logger.debug("miniLogin==content==="+content);
+        if (logger.isDebugEnabled()) {
+            logger.debug("miniLogin==content===" + content);
+        }
         if (StringUtil.isEmpty(content)){
             res.put("autologin", "fail");
             res.put("reason", "auth_code_fail");
             return res;
         }
         JSONObject json = JSONObject.fromObject(content);
-        logger.debug("miniLogin==json==="+json.toString());
+        if (logger.isDebugEnabled()) {
+            logger.debug("miniLogin==json===" + json.toString());
+        }
         String unionId = json.getString("unionid");
         if (StringUtil.isEmpty(unionId)){
             res.put("autologin", "fail");
@@ -159,7 +166,9 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
         cache.put(WX_MINI_SESSIONKEY+openid,sessionKey,60*60*24*2);
         //获取不到unionid
         JSONObject userInfoJson = connectManager.getUserInfo(weChatMiniLoginDTO.getEdata(), sessionKey, weChatMiniLoginDTO.getIv());
-        logger.debug("miniLogin==userInfoJson==="+userInfoJson.toString());
+        if (logger.isDebugEnabled()) {
+            logger.debug("miniLogin==userInfoJson===" + userInfoJson.toString());
+        }
         loginUserDTO.setUnionid(unionId);
         loginUserDTO.setUnionType(ConnectTypeEnum.WECHAT);
         loginUserDTO.setHeadimgurl(userInfoJson.get("avatarUrl")==null?null:userInfoJson.getString("avatarUrl"));
@@ -180,7 +189,9 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
         accessTokenBuffer.append("&grant_type=authorization_code");
         String access_token_back = HttpUtils.doGet(accessTokenBuffer.toString(),"UTF-8", 1000, 1000);
         JSONObject jsonObject = JSONObject.fromObject(access_token_back);
-        logger.debug("getAccessToken==jsonObject==="+jsonObject.toString());
+        if (logger.isDebugEnabled()) {
+            logger.debug("getAccessToken==jsonObject==="+jsonObject.toString());
+        }
         return jsonObject;
     }
 
@@ -192,7 +203,9 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
         wechatInfoBuffer.append("&lang=zh_CN");
         String user_info_back = HttpUtils.doGet(wechatInfoBuffer.toString(),"UTF-8", 1000, 1000);
         JSONObject wechatInfoJson = JSONObject.fromObject(user_info_back);
-        logger.debug("getWechatInfo==wechatInfoJson==="+wechatInfoJson.toString());
+        if (logger.isDebugEnabled()) {
+            logger.debug("getWechatInfo==wechatInfoJson==="+wechatInfoJson.toString());
+        }
         loginUserDTO.setHeadimgurl(wechatInfoJson.getString("headimgurl"));
         loginUserDTO.setNickName(wechatInfoJson.getString("nickname"));
         if (wechatInfoJson.get("unionid")!=null){
@@ -223,7 +236,9 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
             return "";
         }
         JSONObject json = JSONObject.fromObject(content);
-        logger.debug("getMiniOpenid==json==="+json.toString());
+        if(logger.isDebugEnabled()){
+            logger.debug("getMiniOpenid==json==="+json.toString());
+        }
         String openid = json.getString("openid");
         return openid;
     }

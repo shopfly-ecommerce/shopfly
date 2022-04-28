@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataRefundConsumer implements RefundStatusChangeEvent {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     private RefundDataClient refundDataClient;

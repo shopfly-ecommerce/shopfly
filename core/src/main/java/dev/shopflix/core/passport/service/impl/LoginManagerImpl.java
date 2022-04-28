@@ -25,8 +25,7 @@ import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.exception.ServiceException;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.rabbitmq.MessageSender;
 import dev.shopflix.framework.rabbitmq.MqMessage;
 import dev.shopflix.framework.security.TokenManager;
@@ -35,6 +34,8 @@ import dev.shopflix.framework.util.DateUtil;
 import dev.shopflix.framework.util.EmojiCharacterUtil;
 import dev.shopflix.framework.util.StringUtil;
 import dev.shopflix.framework.util.TokenKeyGenerate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ import java.util.Map;
 @Service
 public class LoginManagerImpl implements LoginManager {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     
@@ -116,7 +117,9 @@ public class LoginManagerImpl implements LoginManager {
         if (!StringUtil.isEmpty(loginUserDTO.getOpenid())){
             auth2Token.setOpneId(loginUserDTO.getOpenid());
         }
-        logger.debug("三方登录openId为：" + loginUserDTO.getOpenid()+";unionid为"+loginUserDTO.getUnionid());
+        if(logger.isDebugEnabled()){
+            logger.debug("三方登录openId为：" + loginUserDTO.getOpenid()+";unionid为"+loginUserDTO.getUnionid());
+        }
         cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + loginUserDTO.getUuid(), auth2Token);
         MemberVO memberVO = this.connectWeChatLoginHandle(member, loginUserDTO.getUuid(),loginUserDTO.getTokenOutTime(),loginUserDTO.getRefreshTokenOutTime());
         res.put("access_token", memberVO.getAccessToken());
@@ -183,7 +186,7 @@ public class LoginManagerImpl implements LoginManager {
         String  nickname = loginUserDTO.getNickName();
         nickname = StringUtil.isEmpty(nickname)?username: EmojiCharacterUtil.encode(nickname);
         member.setNickname(nickname);
-        member.setProvince(loginUserDTO.getProvince());
+        member.setCountry(loginUserDTO.getCountry());
         member.setCity(loginUserDTO.getCity());
         //设置会员等级积分为0
         member.setGradePoint(0);

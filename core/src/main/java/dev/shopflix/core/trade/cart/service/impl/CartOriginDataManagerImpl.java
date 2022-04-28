@@ -24,11 +24,11 @@ import dev.shopflix.framework.exception.ServiceException;
 import dev.shopflix.framework.security.model.Buyer;
 import dev.shopflix.framework.util.DateUtil;
 import org.apache.commons.lang.ArrayUtils;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 

@@ -87,7 +87,7 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
     @Autowired
     private Cache cache;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 
     @Override

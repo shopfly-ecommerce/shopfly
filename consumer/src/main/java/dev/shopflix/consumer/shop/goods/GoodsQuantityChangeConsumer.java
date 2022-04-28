@@ -53,7 +53,7 @@ public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, Refu
     @Autowired
     private OrderClient orderClient;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 
     /**

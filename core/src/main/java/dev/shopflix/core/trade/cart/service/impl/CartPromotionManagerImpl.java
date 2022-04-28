@@ -40,13 +40,14 @@ import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.UserContext;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.exception.ServiceException;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.security.model.Buyer;
 import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -235,8 +236,10 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
             selectedPromotionVo.setPromotion(promotionVO);
             String cacheKey = this.getOriginKey();
             cache.put(cacheKey, selectedPromotionVo);
-            logger.debug("使用促销：" + promotionVO);
-            logger.debug("促销信息为:" + selectedPromotionVo);
+            if (logger.isDebugEnabled()){
+                logger.debug("使用促销：" + promotionVO);
+                logger.debug("促销信息为:" + selectedPromotionVo);
+            }
         } catch (Exception e) {
             logger.error("使用促销出错", e);
             throw new ServiceException(TradeErrorCode.E462.code(), "使用促销出错");
@@ -272,8 +275,10 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
         }
 
         selectedPromotionVo.setCoupon( couponVO);
-        logger.debug("使用优惠券：" + couponVO);
-        logger.debug("促销信息为:" + selectedPromotionVo);
+        if (logger.isDebugEnabled()){
+            logger.debug("使用优惠券：" + couponVO);
+            logger.debug("促销信息为:" + selectedPromotionVo);
+        }
         String cacheKey = this.getOriginKey();
         cache.put(cacheKey, selectedPromotionVo);
     }

@@ -54,7 +54,7 @@ public class OrderPayManagerImpl implements OrderPayManager {
     @Autowired
     private PaymentManager paymentManager;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 
     @Autowired

@@ -58,7 +58,7 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
     @Autowired
     private GroupbuyGoodsManager groupbuyGoodsManager;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 
     /**
@@ -221,7 +221,9 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
         List<GoodsQuantityVO> goodsQuantityVOList = new ArrayList<>();
         for (CartSkuVO sku : skuList) {
-            logger.debug("cart num is " + sku.getPurchaseNum());
+            if(logger.isDebugEnabled()){
+                logger.debug("cart num is " + sku.getPurchaseNum());
+            }
             GoodsQuantityVO goodsQuantity = new GoodsQuantityVO();
             goodsQuantity.setSkuId(sku.getSkuId());
             goodsQuantity.setGoodsId(sku.getGoodsId());

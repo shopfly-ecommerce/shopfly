@@ -91,9 +91,6 @@ public class MemberSellerController {
         member.setMobile(mobile);
         member.setTel(memberEditDTO.getTel());
         BeanUtil.copyProperties(memberEditDTO, member);
-        if (memberEditDTO.getRegion() != null) {
-            BeanUtil.copyProperties(memberEditDTO.getRegion(), member);
-        }
         this.memberManager.edit(member, id);
         return member;
     }
@@ -158,7 +155,6 @@ public class MemberSellerController {
         member.setMobile(mobile);
         member.setTel(memberEditDTO.getTel());
         BeanUtil.copyProperties(memberEditDTO, member);
-        BeanUtil.copyProperties(memberEditDTO.getRegion(), member);
         memberManager.register(member);
         return member;
 

@@ -8,8 +8,9 @@ package dev.shopflix.core.trade.cart.service.cartbuilder.impl;
 import dev.shopflix.core.trade.cart.model.vo.CartVO;
 import dev.shopflix.core.trade.cart.service.cartbuilder.CartShipPriceCalculator;
 import dev.shopflix.core.trade.order.service.ShippingManager;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,10 @@ public class CartShipPriceCalculatorImpl implements CartShipPriceCalculator {
     @Override
     public void countShipPrice(List<CartVO> cartList) {
         shippingManager.setShippingPrice(cartList);
-        logger.debug("购物车处理运费结果为：");
-        logger.debug(cartList.toString());
+        if (logger.isDebugEnabled()) {
+            logger.debug("购物车处理运费结果为：");
+            logger.debug(cartList.toString());
+        }
     }
 
 }

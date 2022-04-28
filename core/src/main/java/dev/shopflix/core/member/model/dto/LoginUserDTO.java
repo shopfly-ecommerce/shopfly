@@ -60,8 +60,8 @@ public class LoginUserDTO implements Serializable {
     @ApiModelProperty(name = "sex", value = "性别：1:男;0:女", required = false)
     private Integer sex;
 
-    @ApiModelProperty(name = "province", value = "省份", required = false)
-    private String province;
+    @ApiModelProperty(name = "country", value = "Country name", required = false)
+    private String country;
 
     @ApiModelProperty(name = "city", value = "城市", required = false)
     private String city;
@@ -151,12 +151,12 @@ public class LoginUserDTO implements Serializable {
         this.unionid = unionid;
     }
 
-    public String getProvince() {
-        return province;
+    public String getCountry() {
+        return country;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getCity() {

@@ -58,13 +58,13 @@ public class OrderData {
 	@Column(name = "goods_num")
 	private Integer goodsNum;
 
-	@ApiModelProperty(value = "省id")
-	@Column(name = "ship_province_id")
-	private Integer shipProvinceId;
+	@ApiModelProperty(value = "国家编码")
+	@Column(name = "ship_country_code")
+	private String shipCountryCode;
 	
-	@ApiModelProperty(value = "区id")
-	@Column(name = "ship_city_id")
-	private Integer shipCityId;
+	@ApiModelProperty(value = "州/省编码")
+	@Column(name = "ship_state_code")
+	private String shipStateCode;
 
 	@ApiModelProperty(value = "创建时间")
 	@Column(name = "create_time")
@@ -83,8 +83,8 @@ public class OrderData {
 		this.setOrderPrice((Double)order.get("order_price"));
 		this.setGoodsNum((Integer)order.get("goods_num"));
 		this.setCreateTime((Long)order.get("create_time"));
-		this.setShipProvinceId((Integer)order.get("ship_province_id"));
-		this.setShipCityId((Integer)order.get("ship_city_id"));
+		this.setShipCountryCode((String)order.get("ship_country_code"));
+		this.setShipStateCode((String)order.get("ship_state_code"));
 	}
 	public OrderData(OrderDO order) {
 		this.setSn(order.getSn());
@@ -95,23 +95,24 @@ public class OrderData {
 		this.setCreateTime(order.getCreateTime());
 		this.setGoodsNum(order.getGoodsNum());
 		this.setOrderPrice(order.getOrderPrice());
-		this.setShipCityId(order.getShipCityId());
-		this.setShipProvinceId(order.getShipProvinceId());
+		this.setShipCountryCode(order.getShipCountryCode());
+		this.setShipStateCode(order.getShipStateCode());
 	}
 
 
 	@Override
 	public String toString() {
 		return "OrderData{" +
+				"id=" + id +
 				", buyerId=" + buyerId +
-				", buyerName=" + buyerName +
+				", buyerName='" + buyerName + '\'' +
 				", sn='" + sn + '\'' +
 				", orderStatus='" + orderStatus + '\'' +
 				", payStatus='" + payStatus + '\'' +
 				", orderPrice=" + orderPrice +
 				", goodsNum=" + goodsNum +
-				", shipProvinceid=" + shipProvinceId +
-				", shipCityid=" + shipCityId +
+				", shipCountryCode='" + shipCountryCode + '\'' +
+				", shipStateCode='" + shipStateCode + '\'' +
 				", createTime=" + createTime +
 				'}';
 	}
@@ -180,20 +181,20 @@ public class OrderData {
 		this.goodsNum = goodsNum;
 	}
 
-	public Integer getShipProvinceId() {
-		return shipProvinceId;
+	public String getShipCountryCode() {
+		return shipCountryCode;
 	}
 
-	public void setShipProvinceId(Integer shipProvinceId) {
-		this.shipProvinceId = shipProvinceId;
+	public void setShipCountryCode(String shipCountryCode) {
+		this.shipCountryCode = shipCountryCode;
 	}
 
-	public Integer getShipCityId() {
-		return shipCityId;
+	public String getShipStateCode() {
+		return shipStateCode;
 	}
 
-	public void setShipCityId(Integer shipCityId) {
-		this.shipCityId = shipCityId;
+	public void setShipStateCode(String shipStateCode) {
+		this.shipStateCode = shipStateCode;
 	}
 
 	public Long getCreateTime() {

@@ -62,11 +62,10 @@ public class ShippingManagerImpl implements ShippingManager {
      * 获取购物车价格
      *
      * @param cartVO 购物车
-     * @param areaId 地区id
      * @return
      */
     @Override
-    public Double getShipPrice(CartVO cartVO, Integer areaId) {
+    public Double getShipPrice(CartVO cartVO) {
         //最终运费
         double finalShip = 0;
         List<CartSkuVO> cartSkuVOS = cartVO.getSkuList();
@@ -198,10 +197,9 @@ public class ShippingManagerImpl implements ShippingManager {
         if (address == null || !address.getMemberId().equals(buyer.getUid())) {
             return;
         }
-//        Integer areaId = address.actualAddress();
 
         // 检测不在配送区域的货品
-//        this.checkArea(cartList, areaId);
+        this.checkArea(cartList, address.getCountryCode(),address.getStateCode());
 
         for (CartVO cartVo : cartList) {
 
@@ -221,11 +219,11 @@ public class ShippingManagerImpl implements ShippingManager {
             }
 
             // 获取购物车商品运费总计
-//            double finalShip = this.getShipPrice(cartVo, areaId);
-//            cartVo.getPrice().setFreightPrice(finalShip);
-//            if (finalShip > 0) {
-//                cartVo.getPrice().setIsFreeFreight(0);
-//            }
+            double finalShip = this.getShipPrice(cartVo);
+            cartVo.getPrice().setFreightPrice(finalShip);
+            if (finalShip > 0) {
+                cartVo.getPrice().setIsFreeFreight(0);
+            }
             cartVo.setShippingTypeName("运费");
         }
 
@@ -236,11 +234,12 @@ public class ShippingManagerImpl implements ShippingManager {
      * 校验地区
      *
      * @param cartList 购物车
-     * @param areaId   地区
+     * @param countryCode   国家code
+     * @param stateCode      洲code
      * @return
      */
     @Override
-    public List<CacheGoods> checkArea(List<CartVO> cartList, Integer areaId) {
+    public List<CacheGoods> checkArea(List<CartVO> cartList, String countryCode,String stateCode) {
         List<CacheGoods> errorGoods = new ArrayList<>();
         for (CartVO cartVo : cartList) {
             //运费模版映射
@@ -265,8 +264,15 @@ public class ShippingManagerImpl implements ShippingManager {
                         for (ShipTemplateSettingVO settingVO : temp.getItems()) {
                             if (settingVO.getAreaId() != null) {
                                 /** 校验地区 */
-                                if (settingVO.getAreaId().indexOf("," + areaId + ",") >= 0) {
-                                    shipMap.put(skuVO.getSkuId(), settingVO);
+                                if (!StringUtil.isEmpty(stateCode)){
+                                    if (settingVO.getAreaId().indexOf("," + stateCode + ",") >= 0) {
+                                        shipMap.put(skuVO.getSkuId(), settingVO);
+                                    }
+                                }
+                                if (!StringUtil.isEmpty(countryCode)&&StringUtil.isEmpty(stateCode)){
+                                    if (settingVO.getAreaId().indexOf("," + countryCode + ",") >= 0) {
+                                        shipMap.put(skuVO.getSkuId(), settingVO);
+                                    }
                                 }
                             }
                         }

@@ -20,13 +20,12 @@ import java.util.List;
 public interface ShippingManager {
 
     /**
-     * 获取运费
+     * 获取购物车价格
      *
-     * @param cartVOS 购物车
-     * @param areaId  地区id
-     * @return 运费
+     * @param cartVO 购物车
+     * @return
      */
-    Double getShipPrice(CartVO cartVOS, Integer areaId);
+    Double getShipPrice(CartVO cartVO);
 
     /**
      * 设置运费
@@ -35,14 +34,16 @@ public interface ShippingManager {
      */
     void setShippingPrice(List<CartVO> cartList);
 
+
     /**
-     * 检测是否有不能配送的区域
+     * 校验地区
      *
      * @param cartList 购物车
-     * @param areaId   地区
+     * @param countryCode   国家code
+     * @param stateCode      洲code
      * @return
      */
-    List<CacheGoods> checkArea(List<CartVO> cartList, Integer areaId);
+    List<CacheGoods> checkArea(List<CartVO> cartList, String countryCode,String stateCode);
 
 
 }

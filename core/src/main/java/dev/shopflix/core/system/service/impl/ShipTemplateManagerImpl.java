@@ -194,7 +194,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
         BeanUtils.copyProperties(template, tpl);
 
         //查询运费模板的子模板
-        String sql = "select * from es_ship_template_child where template_id = ?";
+        String sql = "select * from es_ship_template_setting where template_id = ?";
         List<ShipTemplateSettingDO> settingDOList = this.daoSupport.queryForList(sql, ShipTemplateSettingDO.class, templateId);
 
         List<ShipTemplateSettingVO> items = convert(settingDOList,true);
@@ -212,6 +212,9 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
      * @return
      */
     private List<ShipTemplateSettingVO> convert(List<ShipTemplateSettingDO> settingDOList,boolean flag) {
+        if (settingDOList==null||settingDOList.size()==0){
+            return null;
+        }
         String sql;
         List<ShipTemplateSettingVO> items = new ArrayList<>();
         if (settingDOList != null) {

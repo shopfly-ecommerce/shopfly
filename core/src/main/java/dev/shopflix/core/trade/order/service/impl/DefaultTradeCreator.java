@@ -241,23 +241,22 @@ public class DefaultTradeCreator implements TradeCreator {
         //已选中结算的商品
         List<CartVO> cartList = cartView.getCartList();
 
-//        Integer areaId = memberAddress.getCountyId();
 
         //2、筛选不在配送区域的商品
-//        List<CacheGoods> list = this.shippingManager.checkArea(cartList, areaId);
+        List<CacheGoods> list = this.shippingManager.checkArea(cartList,memberAddress.getCountryCode(),memberAddress.getStateCode());
 
         //验证后存在商品问题的集合
         List<Map> goodsErrorList = new ArrayList();
 
-//        if (list.size() > 0) {
-//            for (CacheGoods goods : list) {
-//                Map errorMap = new HashMap(16);
-//                errorMap.put("name", goods.getGoodsName());
-//                errorMap.put("image", goods.getThumbnail());
-//                goodsErrorList.add(errorMap);
-//            }
-//            throw new ServiceException(TradeErrorCode.E461.code(), "商品不在配送区域", goodsErrorList);
-//        }
+        if (list.size() > 0) {
+            for (CacheGoods goods : list) {
+                Map errorMap = new HashMap(16);
+                errorMap.put("name", goods.getGoodsName());
+                errorMap.put("image", goods.getThumbnail());
+                goodsErrorList.add(errorMap);
+            }
+            throw new ServiceException(TradeErrorCode.E461.code(), "商品不在配送区域", goodsErrorList);
+        }
 
 
         return this;

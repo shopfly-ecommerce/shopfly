@@ -1,5 +1,7 @@
 package dev.shopflix.core.payment.plugin.paypal;
 
+import dev.shopflix.core.payment.service.AbstractPaymentPlugin;
+
 /**
  * PaypalConfig
  *
@@ -7,7 +9,7 @@ package dev.shopflix.core.payment.plugin.paypal;
  * @version 1.0.0
  * 2022-04-22 20:22:00
  */
-public class PaypalConfig {
+public class PaypalPluginConfig extends AbstractPaymentPlugin {
 
     private static final String clientId = "xxxx";
     private static final String clientSecret = "xxxx";
@@ -48,4 +50,8 @@ public class PaypalConfig {
     public static final String SHIPPINGPREFERENCE = "SET_PROVIDED_ADDRESS";
     public static final String COMPLETED = "COMPLETED";
 
+    @Override
+    protected String getPluginId() {
+        return "paypalPlugin";
+    }
 }

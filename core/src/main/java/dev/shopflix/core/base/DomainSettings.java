@@ -27,6 +27,12 @@ public class DomainSettings {
     /**
      * 买家端域名
      */
+    @Value("${shopflix.name:#{null}}")
+    private String name;
+
+    /**
+     * 买家端域名
+     */
     @Value("${shopflix.domain.buyer:#{null}}")
     private String buyer;
 
@@ -111,10 +117,20 @@ public class DomainSettings {
         this.buyerWap = buyerWap;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "DomainSettings{" +
-                "buyer='" + buyer + '\'' +
+                "name='" + name + '\'' +
+                ", buyer='" + buyer + '\'' +
                 ", mobileBuyer='" + mobileBuyer + '\'' +
                 ", buyerPc='" + buyerPc + '\'' +
                 ", buyerWap='" + buyerWap + '\'' +

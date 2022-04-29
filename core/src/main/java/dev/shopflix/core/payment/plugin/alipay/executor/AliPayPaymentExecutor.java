@@ -45,10 +45,8 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
     @Autowired
     private Debugger debugger;
 
-
     /**
      * 支付
-     *
      * @param bill
      * @return
      */
@@ -100,7 +98,6 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
         String billSn = "";
         // 交易号
         try {
-
 
             HttpServletRequest request = ThreadContextHolder.getHttpRequest();
             billSn = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");

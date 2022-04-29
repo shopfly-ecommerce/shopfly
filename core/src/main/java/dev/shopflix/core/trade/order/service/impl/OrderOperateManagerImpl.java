@@ -539,6 +539,12 @@ public class OrderOperateManagerImpl implements OrderOperateManager {
         this.updateItemJson(JsonUtil.objectToJson(orderSkuVOList), sn);
     }
 
+    @Override
+    public void updateOrderPayOrderNo(String payOrderNo, String sn) {
+        String sql = "update es_order set pay_order_no = ? where sn = ?";
+        this.daoSupport.execute(sql, payOrderNo, sn);
+    }
+
 
     /**
      * 修改订单项的退款金额

@@ -16,7 +16,7 @@ import java.util.List;
  * @Author: gy
  * @Date: 2020/6/10 0010 9:50
  */
-//@Component
+@Component
 public class EveryTenMinutesExecuteJobHandler {
 
 
@@ -25,7 +25,7 @@ public class EveryTenMinutesExecuteJobHandler {
     @Autowired
     private List<EveryTenMinutesExecute> everyTenMinutesExecutes;
 
-    @Scheduled(cron = "0 */10 * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     public void execute() {
         try {
 

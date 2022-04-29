@@ -134,4 +134,10 @@ public class OrderClientImpl implements OrderClient {
         this.orderOperateManager.payOrder(sn, price, returnTradeNo, orderPermission);
     }
 
+
+    @Override
+    public void updateOrderPayOrderNo(String payOrderNo, String sn) {
+        this.orderOperateManager.updateOrderPayOrderNo(payOrderNo, sn);
+    }
+
 }

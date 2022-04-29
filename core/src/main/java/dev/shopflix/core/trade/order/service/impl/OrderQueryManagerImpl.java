@@ -546,6 +546,8 @@ public class OrderQueryManagerImpl implements OrderQueryManager {
                     && orderDO.getPaymentPluginId() != null) {
                 //获取订单的支付方式
                 PaymentMethodDO paymentMethodDO = this.paymentMethodManager.getByPluginId(orderDO.getPaymentPluginId());
+                paymentMethodDO.setIsRetrace(paymentMethodDO.getIsRetrace() == null ? 0 : paymentMethodDO.getIsRetrace());
+
                 if (paymentMethodDO != null && paymentMethodDO.getIsRetrace() == 1) {
                     line.setIsRetrace(true);
                 }

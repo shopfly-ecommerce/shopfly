@@ -147,4 +147,23 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
 
         return this.daoSupport.queryForObject(sql, PaymentBillDO.class, returnTradeNo);
     }
+
+    @Override
+    public void updateTradeNoByBillSn(String billSn, String returnTradeNo) {
+        System.out.println(returnTradeNo+"======="+billSn);
+        String sql = "update es_payment_bill set return_trade_no = ? where sn = ?";
+        this.daoSupport.execute(sql, returnTradeNo, billSn);
+    }
+
+    @Override
+    public PaymentBillDO getBillByBillSn(String billSn) {
+        String sql = "select * from es_payment_bill where sn = ? ";
+        return this.daoSupport.queryForObject(sql, PaymentBillDO.class, billSn);
+    }
+
+    @Override
+    public List<PaymentBillDO> getWaitPay() {
+        String sql = "SELECT DISTINCT sn,is_pay,trade_price,return_trade_no,trade_type,payment_plugin_id from es_payment_bill p where is_pay = 0 and p.sn not in (SELECT DISTINCT pb.sn from  es_payment_bill pb where pb.is_pay = 1) ORDER BY bill_id desc";
+        return this.daoSupport.queryForList(sql,PaymentBillDO.class);
+    }
 }

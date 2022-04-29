@@ -9,6 +9,8 @@ import dev.shopflix.core.payment.model.dos.PaymentBillDO;
 import dev.shopflix.core.payment.model.enums.TradeType;
 import dev.shopflix.framework.database.Page;
 
+import java.util.List;
+
 /**
  * 支付帐单业务层
  *
@@ -63,5 +65,23 @@ public interface PaymentBillManager {
      * @return
      */
     PaymentBillDO getBillByReturnTradeNo(String returnTradeNo);
+
+
+    /**
+     * 根据billSn修改第三方交易流水号
+     * @param billSn
+     * @param returnTradeNo
+     */
+    void updateTradeNoByBillSn(String billSn,String returnTradeNo);
+
+    /**
+     * 根据billSn读取数据
+     * @param billSn
+     * @return
+     */
+    PaymentBillDO getBillByBillSn(String billSn);
+
+
+    List<PaymentBillDO> getWaitPay();
 
 }

@@ -137,6 +137,8 @@ public class PaymentManagerImpl implements PaymentManager {
         bill.setBillSn(paymentBill.getOutTradeNo());
         bill.setClientType(ClientType.valueOf(param.getClientType()));
         bill.setTradeType(TradeType.valueOf(param.getTradeType()));
+        bill.setSn(param.getSn());
+        bill.setOrderPrice(paymentBill.getTradePrice());
 
         return plugin.onQuery(bill);
     }

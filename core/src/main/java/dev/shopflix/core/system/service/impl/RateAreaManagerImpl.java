@@ -14,6 +14,7 @@ import dev.shopflix.core.system.model.dos.RateAreaDO;
 import dev.shopflix.core.system.model.vo.AreaVO;
 import dev.shopflix.core.system.model.vo.RateAreaVO;
 import dev.shopflix.core.system.service.RateAreaManager;
+import dev.shopflix.core.system.service.ShipTemplateManager;
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.database.DaoSupport;
 import dev.shopflix.framework.database.Page;
@@ -42,6 +43,10 @@ public class RateAreaManagerImpl implements RateAreaManager {
 
     @Autowired
     private DaoSupport daoSupport;
+
+    @Autowired
+    private ShipTemplateManager shipTemplateManager;
+
 
 
     @Override
@@ -77,6 +82,7 @@ public class RateAreaManagerImpl implements RateAreaManager {
         convertDO(rateAreaVO, rateAreaDO);
         rateAreaDO.setId(id);
         this.daoSupport.update(rateAreaDO,id);
+        shipTemplateManager.removeCache(id);
         return rateAreaDO;
     }
 
@@ -106,7 +112,12 @@ public class RateAreaManagerImpl implements RateAreaManager {
 
     @Override
     public void delete(Integer rateAreaId) {
+        Integer count = shipTemplateManager.getCountByAreaId(rateAreaId);
+        if (count!=null && count>0){
+            throw new ServiceException("500","The rate area is in used");
+        }
         this.daoSupport.execute("delete from es_rate_area where id = ?", rateAreaId);
+
     }
 
     @Override

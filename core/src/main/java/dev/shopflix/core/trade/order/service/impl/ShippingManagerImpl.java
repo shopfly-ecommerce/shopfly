@@ -198,7 +198,7 @@ public class ShippingManagerImpl implements ShippingManager {
             shipPrice = CurrencyUtil.add(shipPrice, setting.getAmt());
         } else if (AmtTypeEnums.PERCENTAGE.name().equalsIgnoreCase(setting.getAmtType())) {
             //如果是百分比就是商品原价*百分比
-            Double pAmt = CurrencyUtil.mul(goodsPrice, setting.getAmt());
+            Double pAmt = CurrencyUtil.mul(goodsPrice, CurrencyUtil.div(setting.getAmt(),100D));
             shipPrice = CurrencyUtil.add(shipPrice, pAmt);
         }
         return shipPrice;

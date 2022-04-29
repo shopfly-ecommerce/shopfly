@@ -87,20 +87,18 @@ public class ShippingManagerImpl implements ShippingManager {
                 continue;
             }
             //创建运费模板数据
-            if (templateMap.get(settingVO.getTemplateId()) == null) {
-                ShipTemplateSettingDTO shipTemplateSettingDTO = new ShipTemplateSettingDTO();
-                List<ShipTemplateSettingDO> items = settingVO.getItems();
-                //筛选出价格区间设置
-                List<ShipTemplateSettingDO> priceSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equals(ConditionsTypeEnums.PRICE.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
-                shipTemplateSettingDTO.setPriceSettings(priceSettings);
-                //筛选出重量区间设置
-                List<ShipTemplateSettingDO> weightSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equals(ConditionsTypeEnums.WEIGHT.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
-                shipTemplateSettingDTO.setWeightSettings(weightSettings);
-                //筛选出价格区间设置
-                List<ShipTemplateSettingDO> itemsSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equals(ConditionsTypeEnums.ITEMS.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
-                shipTemplateSettingDTO.setItemsSettings(itemsSettings);
-                templateMap.put(settingVO.getTemplateId(), shipTemplateSettingDTO);
-            }
+            ShipTemplateSettingDTO shipTemplateSettingDTO = new ShipTemplateSettingDTO();
+            List<ShipTemplateSettingDO> items = settingVO.getItems();
+            //筛选出价格区间设置
+            List<ShipTemplateSettingDO> priceSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equalsIgnoreCase(ConditionsTypeEnums.PRICE.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
+            shipTemplateSettingDTO.setPriceSettings(priceSettings);
+            //筛选出重量区间设置
+            List<ShipTemplateSettingDO> weightSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equalsIgnoreCase(ConditionsTypeEnums.WEIGHT.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
+            shipTemplateSettingDTO.setWeightSettings(weightSettings);
+            //筛选出价格区间设置
+            List<ShipTemplateSettingDO> itemsSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equalsIgnoreCase(ConditionsTypeEnums.ITEMS.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
+            shipTemplateSettingDTO.setItemsSettings(itemsSettings);
+            templateMap.put(settingVO.getTemplateId(), shipTemplateSettingDTO);
             //创建运费模板对应商品数据
             List<CartSkuVO> skuList = templateSkuMap.get(settingVO.getTemplateId());
             if(skuList == null){
@@ -125,13 +123,13 @@ public class ShippingManagerImpl implements ShippingManager {
                 Double originalPrice = CurrencyUtil.mul(cartSkuVO.getOriginalPrice(), cartSkuVO.getNum());
                 goodsPrice = CurrencyUtil.add(goodsPrice, originalPrice);
             }
-            Double finalGoodsPrice = goodsPrice;
-
             //商品价格算运费
             List<ShipTemplateSettingDO> priceSettings = template.getPriceSettings();
             if (priceSettings!=null&&priceSettings.size()>0){
-                ShipTemplateSettingDO setting = priceSettings.stream().filter(settingDO -> settingDO.getRegionStart() < finalGoodsPrice && (settingDO.getRegionEnd() > finalGoodsPrice || settingDO.getRegionEnd() == null)).findFirst().get();
-                shipPrice = addShipPirce(shipPrice, goodsPrice, setting);
+                ShipTemplateSettingDO setting = screen(priceSettings,goodsPrice);
+                if (setting!=null){
+                    shipPrice = addShipPirce(shipPrice, goodsPrice, setting);
+                }
 
             }
 
@@ -143,9 +141,10 @@ public class ShippingManagerImpl implements ShippingManager {
                 for (CartSkuVO cartSkuVO : skuList) {
                     weight += CurrencyUtil.mul(cartSkuVO.getGoodsWeight(), cartSkuVO.getNum());
                 }
-                Double finalWeight = weight;
-                ShipTemplateSettingDO setting = weightSettings.stream().filter(settingDO -> settingDO.getRegionStart() < finalWeight && (settingDO.getRegionEnd() > finalWeight || settingDO.getRegionEnd() == null)).findFirst().get();
-                shipPrice = addShipPirce(shipPrice, goodsPrice, setting);
+                ShipTemplateSettingDO setting = screen(weightSettings,weight);
+                if (setting!=null){
+                    shipPrice = addShipPirce(shipPrice, goodsPrice, setting);
+                }
 
             }
 
@@ -156,9 +155,10 @@ public class ShippingManagerImpl implements ShippingManager {
                 for (CartSkuVO cartSkuVO : skuList) {
                     num += cartSkuVO.getNum();
                 }
-                Integer finalNum = num;
-                ShipTemplateSettingDO setting = weightSettings.stream().filter(settingDO -> settingDO.getRegionStart() < finalNum && (settingDO.getRegionEnd() > finalNum || settingDO.getRegionEnd() == null)).findFirst().get();
-                shipPrice = addShipPirce(shipPrice, goodsPrice, setting);
+                ShipTemplateSettingDO setting = screen(itemsSettings,Double.valueOf(num));
+                if (setting!=null){
+                    shipPrice = addShipPirce(shipPrice, goodsPrice, setting);
+                }
             }
             finalShip = CurrencyUtil.add(finalShip, shipPrice);
 
@@ -171,6 +171,21 @@ public class ShippingManagerImpl implements ShippingManager {
     }
 
     /**
+     * 筛选设置
+     * @param weightSettings
+     * @param unit
+     * @return
+     */
+    private ShipTemplateSettingDO  screen(List<ShipTemplateSettingDO> weightSettings,Double unit){
+        for (ShipTemplateSettingDO settingDO:weightSettings) {
+            if (settingDO.getRegionStart() <= unit && (settingDO.getRegionEnd() >= unit || settingDO.getRegionEnd() == null)){
+                return settingDO;
+            }
+        }
+        return null;
+    }
+
+    /**
      * 增加运费价格
      * @param shipPrice
      * @param goodsPrice
@@ -178,10 +193,10 @@ public class ShippingManagerImpl implements ShippingManager {
      * @return
      */
     private Double addShipPirce(Double shipPrice, Double goodsPrice, ShipTemplateSettingDO setting) {
-        if (AmtTypeEnums.ABSOLUTE.name().equals(setting.getAmtType())) {
+        if (AmtTypeEnums.ABSOLUTE.name().equalsIgnoreCase(setting.getAmtType())) {
             //如果是绝对值就是直接相加
             shipPrice = CurrencyUtil.add(shipPrice, setting.getAmt());
-        } else if (AmtTypeEnums.PERCENTAGE.name().equals(setting.getAmtType())) {
+        } else if (AmtTypeEnums.PERCENTAGE.name().equalsIgnoreCase(setting.getAmtType())) {
             //如果是百分比就是商品原价*百分比
             Double pAmt = CurrencyUtil.mul(goodsPrice, setting.getAmt());
             shipPrice = CurrencyUtil.add(shipPrice, pAmt);

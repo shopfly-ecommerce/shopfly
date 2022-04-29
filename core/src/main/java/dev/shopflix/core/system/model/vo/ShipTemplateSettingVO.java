@@ -78,7 +78,7 @@ public class ShipTemplateSettingVO implements Serializable {
         this.rateAreaName = rateAreaDO.getName();
         this.rateAreaId = rateAreaDO.getId();
         this.setItems(settingDOs);
-        if(!flag){
+        if(flag){
             this.areas = JSON.parseArray(rateAreaDO.getAreaJson()).toJavaList(AreaVO.class);
             this.area = rateAreaDO.getArea();
             this.areaId = rateAreaDO.getAreaId();

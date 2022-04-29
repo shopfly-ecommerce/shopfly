@@ -11,8 +11,7 @@ import dev.shopflix.core.member.plugin.wechat.WechatAbstractConnectLoginPlugin;
 import dev.shopflix.core.member.service.ConnectManager;
 import dev.shopflix.core.member.service.MemberManager;
 import dev.shopflix.framework.cache.Cache;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.util.StringUtil;
 import dev.shopflix.framework.validation.annotation.Mobile;
 import io.swagger.annotations.Api;
@@ -20,6 +19,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.hibernate.validator.constraints.Length;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class PassportMiniProgramBuyerController {
     @Autowired
     private Cache cache;
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 
 
@@ -89,14 +90,18 @@ public class PassportMiniProgramBuyerController {
     @ApiOperation(value = "存储小程序端分销的上级id")
     @ApiImplicitParam(name = "from", value = "上级会员id加密格式", required = true, dataType = "String",dataTypeClass = String.class, paramType = "query")
     public String distribution(String from, @RequestHeader(required = false) String uuid) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("==============前台传过来的缓存key:" + from);
+            logger.debug("==============前台传过来的uuid:" + uuid);
+        }
 
-        logger.debug("==============前台传过来的缓存key:" + from);
-        logger.debug("==============前台传过来的uuid:" + uuid);
         if (StringUtil.notEmpty(uuid) && StringUtil.notEmpty(from)) {
             try {
                 //从缓存中获取分销合伙人的会员ID
                 Object memberId = cache.get(CachePrefix.MEMBER_SU.getPrefix() + from);
-                logger.debug("==============从缓存中获取的会员ID为:" + memberId);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("==============从缓存中获取的会员ID为:" + memberId);
+                }
                 //如果会员ID不为空
                 if (memberId != null) {
                     //将uuid作为key值，再次将会员ID存放至缓存中

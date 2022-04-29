@@ -45,8 +45,8 @@ public class QQUserDTO implements Serializable {
     @ApiModelProperty(name = "gender", value = "性别", required = false)
     private String gender;
 
-    @ApiModelProperty(name = "province", value = "省份", required = false)
-    private String province;
+    @ApiModelProperty(name = "country", value = "Country name", required = false)
+    private String country;
 
     @ApiModelProperty(name = "city", value = "城市", required = false)
     private String city;
@@ -59,12 +59,12 @@ public class QQUserDTO implements Serializable {
         this.gender = gender;
     }
 
-    public String getProvince() {
-        return province;
+    public String getCountry() {
+        return country;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getCity() {

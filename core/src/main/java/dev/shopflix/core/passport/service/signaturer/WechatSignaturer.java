@@ -19,12 +19,13 @@ import dev.shopflix.core.payment.plugin.weixin.signaturer.model.WechatJsapiTicke
 import dev.shopflix.framework.cache.Cache;
 import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.logs.Debugger;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.util.DateUtil;
 import dev.shopflix.framework.util.HttpUtils;
 import dev.shopflix.framework.util.StringUtil;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -60,7 +61,7 @@ public class WechatSignaturer {
      */
     private static final String BUYER_SIGNATURE = "singnature_buyer_";
 
-    protected final Logger logger = LoggerFactory.getLogger(WechatSignaturer.class);
+    protected final Logger logger = LoggerFactory.getLogger(WechatSignaturer.class.getName());
 
     @Autowired
     private ConnectManager connectManager;
@@ -107,14 +108,20 @@ public class WechatSignaturer {
             stringBuffer.append(timestamp + "&");
             stringBuffer.append("url=");
             stringBuffer.append(url.replaceAll("&amp;", "&"));
-            logger.debug("签名参数：" + stringBuffer.toString());
+            if(logger.isDebugEnabled()){
+                logger.debug("签名参数：" + stringBuffer.toString());
+            }
             map.put("timestamp", timestamp);
             map.put("nonceStr", nonceStr);
             map.put("signature", SHA1.encode(stringBuffer.toString()));
             map.put("appid", ((SignatureParams) object).getAppId());
-            logger.debug("map参数：" + map);
+            if(logger.isDebugEnabled()){
+                logger.debug("map参数：" + map);
+            }
         } catch (WeixinSignatrueExceprion e) {
-            logger.debug("未开启签名配置2");
+            if(logger.isDebugEnabled()){
+                logger.debug("未开启签名配置2");
+            }
             this.logger.error("微信签名异常：", e);
             throw e;
         } catch (Exception e) {
@@ -153,7 +160,9 @@ public class WechatSignaturer {
             appId = map.get("wechat_rn_app_id");
             appKey = map.get("wechat_rn_app_key");
         } else {
-            logger.debug("未开启签名配置2");
+            if(logger.isDebugEnabled()){
+                logger.debug("未开启签名配置2");
+            }
             throw new WeixinSignatrueExceprion("未开启签名配置");
         }
         Map result = new HashMap();
@@ -288,7 +297,9 @@ public class WechatSignaturer {
             throw new WeixinSignatrueExceprion("微信网页端参数没有配置，请前往信任登录正确配置");
         }
         String content = HttpUtils.doGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + secret + "&code=CODE&grant_type=authorization_code");
-        logger.debug("获取access_token响应:" + content);
+        if(logger.isDebugEnabled()){
+            logger.debug("获取access_token响应:" + content);
+        }
         JSONObject object = JSONObject.fromObject(content);
         if(object.get("access_token")==null){
             throw new WeixinSignatrueExceprion("未获取到正确的认证信息，请联系管理员查看日志解决");
@@ -312,7 +323,9 @@ public class WechatSignaturer {
 
         try {
             String content = HttpUtils.doGet("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken + "&type=jsapi");
-            logger.debug("获取ticket响应:" + content);
+            if(logger.isDebugEnabled()){
+                logger.debug("获取ticket响应:" + content);
+            }
             JSONObject object = JSONObject.fromObject(content);
             String ticket = object.get("ticket").toString();
             String expires = object.get("expires_in").toString();

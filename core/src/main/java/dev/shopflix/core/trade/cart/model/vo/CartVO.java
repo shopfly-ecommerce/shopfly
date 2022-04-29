@@ -5,7 +5,7 @@
 */
 package dev.shopflix.core.trade.cart.model.vo;
 
-import dev.shopflix.core.system.model.dto.ShipTemplateChildDTO;
+import dev.shopflix.core.system.model.vo.ShipTemplateSettingVO;
 import dev.shopflix.core.trade.cart.model.dos.CartDO;
 import dev.shopflix.core.trade.cart.model.enums.CartType;
 import io.swagger.annotations.ApiModel;
@@ -45,7 +45,7 @@ public class CartVO extends CartDO implements Serializable {
      * 购物车与运费dto的map映射
      * key为skuid value 为模版
      */
-    private Map<Integer, ShipTemplateChildDTO> shipTemplateChildMap;
+    private Map<Integer, ShipTemplateSettingVO> shipTemplateChildMap;
 
     @ApiModelProperty(value = "购物车页展示时，店铺内的商品是否全选状态.1为店铺商品全选状态,0位非全选")
     private Integer checked;
@@ -120,7 +120,7 @@ public class CartVO extends CartDO implements Serializable {
         this.checked = checked;
     }
 
-    public Map<Integer, ShipTemplateChildDTO> getShipTemplateChildMap() {
+    public Map<Integer, ShipTemplateSettingVO> getShipTemplateChildMap() {
         return shipTemplateChildMap;
     }
 
@@ -132,7 +132,7 @@ public class CartVO extends CartDO implements Serializable {
         this.promotionNotice = promotionNotice;
     }
 
-    public void setShipTemplateChildMap(Map<Integer, ShipTemplateChildDTO> shipTemplateChildMap) {
+    public void setShipTemplateChildMap(Map<Integer, ShipTemplateSettingVO> shipTemplateChildMap) {
         this.shipTemplateChildMap = shipTemplateChildMap;
     }
 

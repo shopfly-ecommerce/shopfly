@@ -25,6 +25,7 @@ import dev.shopflix.core.goods.service.impl.util.SearchUtil;
 import dev.shopflix.core.goods.service.impl.util.StockCacheKeyUtil;
 import dev.shopflix.core.promotion.exchange.model.dos.ExchangeDO;
 import dev.shopflix.core.system.model.vo.ShipTemplateChildBuyerVO;
+import dev.shopflix.core.system.model.vo.ShipTemplateSettingVO;
 import dev.shopflix.core.system.model.vo.ShipTemplateVO;
 import dev.shopflix.core.goods.service.*;
 import dev.shopflix.framework.cache.Cache;
@@ -162,7 +163,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
 
         ShipTemplateVO temp = this.shipTemplateClient.get(goods.getTemplateId());
 
-        for (ShipTemplateChildBuyerVO child : temp.getItems()) {
+        for (ShipTemplateSettingVO child : temp.getItems()) {
             if (child.getAreaId() != null) {
                 if (child.getAreaId().indexOf("," + areaId + ",") >= 0) {
                     //有货

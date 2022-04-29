@@ -60,7 +60,7 @@ public class UpdatePool {
     private final int defaultMaxPoolSize =100;
     private final int defaultmaxLazySecond  =3600;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 
     public UpdatePool(Integer maxUpdateTime, Integer maxPoolSize, Integer maxLazySecond) {

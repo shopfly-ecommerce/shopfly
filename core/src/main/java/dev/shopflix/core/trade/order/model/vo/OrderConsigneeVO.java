@@ -7,11 +7,8 @@ package dev.shopflix.core.trade.order.model.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import dev.shopflix.core.base.context.Region;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 import java.util.Objects;

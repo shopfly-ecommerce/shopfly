@@ -12,10 +12,11 @@ import dev.shopflix.core.trade.cart.model.vo.CartVO;
 import dev.shopflix.core.trade.cart.model.vo.PriceDetailVO;
 import dev.shopflix.core.trade.cart.model.vo.PromotionRule;
 import dev.shopflix.core.trade.cart.service.cartbuilder.CartPriceCalculator;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
 import dev.shopflix.framework.util.CurrencyUtil;
 import dev.shopflix.framework.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.List;
 @Service(value = "cartPriceCalculator")
 public class CartPriceCalculatorImpl implements CartPriceCalculator {
 
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 
     @Override
@@ -135,10 +136,12 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
         }
 
 
-        logger.debug("计算完优惠后购物车数据为：");
-        logger.debug(cartList.toString());
-        logger.debug("价格为：");
-        logger.debug(price.toString());
+        if(logger.isDebugEnabled()){
+            logger.debug("计算完优惠后购物车数据为：");
+            logger.debug(cartList.toString());
+            logger.debug("价格为：");
+            logger.debug(price.toString());
+        }
 
         return price;
     }

@@ -12,8 +12,9 @@ import dev.shopflix.core.trade.cart.model.vo.CartView;
 import dev.shopflix.core.trade.cart.service.CartReadManager;
 import dev.shopflix.core.trade.cart.service.cartbuilder.impl.DefaultCartBuilder;
 import dev.shopflix.core.trade.cart.service.cartbuilder.*;
-import dev.shopflix.framework.logs.Logger;
-import dev.shopflix.framework.logs.LoggerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -122,8 +123,10 @@ public class CartReadManagerImpl implements CartReadManager {
             if (!notInvalid && cartVO.getChecked() == 1) {
                 cartVO.setInvalid(1);
             }
-            this.logger.info("购物车选中处理结果===》：");
-            this.logger.info(cartVO.toString());
+            if (logger.isDebugEnabled()){
+                this.logger.info("购物车选中处理结果===》：");
+                this.logger.info(cartVO.toString());
+            }
         }
     }
 

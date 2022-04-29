@@ -63,12 +63,6 @@ public class MemberBuyerController {
         String str =EmojiCharacterUtil.encode(memberEditDTO.getNickname());
         memberEditDTO.setNickname(str);
         BeanUtil.copyProperties(memberEditDTO, member);
-        if (memberEditDTO.getRegion() != null) {
-            if (StringUtil.isEmpty(memberEditDTO.getRegion().getCounty())) {
-                throw new ServiceException(MemberErrorCode.E141.code(), "地区不合法");
-            }
-            BeanUtil.copyProperties(memberEditDTO.getRegion(), member);
-        }
         //判断会员是修改资料还是完善资料
         if (member.getInfoFull() != null && !member.getInfoFull().equals(1)) {
             member.setInfoFull(1);

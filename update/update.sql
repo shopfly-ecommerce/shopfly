@@ -27,3 +27,11 @@ alter table es_sss_order_data drop column ship_province_id,drop column ship_city
 -- es_sss_order_data New field add by 2020-04-24
 alter table es_sss_order_data add ship_country_code varchar(50) default null comment 'Country code';
 alter table es_sss_order_data add ship_state_code varchar(50) default null comment 'State code';
+
+-- Delete useless fields in es_member table
+alter table es_member drop column province_id,drop column city_id,drop column county_id,drop column town_id,drop column province,drop column county,drop column town;
+-- es_member New field add by 2020-04-24
+alter table es_member add country varchar(255) default null comment 'Country name';
+alter table es_member add country_code varchar(50) default null comment 'Country code';
+alter table es_member add state_name varchar(255) default null comment 'State name';
+alter table es_member add state_code varchar(50) default null comment 'State code';

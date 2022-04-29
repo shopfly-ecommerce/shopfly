@@ -47,12 +47,6 @@ public class AmqpExchange {
      */
     public final static String HELP_CHANGE = "HELP_CHANGE";
 
-
-    /**
-     * 页面生成消息
-     */
-    public final static String PAGE_CREATE = "PAGE_CREATE";
-
     /**
      * 索引生成消息
      */

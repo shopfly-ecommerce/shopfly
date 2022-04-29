@@ -44,9 +44,6 @@ public class ShipTemplateDO implements Serializable {
     @ApiParam("名字")
     private String name;
 
-    @Column
-    @ApiParam("模版类型，1 重量算运费 2 计件算运费")
-    private Integer type;
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -70,25 +67,12 @@ public class ShipTemplateDO implements Serializable {
         this.id = id;
     }
 
-    /**
-     * 1 重量算运费 2 计件算运费
-     *
-     * @return
-     */
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
 
     @Override
     public String toString() {
         return "ShipTemplateDO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", type=" + type +
                 '}';
     }
 }

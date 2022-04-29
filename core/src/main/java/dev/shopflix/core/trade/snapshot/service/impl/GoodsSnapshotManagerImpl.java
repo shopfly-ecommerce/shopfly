@@ -50,7 +50,7 @@ import java.util.List;
 @Service
 public class GoodsSnapshotManagerImpl implements GoodsSnapshotManager {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     

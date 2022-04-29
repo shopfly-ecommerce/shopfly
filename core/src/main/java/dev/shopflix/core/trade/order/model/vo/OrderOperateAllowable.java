@@ -68,7 +68,7 @@ public class OrderOperateAllowable implements Serializable {
     @ApiModelProperty(value = "是否允许更改价格")
     private Boolean allowEditPrice;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 
     public Boolean getAllowCancel() {

@@ -5,8 +5,6 @@
 */
 package dev.shopflix.api.seller.trade;
 
-import dev.shopflix.core.base.context.Region;
-import dev.shopflix.core.base.context.RegionFormat;
 import dev.shopflix.core.client.member.MemberHistoryReceiptClient;
 import dev.shopflix.core.trade.cart.model.dos.OrderPermission;
 import dev.shopflix.core.trade.order.model.dto.OrderQueryParam;
@@ -137,34 +135,9 @@ public class OrderSellerController {
 
 
     @ApiOperation(value = "商家修改收货人地址", notes = "商家发货前，可以修改收货人地址信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单sn", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "ship_name", value = "收货人姓名", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "remark", value = "订单备注", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "ship_addr", value = "收货地址", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "ship_mobile", value = "收货人手机号", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "ship_tel", value = "收货人电话", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "receive_time", value = "送货时间", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "region", value = "地区id", dataType = "int", paramType = "query"),
-    })
     @PutMapping(value = "/{order_sn}/address")
-    public OrderConsigneeVO updateOrderConsignee(@ApiIgnore @PathVariable(name = "order_sn") String orderSn,
-                                                 @ApiIgnore String shipName, @ApiIgnore String remark,
-                                                 @ApiIgnore String shipAddr, @ApiIgnore String shipMobile,
-                                                 @ApiIgnore String shipTel, @ApiIgnore String receiveTime,
-                                                 @RegionFormat Region region) {
-
-        OrderConsigneeVO orderConsignee = new OrderConsigneeVO();
-        orderConsignee.setOrderSn(orderSn);
-        orderConsignee.setShipName(shipName);
-        orderConsignee.setRemark(remark);
-        orderConsignee.setShipAddr(shipAddr);
-        orderConsignee.setShipMobile(shipMobile);
-        orderConsignee.setShipTel(shipTel);
-        orderConsignee.setReceiveTime(receiveTime);
-        orderConsignee.setRegion(region);
-        orderConsignee = this.orderOperateManager.updateOrderConsignee(orderConsignee);
-        return orderConsignee;
+    public OrderConsigneeVO updateOrderConsignee(@ApiIgnore @PathVariable(name = "order_sn") String orderSn, OrderConsigneeVO orderConsignee) {
+        return this.orderOperateManager.updateOrderConsignee(orderConsignee);
     }
 
 

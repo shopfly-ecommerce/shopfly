@@ -5,6 +5,7 @@ import dev.shopflix.core.system.model.dos.State;
 import dev.shopflix.core.system.service.CountryManager;
 import dev.shopflix.core.system.service.StateManager;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/countries")
-@Api(description = "文章相关API")
+@Api(description = "国家、洲相关API")
 public class CountryBaseController {
 
     @Autowired
@@ -30,12 +31,14 @@ public class CountryBaseController {
     @Autowired
     private StateManager stateManager;
 
+    @ApiOperation("获取所有国家")
     @GetMapping()
     public List<Country> all() {
 
         return countryManager.allCountry();
     }
 
+    @ApiOperation("根据code获取下级地区")
     @GetMapping("/{code}/states")
     public List<State> state(@PathVariable String code) {
 

@@ -5,11 +5,10 @@
 */
 package dev.shopflix.core.system.model.vo;
 
-import dev.shopflix.core.system.model.dos.ShipTemplateChild;
-import dev.shopflix.framework.database.annotation.Column;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.gson.Gson;
+import dev.shopflix.framework.database.annotation.Column;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
@@ -29,7 +28,7 @@ import java.util.Map;
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class ShipTemplateChildSellerVO extends ShipTemplateChildBaseVO implements Serializable {
+public class RateAreaChildVO implements Serializable {
 
     @ApiParam("地区‘，‘分隔   示例参数：北京，山西，天津，上海")
     @Column(name = "area")
@@ -38,21 +37,6 @@ public class ShipTemplateChildSellerVO extends ShipTemplateChildBaseVO implement
     @ApiModelProperty(hidden=true)
     private List<ShipTemplateChildArea> regions;
 
-    public ShipTemplateChildSellerVO() {
-
-    }
-
-    public ShipTemplateChildSellerVO(ShipTemplateChild child, boolean flag) {
-        this.setFirstCompany(child.getFirstCompany());
-        this.setFirstPrice(child.getFirstPrice());
-        this.setContinuedCompany(child.getContinuedCompany());
-        this.setContinuedPrice(child.getContinuedPrice());
-        this.area = child.getArea();
-        this.regions = getConvertRegions(this.area);
-        if(flag){
-            this.area = null;
-        }
-    }
 
     private List<ShipTemplateChildArea> getConvertRegions(String area) {
 

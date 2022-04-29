@@ -31,7 +31,7 @@ public class ExpressDetailVO {
     /**
      * 物流详细信息
      */
-    private List<Map> data;
+    private List data;
 
     public String getName() {
         return name;
@@ -49,11 +49,11 @@ public class ExpressDetailVO {
         this.courierNum = courierNum;
     }
 
-    public List<Map> getData() {
+    public List getData() {
         return data;
     }
 
-    public void setData(List<Map> data) {
+    public void setData(List data) {
         this.data = data;
     }
 

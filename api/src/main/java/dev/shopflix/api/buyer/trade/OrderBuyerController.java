@@ -206,7 +206,7 @@ public class OrderBuyerController {
     @GetMapping(value = "/cashier")
     public CashierVO getCashier(@ApiIgnore String tradeSn, @ApiIgnore String orderSn) {
 
-        String shipName, shipAddr, shipMobile, shipTel, shipProvince, shipCity, shipCounty, shipTown, payTypeText;
+        String shipName, shipAddr, shipMobile, shipCountry, shipState, shipCity, payTypeText;
         Double needPayPrice;
         Long createTime;
 
@@ -216,11 +216,9 @@ public class OrderBuyerController {
             shipName = tradeDO.getConsigneeName();
             shipAddr = tradeDO.getConsigneeAddress();
             shipMobile = tradeDO.getConsigneeMobile();
-            shipTel = tradeDO.getConsigneeTelephone();
-            shipProvince = tradeDO.getConsigneeProvince();
+            shipCountry = tradeDO.getConsigneeCountry();
+            shipState = tradeDO.getConsigneeState();
             shipCity = tradeDO.getConsigneeCity();
-            shipCounty = tradeDO.getConsigneeCounty();
-            shipTown = tradeDO.getConsigneeTown();
             needPayPrice = tradeDO.getTotalPrice();
             payTypeText = tradeDO.getPaymentType();
             createTime = tradeDO.getCreateTime();
@@ -231,11 +229,9 @@ public class OrderBuyerController {
             shipName = detailVO.getShipName();
             shipAddr = detailVO.getShipAddr();
             shipMobile = detailVO.getShipMobile();
-            shipTel = detailVO.getShipTel();
-            shipProvince = detailVO.getShipProvince();
+            shipCountry = detailVO.getShipCountry();
+            shipState = detailVO.getShipState();
             shipCity = detailVO.getShipCity();
-            shipCounty = detailVO.getShipCounty();
-            shipTown = detailVO.getShipTown();
             needPayPrice = detailVO.getNeedPayMoney();
             payTypeText = detailVO.getPaymentType();
             createTime = detailVO.getCreateTime();
@@ -245,15 +241,13 @@ public class OrderBuyerController {
         }
 
         CashierVO cashierVO = new CashierVO();
-        cashierVO.setShipProvince(shipProvince);
+        cashierVO.setShipCountry(shipCountry);
+        cashierVO.setShipState(shipState);
         cashierVO.setShipCity(shipCity);
-        cashierVO.setShipCounty(shipCounty);
-        cashierVO.setShipTown(shipTown);
         cashierVO.setShipAddr(shipAddr);
         cashierVO.setShipMobile(shipMobile);
         cashierVO.setShipName(shipName);
         cashierVO.setNeedPayPrice(needPayPrice);
-        cashierVO.setShipTel(shipTel);
         cashierVO.setPayTypeText(payTypeText);
         cashierVO.setCountDown(handlecountDown(createTime));
         return cashierVO;

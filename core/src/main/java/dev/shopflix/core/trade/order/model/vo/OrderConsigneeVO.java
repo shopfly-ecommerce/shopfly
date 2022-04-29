@@ -5,10 +5,13 @@
 */
 package dev.shopflix.core.trade.order.model.vo;
 
-import dev.shopflix.core.base.context.Region;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 注释
@@ -17,31 +20,47 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * @version v2.0
  * @since v7.0.0
  */
-public class OrderConsigneeVO {
+@ApiModel
+@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class OrderConsigneeVO implements Serializable {
 
-    @ApiModelProperty(value = "订单号")
+    private static final long serialVersionUID = -6095473417556550895L;
+
+    @ApiModelProperty(value = "订单号", name = "order_sn", hidden = true)
     private String orderSn;
 
-    @ApiModelProperty(value = "收货人姓名")
+    @ApiModelProperty(value = "收货人姓名", name = "ship_name")
     private String shipName;
 
-    @ApiModelProperty(value = "订单备注")
+    @ApiModelProperty(value = "订单备注", name = "remark")
     private String remark;
 
-    @ApiModelProperty(value = "收货地址")
+    @ApiModelProperty(value = "国家", name = "ship_country")
+    private String shipCountry;
+
+    @ApiModelProperty(value = "州/省名称", name = "ship_state")
+    private String shipState;
+
+    @ApiModelProperty(value = "城市", name = "ship_city")
+    private String shipCity;
+
+    @ApiModelProperty(value = "国家编码", name = "ship_country_code")
+    private String shipCountryCode;
+
+    @ApiModelProperty(value = "州/省编码", name = "ship_state_code")
+    private String shipStateCode;
+
+    @ApiModelProperty(value = "收货地址", name = "ship_addr")
     private String shipAddr;
 
-    @ApiModelProperty(value = "收货人手机号")
+    @ApiModelProperty(value = "联系电话", name = "ship_mobile")
     private String shipMobile;
 
-    @ApiModelProperty(value = "收货人电话")
-    private String shipTel;
+    @ApiModelProperty(value = "邮编", name = "ship_zip")
+    private String shipZip;
 
-    @ApiModelProperty(value = "送货时间")
+    @ApiModelProperty(value = "送货时间", name = "receive_time")
     private String receiveTime;
-
-    @ApiModelProperty(name = "region", value = "地区id")
-    private Region region;
 
     public String getOrderSn() {
         return orderSn;
@@ -67,6 +86,46 @@ public class OrderConsigneeVO {
         this.remark = remark;
     }
 
+    public String getShipCountry() {
+        return shipCountry;
+    }
+
+    public void setShipCountry(String shipCountry) {
+        this.shipCountry = shipCountry;
+    }
+
+    public String getShipState() {
+        return shipState;
+    }
+
+    public void setShipState(String shipState) {
+        this.shipState = shipState;
+    }
+
+    public String getShipCity() {
+        return shipCity;
+    }
+
+    public void setShipCity(String shipCity) {
+        this.shipCity = shipCity;
+    }
+
+    public String getShipCountryCode() {
+        return shipCountryCode;
+    }
+
+    public void setShipCountryCode(String shipCountryCode) {
+        this.shipCountryCode = shipCountryCode;
+    }
+
+    public String getShipStateCode() {
+        return shipStateCode;
+    }
+
+    public void setShipStateCode(String shipStateCode) {
+        this.shipStateCode = shipStateCode;
+    }
+
     public String getShipAddr() {
         return shipAddr;
     }
@@ -83,12 +142,12 @@ public class OrderConsigneeVO {
         this.shipMobile = shipMobile;
     }
 
-    public String getShipTel() {
-        return shipTel;
+    public String getShipZip() {
+        return shipZip;
     }
 
-    public void setShipTel(String shipTel) {
-        this.shipTel = shipTel;
+    public void setShipZip(String shipZip) {
+        this.shipZip = shipZip;
     }
 
     public String getReceiveTime() {
@@ -99,12 +158,32 @@ public class OrderConsigneeVO {
         this.receiveTime = receiveTime;
     }
 
-    public Region getRegion() {
-        return region;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        OrderConsigneeVO that = (OrderConsigneeVO) o;
+        return Objects.equals(orderSn, that.orderSn) &&
+                Objects.equals(shipName, that.shipName) &&
+                Objects.equals(remark, that.remark) &&
+                Objects.equals(shipCountry, that.shipCountry) &&
+                Objects.equals(shipState, that.shipState) &&
+                Objects.equals(shipCity, that.shipCity) &&
+                Objects.equals(shipCountryCode, that.shipCountryCode) &&
+                Objects.equals(shipStateCode, that.shipStateCode) &&
+                Objects.equals(shipAddr, that.shipAddr) &&
+                Objects.equals(shipMobile, that.shipMobile) &&
+                Objects.equals(shipZip, that.shipZip) &&
+                Objects.equals(receiveTime, that.receiveTime);
     }
 
-    public void setRegion(Region region) {
-        this.region = region;
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderSn, shipName, remark, shipCountry, shipState, shipCity, shipCountryCode, shipStateCode, shipAddr, shipMobile, shipZip, receiveTime);
     }
 
     @Override
@@ -113,49 +192,15 @@ public class OrderConsigneeVO {
                 "orderSn='" + orderSn + '\'' +
                 ", shipName='" + shipName + '\'' +
                 ", remark='" + remark + '\'' +
+                ", shipCountry='" + shipCountry + '\'' +
+                ", shipState='" + shipState + '\'' +
+                ", shipCity='" + shipCity + '\'' +
+                ", shipCountryCode='" + shipCountryCode + '\'' +
+                ", shipStateCode='" + shipStateCode + '\'' +
                 ", shipAddr='" + shipAddr + '\'' +
                 ", shipMobile='" + shipMobile + '\'' +
-                ", shipTel='" + shipTel + '\'' +
+                ", shipZip='" + shipZip + '\'' +
                 ", receiveTime='" + receiveTime + '\'' +
-                ", region=" + region +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        OrderConsigneeVO that = (OrderConsigneeVO) o;
-
-        return new EqualsBuilder()
-                .append(orderSn, that.orderSn)
-                .append(shipName, that.shipName)
-                .append(remark, that.remark)
-                .append(shipAddr, that.shipAddr)
-                .append(shipMobile, that.shipMobile)
-                .append(shipTel, that.shipTel)
-                .append(receiveTime, that.receiveTime)
-                .append(region, that.region)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(orderSn)
-                .append(shipName)
-                .append(remark)
-                .append(shipAddr)
-                .append(shipMobile)
-                .append(shipTel)
-                .append(receiveTime)
-                .append(region)
-                .toHashCode();
     }
 }

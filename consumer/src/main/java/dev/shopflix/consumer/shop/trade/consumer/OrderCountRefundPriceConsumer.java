@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderCountRefundPriceConsumer implements OrderStatusChangeEvent {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
     private OrderClient orderClient;

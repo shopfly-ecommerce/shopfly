@@ -16,7 +16,7 @@ import java.util.List;
  * @Author: gy
  * @Date: 2020/6/10 0010 9:50
  */
-@Component
+//@Component
 public class EveryTenMinutesExecuteJobHandler {
 
 

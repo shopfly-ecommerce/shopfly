@@ -1,20 +1,27 @@
 package dev.shopflix.core.payment.plugin.paypal.executor;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.paypal.http.HttpResponse;
 import com.paypal.orders.*;
 import dev.shopflix.core.base.DomainSettings;
 import dev.shopflix.core.client.trade.OrderClient;
 import dev.shopflix.core.payment.model.dos.PaymentBillDO;
+import dev.shopflix.core.payment.model.enums.ClientType;
+import dev.shopflix.core.payment.model.enums.TradeType;
 import dev.shopflix.core.payment.model.vo.PayBill;
 import dev.shopflix.core.payment.plugin.paypal.CaptureOrder;
 import dev.shopflix.core.payment.plugin.paypal.PayPalClient;
 import dev.shopflix.core.payment.plugin.paypal.PaypalPluginConfig;
 import dev.shopflix.core.payment.service.PaymentBillManager;
 import dev.shopflix.core.trade.order.model.vo.OrderDetailVO;
+import dev.shopflix.framework.context.ThreadContextHolder;
 import dev.shopflix.framework.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +45,10 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
     @Autowired
     private DomainSettings domainSettings;
 
+    @Autowired
+    private OrderClient orderClient;
+
+
     /**
      * 支付
      * @param bill
@@ -45,32 +56,24 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
      */
     public Map onPay(PayBill bill) {
 
-        PayPalClient payPalClient = new PayPalClient();
+        OrderDetailVO orderDetailVO = this.orderClient.getOrderVO(bill.getSn());
+        PayPalClient payPalClient = super.buildClient(bill.getClientType());
 
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.header("prefer","return=representation");
-        request.requestBody(buildRequestBody(bill));
+        request.requestBody(buildRequestBody(bill, orderDetailVO));
 
         Map result = new HashMap();
 
         try {
             HttpResponse<Order> response = payPalClient.client().execute(request);
-
             if (response.statusCode() == 201) {
-                // System.out.println("Status Code: " + response.statusCode());
-                // System.out.println("Status: " + response.result().status());
-                // System.out.println("Order ID: " + response.result().id());
-                // paypal 流水号
-
-                //this.orderClient.updateOrderPayOrderNo(response.result().id(), bill.getSn());
-
-                this.paymentBillManager.updateTradeNoByBillSn(bill.getSn(), response.result().id());
-
                 // System.out.println("Links: ");
                 for (LinkDescription link : response.result().links()) {
                     // System.out.println("\t" + link.rel() + ": " + link.href() + "\tCall Type: " + link.method());
                     if ("approve".equals(link.rel())) {
-                        result.put("approve", link.href());
+                        result.put("gateway_url", link.href());
+                        result.put("form_items", new ArrayList<>());
                     }
                 }
             }
@@ -79,6 +82,46 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
             e.printStackTrace();
         }
         return result;
+    }
+
+
+    /**
+     * 异步回调
+     * @param tradeType
+     * @param clientType
+     * @return
+     */
+    public String onCallback(TradeType tradeType, ClientType clientType) {
+        try {
+            HttpServletRequest request = ThreadContextHolder.getHttpRequest();
+            String resultStr = this.getBodyData(request);
+            JSONObject obj = JSONUtil.toBean(resultStr, JSONObject.class);
+
+            //第三方流水号
+            String returnOrderNo = obj.get("id")+"";
+
+            //批准交易
+            if("CHECKOUT.ORDER.APPROVED".equals(obj.get("event_type")+"")){
+                JSONObject resource = obj.get("resource", JSONObject.class);
+                List<JSONObject> list = resource.get("purchase_units", ArrayList.class);
+                JSONObject purchase = list.get(0);
+                JSONObject amount = purchase.get("amount", JSONObject.class);
+
+                //支付金额
+                String value = amount.get("value")+"";
+                //订单/交易 SN
+                String customId = purchase.get("custom_id")+"";
+
+                String type = customId.split("-")[0];
+                String billSN = customId.split("-")[1];
+
+                this.paySuccess(billSN, returnOrderNo, TradeType.valueOf(type), Double.parseDouble(value));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -118,7 +161,7 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
      *
      * @return OrderRequest with created order request
      */
-    private OrderRequest buildRequestBody(PayBill bill) {
+    private OrderRequest buildRequestBody(PayBill bill, OrderDetailVO orderDetailVO) {
 
         OrderRequest orderRequest = new OrderRequest();
         // 在客户付款后立即扣款
@@ -153,11 +196,11 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
                 // API 调用方为采购单位提供的外部 ID。当您必须通过 更新订单时，多个采购单位需要PATCH。如果您忽略此值且订单仅包含一个购买单位，PayPal 会将此值设置为default。
                 .referenceId("PUHF")
                 // 购买说明
-                .description("Sporting Goods")
+                //.description("Sporting Goods")
                 // API 调用者提供的外部 ID。用于协调客户交易与 PayPal 交易。出现在交易和结算报告中，但对付款人不可见。
-                .customId(bill.getBillSn())
+                .customId(bill.getTradeType().name() + "-" + bill.getBillSn())
                 // 软描述符是用于构造出现在付款人卡对帐单上的对帐单描述符的动态文本。
-                .softDescriptor("HighFashions")
+                //.softDescriptor("HighFashions")
 
                 //订单金额明细。必需
                 .amountWithBreakdown(
@@ -170,14 +213,42 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
                 //物流明细 必需
                 .shippingDetail(new ShippingDetail().name(
                         //收货人姓名
-                        new Name().fullName("John Doe"))
+                        new Name().fullName(orderDetailVO.getShipName()))
                         //地址
-                        .addressPortable(new AddressPortable().addressLine1("123 Townsend St").addressLine2("Floor 6")
-                                .adminArea2("San Francisco").adminArea1("CA").postalCode("94107").countryCode("US")));
+                        .addressPortable(new AddressPortable()
+                                .addressLine1(orderDetailVO.getShipAddr())
+                                .adminArea2(orderDetailVO.getShipCity())
+                                .adminArea1(orderDetailVO.getShipState())
+                                .postalCode(orderDetailVO.getShipZip())
+                                .countryCode(orderDetailVO.getShipCountryCode())));
+
         purchaseUnitRequests.add(purchaseUnitRequest);
         //订单明细
         orderRequest.purchaseUnits(purchaseUnitRequests);
         return orderRequest;
+    }
+
+
+    /**
+     * 读取body参数
+     * @param request
+     * @return
+     */
+    private String getBodyData(HttpServletRequest request) {
+        StringBuffer data = new StringBuffer();
+        String line = null;
+        BufferedReader reader = null;
+        try {
+            reader = request.getReader();
+            while (null != (line = reader.readLine())) {
+                data.append(line);
+            }
+        } catch (IOException e) {
+
+        } finally {
+
+        }
+        return data.toString();
     }
 
 

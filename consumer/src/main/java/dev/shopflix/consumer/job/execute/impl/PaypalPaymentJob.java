@@ -34,26 +34,25 @@ public class PaypalPaymentJob implements EveryTenMinutesExecute {
 
     @Override
     public void everyTenMinutes() {
-        System.out.println("每1分钟调用=" + DateUtil.date());
         //查询所有待支付的订单
 
         List<PaymentBillDO> list = this.paymentBillManager.getWaitPay();
 
         //循环查询支付状态
-        for (PaymentBillDO billDO: list) {
-            System.out.println("订单号 = " + billDO.getSn());
-            PayParam param = new PayParam();
-            param.setSn(billDO.getSn());
-            param.setTradeType(billDO.getTradeType());
-            param.setClientType(ClientType.PC.name());
-            param.setPaymentPluginId(billDO.getPaymentPluginId());
-            try {
-                this.paymentManager.queryResult(param);
-            } catch (Exception e) {
-//                e.printStackTrace();
-                continue;
-            }
-        }
+//        for (PaymentBillDO billDO: list) {
+//            System.out.println("订单号 = " + billDO.getSn());
+//            PayParam param = new PayParam();
+//            param.setSn(billDO.getSn());
+//            param.setTradeType(billDO.getTradeType());
+//            param.setClientType(ClientType.PC.name());
+//            param.setPaymentPluginId(billDO.getPaymentPluginId());
+//            try {
+//                this.paymentManager.queryResult(param);
+//            } catch (Exception e) {
+////                e.printStackTrace();
+//                continue;
+//            }
+//        }
 
     }
 }

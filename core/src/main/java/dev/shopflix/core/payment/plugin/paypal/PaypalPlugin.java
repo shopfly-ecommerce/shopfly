@@ -4,10 +4,13 @@ import cn.hutool.json.JSONUtil;
 import com.paypal.http.HttpResponse;
 import com.paypal.orders.*;
 import dev.shopflix.core.client.trade.OrderClient;
+import dev.shopflix.core.payment.model.enums.AlipayConfigItem;
 import dev.shopflix.core.payment.model.enums.ClientType;
+import dev.shopflix.core.payment.model.enums.PaypalConfigItem;
 import dev.shopflix.core.payment.model.enums.TradeType;
 import dev.shopflix.core.payment.model.vo.ClientConfig;
 import dev.shopflix.core.payment.model.vo.PayBill;
+import dev.shopflix.core.payment.model.vo.PayConfigItem;
 import dev.shopflix.core.payment.model.vo.RefundBill;
 import dev.shopflix.core.payment.plugin.paypal.executor.PaypalPaymentExecutor;
 import dev.shopflix.core.payment.service.PaymentPluginManager;
@@ -52,7 +55,25 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
 
     @Override
     public List<ClientConfig> definitionClientConfig() {
-        return null;
+
+        List<ClientConfig> resultList = new ArrayList<>();
+
+        ClientConfig config = new ClientConfig();
+
+        List<PayConfigItem> configList = new ArrayList<>();
+        for (PaypalConfigItem value : PaypalConfigItem.values()) {
+            PayConfigItem item = new PayConfigItem();
+            item.setName(value.name());
+            item.setText(value.getText());
+            configList.add(item);
+        }
+
+        config.setKey(ClientType.PC.getDbColumn() + "&" + ClientType.WAP.getDbColumn() + "&" + ClientType.NATIVE.getDbColumn() + "&" + ClientType.REACT.getDbColumn());
+        config.setConfigList(configList);
+        config.setName("是否开启");
+
+        resultList.add(config);
+        return resultList;
     }
 
     @Override
@@ -67,12 +88,7 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
 
     @Override
     public String onCallback(TradeType tradeType, ClientType clientType) {
-        System.out.println("异步支付回调");
-
-        HttpServletRequest request = ThreadContextHolder.getHttpRequest();
-        System.out.println(JSONUtil.toJsonStr(request.getParameterMap()));
-
-        return null;
+        return this.paypalPaymentExecutor.onCallback(tradeType, clientType);
     }
 
     @Override
@@ -94,6 +110,8 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
     public Integer getIsRetrace() {
         return null;
     }
+
+
 
 
 

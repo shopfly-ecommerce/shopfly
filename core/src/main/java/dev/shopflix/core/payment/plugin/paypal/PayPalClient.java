@@ -6,6 +6,13 @@ import com.paypal.core.PayPalHttpClient;
 
 public class PayPalClient {
 
+	public PayPalClient() {
+	}
+
+	public PayPalClient(PayPalEnvironment environment) {
+		this.environment = environment;
+	}
+
 	/**
 	 * Setting up PayPal SDK environment with PayPal Access credentials. For demo
 	 * purpose, we are using SandboxEnvironment. In production this will be

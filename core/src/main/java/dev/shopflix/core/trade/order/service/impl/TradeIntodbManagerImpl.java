@@ -18,6 +18,7 @@ import dev.shopflix.core.trade.order.model.dto.OrderDTO;
 import dev.shopflix.core.trade.order.model.enums.OrderOutStatusEnum;
 import dev.shopflix.core.trade.order.model.enums.OrderOutTypeEnum;
 import dev.shopflix.core.trade.order.model.enums.OrderStatusEnum;
+import dev.shopflix.core.trade.order.model.enums.TradeStatusEnum;
 import dev.shopflix.core.trade.order.model.vo.TradeVO;
 import dev.shopflix.core.trade.order.service.CheckoutParamManager;
 import dev.shopflix.core.trade.order.service.OrderLogManager;
@@ -135,6 +136,9 @@ public class TradeIntodbManagerImpl implements TradeIntodbManager {
         // 交易入库
         TradeDO tradeDO = new TradeDO(tradeVO);
         tradeDO.setCreateTime(DateUtil.getDateline());
+
+        //TODO snow测试用
+        tradeDO.setTradeStatus(OrderStatusEnum.CONFIRM.name());
         this.daoSupport.insert(tradeDO);
 
         long createTime = DateUtil.getDateline();
@@ -193,6 +197,9 @@ public class TradeIntodbManagerImpl implements TradeIntodbManager {
             orderDTO.setCommentStatus(orderDO.getCommentStatus());
             orderDTO.setServiceStatus(orderDO.getServiceStatus());
 
+
+            //TODO snow测试用
+            orderDO.setOrderStatus(OrderStatusEnum.CONFIRM.name());
             this.daoSupport.insert(orderDO);
 
             int orderId = this.daoSupport.getLastId("es_order");

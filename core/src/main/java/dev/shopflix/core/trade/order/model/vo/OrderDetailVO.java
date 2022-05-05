@@ -90,6 +90,9 @@ public class OrderDetailVO extends OrderDO {
     @ApiModelProperty(value = "拼团订单状态")
     private String pingTuanStatus;
 
+    @ApiModelProperty(name = "pay_order_no", value = "支付方式返回的交易号")
+    private String payOrderNo;
+
 
     public ReceiptHistory getReceiptHistory() {
         return receiptHistory;
@@ -260,6 +263,16 @@ public class OrderDetailVO extends OrderDO {
 
     public void setFullMinus(Double fullMinus) {
         this.fullMinus = fullMinus;
+    }
+
+    @Override
+    public String getPayOrderNo() {
+        return payOrderNo;
+    }
+
+    @Override
+    public void setPayOrderNo(String payOrderNo) {
+        this.payOrderNo = payOrderNo;
     }
 
     @Override

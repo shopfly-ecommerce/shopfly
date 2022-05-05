@@ -174,4 +174,11 @@ public interface OrderOperateManager {
      */
     void updateOrderItemServiceStatus(String sn, List<OrderSkuDTO> orderSkuDTOList);
 
+    /**
+     * 根据订单号修改第三方支付流水号
+     * @param payOrderNo
+     * @param sn
+     */
+    void updateOrderPayOrderNo(String payOrderNo, String sn);
+
 }

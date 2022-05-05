@@ -25,7 +25,7 @@ public class EveryTenMinutesExecuteJobHandler {
     @Autowired
     private List<EveryTenMinutesExecute> everyTenMinutesExecutes;
 
-    @Scheduled(cron = "0 */10 * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     public void execute() {
         try {
 

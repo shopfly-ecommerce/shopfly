@@ -11,17 +11,17 @@ spring:
 
   #数据库配置
   datasource:
-    url: jdbc:mysql://localhost:3306/b2c_en?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://222.222.106.122:52513/b2c_en?useUnicode=true&characterEncoding=utf8&autoReconnect=true
     username: root
-    password: 111111
+    password: enation752513
     driver-class-name: com.mysql.jdbc.Driver
     druid:
       web-stat-filter:
         enabled: false
   #rabbitmq
   rabbitmq:
-    host: 192.168.2.219
-    port: 5672
+    host: 222.222.106.122
+    port: 26587
     username: b2c
     password: b2c
     virtual-host: b2c
@@ -30,7 +30,7 @@ spring:
   data:
     elasticsearch:
       cluster-name: docker-cluster
-      cluster-nodes: 192.168.2.219:9300
+      cluster-nodes: 222.222.106.122:52516
       index-name: b2c
 
 #redis 配置
@@ -39,8 +39,8 @@ redis:
   config :
     type: manual
   host: localhost
-  port: 6378
-  password: 123456
+  port: 6379
+  password:
   maxIdle: 500
   maxTotal: 500
   maxWaitMillis: -1
@@ -50,10 +50,11 @@ redis:
 logging:
   level:
     org.springframework: ERROR
-    com.enation.app : DEBUG
+    dev.shopflix : DEBUG
 
 #java 系统配置
 shopflix:
+  name: shopflix # 公司名称
   product: stand #定义系统标准产品，微服务指定为： microservice
   license[0]: abcde #license请向售后人员索要
   #token加密秘钥，请务必更换此词串，且注意保密
@@ -69,3 +70,5 @@ shopflix:
     buyer: buyer.javamall.com.cn #配置为您买家端PC的域名
     mobileBuyer: m.buyer.javamall.com.cn  #配置为您买家端WAP的域名
     callback: api.buyerjavamall.com.cn #请配置为您站点的买家端的api域名，如果不配置此项默认读取站点买家端api的域名，用来做支付新人登录回调
+    cancelUrl : https://www.baidu.com #取消付款后重定向的URL
+    returnUrl : https://www.baidu.com #批准付款后重定向的URL

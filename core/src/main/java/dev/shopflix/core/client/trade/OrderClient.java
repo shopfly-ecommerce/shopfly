@@ -116,4 +116,12 @@ public interface OrderClient {
     void payOrder(String orderSn, Double price, String returnTradeNo, String permission);
 
 
+    /**
+     * 根据订单号修改第三方支付流水号
+     * @param payOrderNo
+     * @param sn
+     */
+    void updateOrderPayOrderNo(String payOrderNo, String sn);
+
+
 }

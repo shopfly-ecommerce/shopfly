@@ -204,6 +204,25 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
         return tpl;
     }
 
+    @Override
+    public Integer getCountByAreaId(Integer rateAreaId) {
+
+        return daoSupport.queryForInt("select count(0) from es_ship_template_setting where rate_area_id = ? ",rateAreaId);
+    }
+
+    @Override
+    public void removeCache(Integer rateAreaId) {
+        List<ShipTemplateSettingDO> list= daoSupport.queryForList("select distinct template_id from es_ship_template_setting where rate_area_id = ?",ShipTemplateSettingDO.class,rateAreaId);
+        if (list!=null&&list.size()>0){
+            for (ShipTemplateSettingDO settingDO : list) {
+                //移除缓存某个VO
+                this.cache.remove(CachePrefix.SHIP_TEMPLATE_ONE.getPrefix() + settingDO.getTemplateId());
+            }
+            //移除缓存某商家的VO列表
+            this.cache.remove(CachePrefix.SHIP_TEMPLATE.getPrefix());
+        }
+    }
+
     /**
      *
      * ShipTemplateSettingDO在转换VO，增加地区相关信息

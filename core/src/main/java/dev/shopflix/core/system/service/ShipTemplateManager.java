@@ -62,4 +62,17 @@ public interface ShipTemplateManager {
 	 * @return
 	 */
 	ShipTemplateSellerVO getFromDB(Integer templateId);
+
+	/**
+	 * 根据区域id查询区域被使用数量
+	 * @param rateAreaId
+	 * @return
+	 */
+    Integer getCountByAreaId(Integer rateAreaId);
+
+	/**
+	 * 根据区域id移除运费模板
+	 * @param rateAreaId
+	 */
+	void removeCache(Integer rateAreaId);
 }

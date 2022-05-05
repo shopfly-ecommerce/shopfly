@@ -1,10 +1,6 @@
 package dev.shopflix.core.payment.plugin.paypal;
 
-import cn.hutool.json.JSONUtil;
-import com.paypal.http.HttpResponse;
-import com.paypal.orders.*;
-import dev.shopflix.core.client.trade.OrderClient;
-import dev.shopflix.core.payment.model.enums.AlipayConfigItem;
+
 import dev.shopflix.core.payment.model.enums.ClientType;
 import dev.shopflix.core.payment.model.enums.PaypalConfigItem;
 import dev.shopflix.core.payment.model.enums.TradeType;
@@ -14,15 +10,9 @@ import dev.shopflix.core.payment.model.vo.PayConfigItem;
 import dev.shopflix.core.payment.model.vo.RefundBill;
 import dev.shopflix.core.payment.plugin.paypal.executor.PaypalPaymentExecutor;
 import dev.shopflix.core.payment.service.PaymentPluginManager;
-import dev.shopflix.core.trade.order.model.vo.OrderDetailVO;
-import dev.shopflix.core.trade.order.service.OrderOperateManager;
-import dev.shopflix.core.trade.sdk.model.OrderDetailDTO;
-import dev.shopflix.framework.context.ThreadContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

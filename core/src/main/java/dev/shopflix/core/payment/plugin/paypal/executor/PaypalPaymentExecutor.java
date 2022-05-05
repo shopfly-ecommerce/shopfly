@@ -95,6 +95,7 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
         try {
             HttpServletRequest request = ThreadContextHolder.getHttpRequest();
             String resultStr = this.getBodyData(request);
+            System.out.println(resultStr);
             JSONObject obj = JSONUtil.toBean(resultStr, JSONObject.class);
 
             //第三方流水号

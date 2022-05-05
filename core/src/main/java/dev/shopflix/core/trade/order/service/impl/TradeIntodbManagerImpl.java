@@ -137,8 +137,6 @@ public class TradeIntodbManagerImpl implements TradeIntodbManager {
         TradeDO tradeDO = new TradeDO(tradeVO);
         tradeDO.setCreateTime(DateUtil.getDateline());
 
-        //TODO snow测试用
-        tradeDO.setTradeStatus(OrderStatusEnum.CONFIRM.name());
         this.daoSupport.insert(tradeDO);
 
         long createTime = DateUtil.getDateline();
@@ -198,8 +196,6 @@ public class TradeIntodbManagerImpl implements TradeIntodbManager {
             orderDTO.setServiceStatus(orderDO.getServiceStatus());
 
 
-            //TODO snow测试用
-            orderDO.setOrderStatus(OrderStatusEnum.CONFIRM.name());
             this.daoSupport.insert(orderDO);
 
             int orderId = this.daoSupport.getLastId("es_order");

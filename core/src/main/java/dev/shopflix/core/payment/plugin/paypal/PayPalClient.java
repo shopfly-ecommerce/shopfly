@@ -11,6 +11,7 @@ public class PayPalClient {
 
 	public PayPalClient(PayPalEnvironment environment) {
 		this.environment = environment;
+		this.client = new PayPalHttpClient(this.environment);
 	}
 
 	/**
@@ -18,11 +19,7 @@ public class PayPalClient {
 	 * purpose, we are using SandboxEnvironment. In production this will be
 	 * LiveEnvironment.
 	 */
-	private PayPalEnvironment environment = new PayPalEnvironment.Sandbox(
-			System.getProperty("PAYPAL_CLIENT_ID") != null ? System.getProperty("PAYPAL_CLIENT_ID")
-					: "Aejo36jCAH2pqkN3rbG0e3upgklt_0uZNaQ7WXAvPdvQZkShK7vsf4xdE0GU8340tbDS_qP3gkkFdnOh",
-			System.getProperty("PAYPAL_CLIENT_SECRET") != null ? System.getProperty("PAYPAL_CLIENT_SECRET")
-					: "EBbNOsKPsr6eNnnC1x4dFNkcgXy_yMhHxhdKIpf9Xhhj5RvyFRgaxKjwmKlwaQt1zEhmh4tgLDEZWxIv");
+	private PayPalEnvironment environment;
 
 	/**
 	 * PayPal HTTP client instance with environment which has access credentials

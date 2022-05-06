@@ -79,16 +79,18 @@ public class AwsS3Plugin implements Uploader {
         String fileName = scene + "/" + picName;
         FileVO file = new FileVO();
         file.setName(picName);
-        this.putObject(input.getStream(), input.getSize(), fileName, bucketName, region, accessKeyId, accessKeySecret);
-        file.setUrl("https://" + bucketName + ".s3." + region + ".amazonaws.com/" + fileName);
-        file.setExt(ext);
+        boolean flag = this.putObject(input.getStream(), input.getSize(), fileName, bucketName, region, accessKeyId, accessKeySecret);
+        if (flag) {
+            file.setUrl("https://" + bucketName + ".s3." + region + ".amazonaws.com/" + fileName);
+            file.setExt(ext);
+        }
 
         return file;
     }
 
-    private void putObject(InputStream stream, Long size, String fileName,
-                           String bucketName, String regionStr,
-                           String accessKeyId, String accessKeySecret) {
+    private boolean putObject(InputStream stream, Long size, String fileName,
+                              String bucketName, String regionStr,
+                              String accessKeyId, String accessKeySecret) {
 
         Region region = Region.of(regionStr);
         S3Client s3 = S3Client.builder()
@@ -111,9 +113,11 @@ public class AwsS3Plugin implements Uploader {
                     RequestBody.fromInputStream(stream, size));
 
 
+            return true;
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            System.exit(1);
+            return false;
         }
 
     }

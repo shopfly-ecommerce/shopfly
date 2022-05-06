@@ -1,0 +1,40 @@
+/*
+ * 易族智汇（北京）科技有限公司 版权所有。
+ * 未经许可，您不得使用此文件。
+ * 官方地址：www.javamall.com.cn
+*/
+package cloud.shopfly.b2c.consumer.shop.trade.consumer;
+
+import cloud.shopfly.b2c.consumer.core.event.OrderStatusChangeEvent;
+import cloud.shopfly.b2c.core.base.message.OrderStatusChangeMsg;
+import cloud.shopfly.b2c.core.trade.order.model.dos.OrderDO;
+import cloud.shopfly.b2c.core.trade.order.model.enums.OrderStatusEnum;
+import cloud.shopfly.b2c.core.trade.snapshot.service.GoodsSnapshotManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * 生成商品交易快照
+ *
+ * @author Snow create in 2018/5/22
+ * @version v2.0
+ * @since v7.0.0
+ */
+@Component
+public class SnapshotCreateConsumer implements OrderStatusChangeEvent {
+
+    @Autowired
+    private GoodsSnapshotManager goodsSnapshotManager;
+
+    @Override
+    public void orderChange(OrderStatusChangeMsg orderMessage) {
+
+        if (orderMessage.getNewStatus().equals(OrderStatusEnum.NEW)) {
+            OrderDO orderDO = orderMessage.getOrderDO();
+
+            this.goodsSnapshotManager.add(orderDO);
+        }
+    }
+
+
+}

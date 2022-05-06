@@ -209,7 +209,7 @@ public class RedisConnectionConfig {
 
 	@Override
 	public String toString() {
-		return "ShopflixRedisConfig{" +
+		return "shopflyRedisConfig{" +
 				"type='" + type + '\'' +
 				", configType='" + configType + '\'' +
 				", restUrl='" + restUrl + '\'' +

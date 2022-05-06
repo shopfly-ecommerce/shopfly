@@ -30,9 +30,9 @@ import cloud.shopfly.b2c.core.base.model.vo.FileVO;
 import cloud.shopfly.b2c.core.base.service.FileManager;
 import cloud.shopfly.b2c.core.base.service.SmsManager;
 import cloud.shopfly.b2c.core.distribution.util.ShortUrlGenerator;
-import dev.shopflix.core.member.model.vo.*;
+import cloud.shopfly.b2c.core.member.model.vo.*;
 import cloud.shopfly.b2c.core.system.model.vo.SiteSetting;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.ThreadContextHolder;
 import cloud.shopfly.b2c.framework.context.UserContext;
@@ -94,7 +94,7 @@ public class ConnectManagerImpl implements ConnectManager {
     private DomainHelper domainHelper;
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @Autowired
     private SettingClient settingClient;
@@ -309,12 +309,12 @@ public class ConnectManagerImpl implements ConnectManager {
         }
         //将信任登录的相关信息存入redis中
         auth2Token.setType(type);
-        cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token, shopflixConfig.getCaptchaTimout());
+        cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token, shopflyConfig.getCaptchaTimout());
 
-        debugger.log("将token信息写入缓存，超时时间为：" + shopflixConfig.getCaptchaTimout());
+        debugger.log("将token信息写入缓存，超时时间为：" + shopflyConfig.getCaptchaTimout());
 
         if (logger.isDebugEnabled()) {
-            this.logger.debug(new Date() + " " + uuid + " 登录授权，授权时间为" + shopflixConfig.getCaptchaTimout());
+            this.logger.debug(new Date() + " " + uuid + " 登录授权，授权时间为" + shopflyConfig.getCaptchaTimout());
         }
         //如果在会员中心绑定账号，不需要返回新的会员信息
         if ("member".equals(mem)) {

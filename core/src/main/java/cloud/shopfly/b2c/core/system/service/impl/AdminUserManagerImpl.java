@@ -13,7 +13,7 @@ import cloud.shopfly.b2c.core.system.model.vo.AdminLoginVO;
 import cloud.shopfly.b2c.core.system.model.vo.AdminUserVO;
 import cloud.shopfly.b2c.core.system.service.AdminUserManager;
 import cloud.shopfly.b2c.core.system.service.RoleSeller;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.auth.Token;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.ThreadContextHolder;
@@ -50,7 +50,7 @@ public class AdminUserManagerImpl implements AdminUserManager {
     @Autowired
     private RoleSeller roleManager;
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
     @Autowired
     private Cache cache;
     @Autowired

@@ -16,7 +16,7 @@ import cloud.shopfly.b2c.core.system.model.vo.ShipTemplateVO;
 import cloud.shopfly.b2c.core.system.service.ShipTemplateManager;
 import cloud.shopfly.b2c.core.base.CachePrefix;
 import cloud.shopfly.b2c.core.goods.model.dos.GoodsDO;
-import dev.shopflix.core.system.model.vo.*;
+import cloud.shopfly.b2c.core.system.model.vo.*;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.exception.ServiceException;

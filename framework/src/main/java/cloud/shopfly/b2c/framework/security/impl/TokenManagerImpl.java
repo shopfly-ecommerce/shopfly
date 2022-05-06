@@ -5,7 +5,7 @@
 */
 package cloud.shopfly.b2c.framework.security.impl;
 
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.auth.AuthUser;
 import cloud.shopfly.b2c.framework.auth.Token;
 import cloud.shopfly.b2c.framework.auth.TokenParseException;
@@ -27,33 +27,33 @@ import org.springframework.stereotype.Service;
 public class TokenManagerImpl implements TokenManager {
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @Override
     public Token create(AuthUser user) {
-        JwtTokenCreater tokenCreater = new JwtTokenCreater(shopflixConfig.getTokenSecret());
-        tokenCreater.setAccessTokenExp(shopflixConfig.getAccessTokenTimeout());
-        tokenCreater.setRefreshTokenExp(shopflixConfig.getRefreshTokenTimeout());
+        JwtTokenCreater tokenCreater = new JwtTokenCreater(shopflyConfig.getTokenSecret());
+        tokenCreater.setAccessTokenExp(shopflyConfig.getAccessTokenTimeout());
+        tokenCreater.setRefreshTokenExp(shopflyConfig.getRefreshTokenTimeout());
         return tokenCreater.create(user);
 
     }
 
     @Override
     public <T> T parse(Class<T> clz, String token) throws TokenParseException {
-        JwtTokenParser tokenParser = new JwtTokenParser(shopflixConfig.getTokenSecret());
+        JwtTokenParser tokenParser = new JwtTokenParser(shopflyConfig.getTokenSecret());
         return tokenParser.parse(clz, token);
     }
 
     @Override
     public Token create(AuthUser user, Integer tokenOutTime, Integer refreshTokenOutTime) {
-        JwtTokenCreater tokenCreater = new JwtTokenCreater(shopflixConfig.getTokenSecret());
+        JwtTokenCreater tokenCreater = new JwtTokenCreater(shopflyConfig.getTokenSecret());
         if (null == tokenOutTime){
-            tokenCreater.setAccessTokenExp(shopflixConfig.getAccessTokenTimeout());
+            tokenCreater.setAccessTokenExp(shopflyConfig.getAccessTokenTimeout());
         }else{
             tokenCreater.setAccessTokenExp(tokenOutTime);
         }
         if (null == refreshTokenOutTime){
-            tokenCreater.setRefreshTokenExp(shopflixConfig.getRefreshTokenTimeout());
+            tokenCreater.setRefreshTokenExp(shopflyConfig.getRefreshTokenTimeout());
         }else{
             tokenCreater.setRefreshTokenExp(refreshTokenOutTime);
         }

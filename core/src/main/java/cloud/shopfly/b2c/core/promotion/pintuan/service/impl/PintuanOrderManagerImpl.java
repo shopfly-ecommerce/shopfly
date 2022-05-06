@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.trade.order.model.dto.PersonalizedData;
 import cloud.shopfly.b2c.core.trade.order.model.enums.OrderDataKey;
 import cloud.shopfly.b2c.core.trade.order.model.enums.OrderStatusEnum;
 import cloud.shopfly.b2c.core.trade.order.model.vo.OrderSkuVO;
-import dev.shopflix.core.promotion.pintuan.model.*;
+import cloud.shopfly.b2c.core.promotion.pintuan.model.*;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.exception.ResourceNotFoundException;
 import cloud.shopfly.b2c.framework.trigger.Interface.TimeTrigger;

@@ -10,7 +10,7 @@ import cloud.shopfly.b2c.core.trade.order.model.enums.*;
 import cloud.shopfly.b2c.core.trade.order.support.OrderOperateChecker;
 import cloud.shopfly.b2c.core.trade.order.support.OrderOperateFlow;
 import cloud.shopfly.b2c.core.trade.order.support.OrderStep;
-import dev.shopflix.core.trade.order.model.enums.*;
+import cloud.shopfly.b2c.core.trade.order.model.enums.*;
 import cloud.shopfly.b2c.framework.util.StringUtil;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

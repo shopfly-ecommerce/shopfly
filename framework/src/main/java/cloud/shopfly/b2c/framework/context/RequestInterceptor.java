@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * shopflix 上下文初始化
+ * shopfly 上下文初始化
  * 以及跨域的支持
  *
  * @author kingapex

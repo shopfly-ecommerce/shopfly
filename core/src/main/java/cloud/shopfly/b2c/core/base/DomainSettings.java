@@ -21,38 +21,38 @@ import org.springframework.context.annotation.Configuration;
  * 2018/6/20
  */
 @Configuration
-@ConfigurationProperties(prefix = "shopflix")
+@ConfigurationProperties(prefix = "shopfly")
 public class DomainSettings {
 
     /**
      * 买家端域名
      */
-    @Value("${shopflix.name:#{null}}")
+    @Value("${shopfly.name:#{null}}")
     private String name;
 
     /**
      * 买家端域名
      */
-    @Value("${shopflix.domain.buyer:#{null}}")
+    @Value("${shopfly.domain.buyer:#{null}}")
     private String buyer;
 
     /**
      * 手机买家端域名
      */
-    @Value("${shopflix.domain.mobileBuyer:#{null}}")
+    @Value("${shopfly.domain.mobileBuyer:#{null}}")
     private String mobileBuyer;
 
 
     /**
      * 买家端域名
      */
-    @Value("${shopflix.domain.buyer-pc:#{null}}")
+    @Value("${shopfly.domain.buyer-pc:#{null}}")
     private String buyerPc;
 
     /**
      * 手机买家端域名
      */
-    @Value("${shopflix.domain.buyer-wap:#{null}}")
+    @Value("${shopfly.domain.buyer-wap:#{null}}")
     private String buyerWap;
 
     /**
@@ -60,7 +60,7 @@ public class DomainSettings {
      *
      * @return
      */
-    @Value("${shopflix.domain.callback:#{null}}")
+    @Value("${shopfly.domain.callback:#{null}}")
     private String callback;
 
     public String getBuyer() {

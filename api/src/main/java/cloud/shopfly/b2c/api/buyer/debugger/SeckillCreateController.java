@@ -46,7 +46,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/debugger/seckill")
-@ConditionalOnProperty(value = "shopflix.debugger", havingValue = "true")
+@ConditionalOnProperty(value = "shopfly.debugger", havingValue = "true")
 public class SeckillCreateController {
 
     @Autowired

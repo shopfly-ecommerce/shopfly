@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * 2018-08-14 下午2:37
  */
 @Service
-@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
 public class GoodsDataClientDefaultImpl implements GoodsDataClient {
 
     @Autowired

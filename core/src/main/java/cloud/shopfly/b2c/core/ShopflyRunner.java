@@ -6,7 +6,7 @@
 package cloud.shopfly.b2c.core;
 
 import cloud.shopfly.b2c.core.goodssearch.service.GoodsIndexInitManager;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.context.UserContext;
 import cloud.shopfly.b2c.framework.context.UserHolder;
 
@@ -19,7 +19,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * Shopflix 项目启动配置
+ * shopfly 项目启动配置
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(value = 1)
-public class ShopflixRunner implements ApplicationRunner {
+public class ShopflyRunner implements ApplicationRunner {
 
 
     /**
@@ -39,12 +39,12 @@ public class ShopflixRunner implements ApplicationRunner {
 
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @Autowired
     GoodsIndexInitManager goodsIndexInitManager;
 
-   protected final Logger logger = LoggerFactory.getLogger(ShopflixRunner.class);
+   protected final Logger logger = LoggerFactory.getLogger(ShopflyRunner.class);
 
 
     /**
@@ -56,10 +56,10 @@ public class ShopflixRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        if (shopflixConfig.getTokenSecret() == null) {
+        if (shopflyConfig.getTokenSecret() == null) {
             String errorMsg = "配置异常:未配置token秘钥，请到config配置中心检查如下：\n";
             errorMsg += "===========================\n";
-            errorMsg += "   shopflix.token-secret\n";
+            errorMsg += "   shopfly.token-secret\n";
             errorMsg += "===========================";
 
             throw new Exception(errorMsg);
@@ -68,7 +68,7 @@ public class ShopflixRunner implements ApplicationRunner {
         UserContext.setHolder(userHolder);
 
         goodsIndexInitManager.initIndex();
-        logger.debug("Shopflix started");
+        logger.debug("shopfly started");
 
     }
 }

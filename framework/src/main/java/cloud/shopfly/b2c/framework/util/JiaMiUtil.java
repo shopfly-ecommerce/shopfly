@@ -41,7 +41,7 @@ public class JiaMiUtil {
         decryptCipher.init(Cipher.DECRYPT_MODE, key);    
     }    
     /** 字符串默认键值 */    
-    private static String strDefaultKey ="shopflix8864";
+    private static String strDefaultKey ="shopfly8864";
     /** 加密工具 */    
     private Cipher encryptCipher = null;    
     /** 解密工具 */    

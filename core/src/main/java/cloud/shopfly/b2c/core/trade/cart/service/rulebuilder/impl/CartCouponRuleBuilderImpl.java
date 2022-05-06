@@ -12,7 +12,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.enums.PromotionTarget;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
 import cloud.shopfly.b2c.core.trade.cart.service.CartPromotionManager;
 import cloud.shopfly.b2c.core.trade.cart.service.rulebuilder.CartCouponRuleBuilder;
-import dev.shopflix.core.trade.cart.model.vo.*;
+import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
 import cloud.shopfly.b2c.framework.util.CurrencyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

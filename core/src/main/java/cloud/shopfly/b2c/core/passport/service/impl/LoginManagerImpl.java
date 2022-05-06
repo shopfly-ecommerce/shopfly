@@ -19,7 +19,7 @@ import cn.hutool.core.lang.UUID;
 import cloud.shopfly.b2c.core.base.CachePrefix;
 import cloud.shopfly.b2c.core.base.message.MemberRegisterMsg;
 import cloud.shopfly.b2c.core.base.rabbitmq.AmqpExchange;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.auth.Token;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.ThreadContextHolder;
@@ -58,7 +58,7 @@ public class LoginManagerImpl implements LoginManager {
     private DaoSupport memberDaoSupport;
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @Autowired
     private MemberManager memberManager;
@@ -247,10 +247,10 @@ public class LoginManagerImpl implements LoginManager {
         }
 
         if (null == tokenOutTime){
-            tokenOutTime = shopflixConfig.getAccessTokenTimeout();
+            tokenOutTime = shopflyConfig.getAccessTokenTimeout();
         }
         if (null == refreshTokenOutTime){
-            refreshTokenOutTime = shopflixConfig.getRefreshTokenTimeout();
+            refreshTokenOutTime = shopflyConfig.getRefreshTokenTimeout();
         }
 
         //新建买家用户角色对象

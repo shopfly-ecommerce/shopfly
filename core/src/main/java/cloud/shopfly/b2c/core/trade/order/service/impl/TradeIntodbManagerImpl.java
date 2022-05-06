@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.core.trade.TradeErrorCode;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CartPromotionVo;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CartSkuVO;
 import cloud.shopfly.b2c.core.trade.cart.service.CartOriginDataManager;
-import dev.shopflix.core.trade.order.model.dos.*;
+import cloud.shopfly.b2c.core.trade.order.model.dos.*;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.UserContext;
 import cloud.shopfly.b2c.framework.database.DaoSupport;

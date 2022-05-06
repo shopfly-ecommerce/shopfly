@@ -13,7 +13,7 @@ import cloud.shopfly.b2c.core.payment.model.vo.PayBill;
 import cloud.shopfly.b2c.core.payment.model.vo.PayConfigItem;
 import cloud.shopfly.b2c.core.payment.model.vo.RefundBill;
 import cloud.shopfly.b2c.core.payment.plugin.weixin.executor.*;
-import dev.shopflix.core.payment.plugin.weixin.executor.*;
+import cloud.shopfly.b2c.core.payment.plugin.weixin.executor.*;
 import cloud.shopfly.b2c.core.payment.service.PaymentPluginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

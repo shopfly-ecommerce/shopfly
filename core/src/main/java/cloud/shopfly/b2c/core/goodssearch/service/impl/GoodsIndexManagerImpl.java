@@ -14,7 +14,7 @@ import cloud.shopfly.b2c.core.goodssearch.util.HexUtil;
 import cloud.shopfly.b2c.core.system.model.TaskProgressConstant;
 import cloud.shopfly.b2c.core.system.model.vo.TaskProgress;
 import cloud.shopfly.b2c.core.system.service.ProgressManager;
-import cloud.shopfly.b2c.core.ShopflixRunner;
+import cloud.shopfly.b2c.core.ShopflyRunner;
 import cloud.shopfly.b2c.core.goods.model.dos.CategoryDO;
 import cloud.shopfly.b2c.framework.elasticsearch.EsConfig;
 import cloud.shopfly.b2c.framework.elasticsearch.EsSettings;
@@ -55,7 +55,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     @Autowired
     protected ElasticsearchTemplate elasticsearchOperations;
 
-    protected final Logger logger = LoggerFactory.getLogger(ShopflixRunner.class);
+    protected final Logger logger = LoggerFactory.getLogger(ShopflyRunner.class);
 
 
     @Autowired

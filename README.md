@@ -46,7 +46,7 @@ API_BASE=your API service address
 API_BUYER=your API service address
 API_SELLER=your API service address
 ```
-If you do not specify the API address where the shopflix demo will be used
+If you do not specify the API address where the shopfly demo will be used
 
 3.Run the application:
 
@@ -107,13 +107,13 @@ https://github.com/shopfly-ecommerce/vue-storefront
 
 # Contact Us
 
-service@shopflix.dev
+service@shopfly.dev
 
 
 
 # website
 
-https://www.shopflix.dev/
+https://www.shopfly.cloud
 
 
 

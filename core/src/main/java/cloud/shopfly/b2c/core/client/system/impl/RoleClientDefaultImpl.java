@@ -22,7 +22,7 @@ import java.util.Map;
  * @since v7.0.0
  */
 @Service
-@ConditionalOnProperty(value="shopflix.product", havingValue="stand")
+@ConditionalOnProperty(value="shopfly.product", havingValue="stand")
 public class RoleClientDefaultImpl implements RoleClient {
 
     @Autowired

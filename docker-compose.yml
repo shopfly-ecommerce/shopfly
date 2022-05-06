@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   api:
-    image: shopflix/api:1.0.0
+    image: shopfly/api:1.0.0
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -12,7 +12,7 @@ services:
       - mq
       - es    
     networks:
-      - shopflix-backend-tier
+      - shopfly-backend-tier
 
   db:
     image: mysql:8.0.28
@@ -20,15 +20,15 @@ services:
       - 3306:3306
     restart: unless-stopped
     networks:
-      - shopflix-backend-tier
+      - shopfly-backend-tier
     volumes:
-      - shopflix-db:/var/lib/mysql
+      - shopfly-db:/var/lib/mysql
       - ./my.cnf:/etc/mysql/my.cnf
-      - ./shopflix.sql:/docker-entrypoint-initdb.d/shopflix.sql
+      - ./shopfly.sql:/docker-entrypoint-initdb.d/shopfly.sql
 
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=shopflix
+      - MYSQL_DATABASE=shopfly
 
   redis:
     image: redis:6.2.6-alpine
@@ -36,9 +36,9 @@ services:
       - 6379:6379
     restart: unless-stopped
     networks:
-      - shopflix-backend-tier
+      - shopfly-backend-tier
     volumes:
-      - shopflix-redis:/data
+      - shopfly-redis:/data
 
   mq:
     image: registry.cn-beijing.aliyuncs.com/javashop-k8s-images/rabbitmq:3.6.14
@@ -47,9 +47,9 @@ services:
       - 15672:15672
     restart: unless-stopped
     networks:
-      - shopflix-backend-tier
+      - shopfly-backend-tier
     # volumes:
-    #   - shopflix-mq:/var/lib/rabbitmq
+    #   - shopfly-mq:/var/lib/rabbitmq
 
   es:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.23
@@ -58,9 +58,9 @@ services:
       - 9300:9300
     restart: unless-stopped
     networks:
-      - shopflix-backend-tier
+      - shopfly-backend-tier
     volumes:
-      - shopflix-es:/usr/share/elasticsearch/data
+      - shopfly-es:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
       - cluster.name=docker-cluster
@@ -72,15 +72,15 @@ services:
         hard: -1
 
 volumes:
-  shopflix-db:
+  shopfly-db:
     driver: local
-  shopflix-redis:
+  shopfly-redis:
     driver: local
-  shopflix-mq:
+  shopfly-mq:
     driver: local
-  shopflix-es:
+  shopfly-es:
     driver: local
 
 networks:
-  shopflix-backend-tier:
+  shopfly-backend-tier:
     driver: bridge

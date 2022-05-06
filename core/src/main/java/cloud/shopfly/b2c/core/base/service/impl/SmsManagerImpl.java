@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.system.model.dos.MessageTemplateDO;
 import cloud.shopfly.b2c.core.system.model.vo.SiteSetting;
 import cloud.shopfly.b2c.core.system.model.vo.SmsPlatformVO;
 import cloud.shopfly.b2c.core.system.service.SmsPlatformManager;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.ApplicationContextHolder;
 import cloud.shopfly.b2c.framework.logs.Debugger;
@@ -57,7 +57,7 @@ public class SmsManagerImpl implements SmsManager {
     private Cache cache;
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @Autowired
     private MessageSender messageSender;
@@ -99,7 +99,7 @@ public class SmsManagerImpl implements SmsManager {
             //验证码校验通过后清除缓存
             cache.remove(valCode);
             //将标识放入缓存中，在验证验证码正确后，下一步操作需要校验是否经过验证验证码(缓存中是否存在)
-            cache.put(CachePrefix.MOBILE_VALIDATE.getPrefix() + scene + "_" + mobile, mobile, shopflixConfig.getCaptchaTimout());
+            cache.put(CachePrefix.MOBILE_VALIDATE.getPrefix() + scene + "_" + mobile, mobile, shopflyConfig.getCaptchaTimout());
             return true;
         }
         return false;
@@ -107,7 +107,7 @@ public class SmsManagerImpl implements SmsManager {
 
     @Override
     public void record(String scene, String mobile, String code) {
-        cache.put(CachePrefix.SMS_CODE.getPrefix() + scene + "_" + mobile, code, shopflixConfig.getSmscodeTimout());
+        cache.put(CachePrefix.SMS_CODE.getPrefix() + scene + "_" + mobile, code, shopflyConfig.getSmscodeTimout());
     }
 
     @Override

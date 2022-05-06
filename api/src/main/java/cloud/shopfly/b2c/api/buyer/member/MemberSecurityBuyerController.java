@@ -13,7 +13,7 @@ import cloud.shopfly.b2c.core.member.MemberErrorCode;
 import cloud.shopfly.b2c.core.member.model.dos.Member;
 import cloud.shopfly.b2c.core.member.service.MemberManager;
 import cloud.shopfly.b2c.core.member.service.MemberSecurityManager;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.UserContext;
 import cloud.shopfly.b2c.framework.exception.ServiceException;
@@ -56,7 +56,7 @@ public class MemberSecurityBuyerController {
     @Autowired
     private Cache cache;
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @PostMapping(value = "/security/send")
     @ApiOperation(value = "发送手机验证验证码")
@@ -78,7 +78,7 @@ public class MemberSecurityBuyerController {
         captchaClient.deleteCode(uuid, captcha, SceneType.VALIDATE_MOBILE.name());
         memberSecurityManager.sendValidateSmsCode(member.getMobile());
         //将验证码失效时间返回，用于前端提示
-        return shopflixConfig.getSmscodeTimout() / 60 + "";
+        return shopflyConfig.getSmscodeTimout() / 60 + "";
     }
 
 

@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * 支付账单管理实现
  *
@@ -71,19 +72,19 @@ public class PaymentManagerImpl implements PaymentManager {
         //保存支付参数
 
         switch (bill.getClientType()) {
-            case ClientType.PC:
+            case PC:
                 paymentBill.setPayConfig(paymentMethod.getPcConfig());
                 break;
-            case ClientType.WAP:
+            case WAP:
                 paymentBill.setPayConfig(paymentMethod.getWapConfig());
                 break;
-            case ClientType.NATIVE:
+            case NATIVE:
                 paymentBill.setPayConfig(paymentMethod.getAppNativeConfig());
                 break;
-            case ClientType.REACT:
+            case REACT:
                 paymentBill.setPayConfig(paymentMethod.getAppReactConfig());
                 break;
-            case ClientType.MINI:
+            case MINI:
                 paymentBill.setPayConfig(paymentMethod.getMiniConfig());
                 break;
             default:

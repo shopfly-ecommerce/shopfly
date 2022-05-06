@@ -13,7 +13,7 @@ import cloud.shopfly.b2c.core.goods.model.dos.GoodsGalleryDO;
 import cloud.shopfly.b2c.core.goods.model.dto.GoodsDTO;
 import cloud.shopfly.b2c.core.goods.model.vo.DraftGoodsVO;
 import cloud.shopfly.b2c.core.goods.service.*;
-import dev.shopflix.core.goods.service.*;
+import cloud.shopfly.b2c.core.goods.service.*;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.database.Page;
 import cloud.shopfly.b2c.framework.exception.ServiceException;

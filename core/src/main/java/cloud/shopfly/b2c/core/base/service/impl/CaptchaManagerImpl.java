@@ -10,7 +10,7 @@ import cloud.shopfly.b2c.core.base.SettingGroup;
 import cloud.shopfly.b2c.core.base.service.CaptchaManager;
 import cloud.shopfly.b2c.core.base.service.SettingManager;
 import cloud.shopfly.b2c.core.system.model.vo.SiteSetting;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.ThreadContextHolder;
 import cloud.shopfly.b2c.framework.util.JsonUtil;
@@ -38,7 +38,7 @@ public class CaptchaManagerImpl implements CaptchaManager {
     @Autowired
     private Cache cache;
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
     @Autowired
     private SettingManager settingManager;
 
@@ -108,7 +108,7 @@ public class CaptchaManagerImpl implements CaptchaManager {
             g.setColor(new Color(30 + random.nextInt(80), 30 + random.nextInt(80), 30 + random.nextInt(80)));
             g.drawString(rand, 30 * i + 20, 58);
         }
-        cache.put(CachePrefix.CAPTCHA.getPrefix() + uuid + "_" + scene, sRand.toLowerCase(), shopflixConfig.getCaptchaTimout());
+        cache.put(CachePrefix.CAPTCHA.getPrefix() + uuid + "_" + scene, sRand.toLowerCase(), shopflyConfig.getCaptchaTimout());
         // 图象生效
         g.dispose();
         // 输出图象到页面

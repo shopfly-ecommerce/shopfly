@@ -21,7 +21,7 @@ import java.util.List;
  * @Date: 2018/7/26 14:18
  */
 @Service
-@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
 public class LogiCompanyClientDefaultImpl implements LogiCompanyClient {
 
     @Autowired

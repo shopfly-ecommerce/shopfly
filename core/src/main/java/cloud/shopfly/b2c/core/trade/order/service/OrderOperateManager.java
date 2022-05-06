@@ -12,7 +12,7 @@ import cloud.shopfly.b2c.core.trade.order.model.enums.OrderStatusEnum;
 import cloud.shopfly.b2c.core.trade.order.model.enums.ServiceStatusEnum;
 import cloud.shopfly.b2c.core.trade.order.model.vo.*;
 import cloud.shopfly.b2c.core.trade.cart.model.dos.OrderPermission;
-import dev.shopflix.core.trade.order.model.vo.*;
+import cloud.shopfly.b2c.core.trade.order.model.vo.*;
 import cloud.shopfly.b2c.core.trade.sdk.model.OrderSkuDTO;
 
 import java.util.List;

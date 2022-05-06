@@ -12,7 +12,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartView;
 import cloud.shopfly.b2c.core.trade.cart.service.CartReadManager;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.*;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.impl.DefaultCartBuilder;
-import dev.shopflix.core.trade.cart.service.cartbuilder.*;
+import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

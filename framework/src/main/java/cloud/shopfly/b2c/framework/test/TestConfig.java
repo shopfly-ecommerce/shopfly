@@ -17,6 +17,6 @@ import org.springframework.context.annotation.Configuration;
  * 2018/7/11
  */
 @Configuration
-@ComponentScan("dev.shopflix")
+@ComponentScan("cloud.shopfly.b2c")
 public class TestConfig {
 }

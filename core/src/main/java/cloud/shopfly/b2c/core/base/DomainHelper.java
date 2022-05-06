@@ -5,7 +5,7 @@
 */
 package cloud.shopfly.b2c.core.base;
 
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.context.ThreadContextHolder;
 import cloud.shopfly.b2c.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class DomainHelper {
 
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @Autowired
     private DomainSettings domainSettings;
@@ -50,7 +50,7 @@ public class DomainHelper {
         if (buyerDomain.indexOf("http") != -1) {
             return buyerDomain;
         }
-        return shopflixConfig.getScheme() + buyerDomain;
+        return shopflyConfig.getScheme() + buyerDomain;
 
     }
 
@@ -65,7 +65,7 @@ public class DomainHelper {
         if (mobileDomain.indexOf("http") != -1) {
             return mobileDomain;
         }
-        return shopflixConfig.getScheme() + mobileDomain;
+        return shopflyConfig.getScheme() + mobileDomain;
 
     }
 
@@ -111,7 +111,7 @@ public class DomainHelper {
         if (callback.indexOf("http") != -1) {
             return callback;
         }
-        return shopflixConfig.getScheme() + callback;
+        return shopflyConfig.getScheme() + callback;
     }
 
     /**

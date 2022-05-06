@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.goods.service.CategoryManager;
 import cloud.shopfly.b2c.core.goods.util.CatUrlUtils;
 import cloud.shopfly.b2c.core.goods.util.Separator;
 
-import dev.shopflix.core.goodssearch.model.*;
+import cloud.shopfly.b2c.core.goodssearch.model.*;
 import cloud.shopfly.b2c.core.goodssearch.service.GoodsSearchManager;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.database.Page;

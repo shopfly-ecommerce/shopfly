@@ -27,7 +27,6 @@ import cloud.shopfly.b2c.framework.util.CurrencyUtil;
 import cloud.shopfly.b2c.framework.util.DateUtil;
 import cloud.shopfly.b2c.framework.util.JsonUtil;
 import cloud.shopfly.b2c.framework.util.StringUtil;
-import dev.shopflix.consumer.core.event.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

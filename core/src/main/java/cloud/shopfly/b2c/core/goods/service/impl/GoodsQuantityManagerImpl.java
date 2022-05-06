@@ -10,7 +10,7 @@ import cloud.shopfly.b2c.core.goods.model.vo.GoodsQuantityVO;
 import cloud.shopfly.b2c.core.goods.service.GoodsQuantityManager;
 import cloud.shopfly.b2c.core.goods.service.impl.util.UpdatePool;
 import cloud.shopfly.b2c.core.goods.service.impl.util.StockCacheKeyUtil;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,11 +41,11 @@ import java.util.Map;
  * 这样条件有：缓冲区大小，缓冲次数，缓冲时间<br/>
  * 上述条件在配置中心可以配置，如果没有配置采用 ${@link UpdatePool} 默认值<br/>
  * 在配置项说明：<br/>
- * <li>缓冲区大小：shopflix.pool.stock.max-pool-size</li>
- * <li>缓冲次数：shopflix.pool.stock.max-update-time</li>
- * <li>缓冲时间（秒数）：shopflix.pool.stock.max-lazy-second</li>
+ * <li>缓冲区大小：shopfly.pool.stock.max-pool-size</li>
+ * <li>缓冲次数：shopfly.pool.stock.max-update-time</li>
+ * <li>缓冲时间（秒数）：shopfly.pool.stock.max-lazy-second</li>
  *
- * @see ShopflixConfig
+ * @see ShopflyConfig
  */
 @Service
 public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
@@ -57,7 +57,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
     private DaoSupport daoSupport;
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
 
     /**
@@ -136,7 +136,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
         if (result) {
 
             //判断配置文件中设置的商品库存缓冲池是否开启
-            if (shopflixConfig.isStock()) {
+            if (shopflyConfig.isStock()) {
 
                 //是否需要同步数据库
                 boolean needSync = getSkuPool().oneTime(skuIdList);
@@ -262,7 +262,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
      */
     private UpdatePool getGoodsPool() {
         if (goodsUpdatePool == null) {
-            goodsUpdatePool = new UpdatePool(shopflixConfig.getMaxUpdateTime(),shopflixConfig.getMaxPoolSize(),shopflixConfig.getMaxLazySecond());
+            goodsUpdatePool = new UpdatePool(shopflyConfig.getMaxUpdateTime(),shopflyConfig.getMaxPoolSize(),shopflyConfig.getMaxLazySecond());
 
 
         }
@@ -276,7 +276,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
      */
     private UpdatePool getSkuPool() {
         if (skuUpdatePool == null) {
-            skuUpdatePool = new UpdatePool(shopflixConfig.getMaxUpdateTime(),shopflixConfig.getMaxPoolSize(),shopflixConfig.getMaxLazySecond());
+            skuUpdatePool = new UpdatePool(shopflyConfig.getMaxUpdateTime(),shopflyConfig.getMaxPoolSize(),shopflyConfig.getMaxLazySecond());
 
             if (logger.isDebugEnabled()) {
                 logger.debug("初始化sku pool:");

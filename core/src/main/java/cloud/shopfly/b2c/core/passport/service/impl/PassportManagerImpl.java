@@ -12,7 +12,7 @@ import cloud.shopfly.b2c.core.member.service.MemberManager;
 import cloud.shopfly.b2c.core.passport.service.PassportManager;
 import cloud.shopfly.b2c.core.base.CachePrefix;
 import cloud.shopfly.b2c.core.base.SceneType;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.auth.Token;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.exception.ResourceNotFoundException;
@@ -48,7 +48,7 @@ public class PassportManagerImpl implements PassportManager {
     @Autowired
     private PassportManager passportManager;
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
     @Autowired
     private TokenManager tokenManager;
 

@@ -17,7 +17,7 @@ import cloud.shopfly.b2c.core.statistics.util.StatisticsUtil;
 import cloud.shopfly.b2c.core.statistics.util.SyncopateUtil;
 import cloud.shopfly.b2c.core.system.model.dos.Regions;
 import cloud.shopfly.b2c.core.base.SearchCriteria;
-import dev.shopflix.core.statistics.model.vo.*;
+import cloud.shopfly.b2c.core.statistics.model.vo.*;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.database.ObjectNotFoundException;
 import cloud.shopfly.b2c.framework.database.Page;

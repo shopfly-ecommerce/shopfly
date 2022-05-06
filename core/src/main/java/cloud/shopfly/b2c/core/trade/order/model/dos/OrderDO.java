@@ -11,7 +11,7 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.ConsigneeVO;
 import cloud.shopfly.b2c.core.trade.order.model.vo.OrderSkuVO;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CartSkuVO;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.PriceDetailVO;
-import dev.shopflix.core.trade.order.model.enums.*;
+import cloud.shopfly.b2c.core.trade.order.model.enums.*;
 import cloud.shopfly.b2c.framework.database.annotation.Column;
 import cloud.shopfly.b2c.framework.database.annotation.Id;
 import cloud.shopfly.b2c.framework.database.annotation.PrimaryKeyField;

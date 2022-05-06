@@ -24,7 +24,7 @@ import cloud.shopfly.b2c.core.goods.service.*;
 import cloud.shopfly.b2c.core.member.model.vo.GoodsGrade;
 import cloud.shopfly.b2c.core.promotion.exchange.model.dos.ExchangeDO;
 import cloud.shopfly.b2c.core.promotion.tool.model.dto.PromotionGoodsDTO;
-import dev.shopflix.core.goods.service.*;
+import cloud.shopfly.b2c.core.goods.service.*;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.exception.ServiceException;

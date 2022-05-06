@@ -16,9 +16,9 @@ import cloud.shopfly.b2c.core.base.rabbitmq.AmqpExchange;
 import cloud.shopfly.b2c.core.trade.TradeErrorCode;
 import cloud.shopfly.b2c.core.trade.cart.model.dos.OrderPermission;
 
-import dev.shopflix.core.trade.order.model.enums.*;
-import dev.shopflix.core.trade.order.model.vo.*;
-import dev.shopflix.core.trade.order.service.*;
+import cloud.shopfly.b2c.core.trade.order.model.enums.*;
+import cloud.shopfly.b2c.core.trade.order.model.vo.*;
+import cloud.shopfly.b2c.core.trade.order.service.*;
 import cloud.shopfly.b2c.core.trade.order.support.OrderOperateChecker;
 import cloud.shopfly.b2c.core.trade.order.support.OrderOperateFlow;
 import cloud.shopfly.b2c.core.trade.order.support.OrderStep;

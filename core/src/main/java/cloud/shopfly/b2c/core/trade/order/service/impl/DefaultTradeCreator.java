@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.member.model.dos.Member;
 import cloud.shopfly.b2c.core.member.model.dos.MemberAddress;
 import cloud.shopfly.b2c.core.promotion.tool.model.enums.PromotionTypeEnum;
 import cloud.shopfly.b2c.core.trade.TradeErrorCode;
-import dev.shopflix.core.trade.cart.model.vo.*;
+import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
 import cloud.shopfly.b2c.core.trade.order.model.vo.CheckoutParamVO;
 import cloud.shopfly.b2c.framework.context.UserContext;
 import cloud.shopfly.b2c.framework.exception.ServiceException;

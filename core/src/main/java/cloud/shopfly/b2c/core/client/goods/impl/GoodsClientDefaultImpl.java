@@ -18,8 +18,8 @@ import cloud.shopfly.b2c.core.goods.model.dos.GoodsDO;
 import cloud.shopfly.b2c.core.goods.model.dos.GoodsGalleryDO;
 import cloud.shopfly.b2c.core.goods.model.enums.GoodsType;
 import cloud.shopfly.b2c.core.promotion.exchange.model.dos.ExchangeDO;
-import dev.shopflix.core.goods.model.vo.*;
-import dev.shopflix.core.goods.service.*;
+import cloud.shopfly.b2c.core.goods.model.vo.*;
+import cloud.shopfly.b2c.core.goods.service.*;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.rabbitmq.MessageSender;
 import cloud.shopfly.b2c.framework.rabbitmq.MqMessage;
@@ -41,7 +41,7 @@ import java.util.Set;
  * @since v7.0.0
  */
 @Service
-@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
 public class GoodsClientDefaultImpl implements GoodsClient {
 
     @Autowired

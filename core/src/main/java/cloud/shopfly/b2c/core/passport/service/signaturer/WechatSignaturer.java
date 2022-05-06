@@ -72,7 +72,7 @@ public class WechatSignaturer {
     /**
      * 获取 微信签名 前端调用分享等功能权限
      *
-     * @param type @see  dev.shopflix.service.passport.signaturer.WechatTypeEnmu
+     * @param type @see  cloud.shopfly.b2c.service.passport.signaturer.WechatTypeEnmu
      *             WAP("WAP"),
      *             REACT("原生"),
      *             NATIVE("NAAPP"),

@@ -8,7 +8,7 @@ package cloud.shopfly.b2c.core.trade.order.model.vo;
 import cloud.shopfly.b2c.core.trade.order.model.enums.*;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import dev.shopflix.core.trade.order.model.enums.*;
+import cloud.shopfly.b2c.core.trade.order.model.enums.*;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

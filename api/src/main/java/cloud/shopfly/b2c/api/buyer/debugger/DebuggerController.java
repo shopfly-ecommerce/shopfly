@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/debugger")
-@ConditionalOnProperty(value = "shopflix.debugger", havingValue = "true")
+@ConditionalOnProperty(value = "shopfly.debugger", havingValue = "true")
 public class DebuggerController {
 
     @Autowired

@@ -14,7 +14,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.enums.CartType;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CartSkuOriginVo;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CartView;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.*;
-import dev.shopflix.core.trade.cart.service.cartbuilder.*;
+import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.*;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.impl.DefaultCartBuilder;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.context.UserContext;

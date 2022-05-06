@@ -8,7 +8,7 @@ package cloud.shopfly.b2c.framework.database.impl;
 import cloud.shopfly.b2c.framework.database.*;
 import cloud.shopfly.b2c.framework.util.ReflectionUtil;
 import cloud.shopfly.b2c.framework.util.StringUtil;
-import dev.shopflix.framework.database.*;
+import cloud.shopfly.b2c.framework.database.*;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

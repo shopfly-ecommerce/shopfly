@@ -50,11 +50,11 @@ redis:
 logging:
   level:
     org.springframework: ERROR
-    dev.shopflix : DEBUG
+    cloud.shopfly.b2c : DEBUG
 
-#java 系统配置
-shopflix:
-  name: shopflix # 公司名称
+#shopfly 系统配置
+shopfly:
+  name: shopfly # 公司名称
   product: stand #定义系统标准产品，微服务指定为： microservice
   license[0]: abcde #license请向售后人员索要
   #token加密秘钥，请务必更换此词串，且注意保密

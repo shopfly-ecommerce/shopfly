@@ -27,7 +27,7 @@ import javax.validation.ConstraintViolationException;
  * 2016年12月9日 上午12:00:53
  */
 @ControllerAdvice
-public class ShopflixExceptionHandler {
+public class ShopflyExceptionHandler {
     /**
      * 处理单个参数校验
      *

@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * 2018-08-14 下午2:42
  */
 @Service
-@ConditionalOnProperty(value="shopflix.product", havingValue="stand")
+@ConditionalOnProperty(value="shopfly.product", havingValue="stand")
 public class RefundDateClientDefaultImpl implements RefundDataClient {
 
     @Autowired

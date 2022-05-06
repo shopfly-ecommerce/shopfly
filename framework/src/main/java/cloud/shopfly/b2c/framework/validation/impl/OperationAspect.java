@@ -5,7 +5,7 @@
 */
 package cloud.shopfly.b2c.framework.validation.impl;
 
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.exception.ServiceException;
 import cloud.shopfly.b2c.framework.exception.SystemErrorCodeV1;
 import cloud.shopfly.b2c.framework.validation.annotation.Operation;
@@ -29,13 +29,13 @@ import org.springframework.stereotype.Component;
 public class OperationAspect {
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Before("@annotation(operation)")
     public void doAfter(Operation operation) throws Exception {
-        if (shopflixConfig.getIsDemoSite()) {
+        if (shopflyConfig.getIsDemoSite()) {
             if (logger.isDebugEnabled()) {
                 logger.debug("演示站点禁止此操作");
             }

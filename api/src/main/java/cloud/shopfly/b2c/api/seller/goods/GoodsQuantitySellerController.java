@@ -13,7 +13,7 @@ import cloud.shopfly.b2c.core.goods.model.vo.GoodsQuantityVO;
 import cloud.shopfly.b2c.core.goods.model.vo.GoodsSkuVO;
 import cloud.shopfly.b2c.core.goods.service.GoodsQuantityManager;
 import cloud.shopfly.b2c.core.goods.service.GoodsQueryManager;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.exception.ServiceException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -49,7 +49,7 @@ public class GoodsQuantitySellerController {
     @Autowired
     private GoodsQuantityManager goodsQuantityManager;
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @ApiOperation(value = "商家单独维护库存接口", notes = "商家单独维护库存接口时使用")
     @ApiImplicitParams({
@@ -119,7 +119,7 @@ public class GoodsQuantitySellerController {
         this.goodsQuantityManager.updateSkuQuantity(stockList);
 
         //如果商品库存缓冲池开启了，那么需要立即同步数据库的商品库存，以保证商品库存显示正常
-        if (shopflixConfig.isStock()) {
+        if (shopflyConfig.isStock()) {
             //立即同步数据库的库存
             goodsQuantityManager.syncDataBase();
         }

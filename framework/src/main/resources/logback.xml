@@ -14,7 +14,7 @@
 
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-        <file>${LOGS}/shopflix.log</file>
+        <file>${LOGS}/shopfly.log</file>
 
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 

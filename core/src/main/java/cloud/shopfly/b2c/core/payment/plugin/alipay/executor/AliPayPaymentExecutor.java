@@ -17,7 +17,7 @@ import com.alipay.api.AlipayResponse;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.response.AlipayTradeQueryResponse;
-import cloud.shopfly.b2c.core.payment.plugin.alipay.ShopflixAlipayUtil;
+import cloud.shopfly.b2c.core.payment.plugin.alipay.ShopflyAlipayUtil;
 import cloud.shopfly.b2c.framework.context.ThreadContextHolder;
 import cloud.shopfly.b2c.framework.exception.ServiceException;
 import cloud.shopfly.b2c.framework.logs.Debugger;
@@ -112,7 +112,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
             String alipayPublicKey = cfgparams.get("alipay_public_key");
 
             // 验证是否成功
-            if (ShopflixAlipayUtil.verify(alipayPublicKey)) {
+            if (ShopflyAlipayUtil.verify(alipayPublicKey)) {
                 //新版本同步没有交易状态
                 double payPrice = StringUtil.toDouble(totalAmount, 0d);
                 //this.paySuccess(billSn, returnTradeNo, tradeType, payPrice);
@@ -157,7 +157,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
             debugger.log(alipayPublicKey);
 
             // 验证成功
-            if (ShopflixAlipayUtil.verify(alipayPublicKey)) {
+            if (ShopflyAlipayUtil.verify(alipayPublicKey)) {
                 debugger.log("验证成功");
 
                 if ("TRADE_SUCCESS".equals(tradeStatus) || "TRADE_FINISHED".equals(tradeStatus)) {

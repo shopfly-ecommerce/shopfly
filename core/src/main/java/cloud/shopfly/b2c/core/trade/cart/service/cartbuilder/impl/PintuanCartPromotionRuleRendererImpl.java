@@ -11,7 +11,7 @@ import cloud.shopfly.b2c.core.trade.cart.service.CartPromotionManager;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.CartPromotionRuleRenderer;
 import cloud.shopfly.b2c.core.trade.cart.service.rulebuilder.CartCouponRuleBuilder;
 import cloud.shopfly.b2c.core.trade.cart.service.rulebuilder.SkuPromotionRuleBuilder;
-import dev.shopflix.core.trade.cart.model.vo.*;
+import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -13,7 +13,7 @@ import cloud.shopfly.b2c.core.member.MemberErrorCode;
 import cloud.shopfly.b2c.core.member.model.enums.ConnectPortEnum;
 import cloud.shopfly.b2c.core.member.model.vo.MemberVO;
 import cloud.shopfly.b2c.core.member.service.ConnectManager;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.context.ThreadContextHolder;
 import cloud.shopfly.b2c.framework.exception.ServiceException;
 import cloud.shopfly.b2c.framework.logs.Debugger;
@@ -61,10 +61,6 @@ public class PassportConnectBuyerController {
 
     @Autowired
     private DomainHelper domainHelper;
-
-    @Autowired
-    private ShopflixConfig shopflixConfig;
-
 
     @Autowired
     private Debugger debugger;

@@ -45,7 +45,7 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new ShopflixRequestInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(new ShopflyRequestInterceptor()).addPathPatterns("/**");
 	}
 
 	/**

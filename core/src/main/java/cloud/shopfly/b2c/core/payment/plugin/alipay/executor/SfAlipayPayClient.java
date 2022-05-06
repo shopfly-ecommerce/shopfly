@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * shopflix 阿里支付客户端
+ * shopfly 阿里支付客户端
  *
  * @author zh
  * @version v7.0
@@ -145,7 +145,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
         } else {
             /*******************************************************************************
              * 注意：
-             *     这个类的作用就是覆写这里，目的是形成 shopflix 前端需要的form 和form item格式
+             *     这个类的作用就是覆写这里，目的是形成 shopfly 前端需要的form 和form item格式
              * 原因：
              *     前后端分离，vue无法通过form表单跳转
              *******************************************************************************/

@@ -8,8 +8,8 @@ package cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.impl;
 import cloud.shopfly.b2c.core.trade.cart.model.enums.CartType;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.*;
-import dev.shopflix.core.trade.cart.model.vo.*;
-import dev.shopflix.core.trade.cart.service.cartbuilder.*;
+import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
+import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

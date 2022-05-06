@@ -24,7 +24,7 @@ import javax.sql.DataSource;
  * 2018/3/6
  */
 @Configuration
-@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
 public class DataSourceConfig {
 
     /*----------------------------------------------------------------------------*/

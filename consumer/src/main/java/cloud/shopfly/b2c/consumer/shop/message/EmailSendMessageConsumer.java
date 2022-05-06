@@ -31,7 +31,6 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.TradeVO;
 import cloud.shopfly.b2c.core.trade.sdk.model.OrderDetailDTO;
 import cloud.shopfly.b2c.framework.util.DateUtil;
 import cloud.shopfly.b2c.framework.util.StringUtil;
-import dev.shopflix.consumer.core.event.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

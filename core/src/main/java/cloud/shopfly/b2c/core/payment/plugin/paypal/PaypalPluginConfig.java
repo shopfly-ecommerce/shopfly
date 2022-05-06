@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class PaypalPluginConfig extends AbstractPaymentPlugin {
 
-    protected final String siteName = "shopflix商城";
+    protected final String siteName = "shopfly商城";
 
     @Autowired
     private Debugger debugger;

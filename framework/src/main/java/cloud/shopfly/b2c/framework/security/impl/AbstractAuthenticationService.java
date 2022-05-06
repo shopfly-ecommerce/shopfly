@@ -5,7 +5,7 @@
 */
 package cloud.shopfly.b2c.framework.security.impl;
 
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.auth.AuthUser;
 import cloud.shopfly.b2c.framework.security.AuthenticationService;
 import cloud.shopfly.b2c.framework.security.TokenManager;
@@ -59,7 +59,7 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
 
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
 
     /**
@@ -163,7 +163,7 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
             //缓存时间为session有效期+一分钟
             //也就表示，用户如果被禁用，session超时这个cache也就不需要了：
             //因为他需要重新登录就可以被检测出无效
-            int sessionTimeout = shopflixConfig.getRefreshTokenTimeout() - shopflixConfig.getAccessTokenTimeout() + 60;
+            int sessionTimeout = shopflyConfig.getRefreshTokenTimeout() - shopflyConfig.getAccessTokenTimeout() + 60;
 
             //使用ehcache作为缓存
             CachingProvider provider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");

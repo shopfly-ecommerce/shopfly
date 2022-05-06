@@ -13,7 +13,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.enums.CartType;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
 import cloud.shopfly.b2c.core.trade.cart.service.CartPromotionManager;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.CartPromotionRuleRenderer;
-import dev.shopflix.core.trade.cart.model.vo.*;
+import cloud.shopfly.b2c.core.trade.cart.model.vo.*;
 import cloud.shopfly.b2c.core.trade.cart.service.rulebuilder.CartCouponRuleBuilder;
 import cloud.shopfly.b2c.core.trade.cart.service.rulebuilder.CartPromotionRuleBuilder;
 import cloud.shopfly.b2c.core.trade.cart.service.rulebuilder.SkuPromotionRuleBuilder;

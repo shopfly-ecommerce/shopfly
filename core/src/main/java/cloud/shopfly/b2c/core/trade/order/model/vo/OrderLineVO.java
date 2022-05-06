@@ -11,7 +11,7 @@ import cloud.shopfly.b2c.core.promotion.coupon.model.dos.CouponDO;
 import cloud.shopfly.b2c.core.promotion.fulldiscount.model.dos.FullDiscountGiftDO;
 import cloud.shopfly.b2c.core.trade.order.model.dos.OrderDO;
 import cloud.shopfly.b2c.core.trade.order.support.AbstractOrderSpecialStatus;
-import dev.shopflix.core.trade.order.model.enums.*;
+import cloud.shopfly.b2c.core.trade.order.model.enums.*;
 import cloud.shopfly.b2c.framework.util.JsonUtil;
 import cloud.shopfly.b2c.framework.util.StringUtil;
 import io.swagger.annotations.ApiModelProperty;

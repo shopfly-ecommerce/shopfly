@@ -27,7 +27,7 @@ import cloud.shopfly.b2c.core.system.model.vo.ShipTemplateSettingVO;
 import cloud.shopfly.b2c.core.system.model.vo.ShipTemplateVO;
 import cloud.shopfly.b2c.core.goods.service.impl.util.SearchUtil;
 import cloud.shopfly.b2c.core.goods.service.impl.util.StockCacheKeyUtil;
-import dev.shopflix.core.goods.service.*;
+import cloud.shopfly.b2c.core.goods.service.*;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.database.IntegerMapper;

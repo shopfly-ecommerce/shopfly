@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2018/7/27 09:44
  */
 @Service
-@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
 public class MessageTemplateClientDefaultImpl implements MessageTemplateClient {
 
     @Autowired

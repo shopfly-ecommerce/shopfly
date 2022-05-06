@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2018/7/25 16:24
  */
 @Service
-@ConditionalOnProperty(value="shopflix.product", havingValue="stand")
+@ConditionalOnProperty(value="shopfly.product", havingValue="stand")
 public class ShipTemplateClientDefaultImpl implements ShipTemplateClient {
 
     @Autowired

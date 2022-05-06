@@ -8,7 +8,7 @@
         <version>2.0.1.RELEASE</version>
     </parent>
 
-    <groupId>dev.shopflix</groupId>
+    <groupId>cloud.shopfly.b2c</groupId>
     <artifactId>parent</artifactId>
     <version>1.0.0</version>
     <modules>
@@ -20,11 +20,11 @@
 
     </modules>
     <packaging>pom</packaging>
-    <name>shopflix</name>
-    <description>shopflix</description>
+    <name>shopfly</name>
+    <description>shopfly</description>
 
     <properties>
-        <docker-registry>shopflix/</docker-registry>
+        <docker-registry>shopfly/</docker-registry>
         <docker-server-id>docker-hub</docker-server-id>
         <log4j2.version>2.15.0</log4j2.version>
     </properties>

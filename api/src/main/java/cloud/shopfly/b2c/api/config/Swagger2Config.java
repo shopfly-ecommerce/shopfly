@@ -40,7 +40,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-微信")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/wechat/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -51,7 +51,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-分销")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/distribution/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -63,7 +63,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-拼团")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/pintuan/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -75,7 +75,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-售后")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/after-sales/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -85,7 +85,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-流量")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/view"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -96,7 +96,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-商品")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/goods/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -108,7 +108,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-会员认证中心")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.regex("(/passport/.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -119,7 +119,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-会员")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.regex("(/members.*)|(/account-binder.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -130,7 +130,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-楼层")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.regex("(/pages/.*)|(/focus-pictures.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -141,7 +141,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-支付")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/order/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -152,7 +152,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-店铺")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/shops/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -163,7 +163,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-交易")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.regex("(/trade.*)|(/express.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -174,7 +174,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("买家端-促销")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.buyer"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
                 .paths(PathSelectors.ant("/promotions/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -184,7 +184,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .title("买家Api文档")
                 .description("买家中心API接口")
                 .version("7.0")
-                .contact(new Contact("shopflix", "https://www.shopflix.dev", "service@shopflix.dev"))
+                .contact(new Contact("shopfly", "https://www.shopfly.dev", "service@shopfly.dev"))
                 .build();
     }
 
@@ -193,7 +193,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .title("商家Api文档")
                 .description("商家中心API接口")
                 .version("7.0")
-                .contact(new Contact("shopflix", "https://www.shopflix.dev", "service@shopflix.dev"))
+                .contact(new Contact("shopfly", "https://www.shopfly.dev", "service@shopfly.dev"))
                 .build();
     }
 
@@ -203,7 +203,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-售后")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/after-sales/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -215,7 +215,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .apiInfo(sellerApiInfo())
                 .select()
                 // 自行修改为自己的包路径
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/payment/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -226,7 +226,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-商品")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/goods/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -237,7 +237,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-会员")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.regex("(/seller/members.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -249,7 +249,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .apiInfo(sellerApiInfo())
                 .select()
                 // 自行修改为自己的包路径
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.regex("(/seller/focus-pictures.*)|(/seller/pages.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -261,7 +261,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .apiInfo(sellerApiInfo())
                 .select()
                 // 自行修改为自己的包路径
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/page-create/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -272,7 +272,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-促销")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/promotion/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -284,7 +284,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-商家认证中心")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.regex("(/seller/login.*)|(/seller/register.*)|(/seller/check.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -295,7 +295,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-交易")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.regex("(/seller/trade.*)|(/seller/waybill.*)|(/seller/express.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -307,7 +307,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .apiInfo(sellerApiInfo())
                 .select()
                 // 自行修改为自己的包路径
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.regex("(/seller/task.*)|(/seller/systems.*)|(/seller/settings.*)|(/seller/sensitive-words.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -318,7 +318,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-统计")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/statistics/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }
@@ -329,7 +329,7 @@ public class Swagger2Config extends AbstractSwagger2 {
                 .groupName("管理端-分销")
                 .apiInfo(sellerApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("dev.shopflix.api.seller"))
+                .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/distribution/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
     }

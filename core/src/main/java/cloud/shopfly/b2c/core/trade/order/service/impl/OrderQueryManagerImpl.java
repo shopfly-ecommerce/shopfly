@@ -22,8 +22,8 @@ import cloud.shopfly.b2c.core.promotion.fulldiscount.model.dos.FullDiscountGiftD
 import cloud.shopfly.b2c.core.trade.TradeErrorCode;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CouponVO;
 import cloud.shopfly.b2c.framework.util.*;
-import dev.shopflix.core.trade.order.model.enums.*;
-import dev.shopflix.core.trade.order.model.vo.*;
+import cloud.shopfly.b2c.core.trade.order.model.enums.*;
+import cloud.shopfly.b2c.core.trade.order.model.vo.*;
 import cloud.shopfly.b2c.core.trade.sdk.model.OrderDetailDTO;
 import cloud.shopfly.b2c.core.trade.sdk.model.OrderSkuDTO;
 import cloud.shopfly.b2c.framework.database.DaoSupport;

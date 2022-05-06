@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  * 2018/5/23 上午7:46
  */
 @Service
-@ConditionalOnProperty(value = "shopflix.product", havingValue = "stand")
+@ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
 public class WithdrawCountClientDefaultImpl implements WithdrawCountClient {
 
 

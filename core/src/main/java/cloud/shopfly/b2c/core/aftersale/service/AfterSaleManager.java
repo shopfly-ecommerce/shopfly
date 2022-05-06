@@ -11,7 +11,7 @@ import cloud.shopfly.b2c.core.aftersale.model.dto.RefundDTO;
 import cloud.shopfly.b2c.core.aftersale.model.dto.RefundDetailDTO;
 import cloud.shopfly.b2c.core.aftersale.model.vo.*;
 import cloud.shopfly.b2c.core.goods.model.enums.Permission;
-import dev.shopflix.core.aftersale.model.vo.*;
+import cloud.shopfly.b2c.core.aftersale.model.vo.*;
 import cloud.shopfly.b2c.framework.database.Page;
 
 import java.util.List;

@@ -5,7 +5,7 @@
 */
 package cloud.shopfly.b2c.framework.logs;
 
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class Debugger {
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     @Autowired
     private Cache cache;
@@ -48,7 +48,7 @@ public class Debugger {
      */
     public void log(String str) {
         //只有debugger开启才操作
-        if (!shopflixConfig.isDebugger()) {
+        if (!shopflyConfig.isDebugger()) {
             return;
         }
 
@@ -72,7 +72,7 @@ public class Debugger {
      */
     public String getLog() {
         //只有debugger开启才操作
-        if (!shopflixConfig.isDebugger()) {
+        if (!shopflyConfig.isDebugger()) {
             return "";
         }
         String logStr =(String) cache.get(LOG_KEY);
@@ -88,7 +88,7 @@ public class Debugger {
      */
     public void clear() {
         //只有debugger开启才操作
-        if (!shopflixConfig.isDebugger()) {
+        if (!shopflyConfig.isDebugger()) {
             return;
         }
         cache.remove(LOG_KEY);

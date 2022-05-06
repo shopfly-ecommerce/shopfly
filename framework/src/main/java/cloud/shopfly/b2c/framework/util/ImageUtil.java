@@ -67,10 +67,10 @@ public class ImageUtil {
         ImageUtil UI;
         boolean ss = false;
         try {
-            String from = "/Users/kingapex/ideaworkspace/shopflix-en/shopflix/framework/target/images/goods/41187474.jpeg";
-            String to = "/Users/kingapex/ideaworkspace/shopflix-en/shopflix/framework/target/images/goods/41187474_500_200.jpeg";
+            String from = "/Users/kingapex/ideaworkspace/shopfly-en/shopfly/framework/target/images/goods/41187474.jpeg";
+            String to = "/Users/kingapex/ideaworkspace/shopfly-en/shopfly/framework/target/images/goods/41187474_500_200.jpeg";
             ss = createThumbnail(from, to, 500, 200);
-//            UI = new UploadImg(, "/Users/kingapex/ideaworkspace/shopflix-en/shopflix/framework/target/images/goods/", "ps_low2","jpeg");
+//            UI = new UploadImg(, "/Users/kingapex/ideaworkspace/shopfly-en/shopfly/framework/target/images/goods/", "ps_low2","jpeg");
 //            ss = UI.createThumbnail();
             if (ss) {
                 System.out.println("Success");

@@ -1,7 +1,7 @@
 package cloud.shopfly.b2c.core.goodssearch.service.impl;
 
 import cloud.shopfly.b2c.core.goodssearch.model.MyMap;
-import cloud.shopfly.b2c.core.ShopflixRunner;
+import cloud.shopfly.b2c.core.ShopflyRunner;
 import cloud.shopfly.b2c.core.goodssearch.service.GoodsIndexInitManager;
 import cloud.shopfly.b2c.framework.elasticsearch.EsConfig;
 import cloud.shopfly.b2c.framework.elasticsearch.EsSettings;
@@ -33,7 +33,7 @@ public class GoodsIndexInitManagerImpl implements GoodsIndexInitManager {
     @Autowired
     private MessageSender messageSender;
 
-    protected final Logger logger = LoggerFactory.getLogger(ShopflixRunner.class);
+    protected final Logger logger = LoggerFactory.getLogger(ShopflyRunner.class);
 
     @Override
     public void initIndex()  {

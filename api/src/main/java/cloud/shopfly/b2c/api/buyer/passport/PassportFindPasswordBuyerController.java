@@ -14,7 +14,7 @@ import cloud.shopfly.b2c.core.member.model.dos.Member;
 import cloud.shopfly.b2c.core.member.service.MemberManager;
 import cloud.shopfly.b2c.core.member.service.MemberSecurityManager;
 import cloud.shopfly.b2c.core.passport.service.PassportManager;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.exception.ServiceException;
 import cloud.shopfly.b2c.framework.util.JsonUtil;
@@ -60,7 +60,7 @@ public class PassportFindPasswordBuyerController {
     @Autowired
     private SmsClient smsClient;
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
 
     @ApiOperation(value = "获取账户信息")
@@ -96,7 +96,7 @@ public class PassportFindPasswordBuyerController {
         map.put("mobile", mobile);
         map.put("uname", name.substring(0, 1) + "***" + name.substring(name.length() - 1, name.length()));
         map.put("uuid", uuid);
-        cache.put(uuid, member, shopflixConfig.getSmscodeTimout());
+        cache.put(uuid, member, shopflyConfig.getSmscodeTimout());
         return JsonUtil.objectToJson(map);
 
     }
@@ -118,7 +118,7 @@ public class PassportFindPasswordBuyerController {
         Member member = (Member) cache.get(uuid);
         if (member != null) {
             passportManager.sendFindPasswordCode(member.getMobile());
-            return shopflixConfig.getSmscodeTimout() / 60 + "";
+            return shopflyConfig.getSmscodeTimout() / 60 + "";
         }
         throw new ServiceException(MemberErrorCode.E119.code(), "请先对当前用户进行身份校验");
     }

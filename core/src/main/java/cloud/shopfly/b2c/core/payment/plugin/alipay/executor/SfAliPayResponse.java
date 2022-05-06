@@ -5,7 +5,7 @@
 */
 package cloud.shopfly.b2c.core.payment.plugin.alipay.executor;
 /**
- * shopflix 支付相应对象
+ * shopfly 支付相应对象
  *
  * @author zh
  * @version v7.0
@@ -33,7 +33,7 @@ public class SfAliPayResponse extends AlipayResponse {
 
     @Override
     public String toString() {
-        return "ShopflixPayResponse{" +
+        return "shopflyPayResponse{" +
                 "form=" + form +
                 '}';
     }

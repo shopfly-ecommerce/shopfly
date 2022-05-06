@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.goods.service.GoodsQuantityManager;
 import cloud.shopfly.b2c.core.goods.service.GoodsSkuManager;
 import cloud.shopfly.b2c.core.goods.service.impl.util.SearchUtil;
 import cloud.shopfly.b2c.core.goods.service.impl.util.StockCacheKeyUtil;
-import cloud.shopfly.b2c.framework.ShopflixConfig;
+import cloud.shopfly.b2c.framework.ShopflyConfig;
 import cloud.shopfly.b2c.framework.cache.Cache;
 import cloud.shopfly.b2c.framework.database.DaoSupport;
 import cloud.shopfly.b2c.framework.database.IntegerMapper;
@@ -79,7 +79,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private ShopflixConfig shopflixConfig;
+    private ShopflyConfig shopflyConfig;
 
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
@@ -357,7 +357,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
         goodsQuantityManager.updateSkuQuantity(quantityList);
 
         //如果商品库存缓冲池开启了，那么需要立即同步数据库的商品库存，以保证商品库存显示正常
-        if (shopflixConfig.isStock()) {
+        if (shopflyConfig.isStock()) {
             goodsQuantityManager.syncDataBase();
         }
     }

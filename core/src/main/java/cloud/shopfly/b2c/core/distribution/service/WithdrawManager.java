@@ -24,18 +24,18 @@ import java.util.Map;
 
 
 /**
- * 提现接口
+ * Withdrawal interface
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 下午1:18
+ * 2018/5/22 In the afternoon1:18
  */
 public interface WithdrawManager {
 
     /**
-     * 根据ID提现申请详细记录
+     * According to theIDDetailed record of withdrawal application
      *
      * @param id
      * @return
@@ -43,36 +43,36 @@ public interface WithdrawManager {
     WithdrawApplyDO getModel(Integer id);
 
     /**
-     * 申请提现
+     * To apply for cash withdrawals
      *
-     * @param memberId    会员id
-     * @param applyMoney  申请金额
-     * @param applyRemark 备注
+     * @param memberId    membersid
+     * @param applyMoney  To apply for the amount
+     * @param applyRemark note
      */
     void applyWithdraw(Integer memberId, Double applyMoney, String applyRemark);
 
 
     /**
-     * 审核提现申请
+     * Review withdrawal request
      *
-     * @param applyId     提现申请id
-     * @param remark      备注
-     * @param auditResult 审核结果
+     * @param applyId     Withdrawal applicationid
+     * @param remark      note
+     * @param auditResult Review the results
      */
     void auditing(Integer applyId, String remark, String auditResult);
 
 
     /**
-     * 财务打款
+     * Financial money
      *
-     * @param applyId 提现申请id
-     * @param remark  备注
+     * @param applyId Withdrawal applicationid
+     * @param remark  note
      */
     void transfer(Integer applyId, String remark);
 
 
     /**
-     * 根据member_id查询提现记录
+     * According to themember_idQuery withdrawal records
      *
      * @param memeberId
      * @param pageNo
@@ -82,14 +82,14 @@ public interface WithdrawManager {
     Page<WithdrawApplyVO> pageWithdrawApply(Integer memeberId, Integer pageNo, Integer pageSize);
 
     /**
-     * 保存提现设置
+     * Save the withdrawal Settings
      *
      * @param bankParams
      */
     void saveWithdrawWay(BankParamsVO bankParams);
 
     /**
-     * 获取提现设置
+     * Gets the withdrawal Settings
      *
      * @param memberId
      * @return
@@ -97,7 +97,7 @@ public interface WithdrawManager {
     BankParamsVO getWithdrawSetting(int memberId);
 
     /**
-     * 分页会员提现查询
+     * Paging member withdrawal query
      *
      * @param pageNo
      * @param pageSize
@@ -108,7 +108,7 @@ public interface WithdrawManager {
 
 
     /**
-     * 分页会员提现查询
+     * Paging member withdrawal query
      *
      * @param memberId
      * @return

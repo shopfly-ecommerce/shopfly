@@ -27,84 +27,84 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 售后管理接口
+ * After-sales management interface
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 下午3:07 2018/5/2
+ * @since v7.0 In the afternoon3:07 2018/5/2
  */
 public interface AfterSaleManager {
 
     /**
-     * 申请退款
+     * To apply for a refund
      *
-     * @param refundApply 退款申请
+     * @param refundApply Refund application
      */
     void applyRefund(BuyerRefundApplyVO refundApply);
 
 
     /**
-     * 退货申请
+     * Return to apply for
      *
      * @param refundApply
      */
     void applyGoodsReturn(BuyerRefundApplyVO refundApply);
 
     /**
-     * 买家对已付款的订单执行取消操作
+     * Buyer cancels paid orders
      *
      * @param buyerCancelOrderVO
      */
     void cancelOrder(BuyerCancelOrderVO buyerCancelOrderVO);
 
     /**
-     * 管理员审批一个退货（款）
+     * The administrator approves a return（paragraph）
      *
-     * @param refundApproval 批准 vo
-     * @param permission 权限
-     * @return 批准 vo
+     * @param refundApproval approvalvo
+     * @param permission permissions
+     * @return approvalvo
      */
     AdminRefundApprovalVO approval(AdminRefundApprovalVO refundApproval, Permission permission);
 
     /**
-     * 财务审核/执行一个退款
+     * Financial audit/Execute a refund
      * @param refundApproval
      * @return
      */
     FinanceRefundApprovalVO approval(FinanceRefundApprovalVO refundApproval);
 
     /**
-     * 根据参数查询退款（货）单
+     * Query a refund based on the parameters（cargo）single
      *
-     * @param param 查询参数
+     * @param param Query parameters
      * @return
      */
     Page<RefundDTO> query(RefundQueryParamVO param);
 
     /**
-     * 根据编号获取详细
+     * Get details by number
      *
-     * @param sn 单据编号
+     * @param sn Receipt number
      * @return
      */
     RefundDetailDTO getDetail(String sn);
 
     /**
-     * 查询退款方式为原路退回且状态为退款中的退款单
+     * Query that the refund mode is the original route return and the status is refund
      *
      * @return
      */
     List<RefundDO> queryNoReturnOrder();
 
     /**
-     * 更新退款单的状态
+     * Update the status of refund receipt
      *
-     * @param list 退款单列表
+     * @param list A single list of refunds
      */
     void update(List<RefundDO> list);
 
     /**
-     * 获取退款申请信息
+     * Obtain refund application information
      *
      * @param orderSn
      * @param skuId
@@ -113,7 +113,7 @@ public interface AfterSaleManager {
     RefundApplyVO refundApply(String orderSn, Integer skuId);
 
     /**
-     * 获取未完成售后订单数量
+     * Obtain the number of outstanding orders
      *
      * @param memberId
      * @return
@@ -122,45 +122,45 @@ public interface AfterSaleManager {
 
 
     /**
-     * 获取退货单的商品列表
+     * Get a list of items for the return
      *
-     * @param sn 退款单号
-     * @return 退货商品列表
+     * @param sn The refund number
+     * @return List of Returned Goods
      */
     List<RefundGoodsDO> getRefundGoods(String sn);
 
     /**
-     * 查询退款单状态
+     * Query the status of the refund slip
      */
     void queryRefundStatus();
 
     /**
-     * 入库
+     * Put in storage
      *
-     * @param sn     退款单
-     * @param remark 备注
+     * @param sn     Refund single
+     * @param remark note
      */
     void stockIn(String sn, String remark);
 
     /**
-     * 退款
+     * A refund
      *
-     * @param sn     退款单号
-     * @param remark 退款备注
+     * @param sn     The refund number
+     * @param remark The refund note
      */
     void refund(String sn, String remark);
 
     /**
-     * 系统对已付款的订单执行取消操作
+     * The system cancels paid orders
      * @param buyerCancelOrderVO
      */
     void sysCancelOrder(BuyerCancelOrderVO buyerCancelOrderVO);
 
     /**
-     * 退款单导出excel
-     * @param startTime 开始时间
-     * @param endTime 结束时间
-     * @return 字节流
+     * Refund Receipt Exportexcel
+     * @param startTime The start time
+     * @param endTime The end of time
+     * @return Byte stream
      */
     List<ExportRefundExcelVO> exportExcel(long startTime, long endTime);
 

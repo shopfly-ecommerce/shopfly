@@ -29,7 +29,7 @@ import java.util.List;
 
 
 /**
- * 快递平台实体
+ * Express platform entity
  *
  * @author zh
  * @version v7.0.0
@@ -42,39 +42,39 @@ public class ExpressPlatformVO implements Serializable {
 
     private static final long serialVersionUID = -6909967652948921476L;
     /**
-     * 快递平台id
+     * Delivery platformid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 快递平台名称
+     * Express Platform Name
      */
     @Column(name = "name")
-    @ApiModelProperty(name = "name", value = "快递平台名称", required = false)
+    @ApiModelProperty(name = "name", value = "Express Platform Name", required = false)
     private String name;
     /**
-     * 是否开启快递平台,1开启，0未开启
+     * Whether to enable the express delivery platform,1Open,0Did not open
      */
     @Column(name = "open")
-    @ApiModelProperty(name = "open", value = "是否开启快递平台,1开启，0未开启", required = false)
+    @ApiModelProperty(name = "open", value = "Whether to enable the express delivery platform,1Open,0Did not open", required = false)
     private Integer open;
     /**
-     * 快递平台配置
+     * Express Platform Configuration
      */
     @Column(name = "config")
-    @ApiModelProperty(name = "config", value = "快递平台配置", required = false)
+    @ApiModelProperty(name = "config", value = "Express Platform Configuration", required = false)
     private String config;
     /**
-     * 快递平台beanid
+     * Delivery platformbeanid
      */
     @Column(name = "bean")
-    @ApiModelProperty(name = "bean", value = "快递平台beanid", required = false)
+    @ApiModelProperty(name = "bean", value = "Delivery platformbeanid", required = false)
     private String bean;
     /**
-     * 快递平台配置项
+     * Express platform configuration item
      */
-    @ApiModelProperty(name = "configItems", value = "快递平台配置项", required = true)
+    @ApiModelProperty(name = "configItems", value = "Express platform configuration item", required = true)
     private List<ConfigItem> configItems;
 
     public ExpressPlatformVO(ExpressPlatformDO expressPlatformDO) {

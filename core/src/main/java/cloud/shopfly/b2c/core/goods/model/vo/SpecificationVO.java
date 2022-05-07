@@ -25,12 +25,12 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 
 /**
- * 规格vo
+ * specificationsvo
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月20日 上午11:28:48
+ * 2018years3month20The morning of11:28:48
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -41,9 +41,9 @@ public class SpecificationVO extends SpecificationDO {
      */
     private static final long serialVersionUID = 6722899699412983854L;
     /**
-     * 规格值
+     * values
      */
-    @ApiModelProperty("规格值")
+    @ApiModelProperty("values")
     private List<SpecValuesDO> valueList;
 
     public List<SpecValuesDO> getValueList() {

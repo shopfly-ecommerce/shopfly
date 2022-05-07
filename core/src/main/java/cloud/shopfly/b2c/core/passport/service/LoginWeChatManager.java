@@ -23,7 +23,7 @@ import net.sf.json.JSONObject;
 import java.util.Map;
 
 /**
- * 微信统一登陆服务
+ * Wechat unified login service
  * @author cs
  * @since v1.0
  * @version 7.2.2
@@ -33,7 +33,7 @@ public interface LoginWeChatManager {
 
 
     /**
-     * 获取授权登录的url
+     * Obtained authorized loginurl
      *
      * @return
      */
@@ -41,7 +41,7 @@ public interface LoginWeChatManager {
 
 
     /**
-     * 获取accesstoken
+     * To obtainaccesstoken
      *
      * @param code
      * @return
@@ -50,35 +50,35 @@ public interface LoginWeChatManager {
 
 
     /**
-     * 获取unionid
-     * @param code 微信h5授权返回的code
+     * To obtainunionid
+     * @param code WeChath5Authorized to returncode
      * @return
      */
     Map wxWapLogin(String code, String uuid, String oldUuid);
 
     /**
-     * unipp app登陆
+     * unipp applanding
      * @param weChatUserDTO
      * @return
      */
     Map wxAppLogin(String uuid, WeChatUserDTO weChatUserDTO);
 
     /**
-     * 小程序登陆
+     * Applets login
      * @param weChatMiniLoginDTO
      * @return
      */
     Map miniLogin(WeChatMiniLoginDTO weChatMiniLoginDTO);
 
     /**
-     * 获取小程序的code
+     * To get the appletscode
      * @param code
      * @return
      */
     String getMiniOpenid(String code);
 
     /**
-     * 微信小程序绑定手机号
+     * Wechat mini program binding mobile phone number
      * @param
      * @return
      */

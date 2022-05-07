@@ -24,7 +24,7 @@ import java.util.Arrays;
 /**
  * @author fk
  * @version v2.0
- * @Description: ClientAppType 验证
+ * @Description: ClientAppType validation
  * @date 2018/4/3 11:44
  * @since v7.0.0
  */

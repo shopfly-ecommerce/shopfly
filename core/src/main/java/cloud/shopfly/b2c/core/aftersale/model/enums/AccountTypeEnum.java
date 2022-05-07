@@ -18,18 +18,18 @@ package cloud.shopfly.b2c.core.aftersale.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 退款账户类型枚举类
+ * @Description Refund account type enumeration class
  * @ClassName AccountTypeEnum
- * @since v7.0 下午3:11 2018/6/7
+ * @since v7.0 In the afternoon3:11 2018/6/7
  */
 public enum AccountTypeEnum {
 
-    //支付宝
-    ALIPAY("支付宝"),
-    //微信
-    WEIXINPAY("微信"),
-    //银行转账
-    BANKTRANSFER("银行转账");
+    // Alipay
+    ALIPAY("Alipay"),
+    // WeChat
+    WEIXINPAY("WeChat"),
+    // Bank transfer
+    BANKTRANSFER("Bank transfer");
 
     private String description;
 

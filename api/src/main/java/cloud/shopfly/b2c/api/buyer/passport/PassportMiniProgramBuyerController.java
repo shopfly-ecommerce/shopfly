@@ -42,13 +42,13 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 小程序登录接口
+ * @Description: Applets login interface
  * @date 2018/11/20 14:56
  * @since v7.0.0
  */
 @RestController
 @RequestMapping("/passport/mini-program")
-@Api(description = "小程序登录api")
+@Api(description = "Applets loginapi")
 @Validated
 public class PassportMiniProgramBuyerController {
 
@@ -69,17 +69,17 @@ public class PassportMiniProgramBuyerController {
 
 
     @GetMapping("/auto-login")
-    @ApiOperation(value = "小程序自动登录")
+    @ApiOperation(value = "Applet automatic login")
     public Map autoLogin(String code, String uuid) {
 
-        //获取sessionkey和openid或者unionid
+        // Obtain sessionKey and OpenID or UnionID
         String content = wechatAbstractConnectLoginPlugin.miniProgramAutoLogin(code);
 
         return this.connectManager.miniProgramLogin(content, uuid);
     }
 
     @GetMapping("/decrypt")
-    @ApiOperation(value = "加密数据解密验证")
+    @ApiOperation(value = "Decrypt and verify encrypted data")
     public Map decrypt(String code, String encryptedData, String uuid, String iv) {
 
         return connectManager.decrypt(code, encryptedData, uuid, iv);
@@ -87,8 +87,8 @@ public class PassportMiniProgramBuyerController {
 
 
     @GetMapping("/code-unlimit")
-    @ApiOperation(value = "获取微信小程序码")
-    @ApiImplicitParam(name = "goods_id", value = "商品id", required = true, dataType = "int", paramType = "query")
+    @ApiOperation(value = "Get wechat small program code")
+    @ApiImplicitParam(name = "goods_id", value = "productid", required = true, dataType = "int", paramType = "query")
     public String getWXACodeUnlimit(@ApiIgnore int goodsId) {
 
         String accessTocken = wechatAbstractConnectLoginPlugin.getWXAccessTocken();
@@ -97,24 +97,24 @@ public class PassportMiniProgramBuyerController {
     }
 
     @PostMapping("/distribution")
-    @ApiOperation(value = "存储小程序端分销的上级id")
-    @ApiImplicitParam(name = "from", value = "上级会员id加密格式", required = true, dataType = "String",dataTypeClass = String.class, paramType = "query")
+    @ApiOperation(value = "Store applet side distribution superiorid")
+    @ApiImplicitParam(name = "from", value = "The superior memberidEncryption format", required = true, dataType = "String",dataTypeClass = String.class, paramType = "query")
     public String distribution(String from, @RequestHeader(required = false) String uuid) {
         if (logger.isDebugEnabled()) {
-            logger.debug("==============前台传过来的缓存key:" + from);
-            logger.debug("==============前台传过来的uuid:" + uuid);
+            logger.debug("==============The cache from the foregroundkey:" + from);
+            logger.debug("==============It came from the front deskuuid:" + uuid);
         }
 
         if (StringUtil.notEmpty(uuid) && StringUtil.notEmpty(from)) {
             try {
-                //从缓存中获取分销合伙人的会员ID
+                // Get the membership ID of the distribution partner from the cache
                 Object memberId = cache.get(CachePrefix.MEMBER_SU.getPrefix() + from);
                 if (logger.isDebugEnabled()) {
-                    logger.debug("==============从缓存中获取的会员ID为:" + memberId);
+                    logger.debug("==============Membership retrieved from the cacheIDfor:" + memberId);
                 }
-                //如果会员ID不为空
+                // If the member ID is not empty
                 if (memberId != null) {
-                    //将uuid作为key值，再次将会员ID存放至缓存中
+                    // Use the UUID as the key and store the member ID in the cache again
                     cache.put(CachePrefix.DISTRIBUTION_UP.getPrefix() + uuid, memberId);
                 }
             } catch (Exception e) {
@@ -126,19 +126,19 @@ public class PassportMiniProgramBuyerController {
         return "";
     }
 
-    @ApiOperation(value = "小程序注册绑定")
+    @ApiOperation(value = "Applets register bindings")
     @PostMapping("/register-bind/{uuid}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uuid", value = "唯一标识", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "nick_name", value = "昵称", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "face", value = "头像", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "sex", value = "性别", required = true, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "uuid", value = "A unique identifier", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "nick_name", value = "nickname", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "face", value = "Head portrait", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "sex", value = "gender", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "mobile", value = "Mobile phone number", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "Password", required = true, dataType = "String", paramType = "query"),
 
     })
-    public Map binder(@PathVariable("uuid") String uuid, @Length(max = 20, message = "昵称超过长度限制") @ApiIgnore String nickName, String face, Integer sex, @Mobile String mobile, @Pattern(regexp = "[a-fA-F0-9]{32}", message = "密码格式不正确") String password) {
-        //执行注册
+    public Map binder(@PathVariable("uuid") String uuid, @Length(max = 20, message = "The nickname exceeds the length limit") @ApiIgnore String nickName, String face, Integer sex, @Mobile String mobile, @Pattern(regexp = "[a-fA-F0-9]{32}", message = "The password format is incorrect") String password) {
+        // Perform registration
         Member member = new Member();
         member.setUname("m_" + mobile);
         member.setMobile(mobile);
@@ -147,7 +147,7 @@ public class PassportMiniProgramBuyerController {
         member.setFace(face);
         member.setSex(sex);
         memberManager.register(member);
-        //执行绑定账号
+        // Executing the Binding account
         Map map = connectManager.mobileBind(mobile, uuid);
         return map;
     }

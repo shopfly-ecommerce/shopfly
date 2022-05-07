@@ -20,9 +20,9 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartVO;
 import java.util.List;
 
 /**
- * 购物车优惠券渲染器
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >购物车架构</a>
+ * Shopping cart coupon renderer
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >Shopping cart architecture</a>
  *
  * @author kingapex
  * @version 1.0
@@ -32,7 +32,7 @@ import java.util.List;
 public interface CartCouponRenderer {
 
     /**
-     * 优惠券计算
+     * Coupon calculation
      * @param cartList
      */
     void render(List<CartVO> cartList);

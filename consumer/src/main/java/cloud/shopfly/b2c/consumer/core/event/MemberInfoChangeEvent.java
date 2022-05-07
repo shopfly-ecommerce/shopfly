@@ -16,19 +16,19 @@
 package cloud.shopfly.b2c.consumer.core.event;
 
 /**
- * 会员资料修改事件
+ * Member information modification event
  *
  * @author zh
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:24:31
+ * 2018years3month23The morning of10:24:31
  */
 public interface MemberInfoChangeEvent {
 
     /**
-     * 会员资料修改后事件
+     * Event after modification of member information
      *
-     * @param memberId 会员id
+     * @param memberId membersid
      */
     void memberInfoChange(Integer memberId);
 }

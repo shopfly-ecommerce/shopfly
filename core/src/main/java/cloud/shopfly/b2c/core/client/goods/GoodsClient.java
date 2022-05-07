@@ -29,13 +29,13 @@ import java.util.Map;
 /**
  * @author fk
  * @version v1.0
- * @Description: 商品对外的接口
+ * @Description: The external interface of a commodity
  * @date 2018/7/26 10:33
  * @since v7.0.0
  */
 public interface GoodsClient {
     /**
-     * 缓存中查询商品的信息
+     * Query information about a product in the cache
      *
      * @param goodsId
      * @return
@@ -43,15 +43,15 @@ public interface GoodsClient {
     CacheGoods getFromCache(Integer goodsId);
 
     /**
-     * 根据条件查询商品总数
+     * Query the total number of items by condition
      *
-     * @param status 商品状态
-     * @return 商品总数
+     * @param status Status
+     * @return The total number of goods
      */
     Integer queryGoodsCountByParam(Integer status);
 
     /**
-     * 查询多个商品的基本信息
+     * Example Query basic information about multiple commodities
      *
      * @param goodsIds
      * @return
@@ -59,15 +59,15 @@ public interface GoodsClient {
     List<GoodsSelectLine> query(Integer[] goodsIds);
 
     /**
-     * 查询很多商品的信息和参数信息
+     * Example Query the information and parameter information about many commodities
      *
-     * @param goodsIds 商品id集合
+     * @param goodsIds productidA collection of
      * @return
      */
     List<Map<String, Object>> getGoodsAndParams(Integer[] goodsIds);
 
     /**
-     * 缓存中查询sku信息
+     * Cached queryskuinformation
      *
      * @param skuId
      * @return
@@ -75,36 +75,36 @@ public interface GoodsClient {
     GoodsSkuVO getSkuFromCache(Integer skuId);
 
     /**
-     * 更新商品的评论数量
+     * Update the number of reviews for items
      *
      * @param goodsId
      */
     void updateCommentCount(Integer goodsId);
 
     /**
-     * 查询商品信息
+     * Querying Commodity Information
      *
-     * @param goodsIds 商品id集合
+     * @param goodsIds productidA collection of
      * @return
      */
     List<Map<String, Object>> getGoods(Integer[] goodsIds);
 
     /**
-     * 更新商品的购买数量
+     * Update the purchase quantity of goods
      *
      * @param list
      */
     void updateBuyCount(List<OrderSkuVO> list);
 
     /**
-     * 查询商品总数
+     * Querying the total number of goods
      *
-     * @return 商品总数
+     * @return The total number of goods
      */
     Integer queryGoodsCount();
 
     /**
-     * 查询某范围的商品信息
+     * Query information about a range of commodities
      *
      * @param pageNo
      * @param pageSize
@@ -113,23 +113,23 @@ public interface GoodsClient {
     List<Map> queryGoodsByRange(Integer pageNo, Integer pageSize);
 
     /**
-     * 获取商品分类
+     * Get product categories
      *
-     * @param id 商品分类主键
-     * @return Category 商品分类
+     * @param id Merchandise category primary key
+     * @return Category Category
      */
     CategoryDO getCategory(Integer id);
 
     /**
-     * 校验商品模版是否使用
+     * Verify whether the product template is used
      *
      * @param templateId
-     * @return 商品
+     * @return product
      */
     GoodsDO checkShipTemplate(Integer templateId);
 
     /**
-     * 添加商品快照时使用的接口
+     * Interface for adding a commodity snapshot
      *
      * @param goodsId
      * @return
@@ -137,7 +137,7 @@ public interface GoodsClient {
     GoodsSnapshotVO queryGoodsSnapShotInfo(Integer goodsId);
 
     /**
-     * 更新商品好平率
+     * Update the good leveling rate of goods
      */
     void updateGoodsGrade();
 

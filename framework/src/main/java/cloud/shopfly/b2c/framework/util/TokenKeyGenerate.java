@@ -22,13 +22,13 @@ package cloud.shopfly.b2c.framework.util;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-12-18 下午3:39
+ * 2018-12-18 In the afternoon3:39
  */
 public class TokenKeyGenerate {
 
 
     /**
-     * 生成token KEY
+     * generatetoken KEY
      *
      * @param uuid
      * @param memberId
@@ -39,7 +39,7 @@ public class TokenKeyGenerate {
     }
 
     /**
-     * 生成模糊token 提供删除使用
+     * To generate the fuzzytoken Provide delete use
      *
      * @param uuid
      * @param memberId
@@ -50,7 +50,7 @@ public class TokenKeyGenerate {
     }
 
     /**
-     * 生成 模糊删除 key
+     * Generate fuzzy deletekey
      *
      * @param memberId
      * @return
@@ -60,7 +60,7 @@ public class TokenKeyGenerate {
     }
 
     /**
-     * 生成 模糊删除 key
+     * Generate fuzzy deletekey
      *
      * @param memberId
      * @return
@@ -71,7 +71,7 @@ public class TokenKeyGenerate {
 
 
     /**
-     * 生成token KEY
+     * generatetoken KEY
      *
      * @param uuid
      * @param memberId
@@ -82,7 +82,7 @@ public class TokenKeyGenerate {
     }
 
     /**
-     * 生成刷新token KEY
+     * Generate the refreshtoken KEY
      *
      * @param uuid
      * @param memberId
@@ -94,7 +94,7 @@ public class TokenKeyGenerate {
 
 
     /**
-     * 生成 模糊删除 key
+     * Generate fuzzy deletekey
      *
      * @param memberId
      * @return
@@ -104,7 +104,7 @@ public class TokenKeyGenerate {
     }
 
     /**
-     * 生成 模糊删除 key
+     * Generate fuzzy deletekey
      *
      * @param memberId
      * @return

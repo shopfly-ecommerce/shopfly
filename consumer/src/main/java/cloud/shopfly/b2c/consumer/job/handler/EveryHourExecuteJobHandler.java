@@ -25,12 +25,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 每小时执行
+ * Hourly execution
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-06 上午4:24
+ * 2018-07-06 In the morning4:24
  */
 @Component
 public class EveryHourExecuteJobHandler {
@@ -55,7 +55,7 @@ public class EveryHourExecuteJobHandler {
                 logger.debug("EveryHour job end");
             }
         } catch (Exception e) {
-            this.logger.error("每小时任务异常：", e);
+            this.logger.error("The hourly task is abnormal：", e);
         }
     }
 }

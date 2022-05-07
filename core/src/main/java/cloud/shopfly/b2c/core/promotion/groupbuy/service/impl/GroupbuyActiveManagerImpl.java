@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 团购活动表业务类
+ * Group purchase activity table business class
  *
  * @author Snow
  * @version v7.0.0
@@ -79,7 +79,7 @@ public class GroupbuyActiveManagerImpl extends AbstractPromotionRuleManagerImpl 
     public void delete(Integer id) {
         this.verifyAuth(id);
         this.daoSupport.delete(GroupbuyActiveDO.class, id);
-        //删除参加的团购商品
+        // Delete participating group purchase commodities
         String sql = "delete from es_groupbuy_goods where act_id = ? ";
         this.daoSupport.execute(sql, id);
     }
@@ -104,9 +104,9 @@ public class GroupbuyActiveManagerImpl extends AbstractPromotionRuleManagerImpl 
         GroupbuyActiveDO activeDO = this.getModel(id);
         long nowTime = DateUtil.getDateline();
 
-        //如果活动起始时间小于现在时间，活动已经开始了。
+        // If the start time is less than the present time, the activity has already started.
         if (activeDO.getStartTime().longValue() < nowTime && activeDO.getEndTime().longValue() > nowTime) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动已经开始，不能进行编辑删除操作");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The activity has started. You cannot edit or delete the activity");
         }
     }
 

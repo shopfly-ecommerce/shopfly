@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 发送短信
+ * Send a text message
  *
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:32:15
+ * @since v7.0.0 2018years3month23The morning of10:32:15
  */
 @Component
 public class SmsSendMessageReceiver {
@@ -46,9 +46,9 @@ public class SmsSendMessageReceiver {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     /**
-     * 短信消息
+     * SMS message
      *
-     * @param smsSendVO 短信vo
+     * @param smsSendVO SMSvo
      */
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = AmqpExchange.SEND_MESSAGE + "_QUEUE"),
@@ -60,7 +60,7 @@ public class SmsSendMessageReceiver {
                 try {
                     event.send(smsSendVO);
                 } catch (Exception e) {
-                    logger.error("发送短信出错", e);
+                    logger.error("Sending SMS message error", e);
                 }
             }
         }

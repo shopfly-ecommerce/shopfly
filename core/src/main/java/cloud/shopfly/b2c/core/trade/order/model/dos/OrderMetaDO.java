@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 订单扩展信息表实体
+ * Order extension information table entities
  *
  * @author Snow
  * @version v7.0.0
@@ -45,38 +45,38 @@ public class OrderMetaDO implements Serializable {
     private static final long serialVersionUID = 3108120423695585L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "meta_id")
     @ApiModelProperty(hidden = true)
     private Integer metaId;
 
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
 
     /**
-     * 扩展-键
+     * extension-key
      */
     @Column(name = "meta_key")
-    @ApiModelProperty(name = "meta_key", value = "扩展-键", required = false)
+    @ApiModelProperty(name = "meta_key", value = "extension-key", required = false)
     private String metaKey;
 
     /**
-     * 扩展-值
+     * extension-value
      */
     @Column(name = "meta_value")
-    @ApiModelProperty(name = "meta_value", value = "扩展-值", required = false)
+    @ApiModelProperty(name = "meta_value", value = "extension-value", required = false)
     private String metaValue;
 
     /**
-     * 售后状态
+     * After state
      */
     @Column(name = "status")
-    @ApiModelProperty(name = "status", value = "售后状态", required = false)
+    @ApiModelProperty(name = "status", value = "After state", required = false)
     private String status;
 
     @PrimaryKeyField

@@ -81,15 +81,15 @@ public class SeckillCreateController {
 
 
 
-    @ApiOperation(value = "添加限时抢购入库", response = SeckillVO.class)
+    @ApiOperation(value = "Add flash sale to store", response = SeckillVO.class)
     @GetMapping
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     public SeckillDTO add(@NotNull String startTime,@NotNull String endTime,@NotNull String times,@NotNull String skuIds) {
         SeckillDTO seckill = new SeckillDTO();
         seckill.setApplyEndTime(DateUtil.getDateline(endTime,"yyyy-MM-dd HH:mm:ss"));
         seckill.setStartDay(DateUtil.getDateline(startTime,"yyyy-MM-dd"));
-        seckill.setSeckillName("测试" + startTime);
-        seckill.setSeckillName("测试" + startTime);
+        seckill.setSeckillName("test" + startTime);
+        seckill.setSeckillName("test" + startTime);
         seckill.setRangeList(getRangeList(times));
         seckill.setSeckillStatus(SeckillStatusEnum.RELEASE.name());
         SeckillDO seckillDO = new SeckillDO();
@@ -124,26 +124,26 @@ public class SeckillCreateController {
                 seckillApplyDO.setSoldQuantity(1);
                 seckillApplyDO.setStartDay(seckill.getStartDay());
                 seckillApplyDO.setTimeLine(seckill.getRangeList().get(i));
-                //判断参加活动的数量和库存数量
+                // Judge the number of activities and inventory
                 if (seckillApplyDO.getSoldQuantity() > goodsSkuVO.getEnableQuantity()) {
-                    throw new ServiceException(PromotionErrorCode.E402.code(), seckillApplyDO.getGoodsName() + ",此商品库存不足");
+                    throw new ServiceException(PromotionErrorCode.E402.code(), seckillApplyDO.getGoodsName() + ",This article is out of stock");
                 }
 
                 /**
-                 * *************两种情况：******************
-                 * 团购时间段：      |________________|
-                 * 秒杀时间段：  |_____|           |_______|
+                 * *************Two cases：******************
+                 * Group purchase period：      |________________|
+                 * Seckill time：  |_____|           |_______|
                  *
-                 * ************第三种情况：******************
-                 * 团购时间段：        |______|
-                 * 秒杀时间段：   |________________|
+                 * ************The third case：******************
+                 * Group purchase period：        |______|
+                 * Seckill time：   |________________|
                  *
-                 * ************第四种情况：******************
-                 * 团购时间段：   |________________|
-                 * 秒杀时间段：        |______|
+                 * ************The fourth case：******************
+                 * Group purchase period：   |________________|
+                 * Seckill time：        |______|
                  *
                  */
-                //这个商品的开始时间计算要用他参与的时间段来计算，结束时间是当天晚上23：59：59
+                // The start time of this product shall be calculated according to the time segment he participates in, and the end time is 23:59:59 p.m. of the same day
                 String date = DateUtil.toString(seckill.getStartDay(), "yyyy-MM-dd");
                 long startTime = DateUtil.getDateline(date + " " + seckillApplyDO.getTimeLine() + ":00:00", "yyyy-MM-dd HH:mm:ss");
                 long endTime = DateUtil.getDateline(date + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
@@ -156,29 +156,29 @@ public class SeckillCreateController {
                 int count = daoSupport.queryForInt(sql,goodsId,startTime,startTime,endTime,endTime,startTime,endTime,startTime,endTime);
 
                 if (count > 0) {
-                    throw new ServiceException(PromotionErrorCode.E400.code(), "商品[" + goodsSkuVO.getGoodsName() + "]已经在重叠的时间段参加了团购活动，不能参加限时抢购活动");
+                    throw new ServiceException(PromotionErrorCode.E400.code(), "product[" + goodsSkuVO.getGoodsName() + "]You have participated in group purchase activities in overlapping periods and cannot participate in flash sale activities");
                 }
                 daoSupport.insert(seckillApplyDO);
                 Integer applyId = seckillApplyDO.getApplyId();
                 seckillApplyDO.setApplyId(applyId);
 
 
-                //参与限时抢购促销活动并且已被平台审核通过的商品集合
+                // The collection of products that participate in the flash sale promotion and have been approved by the platform
                 List<SeckillApplyDO> goodsList = new ArrayList<>();
-                //审核通过的限时抢购商品集合
+                // A collection of approved flash sale items
                 List<PromotionGoodsDO> promotionGoodsDOS = new ArrayList<>();
                 Long actId = 0L;
 
                 SeckillApplyDO apply = seckillApplyDO;
 
-                //查询商品
+                // Query the goods
                 CacheGoods goods = goodsClient.getFromCache(apply.getGoodsId());
-                //将审核通过的商品放入集合中
+                // Put approved items into the collection
                 goodsList.add(apply);
 
-                //促销商品表
+                // Promotional list
                 PromotionGoodsDO promotion = new PromotionGoodsDO();
-                promotion.setTitle("限时抢购");
+                promotion.setTitle("flash");
                 promotion.setGoodsId(apply.getGoodsId());
                 promotion.setPromotionType(PromotionTypeEnum.SECKILL.name());
                 promotion.setActivityId(apply.getSeckillId());
@@ -191,29 +191,29 @@ public class SeckillCreateController {
                 promotionGoodsDOS.add(promotion);
 
 
-                //从缓存读取限时抢购的活动的商品
+                // Read flash sale active items from cache
                 String redisKey = getRedisKey(apply.getStartDay());
                 Map<Integer, List<SeckillGoodsVO>> map = this.cache.getHash(redisKey);
-                //如果redis中有当前审核商品参与的限时抢购活动商品信息，就删除掉
+                // If redis has flash sale information for the currently reviewed item, delete it
                 if (map != null && !map.isEmpty()) {
                     this.cache.remove(redisKey);
                 }
 
-                //活动信息DTO
+                // Activity information DTO
                 PromotionDetailDTO detailDTO = new PromotionDetailDTO();
                 detailDTO.setActivityId(seckill.getSeckillId());
                 detailDTO.setStartTime(startTime);
                 detailDTO.setEndTime(endTime);
                 detailDTO.setPromotionType(PromotionTypeEnum.SECKILL.name());
-                detailDTO.setTitle("限时抢购");
+                detailDTO.setTitle("flash");
                 this.promotionGoodsManager.addModel(goodsId,detailDTO);
 
-                //设置延迟加载任务，到活动开始时间后将搜索引擎中的优惠价格设置为0
+                // Set the lazy load task and set the search engine discount to 0 after the start time of the activity
                 PromotionPriceDTO promotionPriceDTO = new PromotionPriceDTO();
                 promotionPriceDTO.setGoodsId(apply.getGoodsId());
                 promotionPriceDTO.setPrice(apply.getPrice());
                 timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, startTime, null);
-                //此活动结束后将索引的优惠价格重置为0
+                // Reset the indexs discount price to 0 after this activity ends
                 promotionPriceDTO.setPrice(0.0);
                 timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, endTime, null);
 
@@ -222,13 +222,13 @@ public class SeckillCreateController {
     }
 
     /**
-     * 转换商品ID数据
+     * Transformation of goodsIDdata
      * @param skuIds
      * @return
      */
     private List<String> getSkuIdList(String skuIds,String split){
         if (StringUtil.isEmpty(skuIds)) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"参数错误");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"Parameter error");
         }
         String[] timesS = skuIds.split(split);
         List<String> list = new ArrayList<>();
@@ -240,13 +240,13 @@ public class SeckillCreateController {
     }
 
     /**
-     * 转换时刻数据结构
+     * Transform time data structures
      * @param times
      * @return
      */
     private List<Integer> getRangeList(String times){
         if (StringUtil.isEmpty(times)) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"参数错误");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"Parameter error");
         }
         String[] timesS = times.split(",");
         List<Integer> list = new ArrayList<>();
@@ -259,7 +259,7 @@ public class SeckillCreateController {
 
 
     /**
-     * 获取限时抢购key
+     * Get a flash salekey
      *
      * @param dateline
      * @return

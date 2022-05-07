@@ -24,7 +24,7 @@ import cloud.shopfly.b2c.core.promotion.tool.model.dto.PromotionGoodsDTO;
 import java.util.List;
 
 /**
- * 活动商品对照接口
+ * Active commodity control interface
  *
  * @author Snow create in 2018/3/21
  * @version v2.0
@@ -33,15 +33,15 @@ import java.util.List;
 public interface PromotionGoodsManager {
 
     /**
-     * 添加活动商品对照表
+     * Add the active commodity comparison table
      *
-     * @param list      商品列表
-     * @param detailDTO 活动详情
+     * @param list      Products
+     * @param detailDTO Event details
      */
     void add(List<PromotionGoodsDTO> list, PromotionDetailDTO detailDTO);
 
     /**
-     * 添加单个商品对照
+     * Add a single commodity comparison
      * @param goodsId
      * @param detailDTO
      * @return
@@ -50,21 +50,21 @@ public interface PromotionGoodsManager {
 
 
     /**
-     * 修改活动商品对照表
+     * Modify the activity commodity comparison table
      *
      * @param list
-     * @param detailDTO 活动详情
+     * @param detailDTO Event details
      */
     void edit(List<PromotionGoodsDTO> list, PromotionDetailDTO detailDTO);
 
     /**
-     * 根据商品id删除活动(正在进行中或者未开始的促销活动)
+     * According to the goodsidDelete activity(Ongoing or uninitiated sales promotion)
      * @param goodsId
      */
     void delete(Integer goodsId);
 
     /**
-     * 根据活动id和活动工具类型删除活动商品对照表
+     * According to the activityidDelete the active goods table from the active tool type
      *
      * @param activityId
      * @param promotionType
@@ -72,17 +72,17 @@ public interface PromotionGoodsManager {
     void delete(Integer activityId, String promotionType);
 
     /**
-     * 根据活动id,活动工具类型和商品id删除活动商品对照表
+     * According to the activityid,Activity tool types and goodsidDelete the active commodity comparison table
      *
-     * @param goodsId       商品id
-     * @param activityId    活动id
-     * @param promotionType 活动类型
+     * @param goodsId       productid
+     * @param activityId    activityid
+     * @param promotionType The activity type
      */
     void delete(Integer goodsId, Integer activityId, String promotionType);
 
 
     /**
-     * 根据活动ID和活动类型查出参与此活动的所有商品
+     * According to the activityIDAnd activity type to find out all the merchandise involved in the activity
      *
      * @param activityId
      * @param promotionType
@@ -91,22 +91,22 @@ public interface PromotionGoodsManager {
     List<PromotionGoodsDO> getPromotionGoods(Integer activityId, String promotionType);
 
     /**
-     * 根据商品id读取商品参与的所有活动（有效的活动）
+     * According to the goodsidRead all activities that the commodity participates in（Effective activities）
      *
      * @param goodsId
-     * @return 返回活动的集合
+     * @return Returns a collection of activities
      */
     List<PromotionVO> getPromotion(Integer goodsId);
 
     /**
-     * 清空key
+     * emptykey
      *
      * @param goodsId
      */
     void cleanCache(Integer goodsId);
 
     /**
-     * 重新写入缓存
+     * Rewrite cache
      *
      * @param goodsId
      */

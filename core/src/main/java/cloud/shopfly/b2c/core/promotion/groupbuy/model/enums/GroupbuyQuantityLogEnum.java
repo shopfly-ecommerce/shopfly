@@ -21,15 +21,15 @@ package cloud.shopfly.b2c.core.promotion.groupbuy.model.enums;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-09-21 上午9:01
+ * 2018-09-21 In the morning9:01
  */
 public enum GroupbuyQuantityLogEnum {
 
-    /** 已结束*/
-    BUY("售出"),
+    /** Has ended*/
+    BUY("sold"),
 
-    /** 进行中*/
-    CANCEL("取消");
+    /** ongoing*/
+    CANCEL("cancel");
 
     private String status;
 

@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 支付帐单业务层
+ * Pay bills business layer
  *
  * @author fk
  * @version v2.0
@@ -32,35 +32,35 @@ import java.util.List;
 public interface PaymentBillManager {
 
     /**
-     * 查询支付帐单列表
+     * Check the list of paid bills
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加支付帐单
+     * Add payment bill
      *
-     * @param paymentBill 支付帐单
-     * @return PaymentBill 支付帐单
+     * @param paymentBill Pay your bills
+     * @return PaymentBill Pay your bills
      */
     PaymentBillDO add(PaymentBillDO paymentBill);
 
     /**
-     * 支付成功调用
+     * Payment successfully called
      *
-     * @param billSn        支付账单号
-     * @param returnTradeNo 第三方平台回传单号（第三方平台的支付单号）
-     * @param tradeType     交易类型
-     * @param payPrice      支付金额
+     * @param billSn        Pay bill number
+     * @param returnTradeNo The third party platform returns the flyer number（The payment slip number of the third-party platform）
+     * @param tradeType     Transaction type
+     * @param payPrice      Pay the amount
      */
     void paySuccess(String billSn, String returnTradeNo, TradeType tradeType, double payPrice);
 
 
     /**
-     * 使用单号和交易类型查询对应的支付流水，最后一条
+     * Query the corresponding payment flow using the order number and transaction type, the last one
      *
      * @param sn
      * @param tradeType
@@ -69,7 +69,7 @@ public interface PaymentBillManager {
     PaymentBillDO getBillBySnAndTradeType(String sn, String tradeType);
 
     /**
-     * 使用第三方单号查询流水
+     * Use the third party tracking number to query the flow
      *
      * @param returnTradeNo
      * @return
@@ -78,14 +78,14 @@ public interface PaymentBillManager {
 
 
     /**
-     * 根据billSn修改第三方交易流水号
+     * According to thebillSnModify the third party transaction serial number
      * @param billSn
      * @param returnTradeNo
      */
     void updateTradeNoByBillSn(String billSn,String returnTradeNo);
 
     /**
-     * 根据billSn读取数据
+     * According to thebillSnRead the data
      * @param billSn
      * @return
      */

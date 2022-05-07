@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.promotion.fulldiscount.model.vo.FullDiscountVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 满优惠活动业务层
+ * Full discount activity business layer
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -28,46 +28,46 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface FullDiscountManager	{
 
 	/**
-	 * 查询满优惠活动列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
-	 * @param keywords 关键字
+	 * Check the list of full offers
+	 * @param page The page number
+	 * @param pageSize Number each page
+	 * @param keywords keyword
 	 * @return Page
 	 */
 	Page list(int page, int pageSize, String keywords);
 
 	/**
-	 * 添加满优惠活动
-	 * @param fullDiscount 满优惠活动
-	 * @return FullDiscount 满优惠活动
+	 * Add full discount activities
+	 * @param fullDiscount Full discount
+	 * @return FullDiscount Full discount
 	 */
 	FullDiscountVO add(FullDiscountVO fullDiscount);
 
 	/**
-	* 修改满优惠活动
-	* @param fullDiscount 满优惠活动
-	* @param id 满优惠活动主键
-	* @return FullDiscount 满优惠活动
+	* Modify full discount activities
+	* @param fullDiscount Full discount
+	* @param id Full discount activity main key
+	* @return FullDiscount Full discount
 	*/
 	FullDiscountVO edit(FullDiscountVO fullDiscount, Integer id);
 
 	/**
-	 * 删除满优惠活动
-	 * @param id 满优惠活动主键
+	 * Delete full discount activities
+	 * @param id Full discount activity main key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 从数据库获取促销信息
-	 * @param fdId 满优惠活动ID
-	 * @return 满优惠活动实体
+	 * Get promotional information from the database
+	 * @param fdId Full discountID
+	 * @return Full preferential activity entities
 	 */
 	FullDiscountVO getModel(Integer fdId);
 
 
 	/**
-	 * 验证操作权限<br/>
-	 * 如有问题直接抛出权限异常
+	 * Verifying operation rights<br/>
+	 * Throw a permission exception if there is a problem
 	 * @param id
 	 */
 	void verifyAuth(Integer id);

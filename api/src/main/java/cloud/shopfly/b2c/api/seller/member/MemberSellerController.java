@@ -41,7 +41,7 @@ import java.util.List;
 
 
 /**
- * 会员控制器
+ * Member controller
  *
  * @author zh
  * @version v2.0
@@ -51,24 +51,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/seller/members")
 @Validated
-@Api(description = "会员管理API")
+@Api(description = "Member managementAPI")
 public class MemberSellerController {
 
     @Autowired
     private MemberManager memberManager;
 
-    @ApiOperation(value = "注销会员登录")
+    @ApiOperation(value = "Log out member login")
     @PostMapping(value = "/logout")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uid", value = "会员id", dataType = "int", paramType = "query", required = true)
+            @ApiImplicitParam(name = "uid", value = "membersid", dataType = "int", paramType = "query", required = true)
     })
-    public String loginOut(@NotNull(message = "会员id不能为空") Integer uid) {
+    public String loginOut(@NotNull(message = "membersidCant be empty") Integer uid) {
         this.memberManager.logout(uid);
         return null;
     }
 
 
-    @ApiOperation(value = "查询会员列表", response = Member.class)
+    @ApiOperation(value = "Query membership list", response = Member.class)
     @GetMapping
     public Page list(@Valid MemberQueryParam memberQueryParam, @ApiIgnore Integer pageNo,
                      @ApiIgnore Integer pageSize) {
@@ -78,22 +78,22 @@ public class MemberSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改会员", response = Member.class)
+    @ApiOperation(value = "Modify the member", response = Member.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "password", value = "会员密码", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "remark", value = "会员备注", required = false, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "password", value = "The member password", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "mobile", value = "Mobile phone number", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "remark", value = "Member of the note", required = false, dataType = "String", paramType = "query")
     })
     public Member edit(@Valid MemberEditDTO memberEditDTO, @PathVariable Integer id, String password, @Mobile String mobile, String remark) {
         Member member = memberManager.getModel(id);
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("Current member does not exist");
         }
-        //如果密码不为空的话 修改密码
+        // If the password is not empty, change the password
         if (!StringUtil.isEmpty(password)) {
-            //退出会员信息
+            // Membership Withdrawal Information
             memberManager.memberLoginout(id);
-            //组织会员的新密码
+            // Organization members new password
             member.setPassword(StringUtil.md5(password + member.getUname().toLowerCase()));
         }
         member.setRemark(remark);
@@ -107,14 +107,14 @@ public class MemberSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除会员")
+    @ApiOperation(value = "Delete members")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的会员主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The member primary key to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
         Member member = memberManager.getModel(id);
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("Current member does not exist");
         }
         member.setDisabled(-1);
         this.memberManager.edit(member, id);
@@ -123,14 +123,14 @@ public class MemberSellerController {
 
 
     @PostMapping(value = "/{id}")
-    @ApiOperation(value = "恢复会员")
+    @ApiOperation(value = "To restore the member")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要恢复的会员主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The member primary key to restore", required = true, dataType = "int", paramType = "path")
     })
     public Member recovery(@PathVariable Integer id) {
         Member member = memberManager.getModel(id);
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("Current member does not exist");
         }
         if (member.getDisabled().equals(-1)) {
             member.setDisabled(0);
@@ -141,9 +141,9 @@ public class MemberSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个会员")
+    @ApiOperation(value = "Query a member")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的会员主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The member primary key to query", required = true, dataType = "int", paramType = "path")
     })
     public Member get(@PathVariable Integer id) {
         return this.memberManager.getModel(id);
@@ -151,13 +151,13 @@ public class MemberSellerController {
 
 
     @PostMapping
-    @ApiOperation(value = "平台添加会员")
+    @ApiOperation(value = "Platform membership")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "password", value = "会员密码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "uname", value = "会员用户名", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "password", value = "The member password", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "uname", value = "Member user name", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "mobile", value = "Mobile phone number", required = true, dataType = "String", paramType = "query")
     })
-    public Member addMember(@Valid MemberEditDTO memberEditDTO, @NotEmpty(message = "会员密码不能为空") String password, @Length(min = 2, max = 20, message = "用户名长度必须在2到20位之间") String uname, @Mobile String mobile) {
+    public Member addMember(@Valid MemberEditDTO memberEditDTO, @NotEmpty(message = "Member password cannot be empty") String password, @Length(min = 2, max = 20, message = "The length of the username must be within2to20Between a") String uname, @Mobile String mobile) {
         Member member = new Member();
         member.setUname(uname);
         member.setPassword(password);
@@ -172,9 +172,9 @@ public class MemberSellerController {
 
 
     @GetMapping(value = "/{member_ids}/list")
-    @ApiOperation(value = "查询多个会员的基本信息")
+    @ApiOperation(value = "Query the basic information of multiple members")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "member_ids", value = "要查询的会员的主键", required = true, dataType = "int", paramType = "path", allowMultiple = true)})
+            @ApiImplicitParam(name = "member_ids", value = "Primary key of the member to query", required = true, dataType = "int", paramType = "path", allowMultiple = true)})
     public List<Member> getGoodsDetail(@PathVariable("member_ids") Integer[] memberIds) {
         return this.memberManager.getMemberByIds(memberIds);
 

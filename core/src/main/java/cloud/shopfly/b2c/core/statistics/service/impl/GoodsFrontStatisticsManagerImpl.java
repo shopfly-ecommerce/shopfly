@@ -37,11 +37,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商家中心，商品分析统计 接口实现体
+ * Merchant center, product analysis statistical interface implementation body
  *
  * @author Chopper
  * @version v1.0
- * @since v7.0 2018/3/28 上午9:49
+ * @since v7.0 2018/3/28 In the morning9:49
  */
 @Service
 public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsManager {
@@ -52,21 +52,21 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
     private DaoSupport daoSupport;
 
     /**
-     * 获取商品详情
+     * Obtain product details
      *
-     * @param pageNo    当前页码
-     * @param pageSize  每页数据量
-     * @param catId     商品分类id
-     * @param goodsName 商品名称
-     * @return Page 分页数据
+     * @param pageNo    The current page number
+     * @param pageSize  Data volume per page
+     * @param catId     Categoryid
+     * @param goodsName Name
+     * @return Page Paging data
      */
     @Override
     public Page getGoodsDetail(Integer pageNo, Integer pageSize, Integer catId, String goodsName) {
 
         try {
-            // 参数列表
+            // The list of parameters
             ArrayList<Object> paramList = new ArrayList<>(16);
-            // 获得今天23:59:59的时间戳
+            // Get todays 23:59:59 time stamp
             Calendar cal = Calendar.getInstance();
             int year = cal.get(Calendar.YEAR);
             int month = cal.get(Calendar.MONTH) + 1;
@@ -74,27 +74,27 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
             long endTime = DateUtil.toDate(year + "-" + month + "-" + day + " 23:59:59", "yyyy-MM-dd HH:mm:ss")
                     .getTime() / 1000;
 
-            // 获取30天前23:59:59的时间戳
+            // Gets the timestamp of 23:59:59 30 days ago
             long startTime = endTime - 2592000;
 
-            // 时间戳转换为字符串
+            // The timestamp is converted to a string
             String startDate = String.valueOf(startTime);
             String endDate = String.valueOf(endTime);
-            // 加入参数
+            // Join the parameters
             paramList.add(startDate);
             paramList.add(endDate);
 
-            // 如果商品名不为空，则模糊查询商品名
+            // If the item name is not empty, fuzzy query is performed for the item name
             String nameWhere = "";
             if (goodsName != null && !"".equals(goodsName)) {
                 nameWhere = " AND oi.goods_name LIKE ? ";
                 paramList.add("%" + goodsName + "%");
             }
 
-            // 商品分类路径
+            // Commodity classification path
             String catPath;
 
-            // 如果分类id为0，则查询全部分类，不为0，则于数据库中查询路径，如果没有此分类，或有重复数据，则返回空数据
+            // If the category ID is 0, all categories are queried. If the category id is not 0, the path is queried in the database. If there is no category or duplicate data, empty data is returned
             if (catId == 0) {
                 catPath = "0";
             } else {
@@ -107,7 +107,7 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
                 catPath = map.get("category_path").toString();
             }
 
-            // 拼接Sql 店铺id，已完成的订单，时间范围，商品名称，分类路径，按商品Id分组
+            // Splice Sql store ID, completed order, time range, product name, classification path, grouped by product ID
             String sql = "SELECT goods_id,goods_name , SUM(goods_num) AS numbers,ROUND(price,2) AS price,ROUND(price * SUM(goods_num),2) AS total_price" +
                     " FROM es_sss_order_goods_data oi WHERE oi.order_sn IN (SELECT sn FROM es_sss_order_data o WHERE o.create_time >= ? AND o.create_time <= ? ) " + nameWhere + " AND oi.category_path like '%" + catPath + "%' "
                     + "  GROUP BY goods_id ,goods_name,price ";
@@ -115,22 +115,22 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
             return StatisticsUtil.getDataPage(this.daoSupport, year, sql, pageNo, pageSize, paramList.toArray());
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
 
     /**
-     * 价格区间
+     * A price range
      *
-     * @param sections       区间List 格式：0 100 200
-     * @param searchCriteria 时间，分类id，店铺id
-     * @return SimpleChart 简单图表数据
+     * @param sections       intervalList format：0 100 200
+     * @param searchCriteria Time, classificationidShops,id
+     * @return SimpleChart Simple chart data
      */
     @Override
     public SimpleChart getGoodsPriceSales(List<Integer> sections, SearchCriteria searchCriteria) {
 
-        // 验证参数
+        // Validate parameter
         SearchCriteria.checkDataParams(searchCriteria, true, false);
 
         String cycleType = searchCriteria.getCycleType();
@@ -139,13 +139,13 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
         Integer catId = searchCriteria.getCategoryId();
 
         try {
-            // 获取开始时间和结束时间
+            // Get the start time and end time
             long[] times = StatisticsUtil.getInstance().getStartTimeAndEndTime(cycleType, year, month);
 
-            // 参数集合
+            // Parameter collection
             ArrayList<Object> paramList = new ArrayList<>();
 
-            // 时间条件字符串
+            // Time conditional string
             String dateWhere = "";
 
             dateWhere += " o.create_time >= ? ";
@@ -153,7 +153,7 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
             dateWhere += " AND o.create_time <= ? ";
             paramList.add(times[1]);
 
-            // 商品分类
+            // Classification of goods
             String catPath;
             if (null == catId || catId == 0) {
                 catPath = "0";
@@ -162,7 +162,7 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
                         "SELECT DISTINCT(gd.category_path) FROM es_sss_goods_data gd WHERE gd.category_id = " + catId);
             }
 
-            // 拼接CASE语句
+            // Concatenated CASE statement
             String caseStatement = getGoodsPriceSqlCaseStatement(sections);
             String sql = "SELECT SUM(oi.goods_num) AS goods_num, " + caseStatement
                     + "AS elt_data FROM es_sss_order_goods_data oi left join es_sss_order_data o on oi.order_sn=o.sn WHERE "
@@ -173,13 +173,13 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
 
             List<Map<String, Object>> data = this.daoSupport.queryForList(mainSql, paramList.toArray());
 
-            // 将数据重新排序
+            // Reorder the data
             data = StatisticsUtil.getInstance().fitOrderPriceData(data, sections);
 
-            // 图表数据
+            // The chart data
             String[] chartData = new String[data.size()];
 
-            // 数据名称，就是区间
+            // The data name is the interval
             String[] localName = new String[data.size()];
 
             int i = 0;
@@ -189,21 +189,21 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
                 i++;
             }
 
-            ChartSeries chartSeries = new ChartSeries("价格销量分析", chartData, localName);
+            ChartSeries chartSeries = new ChartSeries("Price and volume analysis", chartData, localName);
 
             return new SimpleChart(chartSeries, localName, new String[0]);
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 商品获取下单金额前30
+     * Before obtaining the order amount30
      *
-     * @param topNum         top数
-     * @param searchCriteria 时间相关参数
-     * @return Page 分页对象
+     * @param topNum         topThe number
+     * @param searchCriteria Time dependent parameter
+     * @return Page Paging object
      */
     @Override
     public Page getGoodsOrderPriceTopPage(int topNum, SearchCriteria searchCriteria) {
@@ -211,25 +211,25 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
         SearchCriteria.checkDataParams(searchCriteria, true, false);
         try {
 
-            // 参数集合
+            // Parameter collection
             ArrayList<Object> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.name());
 
-            // 如果排名没有值，默认为30
+            // If the ranking has no value, the default is 30
             if (topNum == 0) {
                 topNum = 30;
             }
-            // 获取时间戳
+            // Get timestamp
             long[] times = StatisticsUtil.getInstance().getStartTimeAndEndTime(searchCriteria.getCycleType(),
                     searchCriteria.getYear(), searchCriteria.getMonth());
 
-            // 时间条件
+            // The time condition
             String dateWhere = "";
             dateWhere += "AND o.create_time >= ? ";
             paramList.add(times[0]);
             dateWhere += " AND o.create_time <= ? ";
             paramList.add(times[1]);
-            // 拼接Sql 店铺id，已完成订单，时间范围，按商品id分组，按总价格排序
+            // Splice Sql store ID, completed order, time range, grouped by commodity ID, sorted by total price
             String sql = "FROM es_sss_order_goods_data WHERE order_sn IN (SELECT sn FROM es_sss_order_data o WHERE "
                     + " order_status = ? " + dateWhere + ") GROUP BY goods_id  ";
 
@@ -243,16 +243,16 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
             return StatisticsUtil.getDataPage(this.daoSupport, searchCriteria.getYear(), selectPage, selectCount, 1, topNum, paramList.toArray());
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 下单商品数量前30，分页数据
+     * Order quantity before30, paging data
      *
-     * @param topNum         名次 默认为30
-     * @param searchCriteria 时间相关参数
-     * @return Page 分页对象
+     * @param topNum         The ranking defaults to30
+     * @param searchCriteria Time dependent parameter
+     * @return Page Paging object
      */
     @Override
     public Page getGoodsNumTopPage(int topNum, SearchCriteria searchCriteria) {
@@ -265,26 +265,26 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
 
         try {
 
-            // 参数集合
+            // Parameter collection
             ArrayList<Object> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.name());
 
-            // 如果排名没有值
+            // If the ranking has no value
             if (topNum == 0) {
                 topNum = 30;
             }
 
-            // 时间条件
+            // The time condition
             String dateWhere = "";
             long[] times = StatisticsUtil.getInstance().getStartTimeAndEndTime(cycleType, year, month);
 
-            // 如果包含开始时间条件
+            // If you include the start time condition
             dateWhere += "and o.create_time >= ? ";
             paramList.add(times[0]);
             dateWhere += " AND o.create_time <= ? ";
             paramList.add(times[1]);
 
-            // 拼接Sql 店铺id，已完成订单，时间范围，按商品id和商品名称分组，按商品数量降序排序
+            // Splice Sql store ID, completed order, time range, grouped by commodity ID and commodity name, sorted by commodity quantity in descending order
             String sql = "FROM es_sss_order_goods_data WHERE order_sn IN (SELECT sn FROM es_sss_order_data o WHERE "
                     + " order_status = ? " + dateWhere + ") GROUP BY goods_id,goods_name";
             String selectPage = "SELECT goods_name,goods_id,SUM(goods_num) as all_num " + sql;
@@ -295,40 +295,40 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
             return StatisticsUtil.getDataPage(this.daoSupport, searchCriteria.getYear(), selectPage, selectCount, 1, topNum, paramList.toArray());
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 获取商品下单金额前30，图表数据
+     * Before obtaining the order amount of goods30, chart data
      *
-     * @param topNum         top数
-     * @param searchCriteria 时间相关参数
-     * @return SimpleChart 简单图表数据
+     * @param topNum         topThe number
+     * @param searchCriteria Time dependent parameter
+     * @return SimpleChart Simple chart data
      */
     @Override
     public SimpleChart getGoodsOrderPriceTop(Integer topNum, SearchCriteria searchCriteria) {
 
         SearchCriteria.checkDataParams(searchCriteria, true, false);
         try {
-            // 获取当前登陆的会员店铺id
+            // Get the id of the member store currently logged in
             ArrayList<Object> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.name());
 
-            // 如果排名没有值
+            // If the ranking has no value
             if (topNum == 0) {
                 topNum = 30;
             }
             long[] times = StatisticsUtil.getInstance().getStartTimeAndEndTime(searchCriteria.getCycleType(),
                     searchCriteria.getYear(), searchCriteria.getMonth());
 
-            // 时间条件
+            // The time condition
             String dateWhere = "";
             dateWhere += "AND o.create_time >= ? ";
             paramList.add(times[0]);
             dateWhere += " AND o.create_time <= ? ";
             paramList.add(times[1]);
-            // 拼接Sql 店铺id，已完成订单，时间范围，按商品id分组，按总金额排序
+            // Splice Sql store ID, completed order, time range, grouped by commodity ID, sorted by total amount
             String sql = "FROM es_sss_order_goods_data WHERE order_sn IN (SELECT sn FROM es_sss_order_data o WHERE "
                     + " order_status = ? " + dateWhere + "" + ") GROUP BY goods_id  ";
 
@@ -339,16 +339,16 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
 
             List<Map<String, Object>> list = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), selectPage, paramList.toArray());
 
-            // 图表数据，下单金额
+            // Chart data, order amount
             String[] data = new String[list.size()];
 
-            // 数据名称，即商品名称
+            // The data name is the commodity name
             String[] localName = new String[list.size()];
 
-            // x轴刻度
+            // The x axis calibration
             String[] xAxis = new String[list.size()];
 
-            // 如果数据大于0，则遍历
+            // If the data is greater than 0, it is traversed
             int dataNum = list.size();
             if (list.size() > 0) {
                 for (int i = 0; i < dataNum; i++) {
@@ -359,22 +359,22 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
                 }
             }
 
-            ChartSeries chartSeries = new ChartSeries("总金额", data, localName);
+            ChartSeries chartSeries = new ChartSeries("The total amount", data, localName);
 
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
 
     }
 
     /**
-     * 获取商品购买数量前30
+     * Before obtaining the purchase quantity of goods30
      *
-     * @param topNum         top数
-     * @param searchCriteria 时间相关参数
-     * @return SimpleChart 简单图表数据
+     * @param topNum         topThe number
+     * @param searchCriteria Time dependent parameter
+     * @return SimpleChart Simple chart data
      */
     @Override
     public SimpleChart getGoodsNumTop(Integer topNum, SearchCriteria searchCriteria) {
@@ -386,45 +386,45 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
         Integer month = searchCriteria.getMonth();
 
         try {
-            // 获取当前登陆的会员店铺id
+            // Get the id of the member store currently logged in
             ArrayList<Object> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.name());
 
-            // 如果排名没有值
+            // If the ranking has no value
             if (topNum == 0) {
                 topNum = 30;
             }
 
-            // 时间条件
+            // The time condition
             String dateWhere = "";
             long[] times = StatisticsUtil.getInstance().getStartTimeAndEndTime(cycleType, year, month);
 
-            // 如果包含开始时间条件
+            // If you include the start time condition
             dateWhere += "AND o.create_time >= ? ";
             paramList.add(times[0]);
             dateWhere += " AND o.create_time <= ? ";
             paramList.add(times[1]);
 
-            // 拼接Sql
+            // Stitching Sql
             String sql = "FROM es_sss_order_goods_data WHERE order_sn IN (SELECT sn FROM es_sss_order_data o WHERE "
                     + " order_status = ? " + dateWhere + ") GROUP BY goods_id,goods_name";
             String selectCharts = "SELECT goods_name,goods_id,SUM(goods_num) as all_num " + sql;
 
             selectCharts += " ORDER BY SUM(goods_num) DESC LIMIT " + topNum;
 
-            //获取数据
+            // To get the data
             List<Map<String, Object>> list = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), selectCharts, paramList.toArray());
 
-            // 图表数据，即商品被购买的数量
+            // Chart data, i.e. the quantity of goods purchased
             String[] chartData = new String[list.size()];
 
-            // 数据名称，即商品名称
+            // The data name is the commodity name
             String[] localName = new String[list.size()];
 
-            //x轴刻度
+            // The x axis calibration
             String[] xAxis = new String[list.size()];
 
-            // 如果list有数据，则遍历
+            // If the list has data, it is traversed
             if (list.size() > 0) {
                 for (int i = 0; i < list.size(); i++) {
                     Map map = list.get(i);
@@ -434,26 +434,26 @@ public class GoodsFrontStatisticsManagerImpl implements GoodsFrontStatisticsMana
                 }
             }
 
-            ChartSeries chartSeries = new ChartSeries("下单量", chartData, localName);
+            ChartSeries chartSeries = new ChartSeries("Order quantity", chartData, localName);
 
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 生成价格销量统计的SQL CASE语句
+     * Generating price and sales statisticsSQL CASEstatements
      *
-     * @param ranges 整数集合
+     * @param ranges The integer set
      * @return SQL CASE Statement
      */
     private static String getGoodsPriceSqlCaseStatement(List<Integer> ranges) {
         if (null == ranges || ranges.size() == 0) {
             return "0";
         }
-        // 由大到小排序
+        // Sort from largest to smallest
         StatisticsUtil.sortRanges(ranges);
 
         StringBuilder sb = new StringBuilder("(case ");

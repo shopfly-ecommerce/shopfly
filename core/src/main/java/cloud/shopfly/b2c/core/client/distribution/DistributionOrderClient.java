@@ -21,25 +21,25 @@ import cloud.shopfly.b2c.core.distribution.model.dos.DistributionOrderDO;
 
 
 /**
- * 分销Order client
+ * distributionOrder client
  *
  * @author Chopper
  * @version v1.0
  * @since v6.1
- * 2016年10月2日 下午5:24:14
+ * 2016years10month2On the afternoon5:24:14
  */
 public interface DistributionOrderClient {
 
     /**
-     * 根据sn获得分销商订单详情
+     * According to thesnGet distributor order details
      *
-     * @param orderSn 订单编号
+     * @param orderSn Order no.
      * @return FxOrderDO
      */
     DistributionOrderDO getModelByOrderSn(String orderSn);
 
     /**
-     * 保存一条数据
+     * Save a piece of data
      *
      * @param distributionOrderDO
      * @return
@@ -47,23 +47,23 @@ public interface DistributionOrderClient {
     DistributionOrderDO add(DistributionOrderDO distributionOrderDO);
 
     /**
-     * 通过订单id，计算出各个级别的返利金额并保存到数据库
+     * Through the orderid, calculate the rebate amount of each level and save it in the database
      *
-     * @param orderSn 订单编号
-     * @return 计算结果 true 成功， false 失败
+     * @param orderSn Order no.
+     * @return The calculation resultstrue Success, false failure
      */
     boolean calCommission(String orderSn);
 
     /**
-     * 根据购买人增加上级人员订单数量
+     * Increase order quantity of superior staff according to buyer
      *
-     * @param buyMemberId 购买人会员id
+     * @param buyMemberId Buyer membershipid
      */
     void addOrderNum(int buyMemberId);
 
 
     /**
-     * 计算退款时需要退的返利金额
+     * Calculate the amount of rebate to be refunded
      *
      * @param refundDO
      */
@@ -71,7 +71,7 @@ public interface DistributionOrderClient {
 
 
     /**
-     * 结算订单
+     * To settle the order
      *
      * @param order
      */

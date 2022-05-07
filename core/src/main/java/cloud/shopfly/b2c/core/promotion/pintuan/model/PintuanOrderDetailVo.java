@@ -30,13 +30,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class PintuanOrderDetailVo extends PintuanOrder {
 
-    @ApiModelProperty(name = "origin_price", value = "原价")
+    @ApiModelProperty(name = "origin_price", value = "The original price")
     private Double originPrice;
 
-    @ApiModelProperty(name = "sales_price", value = "拼团价")
+    @ApiModelProperty(name = "sales_price", value = "Spell group price")
     private Double salesPrice;
 
-    @ApiModelProperty(name = "left_time", value = "拼团活动剩余秒数")
+    @ApiModelProperty(name = "left_time", value = "Number of seconds left in group activity")
     private Long leftTime;
 
 

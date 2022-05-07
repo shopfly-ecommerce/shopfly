@@ -36,71 +36,71 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.List;
 
 /**
- * 订单明细
+ * The order details
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
  * @since v7.0.0
  */
-@ApiModel(description = "订单明细")
+@ApiModel(description = "The order details")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OrderDetailVO extends OrderDO {
 
-    @ApiModelProperty(value = "订单操作允许情况")
+    @ApiModelProperty(value = "Order operation permit status")
     private OrderOperateAllowable orderOperateAllowableVO;
 
-    @ApiModelProperty(value = "订单状态文字")
+    @ApiModelProperty(value = "Order status text")
     private String orderStatusText;
 
-    @ApiModelProperty(value = "付款状态文字")
+    @ApiModelProperty(value = "Payment status text")
     private String payStatusText;
 
-    @ApiModelProperty(value = "发货状态文字")
+    @ApiModelProperty(value = "Delivery status text")
     private String shipStatusText;
 
-    @ApiModelProperty(value = "售后状态文字")
+    @ApiModelProperty(value = "Post sale status text")
     private String serviceStatusText;
 
-    @ApiModelProperty(value = "支付方式")
+    @ApiModelProperty(value = "Method of payment")
     private String paymentName;
 
-    @ApiModelProperty(value = "sku列表")
+    @ApiModelProperty(value = "skuThe list of")
     private List<OrderSkuVO> orderSkuList;
 
-    @ApiModelProperty(value = "发票信息")
+    @ApiModelProperty(value = "The invoice information")
     private ReceiptHistory receiptHistory;
 
-    @ApiModelProperty(value = "订单赠品列表")
+    @ApiModelProperty(value = "Order list of freebies")
     private List<FullDiscountGiftDO> giftList;
 
 
-    @ApiModelProperty(value = "返现金额")
+    @ApiModelProperty(value = "Cashback amount")
     private Double cashBack;
 
-    @ApiModelProperty(value = "优惠券抵扣金额")
+    @ApiModelProperty(value = "Coupon deduction amount")
     private Double couponPrice;
 
-    @ApiModelProperty(value = "赠送的积分")
+    @ApiModelProperty(value = "Bonus points")
     private Integer giftPoint;
 
-    @ApiModelProperty(value = "赠送的优惠券")
+    @ApiModelProperty(value = "Complimentary coupons")
     private CouponVO giftCoupon;
 
 
-    @ApiModelProperty(value = "此订单使用的积分")
+    @ApiModelProperty(value = "Credits used for this order")
     private Integer usePoint;
 
 
-    @ApiModelProperty(value = "满减金额")
+    @ApiModelProperty(value = "Full amount reduction")
     private Double fullMinus;
 
     /**
-     * 拼团订单状态
+     * Group order status
      */
-    @ApiModelProperty(value = "拼团订单状态")
+    @ApiModelProperty(value = "Group order status")
     private String pingTuanStatus;
 
-    @ApiModelProperty(name = "pay_order_no", value = "支付方式返回的交易号")
+    @ApiModelProperty(name = "pay_order_no", value = "Payment method returns the transaction number")
     private String payOrderNo;
 
 
@@ -122,18 +122,18 @@ public class OrderDetailVO extends OrderDO {
 
     public String getPingTuanStatus() {
 //        pingTuanStatus = "";
-//        //已经付款的拼团订单的状态为待成团
+//        //The paid group order is in the status of pending group
 //        if (OrderTypeEnum.pintuan.name().equals(this.getOrderType())) {
 //            if (this.getPayStatus().equals(PayStatusEnum.PAY_NO.value())) {
 //                if(OrderStatusEnum.CANCELLED.value().equals(this.getOrderStatus())){
-//                    pingTuanStatus = "未成团";
+//                    pingTuanStatus = "No clouds";
 //                }else{
-//                    pingTuanStatus = "待成团";
+//                    pingTuanStatus = "To stay together";
 //                }
 //            } else if (OrderStatusEnum.PAID_OFF.value().equals(this.getOrderStatus())) {
-//                pingTuanStatus = "待成团";
+//                pingTuanStatus = "To stay together";
 //            } else {
-//                pingTuanStatus = "已成团";
+//                pingTuanStatus = "Have to make";
 //            }
 //
 //        }
@@ -147,7 +147,7 @@ public class OrderDetailVO extends OrderDO {
 
     public String getOrderStatusText() {
 
-        //先从特殊的流程-状态显示 定义中读取，如果为空说明不是特殊的状态，直接显示为 状态对应的提示词
+        // It is read from the special process-state display definition first. If it is empty, it indicates that it is not a special state and directly displays the prompt corresponding to the state
         orderStatusText = AbstractOrderSpecialStatus.getStatusText(getOrderType(), getPaymentType(), getOrderStatus());
         if (StringUtil.isEmpty(orderStatusText)) {
             orderStatusText = OrderStatusEnum.valueOf(getOrderStatus()).description();
@@ -289,7 +289,7 @@ public class OrderDetailVO extends OrderDO {
     public Double getGoodsPrice() {
 
         Double goodsPrice = super.getGoodsPrice();
-        //7.0.x数据库缺少商品原价字段，使用动态计算的方法算出商品原价
+        // The 7.0.x database lacks the field of commodity original price. Dynamic calculation method is used to calculate the commodity original price
         goodsPrice = CurrencyUtil.add(goodsPrice, getDiscountPrice());
 
         return goodsPrice;

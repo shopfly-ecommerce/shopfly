@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.goods.model.vo.GoodsSkuVO;
 import java.util.List;
 
 /**
- * 草稿商品sku业务层
+ * The draft of goodsskuThe business layer
  * @author fk
  * @version v2.0
  * @since v7.0.0
@@ -30,14 +30,14 @@ import java.util.List;
 public interface DraftGoodsSkuManager {
 
 	/**
-	 * 添加sku规格列表
+	 * addskuSpecification list
 	 * @param goodsVO
 	 * @param draftGoodsId
 	 */
 	void add(GoodsDTO goodsVO, Integer draftGoodsId);
 
 	/**
-	 * 查询草稿箱的sku列表
+	 * Query the draft boxskuThe list of
 	 * @param draftGoodsId
 	 * @return
 	 */

@@ -16,50 +16,50 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 订单的操作方式
+ * The operation mode of the order
  *
  * @author kingapex
  * @version 1.0
  * @since v7.0.0
- * 2017年5月19日下午10:43:06
+ * 2017years5month19On the afternoon10:43:06
  */
 public enum OrderOperateEnum {
 
 
     /**
-     * 确认
+     * confirm
      */
-    CONFIRM("确认"),
+    CONFIRM("confirm"),
 
     /**
-     * 支付
+     * pay
      */
-    PAY("支付"),
+    PAY("pay"),
 
     /**
-     * 发货
+     * The delivery
      */
-    SHIP("发货"),
+    SHIP("The delivery"),
 
     /**
-     * 确认收货
+     * Confirm the goods
      */
-    ROG("确认收货"),
+    ROG("Confirm the goods"),
 
     /**
-     * 取消
+     * cancel
      */
-    CANCEL("取消"),
+    CANCEL("cancel"),
 
     /**
-     * 评论
+     * comments
      */
-    COMMENT("评论"),
+    COMMENT("comments"),
 
     /**
-     * 完成
+     * complete
      */
-    COMPLETE("完成");
+    COMPLETE("complete");
 
     private String description;
 

@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.promotion.exchange.model.dos.ExchangeCat;
 import java.util.List;
 
 /**
- * 积分兑换分类业务层
+ * Points exchange classification business layer
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -29,37 +29,37 @@ import java.util.List;
 public interface ExchangeCatManager	{
 
 	/**
-	 * 查询积分兑换分类列表
-	 * @param parentId 父ID
+	 * Query the list of points redemption categories
+	 * @param parentId The fatherID
 	 * @return Page
 	 */
 	List<ExchangeCat> list(Integer parentId);
 
 	/**
-	 * 添加积分兑换分类
-	 * @param exchangeCat 积分兑换分类
-	 * @return ExchangeCat 积分兑换分类
+	 * Add the points exchange category
+	 * @param exchangeCat Points exchange classification
+	 * @return ExchangeCat Points exchange classification
 	 */
 	ExchangeCat add(ExchangeCat exchangeCat);
 
 	/**
-	* 修改积分兑换分类
-	* @param exchangeCat 积分兑换分类
-	* @param id 积分兑换分类主键
-	* @return ExchangeCat 积分兑换分类
+	* Modify the classification of points exchange
+	* @param exchangeCat Points exchange classification
+	* @param id Points exchange classification primary key
+	* @return ExchangeCat Points exchange classification
 	*/
 	ExchangeCat edit(ExchangeCat exchangeCat, Integer id);
 
 	/**
-	 * 删除积分兑换分类
-	 * @param id 积分兑换分类主键
+	 * Delete the points exchange category
+	 * @param id Points exchange classification primary key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取积分兑换分类
-	 * @param id 积分兑换分类主键
-	 * @return ExchangeCat  积分兑换分类
+	 * Get points redemption classification
+	 * @param id Points exchange classification primary key
+	 * @return ExchangeCat  Points exchange classification
 	 */
 	ExchangeCat getModel(Integer id);
 

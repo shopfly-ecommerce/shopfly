@@ -73,9 +73,9 @@ import java.util.Map;
 /**
  * @author zjp
  * @version v7.0
- * @Description 售后管理业务类
+ * @Description After-sale management business
  * @ClassName AfterSaleManagerImpl
- * @since v7.0 上午11:32 2018/5/8
+ * @since v7.0 In the morning11:32 2018/5/8
  */
 @Service
 public class AfterSaleManagerImpl implements AfterSaleManager {
@@ -102,7 +102,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
 
 
     /**
-     * 日志记录
+     * logging
      */
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -111,7 +111,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     public void applyRefund(BuyerRefundApplyVO refundApply) {
         refundApply.setRefuseType(RefuseTypeEnum.RETURN_MONEY.value());
         RefundDO refund = this.buyerRefund(refundApply);
-        this.log(refund.getSn(), refund.getMemberName(), "申请退款");
+        this.log(refund.getSn(), refund.getMemberName(), "To apply for a refund");
     }
 
     @Override
@@ -119,43 +119,43 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     public void applyGoodsReturn(BuyerRefundApplyVO goodsReturnsApply) {
         goodsReturnsApply.setRefuseType(RefuseTypeEnum.RETURN_GOODS.value());
         RefundDO refund = this.buyerRefund(goodsReturnsApply);
-        this.log(refund.getSn(), refund.getMemberName(), "申请退货");
+        this.log(refund.getSn(), refund.getMemberName(), "To apply for a refund");
     }
 
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void cancelOrder(BuyerCancelOrderVO buyerCancelOrderVO) {
-        //获取登录会员
+        // Obtain login membership
         Buyer buyer = UserContext.getBuyer();
-        //获取订单信息对订单进行属主校验
+        // Obtain the order information to verify the owner of the order
         OrderDetailDTO orderDetail = orderQueryManager.getModel(buyerCancelOrderVO.getOrderSn());
         if (orderDetail == null || !buyer.getUid().equals(orderDetail.getMemberId())) {
-            throw new ServiceException(AftersaleErrorCode.E604.name(), "订单不存在");
+            throw new ServiceException(AftersaleErrorCode.E604.name(), "Order does not exist");
         }
         baseCancle(buyerCancelOrderVO, orderDetail, false);
     }
 
 
     /**
-     * 取消订单通用
+     * Cancel order general
      *
      * @param buyerCancelOrderVO
      * @param orderDetail
      */
     private RefundDO baseCancle(BuyerCancelOrderVO buyerCancelOrderVO, OrderDetailDTO orderDetail, boolean isAdmin) {
 
-        //已付款订单才可执行退款操作
+        // Only paid orders can be refunded
         if (!orderDetail.getOrderStatus().equals(OrderStatusEnum.PAID_OFF.value()) && !orderDetail.getPayStatus().equals(PayStatusEnum.PAY_YES.value())) {
-            throw new ServiceException(AftersaleErrorCode.E601.name(), "操作不允许");
+            throw new ServiceException(AftersaleErrorCode.E601.name(), "Operation not allowed");
         }
-        //订单操作校验
+        // Order operation check
         OrderOperateAllowable orderOperateAllowableVO = orderDetail.getOrderOperateAllowableVO();
         if (!orderOperateAllowableVO.getAllowServiceCancel()) {
-            throw new ServiceException(AftersaleErrorCode.E601.name(), "操作不允许");
+            throw new ServiceException(AftersaleErrorCode.E601.name(), "Operation not allowed");
         }
 
         String refundSn = DateUtil.toString(DateUtil.getDateline(), "yyMMddhhmmss");
-        //拼装退款单
+        // Assembled refund form
         RefundDO refundDO = new RefundDO();
         refundDO.setSn(refundSn);
         refundDO.setCustomerRemark(buyerCancelOrderVO.getCustomerRemark());
@@ -167,14 +167,14 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
         refundDO.setRefundPrice(orderDetail.getOrderPrice());
         refundDO.setPayOrderNo(orderDetail.getPayOrderNo());
 
-        //判断当前支付方式是否支持原路退回,如果不支持则退款方式不能为空
+        // Judge whether the current payment method supports the original way to return, if not, the refund method can not be empty
         PaymentMethodDO paymentMethodDO = paymentMethodManager.getByPluginId(orderDetail.getPaymentPluginId());
         String refundWay = RefundWayEnum.ORIGINAL.name();
-        //非原路退回
+        // Go back the other way
         if (paymentMethodDO == null || paymentMethodDO.getIsRetrace() == 0) {
             refundWay = RefundWayEnum.OFFLINE.name();
             if (isAdmin) {
-                //这里暂时是拼团退款并且是管理员点击确认收款的订单
+                // Here is the group refund and the administrator click to confirm the payment order
                 refundDO.setAccountType("");
                 refundDO.setReturnAccount("");
                 refundDO.setBankAccountName("");
@@ -183,23 +183,23 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
                 refundDO.setBankName("");
             } else {
                 if (buyerCancelOrderVO.getAccountType() == null) {
-                    throw new ServiceException(AftersaleErrorCode.E605.name(), "退款方式必填");
+                    throw new ServiceException(AftersaleErrorCode.E605.name(), "Refund method Mandatory");
                 }
-                //银行转账
+                // Bank transfer
                 if (AccountTypeEnum.BANKTRANSFER.name().equals(buyerCancelOrderVO.getAccountType())) {
                     refundDO.setBankAccountName(buyerCancelOrderVO.getBankAccountName());
                     refundDO.setBankAccountNumber(buyerCancelOrderVO.getBankAccountNumber());
                     refundDO.setBankDepositName(buyerCancelOrderVO.getBankDepositName());
                     refundDO.setBankName(buyerCancelOrderVO.getBankName());
                 } else {
-                    //支付宝或者微信
+                    // Alipay or wechat
                     refundDO.setReturnAccount(buyerCancelOrderVO.getReturnAccount());
                 }
                 refundDO.setAccountType(buyerCancelOrderVO.getAccountType());
             }
 
         } else {
-            //原路退回WEIXINPAY  ALIPAY
+            // The original road back WEIXINPAY ALIPAY
             String pluginId = paymentMethodDO.getPluginId();
             String accountType = null;
             if ("weixinPayPlugin".equals(pluginId)) {
@@ -219,16 +219,16 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
         this.daoSupport.insert(refundDO);
         refundDO.setId(this.daoSupport.getLastId("es_refund"));
 
-        //生成退货商品
+        // Generate returned goods
         List<OrderSkuDTO> orderSkuList = orderDetail.getOrderSkuList();
         for (OrderSkuDTO orderSkuDTO : orderSkuList) {
             this.refundGoods(orderSkuDTO, orderSkuDTO.getNum(), refundSn);
         }
 
-        //更新订单状态及售后状态
+        // Update order status and after-sale status
         orderOperateManager.updateOrderServiceStatus(orderDetail.getSn(), ServiceStatusEnum.APPLY.name());
 
-        // 发送申请退款的消息
+        // Send a message requesting a refund
         RefundChangeMsg refundStatusChangeMessage = new RefundChangeMsg(refundDO, RefundStatusEnum.APPLY);
         this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, AmqpExchange.REFUND_STATUS_CHANGE + "_QUEUE",
                 refundStatusChangeMessage));
@@ -242,16 +242,16 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
 
         RefundDO refund = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDTO.class,
                 refundApproval.getSn());
-        String operater = "系统自动审核";
+        String operater = "Automatic system audit";
 
-        //退款金额校验
+        // Verification of refund amount
         this.checkMoney(refund, refundApproval.getRefundPrice());
 
         String refundStatus = RefundStatusEnum.REFUSE.value();
         String redundFailReason = "";
 
 
-        // 判断是否同意退款
+        // Decide if you agree to a refund
         if (refundApproval.getAgree().equals(1)) {
             if (refund.getRefuseType().equals(RefuseTypeEnum.RETURN_MONEY.value())) {
                 refundStatus = RefundStatusEnum.WAIT_FOR_MANUAL.value();
@@ -261,18 +261,18 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
             }
             refund.setRefundStatus(refundStatus);
             refund.setRefundPrice(refundApproval.getRefundPrice());
-            // 发送审核通过的消息
+            // Send the message that is approved
             RefundChangeMsg refundStatusChangeMessage = new RefundChangeMsg(refund, RefundStatusEnum.PASS);
             this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, AmqpExchange.REFUND_STATUS_CHANGE + "_QUEUE",
                     refundStatusChangeMessage));
 
-            // 如果为申请退款且退款方式支持原路退回则审核通过后直接原路退款
+            // If you apply for a refund and the refund method supports the original way, you can directly refund the original way after the approval
             if (refund.getRefuseType().equals(RefuseTypeEnum.RETURN_MONEY.value()) && RefundWayEnum.ORIGINAL.name().equals(refund.getRefundWay()) && refundApproval.getRefundPrice() > 0) {
-                // 订单号 退款金额
+                // Order Number refund amount
                 Map map = refundManager.originRefund(refund.getPayOrderNo(), refund.getSn(), refundApproval.getRefundPrice());
                 if ("true".equals(StringUtil.toString(map.get("result")))) {
                     refundStatus = RefundStatusEnum.REFUNDING.value();
-                    //发送原路退回成功消息
+                    // Sending a message indicating that the original route is returned successfully
                     refundStatusChangeMessage = new RefundChangeMsg(refund, RefundStatusEnum.REFUNDING);
                     this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, AmqpExchange.REFUND_STATUS_CHANGE + "_QUEUE",
                             refundStatusChangeMessage));
@@ -282,7 +282,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
                 }
             }
         } else {
-            // 发送审核通过的消息
+            // Send the message that is approved
             RefundChangeMsg refundStatusChangeMessage = new RefundChangeMsg(refund, RefundStatusEnum.REFUSE);
             this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, AmqpExchange.REFUND_STATUS_CHANGE + "_QUEUE",
                     refundStatusChangeMessage));
@@ -294,8 +294,8 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
                 refundApproval.getRefundPoint(), redundFailReason, refundApproval.getSn());
 
 
-        // 记录日志
-        this.log(refundApproval.getSn(), operater, "审核退货（款），结果为：" + (refundApproval.getAgree() == 1 ? "同意" : "拒绝"));
+        // log
+        this.log(refundApproval.getSn(), operater, "Review the return（paragraph）, the results for：" + (refundApproval.getAgree() == 1 ? "agree" : "Refused to"));
 
         return refundApproval;
     }
@@ -305,18 +305,18 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
         RefundDO refund = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDO.class,
                 refundApproval.getSn());
         if (refund == null) {
-            throw new ServiceException(AftersaleErrorCode.E603.name(), "退款单不存在");
+            throw new ServiceException(AftersaleErrorCode.E603.name(), "Refund slip does not exist");
         }
 
-        //权限校验
+        // Permission to check
         this.checkAllowable(refund, RefundOperateEnum.ADMIN_REFUND);
-        //金额校验
+        // Check amount
         this.checkMoney(refund, refundApproval.getRefundPrice());
 
         this.daoSupport.execute("update es_refund set refund_price=? ,refund_status=?,finance_remark = ? ,refund_time = ? where sn=?",
                 refundApproval.getRefundPrice(), RefundStatusEnum.COMPLETED.value(), refundApproval.getRemark() == null ? "" : refundApproval.getRemark(),
                 DateUtil.getDateline(), refundApproval.getSn());
-        // 发送管理员审核的消息
+        // Sends the message approved by the administrator
         RefundChangeMsg refundStatusChangeMessage = new RefundChangeMsg(refund,
                 RefundStatusEnum.REFUNDING);
         this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, AmqpExchange.REFUND_STATUS_CHANGE + "_QUEUE",
@@ -369,7 +369,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
             termList.add(refundType);
         }
 
-        // 按时间查询
+        // Query by time
         String startTime = param.getStartTime();
         String endTime = param.getEndTime();
         if (StringUtil.notEmpty(startTime)) {
@@ -383,13 +383,13 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
 
         }
 
-        //退款方式
+        // The refund way
         if (StringUtil.notEmpty(param.getRefundWay())) {
             sqlSplit.add(" refund_way = ? ");
             termList.add(param.getRefundWay());
         }
 
-        //对sql条件语句进行拼接
+        // Concatenate SQL conditional statements
         String sqlSplicing = SqlSplicingUtil.sqlSplicing(sqlSplit);
         if (!StringUtil.isEmpty(sqlSplicing)) {
             sql.append(sqlSplicing);
@@ -407,7 +407,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
         RefundDTO refundDTO = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDTO.class, sn);
 
         if (refundDTO == null) {
-            throw new ServiceException(AftersaleErrorCode.E603.name(), "退款单不存在");
+            throw new ServiceException(AftersaleErrorCode.E603.name(), "Refund slip does not exist");
         }
 
         List<RefundGoodsDO> refundGoodsDOS = this.daoSupport.queryForList("select * from es_refund_goods where refund_sn=? ", RefundGoodsDO.class, sn);
@@ -446,20 +446,20 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
         OrderDetailVO order = orderQueryManager.getModel(orderSn, null);
 
         if (!order.getMemberId().equals(UserContext.getBuyer().getUid())) {
-            throw new ServiceException(AftersaleErrorCode.E604.name(), "订单不存在");
+            throw new ServiceException(AftersaleErrorCode.E604.name(), "Order does not exist");
         }
 
         PaymentMethodDO paymentMethodDO = paymentMethodManager.getByPluginId(order.getPaymentPluginId());
-        //判断是否支持原路退回
+        // Check whether the original route is supported
         if (paymentMethodDO != null && paymentMethodDO.getIsRetrace() == 1) {
             refundApplyVO.setOriginalWay("yes");
         } else {
             refundApplyVO.setOriginalWay("no");
         }
         refundApplyVO.setReturnPoint(0);
-        //如果不传skuid则为整单申请 退款金额为订单支付金额
+        // If skUID is not sent, the refund amount applied for the whole order is the amount paid in the order
         if (skuId == null) {
-            //退款申请不退运费
+            // Refund application is not refundable freight
             refundApplyVO.setReturnMoney(CurrencyUtil.sub(order.getNeedPayMoney(), order.getShippingPrice()));
             refundApplyVO.setOrder(order);
 
@@ -475,7 +475,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
                 if (orderSkuVO.getSkuId().equals(skuId)) {
                     RefundSkuVO refundSkuVO = initRefundSkuVO(orderSkuVO, order);
                     list.add(refundSkuVO);
-                    //退款金额
+                    // The refund amount
                     double returnMoney = 0.00;
                     if (orderSkuVO.getNum() >= 2) {
                         int num = orderSkuVO.getNum() - 1;
@@ -525,14 +525,14 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     public void stockIn(String sn, String remark) {
         RefundDO refund = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDO.class,
                 sn);
-        // 验证退款单是否存在及是否当前卖家的退款单
+        // Verify that the refund receipt exists and is the current sellers refund receipt
         if (refund == null) {
-            throw new ServiceException(AftersaleErrorCode.E603.name(), "退款单不存在");
+            throw new ServiceException(AftersaleErrorCode.E603.name(), "Refund slip does not exist");
         }
         this.checkAllowable(refund, RefundOperateEnum.STOCK_IN);
 
-        // 发送入库的消息
-        //TODO 商品库存还原 赠品还原
+        // Send a message to the repository
+        // TODO merchandise inventory restore gift restore
         RefundChangeMsg refundStatusChangeMessage = new RefundChangeMsg(refund,
                 RefundStatusEnum.STOCK_IN);
         this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, AmqpExchange.REFUND_STATUS_CHANGE + "_QUEUE",
@@ -543,9 +543,9 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
 
 
         String redundFailReason = "";
-        // 如果支持原路退回则审核通过后直接原路退款
+        // If the original way back is supported, the original way refund will be directly approved
         if (refund.getRefundWay().equals(RefundWayEnum.ORIGINAL.value()) && refund.getRefundPrice() > 0) {
-            // 订单号 退款金额
+            // Order Number refund amount
             Map map = refundManager.originRefund(refund.getPayOrderNo(), refund.getSn(), refund.getRefundPrice());
 
             if ("true".equals(map.get("result").toString())) {
@@ -568,16 +568,16 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
 
         RefundDO refund = this.daoSupport.queryForObject("select * from es_refund where sn =?", RefundDO.class,
                 sn);
-        // 验证退款单是否存在及是否当前卖家的退款单
+        // Verify that the refund receipt exists and is the current sellers refund receipt
         if (refund == null) {
-            throw new ServiceException(AftersaleErrorCode.E603.name(), "退款单不存在");
+            throw new ServiceException(AftersaleErrorCode.E603.name(), "Refund slip does not exist");
         }
 
         this.checkAllowable(refund, RefundOperateEnum.ADMIN_REFUND);
 
         this.daoSupport.execute("update es_refund set refund_status=? ,finance_remark = ?,refund_time= ? where sn=?",
                 RefundStatusEnum.COMPLETED.value(), remark == null ? "" : remark, DateUtil.getDateline(), sn);
-        // 发送管理员审核的消息
+        // Sends the message approved by the administrator
         RefundChangeMsg refundStatusChangeMessage = new RefundChangeMsg(refund,
                 RefundStatusEnum.REFUNDING);
         this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, "systemRefund-apply-ROUTING_KEY",
@@ -589,22 +589,22 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     public void sysCancelOrder(BuyerCancelOrderVO buyerCancelOrderVO) {
 
         OrderDetailDTO orderDetail = orderQueryManager.getModel(buyerCancelOrderVO.getOrderSn());
-        //未付款订单直接变成已取消
+        // Unpaid orders become cancelled
         if (PayStatusEnum.PAY_NO.value().equals(orderDetail.getPayStatus())) {
             CancelVO cancelVO = new CancelVO();
             cancelVO.setOrderSn(orderDetail.getSn());
-            cancelVO.setOperator("系统自动");
-            cancelVO.setReason("活动结束未成团");
+            cancelVO.setOperator("The system automatically");
+            cancelVO.setReason("The activity ended without a group");
             this.orderOperateManager.cancel(cancelVO, OrderPermission.admin);
         } else {
-            //申请退款单
+            // Application for refund Form
             RefundDO refund = baseCancle(buyerCancelOrderVO, orderDetail, true);
-            //退款单自动审核通过
+            // Refund receipt automatically approved
             AdminRefundApprovalVO refundApproval = new AdminRefundApprovalVO();
             refundApproval.setAgree(1);
             refundApproval.setRefundPoint(0);
             refundApproval.setSn(refund.getSn());
-            refundApproval.setRemark("系统自动审核");
+            refundApproval.setRemark("Automatic system audit");
             refundApproval.setRefundPrice(refund.getRefundPrice());
             this.approval(refundApproval, Permission.ADMIN);
         }
@@ -618,10 +618,10 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     /**
-     * 获取订单项信息
+     * Get order item information
      *
-     * @param orderSn 订单编号
-     * @param skuId   商品SKUID
+     * @param orderSn Order no.
+     * @param skuId   productSKUID
      * @return
      */
     private OrderItemsDO getOrderItems(String orderSn, Integer skuId) {
@@ -631,7 +631,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     /**
-     * 售后skuvo 初始化属性
+     * after-salesskuvo Initialize properties
      *
      * @param skuVO
      * @param order
@@ -640,17 +640,17 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     private RefundSkuVO initRefundSkuVO(OrderSkuVO skuVO, OrderDetailVO order) {
         RefundSkuVO refundSkuVO = new RefundSkuVO(skuVO);
 
-        //获取订单项数据
+        // Get order item data
         OrderItemsDO itemsDO = this.getOrderItems(order.getSn(), skuVO.getSkuId());
 
-        //判断订单项的可退款金额是否为空或者为0
+        // Determine whether the refundable amount of the order item is empty or 0
         if (itemsDO.getRefundPrice() == null || itemsDO.getRefundPrice().doubleValue() == 0) {
             refundSkuVO.setRefundPrice(0.00);
             refundSkuVO.setLastRefundPrice(0.00);
         } else {
 
             Double nowPrice = getNowPrice(order.getSn(), skuVO.getPurchasePrice());
-            //此商品实际支付总额
+            // The total amount actually paid for this item
 
             refundSkuVO.setRefundPrice(nowPrice);
             refundSkuVO.setLastRefundPrice(nowPrice);
@@ -661,7 +661,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     /**
-     * 卖家退款申请
+     * Sellers Refund Application
      *
      * @param buyerRefundApply
      * @return
@@ -669,18 +669,18 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     private RefundDO buyerRefund(BuyerRefundApplyVO buyerRefundApply) {
         Buyer buyer = UserContext.getBuyer();
 
-        //获取订单信息，判断订单有效性
+        // Obtain order information and judge order validity
         OrderDetailDTO order = orderQueryManager.getModel(buyerRefundApply.getOrderSn());
 
-        //不存在的订单或者不属于当前会员的订单进行校验
+        // Check orders that do not exist or do not belong to current members
         if (order == null || !buyer.getUid().equals(order.getMemberId())) {
-            throw new ServiceException(AftersaleErrorCode.E604.name(), "订单不存在");
+            throw new ServiceException(AftersaleErrorCode.E604.name(), "Order does not exist");
         }
         return innerRefund(buyerRefundApply, order);
     }
 
     /**
-     * 具体操作退款
+     * Specific operation refund
      *
      * @param buyerRefundApply
      * @param order
@@ -688,59 +688,59 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
      */
     private RefundDO innerRefund(BuyerRefundApplyVO buyerRefundApply, OrderDetailDTO order) {
 
-        //实际退款金额
+        // Actual refund amount
         Double refundPrice = 0.0d;
 
-        //获取订单可退款金额
+        // Get the refundable amount of the order
         double allowRefundPrice = this.orderQueryManager.getOrderRefundPrice(order.getSn());
 
-        //如果订单的可退款金额小于等于0，那么不允许退款
+        // If the refundable amount of an order is less than or equal to 0, no refund is allowed
         if (allowRefundPrice <= 0) {
             throw new ServiceException(AftersaleErrorCode.E609.name(), AftersaleErrorCode.E609.describe());
         }
 
-        //获取订单SKU信息
+        // Get order SKU information
         List<OrderSkuDTO> orderSkuList = order.getOrderSkuList();
         OrderSkuDTO orderSkuDTO = null;
 
-        //根据当前时间生成退款单号
+        // Generate a refund slip number based on the current time
         String refundSn = DateUtil.toString(DateUtil.getDateline(), "yyMMddHHmmss");
 
-        //skuId为空，证明是付款后取消订单；不为空证明是确认收货后申请售后
+        // SkuId is empty, which proves that the order is cancelled after payment; Not empty proof is to confirm receipt of goods after the application for after-sales
         if (buyerRefundApply.getSkuId() == null) {
 
-            //实际退款金额等于订单的可退款总额
+            // The actual refund amount is equal to the total refundable amount of the order
             refundPrice = allowRefundPrice;
 
             for (OrderSkuDTO orderSku : orderSkuList) {
-                //计算商家修改价格后的真实价格
+                // Calculate the true price of the modified price by the merchant
                 Double nowPrice = getNowPrice(order.getSn(), orderSku.getPurchasePrice());
 
                 orderSku.setPurchasePrice(nowPrice);
 
-                //生成退货商品表
+                // Generate a list of returned goods
                 this.refundGoods(orderSku, orderSku.getNum(), refundSn);
             }
 
-            //修改订单的售后状态
+            // Modify the after-sale status of the order
             orderOperateManager.updateOrderServiceStatus(order.getSn(), ServiceStatusEnum.APPLY.name());
 
         } else {
 
             for (OrderSkuDTO orderSku : orderSkuList) {
 
-                //判断要申请售后的SKU是不是存在于订单SKU信息中
+                // Determine whether the SKU to be applied for after sales exists in the order SKU information
                 if (orderSku.getSkuId() == (buyerRefundApply.getSkuId()).intValue()) {
-                    //获取订单项数据
+                    // Get order item data
                     OrderItemsDO orderItem = this.getOrderItems(order.getSn(), orderSku.getSkuId());
 
-                    //如果退款金额为0(针对单个商品申请退款退货的情况)
+                    // If the refund amount is 0(in the case of applying for refund and return of a single commodity)
                     if (orderItem == null || orderItem.getRefundPrice() == null || orderItem.getRefundPrice() == 0) {
                         throw new ServiceException(AftersaleErrorCode.E609.name(), AftersaleErrorCode.E609.describe());
                     }
 
                     if (!orderSku.getServiceStatus().equals(ServiceStatusEnum.NOT_APPLY.name())) {
-                        throw new ServiceException(AftersaleErrorCode.E601.name(), "操作不允许");
+                        throw new ServiceException(AftersaleErrorCode.E601.name(), "Operation not allowed");
                     }
 
                     orderSkuDTO = orderSku;
@@ -748,34 +748,34 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
                     Double nowPrice = getNowPrice(order.getSn(), orderSku.getPurchasePrice());
                     orderSku.setPurchasePrice(nowPrice);
 
-                    //如果没有传递退货数量，则默认为购买数量
+                    // If the returned quantity is not passed, it defaults to the purchased quantity
                     if (buyerRefundApply.getReturnNum() == null) {
                         buyerRefundApply.setReturnNum(orderSku.getNum());
                     }
 
                     if (orderSku.getNum() < buyerRefundApply.getReturnNum()) {
-                        throw new ServiceException(AftersaleErrorCode.E607.name(), "申请售后货品数量不能大于购买数量");
+                        throw new ServiceException(AftersaleErrorCode.E607.name(), "The quantity of goods applied for after sale should not be greater than the purchased quantity");
                     }
 
                     refundPrice = CurrencyUtil.mul(buyerRefundApply.getReturnNum(), nowPrice);
 
-                    //生成退货商品表
+                    // Generate a list of returned goods
                     this.refundGoods(orderSkuDTO, buyerRefundApply.getReturnNum(), refundSn);
-                    //修改订单项的售后状态为已申请
+                    // Change the after-sales status of the order item to applied
                     List<OrderSkuDTO> orderSkuDTOList = new ArrayList<>();
                     orderSku.setServiceStatus(ServiceStatusEnum.APPLY.name());
                     orderSkuDTOList.add(orderSku);
                     orderOperateManager.updateOrderItemServiceStatus(order.getSn(), orderSkuDTOList);
                 }
             }
-            //判断商品是否存在
+            // Determine whether goods exist
             if (orderSkuDTO == null) {
-                throw new ServiceException(AftersaleErrorCode.E602.name(), "商品不存在");
+                throw new ServiceException(AftersaleErrorCode.E602.name(), "Goods dont exist");
             }
         }
 
 
-        //退款单入库
+        // The refund slip is stored
         RefundDO refund = new RefundDO();
         refund.setSn(refundSn);
         refund.setOrderSn(buyerRefundApply.getOrderSn());
@@ -786,28 +786,28 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
         refund.setPaymentType(order.getPaymentType());
         refund.setPayOrderNo(order.getPayOrderNo());
 
-        //判断当前支付方式是否支持原路退回,如果不支持则退款方式不能为空
+        // Judge whether the current payment method supports the original way to return, if not, the refund method can not be empty
         PaymentMethodDO paymentMethodDO = paymentMethodManager.getByPluginId(order.getPaymentPluginId());
         String refundWay = RefundWayEnum.ORIGINAL.name();
         if (paymentMethodDO == null || paymentMethodDO.getIsRetrace() == 0) {
             refundWay = RefundWayEnum.OFFLINE.name();
             if (buyerRefundApply.getAccountType() == null) {
-                throw new ServiceException(AftersaleErrorCode.E605.name(), "退款方式必填");
+                throw new ServiceException(AftersaleErrorCode.E605.name(), "Refund method Mandatory");
             }
 
-            //银行转账
+            // Bank transfer
             if (AccountTypeEnum.BANKTRANSFER.value().equals(buyerRefundApply.getAccountType())) {
                 refund.setBankAccountName(buyerRefundApply.getBankAccountName());
                 refund.setBankAccountNumber(buyerRefundApply.getBankAccountNumber());
                 refund.setBankDepositName(buyerRefundApply.getBankDepositName());
                 refund.setBankName(buyerRefundApply.getBankName());
             } else {
-                //支付宝或者微信
+                // Alipay or wechat
                 refund.setReturnAccount(buyerRefundApply.getReturnAccount());
             }
             refund.setAccountType(buyerRefundApply.getAccountType());
         } else {
-            //原路退回WEIXINPAY  ALIPAY
+            // The original road back WEIXINPAY ALIPAY
             String pluginId = paymentMethodDO.getPluginId();
             String accountType = null;
             if ("weixinPayPlugin".equals(pluginId)) {
@@ -833,7 +833,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
         buyerRefundApply.setRefundSn(refundSn);
 
 
-        // 发送申请退款的消息
+        // Send a message requesting a refund
         RefundChangeMsg refundStatusChangeMessage = new RefundChangeMsg(refund, RefundStatusEnum.APPLY);
         this.messageSender.send(new MqMessage(AmqpExchange.REFUND_STATUS_CHANGE, AmqpExchange.REFUND_STATUS_CHANGE + "_QUEUE",
                 refundStatusChangeMessage));
@@ -842,48 +842,48 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     /**
-     * 计算商家修改价格后的真实价格
+     * Calculate the true price of the modified price by the merchant
      * @param orderSn
      * @param skuPurchasePrice
      * @return
      */
     private Double getNowPrice(String orderSn, Double skuPurchasePrice) {
         OrderDO orderDO = orderQueryManager.getDoByOrderSn(orderSn);
-        //商品成交价在订单商品总价中的占比（保留6位小数）
+        // Proportion of the transaction price of goods in the total price of goods ordered (keep 6 decimal places)
         Double ratio = CurrencyUtil.div(skuPurchasePrice, orderDO.getGoodsPrice(), 6);
-        //商家修改订单价格后的商品价格 = 占比 * 订单价格
+        // Price of goods after modification of order price by merchant = proportion * order price
         Double nowPrice = CurrencyUtil.mul(ratio, orderDO.getOrderPrice());
         return nowPrice;
     }
 
     /**
-     * 进行操作校验 看此状态下是否允许此操作
+     * Verify the operation to see if the operation is allowed in this state
      *
-     * @param refund        退款VO
-     * @param refundOperate 进行的操作
+     * @param refund        A refundVO
+     * @param refundOperate Operations performed
      */
     private void checkAllowable(RefundDO refund, RefundOperateEnum refundOperate) {
 
-        // 退款当前流程状态
+        // Refund current process status
         String status = refund.getRefundStatus();
         RefundStatusEnum refundStatus = RefundStatusEnum.valueOf(status);
 
-        // 退货/退款
+        // Return/refund
         String refuseType = refund.getRefuseType();
         RefuseTypeEnum type = RefuseTypeEnum.valueOf(refuseType);
 
-        // 货到付款/在线支付
+        // Cash on delivery/online payment
         String paymentType = refund.getPaymentType();
         PaymentTypeEnum payment = PaymentTypeEnum.valueOf(paymentType);
 
         boolean allowble = RefundOperateChecker.checkAllowable(type, payment, refundStatus, refundOperate);
         if (!allowble) {
-            throw new ServiceException(AftersaleErrorCode.E601.name(), "操作不允许");
+            throw new ServiceException(AftersaleErrorCode.E601.name(), "Operation not allowed");
         }
     }
 
     /**
-     * 记录操作日志
+     * Recording Operation Logs
      *
      * @param sn
      * @param operator
@@ -901,31 +901,31 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
     }
 
     /**
-     * 退货商品入库
+     * Return goods to storage
      *
      * @param orderSkuDTO
      * @param num
      * @param refundSn
      */
     private void refundGoods(OrderSkuDTO orderSkuDTO, Integer num, String refundSn) {
-        // 向退货商品表插入数据
+        // Insert data into the returned goods list
         RefundGoodsDO refundGoods = new RefundGoodsDO(orderSkuDTO);
         refundGoods.setReturnNum(num);
-        // 实际支付的商品单价
+        // The unit price of goods actually paid
         refundGoods.setPrice(orderSkuDTO.getPurchasePrice());
         refundGoods.setRefundSn(refundSn);
         this.daoSupport.insert("es_refund_goods", refundGoods);
     }
 
     /**
-     * 校验退款金额
+     * Verify refund amount
      *
      * @param refund
      * @param price
      */
     private void checkMoney(RefundDO refund, Double price) {
 
-        //获取退款单信息
+        // Obtain refund receipt information
         Double refundPrice;
         if (refund.getRefundType().equals(RefundTypeEnum.CANCEL_ORDER.value())) {
             refundPrice = orderQueryManager.getModel(refund.getOrderSn()).getNeedPayMoney();
@@ -933,7 +933,7 @@ public class AfterSaleManagerImpl implements AfterSaleManager {
             refundPrice = refund.getRefundPrice();
         }
         if (price > refundPrice) {
-            throw new ServiceException(AftersaleErrorCode.E600.name(), "退款金额不能大于支付金额");
+            throw new ServiceException(AftersaleErrorCode.E600.name(), "The refund amount cannot be greater than the amount paid");
         }
     }
 

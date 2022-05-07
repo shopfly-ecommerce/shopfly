@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 满优惠赠品业务类
+ * Full preferential gift business class
  *
  * @author Snow
  * @version v7.0.0
@@ -51,7 +51,7 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
         String sql = "select * from es_full_discount_gift";
 
         List<Object> params = new ArrayList<>();
-        //如果字段非空
+        // If the field is not empty
         if (!StringUtil.isEmpty(keyword)) {
             sql += " where gift_name like ? ";
             params.add("%" + keyword + "%");
@@ -98,9 +98,9 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
     public void verifyAuth(Integer id) {
 
         FullDiscountGiftDO fullDiscountGift = this.getModel(id);
-        //验证越权操作
+        // Verify unauthorized operations
         if (fullDiscountGift == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
 
     }
@@ -111,7 +111,7 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
     public boolean addGiftQuantity(List<FullDiscountGiftDO> giftDOList) {
         try {
             for (FullDiscountGiftDO giftDO : giftDOList) {
-                //当前取消的订单有赠品
+                // There are freebies for current canceled orders
                 String giftSql = "update es_full_discount_gift set enable_store=enable_store+1 ,actual_store=actual_store+1 where gift_id=?";
                 daoSupport.execute(giftSql, giftDO.getGiftId());
             }
@@ -127,7 +127,7 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
     public boolean addGiftEnableQuantity(List<FullDiscountGiftDO> giftDOList) {
         try {
             for (FullDiscountGiftDO giftDO : giftDOList) {
-                //当前取消的订单有赠品,增加赠品可用库存
+                // Current cancelled orders have freebies, increase available inventory for freebies
                 String giftSql = "update es_full_discount_gift set enable_store=enable_store+1 where gift_id=?";
                 daoSupport.execute(giftSql, giftDO.getGiftId());
             }
@@ -151,7 +151,7 @@ public class FullDiscountGiftManagerImpl implements FullDiscountGiftManager {
             }
 
             for (FullDiscountGiftDO giftDO : giftDOList) {
-                //当前取消的订单有赠品
+                // There are freebies for current canceled orders
                 daoSupport.execute(giftSql, giftDO.getGiftId());
             }
             return true;

@@ -30,7 +30,7 @@ import java.util.List;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-18 上午11:44
+ * 2019-02-18 In the morning11:44
  */
 @Service
 @ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
@@ -39,10 +39,10 @@ public class PintuanClientDefaultImpl implements PintuanClient {
     private PintuanManager pintuanManager;
 
     /**
-     * 获取拼团
+     * Access to spell group
      *
-     * @param id 拼团主键
-     * @return Pintuan  拼团
+     * @param id Spell the primary key
+     * @return Pintuan  Spell group
      */
     @Override
     public Pintuan getModel(Integer id) {
@@ -50,7 +50,7 @@ public class PintuanClientDefaultImpl implements PintuanClient {
     }
 
     /**
-     * 停止一个活动
+     * Stop an activity
      *
      * @param promotionId
      */
@@ -60,7 +60,7 @@ public class PintuanClientDefaultImpl implements PintuanClient {
     }
 
     /**
-     * 开始一个活动
+     * Start an activity
      *
      * @param promotionId
      */

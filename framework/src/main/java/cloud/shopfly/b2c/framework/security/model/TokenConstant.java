@@ -15,10 +15,10 @@
  */
 package cloud.shopfly.b2c.framework.security.model;
 /**
- * 定义Token基本常量
+ * defineTokenBasic constants
  * @author zh
  * @version v7.0
- * @date 18/4/12 下午2:46
+ * @date 18/4/12 In the afternoon2:46
  * @since v7.0
  */
 public class TokenConstant {

@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.util.BeanUtil;
 
 
 /**
- * 转换goods包下，此包使用到的model及字段
+ * conversiongoodsPackage, used by this packagemodelAnd the field
  *
  * @author Snow create in 2018/3/20
  * @version v2.0
@@ -32,7 +32,7 @@ import cloud.shopfly.b2c.framework.util.BeanUtil;
 public class TradeGoodsConverter {
 
     /**
-     * 转换goodsVO对象
+     * conversiongoodsVOobject
      *
      * @return
      */
@@ -44,7 +44,7 @@ public class TradeGoodsConverter {
     }
 
     /**
-     * 转换goodsSkuVO对象
+     * conversiongoodsSkuVOobject
      *
      * @return
      */

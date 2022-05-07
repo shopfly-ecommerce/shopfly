@@ -80,9 +80,9 @@ import java.util.*;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录业务类
+ * @Description Trusted login business class
  * @ClassName ConnectManagerImpl
- * @since v7.0 下午8:55 2018/6/6
+ * @since v7.0 In the afternoon8:55 2018/6/6
  */
 @Service
 public class ConnectManagerImpl implements ConnectManager {
@@ -131,7 +131,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     /**
-     * 日志记录
+     * logging
      */
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -148,24 +148,24 @@ public class ConnectManagerImpl implements ConnectManager {
 
     @Override
     public Map bind(String uuid, Integer uid) {
-        //获取当前的用户信息
+        // Get the current user information
         Member member = memberManager.getModel(uid);
-        //对会员的状态进行校验，已禁用的会员不允许绑定
+        // Verify the status of members. Disabled members are not allowed to bind
         if (!member.getDisabled().equals(0)) {
-            throw new ServiceException(MemberErrorCode.E124.code(), "当前会员已禁用");
+            throw new ServiceException(MemberErrorCode.E124.code(), "Current membership is disabled");
         }
         Map map = new HashMap(4);
         Auth2Token auth2Token = (Auth2Token) cache.get(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid);
         if (auth2Token == null) {
-            throw new ServiceException(MemberErrorCode.E133.name(), "redis授权信息不存在");
+            throw new ServiceException(MemberErrorCode.E133.name(), "redisThe authorization information does not exist");
         }
         String sql = "select * from es_connect where union_id = ? and union_type = ?";
         ConnectDO connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, auth2Token.getUnionid(), auth2Token.getType());
-        //如果会员授权登录信息union_id不为空则给予相应提示,询问是否更换
+        // If the member authorized login information union_id is not empty, the corresponding prompt will be given to ask whether to change
         if (connectDO != null && !StringUtil.isEmpty(connectDO.getUnionId())) {
             map.put("result", "existed");
         } else {
-            //根据如果会员授权信息存在则进行更新操作，不存在则进行添加操作
+            // If the member authorization information exists, it will be updated, and if it does not exist, it will be added
             sql = "select * from es_connect where member_id = ? and union_type = ?";
             connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, member.getMemberId(), auth2Token.getType());
             if (connectDO == null) {
@@ -187,31 +187,31 @@ public class ConnectManagerImpl implements ConnectManager {
     @Override
     public void wechatAuthCallBack() {
         try {
-            //cookie 有效期: 30天
+            // Cookie validity period: 30 days
             final int maxAge = 30 * 24 * 60 * 60;
-            //生成uuid
+            // Uuid generated
             String uuid = UUID.randomUUID().toString();
-            //根据类型获取对应的插件
+            // Get the corresponding plug-in by type
 
             AbstractConnectLoginPlugin connectionLogin = this.getConnectionLogin(ConnectTypeEnum.WECHAT);
-            //获取微信授权信息
+            // Obtain wechat authorization information
             Auth2Token auth2Token = (Auth2Token) cache.get(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid);
 
             if (auth2Token == null) {
                 auth2Token = connectionLogin.loginCallback();
-                //当需要测试时，打开此注释，注释掉上一句
+                // When you need to test, open this comment and comment out the previous sentence
                 //auth2Token = new Auth2Token();
                 //auth2Token.setUnionid("unionId123 ");
                 //auth2Token.setOpneId("openid123");
                 //auth2Token.setAccessToken("accessToken123");
                 // auth2Token.setType(ConnectTypeEnum.WECHAT.value());
             }
-            //将授权信息放入缓存,缓存失效时间为30天
+            // The authorization information is put into the cache, and the cache expires for 30 days
             cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token, maxAge);
             if (logger.isDebugEnabled()) {
-                this.logger.debug(new Date() + " " + uuid + " 授权信息放到缓存存中，失效时间为30天");
+                this.logger.debug(new Date() + " " + uuid + " The authorization information is stored in the cache. The expiration time is30day");
             }
-            //将标示存入cookie
+            // Store the tag in a cookie
             Cookie cookie = new Cookie("uuid_connect", uuid);
             cookie.setDomain(domainHelper.getTopDomain());
             cookie.setPath("/");
@@ -227,17 +227,17 @@ public class ConnectManagerImpl implements ConnectManager {
             Cookie uuidCookie = new Cookie("uuid", uuid);
             uuidCookie.setDomain(domainHelper.getTopDomain());
             uuidCookie.setPath("/");
-            //30天
+            // 30 days
             uuidCookie.setMaxAge(maxAge);
 
             ThreadContextHolder.getHttpResponse().addCookie(wechatCookie);
             ThreadContextHolder.getHttpResponse().addCookie(cookie);
             ThreadContextHolder.getHttpResponse().addCookie(uuidCookie);
-            //跳转到首页
+            // Jump to home page
             ThreadContextHolder.getHttpResponse().sendRedirect(domainHelper.getMobileDomain());
         } catch (Exception e) {
             if (logger.isErrorEnabled()) {
-                logger.error("微信信任登录回调出错", e);
+                logger.error("Wechat trust login callback error", e);
             }
         }
     }
@@ -249,21 +249,21 @@ public class ConnectManagerImpl implements ConnectManager {
         Auth2Token auth2Token = (Auth2Token) cache.get(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid);
         if (auth2Token == null) {
             if (logger.isDebugEnabled()) {
-                this.logger.debug(new Date() + " " + uuid + " 授权信息失效");
+                this.logger.debug(new Date() + " " + uuid + " Authorization Information invalid");
             }
 
 
             cleanCookie();
-            throw new ServiceException(MemberErrorCode.E133.name(), "授权超时，请重新授权");
+            throw new ServiceException(MemberErrorCode.E133.name(), "The authorization has timed out. Please reauthorize it");
         }
         String sql = "select * from es_connect where union_type = ? and  union_id = ? ";
         ConnectDO connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, ConnectTypeEnum.WECHAT.value(), auth2Token.getUnionid());
 
-        //检验第三方登录信息是否存在，存在的话根据memberId获取会员信息
+        // Check whether the third party login information exists, if so, obtain the member information according to memberId
         if (connectDO != null) {
             Member member = memberManager.getModel(connectDO.getMemberId());
 
-            //检验会员是否存在，存在的话执行登录操作
+            // Check whether the member exists, if so, perform login operation
             if (member != null) {
                 MemberVO memberVO = memberManager.connectLoginHandle(member, uuid);
                 map.put("access_token", memberVO.getAccessToken());
@@ -281,17 +281,17 @@ public class ConnectManagerImpl implements ConnectManager {
 
             AbstractConnectLoginPlugin connectionLogin = this.getConnectionLogin(connectTypeEnum);
             if (connectionLogin == null) {
-                throw new ServiceException(MemberErrorCode.E130.name(), "不支持的登录方式");
+                throw new ServiceException(MemberErrorCode.E130.name(), "The login mode is not supported");
             }
-            debugger.log("根据类型[" + type + "]调起登录插件：[" + connectionLogin + "]");
+            debugger.log("According to the type[" + type + "]Call up the login plug-in：[" + connectionLogin + "]");
             String loginUrl = connectionLogin.getLoginUrl();
-            debugger.log("跳转url为：");
+            debugger.log("jumpurlfor：");
             debugger.log(loginUrl);
             ThreadContextHolder.getHttpResponse().sendRedirect(loginUrl);
 
         } catch (IOException e) {
             this.logger.error(e.getMessage(), e);
-            throw new ServiceException(MemberErrorCode.E131.name(), "联合登录失败");
+            throw new ServiceException(MemberErrorCode.E131.name(), "Joint login failure");
         }
     }
 
@@ -299,42 +299,42 @@ public class ConnectManagerImpl implements ConnectManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberVO callBack(String type, String mem, String uuid) {
-        //根据回调获取对应的插件，并获取相应的openid
+        // Get the corresponding plug-in based on the callback, and get the corresponding OpenID
         ConnectTypeEnum connectTypeEnum = ConnectTypeEnum.valueOf(type);
         AbstractConnectLoginPlugin connectionLogin = this.getConnectionLogin(connectTypeEnum);
 
-        debugger.log("调起插件:" + connectionLogin);
+        debugger.log("Tuning up the plug-in:" + connectionLogin);
         Auth2Token auth2Token = connectionLogin.loginCallback();
-        //根据openid查询是否有会员绑定过
+        // Check whether any member has been bound according to openID
         String sql = "select * from es_connect where union_type = ? and  union_id = ? ";
         ConnectDO connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, type, auth2Token.getUnionid());
 
-        debugger.log("获取绑定信息:" + connectDO);
+        debugger.log("Getting binding information:" + connectDO);
 
         Member member = null;
         if (connectDO != null) {
             member = memberManager.getModel(connectDO.getMemberId());
-            debugger.log("获取绑定的会员:" + member);
+            debugger.log("Get bound membership:" + member);
 
         }
-        //将信任登录的相关信息存入redis中
+        // Store information about trusted logins in Redis
         auth2Token.setType(type);
         cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token, shopflyConfig.getCaptchaTimout());
 
-        debugger.log("将token信息写入缓存，超时时间为：" + shopflyConfig.getCaptchaTimout());
+        debugger.log("willtokenThe information is written to the cache and the timeout period is：" + shopflyConfig.getCaptchaTimout());
 
         if (logger.isDebugEnabled()) {
-            this.logger.debug(new Date() + " " + uuid + " 登录授权，授权时间为" + shopflyConfig.getCaptchaTimout());
+            this.logger.debug(new Date() + " " + uuid + " Login authorization. The authorization time is" + shopflyConfig.getCaptchaTimout());
         }
-        //如果在会员中心绑定账号，不需要返回新的会员信息
+        // If the account is bound in the member center, there is no need to return the new member information
         if ("member".equals(mem)) {
             return null;
         }
         MemberVO memberVO = null;
         if (member != null) {
-            debugger.log("进行会员登录操作");
+            debugger.log("Member login operation");
             memberVO = memberManager.connectLoginHandle(member, uuid);
-            debugger.log("生成vo:");
+            debugger.log("generatevo:");
             debugger.log(memberVO.toString());
 
         }
@@ -348,21 +348,21 @@ public class ConnectManagerImpl implements ConnectManager {
         Buyer buyer = UserContext.getBuyer();
         Member member = memberManager.getModel(buyer.getUid());
 
-        //获取redis中存储的数据 填充会员信息关联相应的登录方式id
+        // Get the data stored in Redis to fill in the membership information and associate the corresponding login id
         Auth2Token auth2Token = (Auth2Token) cache.get(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid);
         if (auth2Token == null) {
             if (logger.isDebugEnabled()) {
-                this.logger.debug(new Date() + " " + uuid + " 自动登录授权找不到");
+                this.logger.debug(new Date() + " " + uuid + " Automatic login authorization could not be found");
             }
             cleanCookie();
-            throw new ServiceException(MemberErrorCode.E133.name(), "授权超时，请重新授权");
+            throw new ServiceException(MemberErrorCode.E133.name(), "The authorization has timed out. Please reauthorize it");
         }
         ConnectTypeEnum connectTypeEnum = ConnectTypeEnum.valueOf(auth2Token.getType());
         AbstractConnectLoginPlugin connectionLogin = this.getConnectionLogin(connectTypeEnum);
-        //更新会员信息
+        // Update member information
         member = connectionLogin.fillInformation(auth2Token, member);
         memberManager.edit(member, buyer.getUid());
-        //组织数据保存新人登录信息
+        // Organize data to store new person login information
         ConnectDO connectDO = new ConnectDO();
         connectDO.setMemberId(member.getMemberId());
         connectDO.setUnionType(auth2Token.getType());
@@ -379,11 +379,11 @@ public class ConnectManagerImpl implements ConnectManager {
         ConnectDO connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, memberId, type);
 
         if (connectDO == null) {
-            throw new ServiceException(MemberErrorCode.E134.name(), "会员未绑定相关账号");
+            throw new ServiceException(MemberErrorCode.E134.name(), "Members are not bound to relevant accounts");
         }
-        //30天内不可重复解绑
+        // Do not unbind again within 30 days
         /*if (DateUtil.getDateline() - (connectDO.getUnboundTime() == null ? 0 : connectDO.getUnboundTime()) < time) {
-            throw new ServiceException(MemberErrorCode.E135.name(), "30天内不可重复解绑");
+            throw new ServiceException(MemberErrorCode.E135.name(), "30Do not repeatedly unbind within a day");
         }*/
 
         sql = "update es_connect set unbound_time = ? , union_id = ? where id = ?";
@@ -397,18 +397,18 @@ public class ConnectManagerImpl implements ConnectManager {
         Map map = new HashMap(4);
         Auth2Token auth2Token = (Auth2Token) cache.get(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid);
         if (auth2Token != null) {
-            //检验此微信是否已经绑定过其他的用户
+            // Check whether this wechat has been bound to other users
             String sql = "select * from es_connect where union_id = ? and union_type = ?";
             ConnectDO connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, auth2Token.getUnionid(), auth2Token.getType());
             if (connectDO != null) {
-                throw new ServiceException(MemberErrorCode.E143.code(), "已绑定其他用户,请解绑后再操作");
+                throw new ServiceException(MemberErrorCode.E143.code(), "You have bound another user,Please unbind it and try again");
             }
             Member model = memberManager.getModel(UserContext.getBuyer().getUid());
             MemberVO memberVO = memberManager.connectLoginHandle(model, uuid);
             map.put("result", "bind_success");
             map.put("access_token", memberVO.getAccessToken());
             map.put("refresh_token", memberVO.getRefreshToken());
-            //更新会员openid 如果存在更新此条数据，如果不存在添加一条
+            // Update member openID if there is an update of this data, if there is no add one
             sql = "select * from es_connect where member_id = ? and union_type = ?";
             connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, UserContext.getBuyer().getUid(), auth2Token.getType());
             if (connectDO == null) {
@@ -423,7 +423,7 @@ public class ConnectManagerImpl implements ConnectManager {
             }
         } else {
             cleanCookie();
-            throw new ServiceException(MemberErrorCode.E133.name(), "授权超时，请重新授权");
+            throw new ServiceException(MemberErrorCode.E133.name(), "The authorization has timed out. Please reauthorize it");
         }
         return map;
     }
@@ -468,7 +468,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
         Map map = new HashMap(4);
         if (member != null) {
-            //会员登录
+            // Member login
             MemberVO memberVO = memberManager.loginHandle(member);
             map.put("is_bind", true);
             map.put("access_token", memberVO.getAccessToken());
@@ -483,26 +483,26 @@ public class ConnectManagerImpl implements ConnectManager {
     @Override
     public void sendCheckMobileSmsCode(String mobile) {
         if (!Validator.isMobile(mobile)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "手机号码格式不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The mobile phone number format is incorrect");
         }
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.getMemberByMobile(mobile);
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E123.code(), "当前会员不存在");
+            throw new ServiceException(MemberErrorCode.E123.code(), "Current member does not exist");
         }
-        //发送验证码短信
-        smsManager.sendSmsMessage("校验手机操作", mobile, SceneType.VALIDATE_MOBILE);
+        // Send verification code SMS messages
+        smsManager.sendSmsMessage("Verify mobile phone operation", mobile, SceneType.VALIDATE_MOBILE);
 
     }
 
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Map mobileBind(String mobile, String uuid) {
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.getMemberByMobile(mobile);
-        //校验当前会员是否存在
+        // Check whether the current member exists
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E123.code(), "当前会员不存在");
+            throw new ServiceException(MemberErrorCode.E123.code(), "Current member does not exist");
         }
         return this.binding(member, uuid, uuid);
 
@@ -537,7 +537,7 @@ public class ConnectManagerImpl implements ConnectManager {
     public List<ConnectSettingVO> list() {
         String sql = "select * from es_connect_setting ";
         List<ConnectSettingVO> connectSetting = this.memberDaoSupport.queryForList(sql, ConnectSettingVO.class);
-        //获取已经存在的授权类型
+        // Gets an existing authorization type
         List<String> list = new ArrayList<>();
         if (connectSetting.size() > 0) {
             for (ConnectSettingVO connectSettingDO : connectSetting) {
@@ -546,7 +546,7 @@ public class ConnectManagerImpl implements ConnectManager {
         } else {
             connectSetting = new ArrayList<>();
         }
-        //如果不存在则需重新生成一条数据
+        // If no, generate another data
         for (ConnectTypeEnum connectTypeEnum : ConnectTypeEnum.values()) {
             if (!list.contains(connectTypeEnum.value())) {
                 AbstractConnectLoginPlugin connectionLogin = this.getConnectionLogin(connectTypeEnum);
@@ -590,14 +590,14 @@ public class ConnectManagerImpl implements ConnectManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Map bind(String username, String password, String uuidConnect, String uuid) {
-        //校验会员账号密码正确性
+        // Verify the validity of member account password
         Member member = memberManager.validation(username, password);
         return this.binding(member, uuidConnect, uuid);
     }
 
 
     /**
-     * 根据type获取相应的插件类
+     * According to thetypeGets the corresponding plug-in class
      *
      * @param type
      * @return
@@ -621,7 +621,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     /**
-     * 根据登录类型获取会员相应的openid 判断是否绑定返回相应的信息
+     * Get the corresponding membership according to the login typeopenid Check whether the binding returns the corresponding information
      *
      * @param member
      * @param uuidConnect
@@ -631,7 +631,7 @@ public class ConnectManagerImpl implements ConnectManager {
     private Map binding(Member member, String uuidConnect, String uuid) {
         Map map = this.bind(uuidConnect, member.getMemberId());
         if (!"existed".equals(map.get("result"))) {
-            //对会员的状态进行校验，已禁用的会员不允许绑定
+            // Verify the status of members. Disabled members are not allowed to bind
             MemberVO memberVO = memberManager.connectLoginHandle(member, uuid);
             map.put("access_token", memberVO.getAccessToken());
             map.put("refresh_token", memberVO.getRefreshToken());
@@ -642,16 +642,16 @@ public class ConnectManagerImpl implements ConnectManager {
 
     @Override
     public void wechatOut() {
-        //解除绑定
+        // Remove the binding
         this.unbind(ConnectTypeEnum.WECHAT.value());
-        //注销会员
+        // The cancellation of membership
         memberManager.logout(UserContext.getBuyer().getUid());
     }
 
 
     @Override
     public String getAliInfo() {
-        //将参数值放入map
+        // Put parameter values into map
         Map<String, String> alipayMap = new HashMap<>();
         ConnectSettingDO pay = this.get(ConnectTypeEnum.ALIPAY.value());
         ConnectSettingVO alipay = new ConnectSettingVO();
@@ -664,7 +664,7 @@ public class ConnectManagerImpl implements ConnectManager {
             }
         }
 
-        //拼接参数
+        // Stitching parameters
         String appId = alipayMap.get("alipay_app_app_id");
         String pid = alipayMap.get("alipay_app_pid");
         String targetId = DateUtil.getDateline() + "" + DateUtil.getDateline() + "" + DateUtil.getDateline() + "00";
@@ -680,7 +680,7 @@ public class ConnectManagerImpl implements ConnectManager {
         map.put("target_id", targetId);
         map.put("auth_type", "AUTHACCOUNT");
         map.put("sign_type", "RSA2");
-        //获取生成sign的参数url
+        // Gets the url of the parameter that generated sign
         String content = getSignContent(map);
         String sign = "";
         try {
@@ -688,27 +688,27 @@ public class ConnectManagerImpl implements ConnectManager {
             map.put("sign", sign);
             sign = getSignContent(map);
         } catch (Exception e) {
-            logger.error("生成支付宝签名错误===" + e.getMessage());
+            logger.error("Error generating alipay signature===" + e.getMessage());
         }
         return sign;
     }
 
     @Override
     public Map appBind(Member member, String openid, String type, String uuid) {
-        //对会员的状态进行校验，已禁用的会员不允许绑定
+        // Verify the status of members. Disabled members are not allowed to bind
         if (!member.getDisabled().equals(0)) {
-            throw new ServiceException(MemberErrorCode.E124.code(), "当前会员已禁用");
+            throw new ServiceException(MemberErrorCode.E124.code(), "Current membership is disabled");
         }
         Map map = new HashMap(4);
 
         String sql = "select * from es_connect where member_id = ? and union_type = ?";
         ConnectDO connectDO = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, member.getMemberId(), type);
         MemberVO memberVO = memberManager.connectLoginHandle(member, uuid);
-        // 当前会员已经绑定了其他的账号
+        // The current member is already bound to another account
         if (connectDO != null && !StringUtil.isEmpty(connectDO.getUnionId())) {
-            throw new ServiceException(MemberErrorCode.E124.code(), "此账号已被绑定，请先解绑才能继续绑定");
+            throw new ServiceException(MemberErrorCode.E124.code(), "This account has been bound. Please unbind it before continuing to bind");
         } else {
-            //如果会员授权信息存在则进行更新操作，不存在则进行添加操作
+            // If the member authorization information exists, update it; if it does not exist, add it
             if (connectDO == null) {
                 connectDO = new ConnectDO();
                 connectDO.setMemberId(member.getMemberId());
@@ -727,7 +727,7 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     /**
-     * 初始化配置参数
+     * Initialize configuration parameters
      *
      * @return
      */
@@ -744,7 +744,7 @@ public class ConnectManagerImpl implements ConnectManager {
                 }
             }
         }
-        debugger.log("获取参数：", map.toString());
+        debugger.log("To obtain parameters：", map.toString());
         return map;
 
     }
@@ -753,39 +753,39 @@ public class ConnectManagerImpl implements ConnectManager {
     public Map miniProgramLogin(String content, String uuid) {
         Map res = new HashMap(16);
         JSONObject json = JSONObject.fromObject(content);
-        //获取不到unionid
+        // Failed to obtain the UnionID
         if (json.get("unionid") == null) {
             res.put("autologin", "fail");
             res.put("reson", "unionid_not_found");
-            //存储sessionkey
+            // Storage sessionkey
             String sessionKey = json.getString("session_key");
             cache.put(CachePrefix.SESSION_KEY.getPrefix() + uuid, sessionKey);
             return res;
         }
         String unionId = json.getString("unionid");
         if (content != null) {
-            //存储uuid和unionId的关系
+            // Stores the relationship between uUID and unionId
             Auth2Token auth2Token = new Auth2Token();
             auth2Token.setType(ConnectTypeEnum.WECHAT.value());
             auth2Token.setUnionid(unionId);
             String openid = json.getString("openid");
-            //openid用于注册绑定时获取登录的微信的信息
+            // Openid is used to obtain wechat information when registering binding
             auth2Token.setOpneId(openid);
             if (logger.isDebugEnabled()) {
-                logger.debug("微信小程序登录openId为：" + openid);
+                logger.debug("Wechat mini program loginopenIdfor：" + openid);
             }
             cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token);
         }
-        //使用unionid读取数据库绑定数据
+        // Use unionID to read database binding data
         String sql = "select * from es_connect where union_id = ? and union_type = ?";
         ConnectDO connect = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, unionId, ConnectTypeEnum.WECHAT.value());
-        //读到了unionid，但没有找到账号
+        // Unionid read, but no account found
         if (connect == null) {
             res.put("autologin", "fail");
             res.put("reson", "account_not_found");
             return res;
         }
-        //验证通过可以正常登录
+        // If the authentication succeeds, you can log in normally
         Integer memberId = connect.getMemberId();
         Member member = memberManager.getModel(memberId);
         MemberVO memberVO = memberManager.connectLoginHandle(member, uuid);
@@ -807,22 +807,22 @@ public class ConnectManagerImpl implements ConnectManager {
             String unionId = (String) userInfo.get("unionId");
             String sql = "select * from es_connect where union_id = ? and union_type = ?";
             ConnectDO connect = this.memberDaoSupport.queryForObject(sql, ConnectDO.class, unionId, ConnectTypeEnum.WECHAT.value());
-            //读到了unionid，但没有找到账号
+            // Unionid read, but no account found
             if (connect == null) {
                 res.put("autologin", "fail");
                 res.put("reson", "account_not_found");
 
-                //存储uuid和unionId的关系
+                // Stores the relationship between uUID and unionId
                 Auth2Token auth2Token = new Auth2Token();
                 auth2Token.setType(ConnectTypeEnum.WECHAT.value());
                 auth2Token.setUnionid(unionId);
                 String openId = (String) userInfo.get("openId");
-                //openid用于注册绑定时获取微信登录的信息
+                // Openid is used to obtain wechat login information during registration binding
                 auth2Token.setOpneId(openId);
                 cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token);
                 return res;
             }
-            //验证通过可以正常登录
+            // If the authentication succeeds, you can log in normally
             Integer memberId = connect.getMemberId();
             Member member = memberManager.getModel(memberId);
             MemberVO memberVO = memberManager.connectLoginHandle(member, uuid);
@@ -842,22 +842,22 @@ public class ConnectManagerImpl implements ConnectManager {
             Buyer buyer = UserContext.getBuyer();
             int memberId = buyer.getUid();
 
-            //会员短连接缓存key
+            // Member short link cache key
             String memberSuKey = CachePrefix.MEMBER_SU.getPrefix() + memberId;
-            //从缓存中获取会员短连接
+            // Retrieves the member short link from the cache
             Object memberSu = cache.get(memberSuKey);
             if (memberSu == null) {
-                //重新生成会员短连接
+                // Regenerate the member short link
                 memberSu = this.getSuCode(memberId+"");
-                logger.debug("==============根据会员ID生成的短连接为:" + memberSu);
-                //将会员短连接放入缓存中
+                logger.debug("==============According to the membershipIDThe resulting short connection is:" + memberSu);
+                // Put the member short connection in the cache
                 cache.put(CachePrefix.MEMBER_SU.getPrefix() + memberId, memberSu);
             }
-            //以会员短连接为key，将会员ID放入缓存中
+            // Put the member ID in the cache with the member short link as the key
             String memberIdCacheKey = CachePrefix.MEMBER_SU.getPrefix() + memberSu;
             cache.put(memberIdCacheKey, memberId);
 
-            //将会员短连接放入二维码中
+            // Put the short link into the QR code
             params.put("scene", goodsId + "&" + memberSu);
             params.put("page", "goods-module/goods/goods");
             logger.debug(params.toString());
@@ -877,7 +877,7 @@ public class ConnectManagerImpl implements ConnectManager {
             fileDTO.setName(name);
             fileDTO.setExt("png");
             FileVO goods = fileManager.upload(fileDTO, "goods");
-            logger.debug("++++++++++++++++++小程序二维码的地址是：++++++++++++" + goods.getUrl());
+            logger.debug("++++++++++++++++++The address of the small program qr code is：++++++++++++" + goods.getUrl());
             return goods.getUrl();
 
         } catch (Exception e) {
@@ -887,10 +887,10 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     /**
-     * 获取联合登录对象
+     * Gets the federated login object
      *
-     * @param memberId  会员id
-     * @param unionType 类型
+     * @param memberId  membersid
+     * @param unionType type
      * @return ConnectDO
      */
     @Override
@@ -905,7 +905,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     /**
-     * 解密，获取信息
+     * Decryption, access to information
      *
      * @param encryptedData
      * @param sessionKey
@@ -914,14 +914,14 @@ public class ConnectManagerImpl implements ConnectManager {
      */
     @Override
     public JSONObject getUserInfo(String encryptedData, String sessionKey, String iv) {
-        // 被加密的数据
+        // Encrypted data
         byte[] dataByte = Base64.decode(encryptedData);
-        // 加密秘钥
+        // Add the secret key
         byte[] keyByte = Base64.decode(sessionKey);
-        // 偏移量
+        // The offset
         byte[] ivByte = Base64.decode(iv);
         try {
-            // 如果密钥不足16位，那么就补足.  这个if 中的内容很重要
+            // If the key is less than 16 bits, it is replenished
             int base = 16;
             if (keyByte.length % base != 0) {
                 int groups = keyByte.length / base + (keyByte.length % base != 0 ? 1 : 0);
@@ -930,13 +930,13 @@ public class ConnectManagerImpl implements ConnectManager {
                 System.arraycopy(keyByte, 0, temp, 0, keyByte.length);
                 keyByte = temp;
             }
-            // 初始化
+            // Initialize the
             Security.addProvider(new BouncyCastleProvider());
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding", "BC");
             SecretKeySpec spec = new SecretKeySpec(keyByte, "AES");
             AlgorithmParameters parameters = AlgorithmParameters.getInstance("AES");
             parameters.init(new IvParameterSpec(ivByte));
-            // 初始化
+            // Initialize the
             cipher.init(Cipher.DECRYPT_MODE, spec, parameters);
             byte[] resultByte = cipher.doFinal(dataByte);
             if (null != resultByte && resultByte.length > 0) {
@@ -952,10 +952,10 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     /**
-     * 获取格式化的sign的参数
+     * Get formattedsignThe parameters of the
      *
-     * @param sortedParams 生成sign的参数map
-     * @return 组织好的参数url
+     * @param sortedParams generatesignThe parameters of themap
+     * @return Organized parametersurl
      */
     public static String getSignContent(Map<String, String> sortedParams) {
         StringBuffer content = new StringBuffer();
@@ -977,7 +977,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
 
     /**
-     * 清楚cookie
+     * clearcookie
      */
     private void cleanCookie() {
         String main = domainHelper.getTopDomain();
@@ -1028,9 +1028,9 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     /**
-     * 获取唯一短连接值
+     * Gets a unique short connection value
      *
-     * @param param 参数
+     * @param param parameter
      * @return
      */
     private String getSuCode(String param) {

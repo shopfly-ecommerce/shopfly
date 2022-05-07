@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.system.model.dos.SmtpDO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 邮件业务层
+ * Mail business layer
  *
  * @author zh
  * @version v7.0.0
@@ -29,56 +29,56 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface SmtpManager {
 
     /**
-     * 查询邮件列表
+     * Querying mailing lists
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 修改邮件
+     * Modify the mail
      *
-     * @param smtp 邮件
-     * @param id   邮件主键
-     * @return Smtp 邮件
+     * @param smtp mail
+     * @param id   Mail the primary key
+     * @return Smtp mail
      */
     SmtpDO edit(SmtpDO smtp, Integer id);
 
     /**
-     * 获取邮件
+     * Access to email
      *
-     * @param id 邮件主键
-     * @return Smtp  邮件
+     * @param id Mail the primary key
+     * @return Smtp  mail
      */
     SmtpDO getModel(Integer id);
 
     /**
-     * 添加邮件
+     * Add the mail
      *
-     * @param smtp 邮件
-     * @return Smtp 邮件
+     * @param smtp mail
+     * @return Smtp mail
      */
     SmtpDO add(SmtpDO smtp);
 
     /**
-     * 删除邮件
+     * Delete the email
      *
-     * @param id 邮件主键
+     * @param id Mail the primary key
      */
     void delete(Integer id);
 
     /**
-     * 发送测试邮件
+     * Send a test email
      *
-     * @param send 发送邮件地址
-     * @param smtp smtp设置
+     * @param send Sending email address
+     * @param smtp smtpSet up the
      */
     void send(String send, SmtpDO smtp);
 
     /**
-     * 获取当前使用的smtp方案
+     * Gets the currently usedsmtpplan
      *
      * @return smtp
      */

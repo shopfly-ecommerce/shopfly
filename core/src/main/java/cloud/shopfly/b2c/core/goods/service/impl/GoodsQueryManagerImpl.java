@@ -58,7 +58,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品业务类
+ * Commodity business category
  *
  * @author fk
  * @version v2.0
@@ -120,17 +120,17 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
     public CacheGoods getFromCache(Integer goodsId) {
         CacheGoods goods = (CacheGoods) cache.get(CachePrefix.GOODS.getPrefix() + goodsId);
         if (logger.isDebugEnabled()) {
-            logger.debug("由缓存中读出商品：");
+            logger.debug("Read the item from the cache：");
             logger.debug(goods);
         }
         if (goods == null) {
 
             GoodsDO goodsDB = this.getModel(goodsId);
             if (goodsDB == null) {
-                throw new ServiceException(GoodsErrorCode.E301.code(), "该商品已被彻底删除");
+                throw new ServiceException(GoodsErrorCode.E301.code(), "The item has been completely removed");
             }
 
-            // GoodsVo的对象返回,GoodsVo中的skuList是要必须填充好的
+            // The skuList in GoodsVo must be filled
             List<GoodsSkuVO> skuList = goodsSkuManager.listByGoodsId(goodsId);
 
 
@@ -138,17 +138,17 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
             BeanUtils.copyProperties(goodsDB, goods);
             goods.setSkuList(skuList);
 
-            //填充库存数据
+            // Filling inventory data
             fillStock(goods);
             cache.put(CachePrefix.GOODS.getPrefix() + goodsId, goods);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("由缓存中读出商品为空,由数据库中返回商品：");
+                logger.debug("Null item read from cache,Returns goods from the database：");
                 logger.debug(goods);
             }
             return goods;
         } else {
-            //填充库存数据
+            // Filling inventory data
             fillStock(goods);
         }
 
@@ -159,14 +159,14 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
     public Integer checkArea(Integer goodsId, Integer areaId) {
         CacheGoods goods = this.getFromCache(goodsId);
 
-        //判断库存为0，显示无货
+        // Determine the inventory to be 0, indicating no stock
         if (goods.getEnableQuantity() == 0) {
             return 0;
         }
 
-        //卖家承担运费
+        // The seller bears the freight
         if (goods.getGoodsTransfeeCharge() == 1) {
-            //有货
+            // In stock
             return 1;
         }
 
@@ -175,13 +175,13 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         for (ShipTemplateSettingVO child : temp.getItems()) {
             if (child.getAreaId() != null) {
                 if (child.getAreaId().indexOf("," + areaId + ",") >= 0) {
-                    //有货
+                    // In stock
                     return 1;
                 }
             }
         }
 
-        //无货
+        // Is not available
         return 0;
     }
 
@@ -213,9 +213,9 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
 
         List<Object> term = new ArrayList<>();
 
-        //基础查询
+        // Based on the query
         SearchUtil.baseQuery(goodsQueryParam, term, sqlBuffer);
-        //分类查询
+        // Classification of query
         SearchUtil.categoryQuery(goodsQueryParam, term, sqlBuffer, daoSupport);
 
         sqlBuffer.append(" order by g.goods_id desc");
@@ -232,7 +232,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
 
         List<Object> term = new ArrayList<>();
 
-        //获取预警货品数量
+        // Get the number of pre-warning goods
         String goodsSetting = settingClient.get(SettingGroup.GOODS);
 
         GoodsSettingVO setting = JsonUtil.jsonToObject(goodsSetting, GoodsSettingVO.class);
@@ -254,7 +254,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         GoodsDO goods = this.getModel(goodsId);
 
         if (goods == null) {
-            throw new ServiceException(GoodsErrorCode.E301.code(), "没有操作权限");
+            throw new ServiceException(GoodsErrorCode.E301.code(), "No operation permission");
         }
         List<GoodsGalleryDO> galleryList = goodsGalleryManager.list(goodsId);
         GoodsVO goodsVO = new GoodsVO();
@@ -263,7 +263,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
 
         goodsVO.setGoodsGalleryList(galleryList);
 
-        //商品分类赋值
+        // Item category assignment
         Integer categoryId = goods.getCategoryId();
         CategoryDO category = categoryManager.getModel(categoryId);
         String sql = "select name,category_id from es_category " +
@@ -287,7 +287,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         goodsVO.setCategoryIds(categoryIds);
         goodsVO.setCategoryName(categoryName);
 
-        //查询积分商品信息
+        // Query integral product information
         if (goodsVO.getGoodsType().equals(GoodsType.POINT.name())) {
             ExchangeDO exchangeDO = exchangeGoodsClient.getModelByGoods(goodsId);
 
@@ -312,15 +312,15 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
 
 
     /**
-     * 查询该商品关联的可检索的参数集合
+     * Queries a retrievable set of parameters associated with the item
      *
-     * @param list 原始商品数据
+     * @param list Raw commodity data
      * @return
      */
     private List<Map<String, Object>> getIndexGoodsList(List<Map<String, Object>> list) {
         if (list != null) {
             for (Map<String, Object> map : list) {
-                // 查询该商品关联的可检索的参数集合
+                // Queries a retrievable set of parameters associated with the item
                 String sql = "select gp.* from es_goods_params gp inner join es_parameters p on gp.param_id=p.param_id "
                         + "where goods_id = ? and is_index = 1";
                 List listParams = this.daoSupport.queryForList(sql,
@@ -333,10 +333,10 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
 
 
     /**
-     * 为商品填充库存信息<br/>
-     * 库存的信息存储在单独的缓存key中<br/>
-     * 由缓存中读取出所有sku的库存，并分别为goods.skuList中的sku设置库存，以保证库存的时时正确性<br/>
-     * 同时还会将所有的sku库存累加设置为商品的库存
+     * Fill in inventory information for items<br/>
+     * Inventory information is stored in a separate cachekeyIn the<br/>
+     * Read all from the cacheskuInventory, and respectivelygoods.skuListIn theskuSet up inventory to ensure the inventory is correct at all times<br/>
+     * Its also going to put all of theskuInventory accumulation is set to the inventory of goods
      *
      * @param goods
      */
@@ -344,11 +344,11 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
 
         List<GoodsSkuVO> skuList = goods.getSkuList();
 
-        //由缓存中获取sku的可用库存和实际库存
-        //此操作为批量操作，因为是高频操作，要尽量减少和redis的交互次数
+        // The available and actual inventory of the SKU is retrieved from the cache
+        // This operation is a batch operation. Because it is a high-frequency operation, the number of interactions with Redis should be minimized
         List keys = createKeys(skuList);
 
-        //将商品的可用库存和实际库存一起读
+        // Read the available stock of goods together with the actual stock
         keys.add(StockCacheKeyUtil.goodsEnableKey(goods.getGoodsId()));
         keys.add(StockCacheKeyUtil.goodsActualKey(goods.getGoodsId()));
 
@@ -360,20 +360,20 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         int i = 0;
         for (GoodsSkuVO skuVO : skuList) {
 
-            //第一个是可用库存
+            // The first is available inventory
             Integer enable = StringUtil.toInt(quantityList.get(i), null);
 
             i++;
-            //第二个是真实库存
+            // The second is real inventory
             Integer actual = StringUtil.toInt(quantityList.get(i), null);
 
-            //缓存被击穿，由数据库中读取
+            // The cache is breached and read from the database
             if (enable == null || actual == null) {
                 Map<String, Integer> map = goodsQuantityManager.fillCacheFromDB(skuVO.getSkuId());
                 enable = map.get("enable_quantity");
                 actual = map.get("quantity");
 
-                //重置缓存中的库存
+                // Reset the inventory in the cache
                 stringRedisTemplate.opsForValue().set(StockCacheKeyUtil.skuEnableKey(skuVO.getSkuId()), "" + enable);
                 stringRedisTemplate.opsForValue().set(StockCacheKeyUtil.skuActualKey(skuVO.getSkuId()), "" + actual);
             }
@@ -389,7 +389,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
             if (actual == null) {
                 actual = 0;
             }
-            //累计商品的库存
+            // Accumulated inventory of goods
             enableTotal += enable;
             actualTotal += actual;
 
@@ -397,22 +397,22 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         }
 
 
-        //设置商品的库存
+        // Set up inventory of goods
         goods.setEnableQuantity(enableTotal);
         goods.setQuantity(actualTotal);
 
 
-        //读取缓存中商品的库存，看是否被击穿了
-        //第一个是可用库存
+        // Read the inventory of items in the cache to see if there is a breach
+        // The first is available inventory
         Integer goodsEnable = StringUtil.toInt(quantityList.get(i), null);
 
         i++;
-        //第二个是真实库存
+        // The second is real inventory
         Integer goodsActual = StringUtil.toInt(quantityList.get(i), null);
 
-        //商品的库存被击穿了
+        // The inventory of goods was punctured
         if (goodsEnable == null || goodsActual == null) {
-            //重置缓存中的库存
+            // Reset the inventory in the cache
             stringRedisTemplate.opsForValue().set(StockCacheKeyUtil.goodsEnableKey(goods.getGoodsId()), "" + enableTotal);
             stringRedisTemplate.opsForValue().set(StockCacheKeyUtil.goodsActualKey(goods.getGoodsId()), "" + actualTotal);
         }
@@ -421,7 +421,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
     }
 
     /**
-     * 生成批量获取sku库存的keys
+     * Generate batch fetchskuinventorykeys
      *
      * @param goodsList
      * @return
@@ -441,13 +441,13 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         StringBuffer sql = new StringBuffer("select count(0) from es_goods");
         List paramList = new ArrayList();
         List<String> sqlList = new ArrayList<>();
-        //商品状态查询
+        // Commodity status query
         if (status != null) {
             sqlList.add(" market_enable = ?");
             paramList.add(status.toString());
         }
 
-        //商品删除状态查询
+        // Item deletion status query
         if (disabled != null) {
             sqlList.add(" disabled = ?");
             paramList.add(disabled.toString());
@@ -472,7 +472,7 @@ public class GoodsQueryManagerImpl implements GoodsQueryManager {
         sqlBuffer.append(" where goods_id in (" + str + ")  order by goods_id desc");
 
         List<Map<String, Object>> list = this.daoSupport.queryForList(sqlBuffer.toString(), term.toArray());
-        //查询该商品关联的可检索的参数集合
+        // Queries a retrievable set of parameters associated with the item
         this.getIndexGoodsList(list);
         return list;
     }

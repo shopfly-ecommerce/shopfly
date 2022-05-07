@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 支付插件vo
+ * Pay the plug-invo
  *
  * @author fk
  * @version v2.0
@@ -46,23 +46,23 @@ public class PaymentPluginVO implements Serializable {
      */
     private static final long serialVersionUID = 8418953348138006672L;
 
-    @ApiModelProperty(value = "支付方式名称", hidden = true)
+    @ApiModelProperty(value = "Name of Payment Method", hidden = true)
     private String methodName;
 
-    @ApiModelProperty(value = "支付插件id", hidden = true)
+    @ApiModelProperty(value = "Pay the plug-inid", hidden = true)
     private String pluginId;
 
-    @ApiModelProperty(value = "支付方式图片")
+    @ApiModelProperty(value = "Picture of payment method")
     private String image;
 
-    @ApiModelProperty(value = "是否支持原路退回，0不支持  1支持")
-    @NotNull(message = "请选择是否支持原路退回")
-    @Min(value = 0, message = "是否支持原路退回值不正确")
-    @Max(value = 1, message = "是否支持原路退回值不正确")
+    @ApiModelProperty(value = "Whether the original way back is supported,0Does not support1support")
+    @NotNull(message = "Select whether the original route is supported")
+    @Min(value = 0, message = "Whether the original route is supported The return value is incorrect")
+    @Max(value = 1, message = "Whether the original route is supported The return value is incorrect")
     private Integer isRetrace;
 
-    @ApiModelProperty(value = "配置项")
-    @NotNull(message = "客户端开启情况不能为空")
+    @ApiModelProperty(value = "Configuration items")
+    @NotNull(message = "The client startup status cannot be empty")
     @Valid
     private List<ClientConfig> enableClient;
 

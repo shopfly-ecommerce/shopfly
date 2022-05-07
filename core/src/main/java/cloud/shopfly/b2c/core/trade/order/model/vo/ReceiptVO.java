@@ -22,21 +22,21 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 发票
+ * invoice
  *
  * @author kingapex
  * @version 1.0
  * @since v7.0.0
- * 2017年5月24日下午9:13:53
+ * 2017years5month24On the afternoon9:13:53
  */
-@ApiModel(description = "发票")
+@ApiModel(description = "invoice")
 public class ReceiptVO extends MemberReceiptVO implements Serializable {
 
     private static final long serialVersionUID = -6389742728556211209L;
     /**
-     * 普票类型
+     * General ticket type
      */
-    @ApiModelProperty(name = "type", value = "普票类型，0为个人，其他为公司", required = false)
+    @ApiModelProperty(name = "type", value = "General vote type,0For individuals, others for companies", required = false)
     private Integer type;
 
     public Integer getType() {

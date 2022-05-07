@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.payment.plugin.weixin;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信支付参数
+ * @Description: Wechat Payment parameters
  * @date 2018/4/2014:59
  * @since v7.0.0
  */

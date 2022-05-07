@@ -18,8 +18,8 @@ package cloud.shopfly.b2c.core.payment.model.enums;
 /**
  * @author snow
  * @version v1.0
- * @Description: Paypal客户端使用配置参数
- * @date 2022年04月29日14:28:24
+ * @Description: PaypalThe client uses configuration parameters
+ * @date 2022years04month29day14:28:24
  * @since v7.0.0
  */
 public enum PaypalConfigItem {

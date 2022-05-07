@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 团购活动VO
+ * Group-buying activitiesVO
  *
  * @author Snow create in 2018/6/13
  * @version v2.0
@@ -31,10 +31,10 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class GroupbuyActiveVO extends GroupbuyActiveDO {
 
-    @ApiModelProperty(name = "status_text", value = "状态值")
+    @ApiModelProperty(name = "status_text", value = "The status value")
     private String statusText;
 
-    @ApiModelProperty(name = "status", value = "活动状态标识,expired表示已失效")
+    @ApiModelProperty(name = "status", value = "Activity status identification,expiredIndicates invalid")
     private String status;
 
     public String getStatusText() {

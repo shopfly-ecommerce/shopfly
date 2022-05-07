@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 缓存接口
+ * Cache interface
  * @author kingapex
  *
  */
@@ -37,21 +37,21 @@ public interface Cache<T> {
 
 	/**
 	 *  multiGet
-	 * @param keys  要查询的key集合
+	 * @param keys  To query thekeyA collection of
 	 * @return
 	 */
 	List  multiGet(Collection keys);
 
 	/**
-	 * 批量set
+	 * batchset
 	 * @param map
 	 */
 	void multiSet(Map map);
 
 
 	/**
-	 * 批量删除
-	 * @param keys 要删除的key集合
+	 * Batch delete
+	 * @param keys Want to delete thekeyA collection of
 	 */
 	void multiDel(Collection keys);
 
@@ -64,21 +64,21 @@ public interface Cache<T> {
 	void put(Object key, T value);
 	
 	/**
-	 * 往缓存中写入内容
+	 * Write to the cache
 	 * @param key
 	 * @param value
-	 * @param exp	超时时间，单位为秒
+	 * @param exp	Timeout period, in seconds
 	 */
 	void put(Object key, T value, int exp);
 
 	/**
-	 * 删除
+	 * delete
 	 * @param key
 	 */
 	void remove(Object key);
 
 	/**
-	 * 删除
+	 * delete
 	 * @param key
 	 */
 	void vagueDel(Object key);
@@ -90,22 +90,22 @@ public interface Cache<T> {
 
 
 	/**
-	 * 往缓存中写入内容
-	 * @param key		缓存key
-	 * @param hashKey	缓存中hashKey
-	 * @param hashValue hash值
+	 * Write to the cache
+	 * @param key		The cachekey
+	 * @param hashKey	The cachehashKey
+	 * @param hashValue hashvalue
 	 */
 	void putHash(Object key,Object hashKey,Object hashValue);
 
 	/**
-	 * 玩缓存中写入内容
+	 * Play cache to write content
 	 * @param key
 	 * @param map
 	 */
 	void putAllHash(Object key,Map map);
 
 	/**
-	 * 读取缓存值
+	 * Read cache value
 	 * @param key
 	 * @param hashKey
 	 * @return
@@ -113,7 +113,7 @@ public interface Cache<T> {
 	T getHash(Object key,Object hashKey);
 
 	/**
-	 * 读取缓存值
+	 * Read cache value
 	 * @param key
 	 * @return
 	 */

@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 文章实体
+ * The article entity
  *
  * @author fk
  * @version v1.0
@@ -43,41 +43,41 @@ public class ArticleDetail implements Serializable {
     private static final long serialVersionUID = 5105404520203401L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "article_id")
     @ApiModelProperty(hidden = true)
     private Integer articleId;
     /**
-     * 文章名称
+     * The article name
      */
     @Column(name = "article_name")
-    @ApiModelProperty(name = "article_name", value = "文章名称")
+    @ApiModelProperty(name = "article_name", value = "The article name")
     private String articleName;
     /**
-     * 分类名称
+     * name
      */
     @Column(name = "category_name")
-    @ApiModelProperty(name = "category_name", value = "分类名称")
+    @ApiModelProperty(name = "category_name", value = "name")
     private String categoryName;
     /**
-     * 显示位置
+     * Display position
      */
     @Column(name = "show_position")
-    @ApiModelProperty(name = "show_position", value = "显示位置",hidden = true )
+    @ApiModelProperty(name = "show_position", value = "Display position",hidden = true )
     private String showPosition;
 
     /**
-     * 显示位置
+     * Display position
      */
-    @ApiModelProperty(name = "show_position_text", value = "显示位置，文字")
+    @ApiModelProperty(name = "show_position_text", value = "Display position, text")
     private String showPositionText;
 
     /**
-     * 是否允许删除  true 允许  false 不允许
+     * Whether to deletetrue allowfalse 不allow
      */
     @Column(name = "allow_delete")
-    @ApiModelProperty(name = "allow_delete", value = "是否允许删除")
+    @ApiModelProperty(name = "allow_delete", value = "Whether to delete")
     private Boolean allowDelete;
 
     public Integer getArticleId() {

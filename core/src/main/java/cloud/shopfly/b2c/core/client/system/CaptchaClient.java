@@ -16,27 +16,27 @@
 package cloud.shopfly.b2c.core.client.system;
 
 /**
- * 验证码客户端
+ * Verification code client
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 上午11:48
+ * @date 18/7/27 In the morning11:48
  * @since v7.0
  */
 
 public interface CaptchaClient {
     /**
-     * 图片验证
+     * Image authentication
      *
      * @param uuid  uid
-     * @param code  验证码
-     * @param scene 业务类型
+     * @param code  captcha
+     * @param scene Business types
      * @return
      */
     boolean valid(String uuid, String code, String scene);
 
     /**
-     * 清除图片验证码
+     * Clear the image verification code
      *
      * @param uuid
      * @param code

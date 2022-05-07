@@ -20,25 +20,25 @@ import cloud.shopfly.b2c.core.base.SettingGroup;
 /**
  * @author fk
  * @version v1.0
- * @Description: 系统设置
+ * @Description: System Settings
  * @date 2018/7/30 10:48
  * @since v7.0.0
  */
 public interface SettingClient {
 
     /**
-     * 系统参数配置
+     * System Parameter Configuration
      *
-     * @param group    系统设置的分组
-     * @param settings 要保存的设置对象
+     * @param group    Grouping of system Settings
+     * @param settings The Settings object to save
      */
     void save(SettingGroup group, Object settings);
 
     /**
-     * 获取配置
+     * Access to the configuration
      *
-     * @param group 分组名称
-     * @return 存储对象
+     * @param group Group name
+     * @return Store the object
      */
     String get(SettingGroup group);
 

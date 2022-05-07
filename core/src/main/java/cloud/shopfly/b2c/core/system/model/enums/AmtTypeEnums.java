@@ -4,19 +4,19 @@ package cloud.shopfly.b2c.core.system.model.enums;
 /**
  * @author cs
  * @version v7.0
- * @Description 运费价格类型
+ * @Description Freight price type
  *
- * @since v7.0 下午5:03 2022/4/24
+ * @since v7.0 In the afternoon5:03 2022/4/24
  */
 public enum AmtTypeEnums {
 
     /**
-     * 绝对值
+     * The absolute value
      */
     ABSOLUTE,
 
     /**
-     * 百分比
+     * The percentage
      */
     PERCENTAGE;
 

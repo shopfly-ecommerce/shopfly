@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午2:42
+ * 2018-08-14 In the afternoon2:42
  */
 @Service
 @ConditionalOnProperty(value="shopfly.product", havingValue="stand")
@@ -37,7 +37,7 @@ public class RefundDateClientDefaultImpl implements RefundDataClient {
     @Autowired
     private RefundDataManager refundDataManager;
     /**
-     * 退款消息写入
+     * Write refund message
      *
      * @param refundData
      */

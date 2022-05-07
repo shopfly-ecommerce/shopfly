@@ -24,12 +24,12 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 
 /**
- * 商品分类vo
+ * Categoryvo
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月16日 下午4:53:23
+ * 2018years3month16On the afternoon4:53:23
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -37,10 +37,10 @@ public class CategoryVO extends CategoryDO {
 
     private static final long serialVersionUID = 3843585201476087204L;
 
-    @ApiModelProperty("子分类列表")
+    @ApiModelProperty("Subclassification list")
     private List<CategoryVO> children;
 
-    @ApiModelProperty("分类关联的品牌列表")
+    @ApiModelProperty("Category associated brand list")
     private List<BrandVO> brandList;
 
     public CategoryVO() {

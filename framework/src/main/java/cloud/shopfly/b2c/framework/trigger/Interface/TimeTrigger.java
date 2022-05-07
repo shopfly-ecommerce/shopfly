@@ -16,46 +16,46 @@
 package cloud.shopfly.b2c.framework.trigger.Interface;
 
 /**
- * 延时执行接口
+ * Delayed execution interface
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2019/2/13 下午8:13
+ * 2019/2/13 In the afternoon8:13
  */
 public interface TimeTrigger {
 
     /**
-     * 添加延时任务
+     * Adding a Delayed Task
      *
-     * @param executerName 执行器beanid
-     * @param param        执行参数
-     * @param triggerTime  执行时间 时间戳 秒为单位
-     * @param uniqueKey    如果是一个 需要有 修改/取消 延时任务功能的延时任务，<br/>
-     *                     请填写此参数，作为后续删除，修改做为唯一凭证 <br/>
-     *                     建议参数为：PINTUAZN_{ACTIVITY_ID} 例如 pintuan_123<br/>
-     *                     业务内全局唯一
+     * @param executerName actuatorbeanid
+     * @param param        Perform parameter
+     * @param triggerTime  Execution time Timestamp The unit is seconds
+     * @param uniqueKey    If it is a need to have a modification/Cancel the delayed task of the delayed task function,<br/>
+     *                     Please fill in this parameter for subsequent deletion and modification as the unique certificate<br/>
+     *                     Recommended parameters are：PINTUAZN_{ACTIVITY_ID} For example,pintuan_123<br/>
+     *                     Globally unique within a service
      */
     void add(String executerName, Object param, Long triggerTime, String uniqueKey);
 
     /**
-     * 修改延时任务
+     * Modifying a Delayed Task
      *
-     * @param executerName   执行器beanid
-     * @param param          执行参数
-     * @param triggerTime    执行时间 时间戳 秒为单位
-     * @param oldTriggerTime 旧的任务执行时间
-     * @param uniqueKey      添加任务时的唯一凭证
+     * @param executerName   actuatorbeanid
+     * @param param          Perform parameter
+     * @param triggerTime    Execution time Timestamp The unit is seconds
+     * @param oldTriggerTime Old task execution time
+     * @param uniqueKey      Unique credentials when adding tasks
      */
     void edit(String executerName, Object param, Long oldTriggerTime, Long triggerTime, String uniqueKey);
 
     /**
-     * 删除延时任务
+     * Deleting a Delayed Task
      *
-     * @param executerName 执行器
-     * @param triggerTime  执行时间
-     * @param uniqueKey    添加任务时的唯一凭证
+     * @param executerName actuator
+     * @param triggerTime  The execution time
+     * @param uniqueKey    Unique credentials when adding tasks
      */
     void delete(String executerName, Long triggerTime, String uniqueKey);
 }

@@ -22,10 +22,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.List;
 
 /**
- * 购物车视图<br/>
- * 购物车构建器最终要构建的成品
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#购物车显示" >购物车显示</a>
+ * Shopping cart view<br/>
+ * The final product that the shopping cart builder will build
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#Shopping cart display" >Shopping cart display</a>
  *
  * @author kingapex
  * @version 1.0
@@ -35,15 +35,15 @@ import java.util.List;
 public class CartView {
 
     /**
-     * 购物车列表
+     * Shopping cart list
      */
-    @ApiModelProperty(value = "购物车列表")
+    @ApiModelProperty(value = "Shopping cart list")
     private List<CartVO> cartList;
 
     /**
-     * 购物车计算后的总价
+     * Shopping cart calculated total price
      */
-    @ApiModelProperty(value = "车计算后的总价")
+    @ApiModelProperty(value = "The total price of the car after calculation")
     private PriceDetailVO totalPrice;
 
     public CartView(List<CartVO> cartList, PriceDetailVO totalPrice) {

@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.core.goods.model.vo;
 
@@ -9,78 +9,78 @@ import cloud.shopfly.b2c.core.promotion.tool.support.SkuNameUtil;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 商品选择器，sku单位
+ * Product selector,skuunit
  *
  * @author fk
  * @version v2.0
  * @since v7.2.0
- * 2021年06月02日11:12:31
+ * 2021years06month02day11:12:31
  */
 public class GoodsSelectorSkuVO {
     /**
-     * 主键
+     * A primary key
      */
     @ApiModelProperty(hidden = true)
     private Integer skuId;
     /**
-     * 商品id
+     * productid
      */
-    @ApiModelProperty(name = "goods_id", value = "商品id", hidden = true)
+    @ApiModelProperty(name = "goods_id", value = "productid", hidden = true)
     private Integer goodsId;
     /**
-     * 商品名称
+     * Name
      */
-    @ApiModelProperty(name = "goods_name", value = "商品名称", hidden = true)
+    @ApiModelProperty(name = "goods_name", value = "Name", hidden = true)
     private String goodsName;
     /**
-     * 商品编号
+     * SN
      */
-    @ApiModelProperty(name = "sn", value = "商品编号", required = false)
+    @ApiModelProperty(name = "sn", value = "SN", required = false)
     private String sn;
     /**
-     * 库存
+     * Inventory
      */
-    @ApiModelProperty(name = "quantity", value = "库存", required = false)
+    @ApiModelProperty(name = "quantity", value = "Inventory", required = false)
     private Integer quantity;
     /**
-     * 可用库存
+     * Available
      */
-    @ApiModelProperty(name = "enable_quantity", value = "可用库存")
+    @ApiModelProperty(name = "enable_quantity", value = "Available")
     private Integer enableQuantity;
     /**
-     * 商品价格
+     * Price
      */
-    @ApiModelProperty(name = "price", value = "商品价格", required = false)
+    @ApiModelProperty(name = "price", value = "Price", required = false)
     private Double price;
     /**
-     * 规格信息
+     * Specification information
      */
-    @ApiModelProperty(name = "specs_name", value = "规格信息", hidden = true)
+    @ApiModelProperty(name = "specs_name", value = "Specification information", hidden = true)
     private String specsName;
     /**
-     * 规格信息json
+     * Specification informationjson
      */
-    @ApiModelProperty(name = "specs", value = "规格信息json", hidden = true)
+    @ApiModelProperty(name = "specs", value = "Specification informationjson", hidden = true)
     private String specs;
     /**
-     * 成本价格
+     * Cost price
      */
-    @ApiModelProperty(name = "cost", value = "成本价格", required = true)
+    @ApiModelProperty(name = "cost", value = "Cost price", required = true)
     private Double cost;
     /**
-     * 重量
+     * Weight
      */
-    @ApiModelProperty(name = "weight", value = "重量", required = true)
+    @ApiModelProperty(name = "weight", value = "Weight", required = true)
     private Double weight;
     /**
-     * 分类id
+     * Categoriesid
      */
-    @ApiModelProperty(name = "category_id", value = "分类id")
+    @ApiModelProperty(name = "category_id", value = "Categoriesid")
     private Integer categoryId;
     /**
-     * 缩略图
+     * The thumbnail
      */
-    @ApiModelProperty(name = "thumbnail", value = "缩略图", hidden = true)
+    @ApiModelProperty(name = "thumbnail", value = "The thumbnail", hidden = true)
     private String thumbnail;
 
     public Integer getSkuId() {

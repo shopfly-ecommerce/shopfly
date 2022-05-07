@@ -19,7 +19,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 带数据的错误消息
+ * Error message with data
  * Created by kingapex on 2018/3/13.
  * @author kingapex
  * @version 1.0

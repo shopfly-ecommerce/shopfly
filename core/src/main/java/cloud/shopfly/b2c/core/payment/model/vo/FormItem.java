@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author fk
  * @version v1.0
- * @Description: 支付请求的表单项
+ * @Description: Form entry for the payment request
  * @date 2018/7/17 10:41
  * @since v7.0.0
  */
@@ -31,10 +31,10 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class FormItem {
 
-    @ApiModelProperty(value = "表单项名称")
+    @ApiModelProperty(value = "Form item name")
     private String itemName;
 
-    @ApiModelProperty(value = "表单项值")
+    @ApiModelProperty(value = "Form a value")
     private String itemValue;
 
 

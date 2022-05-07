@@ -18,8 +18,8 @@ package cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.impl;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CartSkuVO;
 
 /**
- * 购物车sku过滤器<br/>
- * 指定一定的条件，进行过滤购物车的sku。<br/>
+ * The shopping cartskuThe filter<br/>
+ * Specify certain conditions for filtering the shopping cartsku。<br/>
  *
  * @author kingapex
  * @version 1.0
@@ -29,10 +29,10 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartSkuVO;
 public interface CartSkuFilter {
 
     /**
-     * 指定要过滤的条件
+     * Specify the conditions to filter
      *
-     * @param cartSkuVO 当前的sku，做要比对的对象
-     * @return 返回true/false来决定是否过滤
+     * @param cartSkuVO The currentsku, to be compared to the object
+     * @return returntrue/falseTo decide whether to filter or not
      */
     boolean accept(CartSkuVO cartSkuVO);
 }

@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.system.model.vo.AdminUserVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 平台管理员业务层
+ * Platform administrator business layer
  *
  * @author zh
  * @version v7.0
@@ -31,57 +31,57 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface AdminUserManager {
 
     /**
-     * 查询平台管理员列表
+     * Example Query the platform administrator list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加平台管理员
+     * Adding a Platform Administrator
      *
-     * @param adminUserVO 平台管理员
-     * @return AdminUser 平台管理员
+     * @param adminUserVO Platform administrator
+     * @return AdminUser Platform administrator
      */
     AdminUser add(AdminUserVO adminUserVO);
 
     /**
-     * 修改平台管理员
+     * Modifying a Platform Administrator
      *
-     * @param adminUserVO 平台管理员
-     * @param id          平台管理员主键
-     * @return AdminUser 平台管理员
+     * @param adminUserVO Platform administrator
+     * @param id          Platform administrator primary key
+     * @return AdminUser Platform administrator
      */
     AdminUser edit(AdminUserVO adminUserVO, Integer id);
 
     /**
-     * 删除平台管理员
+     * Deleting a Platform Administrator
      *
-     * @param id 平台管理员主键
+     * @param id Platform administrator primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取平台管理员
+     * Obtaining a Platform Administrator
      *
-     * @param id 平台管理员主键
-     * @return AdminUser  平台管理员
+     * @param id Platform administrator primary key
+     * @return AdminUser  Platform administrator
      */
     AdminUser getModel(Integer id);
 
     /**
-     * 管理员登录
+     * Administrator Login
      *
-     * @param name     管理员名称
-     * @param password 管理员密码
+     * @param name     Administrator name
+     * @param password Administrator password
      * @return
      */
     AdminLoginVO login(String name, String password);
 
     /**
-     * 通过refreshToken重新获取accessToken
+     * throughrefreshTokenTo obtainaccessToken
      *
      * @param refreshToken
      * @return
@@ -89,9 +89,9 @@ public interface AdminUserManager {
     String exchangeToken(String refreshToken);
 
     /**
-     * 管理员注销
+     * Administrator logout
      *
-     * @param uid 会员id
+     * @param uid membersid
      */
     void logout(Integer uid);
 

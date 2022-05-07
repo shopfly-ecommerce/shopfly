@@ -20,37 +20,37 @@ import cloud.shopfly.b2c.core.member.model.dos.MemberCoupon;
 import java.util.List;
 
 /**
- * 会员优惠券client
+ * Membership couponclient
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 上午11:48
+ * @date 18/7/27 In the morning11:48
  * @since v7.0
  */
 
 public interface MemberCouponClient {
     /**
-     * 查询优惠券列表
+     * Check coupon list
      *
-     * @param memberId 会员id
-     * @return 优惠券列表
+     * @param memberId membersid
+     * @return Coupon list
      */
     List listByCheckout(Integer memberId);
 
     /**
-     * 领取优惠券
+     * Get a coupon
      *
-     * @param memberId 会员id
-     * @param couponId 优惠券id
+     * @param memberId membersid
+     * @param couponId couponsid
      */
     void receiveBonus(Integer memberId, Integer couponId);
 
     /**
-     * 获取会员优惠券信息
+     * Get membership coupon information
      *
-     * @param memberId 会员id
-     * @param mcId     优惠券id
-     * @return 优惠券对象
+     * @param memberId membersid
+     * @param mcId     couponsid
+     * @return Coupon recipients
      */
     MemberCoupon getModel(Integer memberId, Integer mcId);
 

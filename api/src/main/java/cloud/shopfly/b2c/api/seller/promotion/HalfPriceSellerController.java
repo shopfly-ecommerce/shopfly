@@ -33,7 +33,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 第二件半价控制器
+ * Second half price controller
  *
  * @author Snow
  * @version v7.0.0
@@ -42,7 +42,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/promotion/half-prices")
-@Api(description = "第二件半价相关API")
+@Api(description = "The second one is half priceAPI")
 @Validated
 public class HalfPriceSellerController {
 
@@ -50,11 +50,11 @@ public class HalfPriceSellerController {
     private HalfPriceManager halfPriceManager;
 
 
-    @ApiOperation(value = "查询第二件半价列表", response = HalfPriceDO.class)
+    @ApiOperation(value = "Check the second half price list", response = HalfPriceDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "keywords", value = "关键字", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "keywords", value = "keyword", dataType = "String", paramType = "query"),
     })
     @GetMapping
     public Page<HalfPriceVO> list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @ApiIgnore String keywords) {
@@ -63,7 +63,7 @@ public class HalfPriceSellerController {
     }
 
 
-    @ApiOperation(value = "添加第二件半价", response = HalfPriceVO.class)
+    @ApiOperation(value = "Add a second piece for half price", response = HalfPriceVO.class)
     @PostMapping
     public HalfPriceVO add(@Valid @RequestBody HalfPriceVO halfPrice) {
 
@@ -75,9 +75,9 @@ public class HalfPriceSellerController {
 
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改第二件半价", response = HalfPriceDO.class)
+    @ApiOperation(value = "Modify the second half price", response = HalfPriceDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public HalfPriceVO edit(@Valid @RequestBody HalfPriceVO halfPrice, @PathVariable Integer id) {
 
@@ -93,9 +93,9 @@ public class HalfPriceSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除第二件半价")
+    @ApiOperation(value = "Delete the second piece at half price")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的第二件半价主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The second half-price primary key to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -107,15 +107,15 @@ public class HalfPriceSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个第二件半价")
+    @ApiOperation(value = "Enquire a second piece half price")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的第二件半价主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The second half-price primary key to query", required = true, dataType = "int", paramType = "path")
     })
     public HalfPriceVO get(@PathVariable Integer id) {
         HalfPriceVO halfPrice = this.halfPriceManager.getFromDB(id);
-        //验证越权操作
+        // Verify unauthorized operations
         if (halfPrice == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
         return halfPrice;
     }

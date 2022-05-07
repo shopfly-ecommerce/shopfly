@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 交易价格业务
+ * Transaction price service
  *
  * @author Snow create in 2018/3/22
  * @version v2.0

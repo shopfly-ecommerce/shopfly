@@ -27,13 +27,13 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * 订单申请通过
+ * Order application approved
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/20 下午2:21
+ * 2018/6/20 In the afternoon2:21
  */
 @Component
 public class DataRefundConsumer implements RefundStatusChangeEvent {
@@ -44,7 +44,7 @@ public class DataRefundConsumer implements RefundStatusChangeEvent {
     private RefundDataClient refundDataClient;
 
     /**
-     * 售后消息
+     * After the news
      *
      * @param refundChangeMsg
      */
@@ -56,7 +56,7 @@ public class DataRefundConsumer implements RefundStatusChangeEvent {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("订单售后异常：", e);
+            logger.error("Abnormal after-sale order：", e);
         }
     }
 }

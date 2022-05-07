@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 限时抢购申请业务层
+ * Flash sale application business layer
  *
  * @author Snow
  * @version v7.0.0
@@ -35,39 +35,39 @@ import java.util.Map;
 public interface SeckillGoodsManager {
 
     /**
-     * 查询限时抢购申请列表
+     * Query the flash sale application list
      *
-     * @param queryParam 查询参数
+     * @param queryParam Query parameters
      * @return Page
      */
     Page list(SeckillQueryParam queryParam);
 
 
     /**
-     * 删除限时抢购申请
+     * Delete the flash sale application
      *
-     * @param id 限时抢购申请主键
+     * @param id Flash purchase application main key
      */
     void delete(Integer id);
 
     /**
-     * 获取限时抢购申请
+     * Get a flash sale application
      *
-     * @param id 限时抢购申请主键
-     * @return SeckillApply  限时抢购申请
+     * @param id Flash purchase application main key
+     * @return SeckillApply  Flash sale application
      */
     SeckillApplyDO getModel(Integer id);
 
 
     /**
-     * 添加限时抢购申请
+     * Add flash sale application
      *
      * @param list
      */
     void addApply(List<SeckillApplyDO> list);
 
     /**
-     * 增加已销售库存数量
+     * Increase the quantity of stock sold
      *
      * @param promotionDTOList
      * @return
@@ -75,14 +75,14 @@ public interface SeckillGoodsManager {
     boolean addSoldNum(List<PromotionDTO> promotionDTOList);
 
     /**
-     * 读取当天限时抢购活动的商品
+     * Read items from the flash sale of the day
      *
      * @return
      */
     Map<Integer, List<SeckillGoodsVO>> getSeckillGoodsList();
 
     /**
-     * 根据时刻读取限时抢购商品列表
+     * Read the flash sale list according to the time
      *
      * @param rangeTime
      * @param pageNo
@@ -92,14 +92,14 @@ public interface SeckillGoodsManager {
     List getSeckillGoodsList(Integer rangeTime, Integer pageNo, Integer pageSize);
 
     /**
-     * 回滚库存
+     * Roll back the inventory
      *
      * @param promotionDTOList
      */
     void rollbackStock(List<PromotionDTO> promotionDTOList);
 
     /**
-     * 查询某限时抢购下的活动商品
+     * Query for active items under a flash sale
      *
      * @param id
      * @return
@@ -107,7 +107,7 @@ public interface SeckillGoodsManager {
     List<SeckillApplyDO> getListBySeckill(Integer id);
 
     /**
-     * 删除限时抢购商品
+     * Delete flash sale items
      *
      * @param goodsId
      */

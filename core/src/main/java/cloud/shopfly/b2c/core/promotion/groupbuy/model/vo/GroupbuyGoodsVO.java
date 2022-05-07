@@ -22,7 +22,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 团购商品VO
+ * A bulk goodsVO
  *
  * @author Snow create in 2018/6/11
  * @version v2.0
@@ -32,22 +32,22 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class GroupbuyGoodsVO extends GroupbuyGoodsDO {
 
 
-    @ApiModelProperty(name = "start_time", value = "活动开始时间")
+    @ApiModelProperty(name = "start_time", value = "Activity start time")
     private Long startTime;
 
-    @ApiModelProperty(name = "end_time", value = "活动截止时间")
+    @ApiModelProperty(name = "end_time", value = "Activity deadline")
     private Long endTime;
 
-    @ApiModelProperty(name = "title", value = "活动标题")
+    @ApiModelProperty(name = "title", value = "Activity title")
     private String title;
 
-    @ApiModelProperty(name = "enable_quantity", value = "可用库存")
+    @ApiModelProperty(name = "enable_quantity", value = "Available")
     private Integer enableQuantity;
 
-    @ApiModelProperty(name = "quantity", value = "库存")
+    @ApiModelProperty(name = "quantity", value = "Inventory")
     private Integer quantity;
 
-    @ApiModelProperty(name = "isEnable", value = "活动是否在进行中")
+    @ApiModelProperty(name = "isEnable", value = "Whether the activity is in progress")
     private Integer isEnable;
 
     public Long getStartTime() {

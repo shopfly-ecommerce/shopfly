@@ -16,22 +16,22 @@
 package cloud.shopfly.b2c.core.base.model.vo;
 
 /**
- * 单选选项vo
+ * Radio optionsvo
  *
  * @author zh
  * @version v7.0
- * @date 18/7/25 下午10:22
+ * @date 18/7/25 In the afternoon10:22
  * @since v7.0
  */
 public class RadioOption {
 
     /**
-     * 选项
+     * options
      */
     private String label;
 
     /**
-     * 选项值
+     * The option value
      */
     private Object value;
 

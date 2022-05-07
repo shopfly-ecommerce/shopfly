@@ -26,10 +26,10 @@ import org.springframework.jdbc.BadSqlGrammarException;
 import java.util.*;
 
 /**
- * 统计专用工具类
- * 本类使用单例模式,调用者使用本类中的方法请先获取类的实例对象
+ * Statistical utility classes
+ * This class uses the singleton pattern,Callers using methods in this class first get instance objects of the class
  *
- * @author jianghongyan 2016年7月1日 版本改造
+ * @author jianghongyan 2016years7month1Japanese version modification
  * @version v6.1
  * @since v6.1
  */
@@ -45,60 +45,60 @@ public class StatisticsUtil {
     }
 
     /**
-     * 获取当前月份的 unix时间戳  最大值
+     * Gets the value of the current monthunixTimestamp maximum
      *
-     * @param year  年份
-     * @param month 月份
-     * @return 时间戳
+     * @param year  year
+     * @param month in
+     * @return The time stamp
      */
     private long getMaxvalType1(int year, int month) {
-        //如果是 12月 那么明年1月的零时作为结束时间
+        // If its December then zero o clock next January will be the end time
         int months = 12;
         if (month == months) {
             return DateUtil.getDateHaveHour((year + 1) + "-01-01 00");
         }
-        //否则 下个月 0时
+        // Otherwise 0 o clock next month
         return DateUtil.getDateHaveHour(year + "-" + (month + 1) + "-01 00");
     }
 
     /**
-     * 获取当前月份的  unix时间戳  最小值
+     * Gets the value of the current monthunixMinimum timestamp value
      *
-     * @param year  年份
-     * @param month 月份
-     * @return 时间戳
+     * @param year  year
+     * @param month in
+     * @return The time stamp
      */
     private long getMinvalType1(int year, int month) {
         return DateUtil.getDateHaveHour(year + "-" + month + "-01 00");
     }
 
     /**
-     * 获取当前年份的  unix时间戳 最大值
+     * Gets the current years valueunixTimestamp maximum
      *
-     * @param year 年份
-     * @return 时间戳
+     * @param year year
+     * @return The time stamp
      */
     private long getMaxvalType0(int year) {
         return DateUtil.getDateline(year + "-12-31 23:59:59", "yyyy-MM-dd HH:mm:ss");
     }
 
     /**
-     * 获取当前年份的 unix时间戳  最小值
+     * Gets the current years valueunixMinimum timestamp value
      *
-     * @param year 年份
-     * @return 时间戳
+     * @param year year
+     * @return The time stamp
      */
     private long getMinvalType0(int year) {
         return DateUtil.getDateline(year + "-01-01");
     }
 
     /**
-     * 获取最小和最大时间戳
+     * Gets the minimum and maximum time stamps
      *
-     * @param cycleType 查询周期
-     * @param year      查询年份
-     * @param month     查询月份
-     * @return 时间戳
+     * @param cycleType Query cycle
+     * @param year      Year of the query
+     * @param month     In the query
+     * @return The time stamp
      */
     public long[] getStartTimeAndEndTime(String cycleType, Integer year, Integer month) {
         long[] times = new long[2];
@@ -121,11 +121,11 @@ public class StatisticsUtil {
     }
 
     /**
-     * 填充客单价分布数据集合
+     * Populate the customer unit price distribution data set
      *
-     * @param data   数据
-     * @param ranges 区间
-     * @return 填充后数据
+     * @param data   data
+     * @param ranges interval
+     * @return Populated data
      */
     @SuppressWarnings("unchecked")
     public List<Map<String, Object>> fitOrderPriceData(List<Map<String, Object>> data,
@@ -135,7 +135,7 @@ public class StatisticsUtil {
             return data;
         }
         List<Map<String, Object>> data2 = new ArrayList<Map<String, Object>>();
-        //由小到大排序
+        // Sort from smallest to largest
         Collections.sort(ranges, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
@@ -178,12 +178,12 @@ public class StatisticsUtil {
     }
 
     /**
-     * 创建SQL语句
+     * createSQLstatements
      *
-     * @param type  日期类型
-     * @param year  年份
-     * @param month 月份
-     * @return sql语句
+     * @param type  The date type
+     * @param year  year
+     * @param month in
+     * @return sqlstatements
      */
     public String createSql(String type, int year, int month) {
 
@@ -205,12 +205,12 @@ public class StatisticsUtil {
     }
 
     /**
-     * @param year 年份
-     * @return sql 按年查询条件
+     * @param year year
+     * @return sql Query conditions by year
      */
     public String createSqlByYear(int year) {
         StringBuffer sql = new StringBuffer();
-        // 月数
+        // months
         int months = 12;
         for (Integer i = 1; i <= months; i++) {
             Integer month = i;
@@ -225,11 +225,11 @@ public class StatisticsUtil {
     }
 
     /**
-     * 获取当前年月最大日期
+     * Gets the maximum date of the current month
      *
-     * @param year  年份
-     * @param month 月份
-     * @return 最大日期
+     * @param year  year
+     * @param month in
+     * @return The biggest date
      */
     public int getDaysByYearMonth(int year, int month) {
         Calendar a = Calendar.getInstance();
@@ -242,7 +242,7 @@ public class StatisticsUtil {
     }
 
     /**
-     * 对整数集合进行排序，主要用于价格销量
+     * To sort a collection of integers, primarily for price sales
      *
      * @param ranges
      */
@@ -258,7 +258,7 @@ public class StatisticsUtil {
     }
 
     /**
-     * 公用方法查询list，如果表不存在，捕获异常，返回空数据
+     * Common method querylistIf the table does not exist, catch the exception and return null data
      *
      * @param daoSupport
      * @param year
@@ -276,7 +276,7 @@ public class StatisticsUtil {
                 list = daoSupport.queryForList(sql, params);
             }
         } catch (BadSqlGrammarException e) {
-            //某个年份的统计表不存在，则返回空数据
+            // If the statistics table for a certain year does not exist, null data is returned
             if (e.getMessage().endsWith("doesn't exist")) {
                 list = new ArrayList<>();
             } else {
@@ -291,7 +291,7 @@ public class StatisticsUtil {
     }
 
     /**
-     * 公用方法查询page，如果表不存在，捕获异常，返回空数据
+     * Common method querypageIf the table does not exist, catch the exception and return null data
      *
      * @param daoSupport
      * @param year
@@ -309,7 +309,7 @@ public class StatisticsUtil {
                 page = daoSupport.queryForPage(sql, pageNo, pageSize, params);
             }
         } catch (BadSqlGrammarException e) {
-            //某个年份的统计表不存在，则返回空数据
+            // If the statistics table for a certain year does not exist, null data is returned
             if (e.getMessage().endsWith("doesn't exist")) {
                 return new Page(pageNo, 0L, pageSize, new ArrayList());
             } else {
@@ -325,7 +325,7 @@ public class StatisticsUtil {
     }
 
     /**
-     * 公用方法查询page，如果表不存在，捕获异常，返回空数据
+     * Common method querypageIf the table does not exist, catch the exception and return null data
      *
      * @param daoSupport
      * @param year
@@ -343,7 +343,7 @@ public class StatisticsUtil {
                 page = daoSupport.queryForPage(sql, countSql, pageNo, pageSize, params);
             }
         } catch (BadSqlGrammarException e) {
-            //某个年份的统计表不存在，则返回空数据
+            // If the statistics table for a certain year does not exist, null data is returned
             if (e.getMessage().endsWith("doesn't exist")) {
                 return new Page(pageNo, 0L, pageSize, new ArrayList());
             } else {

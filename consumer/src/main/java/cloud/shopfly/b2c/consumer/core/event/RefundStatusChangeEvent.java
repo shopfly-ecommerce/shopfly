@@ -18,16 +18,16 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.base.message.RefundChangeMsg;
 
 /**
- * 退款/退货申请
+ * A refund/Return to apply for
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:23:11
+ * 2018years3month23The morning of10:23:11
  */
 public interface RefundStatusChangeEvent {
 	
 	/**
-	 * 售后消息
+	 * After the news
 	 * @param refundChangeMsg
 	 */
     void refund(RefundChangeMsg refundChangeMsg);

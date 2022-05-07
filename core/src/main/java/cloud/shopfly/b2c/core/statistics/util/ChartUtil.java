@@ -20,23 +20,23 @@ import cloud.shopfly.b2c.core.statistics.model.enums.QueryDateType;
 import java.util.Objects;
 
 /**
- * 返回chart vo 的工具类
+ * returnchart vo The utility class
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-10 上午11:18
+ * 2018-04-10 In the morning11:18
  */
 public class ChartUtil {
 
 
     /**
-     * 构造x轴刻度
+     * structurexAxis calibration
      *
-     * @param circle 类型
-     * @param year   年
-     * @param month  月
-     * @return x刻度
+     * @param circle type
+     * @param year   years
+     * @param month  month
+     * @return xcalibration
      */
     public static String[] structureXAxis(String circle, Integer year, Integer month) {
         String[] xAxis = new String[Objects.equals(circle, QueryDateType.YEAR.name()) ? 12 : DataDisplayUtil.getMonthDayNum(month, year)];
@@ -50,10 +50,10 @@ public class ChartUtil {
     }
 
     /**
-     * 构造分组
+     * Construction group
      *
-     * @param args 参数
-     * @return 分组数组
+     * @param args parameter
+     * @return Grouping array
      */
     public static String[] structureArray(String... args) {
         String[] legend = new String[args.length];

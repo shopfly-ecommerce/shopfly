@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 限时抢购入库实体
+ * Flash sale into storage entity
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -44,38 +44,38 @@ public class SeckillDO implements Serializable {
 
     private static final long serialVersionUID = 1621620877040645L;
 
-    /**主键id*/
+    /**A primary keyid*/
     @Id(name = "seckill_id")
     @ApiModelProperty(hidden=true)
     private Integer seckillId;
 
-    /**活动名称*/
+    /**The name of the event*/
     @Column(name = "seckill_name")
-    @NotEmpty(message = "请填写活动名称")
-    @ApiModelProperty(value="活动名称",required=true)
+    @NotEmpty(message = "Please fill in the activity name")
+    @ApiModelProperty(value="The name of the event",required=true)
     private String seckillName;
 
-    /**活动日期*/
+    /**Event date*/
     @Column(name = "start_day")
-    @NotNull(message = "请填写活动日期")
-    @ApiModelProperty(value="活动日期",required=true)
+    @NotNull(message = "Please fill in the date of the activity")
+    @ApiModelProperty(value="Event date",required=true)
     private Long startDay;
 
-    /**报名截至时间*/
+    /**Deadline for registration*/
     @Column(name = "apply_end_time")
-    @NotNull(message = "请填写报名截止时间")
-    @ApiModelProperty(value="报名截至时间",required=true)
+    @NotNull(message = "Please fill in the deadline for registration")
+    @ApiModelProperty(value="Deadline for registration",required=true)
     private Long applyEndTime;
 
-    /**申请规则*/
+    /**Apply the rules*/
     @Column(name = "seckill_rule")
-    @ApiModelProperty(value="申请规则",required=false)
+    @ApiModelProperty(value="Apply the rules",required=false)
     private String seckillRule;
 
 
-    /**状态*/
+    /**Status*/
     @Column(name = "seckill_status")
-    @ApiModelProperty(value="状态,EDITING：编辑中,RELEASE:已发布,OVER:已结束")
+    @ApiModelProperty(value="Status,EDITING：In the editor,RELEASE:The published,OVER:Has ended")
     private String seckillStatus;
 
     @PrimaryKeyField

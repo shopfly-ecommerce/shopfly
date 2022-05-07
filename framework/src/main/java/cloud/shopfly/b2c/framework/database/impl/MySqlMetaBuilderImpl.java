@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 基于Mysql的基本增删改查操作实现类
+ * Based on theMysqlBasic add, delete, change and check operation implementation class
  * @author Snow create in 2018/3/21
  * @version v2.0
  * @since v7.0.0

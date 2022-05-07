@@ -41,7 +41,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2019-01-23.
- * 拼团的购物车渲染器
+ * Cluster shopping cart renderer
  *
  * @author kingapex
  * @version 1.0
@@ -72,7 +72,7 @@ public class PintuanCartSkuRenderer implements CartSkuRenderer {
         PintuanGoodsDO pintuanGoodsDO = tradeDaoSupport.queryForObject(sql, PintuanGoodsDO.class, goodsSkuVO.getSkuId(), DateUtil.getDateline(), DateUtil.getDateline());
 
         if (pintuanGoodsDO == null) {
-            throw new ResourceNotFoundException("此拼团活动已经取消，不能发起拼团");
+            throw new ResourceNotFoundException("This group event has been cancelled and cannot be launched");
         }
         CartSkuVO skuVO = new CartSkuVO();
 
@@ -86,10 +86,10 @@ public class PintuanCartSkuRenderer implements CartSkuRenderer {
         skuVO.setSkuSn(pintuanGoodsDO.getSn());
 
 
-        //拼团成交价
+        // Group purchase price
         skuVO.setPurchasePrice(pintuanGoodsDO.getSalesPrice());
 
-        //拼团商品原始价格
+        // Group commodity original price
         skuVO.setOriginalPrice(pintuanGoodsDO.getPrice());
 
         skuVO.setSpecList(goodsSkuVO.getSpecList());
@@ -102,7 +102,7 @@ public class PintuanCartSkuRenderer implements CartSkuRenderer {
         skuVO.setChecked(1);
         skuVO.setGoodsType(goodsSkuVO.getGoodsType());
 
-        //计算小计
+        // Calculate subtotals
         double subTotal = CurrencyUtil.mul(skuVO.getNum(), skuVO.getPurchasePrice());
         skuVO.setSubtotal(subTotal);
 
@@ -115,7 +115,7 @@ public class PintuanCartSkuRenderer implements CartSkuRenderer {
         CartVO cartVO = new CartVO(sellerId, sellerName, cartType);
         cartVO.setSkuList(skuList);
 
-        //如果超出限购数量 如果限购数量为空，则不验证限购数量
+        // If the purchase limit is exceeded if the purchase limit is empty, the purchase limit is not verified
         Integer pintuan = pintuanManager.getModel(pintuanGoodsDO.getPintuanId()).getLimitNum();
         if (pintuan != null && pintuan < skuVO.getNum()) {
             throw new ServiceException(PintuanErrorCode.E5018.code(), PintuanErrorCode.E5018.describe());
@@ -128,17 +128,17 @@ public class PintuanCartSkuRenderer implements CartSkuRenderer {
     @Override
     public void renderSku(List<CartVO> cartList, CartSkuFilter cartFilter, CartType cartType) {
 
-        //创建一个临时的list
+        // Create a temporary list
         List<CartVO> tempList = new ArrayList<>();
 
-        //将临时的list渲染好
+        // Render the temporary list well
         renderSku(tempList, cartType);
 
-        //进行过滤
+        // filtering
         tempList.forEach(cartVO -> {
 
             cartVO.getSkuList().forEach(cartSkuVO -> {
-                //如果过滤成功才继续
+                // Continue if the filter succeeds
                 if (!cartFilter.accept(cartSkuVO)) {
                     cartList.add(cartVO);
                 }
@@ -149,7 +149,7 @@ public class PintuanCartSkuRenderer implements CartSkuRenderer {
 
 
     /**
-     * 读取当前会员购物车原始数据key
+     * Read the current member shopping cart raw datakey
      *
      * @return
      */
@@ -157,7 +157,7 @@ public class PintuanCartSkuRenderer implements CartSkuRenderer {
     protected String getOriginKey() {
 
         String cacheKey = "";
-        //如果会员登陆了，则要以会员id为key
+        // If the member logs in, the member ID is the key
         Buyer buyer = UserContext.getBuyer();
         if (buyer != null) {
             cacheKey = CachePrefix.CART_SKU_PREFIX.getPrefix() + buyer.getUid();

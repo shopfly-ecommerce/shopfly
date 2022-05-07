@@ -23,7 +23,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 订单查询参数DTO
+ * Order query parametersDTO
  *
  * @author Snow create in 2018/5/14
  * @version v2.0
@@ -33,59 +33,59 @@ import springfox.documentation.annotations.ApiIgnore;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OrderQueryParam {
 
-    @ApiModelProperty(value = "第几页")
+    @ApiModelProperty(value = "What page")
     private Integer pageNo;
 
-    @ApiModelProperty(value = "每页条数")
+    @ApiModelProperty(value = "Number each page")
     private Integer pageSize;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     private String goodsName;
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String orderSn;
 
-    @ApiModelProperty(value = "交易编号")
+    @ApiModelProperty(value = "Transaction number")
     private String tradeSn;
 
     /**
-     * 例如：所有订单，待付款，待发货 等等
+     * For example,：All orders, to be paid, to be shipped, etc
      *
      * @link OrderTagEnum
      */
-    @ApiModelProperty(value = "页面标签",
-            example = "ALL:所有订单,WAIT_PAY:待付款,WAIT_SHIP:待发货,WAIT_ROG:待收货," +
-                    "CANCELLED:已取消,COMPLETE:已完成,WAIT_COMMENT:待评论,REFUND:售后中")
+    @ApiModelProperty(value = "Page TAB",
+            example = "ALL:All orders,WAIT_PAY:For the payment,WAIT_SHIP:To send the goods,WAIT_ROG:For the goods," +
+                    "CANCELLED:Has been cancelled,COMPLETE:Has been completed,WAIT_COMMENT:To comment on,REFUND:In the after-sale")
     private String tag;
 
-    @ApiModelProperty(value = "商家ID")
+    @ApiModelProperty(value = "merchantsID")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "会员ID")
+    @ApiModelProperty(value = "membersID")
     private Integer memberId;
 
-    @ApiModelProperty(value = "收货人")
+    @ApiModelProperty(value = "The consignee")
     private String shipName;
 
-    @ApiModelProperty(value = "开始时间")
+    @ApiModelProperty(value = "The start time")
     private Long startTime;
 
-    @ApiModelProperty(value = "起止时间")
+    @ApiModelProperty(value = "Start-stop time")
     private Long endTime;
 
-    @ApiModelProperty(value = "买家昵称")
+    @ApiModelProperty(value = "Buyers nickname")
     private String buyerName;
 
-    @ApiModelProperty(value = "订单状态")
+    @ApiModelProperty(value = "Status")
     private String orderStatus;
 
-    @ApiModelProperty(value = "付款状态")
+    @ApiModelProperty(value = "Payment status")
     private String payStatus;
 
     /**
-     * 可以查询 订单编号 买家 商品名称
+     * Can query the order number buyers product name
      */
-    @ApiModelProperty(value = "关键字")
+    @ApiModelProperty(value = "keyword")
     private String keywords;
 
 

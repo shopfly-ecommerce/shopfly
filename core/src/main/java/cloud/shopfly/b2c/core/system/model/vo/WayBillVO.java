@@ -31,7 +31,7 @@ import java.util.List;
 
 
 /**
- * 电子面单实体
+ * Electron plane single entity
  *
  * @author zh
  * @version v7.0.0
@@ -45,27 +45,27 @@ public class WayBillVO implements Serializable {
     private static final long serialVersionUID = 6990005251050581L;
 
     /**
-     * 电子面单id
+     * Electronic surface singleid
      */
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 名称
+     * The name of the
      */
-    @ApiModelProperty(name = "name", value = "名称", required = false)
+    @ApiModelProperty(name = "name", value = "The name of the", required = false)
     private String name;
     /**
-     * 是否开启
+     * Whether open
      */
-    @ApiModelProperty(name = "open", value = "是否开启", required = true, hidden = true)
+    @ApiModelProperty(name = "open", value = "Whether open", required = true, hidden = true)
     private Integer open;
     /**
-     * 电子面单配置
+     * Single configuration of electronic surface
      */
-    @ApiModelProperty(name = "config", value = "电子面单配置", required = false)
+    @ApiModelProperty(name = "config", value = "Single configuration of electronic surface", required = false)
     private String config;
 
-    @ApiModelProperty(name = "configItems", value = "电子面单配置项", required = true)
+    @ApiModelProperty(name = "configItems", value = "Electronic surface single configuration item", required = true)
     private List<ConfigItem> configItems;
     /**
      * beanid

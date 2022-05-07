@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.statistics.model.enums;
 
 /**
- * 地区数据类型
+ * Local data type
  *
  * @author mengyuanming
  * @version 2.0
@@ -25,12 +25,12 @@ package cloud.shopfly.b2c.core.statistics.model.enums;
  */
 public enum RegionsDataType {
 
-    // 下单会员数
-    ORDER_MEMBER_NUM("下单会员数"),
-    // 下单金额
-    ORDER_PRICE("下单金额"),
-    // 下单量
-    ORDER_NUM("下单量");
+    // Number of order members
+    ORDER_MEMBER_NUM("Number of single members"),
+    // Place the order amount
+    ORDER_PRICE("Place the order amount"),
+    // Order quantity
+    ORDER_NUM("Order quantity");
 
     private String description;
 

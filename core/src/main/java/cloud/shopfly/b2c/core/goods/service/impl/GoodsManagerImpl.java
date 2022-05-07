@@ -57,7 +57,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品业务类
+ * Commodity business category
  *
  * @author fk
  * @version v2.0
@@ -96,71 +96,71 @@ public class GoodsManagerImpl implements GoodsManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public GoodsDO add(GoodsDTO goodsVo) {
 
-        // 没有规格给这个字段塞0
+        // There is no specification to fill this field with 0
         goodsVo.setHaveSpec(StringUtil.isNotEmpty(goodsVo.getSkuList()) ? 1 : 0);
 
         GoodsDO goods = new GoodsDO(goodsVo);
-        // 判断是否添加的是积分商品
+        // Determine whether the added goods are points
         if (goodsVo.getExchange() != null && goodsVo.getExchange().getEnableExchange() == 1) {
             goods.setGoodsType(GoodsType.POINT.name());
         } else {
             goods.setGoodsType(GoodsType.NORMAL.name());
         }
 
-        // 商品状态 是否可用
+        // Whether the status of the item is available
         goods.setDisabled(1);
-        // 商品创建时间
+        // Product creation time
         goods.setCreateTime(DateUtil.getDateline());
-        // 商品浏览次数
+        // Number of product views
         goods.setViewCount(0);
-        // 商品购买数量
+        // Quantity of goods purchased
         goods.setBuyCount(0);
-        // 评论次数
+        // Comment number
         goods.setCommentNum(0);
-        // 商品评分
+        // Commodity grade
         goods.setGrade(100.0);
-        // 商品最后更新时间
+        // Product last updated time
         goods.setLastModify(DateUtil.getDateline());
-        // 商品库存
+        // inventory
         goods.setQuantity(goodsVo.getQuantity() == null ? 0 : goodsVo.getQuantity());
-        // 可用库存
+        // Available in stock
         goods.setEnableQuantity(goods.getQuantity());
-        // 向goods加入图片
+        // Add images to Goods
         GoodsGalleryDO goodsGalley = goodsGalleryManager
                 .getGoodsGallery(goodsVo.getGoodsGalleryList().get(0).getOriginal());
         goods.setOriginal(goodsGalley.getOriginal());
         goods.setBig(goodsGalley.getBig());
         goods.setSmall(goodsGalley.getSmall());
         goods.setThumbnail(goodsGalley.getThumbnail());
-        //如果有规格，则将规格中最低的价格赋值到商品价格中 update by liuyulei  2019-05-21
+        // If there is a specification, assign the lowest price from the specification to the commodity price
         if (goods.getHaveSpec() == 1) {
 
             this.pushGoodsPrice(goodsVo, goods);
         }
-        // 添加商品
+        // Add the goods
         this.daoSupport.insert(goods);
-        // 获取添加商品的商品ID
+        // Gets the ID of the item to which the item is added
         Integer goodsId = this.daoSupport.getLastId("es_goods");
         goods.setGoodsId(goodsId);
-        // 添加商品参数
+        // Add commodity parameters
         this.goodsParamsManager.addParams(goodsVo.getGoodsParamsList(), goodsId);
-        // 添加商品sku信息
+        // Add product SKU information
         this.goodsSkuManager.add(goodsVo.getSkuList(), goods);
-        // 添加相册
+        // Add a photo album
         this.goodsGalleryManager.add(goodsVo.getGoodsGalleryList(), goodsId);
-        // 添加积分换购商品
+        // Add points to exchange for goods
         if (goods.getGoodsType().equals(GoodsType.POINT.name())) {
             PromotionGoodsDTO goodsDTO = new PromotionGoodsDTO();
             BeanUtils.copyProperties(goods, goodsDTO);
             ExchangeDO exchange = new ExchangeDO();
             BeanUtils.copyProperties(goodsVo.getExchange(), exchange);
-            //校验积分兑换的价格不能高于商品销售价
+            // The price of checking points shall not be higher than the selling price of goods
             if (exchange.getExchangeMoney() > goods.getPrice()) {
-                throw new ServiceException(GoodsErrorCode.E301.code(), "积分商品价格不能高于商品原价");
+                throw new ServiceException(GoodsErrorCode.E301.code(), "The price of integral goods cannot be higher than the original price of goods");
             }
             exchangeGoodsClient.add(new ExchangeClientDTO(exchange, goodsDTO));
         }
-        // 发送增加商品消息，店铺增加自身商品数量，静态页使用
+        // Send to add goods message, the store to increase the number of their own goods, static page use
         GoodsChangeMsg goodsChangeMsg = new GoodsChangeMsg(new Integer[]{goods.getGoodsId()},
                 GoodsChangeMsg.ADD_OPERATION);
 
@@ -174,19 +174,19 @@ public class GoodsManagerImpl implements GoodsManager {
 
         GoodsDO goodsDO = goodsQueryManager.getModel(id);
         if (goodsDO == null) {
-            throw new ServiceException(GoodsErrorCode.E301.code(), "没有操作权限");
+            throw new ServiceException(GoodsErrorCode.E301.code(), "No operation permission");
         }
 
         goodsVO.setGoodsId(id);
         GoodsDO goods = new GoodsDO(goodsVO);
-        // 判断是否把商品修改成积分商品,自营店
+        // Judge whether to modify the goods into integral goods, self-owned stores
         goods.setGoodsType(goodsVO.getExchange() != null && goodsVO.getExchange().getEnableExchange() == 1 ? GoodsType.POINT.name() : GoodsType.NORMAL.name());
-        // 添加商品更新时间
+        // Add product update time
         goods.setLastModify(DateUtil.getDateline());
-        // 修改相册信息
+        // Modifying album Information
         List<GoodsGalleryDO> goodsGalleys = goodsVO.getGoodsGalleryList();
         this.goodsGalleryManager.edit(goodsGalleys, goodsVO.getGoodsId());
-        // 向goods加入图片
+        // Add images to Goods
         goods.setOriginal(goodsGalleys.get(0).getOriginal());
         goods.setBig(goodsGalleys.get(0).getBig());
         goods.setSmall(goodsGalleys.get(0).getSmall());
@@ -194,18 +194,18 @@ public class GoodsManagerImpl implements GoodsManager {
         goods.setQuantity(goodsDO.getQuantity());
         goods.setEnableQuantity(goodsDO.getEnableQuantity());
 
-        //如果有规格，则将规格中最低的价格赋值到商品价格中 update by liuyulei  2019-05-21
+        // If there is a specification, assign the lowest price from the specification to the commodity price
         if (StringUtil.isNotEmpty(goodsVO.getSkuList())) {
             pushGoodsPrice(goodsVO, goods);
         }
 
-        // 更新商品
+        // Update the goods
         this.daoSupport.update(goods, id);
-        // 处理参数信息
+        // Processing parameter Information
         this.goodsParamsManager.addParams(goodsVO.getGoodsParamsList(), id);
-        // 处理规格信息
+        // Processing specification information
         this.goodsSkuManager.edit(goodsVO.getSkuList(), goods);
-        // 添加商品的积分换购信息
+        // Add the information of redeemable points
         PromotionGoodsDTO goodsDTO = new PromotionGoodsDTO();
         BeanUtils.copyProperties(goods, goodsDTO);
         if (goodsVO.getExchange() == null) {
@@ -214,16 +214,16 @@ public class GoodsManagerImpl implements GoodsManager {
             ExchangeDO exchange = new ExchangeDO();
             BeanUtils.copyProperties(goodsVO.getExchange(), exchange);
             if (exchange.getExchangeMoney() > goods.getPrice()) {
-                throw new ServiceException(GoodsErrorCode.E301.code(), "积分商品价格不能高于商品原价");
+                throw new ServiceException(GoodsErrorCode.E301.code(), "The price of integral goods cannot be higher than the original price of goods");
             }
             exchangeGoodsClient.edit(new ExchangeClientDTO(exchange, goodsDTO));
         }
 
-        //清除该商品关联的东西
+        // Clear things associated with the item
         this.cleanGoodsAssociated(id, goodsVO.getMarketEnable());
 
 
-        // 发送增加商品消息，店铺增加自身商品数量，静态页使用
+        // Send to add goods message, the store to increase the number of their own goods, static page use
         GoodsChangeMsg goodsChangeMsg = new GoodsChangeMsg(new Integer[]{id}, GoodsChangeMsg.MANUAL_UPDATE_OPERATION);
         this.messageSender.send(new MqMessage(AmqpExchange.GOODS_CHANGE, AmqpExchange.GOODS_CHANGE + "_ROUTING", goodsChangeMsg));
 
@@ -243,7 +243,7 @@ public class GoodsManagerImpl implements GoodsManager {
         String sql = "update es_goods set market_enable = 0,under_message = ?, last_modify=?  where goods_id in (" + idStr + ")";
         this.daoSupport.execute(sql, term.toArray());
 
-        //清除相关的关联
+        // Clears associated associations
         for (int goodsId : goodsIds) {
             this.cleanGoodsAssociated(goodsId, 0);
         }
@@ -258,13 +258,13 @@ public class GoodsManagerImpl implements GoodsManager {
         this.checkPermission(goodsIds, GoodsOperate.RECYCLE);
 
         List<Object> term = new ArrayList<>();
-        //修改最后修改时间
+        // Modify the last modification time
         term.add(DateUtil.getDateline());
         String idStr = getIdStr(goodsIds, term);
         String sql = "update  es_goods set disabled = 0 ,market_enable=0 , last_modify=?  where goods_id in (" + idStr + ")";
         this.daoSupport.execute(sql, term.toArray());
 
-        //清除相关的关联
+        // Clears associated associations
         for (int goodsId : goodsIds) {
             this.cleanGoodsAssociated(goodsId, 0);
         }
@@ -285,7 +285,7 @@ public class GoodsManagerImpl implements GoodsManager {
 
         String sql = "update es_goods set disabled = -1  where goods_id in (" + idStr + ")";
         this.daoSupport.execute(sql, term.toArray());
-        //删除商品发送商品删除消息DEL_OPERATION
+        // Deleting a product The DEL_OPERATION message for deleting a product is sent
         GoodsChangeMsg goodsChangeMsg = new GoodsChangeMsg(goodsIds, GoodsChangeMsg.DEL_OPERATION);
         this.messageSender.send(new MqMessage(AmqpExchange.GOODS_CHANGE, AmqpExchange.GOODS_CHANGE + "_ROUTING", goodsChangeMsg));
 
@@ -309,7 +309,7 @@ public class GoodsManagerImpl implements GoodsManager {
     @Override
     public void up(Integer goodsId) {
 
-        //查看是否允许上架
+        // Check to see if shelves are allowed
         String sql = "select disabled,market_enable from es_goods where goods_id = ?";
         Map map = this.daoSupport.queryForMap(sql, goodsId);
 
@@ -318,7 +318,7 @@ public class GoodsManagerImpl implements GoodsManager {
 
         OperateAllowable operateAllowable = new OperateAllowable(marketEnable, disabled);
         if (!operateAllowable.getAllowMarket()) {
-            throw new ServiceException(GoodsErrorCode.E301.code(), "商品不能上架操作");
+            throw new ServiceException(GoodsErrorCode.E301.code(), "Goods can not be shelves operation");
         }
 
         sql = "update es_goods set market_enable = 1 and disabled = 1 where goods_id  = ?";
@@ -350,7 +350,7 @@ public class GoodsManagerImpl implements GoodsManager {
                 double grade = CurrencyUtil.mul(goods.getGoodRate(), 100);
                 this.daoSupport.execute(updateSql, CurrencyUtil.round(grade, 1), goods.getGoodsId());
                 cache.put(CachePrefix.GOODS_GRADE.getPrefix() + goods.getGoodsId(), CurrencyUtil.round(grade, 1));
-                // 发送商品消息变化消息
+                // Send a commodity message change message
                 GoodsChangeMsg goodsChangeMsg = new GoodsChangeMsg(new Integer[]{goods.getGoodsId()},
                         GoodsChangeMsg.AUTO_UPDATE_OPERATION);
                 this.messageSender.send(new MqMessage(AmqpExchange.GOODS_CHANGE, AmqpExchange.GOODS_CHANGE + "_ROUTING", goodsChangeMsg));
@@ -359,7 +359,7 @@ public class GoodsManagerImpl implements GoodsManager {
     }
 
     /**
-     * 获取商品id的拼接，且删除缓存中的商品信息
+     * Access to goodsidAnd delete the item information in the cache
      *
      * @param goodsIds
      * @param term
@@ -378,7 +378,7 @@ public class GoodsManagerImpl implements GoodsManager {
     }
 
     /**
-     * 查看商品是否属于当前登陆用户
+     * Check whether the item belongs to the current login user
      *
      * @param goodsIds
      */
@@ -398,22 +398,22 @@ public class GoodsManagerImpl implements GoodsManager {
             switch (goodsOperate) {
                 case DELETE:
                     if (!operateAllowable.getAllowDelete()) {
-                        throw new ServiceException(GoodsErrorCode.E301.code(), "存在不能删除的商品，不能操作");
+                        throw new ServiceException(GoodsErrorCode.E301.code(), "An item cannot be deleted");
                     }
                     break;
                 case RECYCLE:
                     if (!operateAllowable.getAllowRecycle()) {
-                        throw new ServiceException(GoodsErrorCode.E301.code(), "存在不能放入回收站的商品，不能操作");
+                        throw new ServiceException(GoodsErrorCode.E301.code(), "There are goods that cannot be put into the recycle bin and cannot be operated");
                     }
                     break;
                 case REVRET:
                     if (!operateAllowable.getAllowRevert()) {
-                        throw new ServiceException(GoodsErrorCode.E301.code(), "存在不能还原的商品，不能操作");
+                        throw new ServiceException(GoodsErrorCode.E301.code(), "Unrecoverable goods exist and cannot be operated");
                     }
                     break;
                 case UNDER:
                     if (!operateAllowable.getAllowUnder()) {
-                        throw new ServiceException(GoodsErrorCode.E301.code(), "存在不能下架的商品，不能操作");
+                        throw new ServiceException(GoodsErrorCode.E301.code(), "There are goods that cannot be removed from the shelf and cannot be operated");
                     }
                     break;
                 default:
@@ -424,7 +424,7 @@ public class GoodsManagerImpl implements GoodsManager {
     }
 
     /**
-     * 如果有规格，则将规格中最低的价格赋值到商品价格中
+     * If there is a specification, the lowest price from the specification is assigned to the commodity price
      * @param goodsVO
      * @param goods
      */
@@ -444,34 +444,34 @@ public class GoodsManagerImpl implements GoodsManager {
     }
 
     /**
-     * 清除商品的关联<br/>
-     * 在商品删除、下架要进行调用
+     * Clear the association of goods<br/>
+     * Item Deletion、Takedown calls are made
      *
      * @param goodsId
      */
     private void cleanGoodsAssociated(int goodsId, Integer markenable) {
 
         if (logger.isDebugEnabled()) {
-            logger.debug("清除goodsid[" + goodsId + "]相关的缓存，包括促销的缓存");
+            logger.debug("removegoodsid[" + goodsId + "]Relevant caches, including promotional caches");
         }
 
         this.cache.remove(CachePrefix.GOODS.getPrefix() + goodsId);
 
-        // 删除这个商品的sku缓存(必须要在删除库中sku前先删缓存),首先查出商品对应的sku_id
+        // Delete the SKU cache of this item (you must delete the cache before deleting the SKU in the database). Check the SKu_ID of the item first
         String sql = "select sku_id from es_goods_sku where goods_id = ?";
         List<Map> skuIds = this.daoSupport.queryForList(sql, goodsId);
         for (Map map : skuIds) {
             cache.remove(CachePrefix.SKU.getPrefix() + map.get("sku_id"));
         }
 
-        //不再读一次缓存竟然清不掉？？所以在这里又读了一下
+        // Cache cannot be cleared again? So I read it again here
         this.cache.get(CachePrefix.GOODS.getPrefix() + goodsId);
 
-        //删除该商品关联的活动缓存
+        // Deletes the active cache associated with this item
         long currTime = DateUtil.getDateline();
         String currDate = DateUtil.toString(currTime, "yyyyMMdd");
 
-        //清除此商品的缓存
+        // Clear the cache for this item
         this.cache.remove(CachePrefix.PROMOTION_KEY.getPrefix() + currDate + goodsId);
 
         if (markenable == 0) {
@@ -481,13 +481,13 @@ public class GoodsManagerImpl implements GoodsManager {
     }
 
     /**
-     * 删除积分商品
+     * Delete integral goods
      *
      * @param goodsId
      */
     private void deleteExchange(Integer goodsId) {
 
-        //删除积分商品
+        // Delete integral goods
         exchangeGoodsClient.del(goodsId);
     }
 }

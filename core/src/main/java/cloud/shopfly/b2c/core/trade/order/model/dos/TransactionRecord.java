@@ -32,7 +32,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 
 /**
- * 交易记录表实体
+ * Transaction record entity
  *
  * @author Snow
  * @version v7.0.0
@@ -47,52 +47,52 @@ public class TransactionRecord implements Serializable {
     private static final long serialVersionUID = 6751804777335135L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "record_id")
     @ApiModelProperty(hidden = true)
     private Integer recordId;
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
     /**
-     * 商品ID
+     * productID
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品ID", required = false)
+    @ApiModelProperty(name = "goods_id", value = "productID", required = false)
     private Integer goodsId;
     /**
-     * 商品数量
+     * The number
      */
     @Column(name = "goods_num")
-    @ApiModelProperty(name = "goods_num", value = "商品数量", required = false)
+    @ApiModelProperty(name = "goods_num", value = "The number", required = false)
     private Integer goodsNum;
     /**
-     * 确认收货时间
+     * Confirm delivery time
      */
     @Column(name = "rog_time")
-    @ApiModelProperty(name = "rog_time", value = "确认收货时间", required = false)
+    @ApiModelProperty(name = "rog_time", value = "Confirm delivery time", required = false)
     private Long rogTime;
     /**
-     * 用户名
+     * Username
      */
     @Column(name = "uname")
-    @ApiModelProperty(name = "uname", value = "用户名", required = false)
+    @ApiModelProperty(name = "uname", value = "Username", required = false)
     private String uname;
     /**
-     * 交易价格
+     * The transaction price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "交易价格", required = false)
+    @ApiModelProperty(name = "price", value = "The transaction price", required = false)
     private Double price;
     /**
-     * 会员ID
+     * membersID
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员ID", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersID", required = false)
     private Integer memberId;
 
     @PrimaryKeyField

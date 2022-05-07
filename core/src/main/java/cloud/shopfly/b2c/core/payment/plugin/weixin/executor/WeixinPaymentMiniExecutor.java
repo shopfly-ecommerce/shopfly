@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信wap端
+ * @Description: WeChatwapend
  * @date 2018/4/1810:12
  * @since v7.0.0
  */
@@ -36,7 +36,7 @@ public class WeixinPaymentMiniExecutor extends WeixinPuginConfig {
     private WeixinPaymentJsapiExecutor weixinPaymentJsapiExecutor;
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return

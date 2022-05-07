@@ -24,7 +24,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * Created by kingapex on 18/02/2018.
- * 签名工具
+ * Signature tool
  * @author kingapex
  * @version 1.0
  * @since 6.4.0
@@ -34,10 +34,10 @@ public class SignatureUtil {
 
 
     /**
-     * 对字串进行签名
-     * @param hexPrivateKey 私钥
-     * @param str 要签名的字串
-     * @return 签名后的字串，如果签名失败返回null
+     * Sign the string
+     * @param hexPrivateKey The private key
+     * @param str The string to sign
+     * @return A string after the signature, returned if the signature failsnull
      */
     public static  String signature(String hexPrivateKey, String str) {
         try {
@@ -45,7 +45,7 @@ public class SignatureUtil {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
 
-            // 用私钥对信息生成数字签名
+            // Generate a digital signature for the information with the private key
             Signature signature = Signature.getInstance("MD5withRSA");
             signature.initSign(privateKey);
             signature.update(str.getBytes("UTF-8"));
@@ -61,7 +61,7 @@ public class SignatureUtil {
             X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(HexUtils.hexStrToBytes(hexPublicKey));
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
-            //这是SignatureData输出的数字签名
+            // This is the digital signature output by SignatureData
             byte[] signed = HexUtils.hexStrToBytes(signedStr);
 
             java.security.Signature signature = java.security.Signature.getInstance("MD5withRSA");

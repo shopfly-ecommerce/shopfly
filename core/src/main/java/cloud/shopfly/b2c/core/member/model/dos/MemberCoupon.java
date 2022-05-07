@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 会员优惠券实体
+ * Member coupon entity
  *
  * @author Snow
  * @version vv7.0.0
@@ -45,101 +45,101 @@ public class MemberCoupon implements Serializable {
     private static final long serialVersionUID = 5545788652245350L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "mc_id")
     @ApiModelProperty(hidden = true)
     private Integer mcId;
 
     /**
-     * 优惠券表主键
+     * Coupon table primary key
      */
     @Column(name = "coupon_id")
-    @ApiModelProperty(name = "coupon_id", value = "优惠券表主键", required = false)
+    @ApiModelProperty(name = "coupon_id", value = "Coupon table primary key", required = false)
     private Integer couponId;
 
     /**
-     * 会员主键id
+     * Member of the primary keyid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员主键id", required = false)
+    @ApiModelProperty(name = "member_id", value = "Member of the primary keyid", required = false)
     private Integer memberId;
 
     /**
-     * 使用时间
+     * Use your time
      */
     @Column(name = "used_time")
-    @ApiModelProperty(name = "used_time", value = "使用时间", required = false)
+    @ApiModelProperty(name = "used_time", value = "Use your time", required = false)
     private Long usedTime;
 
     /**
-     * 领取时间
+     * Get the time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "领取时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Get the time", required = false)
     private Long createTime;
 
     /**
-     * 订单主键
+     * Order is the primary key
      */
     @Column(name = "order_id")
-    @ApiModelProperty(name = "order_id", value = "订单主键", required = false)
+    @ApiModelProperty(name = "order_id", value = "Order is the primary key", required = false)
     private Integer orderId;
 
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
 
     /**
-     * 会员昵称
+     * Members nickname
      */
     @Column(name = "member_name")
-    @ApiModelProperty(name = "member_name", value = "会员昵称", required = false)
+    @ApiModelProperty(name = "member_name", value = "Members nickname", required = false)
     private String memberName;
 
     /**
-     * 优惠券名称
+     * Coupon name
      */
     @Column(name = "title")
-    @ApiModelProperty(name = "title", value = "优惠券名称", required = false)
+    @ApiModelProperty(name = "title", value = "Coupon name", required = false)
     private String title;
 
     /**
-     * 优惠券面额
+     * Coupon face value
      */
     @Column(name = "coupon_price")
-    @ApiModelProperty(name = "coupon_price", value = "优惠券面额", required = false)
+    @ApiModelProperty(name = "coupon_price", value = "Coupon face value", required = false)
     private Double couponPrice;
 
     /**
-     * 优惠券门槛金额
+     * Coupon threshold amount
      */
     @Column(name = "coupon_threshold_price")
-    @ApiModelProperty(name = "coupon_threshold_price", value = "优惠券门槛金额", required = false)
+    @ApiModelProperty(name = "coupon_threshold_price", value = "Coupon threshold amount", required = false)
     private Double couponThresholdPrice;
 
     /**
-     * 使用起始时间
+     * Start time of use
      */
     @Column(name = "start_time")
-    @ApiModelProperty(name = "start_time", value = "使用起始时间", required = false)
+    @ApiModelProperty(name = "start_time", value = "Start time of use", required = false)
     private Long startTime;
 
     /**
-     * 使用截止时间
+     * Use deadline
      */
     @Column(name = "end_time")
-    @ApiModelProperty(name = "end_time", value = "使用截止时间", required = false)
+    @ApiModelProperty(name = "end_time", value = "Use deadline", required = false)
     private Long endTime;
 
     @Column(name = "used_status")
-    @ApiModelProperty(name = "used_status", value = "使用状态", example = "0未使用，1已使用,2是已过期")
+    @ApiModelProperty(name = "used_status", value = "Using a state", example = "0Is not used,1Has been used,2Is expired")
     private Integer usedStatus;
 
-    @ApiModelProperty(value = "使用状态文字")
+    @ApiModelProperty(value = "Use status text")
     private String usedStatusText;
 
 
@@ -258,11 +258,11 @@ public class MemberCoupon implements Serializable {
 
     public String getUsedStatusText() {
         if (usedStatus == 0) {
-            usedStatusText = "未使用";
+            usedStatusText = "Dont use";
         } else if(usedStatus == 2){
-            usedStatusText = "已过期";
+            usedStatusText = "expired";
         }else{
-            usedStatusText = "已使用";
+            usedStatusText = "Has been used";
         }
 
         return usedStatusText;

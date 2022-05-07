@@ -45,12 +45,12 @@ public class InstallerRecord {
     }
 
     /**
-     * 没有配置回调获取默认访问回调地址
+     * The callback is not configured to get the default access callback address
      *
      * @return
      */
     private static String getUrlDomain() {
-        //获取request
+        // For the request
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
         if (request != null) {
             String serverName = request.getServerName();

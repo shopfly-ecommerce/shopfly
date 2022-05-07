@@ -21,25 +21,25 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 货运单
+ * Bills of lading
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
  * @since v7.0.0
  */
-@ApiModel(description = "货运单")
+@ApiModel(description = "Bills of lading")
 public class DeliveryVO {
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String orderSn;
 
-    @ApiModelProperty(value = "货运单号")
+    @ApiModelProperty(value = "Bills of lading no.")
     private String deliveryNo;
 
-    @ApiModelProperty(value = "物流公司")
+    @ApiModelProperty(value = "Logistics company")
     private Integer logiId;
 
-    @ApiModelProperty(value = "物流公司名称")
+    @ApiModelProperty(value = "Name of logistics Company")
     private String logiName;
 
     @ApiModelProperty(hidden = true)

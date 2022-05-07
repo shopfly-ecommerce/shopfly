@@ -20,11 +20,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 /**
- * 初始化相关bean
+ * Initialization correlationbean
  * @author kingapex
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 @Configuration
 public class ValidateConfig {

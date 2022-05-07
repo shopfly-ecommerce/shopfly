@@ -21,10 +21,10 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartSkuVO;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.PromotionRule;
 
 /**
- * sku促销规则builder接口<br/>
- * 生产sku级别促销规则
- * 文档请参考：<br/>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#促销规则的构建" >促销规则的构建</a>
+ * skuThe promotion rulesbuilderinterface<br/>
+ * productionskuLevel promotion rules
+ * Please refer to the documentation.：<br/>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#The construction of promotion rules" >The construction of promotion rules</a>
  *
  * @author kingapex
  * @version 1.0
@@ -34,17 +34,17 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.PromotionRule;
 public interface SkuPromotionRuleBuilder {
 
     /**
-     * 构建sku促销规则
+     * buildskuThe promotion rules
      *
-     * @param skuVO       购物车的sku
-     * @param promotionVO 促销vo
-     * @return 构建的促销规则
+     * @param skuVO       The shopping cartsku
+     * @param promotionVO Sales promotionvo
+     * @return Build promotional rules
      */
     PromotionRule build(CartSkuVO skuVO, PromotionVO promotionVO);
 
 
     /**
-     * 定义促销类型
+     * Define promotion types
      *
      * @return
      */

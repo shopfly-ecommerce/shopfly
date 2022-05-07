@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
- * 收银台参数VO
+ * Cashier parametersVO
  *
  * @author Snow create in 2018/7/11
  * @version v2.0
@@ -32,30 +32,30 @@ import java.util.Objects;
 public class CashierVO {
 
 
-    @ApiModelProperty(name = "ship_name", value = "收货人姓名")
+    @ApiModelProperty(name = "ship_name", value = "Name of consignee")
     private String shipName;
 
-    @ApiModelProperty(name = "ship_addr", value = "收货地址")
+    @ApiModelProperty(name = "ship_addr", value = "Shipping address")
     private String shipAddr;
 
-    @ApiModelProperty(name = "ship_mobile", value = "收货人手机")
+    @ApiModelProperty(name = "ship_mobile", value = "Consignees mobile phone")
     private String shipMobile;
 
-    @ApiModelProperty(name = "ship_country", value = "配送地区-国家")
+    @ApiModelProperty(name = "ship_country", value = " -countries")
     private String shipCountry;
 
-    @ApiModelProperty(name = "ship_state", value = "配送地区-州/省")
+    @ApiModelProperty(name = "ship_state", value = " -state/province")
     private String shipState;
 
-    @ApiModelProperty(name = "ship_city", value = "配送地区-城市")
+    @ApiModelProperty(name = "ship_city", value = " -city")
     private String shipCity;
 
-    @ApiModelProperty(name = "need_pay_price", value = "应付金额")
+    @ApiModelProperty(name = "need_pay_price", value = "Amount payable")
     private Double needPayPrice;
 
-    @ApiModelProperty(name = "pay_type_text", value = "支付方式")
+    @ApiModelProperty(name = "pay_type_text", value = "Method of payment")
     private String payTypeText;
-    @ApiModelProperty(name = "count_down", value = "订单失效时间")
+    @ApiModelProperty(name = "count_down", value = "Order lapse time")
     private Long countDown;
 
     public String getShipName() {

@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 商品详情页展示VO
+ * Product details page displayVO
  *
  * @author Snow
  * @version v1.0
@@ -40,28 +40,28 @@ public class SeckillGoodsVO extends SeckillGoodsDTO {
      */
     private static final long serialVersionUID = -7280906760276180832L;
 
-    @ApiModelProperty(value = "秒杀开始时刻，注意不是时间，是钟点，比如10")
+    @ApiModelProperty(value = "Its not the time, its the hour, like10")
     private Integer seckillStartTime;
 
-    @ApiModelProperty(value = "秒杀开始时间，这个是时间戳")
+    @ApiModelProperty(value = "Seckill start time. This is the timestamp")
     private Long startTime;
 
-    @ApiModelProperty(value = "距离活动结束的时间，秒为单位")
+    @ApiModelProperty(value = "The time, in seconds, before the end of the activity")
     private Long distanceEndTime;
 
-    @ApiModelProperty(value = "活动是否已经开始、1:活动正在进行中，0:未开始")
+    @ApiModelProperty(value = "Whether the activity has already started、1:The campaign is ongoing,0:Not at the")
     private Integer isStart;
 
-    @ApiModelProperty(value = "剩余可售数量")
+    @ApiModelProperty(value = "Remaining available quantity")
     private Integer remainQuantity;
 
-    @ApiModelProperty(value = "距离活动开始的时间，秒为单位。如果活动的开始时间是10点，服务器时间为8点，距离开始还有多少时间")
+    @ApiModelProperty(value = "The time, in seconds, from the start of the activity. If the event starts at10Point, the server time is8Point, how much time before we start")
     private Long distanceStartTime;
 
-    @ApiModelProperty(value = "商家ID")
+    @ApiModelProperty(value = "merchantsID")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "秒杀活动ID")
+    @ApiModelProperty(value = "Seconds kill activityID")
     private Integer seckillId;
 
 
@@ -70,7 +70,7 @@ public class SeckillGoodsVO extends SeckillGoodsDTO {
     }
 
     /**
-     * 构造器
+     * The constructor
      *
      * @param goods
      */
@@ -102,41 +102,41 @@ public class SeckillGoodsVO extends SeckillGoodsDTO {
 
 
     /**
-     * 计算秒杀活动时间
+     * Calculate the seconds kill activity time
      */
     private void countSeckillTime(SeckillGoodsVO goodsVO) {
 
-        //当前时间的小时数
+        // The number of hours of the current time
         Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
 
-        //此商品限时抢购活动的 开始时刻
+        // The time when this flash sale begins
         int timeLine = goodsVO.getSeckillStartTime();
 
-        //距离活动结束的时间
+        // The time until the end of the activity
         long distanceEndTime = 0;
 
-        //距离活动开始的时间
+        // Time from the start of the activity
         long distanceStartTime = 0;
 
 
-        //是否已经开始，1为开始
+        // Is it started? 1 indicates the start
         int isStart = 0;
 
-        //当前时间大于活动开始的时刻，说明已经开始，计算距离结束的时间
+        // If the current time is greater than the start time, it indicates that the activity has started. Calculate the time before the end
         if (hour >= timeLine) {
-            //读取今天的结束时间
+            // Read the end time for the day
             long endTime = DateUtil.endOfTodDay();
 
-            //当前时间
+            // The current time
             long currentTime = DateUtil.getDateline();
             distanceEndTime = endTime - currentTime;
             isStart = 1;
         } else {
-            //当前时间
+            // The current time
             long currentTime = DateUtil.getDateline();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            //活动的开始时间
+            // The start time of the activity
             long startTime = DateUtil.getDateline(df.format(new Date()) + " " + timeLine + ":00:00", "yyyy-MM-dd HH:mm:ss");
             distanceStartTime = currentTime - startTime;
         }
@@ -161,8 +161,8 @@ public class SeckillGoodsVO extends SeckillGoodsDTO {
 
     public void setStartTime(Long startTime) {
         if (logger.isDebugEnabled()) {
-            this.logger.info("限时抢购开始时间被置为：" + startTime);
-            this.logger.info("对象为：" + this.toString());
+            this.logger.info("The flash sale start time is set to：" + startTime);
+            this.logger.info("The object of：" + this.toString());
         }
         this.startTime = startTime;
     }

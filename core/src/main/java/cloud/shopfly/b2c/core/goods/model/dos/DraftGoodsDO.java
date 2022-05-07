@@ -32,7 +32,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 草稿商品实体
+ * Draft commodity entity
  *
  * @author fk
  * @version v2.0
@@ -46,144 +46,144 @@ public class DraftGoodsDO implements Serializable {
     private static final long serialVersionUID = 7646662730625878L;
 
     /**
-     * 草稿商品id
+     * The draft of goodsid
      */
     @Id(name = "draft_goods_id")
     @ApiModelProperty(hidden = true)
     private Integer draftGoodsId;
     /**
-     * 商品编号
+     * SN
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "商品编号", required = false)
+    @ApiModelProperty(name = "sn", value = "SN", required = false)
     private String sn;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "goods_name", value = "Name", required = false)
     private String goodsName;
     /**
-     * 商品品牌ID
+     * BrandID
      */
     @Column(name = "brand_id")
-    @ApiModelProperty(name = "brand_id", value = "商品品牌ID", required = false)
+    @ApiModelProperty(name = "brand_id", value = "BrandID", required = false)
     private Integer brandId;
     /**
-     * 商品分类ID
+     * CategoryID
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "category_id", value = "商品分类ID", required = false)
+    @ApiModelProperty(name = "category_id", value = "CategoryID", required = false)
     private Integer categoryId;
     /**
-     * 商品重量
+     * Weight
      */
     @Column(name = "weight")
-    @ApiModelProperty(name = "weight", value = "商品重量", required = false)
+    @ApiModelProperty(name = "weight", value = "Weight", required = false)
     private Double weight;
     /**
-     * 商品详情
+     * Product details
      */
     @Column(name = "intro")
-    @ApiModelProperty(name = "intro", value = "商品详情", required = false)
+    @ApiModelProperty(name = "intro", value = "Product details", required = false)
     private String intro;
     /**
-     * 商品价格
+     * Price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "商品价格", required = false)
+    @ApiModelProperty(name = "price", value = "Price", required = false)
     private Double price;
     /**
-     * 商品成本价
+     * The cost of goods
      */
     @Column(name = "cost")
-    @ApiModelProperty(name = "cost", value = "商品成本价", required = false)
+    @ApiModelProperty(name = "cost", value = "The cost of goods", required = false)
     private Double cost;
     /**
-     * 商品市场价
+     * Commodity market price
      */
     @Column(name = "mktprice")
-    @ApiModelProperty(name = "mktprice", value = "商品市场价", required = false)
+    @ApiModelProperty(name = "mktprice", value = "Commodity market price", required = false)
     private Double mktprice;
     /**
-     * 商品类型
+     * Type
      */
     @Column(name = "goods_type")
-    @ApiModelProperty(name = "goods_type", value = "商品类型", required = false)
+    @ApiModelProperty(name = "goods_type", value = "Type", required = false)
     private String goodsType;
     /**
-     * 是否开启规格
+     * Enable specifications
      */
     @Column(name = "have_spec")
-    @ApiModelProperty(name = "have_spec", value = "是否开启规格", required = false)
+    @ApiModelProperty(name = "have_spec", value = "Enable specifications", required = false)
     private Integer haveSpec;
     /**
-     * 商品添加时间
+     * Product addition time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "商品添加时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Product addition time", required = false)
     private Long createTime;
     /**
-     * 商品总库存
+     * Gross merchandise inventory
      */
     @Column(name = "quantity")
-    @ApiModelProperty(name = "quantity", value = "商品总库存", required = false)
+    @ApiModelProperty(name = "quantity", value = "Gross merchandise inventory", required = false)
     private Integer quantity;
     /**
-     * 商品原始图片
+     * Original picture of commodity
      */
     @Column(name = "original")
-    @ApiModelProperty(name = "original", value = "商品原始图片", required = false)
+    @ApiModelProperty(name = "original", value = "Original picture of commodity", required = false)
     private String original;
 
     /**
-     * 商品运费模板ID
+     * Freight templateID
      */
     @Column(name = "template_id")
-    @ApiModelProperty(name = "template_id", value = "商品运费模板ID", required = false)
+    @ApiModelProperty(name = "template_id", value = "Freight templateID", required = false)
     private Integer templateId;
     /**
-     * 是否为买家承担运费
+     * Whether to bear the freight for the buyer
      */
     @Column(name = "goods_transfee_charge")
-    @ApiModelProperty(name = "goods_transfee_charge", value = "是否为买家承担运费", required = false)
+    @ApiModelProperty(name = "goods_transfee_charge", value = "Whether to bear the freight for the buyer", required = false)
     private Integer goodsTransfeeCharge;
 
     /**
-     * seo 标题
+     * seo  title
      */
     @Column(name = "page_title")
-    @ApiModelProperty(name = "page_title", value = "seo 标题", required = false)
+    @ApiModelProperty(name = "page_title", value = "seo  title", required = false)
     private String pageTitle;
     /**
-     * seo关键字
+     * seokeyword
      */
     @Column(name = "meta_keywords")
-    @ApiModelProperty(name = "meta_keywords", value = "seo关键字", required = false)
+    @ApiModelProperty(name = "meta_keywords", value = "seokeyword", required = false)
     private String metaKeywords;
     /**
-     * seo描述
+     * seo describe
      */
     @Column(name = "meta_description")
-    @ApiModelProperty(name = "meta_description", value = "seo描述", required = false)
+    @ApiModelProperty(name = "meta_description", value = "seo describe", required = false)
     private String metaDescription;
     /**
-     * 积分商品需要的金额
+     * The amount of money needed to score goods
      */
     @Column(name = "exchange_money")
-    @ApiModelProperty(name = "exchange_money", value = "积分商品需要的金额", required = false)
+    @ApiModelProperty(name = "exchange_money", value = "The amount of money needed to score goods", required = false)
     private Double exchangeMoney;
     /**
-     * 积分商品需要的积分
+     * Points Points required for an item
      */
     @Column(name = "exchange_point")
-    @ApiModelProperty(name = "exchange_point", value = "积分商品需要的积分", required = false)
+    @ApiModelProperty(name = "exchange_point", value = "Points Points required for an item", required = false)
     private Integer exchangePoint;
     /**
-     * 积分商品的分类id
+     * Classification of integral goodsid
      */
     @Column(name = "exchange_category_id")
-    @ApiModelProperty(name = "exchange_category_id", value = "积分商品的分类id", required = false)
+    @ApiModelProperty(name = "exchange_category_id", value = "Classification of integral goodsid", required = false)
     private Integer exchangeCategoryId;
     @ApiModelProperty(hidden = true)
     private List<String> galleryList;

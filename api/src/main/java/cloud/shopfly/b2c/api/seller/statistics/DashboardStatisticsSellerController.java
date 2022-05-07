@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 商家中心，首页数据
+ * Business center, home page data
  *
  * @author mengyuanming
  * @version 2.0
@@ -34,13 +34,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/seller/statistics/dashboard")
-@Api(description = "管理端首页数据")
+@Api(description = "Manage home page data")
 public class DashboardStatisticsSellerController {
 
     @Autowired
     private DashboardStatisticManager dashboardStatisticManager;
 
-    @ApiOperation(value = "首页数据", response = ShopDashboardVO.class)
+    @ApiOperation(value = "Home page data", response = ShopDashboardVO.class)
     @GetMapping
     public ShopDashboardVO shop() {
         return this.dashboardStatisticManager.getData();

@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 评论回复实体
+ * Comment reply entity
  *
  * @author fk
  * @version v1.0
@@ -43,46 +43,46 @@ public class CommentReply implements Serializable {
     private static final long serialVersionUID = 8995158403058181L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "reply_id")
     @ApiModelProperty(hidden = true)
     private Integer replyId;
     /**
-     * 评论id
+     * commentsid
      */
     @Column(name = "comment_id")
-    @ApiModelProperty(name = "comment_id", value = "评论id", required = false)
+    @ApiModelProperty(name = "comment_id", value = "commentsid", required = false)
     private Integer commentId;
     /**
-     * 回复父id
+     * Respond to a parentid
      */
     @Column(name = "parent_id")
-    @ApiModelProperty(name = "parent_id", value = "回复父id", required = false)
+    @ApiModelProperty(name = "parent_id", value = "Respond to a parentid", required = false)
     private Integer parentId;
     /**
-     * 回复内容
+     * Reply content
      */
     @Column(name = "content")
-    @ApiModelProperty(name = "content", value = "回复内容", required = false)
+    @ApiModelProperty(name = "content", value = "Reply content", required = false)
     private String content;
     /**
-     * 创建时间
+     * Last update
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Last update", required = false)
     private Long createTime;
     /**
-     * 商家或者买家
+     * Merchant or buyer
      */
     @Column(name = "role")
-    @ApiModelProperty(name = "role", value = "商家或者买家", required = false)
+    @ApiModelProperty(name = "role", value = "Merchant or buyer", required = false)
     private String role;
     /**
-     * 父子路径0|10|
+     * Father and son path0|10|
      */
     @Column(name = "path")
-    @ApiModelProperty(name = "path", value = "父子路径0|10|", required = false)
+    @ApiModelProperty(name = "path", value = "Father and son path0|10|", required = false)
     private String path;
 
     @PrimaryKeyField

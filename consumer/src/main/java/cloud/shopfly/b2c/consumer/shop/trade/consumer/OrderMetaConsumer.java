@@ -39,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 订单其他信息入库
+ * Other order information is stored
  *
  * @author Snow create in 2018/6/26
  * @version v2.0
@@ -80,13 +80,13 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
     }
 
     /**
-     * 记录返现金额
+     * Record the cash back amount
      *
      * @param orderDTO
      */
     private void addCashBack(OrderDTO orderDTO) {
         try {
-            //记录返现金额
+            // Record the cash back amount
             double cashBack = orderDTO.getPrice().getCashBack();
             OrderMetaDO cashBackMeta = new OrderMetaDO();
             cashBackMeta.setMetaKey(OrderMetaKeyEnum.CASH_BACK.name());
@@ -94,27 +94,27 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
             cashBackMeta.setOrderSn(orderDTO.getSn());
             this.orderMetaManager.add(cashBackMeta);
             if (logger.isDebugEnabled()) {
-                logger.debug("返现金额入库完成");
+                logger.debug("Deposit of cash back amount is completed");
             }
         } catch (Exception e) {
-            logger.error("返现金额入库出错", e);
+            logger.error("The deposit of cash back amount is wrong", e);
         }
 
     }
 
 
     /**
-     * 记录使用的积分
+     * Record credits used
      *
      * @param orderDTO
      */
     private void addUsePoint(OrderDTO orderDTO) {
         try {
 
-            //使用的积分
+            // Integral used
             int consumerPoint = orderDTO.getPrice().getExchangePoint();
             if (consumerPoint > 0) {
-                //使用积分的记录
+                // Use a record of integrals
                 OrderMetaDO pointMeta = new OrderMetaDO();
                 pointMeta.setMetaKey(OrderMetaKeyEnum.POINT.name());
                 pointMeta.setMetaValue(consumerPoint + "");
@@ -124,24 +124,24 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
             }
 
             if (logger.isDebugEnabled()) {
-                logger.debug("记录使用的积分");
+                logger.debug("Record credits used");
             }
 
         } catch (Exception e) {
-            logger.error("记录使用的积分出错", e);
+            logger.error("Error recording credits used", e);
         }
 
     }
 
 
     /**
-     * 赠送积分的记录
+     * Record of bonus points
      *
      * @param orderDTO
      */
     private void addGiftPoint(OrderDTO orderDTO) {
         try {
-            //赠送积分的记录
+            // Record of bonus points
             OrderMetaDO giftPointMeta = new OrderMetaDO();
             giftPointMeta.setMetaKey(OrderMetaKeyEnum.GIFT_POINT.name());
             giftPointMeta.setMetaValue(orderDTO.getGiftPoint() + "");
@@ -150,17 +150,17 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
             this.orderMetaManager.add(giftPointMeta);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("赠送积分完成");
+                logger.debug("Bonus points completed");
             }
         } catch (Exception e) {
-            logger.error("赠送积分的记录出错", e);
+            logger.error("Error in recording bonus points", e);
         }
 
     }
 
 
     /**
-     * 赠优惠券入库
+     * Free coupons for storage
      *
      * @param orderDTO
      */
@@ -168,7 +168,7 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
         try {
 
 
-            //赠优惠券入库
+            // Free coupons for storage
             List<CouponVO> couponList = orderDTO.getGiftCouponList();
             OrderMetaDO couponMeta = new OrderMetaDO();
             couponMeta.setMetaKey(OrderMetaKeyEnum.COUPON.name());
@@ -178,25 +178,25 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
             this.orderMetaManager.add(couponMeta);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("赠优惠券完成");
+                logger.debug("Coupon completion");
             }
 
         } catch (Exception e) {
-            logger.error("赠优惠券出错", e);
+            logger.error("Giving coupons wrong", e);
         }
 
     }
 
 
     /**
-     * 记录使用优惠券的金额
+     * Keep track of how much you spend on coupons
      *
      * @param orderDTO
      */
     private void addCouponPrice(OrderDTO orderDTO) {
         try {
 
-            //记录使用优惠券的金额
+            // Keep track of how much you spend on coupons
             OrderMetaDO orderMeta = new OrderMetaDO();
             orderMeta.setMetaKey(OrderMetaKeyEnum.COUPON_PRICE.name());
             orderMeta.setMetaValue("" + orderDTO.getPrice().getCouponPrice());
@@ -204,48 +204,48 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
             orderMetaManager.add(orderMeta);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("使用优惠券的金额完成");
+                logger.debug("Use the coupon amount to complete");
             }
 
         } catch (Exception e) {
-            logger.error("使用优惠券的金额出错", e);
+            logger.error("Incorrect amount of coupon used", e);
         }
 
     }
 
 
     /**
-     * 记录使用优惠券的金额
+     * Keep track of how much you spend on coupons
      *
      * @param orderDTO
      */
     private void addFullMinusPrice(OrderDTO orderDTO) {
         try {
 
-            //记录使用优惠券的金额
+            // Keep track of how much you spend on coupons
             OrderMetaDO orderMeta = new OrderMetaDO();
             orderMeta.setMetaKey(OrderMetaKeyEnum.FULL_MINUS.name());
             orderMeta.setMetaValue("" + orderDTO.getPrice().getFullMinus());
             orderMeta.setOrderSn(orderDTO.getSn());
             orderMetaManager.add(orderMeta);
             if (logger.isDebugEnabled()) {
-                logger.debug("订单满减金额入库完成");
+                logger.debug("Order full amount of the warehouse completed");
             }
         } catch (Exception e) {
-            logger.error("订单满减金额入库出错", e);
+            logger.error("There is an error in warehousing the order full and the amount reduced", e);
         }
 
     }
 
 
     /***
-     * 赠品入库
+     * The gifts into the Treasury
      * @param orderDTO
      */
     private void addGift(OrderDTO orderDTO) {
 
         try {
-            //赠品入库
+            // The gifts into the Treasury
             List<FullDiscountGiftDO> giftList = orderDTO.getGiftList();
             OrderMetaDO giftMeta = new OrderMetaDO();
             giftMeta.setMetaKey(OrderMetaKeyEnum.GIFT.name());
@@ -255,11 +255,11 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
             this.orderMetaManager.add(giftMeta);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("赠品入库完成");
+                logger.debug("Free gift storage completed");
             }
 
         } catch (Exception e) {
-            logger.error("赠品入库出错", e);
+            logger.error("Gift entry error", e);
         }
 
 
@@ -267,13 +267,13 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
 
 
     /**
-     * 记录日志
+     * log
      *
      * @param orderDTO
      */
     private void addLog(OrderDTO orderDTO) {
         try {
-            //付款单
+            // Payment order
             PayLog payLog = new PayLog();
             payLog.setPayLogSn(tradeSnCreator.generatePayLogSn());
             payLog.setOrderSn(orderDTO.getSn());
@@ -284,11 +284,11 @@ public class OrderMetaConsumer implements TradeIntoDbEvent {
             this.payLogManager.add(payLog);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("日志入库完成");
+                logger.debug("Logs are imported into the database");
             }
 
         } catch (Exception e) {
-            logger.error("日志入库出错", e);
+            logger.error("The log entry failed. Procedure", e);
         }
 
     }

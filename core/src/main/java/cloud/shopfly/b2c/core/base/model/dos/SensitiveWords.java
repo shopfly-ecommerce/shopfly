@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 敏感词实体
+ * Sensitive word entity
  *
  * @author fk
  * @version v1.0
@@ -44,29 +44,29 @@ public class SensitiveWords implements Serializable {
     private static final long serialVersionUID = 1245656010769588L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 敏感词名称
+     * Sensitive word name
      */
     @Column(name = "word_name")
-    @ApiModelProperty(name = "word_name", value = "敏感词名称", required = true)
-    @NotEmpty(message = "敏感词必填")
+    @ApiModelProperty(name = "word_name", value = "Sensitive word name", required = true)
+    @NotEmpty(message = "Sensitive words mandatory")
     private String wordName;
     /**
-     * 创建时间
+     * Last update
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "创建时间", hidden = true)
+    @ApiModelProperty(name = "create_time", value = "Last update", hidden = true)
     private Long createTime;
     /**
-     * 删除状态  1正常 0 删除
+     * Delete the state1normal0 delete
      */
     @Column(name = "is_delete")
-    @ApiModelProperty(name = "is_delete", value = "删除状态  1正常 0 删除", hidden = true)
+    @ApiModelProperty(name = "is_delete", value = "Delete the state1normal0 delete", hidden = true)
     private Integer isDelete;
 
     @PrimaryKeyField

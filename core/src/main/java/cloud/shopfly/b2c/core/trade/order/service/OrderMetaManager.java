@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.trade.order.model.enums.OrderMetaKeyEnum;
 import java.util.List;
 
 /**
- * 订单元信息
+ * Order meta-information
  *
  * @author Snow create in 2018/6/27
  * @version v2.0
@@ -30,14 +30,14 @@ import java.util.List;
 public interface OrderMetaManager {
 
     /**
-     * 添加
+     * add
      *
      * @param orderMetaDO
      */
     void add(OrderMetaDO orderMetaDO);
 
     /**
-     * 读取订单元信息
+     * Read order meta information
      *
      * @param orderSn
      * @param metaKey
@@ -46,7 +46,7 @@ public interface OrderMetaManager {
     String getMetaValue(String orderSn, OrderMetaKeyEnum metaKey);
 
     /**
-     * 读取order meta列表
+     * readorder metaThe list of
      *
      * @param orderSn
      * @return
@@ -54,7 +54,7 @@ public interface OrderMetaManager {
     List<OrderMetaDO> list(String orderSn);
 
     /**
-     * 修改订单元信息
+     * Example Modify order meta information
      * @param orderSn
      * @param metaKey
      * @param metaValue

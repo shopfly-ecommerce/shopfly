@@ -22,7 +22,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 购物车—商品VO
+ * The shopping cart—productVO
  *
  * @author Snow
  * @version v2.0
@@ -32,10 +32,10 @@ import java.io.Serializable;
 @SuppressWarnings("AlibabaPojoMustOverrideToString")
 public class TradeConvertGoodsVO implements Serializable {
 
-    @ApiModelProperty(value = "运费模板id")
+    @ApiModelProperty(value = "The freight templateid")
     private Integer templateId;
 
-    @ApiModelProperty(name = "last_modify", value = "商品最后修改时间")
+    @ApiModelProperty(name = "last_modify", value = "The last modification time of the product")
     private Long lastModify;
 
 

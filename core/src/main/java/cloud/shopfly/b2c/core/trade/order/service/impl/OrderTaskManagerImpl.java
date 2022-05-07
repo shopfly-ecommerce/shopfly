@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 订单任务
+ * Order task
  *
  * @author Snow create in 2018/7/13
  * @version v2.0
@@ -78,8 +78,8 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
         for (Map map : list) {
             CancelVO cancel = new CancelVO();
             cancel.setOrderSn(map.get("sn").toString());
-            cancel.setReason("超时未付款");
-            cancel.setOperator("系统检测");
+            cancel.setReason("Overdue payment");
+            cancel.setOperator("System testing");
             this.orderOperateManager.cancel(cancel, OrderPermission.client);
         }
 
@@ -89,7 +89,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void rogTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
-        //系统时间
+        // The system time
         long unixTime = DateUtil.getDateline();
         int time = this.dayConversionSecond(settingVO.getRogOrderDay());
 
@@ -98,7 +98,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
         for (Map map : list) {
             RogVO rog = new RogVO();
             rog.setOrderSn(map.get("sn").toString());
-            rog.setOperator("系统检测");
+            rog.setOperator("System testing");
             this.orderOperateManager.rog(rog, OrderPermission.client);
         }
 
@@ -108,25 +108,25 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void completeTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
-        //系统时间
+        // The system time
         long unixTime = DateUtil.getDateline();
         int time = this.dayConversionSecond(settingVO.getCompleteOrderDay());
 
         String sql = "select sn from es_order where signing_time+?<? and  payment_type!=? and ((ship_status=?  and order_status!=?) or order_status= ?)";
-        // 查询所有非货到付款并且订单状态为已收货的订单
+        // Query all non-cod orders with received order status
         List<Map> list = this.daoSupport.queryForList(sql, time, unixTime,
                 PaymentTypeEnum.COD.value(), ShipStatusEnum.SHIP_ROG.value(), OrderStatusEnum.COMPLETE.value(), OrderStatusEnum.CANCELLED.value());
 
-        // 货到付款的，确认收款之后n天为完成
+        // Payment on delivery shall be completed n days after confirmation of payment
         sql = "select sn from es_order where signing_time+?<? and payment_type=? and ((pay_status=?  and order_status!=?) or order_status= ?);";
-        // 查询所有货到付款并且订单状态为已收货的订单
+        // Query all cash on delivery orders with received order status
         List<Map> list2 = this.daoSupport.queryForList(sql, time, unixTime,
                 PaymentTypeEnum.COD.value(), PayStatusEnum.PAY_YES.value(), OrderStatusEnum.COMPLETE.value(), OrderStatusEnum.CANCELLED.value());
         list.addAll(list2);
         for (Map map : list) {
             CompleteVO complete = new CompleteVO();
             complete.setOrderSn(map.get("sn").toString());
-            complete.setOperator("系统检测");
+            complete.setOperator("System testing");
             this.orderOperateManager.complete(complete, OrderPermission.client);
         }
     }
@@ -150,12 +150,12 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void serviceTask() {
         OrderSettingVO settingVO = this.getOrderSetting();
-        //系统时间
+        // The system time
         long unixTime = DateUtil.getDateline();
         int time = this.dayConversionSecond(settingVO.getServiceExpiredDay());
 
         String sql = "select sn from es_order where complete_time+?<? and order_status=? and items_json like ?";
-        // 查询所有订单状态为已完成的订单并且是未申请售后的订单
+        // Query all orders whose status is completed and has not applied for after-sale orders
         List<Map> list = this.daoSupport.queryForList(sql, time, unixTime, OrderStatusEnum.COMPLETE.value(),"%"+ ServiceStatusEnum.NOT_APPLY+"%");
         for (Map map : list) {
             this.orderOperateManager.updateOrderServiceStatus(map.get("sn").toString(), ServiceStatusEnum.EXPIRED.name());
@@ -186,7 +186,7 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
 
 
     /**
-     * 读取订单设置
+     * Read order Settings
      *
      * @return
      */
@@ -198,8 +198,8 @@ public class OrderTaskManagerImpl implements OrderTaskManager {
     }
 
     /**
-     * 将天数转换为相应的秒数
-     * 如果是测试模式，默认为1秒
+     * Convert days to the corresponding number of seconds
+     * In test mode, the default value is1seconds
      *
      * @param day
      * @return

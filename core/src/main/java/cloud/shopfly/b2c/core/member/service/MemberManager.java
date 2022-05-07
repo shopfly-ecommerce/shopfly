@@ -26,7 +26,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 会员业务层
+ * Member business Layer
  *
  * @author zh
  * @version v2.0
@@ -36,117 +36,117 @@ import java.util.List;
 public interface MemberManager {
 
     /**
-     * 获取会员
+     * Access to members
      *
-     * @param id 会员表主键
-     * @return Member  会员
+     * @param id Primary key of member table
+     * @return Member  members
      */
     Member getModel(Integer id);
 
     /**
-     * 根据用户名查询会员
+     * Query members by username
      *
-     * @param uname 用户名
-     * @return 会员信息
+     * @param uname Username
+     * @return The member information
      */
     Member getMemberByName(String uname);
 
     /**
-     * 根据用户手机号码查询会员
+     * Query members according to the users mobile phone number
      *
-     * @param mobile 手机号码
-     * @return 会员信息
+     * @param mobile Mobile phone number
+     * @return The member information
      */
     Member getMemberByMobile(String mobile);
 
     /**
-     * 根据邮箱获取用户
+     * Obtain users by mailbox
      *
-     * @param email 邮箱
-     * @return 会员信息
+     * @param email email
+     * @return The member information
      */
     Member getMemberByEmail(String email);
 
     /**
-     * 修改会员
+     * Modify the member
      *
-     * @param member 会员
-     * @param id     会员主键
-     * @return Member 会员
+     * @param member members
+     * @param id     Member of the primary key
+     * @return Member members
      */
     Member edit(Member member, Integer id);
 
     /**
-     * 会员退出
+     * Members exit
      *
-     * @param uid 会员id
+     * @param uid membersid
      */
     void logout(Integer uid);
 
     /**
-     * 获取当前会员的一些附属统计数
-     * 比如：会员订单数、会员商品收藏数
+     * Get some ancillary statistics for the current membership
+     * Such as：Membership order number、Member merchandise collection number
      *
-     * @return 会员统计信息
+     * @return Membership Statistics
      */
     MemberStatisticsDTO getMemberStatistics();
 
     /**
-     * 登陆次数归零
+     * The number of logins is zero
      */
     void loginNumToZero();
 
     /**
-     * 查询新的会员
+     * Search for new Members
      *
-     * @param length 查询多少个
-     * @return 新会员集合
+     * @param length How many queries
+     * @return Collection of New members
      */
     List<BackendMemberVO> newMember(Integer length);
 
     /**
-     * 修改会员登录次数
+     * Modify the login times of members
      *
-     * @param memberId 会员id
-     * @param now      时间戳
+     * @param memberId membersid
+     * @param now      The time stamp
      */
     void updateLoginNum(Integer memberId, Long now);
 
     /**
-     * 查询当前会员的积分
+     * Query current members points
      *
-     * @return 会员vo
+     * @return membersvo
      */
     MemberPointVO getMemberPoint();
 
     /**
-     * 联合登录后处理
+     * Joint login post-processing
      *
-     * @param member 会员信息
+     * @param member The member information
      * @param uuid   uuid
-     * @return 会员信息
+     * @return The member information
      */
     MemberVO connectLoginHandle(Member member, String uuid);
 
     /**
-     * 会员用户名密码登录
+     * Member login with username and password
      *
-     * @param username 用户名
-     * @param password 密码
-     * @return 是否登录成功
+     * @param username Username
+     * @param password Password
+     * @return Log in successfully.
      */
     MemberVO login(String username, String password);
 
     /**
-     * 会员手机号码登录
+     * Members mobile phone number login
      *
-     * @param mobile 手机号
-     * @return 是否登录成功
+     * @param mobile Mobile phone no.
+     * @return Log in successfully.
      */
     MemberVO login(String mobile);
 
     /**
-     * 登录会员后的处理
+     * Processing after login member
      *
      * @param member
      * @return
@@ -154,66 +154,66 @@ public interface MemberManager {
     MemberVO loginHandle(Member member);
 
     /**
-     * 验证会员账号密码的正确性(只验证不登录)
+     * Verify the validity of member account password(Authentication only, not login)
      *
-     * @param username 用户名/手机号/邮箱
-     * @param password 密码
-     * @return 正确 true 错误 false
+     * @param username Username/Mobile phone no./email
+     * @param password Password
+     * @return correcttrue errorfalse
      */
     Member validation(String username, String password);
 
     /**
-     * 生成用户名
+     * Generating user names
      *
-     * @param uname 用户填写的用户名
-     * @return 用户名数组
+     * @param uname User Specifies the user name
+     * @return Array of usernames
      */
     String[] generateMemberUname(String uname);
 
     /**
-     * 会员注册
+     * Registered members
      *
-     * @param member 会员
-     * @return 会员信息
+     * @param member members
+     * @return The member information
      */
     Member register(Member member);
 
     /**
-     * 根据账号获取当前会员的一些信息，供找回密码使用
+     * Obtain some information of current member according to account number for retrieving password
      *
-     * @param account 用户名/手机号/邮箱
-     * @return 会员信息
+     * @param account Username/Mobile phone no./email
+     * @return The member information
      */
     Member getMemberByAccount(String account);
 
     /**
-     * 查询会员列表
+     * Query membership list
      *
-     * @param memberQueryParam 查询条件
+     * @param memberQueryParam Query conditions
      * @return
      */
     Page list(MemberQueryParam memberQueryParam);
 
     /**
-     * 清除会员登录信息
+     * Clear member login information
      *
-     * @param memberId 会员id
+     * @param memberId membersid
      */
     void memberLoginout(Integer memberId);
 
     /**
-     * 根据会员ids获取会员的集合
+     * According to the membershipidsGets a collection of members
      *
-     * @param memberIds 会员id数组
-     * @return 会员信息
+     * @param memberIds membersidAn array of
+     * @return The member information
      */
     List<Member> getMemberByIds(Integer[] memberIds);
 
     /**
-     * APP会员手机号码登录
+     * APPMembers mobile phone number login
      *
-     * @param mobile 手机号
-     * @return 是否登录成功
+     * @param mobile Mobile phone no.
+     * @return Log in successfully.
      */
     MemberVO appLogin(String mobile);
 }

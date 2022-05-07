@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2018/12/19.
- * 运费计算器
+ * Freight calculator
  *
  * @author kingapex
  * @version 1.0
@@ -31,7 +31,7 @@ import java.util.List;
 public interface CartShipPriceCalculator {
 
     /**
-     * 计算运费
+     * Calculate the freight
      *
      * @param cartList
      */

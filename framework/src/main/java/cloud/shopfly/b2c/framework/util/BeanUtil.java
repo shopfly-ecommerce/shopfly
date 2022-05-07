@@ -23,20 +23,20 @@ import java.util.Set;
 /**
  * @author fk
  * @version v2.0
- * @Description: 对象之间转换操作
+ * @Description: Object conversion operations
  * @date 2018/4/1616:40
  * @since v7.0.0
  */
 public class BeanUtil {
 
     /**
-     * 根据Map中的key对应对象的属性来更新对象的值
+     * According to theMapIn thekeyTo update the value of the object corresponding to its properties
      * <li>
-     * updateProperties中的key必须跟bean中的字段名保持一致才能更新
+     * updatePropertiesIn thekeyMust be withbeanIn the字段名保持一致才能更新
      * </li>
      *
-     * @param updateProperties 要更新的字段以及值
-     * @param bean             要更新的对象
+     * @param updateProperties The fields and values to update
+     * @param bean             The object to update
      * @author wangyijie
      */
     public static <T> void copyPropertiesInclude(Map<String, Object> updateProperties, T bean) {
@@ -56,7 +56,7 @@ public class BeanUtil {
     }
 
     /**
-     * 复制属性
+     * Copy attributes
      * @param objectFrom
      * @param objectTo
      */

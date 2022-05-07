@@ -18,12 +18,12 @@ package cloud.shopfly.b2c.core.payment.plugin.weixin.signaturer.model;
 import java.io.Serializable;
 
 /**
- * 微信jsapi 访问票据
+ * WeChatjsapi Access notes
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-22 上午11:55
+ * 2019-02-22 In the morning11:55
  */
 public class WechatJsapiTicket implements Serializable {
 
@@ -33,7 +33,7 @@ public class WechatJsapiTicket implements Serializable {
      */
     private String jsapiTicket;
     /**
-     * expires_in 有效时间
+     * expires_in Valid time
      */
     private Integer expires;
 

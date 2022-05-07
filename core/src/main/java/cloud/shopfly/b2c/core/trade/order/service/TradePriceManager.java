@@ -16,20 +16,20 @@
 package cloud.shopfly.b2c.core.trade.order.service;
 
 /**
- * 交易价格业务接口
+ * Transaction price business interface
  *
  * @author kingapex
  * @version v2.0
  * @since v7.0.0
- * 2017年3月23日上午10:01:30
+ * 2017years3month23The morning of10:01:30
  */
 public interface TradePriceManager {
 
 
     /**
-     * 未付款的订单，商家修改订单金额，同时修改交易价格
+     * For unpaid orders, the merchant modifies the order amount and the transaction price at the same time
      *
-     * @param tradeSn       交易编号
+     * @param tradeSn       Transaction number
      * @param tradePrice
      * @param discountPrice
      */

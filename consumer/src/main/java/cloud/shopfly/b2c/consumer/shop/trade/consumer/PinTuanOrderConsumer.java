@@ -26,9 +26,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by kingapex on 2019-01-25.
- * 拼团订单消费者<br/>
- * 如果是拼团订单，检测相应的拼团活动是否已经参团成功<br/>
- * 如果成功，要更新相应数据
+ * Group order consumers<br/>
+ * If it is a group order, check whether the corresponding group activity has been successful<br/>
+ * If successful, the corresponding data is updated
  *
  * @author kingapex
  * @version 1.0
@@ -44,7 +44,7 @@ public class PinTuanOrderConsumer implements OrderStatusChangeEvent {
     @Override
     public void orderChange(OrderStatusChangeMsg orderMessage) {
 
-        //对已付款的订单
+        // For paid orders
         if (orderMessage.getNewStatus().equals(OrderStatusEnum.PAID_OFF)) {
             OrderDO orderDO = orderMessage.getOrderDO();
             if (orderDO.getOrderType().equals(OrderTypeEnum.pintuan.name())) {

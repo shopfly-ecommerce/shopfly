@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 商品标签业务层
+ * Commodity label business layer
  *
  * @author fk
  * @version v2.0
@@ -33,7 +33,7 @@ public interface TagsManager {
 
 
     /**
-     * 查询某个标签下固定数量的商品
+     * Query a fixed number of items under a label
      *
      * @param num
      * @param mark
@@ -42,16 +42,16 @@ public interface TagsManager {
     List<GoodsSelectLine> queryTagGoods(Integer num, String mark);
 
     /**
-     * 查询商品标签列表
+     * Example Query the commodity label list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 查询某标签下的商品
+     * Query items under a label
      *
      * @param tagId
      * @param pageNo
@@ -61,7 +61,7 @@ public interface TagsManager {
     Page queryTagGoods(Integer tagId, Integer pageNo, Integer pageSize);
 
     /**
-     * 保存标签商品
+     * Save labelled goods
      *
      * @param tagId
      * @param goodsIds
@@ -71,7 +71,7 @@ public interface TagsManager {
 
 
     /**
-     * 查询一个标签
+     * Querying a label
      * @param id
      * @return
      */

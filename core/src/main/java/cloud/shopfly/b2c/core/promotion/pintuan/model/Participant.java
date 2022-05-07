@@ -21,7 +21,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Created by kingapex on 2019-01-24.
- * 参团者
+ * CanTuanZhe
  *
  * @author kingapex
  * @version 1.0
@@ -34,16 +34,16 @@ public class Participant {
         isMaster = 0;
     }
 
-    @ApiModelProperty(name = "id", value = "会员id")
+    @ApiModelProperty(name = "id", value = "membersid")
     private Integer id;
 
-    @ApiModelProperty(name = "name", value = "会员名")
+    @ApiModelProperty(name = "name", value = "Member name")
     private String name;
 
-    @ApiModelProperty(name = "face", value = "头像")
+    @ApiModelProperty(name = "face", value = "Head portrait")
     private String face;
 
-    @ApiModelProperty(name = "is_master", value = "是否是团长,1是，0否")
+    @ApiModelProperty(name = "is_master", value = "Is it the regimental leader?,1Is that,0no")
     private Integer isMaster;
 
 

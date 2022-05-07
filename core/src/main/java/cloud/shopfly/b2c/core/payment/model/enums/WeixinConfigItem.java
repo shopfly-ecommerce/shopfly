@@ -18,32 +18,32 @@ package cloud.shopfly.b2c.core.payment.model.enums;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信客户端使用配置参数
+ * @Description: Wechat client uses configuration parameters
  * @date 2018/4/11 17:05
  * @since v7.0.0
  */
 public enum WeixinConfigItem {
 
     /**
-     * 商户号MCHID
+     * Merchants,MCHID
      */
-    mchid("商户号MCHID"),
+    mchid("Merchants,MCHID"),
     /**
      * APPID
      */
     appid("APPID"),
     /**
-     * API密钥(key)
+     * APIThe key(key)
      */
-    key("API密钥(key)"),
+    key("APIThe key(key)"),
     /**
-     * 应用密钥(AppScret)
+     * Application of key(AppScret)
      */
-    app_secret("应用密钥(AppScret)"),
+    app_secret("Application of key(AppScret)"),
     /**
-     * 证书路径
+     * The certificate path
      */
-    p12_path("证书路径");
+    p12_path("The certificate path");
 
     private String text;
 

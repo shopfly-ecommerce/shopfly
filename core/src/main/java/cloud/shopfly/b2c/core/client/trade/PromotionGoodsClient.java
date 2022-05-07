@@ -16,17 +16,17 @@
 package cloud.shopfly.b2c.core.client.trade;
 
 /**
- * 促销活动客户端
+ * Promotional campaign client
  *
  * @author zh
  * @version v7.0
- * @date 19/3/28 上午11:10
+ * @date 19/3/28 In the morning11:10
  * @since v7.0
  */
 public interface PromotionGoodsClient {
 
     /**
-     * 删除促销活动商品
+     * Delete promotional items
      * @param goodsId
      */
     void delPromotionGoods(Integer goodsId);

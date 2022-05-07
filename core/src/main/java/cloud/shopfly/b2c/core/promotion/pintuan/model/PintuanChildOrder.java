@@ -32,7 +32,7 @@ import java.io.Serializable;
 
 
 /**
- * 拼团子订单实体
+ * Group sub order entity
  *
  * @author admin
  * @version vv1.0.0
@@ -47,71 +47,71 @@ public class PintuanChildOrder implements Serializable {
     private static final long serialVersionUID = 2898134410030384L;
 
     /**
-     * 子订单id
+     * The child ordersid
      */
     @Id(name = "child_order_id")
     @ApiModelProperty(hidden = true)
     private Integer childOrderId;
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @NotEmpty(message = "订单编号不能为空")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = true)
+    @NotEmpty(message = "The order number cannot be blank")
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = true)
     private String orderSn;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "member_id", value = "会员id", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "member_id", value = "membersid", required = false)
     private Integer memberId;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "sku_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "sku_id", value = "会员id", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "sku_id", value = "membersid", required = false)
     private Integer skuId;
     /**
-     * 拼团活动id
+     * Spell group activitiesid
      */
     @Column(name = "pintuan_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "pintuan_id", value = "拼团活动id", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "pintuan_id", value = "Spell group activitiesid", required = false)
     private Integer pintuanId;
     /**
-     * 订单状态
-     * wait 新订单等待付款
-     * pay_off 已支付等待成团
-     * formed 成团
+     * Status
+     * wait New orders are waiting for payment
+     * pay_off Payment has been made waiting for the group
+     * formed clouds
      */
     @Column(name = "order_status")
-    @ApiModelProperty(name = "order_status", value = "订单状态", required = false)
+    @ApiModelProperty(name = "order_status", value = "Status", required = false)
     private String orderStatus;
     /**
-     * 主订单id
+     * The main orderid
      */
     @Column(name = "order_id")
-    @ApiModelProperty(name = "order_id", value = "主订单id", required = false)
+    @ApiModelProperty(name = "order_id", value = "The main orderid", required = false)
     private Integer orderId;
     /**
-     * 买家名称
+     * Name of the buyer
      */
     @Column(name = "member_name")
-    @ApiModelProperty(name = "member_name", value = "买家名称", required = false)
+    @ApiModelProperty(name = "member_name", value = "Name of the buyer", required = false)
     private String memberName;
 
     @Column(name = "origin_price")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "origin_price", value = "原价", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "origin_price", value = "The original price", required = false)
     private Double originPrice;
     /**
-     * 拼团价
+     * Spell group price
      */
     @Column(name = "sales_price")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "sales_price", value = "拼团价", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "sales_price", value = "Spell group price", required = false)
     private Double salesPrice;
 
 

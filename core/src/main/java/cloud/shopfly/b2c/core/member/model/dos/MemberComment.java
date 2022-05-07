@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 评论实体
+ * Comment on the entity
  *
  * @author fk
  * @version v1.0
@@ -43,16 +43,16 @@ public class MemberComment implements Serializable {
     private static final long serialVersionUID = 4761968067308018L;
 
     /**
-     * 评论主键
+     * Comment on the primary key
      */
     @Id(name = "comment_id")
     @ApiModelProperty(hidden = true)
     private Integer commentId;
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", required = false)
+    @ApiModelProperty(name = "goods_id", value = "productid", required = false)
     private Integer goodsId;
     /**
      * skuid
@@ -61,98 +61,98 @@ public class MemberComment implements Serializable {
     @ApiModelProperty(name = "sku_id", value = "skuid", required = false)
     private Integer skuId;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersid", required = false)
     private Integer memberId;
     /**
-     * 会员名称
+     * Member name
      */
     @Column(name = "member_name")
-    @ApiModelProperty(name = "member_name", value = "会员名称", required = false)
+    @ApiModelProperty(name = "member_name", value = "Member name", required = false)
     private String memberName;
     /**
-     * 会员头像
+     * Member of the head
      */
     @Column(name = "member_face")
-    @ApiModelProperty(name = "member_face", value = "会员头像", required = false)
+    @ApiModelProperty(name = "member_face", value = "Member of the head", required = false)
     private String memberFace;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "goods_name", value = "Name", required = false)
     private String goodsName;
     /**
-     * 评论内容
+     * Comment on the content
      */
     @Column(name = "content")
-    @ApiModelProperty(name = "content", value = "评论内容", required = false)
+    @ApiModelProperty(name = "content", value = "Comment on the content", required = false)
     private String content;
     /**
-     * 评论时间
+     * Comment on time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "评论时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Comment on time", required = false)
     private Long createTime;
     /**
-     * 是否有图片 1 有 0 没有
+     * Is there a picture1 There are0 没There are
      */
     @Column(name = "have_image")
-    @ApiModelProperty(name = "have_image", value = "是否有图片 1 有 0 没有", required = false)
+    @ApiModelProperty(name = "have_image", value = "Is there a picture1 There are0 没There are", required = false)
     private Integer haveImage;
     /**
-     * 状态  1 正常 0 删除
+     * Status1 normal0 delete
      */
     @Column(name = "status")
-    @ApiModelProperty(name = "status", value = "状态  1 正常 0 删除 ", required = false)
+    @ApiModelProperty(name = "status", value = "Status1 normal0 delete", required = false)
     private Integer status;
     /**
-     * 好中差评
+     * Good to bad
      */
     @Column(name = "grade")
-    @ApiModelProperty(name = "grade", value = "好中差评", required = false)
+    @ApiModelProperty(name = "grade", value = "Good to bad", required = false)
     private String grade;
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
     /**
-     * 是否回复 1 是 0 否
+     * Whether the reply1 is0 no
      */
     @Column(name = "reply_status")
-    @ApiModelProperty(name = "reply_status", value = "是否回复 1 是 0 否", required = false)
+    @ApiModelProperty(name = "reply_status", value = "Whether the reply1 is0 no", required = false)
     private Integer replyStatus;
 
     /**
-     * 追加评论状态 0：未追加，1：已追加
+     * Append Comment Status0：Additional,1：Have an additional
      */
     @Column(name = "additional_status")
-    @ApiModelProperty(name = "additional_status", value = "追加评论状态 0：未追加，1：已追加", required = false)
+    @ApiModelProperty(name = "additional_status", value = "Append Comment Status0：Additional,1：Have an additional", required = false)
     private Integer additionalStatus;
 
     /**
-     * 追加评论内容
+     * Additional comments
      */
     @Column(name = "additional_content")
-    @ApiModelProperty(name = "additional_content", value = "追加评论内容", required = false)
+    @ApiModelProperty(name = "additional_content", value = "Additional comments", required = false)
     private String additionalContent;
 
     /**
-     * 追加评论时间
+     * Additional comment time
      */
     @Column(name = "additional_time")
-    @ApiModelProperty(name = "additional_time", value = "追加评论时间", required = false)
+    @ApiModelProperty(name = "additional_time", value = "Additional comment time", required = false)
     private Long additionalTime;
 
     /**
-     * 追加的评论是否上传了图片 0：未上传，1：已上传
+     * Whether the appended comment has uploaded a picture0：Failed to upload,1：uploaded
      */
     @Column(name = "additional_have_image")
-    @ApiModelProperty(name = "additional_have_image", value = "追加的评论是否上传了图片 0：未上传，1：已上传", required = false)
+    @ApiModelProperty(name = "additional_have_image", value = "Whether the appended comment has uploaded a picture0：Failed to upload,1：uploaded", required = false)
     private Integer additionalHaveImage;
 
     @PrimaryKeyField

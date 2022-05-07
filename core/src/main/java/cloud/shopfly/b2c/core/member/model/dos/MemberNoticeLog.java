@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 会员站内消息历史实体
+ * Member site message history entity
  *
  * @author zh
  * @version v7.0.0
@@ -37,7 +37,7 @@ import java.io.Serializable;
  */
 
 /**
- * 会员站内消息历史实体
+ * Member site message history entity
  *
  * @author zh
  * @version v7.0.0
@@ -52,52 +52,52 @@ public class MemberNoticeLog implements Serializable {
     private static final long serialVersionUID = 2703003634632585L;
 
     /**
-     * 会员历史消息id
+     * Member Historyid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersid", required = false)
     private Integer memberId;
     /**
-     * 站内信内容
+     * Station message content
      */
     @Column(name = "content")
-    @ApiModelProperty(name = "content", value = "站内信内容", required = false)
+    @ApiModelProperty(name = "content", value = "Station message content", required = false)
     private String content;
     /**
-     * 发送时间
+     * Send time
      */
     @Column(name = "send_time")
-    @ApiModelProperty(name = "send_time", value = "发送时间", required = false)
+    @ApiModelProperty(name = "send_time", value = "Send time", required = false)
     private Long sendTime;
     /**
-     * 是否删除，0删除，1没有删除
+     * Whether to delete,0To delete,1There is no delete
      */
     @Column(name = "is_del")
-    @ApiModelProperty(name = "is_del", value = "是否删除，0删除，1没有删除", required = false)
+    @ApiModelProperty(name = "is_del", value = "Whether to delete,0To delete,1There is no delete", required = false)
     private Integer isDel;
     /**
-     * 是否已读，0未读，1已读
+     * Has it been read,0Not read,1read
      */
     @Column(name = "is_read")
-    @ApiModelProperty(name = "is_read", value = "是否已读，0未读，1已读", required = false)
+    @ApiModelProperty(name = "is_read", value = "Has it been read,0Not read,1read", required = false)
     private Integer isRead;
     /**
-     * 接收时间
+     * Receiving time
      */
     @Column(name = "receive_time")
-    @ApiModelProperty(name = "receive_time", value = "接收时间", required = false)
+    @ApiModelProperty(name = "receive_time", value = "Receiving time", required = false)
     private Long receiveTime;
     /**
-     * 标题
+     *  title
      */
     @Column(name = "title")
-    @ApiModelProperty(name = "title", value = "标题", required = false)
+    @ApiModelProperty(name = "title", value = " title", required = false)
     private String title;
 
     @PrimaryKeyField

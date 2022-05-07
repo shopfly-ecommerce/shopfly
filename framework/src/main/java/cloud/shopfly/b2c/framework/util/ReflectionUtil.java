@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 反射机制工具类
+ * Reflection mechanism utility class
  * @author Snow create in 2018/3/21
  * @version v2.0
  * @since v7.0.0
@@ -38,7 +38,7 @@ public class ReflectionUtil {
 
 
 	/**
-	 * 将po对象中有属性和值转换成map
+	 * willpoObjects have properties and values converted tomap
 	 * @param po
 	 * @return
 	 */
@@ -59,7 +59,7 @@ public class ReflectionUtil {
 
 
 	/**
-	 * 遍历实体类的属性和数据类型以及属性值
+	 * Iterates through the attributes and data types of the entity class as well as the attribute values
 	 * @param model
 	 * @throws NoSuchMethodException
 	 * @throws IllegalAccessException
@@ -72,21 +72,21 @@ public class ReflectionUtil {
 
 		try {
 			List<Field> fields = new ArrayList<>();
-			//获取所有属性(包含父类)
+			// Get all attributes (including parent classes)
 			fields = getParentField(model.getClass(),fields);
 
-			/*** 修改获取不到父类属性的问题 **********end*/
+			/*** Fix the problem of not getting a parent class attribute**********end*/
 
 
-			//属性名
+			// The property name
 			List columnName = new ArrayList();
-			//属性值
+			// Attribute values
 			List columnValue = new ArrayList();
 
 			/**
-			 * 遍历所有的属性，过滤掉满足以下条件的属性。
-			 * 1、属性值为null的数据
-			 * 2、没有添加自定义标签 @id 和 @Column 的属性
+			 * Iterate through all attributes and filter out attributes that meet the following criteria.
+			 * 1、Attribute values fornullThe data of
+			 * 2、No custom label is added@id and@Column The properties of the
 			 */
 			for (Field field:fields ) {
 
@@ -119,7 +119,7 @@ public class ReflectionUtil {
 	}
 
 	/**
-	 * 根据Class读取主键的字段名
+	 * According to theClassRead the field name of the primary key
 	 * @param clazz
 	 * @return
 	 */
@@ -127,12 +127,12 @@ public class ReflectionUtil {
 		String  columnId = "";
 		Field[] fields = clazz.getDeclaredFields();
 		for (Field field : fields) {
-			//主键字段名
+			// Primary key field name
 			if(field.isAnnotationPresent(Id.class)){
 				Id id =  field.getAnnotation(Id.class);
 				String columnIdName = id.name();
 
-				//是否自定义的属性名
+				// Whether the attribute name is custom
 				if(StringUtil.isEmpty(columnIdName)){
 					columnId = field.getName();
 				}else{
@@ -147,7 +147,7 @@ public class ReflectionUtil {
 
 
 	/**
-	 * 递归获取所有父类的属性
+	 * Recursively gets the attributes of all the parent classes
 	 * @param calzz
 	 * @param list
 	 * @return
@@ -167,7 +167,7 @@ public class ReflectionUtil {
 	}
 
 	/**
-	 * 将数组转换成List
+	 * Convert the array toList
 	 * @param fields
 	 * @return
 	 * add by liuyulei 2019-02-14

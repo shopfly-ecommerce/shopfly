@@ -16,32 +16,32 @@
 package cloud.shopfly.b2c.core.aftersale.model.enums;
 
 /**
- * 退款(货)流程枚举类
+ * A refund(cargo)Process enumeration class
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午9:25 2018/5/3
+ * @since v7.0 In the morning9:25 2018/5/3
  */
 public enum RefundStatusEnum {
 
-    //申请中
-    APPLY("申请中"),
-    //申请通过
-    PASS("申请通过"),
-    //审核拒绝
-    REFUSE("审核拒绝"),
-    //退货入库
-    STOCK_IN("退货入库"),
-    //待人工处理
-    WAIT_FOR_MANUAL("待人工处理"),
-    //申请取消
-    CANCEL("申请取消"),
-    //退款中
-    REFUNDING("退款中"),
-    //退款失败
-    REFUNDFAIL("退款失败"),
-    //完成
-    COMPLETED("完成");
+    // In the application
+    APPLY("In the application"),
+    // Apply for through
+    PASS("Apply for through"),
+    // Audit refused to
+    REFUSE("Audit refused to"),
+    // Return of the Treasury
+    STOCK_IN("Return of the Treasury"),
+    // To be handled manually
+    WAIT_FOR_MANUAL("To be handled manually"),
+    // To apply for cancellation
+    CANCEL("To apply for cancellation"),
+    // A refund of
+    REFUNDING("A refund of"),
+    // Refund failure
+    REFUNDFAIL("Refund failure"),
+    // complete
+    COMPLETED("complete");
 
     private String description;
 

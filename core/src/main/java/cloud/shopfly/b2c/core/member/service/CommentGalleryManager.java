@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 评论图片业务层
+ * Comment on the image business layer
  *
  * @author fk
  * @version v1.0
@@ -30,19 +30,19 @@ public interface CommentGalleryManager {
 
 
     /**
-     * 添加评论图片
+     * Add comment images
      *
-     * @param commentId 评论ID
-     * @param list      图片集合
-     * @param imgBelong 图片所属 0：初评，1：追评
+     * @param commentId commentsID
+     * @param list      Image collection
+     * @param imgBelong Image host0：The intern,1：After a review of the
      */
     void add(Integer commentId, List<String> list, Integer imgBelong);
 
     /**
-     * 获取评论图片
+     * Get a comment picture
      *
-     * @param commentIds 评论ID组
-     * @param imgBelong  评论图片所属 0：初评，1：追评
+     * @param commentIds commentsIDgroup
+     * @param imgBelong  Comment picture ownership0：The intern,1：After a review of the
      * @return
      */
     Map<Integer, List<String>> getGalleryByCommentIds(List<Integer> commentIds, Integer imgBelong);

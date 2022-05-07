@@ -18,24 +18,24 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author fk
  * @version v1.0
- * @Description: 评论评分枚举
+ * @Description: Enumeration of comment scores
  * @date 2018/5/3 11:12
  * @since v7.0.0
  */
 public enum CommentGrade {
 
     /**
-     * 好评
+     * Praise
      */
-    good("好评"),
+    good("Praise"),
     /**
-     * 中评
+     * In the evaluation of
      */
-    neutral("中评"),
+    neutral("In the evaluation of"),
     /**
-     * 差评
+     * Bad review
      */
-    bad("差评");
+    bad("Bad review");
 
     private String description;
 

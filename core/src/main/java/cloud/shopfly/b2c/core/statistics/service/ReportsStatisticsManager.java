@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商家中心，运营报告管理接口
+ * Business center, operation report management interface
  *
  * @author mengyuanming
  * @version 2.0
@@ -34,62 +34,62 @@ import java.util.Map;
 public interface ReportsStatisticsManager {
 
     /**
-     * 销量统计，下单金额图表数据
+     * Sales statistics, order amount chart data
      *
-     * @param searchCriteria 统计参数，时间
-     * @return MultipleChart 复合图表数据
+     * @param searchCriteria Statistical parameters, time
+     * @return MultipleChart Composite chart data
      */
     MultipleChart getSalesMoney(SearchCriteria searchCriteria);
 
     /**
-     * 获取销售统计  下单量图表数据
+     * Obtain sales statistics order volume chart data
      *
-     * @param searchCriteria 统计参数，时间
-     * @return MultipleChart 复合图表数据
+     * @param searchCriteria Statistical parameters, time
+     * @return MultipleChart Composite chart data
      */
     MultipleChart getSalesNum(SearchCriteria searchCriteria);
 
     /**
-     * 获取销售分析  下单金额 分页数据
+     * Obtain paging data of sales analysis order amount
      *
-     * @param searchCriteria 统计参数，时间
-     * @param pageNo         查询页码
-     * @param pageSize       分页数据长度
-     * @return Page 分页数据
+     * @param searchCriteria Statistical parameters, time
+     * @param pageNo         The query page
+     * @param pageSize       Paging data length
+     * @return Page Paging data
      */
     Page getSalesPage(SearchCriteria searchCriteria, int pageNo, int pageSize);
 
     /**
-     * 获取销售分析  数据小结
+     * Obtain summary of sales analysis data
      *
-     * @param searchCriteria 统计参数，时间
-     * @return Map 查询时间内下单金额之和与下单量之和
+     * @param searchCriteria Statistical parameters, time
+     * @return Map The sum of the order amount and the order quantity within the query time
      */
     Map getSalesSummary(SearchCriteria searchCriteria);
 
     /**
-     * 区域分析
+     * Regional analysis
      *
-     * @param searchCriteria 时间相关参数
-     * @param type           获取的数据类型
-     * @return List 地图数据
+     * @param searchCriteria Time dependent parameter
+     * @param type           The type of data to get
+     * @return List Map data
      */
     List regionsMap(SearchCriteria searchCriteria, String type);
 
     /**
-     * 购买分析，客单价分布
+     * Purchase analysis, customer unit price distribution
      *
-     * @param searchCriteria 时间相关参数
-     * @param ranges         价格区间，只接受整数
-     * @return SimpleChart 简单图表数据
+     * @param searchCriteria Time dependent parameter
+     * @param ranges         Price range. Only round numbers are accepted
+     * @return SimpleChart Simple chart data
      */
     SimpleChart orderDistribution(SearchCriteria searchCriteria, Integer[] ranges);
 
     /**
-     * 购买分析，购买时段分析
+     * Buy analysis, buy period analysis
      *
-     * @param searchCriteria 时间相关参数
-     * @return SimpleChart 简单图表数据
+     * @param searchCriteria Time dependent parameter
+     * @return SimpleChart Simple chart data
      */
     SimpleChart purchasePeriod(SearchCriteria searchCriteria);
 

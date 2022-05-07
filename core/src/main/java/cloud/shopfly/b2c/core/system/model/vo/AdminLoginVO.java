@@ -16,38 +16,38 @@
 package cloud.shopfly.b2c.core.system.model.vo;
 
 /**
- * 管理员登录vo
+ * Administrator Loginvo
  *
  * @author zh
  * @version v7.0
- * @date 18/6/27 上午9:28
+ * @date 18/6/27 In the morning9:28
  * @since v7.0
  */
 
 public class AdminLoginVO {
     /**
-     * 平台管理员id
+     * Platform administratorid
      */
     private Integer uid;
     /**
-     * 管理员名称
+     * Administrator name
      */
     private String username;
     /**
-     * 部门
+     * department
      */
     private String department;
     /**
-     * 头像
+     * Head portrait
      */
     private String face;
 
     /**
-     * 角色id
+     * roleid
      */
     private Integer roleId;
     /**
-     * 是否是超级管理员
+     * Yes No Super administrator
      */
     private Integer founder;
     /**
@@ -55,7 +55,7 @@ public class AdminLoginVO {
      */
     private String accessToken;
     /**
-     * 刷新token
+     * The refreshtoken
      */
     private String refreshToken;
 

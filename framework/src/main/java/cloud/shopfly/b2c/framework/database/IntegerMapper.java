@@ -21,11 +21,11 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 /**
- * 整型mapper
+ * The integermapper
  * @author kingapex
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 public class IntegerMapper implements RowMapper<Integer> {
 	

@@ -37,11 +37,11 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: app信任登录相关API
+ * @Description: appTrusted login correlationAPI
  * @date 2018/11/6 10:28
  * @since v7.0.0
  */
-@Api(description = "app信任登录相关API")
+@Api(description = "appTrusted login correlationAPI")
 @RestController
 @RequestMapping("/passport")
 @Validated
@@ -56,79 +56,79 @@ public class PassportConnectAppBuyerController {
     @Autowired
     private MemberManager memberManager;
 
-    @ApiOperation(value = "获取app联合登录所需参数")
+    @ApiOperation(value = "To obtainappParameters required for federated login")
     @GetMapping("/connect/app/{type}/param")
-    @ApiImplicitParam(name = "type", value = "登录类型", required = true, dataType = "String", paramType = "path", allowableValues = "QQ,WEIBO,WECHAT,ALIPAY")
+    @ApiImplicitParam(name = "type", value = "Login type", required = true, dataType = "String", paramType = "path", allowableValues = "QQ,WEIBO,WECHAT,ALIPAY")
     public String getParam(@PathVariable("type") @ApiIgnore String type) {
         return connectManager.getParam(type);
     }
 
-    @ApiOperation(value = "检测openid是否绑定")
+    @ApiOperation(value = "detectionopenidWhether the binding")
     @GetMapping("/connect/app/{type}/openid")
     @ApiImplicitParam(name = "openid", value = "openid", required = true, dataType = "String", paramType = "query")
     public Map checkOpenid(@PathVariable("type") @ApiIgnore String type, @ApiIgnore String openid) {
         return connectManager.checkOpenid(type, openid);
     }
 
-    @ApiOperation(value = "APP获取支付宝登录授权SDK")
+    @ApiOperation(value = "APPObtain alipay login authorizationSDK")
     @GetMapping("/login-binder/ali/info")
     public String getAppInfoStr() {
         return connectManager.getAliInfo();
     }
 
 
-    @ApiOperation(value = "app手机短信登录绑定")
+    @ApiOperation(value = "appSMS login binding")
     @PostMapping("/sms-binder/app")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "openid", value = "第三方平的openid", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "type", value = "登录方式，可选有：qq、weixin、weibo、alipay", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "sms_code", value = "短信码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "uuid", value = "唯一标识", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "openid", value = "Third party flatopenid", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "The login mode is optional：qq、weixin、weibo、alipay", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "mobile", value = "Mobile phone number", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "sms_code", value = "SMS code", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "uuid", value = "A unique identifier", required = true, dataType = "String", paramType = "query"),
     })
     public Map smsBinder(String openid, String type, String mobile, String smsCode, String uuid) {
 
-        //验证手机验证码
+        // Verify the mobile phone verification code
         boolean isPass = smsClient.valid(SceneType.VALIDATE_MOBILE.name(), mobile, smsCode);
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "短信验证码错误");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The SMS verification code is incorrect");
         }
 
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.getMemberByMobile(mobile);
-        //校验当前会员是否存在
+        // Check whether the current member exists
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E123.code(), "当前会员不存在");
+            throw new ServiceException(MemberErrorCode.E123.code(), "Current member does not exist");
         }
 
         return connectManager.appBind(member, openid, type, uuid);
     }
 
-    @ApiOperation(value = "app用户名密码登录绑定")
+    @ApiOperation(value = "appUser name and password login binding")
     @PostMapping("/login-binder/app")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "openid", value = "第三方平的openid", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "type", value = "登录方式，可选有：qq、weixin、weibo、alipay", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "captcha", value = "图片验证码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "uuid", value = "唯一标识", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "openid", value = "Third party flatopenid", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "The login mode is optional：qq、weixin、weibo、alipay", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "username", value = "Username", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "Password", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "captcha", value = "Image verification code", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "uuid", value = "A unique identifier", required = true, dataType = "String", paramType = "query"),
     })
     public Map loginBinder(String openid, String type, String username, String password, String captcha, String uuid) {
 
-        //验证图片验证码
+        // Verify the image verification code
         boolean isPass = captchaClient.valid(uuid, captcha, SceneType.LOGIN.name());
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "图片验证码错误！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The image verification code is incorrect！");
         }
 
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.validation(username, password);
 
         return connectManager.appBind(member, openid, type, uuid);
     }
 
-    @ApiOperation(value = "app注册绑定api")
+    @ApiOperation(value = "appRegistered bindingapi")
     @PostMapping("/register-binder/app")
     public Map registerBinder(String openid, String type, String mobile, String captcha,String password, String uuid) {
 

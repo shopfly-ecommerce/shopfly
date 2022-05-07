@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 菜单表实体
+ * Menu table entities
  *
  * @author zh
  * @version v7.0.0
@@ -42,58 +42,58 @@ public class Menu implements Serializable {
     private static final long serialVersionUID = 3033586331756935L;
 
     /**
-     * 菜单id
+     * The menuid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 父id
+     * The fatherid
      */
     @Column(name = "parent_id")
-    @ApiModelProperty(name = "parent_id", value = "父id", required = false)
+    @ApiModelProperty(name = "parent_id", value = "The fatherid", required = false)
     private Integer parentId;
     /**
-     * 菜单标题
+     * The menu title
      */
     @Column(name = "title")
-    @ApiModelProperty(name = "title", value = "菜单标题", required = false)
+    @ApiModelProperty(name = "title", value = "The menu title", required = false)
     private String title;
     /**
-     * 菜单url
+     * The menuurl
      */
     @Column(name = "url")
-    @ApiModelProperty(name = "url", value = "菜单url", required = false)
+    @ApiModelProperty(name = "url", value = "The menuurl", required = false)
     private String url;
     /**
-     * 菜单唯一标识
+     * Menu unique identifier
      */
     @Column(name = "identifier")
-    @ApiModelProperty(name = "identifier", value = "菜单唯一标识", required = false)
+    @ApiModelProperty(name = "identifier", value = "Menu unique identifier", required = false)
     private String identifier;
     /**
-     * 权限表达式
+     * Permission expression
      */
     @Column(name = "auth_regular")
-    @ApiModelProperty(name = "auth_regular", value = "权限表达式", required = false)
+    @ApiModelProperty(name = "auth_regular", value = "Permission expression", required = false)
     private String authRegular;
     /**
-     * 删除标记
+     * Remove the tag
      */
     @Column(name = "delete_flag")
-    @ApiModelProperty(name = "delete_flag", value = "删除标记", required = false)
+    @ApiModelProperty(name = "delete_flag", value = "Remove the tag", required = false)
     private Integer deleteFlag;
     /**
-     * 菜单级别标识
+     * Menu level identification
      */
     @Column(name = "path")
-    @ApiModelProperty(name = "path", value = "菜单级别标识", required = false)
+    @ApiModelProperty(name = "path", value = "Menu level identification", required = false)
     private String path;
     /**
-     * 菜单级别
+     * Menu level
      */
     @Column(name = "grade")
-    @ApiModelProperty(name = "grade", value = "菜单级别", required = false)
+    @ApiModelProperty(name = "grade", value = "Menu level", required = false)
     private Integer grade;
 
     @PrimaryKeyField

@@ -20,11 +20,11 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 商品库存vo
+ * inventoryvo
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年9月7日 上午11:23:16
+ * 2017years9month7The morning of11:23:16
  */
 public class GoodsQuantityVO implements Cloneable{
 

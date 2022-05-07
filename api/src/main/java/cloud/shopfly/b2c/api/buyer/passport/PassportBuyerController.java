@@ -40,16 +40,16 @@ import java.util.Map;
 
 
 /**
- * 会员验证码处理
+ * Member verification code processing
  *
  * @author zh
  * @version v7.0
  * @since v7.0
- * 2018年3月23日 上午10:12:12
+ * 2018years3month23The morning of10:12:12
  */
 @RestController
 @RequestMapping("/passport")
-@Api(description = "会员其他处理API")
+@Api(description = "Other Handling of MembersAPI")
 @Validated
 public class PassportBuyerController {
 
@@ -61,24 +61,24 @@ public class PassportBuyerController {
     private SmsClient smsClient;
 
     @GetMapping(value = "/smscode/{mobile}")
-    @ApiOperation(value = "验证手机验证码")
+    @ApiOperation(value = "Verify the mobile phone verification code")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "scene", value = "业务类型", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "sms_code", value = "验证码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "scene", value = "Business types", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "sms_code", value = "captcha", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "mobile", value = "Mobile phone number", required = true, dataType = "String", paramType = "path"),
     })
-    public String checkSmsCode(@NotEmpty(message = "业务场景不能为空") String scene, @PathVariable("mobile") String mobile, @Valid @ApiIgnore @NotEmpty(message = "验证码不能为空") String smsCode) {
+    public String checkSmsCode(@NotEmpty(message = "Service scenarios cannot be empty") String scene, @PathVariable("mobile") String mobile, @Valid @ApiIgnore @NotEmpty(message = "The verification code cannot be empty") String smsCode) {
         boolean isPass = smsClient.valid(scene, mobile, smsCode);
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "短信验证码不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The SMS verification code is incorrect");
         }
         return null;
 
     }
 
     @GetMapping("/username/{username}")
-    @ApiOperation(value = "用户名重复校验")
-    @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String", paramType = "path")
+    @ApiOperation(value = "The user name is verified repeatedly")
+    @ApiImplicitParam(name = "username", value = "Username", required = true, dataType = "String", paramType = "path")
     public String checkUserName(@PathVariable("username") String username) {
         Member member = memberManager.getMemberByName(username);
         Map map = new HashMap(16);
@@ -93,12 +93,12 @@ public class PassportBuyerController {
 
 
     @GetMapping("/mobile/{mobile}")
-    @ApiOperation(value = "手机号重复校验")
-    @ApiImplicitParam(name = "mobile", value = "手机号", required = true, dataType = "String", paramType = "path")
+    @ApiOperation(value = "The mobile phone number is checked repeatedly")
+    @ApiImplicitParam(name = "mobile", value = "Mobile phone no.", required = true, dataType = "String", paramType = "path")
     public String checkMobile(@PathVariable("mobile") String mobile) {
         boolean isPass = Validator.isMobile(mobile);
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "手机号码格式不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The mobile phone number format is incorrect");
         }
         Member member = memberManager.getMemberByMobile(mobile);
         Map map = new HashMap(16);
@@ -111,14 +111,14 @@ public class PassportBuyerController {
     }
 
 
-    @ApiOperation(value = "刷新token")
+    @ApiOperation(value = "The refreshtoken")
     @PostMapping("/token")
-    @ApiImplicitParam(name = "refresh_token", value = "刷新token", required = true, dataType = "String", paramType = "query")
-    public String refreshToken(@ApiIgnore @NotEmpty(message = "刷新token不能为空") String refreshToken) {
+    @ApiImplicitParam(name = "refresh_token", value = "The refreshtoken", required = true, dataType = "String", paramType = "query")
+    public String refreshToken(@ApiIgnore @NotEmpty(message = "The refreshtokenCant be empty") String refreshToken) {
         try {
             return passportManager.exchangeToken(refreshToken);
         } catch (ExpiredJwtException e) {
-            throw new ServiceException(MemberErrorCode.E109.code(), "当前token已经失效");
+            throw new ServiceException(MemberErrorCode.E109.code(), "The currenttokenHave failed");
         }
     }
 }

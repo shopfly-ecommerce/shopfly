@@ -37,12 +37,12 @@ import java.util.Map;
 
 
 /**
- * 助通短信 插件
+ * MSM plug-in
  *
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2018年3月25日 下午2:42:20
+ * 2018years3month25On the afternoon2:42:20
  */
 @Component
 public class SmsZtPlugin implements SmsPlatform {
@@ -57,41 +57,41 @@ public class SmsZtPlugin implements SmsPlatform {
 
         try {
             if (StringUtil.isEmpty(phone) || StringUtil.isEmpty(content) || CollUtil.isEmpty(param)) {
-                logger.error("发送短信参数异常,请检查phone="+phone+" ,content="+content+" ,param= "+param);
+                logger.error("Parameters for sending SMS messages are abnormal,Please check thephone="+phone+" ,content="+content+" ,param= "+param);
                 return false;
             }
-            debugger.log("调起SmsZtPlugin", "参数为：", param.toString());
+            debugger.log("Tuned upSmsZtPlugin", "Parameters for：", param.toString());
             String urls = "https://api.mix2.zthysms.com/v2/sendSms";
             long tKey = System.currentTimeMillis() / 1000;
-            //用户
+            // The user
             param.put("username", param.get("name"));
             param.remove("name");
-            //密码
+            // Password
             param.put("password", SecureUtil.md5(SecureUtil.md5(param.get("password").toString()) + tKey));
             //tKey
             param.put("tKey", tKey + "");
-            //手机号
+            // Mobile phone no.
             param.put("mobile", phone);
-            //内容
+            // content
             param.put("content", content);
 
-            debugger.log("向ztsms.cn发出请求，请求url为：", urls);
-            // 返回发送结果
+            debugger.log("toztsms.cnMake a request, requesturlfor：", urls);
+            // Return send result
             String result = HttpRequest.post(urls)
                     .header(Header.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .body(JSONUtil.toJsonStr(param))
                     .timeout(60000)
                     .execute()
                     .body();
-            debugger.log("收到返回结果：", result);
+            debugger.log("Received return result：", result);
             JSONObject jsonObject = JSONUtil.parseObj(result);
             if (!StringUtil.equals(jsonObject.get("code").toString(), "200")) {
-                logger.error("发送短信异常" + result);
+                logger.error("SMS sending exception" + result);
                 return false;
             }
             return true;
         } catch (Exception e) {
-            logger.error("发送短信异常", e);
+            logger.error("SMS sending exception", e);
         }
         return false;
     }
@@ -104,7 +104,7 @@ public class SmsZtPlugin implements SmsPlatform {
 
     @Override
     public String getPluginName() {
-        return "助通网关短信";
+        return "Short message of the assistant gateway";
     }
 
 
@@ -116,22 +116,22 @@ public class SmsZtPlugin implements SmsPlatform {
         ConfigItem name = new ConfigItem();
         name.setType("text");
         name.setName("name");
-        name.setText("用户名");
+        name.setText("Username");
 
         ConfigItem password = new ConfigItem();
         password.setType("text");
         password.setName("password");
-        password.setText("密码");
+        password.setText("Password");
 
         ConfigItem id = new ConfigItem();
         id.setType("text");
         id.setName("id");
-        id.setText("产品id");
+        id.setText("productid");
 
         ConfigItem trumpet = new ConfigItem();
         trumpet.setType("text");
         trumpet.setName("trumpet");
-        trumpet.setText("扩展的小号（没有请留空）");
+        trumpet.setText("Extended trumpet（No please leave blank）");
 
         list.add(name);
         list.add(password);

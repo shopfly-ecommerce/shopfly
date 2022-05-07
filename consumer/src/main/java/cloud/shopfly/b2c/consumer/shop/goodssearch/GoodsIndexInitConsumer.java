@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v1.0
- * @Description: 商品索引初始化
+ * @Description: The commodity index is initialized
  * @date 2018/6/25 11:38
  * @since v7.0.0
  */
@@ -55,50 +55,50 @@ public class GoodsIndexInitConsumer implements GoodsIndexInitEvent {
     public void createGoodsIndex() {
 
         if (logger.isDebugEnabled()) {
-            logger.debug("开始生成索引");
+            logger.debug("Start building indexes");
         }
-        debugger.log("开始生成索引");
+        debugger.log("Start building indexes");
 
         String key = TaskProgressConstant.GOODS_INDEX;
         try {
-            /** 获取商品数 */
+            /** Quantity of goods acquired*/
             int goodsCount = this.goodsClient.queryGoodsCount();
 
-            /** 生成任务进度 */
+            /** Generating task Progress*/
             progressManager.taskBegin(key, goodsCount);
 
-            //生成普通商品商品索引
+            // Generate a common commodity index
             boolean goodsResult = createOrdinaryGoods(goodsCount);
 
-            //任务结束
-            progressManager.taskEnd(key, "索引生成完成");
+            // End of the task
+            progressManager.taskEnd(key, "Index generation complete");
 
             if (logger.isDebugEnabled()) {
-                logger.debug("索引生成完成");
+                logger.debug("Index generation complete");
             }
-            debugger.log("索引生成完成");
+            debugger.log("Index generation complete");
 
             if (goodsResult) {
-                debugger.log("索引生成出现错误");
+                debugger.log("An error occurred in index generation");
             }
 
         } catch (Exception e) {
-            debugger.log("索引生成异常");
-            progressManager.taskError(key, "生成索引异常，请联系运维人员");
-            this.logger.error("生成索引异常：", e);
+            debugger.log("Index generation exception");
+            progressManager.taskError(key, "Abnormal index generation. Contact O&M personnel");
+            this.logger.error("Generate index exception：", e);
 
         }
 
     }
 
     /**
-     * 生成普通商品的索引
+     * Generate an index of common goods
      *
-     * @param goodsCount 商品数
+     * @param goodsCount Number of goods
      */
     private boolean createOrdinaryGoods(Integer goodsCount) {
 
-        //用来标记是否有错误
+        // Used to indicate whether there is an error
         boolean hasError = false;
 
         int pageSize = 100;
@@ -116,7 +116,7 @@ public class GoodsIndexInitConsumer implements GoodsIndexInitEvent {
             List<Map<String, Object>> list = goodsClient.getGoodsAndParams(goodsIds);
             boolean result = goodsIndexClient.addAll(list, i);
 
-            //有过错误就是有错误
+            // There are mistakes, there are mistakes
             hasError = result && hasError;
         }
 

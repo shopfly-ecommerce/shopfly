@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品业务层
+ * Commodity business layer
  *
  * @author fk
  * @version v2.0
@@ -35,15 +35,15 @@ import java.util.Map;
 public interface GoodsQueryManager {
 
     /**
-     * 获取商品
+     * Access to goods
      *
-     * @param id 商品主键
-     * @return Goods 商品
+     * @param id Commodity primary key
+     * @return Goods product
      */
     GoodsDO getModel(Integer id);
 
     /**
-     * 查询商品的好平率
+     * Inquire the good rate of goods
      *
      * @param goodsId
      * @return
@@ -51,7 +51,7 @@ public interface GoodsQueryManager {
     Double getGoodsGrade(Integer goodsId);
 
     /**
-     * 缓存中查询商品的信息
+     * Query information about a product in the cache
      *
      * @param goodsId
      * @return
@@ -59,7 +59,7 @@ public interface GoodsQueryManager {
     CacheGoods getFromCache(Integer goodsId);
 
     /**
-     * 查看商品是否在配送区域
+     * Check if the goods are in the distribution area
      *
      * @param goodsId
      * @param areaId
@@ -68,7 +68,7 @@ public interface GoodsQueryManager {
     Integer checkArea(Integer goodsId, Integer areaId);
 
     /**
-     * 获取商品分类路径
+     * Gets the category path of an item
      *
      * @param id
      * @return
@@ -76,7 +76,7 @@ public interface GoodsQueryManager {
     String queryCategoryPath(Integer id);
 
     /**
-     * 查询商品列表
+     * Querying commodity list
      *
      * @param goodsQueryParam
      * @return
@@ -84,7 +84,7 @@ public interface GoodsQueryManager {
     Page list(GoodsQueryParam goodsQueryParam);
 
     /**
-     * 查询预警货品的商品
+     * Query the goods of the warning goods
      *
      * @param pageNo
      * @param pageSize
@@ -94,7 +94,7 @@ public interface GoodsQueryManager {
     Page warningGoodsList(int pageNo, int pageSize, String keyword);
 
     /**
-     * 商家查询商品,编辑查看使用
+     * Merchant inquiry for goods,Edit view use
      *
      * @param goodsId
      * @return
@@ -102,7 +102,7 @@ public interface GoodsQueryManager {
     GoodsVO queryGoods(Integer goodsId);
 
     /**
-     * 查询多个商品的基本信息
+     * Example Query basic information about multiple commodities
      *
      * @param goodsIds
      * @return
@@ -110,32 +110,32 @@ public interface GoodsQueryManager {
     List<GoodsSelectLine> query(Integer[] goodsIds);
 
     /**
-     * 根据条件查询商品数
+     * Query the number of goods according to the condition
      *
-     * @param status   商品状态
-     * @param disabled 商品是否已删除
-     * @return 商品数
+     * @param status   Status
+     * @param disabled Whether the item has been deleted
+     * @return Number of goods
      */
     Integer getGoodsCountByParam(Integer status, Integer disabled);
 
     /**
-     * 查询很多商品的信息和参数信息
+     * Example Query the information and parameter information about many commodities
      *
-     * @param goodsIds 商品id集合
+     * @param goodsIds productidA collection of
      * @return
      */
     List<Map<String, Object>> getGoodsAndParams(Integer[] goodsIds);
 
     /**
-     * 根据商品id集合查询商品信息
+     * According to the goodsidCollection queries commodity information
      *
-     * @param goodsIds 商品ids
-     * @return  商品信息
+     * @param goodsIds productids
+     * @return  Product information
      */
     List<Map<String, Object>> getGoods(Integer[] goodsIds);
 
     /**
-     * 获取所有商品的id集合
+     * Get all goodsidA collection of
      * @return
      */
     List<Integer> getAllGoodsId();

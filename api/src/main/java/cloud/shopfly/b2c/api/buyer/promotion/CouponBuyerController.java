@@ -32,21 +32,21 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 
 /**
- * 优惠券相关API
+ * Coupon relatedAPI
  * @author Snow create in 2018/7/13
  * @version v2.0
  * @since v7.0.0
  */
 @RestController
 @RequestMapping("/promotions/coupons")
-@Api(description = "优惠券相关API")
+@Api(description = "Coupon relatedAPI")
 @Validated
 public class CouponBuyerController {
 
     @Autowired
     private CouponManager couponManager;
 
-    @ApiOperation(value = "查询优惠券列表")
+    @ApiOperation(value = "Check coupon list")
     @GetMapping()
     public List<CouponDO> getList(){
 
@@ -55,10 +55,10 @@ public class CouponBuyerController {
     }
 
 
-    @ApiOperation(value = "查询所有优惠券")
+    @ApiOperation(value = "Query all coupons")
     @ApiImplicitParams({
-            @ApiImplicitParam(name	= "page_no", value = "页码", dataType = "int",	paramType =	"query"),
-            @ApiImplicitParam(name	= "page_size", value = "条数", dataType = "int",	paramType =	"query"),
+            @ApiImplicitParam(name	= "page_no", value = "The page number", dataType = "int",	paramType =	"query"),
+            @ApiImplicitParam(name	= "page_size", value = "A number of", dataType = "int",	paramType =	"query"),
     })
     @GetMapping(value = "/all")
     public Page<CouponDO> getPage(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize){

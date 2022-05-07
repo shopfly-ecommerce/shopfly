@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
  * Created by kingapex on 2019-01-27.
- * 订单类型
+ * Order type
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -26,12 +26,12 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 public enum OrderTypeEnum {
 
     /**
-     * 普通订单
+     * Regular orders
      */
     normal,
 
     /**
-     * 拼团订单
+     * Spell group order
      */
     pintuan
 

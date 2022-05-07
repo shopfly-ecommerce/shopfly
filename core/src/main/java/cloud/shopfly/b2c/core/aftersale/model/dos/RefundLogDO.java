@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 退货（款）日志实体
+ * Return of the goods（paragraph）Log entity
  *
  * @author zjp
  * @version v7.0.0
@@ -43,34 +43,34 @@ public class RefundLogDO implements Serializable {
     private static final long serialVersionUID = 5393882791682972L;
 
     /**
-     * 日志id
+     * The logid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 退款sn
+     * A refundsn
      */
     @Column(name = "refund_sn")
-    @ApiModelProperty(name = "refund_sn", value = "退款sn", required = false)
+    @ApiModelProperty(name = "refund_sn", value = "A refundsn", required = false)
     private String refundSn;
     /**
-     * 日志记录时间
+     * Logging time
      */
     @Column(name = "logtime")
-    @ApiModelProperty(name = "logtime", value = "日志记录时间", required = false)
+    @ApiModelProperty(name = "logtime", value = "Logging time", required = false)
     private Long logtime;
     /**
-     * 日志详细
+     * Log in detail
      */
     @Column(name = "logdetail")
-    @ApiModelProperty(name = "logdetail", value = "日志详细", required = false)
+    @ApiModelProperty(name = "logdetail", value = "Log in detail", required = false)
     private String logdetail;
     /**
-     * 操作者
+     * The operator
      */
     @Column(name = "operator")
-    @ApiModelProperty(name = "operator", value = "操作者", required = false)
+    @ApiModelProperty(name = "operator", value = "The operator", required = false)
     private String operator;
 
     @PrimaryKeyField

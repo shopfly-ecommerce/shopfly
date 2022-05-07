@@ -33,7 +33,7 @@ import java.util.TreeMap;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信wap端
+ * @Description: WeChatwapend
  * @date 2018/4/1810:12
  * @since v7.0.0
  */
@@ -44,7 +44,7 @@ public class WeixinPaymentWapExecutor extends WeixinPuginConfig {
     private DomainHelper domainHelper;
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return
@@ -60,7 +60,7 @@ public class WeixinPaymentWapExecutor extends WeixinPuginConfig {
 
             Map<String, String> map = super.createUnifiedOrder(bill, params);
             Form form = new Form();
-            // 返回结果
+            // Returns the result
             String resultCode = map.get("result_code");
             if (AbstractPaymentPlugin.SUCCESS.equals(resultCode)) {
                 String codeUrl = map.get("mweb_url");
@@ -69,7 +69,7 @@ public class WeixinPaymentWapExecutor extends WeixinPuginConfig {
                 return result;
             }
         } catch (Exception e) {
-            this.logger.error("生成参数失败", e);
+            this.logger.error("Failed to generate parameters", e);
 
         }
         return null;
@@ -78,7 +78,7 @@ public class WeixinPaymentWapExecutor extends WeixinPuginConfig {
 
 
     /**
-     * 获取支付成功调取页面
+     * Obtain the page of successful payment retrieval
      *
      * @param tradeType
      * @param outTradeNo
@@ -99,14 +99,14 @@ public class WeixinPaymentWapExecutor extends WeixinPuginConfig {
     }
 
     /**
-     * 获取支付成功调取页面
+     * Obtain the page of successful payment retrieval
      *
      * @param tradeType
      * @return
      */
     private String getPayWapSuccessUrl(String tradeType, String subSn,String pluginId) {
 
-        //uniapp-h5 支付成功结果页
+        // Uniapp-h5 Payment result page
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
         String redirectUri = "/order-module/cashier/cashier?";

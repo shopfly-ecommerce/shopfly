@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 退款变化业务实现类
+ * Refund change business implementation class
  *
  * @author mengyuanming
  * @version 2.0
@@ -39,7 +39,7 @@ public class RefundDataManagerImpl implements RefundDataManager {
 
     @Override
     public void put(RefundData refundData) {
-        //审核通过
+        // approved
         this.daoSupport.insert("es_sss_refund_data", refundData);
 
     }

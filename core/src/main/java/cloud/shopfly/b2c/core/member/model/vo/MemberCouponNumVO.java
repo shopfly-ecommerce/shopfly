@@ -22,20 +22,20 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 会员优惠券—各个状态数量
+ * Membership coupon—Number of states
  * @author Snow create in 2018/8/20
  * @version v2.0
  * @since v7.0.0
  */
 public class MemberCouponNumVO implements Serializable {
 
-    @ApiModelProperty(value = "未使用优惠券数量")
+    @ApiModelProperty(value = "Number of unused coupons")
     private Integer unUseNum;
 
-    @ApiModelProperty(value = "已使用优惠券数量")
+    @ApiModelProperty(value = "Number of coupons used")
     private Integer useNum;
 
-    @ApiModelProperty(value = "已过期优惠券数量")
+    @ApiModelProperty(value = "Number of expired coupons")
     private Integer expiredNum;
 
     public Integer getUnUseNum() {

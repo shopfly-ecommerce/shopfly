@@ -30,14 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 购物车中的产品
+ * Products in shopping cart
  *
  * @author Snow
  * @version v2.0
- * 2018年03月19日21:54:35
+ * 2018years03month19day21:54:35
  * @since v7.0.0
  */
-@ApiModel(value = "sku", description = "产品")
+@ApiModel(value = "sku", description = "product")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 @Order
 public class CartSkuVO implements Serializable {
@@ -46,7 +46,7 @@ public class CartSkuVO implements Serializable {
     private static final long serialVersionUID = -2761425455060777922L;
 
     /**
-     * 在构造器里初始化促销列表，规格列表
+     * Initialize the promo list, spec list in the constructor
      */
     public CartSkuVO() {
         this.checked = 1;
@@ -56,109 +56,109 @@ public class CartSkuVO implements Serializable {
         promotionTags = new ArrayList<>();
     }
 
-    @ApiModelProperty(value = "卖家id")
+    @ApiModelProperty(value = "The sellerid")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "卖家姓名")
+    @ApiModelProperty(value = "The sellers name")
     private String sellerName;
 
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "productid")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "产品id")
+    @ApiModelProperty(value = "productid")
     private Integer skuId;
 
-    @ApiModelProperty(value = "产品sn")
+    @ApiModelProperty(value = "productsn")
     private String skuSn;
 
-    @ApiModelProperty(value = "商品所属的分类id")
+    @ApiModelProperty(value = "The category to which the goods belongid")
     private Integer catId;
 
-    @ApiModelProperty(value = "购买数量")
+    @ApiModelProperty(value = "Purchase quantity")
     private Integer num;
 
-    @ApiModelProperty(value = "优惠数量数量")
+    @ApiModelProperty(value = "Preferential quantity")
     private Integer purchaseNum;
 
-    @ApiModelProperty(value = "商品重量")
+    @ApiModelProperty(value = "Weight")
     private Double goodsWeight;
 
-    @ApiModelProperty(value = "商品原价")
+    @ApiModelProperty(value = "Product  price")
     private Double originalPrice;
 
-    @ApiModelProperty(value = "购买时的成交价")
+    @ApiModelProperty(value = "The purchase price at the time of purchase")
     private Double purchasePrice;
 
-    @ApiModelProperty(value = "小计")
+    @ApiModelProperty(value = "subtotal")
     private Double subtotal;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     private String name;
 
-    @ApiModelProperty(value = "商品图片")
+    @ApiModelProperty(value = "Commodity images")
     private String goodsImage;
 
     /**
-     * 是否选中，要去结算 0:未选中 1:已选中，默认
+     * Whether selected, to settle0:uncheck1:Selected, default
      */
-    @ApiModelProperty(value = "是否选中，要去结算")
+    @ApiModelProperty(value = "Whether selected, to settle")
     private Integer checked;
 
 
-    @ApiModelProperty(value = "是否免运费,1：商家承担运费（免运费） 0：买家承担运费")
+    @ApiModelProperty(value = "Free freight or not,1：Merchant bears freight（Free shipping） 0：Buyer pays freight")
     private Integer isFreeFreight;
 
-    @ApiModelProperty(value = "已参与的单品活动工具列表")
+    @ApiModelProperty(value = "List of single product activity tools that have been participated")
     private List<CartPromotionVo> singleList;
 
-    @ApiModelProperty(value = "已参与的组合活动工具列表")
+    @ApiModelProperty(value = "List of participating composite activity tools")
     private List<CartPromotionVo> groupList;
 
-    @ApiModelProperty(value = "此商品需要提示给顾客的优惠标签")
+    @ApiModelProperty(value = "This product needs to be prompted to the customers discount label")
     private List<String> promotionTags;
 
-    @ApiModelProperty(value = "不参与活动")
+    @ApiModelProperty(value = "Not participating in activities")
     private Integer notJoinPromotion;
 
-    @ApiModelProperty(value = "运费模板id")
+    @ApiModelProperty(value = "The freight templateid")
     private Integer templateId;
 
     /**
-     * 商品规格列表
+     * List of specifications
      */
-    @ApiModelProperty(value = "规格列表")
+    @ApiModelProperty(value = "Specification list")
     private List<SpecValueVO> specList;
 
     /**
-     * 积分换购活动中，购买这个商品需要消费的积分。
+     * In the point exchange activity, the amount of points needed to purchase the product.
      */
-    @ApiModelProperty(value = "使用积分")
+    @ApiModelProperty(value = "Using the integral")
     private Integer point;
 
-    @ApiModelProperty(value = "快照ID")
+    @ApiModelProperty(value = "The snapshotID")
     private Integer snapshotId;
 
-    @ApiModelProperty(value = "售后状态")
+    @ApiModelProperty(value = "After state")
     private String serviceStatus;
 
-    @ApiModelProperty(name = "last_modify", value = "最后修改时间")
+    @ApiModelProperty(name = "last_modify", value = "Last Modified time")
     private Long lastModify;
 
-    @ApiModelProperty(name = "enable_quantity", value = "可用库存")
+    @ApiModelProperty(name = "enable_quantity", value = "Available")
     private Integer enableQuantity;
 
     private PromotionRule rule;
 
-    @ApiModelProperty(value = "是否失效：0:正常 1:已失效")
+    @ApiModelProperty(value = "Whether the failure：0:normal1:Has the failure")
     private Integer invalid;
 
-    @ApiModelProperty(value = "购物车商品错误消息")
+    @ApiModelProperty(value = "Shopping cart item error message")
     private String errorMessage;
 
-    @ApiModelProperty(value = "是否可配送  1可配送（有货）0  不可配送（无货）")
+    @ApiModelProperty(value = "Deliverable or not1Can be delivery（In stock）0  不Can be delivery（Is not available）")
     private Integer isShip;
 
-    @ApiModelProperty(name = "goods_type", value = "商品类型NORMAL普通POINT积分")
+    @ApiModelProperty(name = "goods_type", value = "TypeNORMALordinaryPOINTpoint")
     private String goodsType;
 
 

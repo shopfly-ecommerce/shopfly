@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.framework.database;
 import java.util.Arrays;
 
 /**
- * 元数据
+ * metadata
  * @author Snow create in 2018/3/28
  * @version v2.0
  * @since v7.0.0
@@ -26,12 +26,12 @@ import java.util.Arrays;
 public class DataMeta {
 
     /**
-     * sql 语句
+     * sql statements
      */
     private String sql;
 
     /**
-     * sql 语句中需要的参数
+     * sql The parameters needed in the statement
      */
     private Object[] paramter;
 

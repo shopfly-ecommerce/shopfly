@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 运费模板子VO
+ * @Description: Freight templateVO
  * @date 2018/10/2416:15
  * @since v7.0.0
  */
@@ -48,27 +48,27 @@ public class ShipTemplateSettingVO implements Serializable {
     private Integer templateId;
 
 
-    @ApiParam(value = "区域名称",hidden = true)
+    @ApiParam(value = "name",hidden = true)
     @Column(name = "rate_area_name")
     private String rateAreaName;
 
-    @ApiParam(value = "地区‘，‘分隔   示例参数：北京，山西，天津，上海",hidden = true)
+    @ApiParam(value = "region‘，‘Separate example parameters：Beijing, Shanxi, Tianjin, Shanghai",hidden = true)
     @Column(name = "area")
     private String area;
 
-    @ApiModelProperty(value = "地区id‘，‘分隔  示例参数：1，2，3，4 ",hidden = true)
+    @ApiModelProperty(value = "regionid‘，‘Separate example parameters：1，2，3，4 ",hidden = true)
     @Column(name = "area_id")
     private String areaId;
 
-    @ApiParam(value = "地区列表",hidden = true)
+    @ApiParam(value = "In the list",hidden = true)
     @Column(name = "areas")
     private List<AreaVO> areas;
 
-    @ApiModelProperty(value = "区域id")
+    @ApiModelProperty(value = "areaid")
     @Column(name = "rate_area_id")
     private Integer rateAreaId;
 
-    @ApiModelProperty(name = "items", value = "指定配送价格", required = true)
+    @ApiModelProperty(name = "items", value = "Designated delivery price", required = true)
     private List<ShipTemplateSettingDO> items;
 
 

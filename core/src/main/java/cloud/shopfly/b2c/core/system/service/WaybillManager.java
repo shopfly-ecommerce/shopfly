@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.system.model.vo.WayBillVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 电子面单业务层
+ * Electronic plane single business layer
  *
  * @author zh
  * @version v7.0.0
@@ -30,40 +30,40 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface WaybillManager {
 
     /**
-     * 查询电子面单列表
+     * Query the electronic plane single column list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加电子面单
+     * Add electron sheet
      *
-     * @param wayBill 电子面单
-     * @return WayBillDO 电子面单
+     * @param wayBill Electronic surface single
+     * @return WayBillDO Electronic surface single
      */
     WayBillDO add(WayBillVO wayBill);
 
     /**
-     * 修改电子面单
+     * Modify the electronic sheet
      *
-     * @param wayBill 电子面单
-     * @return WayBillDO 电子面单
+     * @param wayBill Electronic surface single
+     * @return WayBillDO Electronic surface single
      */
     WayBillVO edit(WayBillVO wayBill);
 
     /**
-     * 获取电子面单
+     * Get electron surface list
      *
-     * @param id 电子面单主键
-     * @return WayBillDO  电子面单
+     * @param id Electron face single primary bond
+     * @return WayBillDO  Electronic surface single
      */
     WayBillDO getModel(Integer id);
 
     /**
-     * 开启电子面单
+     * Turn on the electronic plane
      *
      * @param bean beanid
      */
@@ -71,7 +71,7 @@ public interface WaybillManager {
 
 
     /**
-     * 根据beanid获取电子面单方案
+     * According to thebeanidObtain electron plane single scheme
      *
      * @param bean
      * @return
@@ -80,18 +80,18 @@ public interface WaybillManager {
 
 
     /**
-     * 根据beanid获取电子面单方案
+     * According to thebeanidObtain electron plane single scheme
      *
      * @param bean beanid
-     * @return 电子面单vo
+     * @return Electronic surface singlevo
      */
     WayBillVO getWaybillConfig(String bean);
 
     /**
-     * 生成电子面单
+     * Generate an electron plane
      *
-     * @param orderSn 订单编号
-     * @param logiId  物流公司id
+     * @param orderSn Order no.
+     * @param logiId  Logistics companyid
      * @return
      */
     String createPrintData(String orderSn, Integer logiId);

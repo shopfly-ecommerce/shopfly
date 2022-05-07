@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 店铺站内消息实体
+ * The message entity within the shop site
  *
  * @author zjp
  * @version v7.0.0
@@ -49,34 +49,34 @@ public class NoticeLogDO implements Serializable {
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 站内信内容
+     * Station message content
      */
     @Column(name = "notice_content")
-    @ApiModelProperty(name = "notice_content", value = "站内信内容", required = false)
+    @ApiModelProperty(name = "notice_content", value = "Station message content", required = false)
     private String noticeContent;
     /**
-     * 发送时间
+     * Send time
      */
     @Column(name = "send_time")
-    @ApiModelProperty(name = "send_time", value = "发送时间", required = false)
+    @ApiModelProperty(name = "send_time", value = "Send time", required = false)
     private Long sendTime;
     /**
-     * 是否删除 ：1 删除   0  未删除
+     * Whether or not to delete：1 delete0  未delete
      */
     @Column(name = "is_delete")
-    @ApiModelProperty(name = "is_delete", value = "是否删除 ：1 删除   0  未删除", required = false)
+    @ApiModelProperty(name = "is_delete", value = "Whether or not to delete：1 delete0  未delete", required = false)
     private Integer isDelete;
     /**
-     * 是否已读 ：1已读   0 未读
+     * Have read：1read0 unread
      */
     @Column(name = "is_read")
-    @ApiModelProperty(name = "is_read", value = "是否已读 ：1已读   0 未读", required = false)
+    @ApiModelProperty(name = "is_read", value = "Have read：1read0 unread", required = false)
     private Integer isRead;
     /**
-     * 消息类型
+     * Message type
      */
     @Column(name = "type")
-    @ApiModelProperty(name = "type", value = "消息类型", required = false)
+    @ApiModelProperty(name = "type", value = "Message type", required = false)
     private String type;
 
     @PrimaryKeyField

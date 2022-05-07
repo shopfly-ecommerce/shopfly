@@ -21,23 +21,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 品牌vo
+ * brandvo
  * 
  * @author fk
  * @version v1.0
- * @since v7.0 2018年3月16日 下午4:44:55
+ * @since v7.0 2018years3month16On the afternoon4:44:55
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class BrandVO {
 
-	@ApiModelProperty(value="品牌名称")
+	@ApiModelProperty(value=" name")
 	private String name;
 
-	@ApiModelProperty(value="品牌图标")
+	@ApiModelProperty(value="Brand icon")
 	private String logo;
 
-	@ApiModelProperty(value="品牌id")
+	@ApiModelProperty(value="brandid")
 	private Integer brandId;
 
 	public String getName() {

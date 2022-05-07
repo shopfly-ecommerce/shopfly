@@ -27,7 +27,7 @@ import cloud.shopfly.b2c.framework.util.DateUtil;
 import org.springframework.stereotype.Component;
 
 /**
- * 第二件半件规则构建器
+ * Second half-piece rule builder
  *
  * @author kingapex
  * @version 1.0
@@ -43,35 +43,35 @@ public class HalfPricePluginNew implements SkuPromotionRuleBuilder {
         PromotionRule rule = new PromotionRule(PromotionTarget.SKU);
 
         /**
-         * 过期判定
+         * Overdue decision
          */
-        //开始时间和结束时间
+        // Start time and end time
         HalfPriceVO halfPriceVO = promotionVO.getHalfPriceVO();
         long startTime = halfPriceVO.getStartTime();
         long endTime = halfPriceVO.getEndTime();
 
-        //是否过期了
+        // Is it expired?
         boolean expired = !DateUtil.inRangeOf(startTime, endTime);
         if (expired) {
             rule.setInvalid(true);
-            rule.setInvalidReason("第二件半件已过期,有效期为:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "至" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
+            rule.setInvalidReason("The second and half pieces are overdue,Is valid for:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "to" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
             return rule;
         }
 
 
-        // 单个商品成交价
+        // Transaction price of individual goods
         Double purchasePrice = skuVO.getOriginalPrice();
 
-        //商品数量
+        // The number
         Integer num = skuVO.getNum();
         if (num.intValue() > 1) {
-            //建立一个应用在sku的规则
-            //参加活动要优惠的价格
+            // Create a rule to apply to the SKU
+            // Get a good price for the event
             Double reducedPrice = CurrencyUtil.div(purchasePrice, 2);
-            //双数都要减，即4件商品减2件的钱
+            // We subtract both of them, so we subtract 2 from 4 items
             rule.setReducedTotalPrice(CurrencyUtil.mul(reducedPrice, num / 2));
-            rule.setTips("第二件半价，减[" + CurrencyUtil.mul(reducedPrice, num / 2) + "]元");
-            rule.setTag("第二件半价");
+            rule.setTips("The second piece is half price, reduce[" + CurrencyUtil.mul(reducedPrice, num / 2) + "]USD");
+            rule.setTag("The second one is half price");
         }
 
         return rule;

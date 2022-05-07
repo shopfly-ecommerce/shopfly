@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * Created by kingapex on 2019-02-12.
- * 订单特殊状态text处理
+ * Order special statustextTo deal with
  *
  * @author kingapex
  * @version 1.0
@@ -35,32 +35,32 @@ public abstract class AbstractOrderSpecialStatus {
 
 
     /**
-     * 定义特殊的流程状态显示
+     * Define a special process status display
      */
     private static Map<String, String> map = new HashMap<>(16);
 
     static {
 
-        //拼团已经成团的为待发货
-        map.put(OrderTypeEnum.pintuan + "_" + PaymentTypeEnum.ONLINE + "_" + OrderStatusEnum.FORMED, "待发货");
+        // The group is ready for delivery
+        map.put(OrderTypeEnum.pintuan + "_" + PaymentTypeEnum.ONLINE + "_" + OrderStatusEnum.FORMED, "To send the goods");
 
-        //普通订单在线付款的，已经付款显示为待发货
-        map.put(OrderTypeEnum.normal + "_" + PaymentTypeEnum.ONLINE + "_" + OrderStatusEnum.PAID_OFF, "待发货");
+        // General order online payment, payment has been shown as waiting for delivery
+        map.put(OrderTypeEnum.normal + "_" + PaymentTypeEnum.ONLINE + "_" + OrderStatusEnum.PAID_OFF, "To send the goods");
 
-        //普通订单在线付款的，已确认显示为待付款
-        map.put(OrderTypeEnum.normal + "_" + PaymentTypeEnum.ONLINE + "_" + OrderStatusEnum.CONFIRM, "待付款");
+        // Ordinary orders paid online have been confirmed and displayed as pending payment
+        map.put(OrderTypeEnum.normal + "_" + PaymentTypeEnum.ONLINE + "_" + OrderStatusEnum.CONFIRM, "For the payment");
 
-        //普通订单货到付款的，已确认的显示为待发货
-        map.put(OrderTypeEnum.normal + "_" + PaymentTypeEnum.COD + "_" + OrderStatusEnum.CONFIRM, "待发货");
+        // For general orders paid on delivery, confirmed goods are displayed as goods to be shipped
+        map.put(OrderTypeEnum.normal + "_" + PaymentTypeEnum.COD + "_" + OrderStatusEnum.CONFIRM, "To send the goods");
     }
 
 
     /**
-     * 获取特殊状态text
+     * Get special statetext
      *
-     * @param orderType   订单类型
-     * @param paymentType 支付类型
-     * @param orderStatus 订单状态
+     * @param orderType   Order type
+     * @param paymentType Payment type
+     * @param orderStatus Status
      * @return
      */
     public static String getStatusText(String orderType, String paymentType, String orderStatus) {

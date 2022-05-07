@@ -30,9 +30,9 @@ import java.util.List;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录参数VO
+ * @Description Trust login parameterVO
  * @ClassName ConnectSettingVO
- * @since v7.0 下午3:46 2018/6/5
+ * @since v7.0 In the afternoon3:46 2018/6/5
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -46,23 +46,23 @@ public class ConnectSettingVO implements Serializable {
     private Integer id;
 
     /**
-     * 参数配置名称
+     * Parameter Configuration Name
      */
     @Column(name = "name")
-    @ApiModelProperty(name = "name", value = "参数配置名称")
-    @NotEmpty(message="参数配置名称必填")
+    @ApiModelProperty(name = "name", value = "Parameter Configuration Name")
+    @NotEmpty(message="Parameter Configuration Name This parameter is mandatory")
     private String name;
     /**
-     * 信任登录类型
+     * Trusted Login type
      */
     @Column(name = "type")
-    @ApiModelProperty(name = "type", value = "授权类型",allowableValues = "QQ,WEIBO,WECHAT,ALIPAY")
+    @ApiModelProperty(name = "type", value = "Authorization type",allowableValues = "QQ,WEIBO,WECHAT,ALIPAY")
     private String type;
     /**
-     * 信任登录配置参数
+     * Trusted login configuration parameters
      */
     @Column(name = "config")
-    @ApiModelProperty(name = "config", value = "信任登录配置参数")
+    @ApiModelProperty(name = "config", value = "Trusted login configuration parameters")
     private String config;
 
     private List<ConnectSettingParametersVO> clientList;

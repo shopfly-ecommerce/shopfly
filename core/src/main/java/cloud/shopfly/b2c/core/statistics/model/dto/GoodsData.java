@@ -22,12 +22,12 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 统计库商品数据
+ * Statistical database commodity data
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/3/22 下午11:49
+ * 2018/3/22 In the afternoon11:49
  */
 
 public class GoodsData implements Serializable {
@@ -37,40 +37,40 @@ public class GoodsData implements Serializable {
      */
     private static final long serialVersionUID = -6108469000506420173L;
 
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "A primary keyid")
     @Column(name = "id")
     private Integer id;
 
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "productid")
     @Column(name = "goods_id")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     @Column(name = "goods_name")
     private String goodsName;
 
-    @ApiModelProperty(value = "品牌id")
+    @ApiModelProperty(value = "brandid")
     @Column(name = "brand_id")
     private Integer brandId;
 
-    @ApiModelProperty(value = "分类id")
+    @ApiModelProperty(value = "Categoriesid")
     @Column(name = "category_id")
     private Integer categoryId;
 
-    @ApiModelProperty("分类路径")
+    @ApiModelProperty("Classification of path")
     @Column(name = "category_path")
     private String categoryPath;
 
-    @ApiModelProperty(value = "商品价格")
+    @ApiModelProperty(value = "Price")
     @Column(name = "price")
     private Double price;
 
 
-    @ApiModelProperty("收藏数量")
+    @ApiModelProperty("Collect the number")
     @Column(name = "favorite_num")
     private Integer favoriteNum;
 
-    @ApiModelProperty("是否上架 1 上架 0下架")
+    @ApiModelProperty("Whether the shelf1 save0off")
     @Column(name = "market_enable")
     private Integer marketEnable;
 

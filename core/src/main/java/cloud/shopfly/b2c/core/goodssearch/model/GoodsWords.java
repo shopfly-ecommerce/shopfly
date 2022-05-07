@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModel;
 
 /**
- * 商品分词po
+ * Commodity participlepo
  * @author fk
  * @version v2.0
  * @since v7.0.0
@@ -31,11 +31,11 @@ import io.swagger.annotations.ApiModel;
 public class GoodsWords {
 
 	/**
-	 * 分词名称
+	 * Participles name
 	 */
 	private String words;
 	/**
-	 * 约计商品数量
+	 * Approximate quantity of goods
 	 */
 	private int goodsNum;
 	

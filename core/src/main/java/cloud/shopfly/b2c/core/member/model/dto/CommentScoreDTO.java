@@ -27,27 +27,27 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 评论评分VO
+ * Review scoreVO
  *
  * @author fk
  * @version v1.0
  * @since v7.0.0
  * 2018-05-03 10:38:00
  */
-@ApiModel(description = "评论动态评分vo")
+@ApiModel(description = "Review dynamic ratingvo")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CommentScoreDTO implements Serializable {
 
-    @ApiModelProperty(value = "会员评论vo的list")
-    @NotNull(message = "商品评论不能为空")
+    @ApiModelProperty(value = "Member commentsvothelist")
+    @NotNull(message = "Product reviews cannot be left blank")
     @Valid
     private List<CommentDTO> comments;
 
     /**
-     * 订单编号
+     * Order no.
      */
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = true)
-    @NotEmpty(message = "订单编号不能为空")
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = true)
+    @NotEmpty(message = "The order number cannot be blank")
     private String orderSn;
 
 

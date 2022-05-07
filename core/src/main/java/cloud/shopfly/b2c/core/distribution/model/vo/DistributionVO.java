@@ -24,48 +24,48 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 
 /**
- * 分销商显示vo
+ * Distributor displayvo
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-23 上午9:57
+ * 2018-05-23 In the morning9:57
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DistributionVO {
 
-    @ApiModelProperty(value = "当前会员id", name = "id")
+    @ApiModelProperty(value = "The current membersid", name = "id")
     private Integer id;
     @ApiModelProperty(value = "lv1id", name = "lv1_id")
     private Integer lv1Id;
     @ApiModelProperty(value = "lv2id", name = "lv2_id")
     private Integer lv2Id;
-    @ApiModelProperty(value = "名字")
+    @ApiModelProperty(value = "The name")
     private String name;
-    @ApiModelProperty(value = "模版名称", name = "current_tpl_name")
+    @ApiModelProperty(value = "The name of the template", name = "current_tpl_name")
     private String currentTplName;
-    @ApiModelProperty(value = "模版id", name = "current_tpl_id")
+    @ApiModelProperty(value = "templateid", name = "current_tpl_id")
     private Integer currentTplId;
-    @ApiModelProperty(value = "下线人数", name = "downline")
+    @ApiModelProperty(value = "The number of referrals", name = "downline")
     private Integer downline;
-    @ApiModelProperty(value = "返利金额")
+    @ApiModelProperty(value = "The rebate amount")
     private Double rebateTotal;
 
     @Column(name = "order_num")
-    @ApiModelProperty(name = "order_num", value = "提成相关订单数", required = true)
+    @ApiModelProperty(name = "order_num", value = "Commission related order number", required = true)
     private Integer orderNum = 0;
 
     @Column(name = "turnover_price")
-    @ApiModelProperty(name = "turnover_price", value = "营业额总额", required = true)
+    @ApiModelProperty(name = "turnover_price", value = "Total turnover", required = true)
     private Double turnoverPrice = 0D;
 
-    @ApiModelProperty(value = "下线", name = "item")
+    @ApiModelProperty(value = "offline", name = "item")
     private List<DistributionVO> item;
 
-    @ApiModelProperty(value = "结算单", name = "bill_member_vo")
+    @ApiModelProperty(value = "statements", name = "bill_member_vo")
     private BillMemberVO billMemberVO;
 
-    @ApiModelProperty(name = "create_time", value = "创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Last update", required = false)
     private Long createTime;
 
     public String getName() {

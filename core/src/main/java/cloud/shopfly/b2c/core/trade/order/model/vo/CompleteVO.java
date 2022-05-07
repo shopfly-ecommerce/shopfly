@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 订单完成VO
+ * The order finishedVO
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
@@ -28,11 +28,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class CompleteVO {
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String orderSn;
 
 
-    @ApiModelProperty(value = "操作人", hidden = true)
+    @ApiModelProperty(value = "Operation of", hidden = true)
     private String operator;
 
 

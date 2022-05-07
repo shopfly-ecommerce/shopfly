@@ -16,21 +16,21 @@
 package cloud.shopfly.b2c.core.goods.model.enums;
 
 /**
- * 商品类型枚举
+ * Enumeration of commodity types
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月22日 下午2:04:37
+ * 2018years3month22On the afternoon2:04:37
  */
 public enum GoodsType {
 	/**
-	 * 正常商品
+	 * Normal goods
 	 */
-	NORMAL("正常商品"), 
+	NORMAL("Normal goods"), 
 	/**
-	 * 积分商品
+	 * Integral goods
 	 */
-	POINT("积分商品");
+	POINT("Integral goods");
 
 	private String description;
 

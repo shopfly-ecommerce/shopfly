@@ -31,7 +31,7 @@ import javax.validation.constraints.NotEmpty;
 
 
 /**
- * 短信网关表控制器
+ * SMS gateway table controller
  *
  * @author zh
  * @version v7.0.0
@@ -40,29 +40,29 @@ import javax.validation.constraints.NotEmpty;
  */
 @RestController
 @RequestMapping("/seller/systems/platforms")
-@Api(description = "短信网关相关API")
+@Api(description = "SMS gateway correlationAPI")
 public class SmsPlatformSellerController {
 
     @Autowired
     private SmsPlatformManager smsPlatformManager;
 
 
-    @ApiOperation(value = "查询短信网关列表", response = SmsPlatformDO.class)
+    @ApiOperation(value = "Example Query the LIST of SMS gateways", response = SmsPlatformDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
-    public Page list(@ApiIgnore @NotEmpty(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotEmpty(message = "每页数量不能为空") Integer pageSize) {
+    public Page list(@ApiIgnore @NotEmpty(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotEmpty(message = "The number of pages cannot be empty") Integer pageSize) {
         return this.smsPlatformManager.list(pageNo, pageSize);
     }
 
 
-    @ApiOperation(value = "修改短信网关", response = SmsPlatformDO.class)
+    @ApiOperation(value = "Modify SMS gateway", response = SmsPlatformDO.class)
     @PutMapping(value = "/{bean}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bean", value = "短信网关bean id", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "sms_platform", value = "短信网关对象", required = true, dataType = "SmsPlatformVO", paramType = "body")
+            @ApiImplicitParam(name = "bean", value = "SMS gatewaybean id", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "sms_platform", value = "SMS Gateway Object", required = true, dataType = "SmsPlatformVO", paramType = "body")
     })
     public SmsPlatformVO edit(@PathVariable String bean, @RequestBody @ApiIgnore SmsPlatformVO smsPlatformVO) {
         smsPlatformVO.setBean(bean);
@@ -71,15 +71,15 @@ public class SmsPlatformSellerController {
 
 
     @GetMapping(value = "/{bean}")
-    @ApiOperation(value = "查询一个短信网关参数")
+    @ApiOperation(value = "Example Query the parameters of an SMS gateway")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bean", value = "短信网关bean id", required = true, dataType = "String", paramType = "path")
+            @ApiImplicitParam(name = "bean", value = "SMS gatewaybean id", required = true, dataType = "String", paramType = "path")
     })
     public SmsPlatformVO getConfig(@PathVariable String bean) {
         return this.smsPlatformManager.getConfig(bean);
     }
 
-    @ApiOperation(value = "开启某个短信网关", response = String.class)
+    @ApiOperation(value = "Enable an SMS gateway", response = String.class)
     @PutMapping("/{bean}/open")
     @ApiImplicitParam(name = "bean", value = "bean", required = true, dataType = "String", paramType = "path")
     public String open(@PathVariable String bean) {

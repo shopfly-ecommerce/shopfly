@@ -37,14 +37,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * 商家中心，商品分析
+ * Merchant center, commodity analysis
  *
  * @author mengyuanming
  * @version 2.0
  * @since 7.0
- * 2018年4月18日上午11:57:48
+ * 2018years4month18The morning of11:57:48
  */
-@Api(description = "商家统计 商品分析")
+@Api(description = "Merchant statistical analysis of goods")
 @RestController
 @RequestMapping("/seller/statistics/goods")
 public class GoodsStatisticsSellerController {
@@ -52,32 +52,32 @@ public class GoodsStatisticsSellerController {
     @Autowired
     private GoodsFrontStatisticsManager goodsFrontStatisticsManager;
 
-    @ApiOperation(value = "商品详情，获取近30天销售数据", response = Page.class)
+    @ApiOperation(value = "Product details, get near30Daily sales data", response = Page.class)
     @GetMapping(value = "/goods_detail")
-    @ApiImplicitParams({@ApiImplicitParam(name = "page_no", value = "当前页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "页面大小", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "category_id", value = "商品分类id", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "goods_name", value = "商品名称", dataType = "String", paramType = "query")})
+    @ApiImplicitParams({@ApiImplicitParam(name = "page_no", value = "The current page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "The page size", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "category_id", value = "Categoryid", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "goods_name", value = "Name", dataType = "String", paramType = "query")})
     public Page getGoodsSalesDetail(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @ApiIgnore Integer categoryId, @ApiIgnore String goodsName) {
 
         if (null == categoryId) {
-            throw new StatisticsException(StatisticsErrorCode.E801.code(), "商品分类id不可为空");
+            throw new StatisticsException(StatisticsErrorCode.E801.code(), "CategoryidDo not empty");
         }
         return this.goodsFrontStatisticsManager.getGoodsDetail(pageNo, pageSize, categoryId, goodsName);
     }
 
-    @ApiOperation(value = "价格销量", response = SimpleChart.class)
+    @ApiOperation(value = "Sales price", response = SimpleChart.class)
     @GetMapping(value = "/price_sales")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sections", value = "价格区间，不传有默认值", dataType = "int", paramType = "query", required = true, allowMultiple = true),
-            @ApiImplicitParam(name = "cycle_type", value = "周期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "category_id", value = "商品分类id", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "sections", value = "Price range, no default values are passed", dataType = "int", paramType = "query", required = true, allowMultiple = true),
+            @ApiImplicitParam(name = "cycle_type", value = "Cycle type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "category_id", value = "Categoryid", dataType = "int", paramType = "query")
     })
     public SimpleChart getGoodsPriceSales(@ApiIgnore @Valid SearchCriteria searchCriteria, @ApiIgnore @RequestParam(value = "sections", required = false) ArrayList<Integer> sections) {
 
-        // 如果价格空间为空，则添加默认值
+        // If the price space is empty, add the default value
         if (null == sections || sections.size() == 0) {
             sections = new ArrayList<>();
             sections.add(0);
@@ -90,60 +90,60 @@ public class GoodsStatisticsSellerController {
             sections.add(2000);
         }
 
-        // 去除null值
+        // Remove the null values
         sections.removeIf(Objects::isNull);
         if (sections.size() < 2) {
-            throw new StatisticsException(StatisticsErrorCode.E801.code(), "应至少上传两个数字，才可构成价格区间");
+            throw new StatisticsException(StatisticsErrorCode.E801.code(), "At least two numbers should be uploaded to form a price range");
         }
         return this.goodsFrontStatisticsManager.getGoodsPriceSales(sections, searchCriteria);
     }
 
-    @ApiOperation(value = "下单金额排行前30商品，分页数据", response = Page.class)
+    @ApiOperation(value = "Ranked first in terms of order amount30Commodity, paging data", response = Page.class)
     @GetMapping(value = "/order_price_page")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "周期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query")})
+            @ApiImplicitParam(name = "cycle_type", value = "Cycle type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query")})
     public Page getGoodsOrderPriceTopPage(@ApiIgnore SearchCriteria searchCriteria) {
-        // 排名名次 默认30
+        // The ranking is 30 by default
         Integer topNum = 30;
-        // 获取数据
+        // To get the data
         return this.goodsFrontStatisticsManager.getGoodsOrderPriceTopPage(topNum, searchCriteria);
     }
 
-    @ApiOperation(value = "下单商品数量排行前30，分页数据", response = Page.class)
+    @ApiOperation(value = "Top order quantity30, paging data", response = Page.class)
     @GetMapping(value = "/order_num_page")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "周期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query")})
+            @ApiImplicitParam(name = "cycle_type", value = "Cycle type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query")})
     public Page getGoodsNumTop(@ApiIgnore SearchCriteria searchCriteria) {
         return this.goodsFrontStatisticsManager.getGoodsNumTopPage(30, searchCriteria);
     }
 
-    @ApiOperation(value = "下单金额排行前30商品，图表数据", response = SimpleChart.class)
+    @ApiOperation(value = "Ranked first in terms of order amount30Commodities, charts and data", response = SimpleChart.class)
     @GetMapping(value = "/order_price")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "周期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query")})
+            @ApiImplicitParam(name = "cycle_type", value = "Cycle type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query")})
     public SimpleChart getGoodsOrderPriceTopChart(@ApiIgnore SearchCriteria searchCriteria) {
 
-        // 排名名次 默认30
+        // The ranking is 30 by default
         Integer topNum = 30;
 
-        // 2.获取数据
+        // 2. Obtain data
         return this.goodsFrontStatisticsManager.getGoodsOrderPriceTop(topNum, searchCriteria);
     }
 
-    @ApiOperation(value = "下单商品数量排行前30，图表数据", response = SimpleChart.class)
+    @ApiOperation(value = "Top order quantity30, chart data", response = SimpleChart.class)
     @GetMapping(value = "/order_num")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "周期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query")})
+            @ApiImplicitParam(name = "cycle_type", value = "Cycle type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query")})
     public SimpleChart getGoodsNumTopChart(@ApiIgnore SearchCriteria searchCriteria) {
-        // 获取数据
+        // To get the data
         return this.goodsFrontStatisticsManager.getGoodsNumTop(30, searchCriteria);
     }
 

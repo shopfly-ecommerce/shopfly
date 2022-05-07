@@ -25,58 +25,58 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 退货操作检测，看某状态下是否允许某操作
+ * Return operation test to see whether an operation is allowed in a certain state
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午11:20 2018/5/2
+ * @since v7.0 In the morning11:20 2018/5/2
  */
 public class RefundOperateChecker {
 
     /**
-     * 货到付款退款
+     * Cash on delivery refunds
      */
     private static final Map<RefundStatusEnum, RefundStepVO> COD_REFUND_FLOW = new HashMap<>();
     /**
-     * 款到发货退款
+     * Refund upon delivery
      */
     private static final Map<RefundStatusEnum, RefundStepVO> ONLINE_REFUND_FLOW = new HashMap<>();
     /**
-     * 货到付款退货
+     * Cash on delivery returns
      */
     private static final Map<RefundStatusEnum, RefundStepVO> COD_RETURN_FLOW = new HashMap<>();
     /**
-     * 款到发货退货
+     * Return the money upon delivery
      */
     private static final Map<RefundStatusEnum, RefundStepVO> ONLINE_RETURN_FLOW = new HashMap<>();
 
     /**
-     * 申请中状态下，买家可取消，卖家可审核
+     * In the application state, the buyer can cancel, the seller can review
      */
     private static final RefundStepVO APPLY_STEP = new RefundStepVO(RefundStatusEnum.APPLY, RefundOperateEnum.CANCEL, RefundOperateEnum.ADMIN_APPROVAL);
 
     /**
-     * 审核拒绝的状态下，可做的操作
+     * Check the actions that can be performed in the rejected state
      */
     private static final RefundStepVO REFUSE_STEP = new RefundStepVO(RefundStatusEnum.REFUSE);
 
     /**
-     * 取消申请的状态下，可做的操作
+     * This operation can be performed when the application is cancelled
      */
     private static final RefundStepVO CANCEL_STEP = new RefundStepVO(RefundStatusEnum.CANCEL);
 
     /**
-     * 退款中状态下可做的操作
+     * What can be done in the state of refund
      */
     private static final RefundStepVO REFUNDING_STEP = new RefundStepVO(RefundStatusEnum.REFUNDING);
 
 //	/**
-//	 * 退款失败状态下，管理员可以审核
+//	 * If a refund fails, the administrator can audit it
 //	 */
 //	private static final RefundStepVO REFUNDFAIL_STEP = new RefundStepVO(RefundStatusEnum.REFUNDFAIL,RefundOperateEnum.ADMIN_REFUND);
 
     /**
-     * 已完成状态下，可做的操作
+     * Operations that can be performed in the completed state
      */
     private static final RefundStepVO COMPLETED_STEP = new RefundStepVO(RefundStatusEnum.COMPLETED);
 
@@ -88,16 +88,16 @@ public class RefundOperateChecker {
     }
 
     /**
-     * 初始化货到付款退款流程
+     * Initialize the CASH on delivery refund process
      */
     private static void initCodRefundflow() {
 
 
-        //退款申请通过状态下，管理员可退款
+        // If the application succeeds, the administrator can refund the money
         RefundStepVO waitForManualStep = new RefundStepVO(RefundStatusEnum.WAIT_FOR_MANUAL, RefundOperateEnum.ADMIN_REFUND);
 
 
-        // 退款失败状态下，管理员可退款
+        // If the refund fails, the administrator can refund the money
         RefundStepVO refundfailStep = new RefundStepVO(RefundStatusEnum.REFUNDFAIL, RefundOperateEnum.ADMIN_REFUND);
 
         COD_REFUND_FLOW.put(RefundStatusEnum.APPLY, APPLY_STEP);
@@ -111,15 +111,15 @@ public class RefundOperateChecker {
     }
 
     /**
-     * 初始化款到发货退款流程
+     * Initialize the payment to shipment refund process
      */
     private static void initOnlineRefundflow() {
 
 
-        //退款申请通过状态下，管理员可退款
+        // If the application succeeds, the administrator can refund the money
         RefundStepVO waitForManualStep = new RefundStepVO(RefundStatusEnum.WAIT_FOR_MANUAL, RefundOperateEnum.ADMIN_REFUND);
 
-        // 退款失败状态下，管理员可退款
+        // If the refund fails, the administrator can refund the money
         RefundStepVO refundfailStep = new RefundStepVO(RefundStatusEnum.REFUNDFAIL, RefundOperateEnum.ADMIN_REFUND);
 
 
@@ -134,17 +134,17 @@ public class RefundOperateChecker {
     }
 
     /**
-     * 初始化货到付款退货流程
+     * Initialize the cash on delivery return process
      */
     private static void initCodReturnflow() {
 
-        //退货申请通过状态下，管理员可退货入库
+        // If the return application is approved, the administrator can return the goods to the warehouse
         RefundStepVO passStep = new RefundStepVO(RefundStatusEnum.PASS, RefundOperateEnum.STOCK_IN);
 
-        //待人工处理和退款失败状态下，管理员可退款
+        // If manual processing or refund fails, the administrator can refund the money
         RefundStepVO waitForManualStep = new RefundStepVO(RefundStatusEnum.WAIT_FOR_MANUAL, RefundOperateEnum.ADMIN_REFUND);
 
-        //退款失败状态下，管理员可退款
+        // If the refund fails, the administrator can refund the money
         RefundStepVO refundfailStep = new RefundStepVO(RefundStatusEnum.REFUNDFAIL, RefundOperateEnum.ADMIN_REFUND);
         COD_RETURN_FLOW.put(RefundStatusEnum.APPLY, APPLY_STEP);
         COD_RETURN_FLOW.put(RefundStatusEnum.CANCEL, CANCEL_STEP);
@@ -158,17 +158,17 @@ public class RefundOperateChecker {
     }
 
     /**
-     * 初始化款到发货退货流程
+     * Initialize the payment to shipment return process
      */
     private static void initOnlionReturnflow() {
 
-        //退货申请通过状态下，卖家可退货入库
+        // When the return application is approved, the seller can return the goods to the warehouse
         RefundStepVO passStep = new RefundStepVO(RefundStatusEnum.PASS, RefundOperateEnum.STOCK_IN);
 
-        //待人工处理状态下，管理员可退款
+        // After manual processing, the administrator can refund the money
         RefundStepVO waitForManualStep = new RefundStepVO(RefundStatusEnum.WAIT_FOR_MANUAL, RefundOperateEnum.ADMIN_REFUND);
 
-        // 退款失败状态下，管理员可退款
+        // If the refund fails, the administrator can refund the money
         RefundStepVO refundfailStep = new RefundStepVO(RefundStatusEnum.REFUNDFAIL, RefundOperateEnum.ADMIN_REFUND);
 
 
@@ -184,28 +184,28 @@ public class RefundOperateChecker {
     }
 
     /**
-     * 校验操作是否允许
+     * Verify whether the operation is allowed
      *
-     * @param type    退款类型
-     * @param status  售后状态
-     * @param operate 操作类型
-     * @return 是否允许操作
+     * @param type    Refund type
+     * @param status  After state
+     * @param operate Operation type
+     * @return Whether operation is allowed
      */
     public static boolean checkAllowable(RefuseTypeEnum type, PaymentTypeEnum paymentType, RefundStatusEnum status, RefundOperateEnum operate) {
 
         Map<RefundStatusEnum, RefundStepVO> flow;
 
         if (type.equals(RefuseTypeEnum.RETURN_MONEY) && paymentType.equals(PaymentTypeEnum.COD)) {
-            //货到付款退款
+            // Cash on delivery refunds
             flow = COD_REFUND_FLOW;
         } else if (type.equals(RefuseTypeEnum.RETURN_MONEY) && paymentType.equals(PaymentTypeEnum.ONLINE)) {
-            //款到发货退款
+            // Refund upon delivery
             flow = ONLINE_REFUND_FLOW;
         } else if (type.equals(RefuseTypeEnum.RETURN_GOODS) && paymentType.equals(PaymentTypeEnum.COD)) {
-            //货到付款退货
+            // Cash on delivery returns
             flow = COD_RETURN_FLOW;
         } else {
-            //款到发货退货
+            // Return the money upon delivery
             flow = ONLINE_RETURN_FLOW;
         }
 

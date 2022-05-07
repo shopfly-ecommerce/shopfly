@@ -28,41 +28,41 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author zjp
  * @version v7.0
- * @Description 退款单列表DTO
+ * @Description A single list of refundsDTO
  * @ClassName RefundDTO
- * @since v7.0 上午11:32 2018/5/8
+ * @since v7.0 In the morning11:32 2018/5/8
  */
 public class RefundDTO extends RefundDO {
 
-    @ApiModelProperty(value = "退货(款)单状态文字描述", name = "refund_status_text")
+    @ApiModelProperty(value = "Return of the goods(paragraph)Single-state text description", name = "refund_status_text")
     private String refundStatusText;
 
-    @ApiModelProperty(value = "退款账户类型文字描述", name = "account_type_text")
+    @ApiModelProperty(value = "Refund account Type Text description", name = "account_type_text")
     private String accountTypeText;
 
-    @ApiModelProperty(value = "退(货)款类型文字描述:退款，退货", name = "refuse_type_text")
+    @ApiModelProperty(value = "refund(cargo)Section Type Text description:refund款，refundcargo", name = "refuse_type_text")
     private String refuseTypeText;
 
-    @ApiModelProperty(value = "操作是否允许", name = "after_sale_operate_allowable")
+    @ApiModelProperty(value = "Whether the operation is allowed", name = "after_sale_operate_allowable")
     private AfterSaleOperateAllowable afterSaleOperateAllowable;
 
     public String getRefundStatusText() {
         return RefundStatusEnum.valueOf(this.getRefundStatus()).description();
     }
 
-    @ApiModelProperty(value = "售后操作允许情况")
+    @ApiModelProperty(value = "After-sales operation permit")
     public AfterSaleOperateAllowable getAfterSaleOperateAllowable() {
         AfterSaleOperateAllowable allowable = new AfterSaleOperateAllowable(RefuseTypeEnum.valueOf(this.getRefuseType()),
                 RefundStatusEnum.valueOf(this.getRefundStatus()), PaymentTypeEnum.valueOf(this.getPaymentType()));
         return allowable;
     }
 
-    @ApiModelProperty(value = "退款方式文字")
+    @ApiModelProperty(value = "Text of refund Method")
     public String getAccountTypeText() {
 
         try {
 
-            // 退款方式  園路退回或者线下支付
+            // Refund means park road return or offline payment
             String refundWay = RefundWayEnum.valueOf(this.getRefundWay()).description();
 
             if (!StringUtil.isEmpty(this.getAccountType())) {
@@ -76,7 +76,7 @@ public class RefundDTO extends RefundDO {
             e.printStackTrace();
         }
 
-        return "未知";
+        return "The unknown";
     }
 
     public String getRefuseTypeText() {

@@ -18,40 +18,40 @@ package cloud.shopfly.b2c.core.pagedata.model.enums;
 /**
  * @author fk
  * @version v1.0
- * @Description: 楼层操作类型
+ * @Description: Floor operation type
  * @date 2018/5/21 16:05
  * @since v7.0.0
  */
 public enum OperationType {
 
     /**
-     * 链接地址
+     * The link address
      */
-    URL("链接地址"),
+    URL("The link address"),
     /**
-     * 商品
+     * product
      */
-    GOODS("商品"),
+    GOODS("product"),
     /**
-     * 关键字
+     * keyword
      */
-    KEYWORD("关键字"),
+    KEYWORD("keyword"),
     /**
-     * 店铺
+     * The store
      */
-    SHOP("店铺"),
+    SHOP("The store"),
     /**
-     * 商城分类
+     * Mall classification
      */
-    CATEGORY("商城分类"),
+    CATEGORY("Mall classification"),
     /**
-     * 专题
+     * project
      */
-    TOPIC("专题"),
+    TOPIC("project"),
     /**
-     * 无操作
+     * No operation
      */
-    NONE("无操作");
+    NONE("No operation");
 
     private String description;
 

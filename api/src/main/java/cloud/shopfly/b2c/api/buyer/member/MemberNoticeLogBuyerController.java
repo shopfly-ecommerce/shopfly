@@ -28,7 +28,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 
 /**
- * 会员站内消息历史控制器
+ * Member station message history controller
  *
  * @author zh
  * @version v7.0.0
@@ -37,18 +37,18 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("/members/member-nocice-logs")
-@Api(description = "会员站内消息历史相关API")
+@Api(description = "Member site message history relatedAPI")
 public class MemberNoticeLogBuyerController {
 
     @Autowired
     private MemberNoticeLogManager memberNociceLogManager;
 
 
-    @ApiOperation(value = "查询会员站内消息历史列表", response = MemberNoticeLog.class)
+    @ApiOperation(value = "Query the message history list of member sites", response = MemberNoticeLog.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "read", value = "是否已读，1已读，0未读", allowableValues = "0,1", required = false, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "read", value = "Has it been read,1Have read,0unread", allowableValues = "0,1", required = false, dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, Integer read) {
@@ -57,9 +57,9 @@ public class MemberNoticeLogBuyerController {
 
 
     @PutMapping(value = "/{ids}/read")
-    @ApiOperation(value = "将消息设置为已读", response = MemberNoticeLog.class)
+    @ApiOperation(value = "Set the message to read", response = MemberNoticeLog.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ids", value = "要设置为已读消息的id", required = true, dataType = "int", paramType = "path", allowMultiple = true)
+            @ApiImplicitParam(name = "ids", value = "To be set to read messagesid", required = true, dataType = "int", paramType = "path", allowMultiple = true)
     })
     public String read(@PathVariable Integer[] ids) {
         this.memberNociceLogManager.read(ids);
@@ -68,9 +68,9 @@ public class MemberNoticeLogBuyerController {
 
 
     @DeleteMapping(value = "/{ids}")
-    @ApiOperation(value = "删除会员站内消息历史")
+    @ApiOperation(value = "Delete message history in member site")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ids", value = "要删除的消息主键", required = true, dataType = "int", paramType = "path", allowMultiple = true)
+            @ApiImplicitParam(name = "ids", value = "Primary key of the message to delete", required = true, dataType = "int", paramType = "path", allowMultiple = true)
     })
     public String delete(@PathVariable Integer[] ids) {
         this.memberNociceLogManager.delete(ids);

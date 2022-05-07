@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.annotation.Column;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 促销信息DTO
+ * Promotional informationDTO
  *
  * @author Snow create in 2018/4/16
  * @version v2.0
@@ -30,38 +30,38 @@ import io.swagger.annotations.ApiModelProperty;
 public class PromotionDetailDTO {
 
     /**
-     * 活动开始时间
+     * Activity start time
      */
     @Column(name = "start_time")
-    @ApiModelProperty(name = "start_time", value = "活动开始时间", required = false)
+    @ApiModelProperty(name = "start_time", value = "Activity start time", required = false)
     private Long startTime;
 
     /**
-     * 活动结束时间
+     * End time
      */
     @Column(name = "end_time")
-    @ApiModelProperty(name = "end_time", value = "活动结束时间", required = false)
+    @ApiModelProperty(name = "end_time", value = "End time", required = false)
     private Long endTime;
 
     /**
-     * 活动id
+     * activityid
      */
     @Column(name = "activity_id")
-    @ApiModelProperty(name = "activity_id", value = "活动id", required = false)
+    @ApiModelProperty(name = "activity_id", value = "activityid", required = false)
     private Integer activityId;
 
     /**
-     * 促销工具类型
+     * Types of promotional tools
      */
     @Column(name = "promotion_type")
-    @ApiModelProperty(name = "promotion_type", value = "促销工具类型", required = false)
+    @ApiModelProperty(name = "promotion_type", value = "Types of promotional tools", required = false)
     private String promotionType;
 
     /**
-     * 活动标题
+     * Activity title
      */
     @Column(name = "title")
-    @ApiModelProperty(name = "title", value = "活动标题", required = false)
+    @ApiModelProperty(name = "title", value = "Activity title", required = false)
     private String title;
 
     public PromotionDetailDTO(GroupbuyActiveDO activeDO) {

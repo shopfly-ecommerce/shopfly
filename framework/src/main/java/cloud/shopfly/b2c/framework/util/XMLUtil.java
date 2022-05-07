@@ -21,7 +21,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * xml工具
+ * xmltool
  * @author kingapex
  *
  */
@@ -30,23 +30,23 @@ public   class XMLUtil {
 	
 	
 	/**
-	 * 读取某个节点的唯一子节点
+	 * Reads the unique child of a node
 	 * @param node
 	 * @param tagName
-	 * @return 如果此节点存在多个tagName子节点，返回第一个子节点，如果不存在返回Null
-	 * @throws RuntimeException 传入的node节点非Node.ELEMENT_NODE类型
+	 * @return If there are more than one such nodetagNameChild node, returns the first child node, or if none existsNull
+	 * @throws RuntimeException The incomingnodeThe node is notNode.ELEMENT_NODEtype
 	 */
 	public static Element getChildByTagName(Node node,String tagName){
 		
-//		//检查节点正确性
+//		//Checking node Correctness
 		if(node.getNodeType()!= Node.ELEMENT_NODE){
-			throw new RuntimeException(tagName +"节点格式不正确,非Element类型。");
+			throw new RuntimeException(tagName +"The node format is incorrect,nonElementType.");
 		}
 		Element el = (Element)node;
-		//获取此节点的名为tagName的子，并返回第一个
+		// Gets a child of this node named tagName and returns the first
 		NodeList nodeList  =el.getElementsByTagName(tagName);
 		int length  = nodeList.getLength();
-		//如果不存在子，则返回Null
+		// If no child exists, Null is returned
 		if( nodeList == null || length==0 ){
 			return null;
 		}
@@ -55,17 +55,17 @@ public   class XMLUtil {
 	
 
 	/**
-	 * 读取某个节点的唯一子节点
+	 * Reads the unique child of a node
 	 * @param doc
 	 * @param tagName
-	 * @return 如果此节点存在多个tagName子节点，返回第一个子节点，如果不存在返回Null
-	 * @throws RuntimeException 传入的node节点非Node.ELEMENT_NODE类型
+	 * @return If there are more than one such nodetagNameChild node, returns the first child node, or if none existsNull
+	 * @throws RuntimeException The incomingnodeThe node is notNode.ELEMENT_NODEtype
 	 */
 	public static Element getChildByTagName(Document doc,String tagName){
-		//获取此节点的名为tagName的子，并返回第一个
+		// Gets a child of this node named tagName and returns the first
 		NodeList nodeList  =doc.getElementsByTagName(tagName);
 		int length  = nodeList.getLength();
-		//如果不存在子，则返回Null
+		// If no child exists, Null is returned
 		if( nodeList == null || length==0 ){
 			return null;
 		}
@@ -74,12 +74,12 @@ public   class XMLUtil {
 	
 	
 	/**
-	 * 寻找某个节点的子节点<br>
-	 * 匹配子的属性名称和属性值
-	 * @param node 节点 
-	 * @param attrName 要匹配的属性名称
-	 * @param attrValue 要匹配的属性值
-	 * @return 返回匹配的节点
+	 * Find the children of a node<br>
+	 * Attribute name and attribute value of the match child
+	 * @param node node
+	 * @param attrName The name of the property to match
+	 * @param attrValue The value of the property to match
+	 * @return Returns the matched node
 	 */
 	public static Element getChildByAttrName (Node node,String attrName,String attrValue){
 		

@@ -29,12 +29,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 商品收藏更新
+ * Merchandise Collection update
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-23 下午5:50
+ * 2018-07-23 In the afternoon5:50
  */
 @Component
 public class DataCollectionGoodsConsumer {
@@ -53,7 +53,7 @@ public class DataCollectionGoodsConsumer {
         try {
             goodsDataClient.updateCollection(goodsData);
         } catch (Exception e) {
-            logger.error("商品收藏数量更新失败：", e);
+            logger.error("Failed to update collection quantity：", e);
         }
     }
 

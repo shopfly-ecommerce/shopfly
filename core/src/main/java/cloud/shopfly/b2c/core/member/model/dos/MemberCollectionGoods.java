@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 会员商品收藏表实体
+ * Member commodity collection table entity
  *
  * @author zh
  * @version v7.0.0
@@ -44,55 +44,55 @@ public class MemberCollectionGoods implements Serializable {
     private static final long serialVersionUID = 7279348053700611L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 会员ID
+     * membersID
      */
     @Column(name = "member_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "member_id", value = "会员ID", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "member_id", value = "membersID", required = false)
     private Integer memberId;
     /**
-     * 收藏商品ID
+     * Collection productID
      */
     @Column(name = "goods_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "goods_id", value = "收藏商品ID", required = true)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "goods_id", value = "Collection productID", required = true)
     private Integer goodsId;
     /**
-     * 收藏商品时间
+     * Collection time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "收藏商品时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Collection time", required = false)
     private Long createTime;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "goods_name", value = "Name", required = false)
     private String goodsName;
     /**
-     * 商品价格
+     * Price
      */
     @Column(name = "goods_price")
-    @ApiModelProperty(name = "goods_price", value = "商品价格", required = false)
+    @ApiModelProperty(name = "goods_price", value = "Price", required = false)
     private Double goodsPrice;
     /**
-     * 商品编号
+     * SN
      */
     @Column(name = "goods_sn")
-    @ApiModelProperty(name = "goods_sn", value = "商品编号", required = false)
+    @ApiModelProperty(name = "goods_sn", value = "SN", required = false)
     private String goodsSn;
 
     /**
-     * 商品图片
+     * Commodity images
      */
     @Column(name = "goods_img")
-    @ApiModelProperty(name = "goods_img", value = "商品图片", required = false)
+    @ApiModelProperty(name = "goods_img", value = "Commodity images", required = false)
     private String goodsImg;
 
     @PrimaryKeyField

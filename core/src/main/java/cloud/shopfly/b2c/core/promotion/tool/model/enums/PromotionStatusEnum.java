@@ -16,30 +16,30 @@
 package cloud.shopfly.b2c.core.promotion.tool.model.enums;
 
 /**
- * 活动状态
+ * Active state
  * @author liushuai
  * @version v1.0
  * @since v7.0
- * 2018/12/9 下午5:00
+ * 2018/12/9 In the afternoon5:00
  * @Description:
  *
  */
 public enum PromotionStatusEnum {
 
 	/**
-	 * 等待
+	 * Waiting for the
 	 */
-	WAIT ("等待"),
+	WAIT ("Waiting for the"),
 
 	/**
-	 * 进行中
+	 * ongoing
 	 */
-	UNDERWAY("进行中"),
+	UNDERWAY("ongoing"),
 
 	/**
-	 * 结束
+	 * The end of the
 	 */
-	END("结束");
+	END("The end of the");
 
 	private String name;
 

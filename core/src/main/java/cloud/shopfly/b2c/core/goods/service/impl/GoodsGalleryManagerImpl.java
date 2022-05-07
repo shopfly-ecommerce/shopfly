@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 商品相册业务类
+ * Commodity album business class
  *
  * @author fk
  * @version v2.0
@@ -72,13 +72,13 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
 
         GoodsSettingVO photoSizeSetting = JsonUtil.jsonToObject(photoSizeSettingJson, GoodsSettingVO.class);
 
-        //缩略图
+        // The thumbnail
         String thumbnail = uploadFactoryClient.getUrl(origin, photoSizeSetting.getThumbnailWidth(), photoSizeSetting.getThumbnailHeight());
-        //小图
+        // insets
         String small = uploadFactoryClient.getUrl(origin, photoSizeSetting.getSmallWidth(), photoSizeSetting.getSmallHeight());
-        //大图
+        // A larger version
         String big = uploadFactoryClient.getUrl(origin, photoSizeSetting.getBigWidth(), photoSizeSetting.getBigHeight());
-        //赋值
+        // The assignment
         goodsGallery.setBig(big);
         goodsGallery.setSmall(small);
         goodsGallery.setThumbnail(thumbnail);
@@ -101,11 +101,11 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
 
         int i = 0;
         for (GoodsGalleryDO origin : goodsGalleryList) {
-            // 获取带所有缩略的相册
+            // Gets an album with all thumbnails
             GoodsGalleryDO galley = this.getGoodsGallery(origin.getOriginal());
             galley.setGoodsId(goodsId);
             galley.setSort(i);
-            /** 默认第一个为默认图片 */
+            /** By default the first one is the default image*/
             if (i == 0) {
                 galley.setIsdefault(1);
             } else {
@@ -121,16 +121,16 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void edit(List<GoodsGalleryDO> goodsGalleryList, Integer goodsId) {
 
-        // 删除没有用到的商品相册信息
+        // Delete the product album information that is not used
         this.delNoUseGalley(goodsGalleryList, goodsId);
         int i = 0;
-        // 如果前台传入id不为-1，则新增商品图片到此商品的相册中 添加相册
+        // If the id passed by the foreground is not -1, the photo of the product is added to the photo album of the product
         for (GoodsGalleryDO goodsGallery : goodsGalleryList) {
-            //已有图片且默认
+            // Already picture and default
             if (goodsGallery.getImgId() != -1 && i == 0) {
-                //将此图片设置为默认
+                // Set this image as the default
                 this.daoSupport.execute("update es_goods_gallery set isdefault = 1 where img_id = ? ", goodsGallery.getImgId());
-                //将其他图片设置为不默认
+                // Set other images not to default
                 this.daoSupport.execute("update es_goods_gallery set isdefault = 0 where img_id != ? and goods_id = ? ", goodsGallery.getImgId(),goodsId);
                 GoodsGalleryDO temp = this.getModel(goodsGallery.getImgId());
                 goodsGallery.setBig(temp.getBig());
@@ -139,13 +139,13 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
                 goodsGallery.setThumbnail(temp.getThumbnail());
                 goodsGallery.setTiny(temp.getTiny());
             }
-            //新增的图片
+            // New image
             if (goodsGallery.getImgId() == -1) {
-                //获取带所有缩略的相册
+                // Gets an album with all thumbnails
                 GoodsGalleryDO galley = this.getGoodsGallery(goodsGallery.getOriginal());
                 galley.setGoodsId(goodsId);
                 galley.setSort(i);
-                // 默认第一个为默认图片
+                // By default the first one is the default image
                 if (i == 0) {
                     galley.setIsdefault(1);
                     this.daoSupport.execute("update es_goods_gallery set isdefault = 0 where goods_id = ? ", goodsId);
@@ -166,13 +166,13 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
     }
 
     /**
-     * 删除没有用到的商品相册信息
+     * Delete the product album information that is not used
      *
-     * @param galleryList 商品相册
-     * @param goodsId     商品id
+     * @param galleryList Photo album
+     * @param goodsId     productid
      */
     private void delNoUseGalley(List<GoodsGalleryDO> galleryList, Integer goodsId) {
-        // 将传入的商品图片id进行拼接
+        // Concatenate the incoming commodity picture ID
         List<Object> imgIds = new ArrayList<>();
         String[] temp = new String[galleryList.size()];
         if (galleryList.size() > 0) {
@@ -183,7 +183,7 @@ public class GoodsGalleryManagerImpl implements GoodsGalleryManager {
         }
         String str = StringUtil.arrayToString(temp, ",");
         imgIds.add(goodsId);
-        // 删除掉不在此商品相册中得图片
+        // Delete the pictures that are not in this product album
         this.daoSupport.execute("delete from es_goods_gallery where img_id not in(" + str + ") and goods_id = ?", imgIds.toArray());
     }
 }

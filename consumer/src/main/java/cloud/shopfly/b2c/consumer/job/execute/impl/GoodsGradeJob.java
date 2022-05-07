@@ -23,12 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 商品评分定时任务
+ * Timing task for product scoring
  *
  * @author fk
  * @version v1.0
  * @since v7.0
- * 2018-07-05 下午2:11
+ * 2018-07-05 In the afternoon2:11
  */
 @Component
 public class GoodsGradeJob implements EveryDayExecute {
@@ -39,7 +39,7 @@ public class GoodsGradeJob implements EveryDayExecute {
     private GoodsClient goodsClient;
 
     /**
-     * 每晚23:30执行
+     * Every night,23:30perform
      */
     @Override
     public void everyDay() {
@@ -52,7 +52,7 @@ public class GoodsGradeJob implements EveryDayExecute {
             this.goodsClient.updateGoodsGrade();
             logger.debug(" goods job end");
         }catch (Exception e) {
-            logger.error("计算商品评分出错", e);
+            logger.error("Error calculating product score", e);
         }
 
     }

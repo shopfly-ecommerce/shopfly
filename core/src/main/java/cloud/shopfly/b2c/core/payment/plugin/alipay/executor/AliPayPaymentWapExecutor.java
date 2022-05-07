@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v1.0
- * @Description: 支付宝wap端
+ * @Description: Alipaywapend
  * @date 2018/4/1714:55
  * @since v7.0.0
  */
@@ -37,7 +37,7 @@ public class AliPayPaymentWapExecutor extends AlipayPluginConfig {
 
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return
@@ -47,7 +47,7 @@ public class AliPayPaymentWapExecutor extends AlipayPluginConfig {
         try {
             AlipayClient alipayClient =  super.buildClient(bill.getClientType());
 
-            //设置请求参数
+            // Setting request Parameters
             AlipayTradeWapPayRequest alipayRequest = new AlipayTradeWapPayRequest();
             alipayRequest.setNotifyUrl(this.getCallBackUrl(bill.getTradeType(), bill.getClientType()));
             alipayRequest.setReturnUrl(this.getReturnUrl(bill));
@@ -55,7 +55,7 @@ public class AliPayPaymentWapExecutor extends AlipayPluginConfig {
             ObjectMapper json = new ObjectMapper();
             String bizContent =  json.writeValueAsString( sParaTemp );
 
-            //填充业务参数
+            // Populate business parameters
             alipayRequest.setBizContent(bizContent );
             return JsonUtil.toMap(alipayClient.pageExecute(alipayRequest).getBody());
         } catch ( Exception e1) {

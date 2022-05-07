@@ -28,13 +28,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 延时任务 消息消费者
+ * Delayed task message consumer
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2019/2/12 下午4:52
+ * 2019/2/12 In the afternoon4:52
  */
 @Component
 public class TimeTriggerConsumer {
@@ -47,7 +47,7 @@ public class TimeTriggerConsumer {
     private Cache cache;
 
     /**
-     * 接收消息，监听 CONSUMPTION_QUEUE 队列
+     * Receive messages, listenCONSUMPTION_QUEUE The queue
      */
     @RabbitListener(queues = TimeTriggerConfig.IMMEDIATE_QUEUE_XDELAY)
     public void consume(TimeTriggerMsg timeTriggerMsg) {
@@ -58,23 +58,23 @@ public class TimeTriggerConsumer {
             if (cache.get(key) == null) {
 
                 if (logger.isDebugEnabled()) {
-                    logger.debug("执行器执行被取消：" + timeTriggerMsg.getTriggerExecuter() + "|任务标识：" + timeTriggerMsg.getUniqueKey());
+                    logger.debug(" time trigger executer cancel:" + timeTriggerMsg.getTriggerExecuter() + "UniqueKey is：" + timeTriggerMsg.getUniqueKey());
                 }
                 return;
             }
             if (logger.isDebugEnabled()) {
-                logger.debug("执行器执行：" + timeTriggerMsg.getTriggerExecuter());
-                logger.debug("执行器参数：" + timeTriggerMsg.getParam().toString());
+                logger.debug(" time trigger execute:：" + timeTriggerMsg.getTriggerExecuter());
+                logger.debug("param is: ：" + timeTriggerMsg.getParam().toString());
             }
 
-            //执行任务前 清除标识
+            // Clear identifiers before performing tasks
             cache.remove(key);
 
             TimeTriggerExecuter timeTriggerExecuter = (TimeTriggerExecuter) ApplicationContextHolder.getBean(timeTriggerMsg.getTriggerExecuter());
             timeTriggerExecuter.execute(timeTriggerMsg.getParam());
 
         } catch (Exception e) {
-            logger.error("延时任务异常：", e);
+            logger.error("Delayed task exception：", e);
         }
     }
 

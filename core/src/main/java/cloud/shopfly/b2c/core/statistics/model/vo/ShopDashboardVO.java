@@ -25,9 +25,9 @@ import java.util.Objects;
 
 /**
  * <<<<<<< HEAD
- * 管理端首页统计数据
+ * Management end home page statistics
  * =======
- * 商家中心，首页统计数据
+ * Business center, home page statistics
  * >>>>>>> master
  *
  * @author mengyuanming
@@ -35,39 +35,39 @@ import java.util.Objects;
  * @since 7.0
  * 2018/6/25 10:19
  */
-@ApiModel("首页统计数据")
+@ApiModel("Home page statistics")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ShopDashboardVO {
 
-    @ApiModelProperty(value = "出售中的商品")
+    @ApiModelProperty(value = "Goods on sale")
     @Column(name = "market_goods")
     private String marketGoods;
 
-    @ApiModelProperty(value = "待上架的商品")
+    @ApiModelProperty(value = "Merchandise waiting to hit the shelves")
     @Column(name = "pending_goods")
     private String pendingGoods;
 
-    @ApiModelProperty(value = "待处理买家咨询")
+    @ApiModelProperty(value = "Buyer inquiries to be processed")
     @Column(name = "pending_member_ask")
     private String pendingMemberAsk;
 
-    @ApiModelProperty(value = "所有订单数")
+    @ApiModelProperty(value = "All orders")
     @Column(name = "all_order_num")
     private String allOrdersNum;
 
-    @ApiModelProperty(value = "待付款订单数")
+    @ApiModelProperty(value = "Order number to be paid")
     @Column(name = "wait_pay_order_num")
     private String waitPayOrderNum;
 
-    @ApiModelProperty(value = "待发货订单数")
+    @ApiModelProperty(value = "Order number of goods to be delivered")
     @Column(name = "wait_ship_order_num")
     private String waitShipOrderNum;
 
-    @ApiModelProperty(value = "待收货订单数")
+    @ApiModelProperty(value = "Backlog order number")
     @Column(name = "wait_delivery_order_num")
     private String waitDeliveryOrderNum;
 
-    @ApiModelProperty(value = "待处理售后订单数")
+    @ApiModelProperty(value = "Number of after-sale orders to be processed")
     @Column(name = "after_sale_order_num")
     private String afterSaleOrderNum;
 

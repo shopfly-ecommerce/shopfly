@@ -22,18 +22,18 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 分销商Manager接口
+ * distributorsManagerinterface
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 下午3:19
+ * 2018/5/21 In the afternoon3:19
  */
 public interface DistributionManager {
 
     /**
-     * 新增分销商
+     * New distributor
      *
      * @param distributor
      * @return
@@ -41,7 +41,7 @@ public interface DistributionManager {
     DistributionDO add(DistributionDO distributor);
 
     /**
-     * 所有下线
+     * All referrals
      *
      * @param memberId
      * @return
@@ -50,34 +50,34 @@ public interface DistributionManager {
 
 
     /**
-     * 分页分销商
+     * Paging distributor
      *
-     * @param pageNo     页码
-     * @param pageSize   分页大小
-     * @param memberName 会员名字
+     * @param pageNo     The page number
+     * @param pageSize   Page size
+     * @param memberName The member name
      * @return PAGE
      */
     Page page(Integer pageNo, Integer pageSize, String memberName);
 
     /**
-     * 根据会员id获得分销商的信息
+     * According to the membershipidGet distributor information
      *
-     * @param memberId 会员id
-     * @return 分销商对象 Distributor,没有就返回null
+     * @param memberId membersid
+     * @return Distributor objectDistributor,Return withoutnull
      */
     DistributionDO getDistributorByMemberId(Integer memberId);
 
     /**
-     * 根据会员id获得分销商的信息
+     * According to the membershipidGet distributor information
      *
-     * @param id 分销商id
-     * @return 分销商对象 Distributor,没有就返回null
+     * @param id distributorsid
+     * @return Distributor objectDistributor,Return withoutnull
      */
     DistributionDO getDistributor(Integer id);
 
 
     /**
-     * 更新Distributor信息
+     * updateDistributorinformation
      *
      * @param distributor
      * @return
@@ -86,16 +86,16 @@ public interface DistributionManager {
 
 
     /**
-     * 根据会员id设置其上级分销商（两级）
+     * According to the membershipidSet up its superior distributor（Two levels of）
      *
-     * @param memberId 会员id
-     * @param parentId 上级会员的id
-     * @return 设置结果， trun=成功 false=失败
+     * @param memberId membersid
+     * @param parentId Superior membersid
+     * @return Set the result, trun=successfulfalse=failure
      */
     boolean setParentDistributorId(Integer memberId, Integer parentId);
 
     /**
-     * 获取可提现金额
+     * Get the amount available for withdrawal
      *
      * @param memberId
      * @return
@@ -103,41 +103,41 @@ public interface DistributionManager {
     Double getCanRebate(Integer memberId);
 
     /**
-     * 增加冻结返利金额
+     * Increase the amount of frozen rebate
      *
-     * @param price    返利金额金额
-     * @param memberId 会员id
+     * @param price    Rebate amount amount
+     * @param memberId membersid
      */
     void addFrozenCommission(Double price, Integer memberId);
 
 
     /**
-     * 增加总销售额、总的返利金额金额
+     * Increase total sales、Total rebate amount amount
      *
-     * @param orderPrice 订单金额
-     * @param rebate     返利金额
-     * @param memberId   会员id
+     * @param orderPrice Amount
+     * @param rebate     The rebate amount
+     * @param memberId   membersid
      */
     void addTotalPrice(Double orderPrice, Double rebate, Integer memberId);
 
     /**
-     * 减去总销售额、总的返利金额金额
+     * Minus total sales、Total rebate amount amount
      *
-     * @param orderPrice 订单金额
-     * @param rebate     返利金额
-     * @param memberId   会员id
+     * @param orderPrice Amount
+     * @param rebate     The rebate amount
+     * @param memberId   membersid
      */
     void subTotalPrice(Double orderPrice, Double rebate, Integer memberId);
 
     /**
-     * 获取当前会员 的上级
+     * Gets the current members superior
      *
-     * @return 返回的字符串
+     * @return String returned
      */
     String getUpMember();
 
     /**
-     * 获取下级 分销商集合
+     * Get a collection of sub-distributors
      *
      * @param memberId
      * @return
@@ -145,7 +145,7 @@ public interface DistributionManager {
     List<DistributionVO> getLowerDistributorTree(Integer memberId);
 
     /**
-     * 修改模版
+     * Modify the template
      *
      * @param memberId
      * @param tplId
@@ -153,7 +153,7 @@ public interface DistributionManager {
     void changeTpl(Integer memberId, Integer tplId);
 
     /**
-     * 统计下线人数
+     * Collecting the Number of Offline Users
      *
      * @param memberId
      */

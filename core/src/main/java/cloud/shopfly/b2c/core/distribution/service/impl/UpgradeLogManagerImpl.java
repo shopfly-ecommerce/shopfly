@@ -34,13 +34,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 升级日志 实现
+ * Upgrade Log Implementation
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 下午12:58
+ * 2018/5/22 In the afternoon12:58
  */
 
 @Component
@@ -62,7 +62,7 @@ public class UpgradeLogManagerImpl implements UpgradeLogManager {
         String sql = "SELECT * FROM es_upgrade_log";
 
         List<String> params = new ArrayList<>();
-        // 只传入了搜索的名字
+        // Only the search name is passed in
         if (!StringUtil.isEmpty(memberName)) {
             sql += " WHERE member_name LIKE ?";
             params.add("%" + memberName + "%");
@@ -75,7 +75,7 @@ public class UpgradeLogManagerImpl implements UpgradeLogManager {
     @Override
     public UpgradeLogDO add(UpgradeLogDO upgradeLog) {
 
-        // 非空
+        // Is not empty
         if (upgradeLog != null) {
             this.daoSupport.insert("es_upgrade_log", upgradeLog);
         }
@@ -90,15 +90,15 @@ public class UpgradeLogManagerImpl implements UpgradeLogManager {
         CommissionTpl oldTpl = this.commissionTplManager.getModel(oldTplId);
         CommissionTpl newTpl = this.commissionTplManager.getModel(newTplId);
 
-        //set数据
+        // The set of data
         upgradelog.setMemberId(memberId);
         if (member != null) {
             upgradelog.setMemberName(member.getUname());
         } else {
-            upgradelog.setMemberName("无名");
+            upgradelog.setMemberName("The unknown");
         }
 
-        // 如果有 就记录
+        // If so, record it
         if (oldTpl != null) {
             upgradelog.setOldTplId(oldTplId);
             upgradelog.setOldTplName(oldTpl.getTplName());

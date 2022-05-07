@@ -27,23 +27,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 站点信息首页展示控制器
+ * The controller is displayed on the site information home page
  *
  * @author zh
  * @version v7.0
- * @date 18/7/13 上午11:21
+ * @date 18/7/13 In the morning11:21
  * @since v7.0
  */
 @RestController
 @RequestMapping("/site-show")
-@Api(description = "站点展示")
+@Api(description = "The site shows")
 public class SiteShowBaseController {
 
     @Autowired
     private SettingManager settingManager;
 
     @GetMapping
-    @ApiOperation(value = "获取站点设置")
+    @ApiOperation(value = "Get site Settings")
     public SiteSetting getSiteSetting() {
 
         String siteJson = settingManager.get(SettingGroup.SITE);

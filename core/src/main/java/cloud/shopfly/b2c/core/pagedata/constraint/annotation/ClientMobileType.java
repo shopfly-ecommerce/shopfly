@@ -24,7 +24,7 @@ import java.lang.annotation.*;
 /**
  * @author fk
  * @version v2.0
- * @Description: 客户端两端类型验证
+ * @Description: Type verification on both ends of the client
  * @date 2018/4/311:42
  * @since v7.0.0
  */
@@ -34,7 +34,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ClientMobileType {
 
-    String message() default "不正确的客户端类型";
+    String message() default "Incorrect client type";
 
     Class<?>[] groups() default {};
 

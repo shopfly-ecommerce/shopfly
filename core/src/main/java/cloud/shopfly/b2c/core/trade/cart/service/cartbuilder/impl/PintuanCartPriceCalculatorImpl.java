@@ -44,7 +44,7 @@ public class PintuanCartPriceCalculatorImpl implements CartPriceCalculator {
     @Override
     public PriceDetailVO countPrice(List<CartVO> cartList) {
 
-        //根据规则计算价格
+        // Calculate the price according to the rules
         PriceDetailVO priceDetailVO = this.countPriceWithRule(cartList);
 
 
@@ -64,13 +64,13 @@ public class PintuanCartPriceCalculatorImpl implements CartPriceCalculator {
             for (CartSkuVO cartSku : cart.getSkuList()) {
 
 
-                //购物车全部商品的原价合
+                // The original price of all items in the shopping cart
                 cartPrice.setOriginalPrice(CurrencyUtil.add(cartPrice.getGoodsPrice(), cartSku.getSubtotal()));
 
-                //购物车所有小计合
+                // Shopping cart all subtotals
                 cartPrice.setGoodsPrice(CurrencyUtil.add(cartPrice.getGoodsPrice(), cartSku.getSubtotal()));
 
-                //累计商品重量
+                // Accumulated commodity weight
                 double weight = CurrencyUtil.mul(cartSku.getGoodsWeight(), cartSku.getNum());
                 double cartWeight = CurrencyUtil.add(cart.getWeight(), weight);
                 cart.setWeight(cartWeight);
@@ -79,7 +79,7 @@ public class PintuanCartPriceCalculatorImpl implements CartPriceCalculator {
             }
 
 
-            //总价为商品价加运费
+            // Total price is commodity price plus freight
             double totalPrice = CurrencyUtil.add(cartPrice.getGoodsPrice(), cartPrice.getFreightPrice());
             cartPrice.setTotalPrice(totalPrice);
             cart.setPrice(cartPrice);
@@ -91,9 +91,9 @@ public class PintuanCartPriceCalculatorImpl implements CartPriceCalculator {
 
 
        if(logger.isDebugEnabled()){
-           logger.debug("计算完优惠后购物车数据为：");
+           logger.debug("After calculating the discount, the shopping cart data is：");
            logger.debug(cartList.toString());
-           logger.debug("价格为：");
+           logger.debug("The price for：");
            logger.debug(price.toString());
        }
 

@@ -32,7 +32,7 @@ import java.io.Serializable;
 
 
 /**
- * 短信网关表实体
+ * Entity of the SMS gateway table
  * @author zh
  * @version v7.0.0
  * @since v7.0.0
@@ -45,28 +45,28 @@ public class SmsPlatformDO implements Serializable {
 
 	private static final long serialVersionUID = 5431942203889125L;
 
-	/**主键ID*/
+	/**A primary keyID*/
 	@Id(name = "id")
 	@ApiModelProperty(hidden=true)
 	private Integer id;
-	/**平台名称*/
+	/**The name of the platform*/
 	@Column(name = "name")
-	@NotEmpty(message="平台名称不能为空")
-	@ApiModelProperty(name="name",value="平台名称",required=true)
+	@NotEmpty(message="The platform name cannot be empty")
+	@ApiModelProperty(name="name",value="The name of the platform",required=true)
 	private String name;
-	/**是否开启*/
+	/**Whether open*/
 	@Column(name = "open")
-	@Min(message="必须为数字", value = 0)
-	@ApiModelProperty(name="open",value="是否开启",required=false)
+	@Min(message="Must be a number", value = 0)
+	@ApiModelProperty(name="open",value="Whether open",required=false)
 	private Integer open;
-	/**配置*/
+	/**configuration*/
 	@Column(name = "config")
-	@ApiModelProperty(name="config",value="配置",required=false)
+	@ApiModelProperty(name="config",value="configuration",required=false)
 	private String config;
-	/**编码*/
+	/**coding*/
 	@Column(name = "bean")
-	@NotEmpty(message="插件id")
-	@ApiModelProperty(name="bean",value="编码",required=true)
+	@NotEmpty(message="The plug-inid")
+	@ApiModelProperty(name="bean",value="coding",required=true)
 	private String bean;
 
 	public SmsPlatformDO(SmsPlatformVO smsPlatformVO) {

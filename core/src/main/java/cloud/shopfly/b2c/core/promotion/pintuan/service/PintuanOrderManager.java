@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2019-01-24.
- * 拼团订单业务类
+ * Group order business class
  *
  * @author kingapex
  * @version 1.0
@@ -38,27 +38,27 @@ public interface PintuanOrderManager {
 
 
     /**
-     * 发起或参与拼团订单
+     * Initiate or participate in group orders
      *
-     * @param order          常规订单
+     * @param order          Regular orders
      * @param skuId          sku id
-     * @param pinTuanOrderId 拼团订单id ，如果为空则为发起拼团，否则参与此拼团
-     * @return 拼团订单
+     * @param pinTuanOrderId Spell group orderid , if it is empty, it initiates a group; otherwise, it participates in the group
+     * @return Spell group order
      */
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     PintuanOrder createOrder(OrderDTO order, Integer skuId, Integer pinTuanOrderId);
 
     /**
-     * 对一个拼团订单进行支付处理
+     * Process payment for a group order
      *
-     * @param order 普通订单
+     * @param order Regular orders
      */
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     void payOrder(OrderDO order);
 
 
     /**
-     * 根据id获取模型
+     * According to theidAccess model
      *
      * @param id
      * @return
@@ -66,7 +66,7 @@ public interface PintuanOrderManager {
     PintuanOrder getModel(Integer id);
 
     /**
-     * 通过普通订单号查找拼团主订单
+     * Find the group master order by the normal order number
      *
      * @param orderSn
      * @return
@@ -74,16 +74,16 @@ public interface PintuanOrderManager {
     PintuanOrderDetailVo getMainOrderBySn(String orderSn);
 
     /**
-     * 读取某个商品待成团的订单
+     * Read an order for an item to be grouped
      *
-     * @param goodsId 商品id
+     * @param goodsId productid
      * @param skuId   skuId
-     * @return 拼团订单
+     * @return Spell group order
      */
     List<PintuanOrder> getWaitOrder(Integer goodsId, Integer skuId);
 
     /**
-     * 读取某订单的所有子订单
+     * Reads all suborders of an order
      *
      * @param orderId
      * @return
@@ -91,9 +91,9 @@ public interface PintuanOrderManager {
     List<PintuanChildOrder> getPintuanChild(Integer orderId);
 
     /**
-     * 处理拼团订单
+     * Deal with group orders
      *
-     * @param orderId 订单id
+     * @param orderId The orderid
      */
     void handle(Integer orderId);
 

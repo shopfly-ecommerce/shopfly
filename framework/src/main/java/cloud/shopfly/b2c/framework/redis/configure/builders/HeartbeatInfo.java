@@ -16,8 +16,8 @@
 package cloud.shopfly.b2c.framework.redis.configure.builders;
 
 /**
- * 由sohu tv cache cloud copy过来的
- * 心跳类
+ * bysohu tv cache cloud copyCome over
+ * Heart beat class
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -28,27 +28,27 @@ package cloud.shopfly.b2c.framework.redis.configure.builders;
 public class HeartbeatInfo {
 
     /**
-     * 应用id
+     * applicationid
      */
     private long appId;
 
     /**
-     * 实例个数
+     * The number of instances
      */
     private int shardNum;
 
     /**
-     * 分配信息
+     * Distribution of information
      */
     private String shardInfo;
 
     /**
-     * 应用状态
+     * Application state
      */
     private int status;
 
     /**
-     * 消息
+     * The message
      */
     private String message;
 

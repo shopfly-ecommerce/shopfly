@@ -32,7 +32,7 @@ import java.util.List;
 
 
 /**
- * 角色表控制器
+ * Role list controller
  *
  * @author admin
  * @version v1.0.0
@@ -41,27 +41,27 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/systems/roles")
-@Api(description = "角色表相关API")
+@Api(description = "Role table correlationAPI")
 public class RoleManagerController {
 
     @Autowired
     private RoleSeller roleManager;
 
 
-    @ApiOperation(value = "查询角色列表", response = RoleDO.class)
+    @ApiOperation(value = "Querying the Role List", response = RoleDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
-    public Page list(@ApiIgnore @NotEmpty(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotEmpty(message = "每页数量不能为空") Integer pageSize) {
+    public Page list(@ApiIgnore @NotEmpty(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotEmpty(message = "The number of pages cannot be empty") Integer pageSize) {
         return this.roleManager.list(pageNo, pageSize);
     }
 
 
-    @ApiOperation(value = "添加角色", response = RoleDO.class)
+    @ApiOperation(value = "Adding roles", response = RoleDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleVO", value = "角色", required = true, dataType = "RoleVO", paramType = "body")
+            @ApiImplicitParam(name = "roleVO", value = "role", required = true, dataType = "RoleVO", paramType = "body")
     })
     @PostMapping
     public RoleVO add(@RequestBody @ApiIgnore RoleVO roleVO) {
@@ -69,10 +69,10 @@ public class RoleManagerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改角色表", response = RoleDO.class)
+    @ApiOperation(value = "Modifying the role table", response = RoleDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "roleVO", value = "菜单", required = true, dataType = "RoleVO", paramType = "body")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "roleVO", value = "The menu", required = true, dataType = "RoleVO", paramType = "body")
     })
     public RoleVO edit(@RequestBody @ApiIgnore RoleVO roleVO, @PathVariable Integer id) {
         return this.roleManager.edit(roleVO, id);
@@ -80,9 +80,9 @@ public class RoleManagerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除角色")
+    @ApiOperation(value = "Delete the role")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的角色表主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the role table to be deleted", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
         this.roleManager.delete(id);
@@ -91,18 +91,18 @@ public class RoleManagerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个角色表")
+    @ApiOperation(value = "Query a role table")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的角色表主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the role table to be queried", required = true, dataType = "int", paramType = "path")
     })
     public RoleVO get(@PathVariable Integer id) {
         return this.roleManager.getRole(id);
     }
 
     @GetMapping(value = "/{id}/checked")
-    @ApiOperation(value = "根据角色id查询所拥有的菜单权限")
+    @ApiOperation(value = "According to the characteridQuery menu permissions")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的角色表主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the role table to be queried", required = true, dataType = "int", paramType = "path")
     })
     public List<String> getCheckedMenu(@PathVariable Integer id) {
         return this.roleManager.getRoleMenu(id);

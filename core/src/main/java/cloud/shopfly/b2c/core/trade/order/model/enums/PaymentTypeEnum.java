@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 支付方式
+ * Method of payment
  *
  * @author Snow create in 2018/4/8
  * @version v2.0
@@ -25,14 +25,14 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 public enum PaymentTypeEnum {
 
     /**
-     * 在线支付
+     * Online payment
      */
-    ONLINE("在线支付"),
+    ONLINE("Online payment"),
 
     /**
-     * 货到付款
+     * Cash on delivery
      */
-    COD("货到付款");
+    COD("Cash on delivery");
 
     private String description;
 

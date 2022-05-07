@@ -23,12 +23,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 静态页面实现
+ * Static page implementation
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-17 下午3:27
+ * 2018-07-17 In the afternoon3:27
  */
 @Service
 public class StaticsPageHelpManagerImpl implements StaticsPageHelpManager {
@@ -38,7 +38,7 @@ public class StaticsPageHelpManagerImpl implements StaticsPageHelpManager {
     private DaoSupport daoSupport;
 
     /**
-     * 获取帮助页面总数
+     * Get the total number of help pages
      *
      * @return
      */
@@ -48,7 +48,7 @@ public class StaticsPageHelpManagerImpl implements StaticsPageHelpManager {
     }
 
     /**
-     * 分页获取帮助
+     * Paging for help
      *
      * @param page
      * @param pageSize

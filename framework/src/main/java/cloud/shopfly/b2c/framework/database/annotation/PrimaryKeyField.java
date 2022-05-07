@@ -22,9 +22,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标识不是数据库读写的字段
+ * Identifies fields that are not read or written to the database
  * @author kingapex
- * 2010-1-22下午04:08:58
+ * 2010-1-22In the afternoon04:08:58
  */
 @Retention(RetentionPolicy.RUNTIME) 
 @Target(ElementType.METHOD) 

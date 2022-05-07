@@ -37,7 +37,7 @@ import java.util.Map;
 
 
 /**
- * 支付账单管理实现
+ * Payment bill management implementation
  *
  * @author kingapex
  * @version 1.0
@@ -62,24 +62,24 @@ public class PaymentManagerImpl implements PaymentManager {
     @Override
     public Map pay(PayBill bill) {
 
-        debugger.log("准备对以下bill进行支付");
+        debugger.log("Prepare for the followingbillTo pay");
         debugger.log(bill.toString());
 
-        // 查询支付方式
+        // Check payment method
         PaymentMethodDO paymentMethod = this.paymentMethodManager.getByPluginId(bill.getPluginId());
         if (paymentMethod == null) {
-            debugger.log("未找到相应的支付方式[" + bill.getPluginId() + "]");
-            throw new ServiceException(PaymentErrorCode.E501.code(), "未找到相应的支付方式[" + bill.getPluginId() + "]");
+            debugger.log("No corresponding payment method was found[" + bill.getPluginId() + "]");
+            throw new ServiceException(PaymentErrorCode.E501.code(), "No corresponding payment method was found[" + bill.getPluginId() + "]");
         }
 
-        //使用系统时间加4位随机数生成流程号
+        // Use the system time plus 4 random digits to generate a flow number
         String billSn = System.currentTimeMillis() + "" + StringUtil.getRandStr(4);
 
-        debugger.log("为账单生成流程号：" + billSn);
+        debugger.log("Generate process numbers for bills：" + billSn);
 
-        // 生成支付流水
+        // Generate payment flow
         PaymentBillDO paymentBill = new PaymentBillDO(bill.getSn(), billSn, null, 0, bill.getTradeType().name(), paymentMethod.getMethodName(), bill.getOrderPrice(), paymentMethod.getPluginId());
-        //保存支付参数
+        // Save payment parameters
 
         switch (bill.getClientType()) {
             case PC:
@@ -101,17 +101,17 @@ public class PaymentManagerImpl implements PaymentManager {
                 break;
         }
 
-        //将支付单入库
+        // Store the payment slip
         this.paymentBillManager.add(paymentBill);
 
-        debugger.log("账单入库成功");
+        debugger.log("The bill was stored successfully");
 
         bill.setBillSn(billSn);
 
-        //调起相应的支付插件
+        // Call up the appropriate payment plug-in
         PaymentPluginManager paymentPlugin = this.findPlugin(bill.getPluginId());
 
-        debugger.log("开始调起支付插件：" + bill.getPluginId());
+        debugger.log("Start calling the payment plug-in：" + bill.getPluginId());
         return paymentPlugin.pay(bill);
     }
 
@@ -139,7 +139,7 @@ public class PaymentManagerImpl implements PaymentManager {
         PaymentPluginManager plugin = this.findPlugin(param.getPaymentPluginId());
 
         PaymentBillDO paymentBill = this.paymentBillManager.getBillBySnAndTradeType(param.getSn(), param.getTradeType());
-        //已经支付回调，则不需要查询
+        // If a callback has been paid, no query is required
         if (paymentBill.getIsPay() == 1) {
             return "success";
         }
@@ -156,7 +156,7 @@ public class PaymentManagerImpl implements PaymentManager {
 
 
     /**
-     * 查找支付插件
+     * Find payment plug-ins
      *
      * @param pluginId
      * @return

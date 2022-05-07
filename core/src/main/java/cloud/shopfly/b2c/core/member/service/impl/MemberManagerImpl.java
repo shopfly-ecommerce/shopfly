@@ -54,7 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 会员业务类
+ * Member Business
  *
  * @author zh
  * @version v2.0
@@ -86,26 +86,26 @@ public class MemberManagerImpl implements MemberManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Member edit(Member member, Integer id) {
-        //校验邮箱是否已经存在
+        // Verify whether the mailbox already exists
         if (!StringUtil.isEmpty(member.getEmail())) {
             Member mb = this.getMemberByEmail(member.getEmail());
             if (mb != null && !mb.getMemberId().equals(id)) {
-                throw new ServiceException(MemberErrorCode.E117.code(), "邮箱已经被占用");
+                throw new ServiceException(MemberErrorCode.E117.code(), "The mailbox is occupied");
             }
         }
-        //校验用户名是否已经存在
+        // Verify that the user name already exists
         if (!StringUtil.isEmpty(member.getUname())) {
             Member mb = this.getMemberByName(member.getUname());
             if (mb != null && !mb.getMemberId().equals(id)) {
-                throw new ServiceException(MemberErrorCode.E108.code(), "当前用户名已经被使用");
+                throw new ServiceException(MemberErrorCode.E108.code(), "The current user name is already in use");
             }
         }
 
-        //校验手机号码是否重复
+        // Check whether the mobile phone number is duplicated
         if (!StringUtil.isEmpty(member.getMobile())) {
             Member mb = this.getMemberByMobile(member.getMobile());
             if (mb != null && !mb.getMemberId().equals(id)) {
-                throw new ServiceException(MemberErrorCode.E118.code(), "当前手机号已经被使用");
+                throw new ServiceException(MemberErrorCode.E118.code(), "The current mobile phone number has been used");
             }
         }
         this.memberDaoSupport.update(member, id);
@@ -140,11 +140,11 @@ public class MemberManagerImpl implements MemberManager {
     @Override
     public MemberStatisticsDTO getMemberStatistics() {
         MemberStatisticsDTO memberStatisticsDTO = new MemberStatisticsDTO();
-        //会员收藏商品数
+        // Number of items collected by members
         memberStatisticsDTO.setGoodsCollectCount(memberCollectionGoodsManager.getMemberCollectCount());
-        //会员订单数
+        // Membership order number
         memberStatisticsDTO.setOrderCount(orderClient.getOrderNumByMemberId(UserContext.getBuyer().getUid()));
-        //待评论数
+        // For comments
         memberStatisticsDTO.setPendingCommentCount(orderClient.getOrderCommentNumByMemberId(UserContext.getBuyer().getUid(), CommentStatusEnum.UNFINISHED.name()));
         return memberStatisticsDTO;
     }
@@ -183,15 +183,15 @@ public class MemberManagerImpl implements MemberManager {
             }
             return memberPointVO;
         }
-        throw new ResourceNotFoundException("此会员不存在！");
+        throw new ResourceNotFoundException("This member does not exist！");
 
     }
 
     @Override
     public MemberVO connectLoginHandle(Member member, String uuid) {
-        //初始化会员信息
+        // Initialize member information
         MemberVO memberVO = this.convertMember(member, uuid);
-        //发送登录消息
+        // Sending a Login message
         this.sendMessage(member);
         return memberVO;
     }
@@ -205,22 +205,22 @@ public class MemberManagerImpl implements MemberManager {
     @Override
     public Member validation(String username, String password) {
         String pwdmd5 = "";
-        //用户名登录处理
+        // User name login processing
         Member member = this.getMemberByName(username);
-        //判断是否为uniapp注册账号，如果是且密码为空则提示去uniapp修改密码后登陆，add chushuai by 2020/10/09
+        // Determine whether to register an account for UNIapp. If yes and the password is empty, prompt uniapp to change the password and log in, add chushuai by 2020/10/09
         if (member!=null && StringUtil.isEmpty(member.getPassword()) && username.startsWith("m_")){
-            throw new ServiceException(MemberErrorCode.E107.code(), "此账号为微信/支付宝等移动端三方授权账号，请在移动端登录并修改密码后在电脑端登录");
+            throw new ServiceException(MemberErrorCode.E107.code(), "This account is wechat/For third-party authorized accounts of mobile terminals such as Alipay, please log in on the mobile terminal and change the password before logging in on the computer");
         }
         if (member != null) {
             if (!StringUtil.equals(member.getUname(), username)) {
-                throw new ServiceException(MemberErrorCode.E107.code(), "账号密码错误！");
+                throw new ServiceException(MemberErrorCode.E107.code(), "Incorrect account password！");
             }
             pwdmd5 = StringUtil.md5(password + member.getUname().toLowerCase());
             if (member.getPassword().equals(pwdmd5)) {
                 return member;
             }
         }
-        //手机号码登录处理
+        // Mobile phone number login processing
         member = this.getMemberByMobile(username);
         if (member != null) {
             pwdmd5 = StringUtil.md5(password + member.getUname().toLowerCase());
@@ -228,7 +228,7 @@ public class MemberManagerImpl implements MemberManager {
                 return member;
             }
         }
-        //邮箱登录处理
+        // Mailbox Login Processing
         member = this.getMemberByEmail(username);
         if (member != null) {
             pwdmd5 = StringUtil.md5(password + member.getUname().toLowerCase());
@@ -236,21 +236,21 @@ public class MemberManagerImpl implements MemberManager {
                 return member;
             }
         }
-        throw new ServiceException(MemberErrorCode.E107.code(), "账号密码错误！");
+        throw new ServiceException(MemberErrorCode.E107.code(), "Incorrect account password！");
     }
 
     /**
-     * 登录会员后的处理
+     * Processing after login member
      *
-     * @param member 会员信息
+     * @param member The member information
      */
     @Override
     public MemberVO loginHandle(Member member) {
-        //从请求header中获取用户的uuid
+        // Get the users UUID from the request header
         String uuid = ThreadContextHolder.getHttpRequest().getHeader("uuid");
-        //初始化会员信息
+        // Initialize member information
         MemberVO memberVO = this.convertMember(member, uuid);
-        //发送登录消息
+        // Sending a Login message
         this.sendMessage(member);
 
         return memberVO;
@@ -258,7 +258,7 @@ public class MemberManagerImpl implements MemberManager {
 
     @Override
     public String[] generateMemberUname(String uname) {
-        //如果用户输入的用户大于15位 则截取 拼接随机数5位，总长度不能大于二十
+        // If the number of users entered by the user is greater than 15, a random number of 5 digits is intercepted and the total length cannot be greater than 20
         if (uname.length() > 15) {
             uname = uname.substring(0, 15);
 
@@ -270,7 +270,7 @@ public class MemberManagerImpl implements MemberManager {
                 break;
             }
             String unameRandom = "" + (int) (Math.random() * (99999 - 10000 + 1));
-            //根据拼接好的用户判断是否存在
+            // Determine whether the user exists according to the spliced user
             Member member = this.getMemberByName(uname + unameRandom);
             if (member == null) {
                 strs[i] = uname + unameRandom;
@@ -282,23 +282,23 @@ public class MemberManagerImpl implements MemberManager {
 
     @Override
     public MemberVO login(String mobile) {
-        //获取用户信息
+        // Obtaining User information
         Member member = this.mobileLoginValidation(mobile);
-        //对登录的后续处理
+        // Follow-up to login
         return this.loginHandle(member);
     }
 
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberVO appLogin(String mobile) {
-        //获取用户信息
+        // Obtaining User information
         Member member = this.mobileLoginValidation(mobile);
 
-        //从请求header中获取用户的uuid
+        // Get the users UUID from the request header
         String uuid = ThreadContextHolder.getHttpRequest().getHeader("uuid");
-        //初始化会员信息
+        // Initialize member information
         MemberVO memberVO = this.convertMember(member, uuid);
-        //发送登录消息
+        // Sending a Login message
         this.sendMessage(member);
 
         return memberVO;
@@ -307,21 +307,21 @@ public class MemberManagerImpl implements MemberManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Member register(Member member) {
-        //手机号码校验
+        // Mobile phone number verification
         Member m = this.getMemberByMobile(member.getMobile());
         if (m != null) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "该手机号已经被占用");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The phone number has been occupied");
         }
-        //用户名校验
+        // User name verification
         m = this.getMemberByName(member.getUname());
         if (m != null) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "当前会员已经注册");
+            throw new ServiceException(MemberErrorCode.E107.code(), "Current membership is registered");
         }
-        //邮箱校验
+        // Mail check
         if (!StringUtil.isEmpty(member.getEmail())) {
             m = this.getMemberByEmail(member.getEmail());
             if (m != null) {
-                throw new ServiceException(MemberErrorCode.E117.code(), "邮箱已经被占用");
+                throw new ServiceException(MemberErrorCode.E117.code(), "The mailbox is occupied");
             }
         }
         String password = member.getPassword();
@@ -335,7 +335,7 @@ public class MemberManagerImpl implements MemberManager {
         this.memberDaoSupport.insert(member);
         int memberId = this.memberDaoSupport.getLastId("es_member");
         member.setMemberId(memberId);
-        //组织数据结构发送会员注册消息
+        // The organization data structure sends membership registration messages
         MemberRegisterMsg memberRegisterMsg = new MemberRegisterMsg();
         memberRegisterMsg.setMember(member);
         memberRegisterMsg.setUuid(ThreadContextHolder.getHttpRequest().getHeader("uuid"));
@@ -345,12 +345,12 @@ public class MemberManagerImpl implements MemberManager {
 
     @Override
     public Member getMemberByAccount(String account) {
-        //通过手机号进行查询账户信息
+        // You can query account information by mobile phone number
         Member member = this.getMemberByMobile(account);
         if (member != null) {
             return member;
         }
-        //通过用户名进行查询账户信息
+        // You can query account information by user name
         member = this.getMemberByName(account);
         if (member != null) {
             return member;
@@ -359,14 +359,14 @@ public class MemberManagerImpl implements MemberManager {
         if (member != null) {
             return member;
         }
-        throw new ResourceNotFoundException("此会员不存在");
+        throw new ResourceNotFoundException("This member does not exist");
     }
 
     @Override
     public Page list(MemberQueryParam memberQueryParam) {
         List<String> term = new ArrayList<>();
         StringBuffer sql = new StringBuffer("select * from es_member");
-        //对会员状态的查询处理
+        // Member status query processing
         if (memberQueryParam.getDisabled() != null) {
             if (memberQueryParam.getDisabled() != -1 && memberQueryParam.getDisabled() != 0) {
                 sql.append(" where disabled =  0");
@@ -377,36 +377,36 @@ public class MemberManagerImpl implements MemberManager {
         } else {
             sql.append(" where disabled =  0");
         }
-        //关键字查询
+        // Keyword query
         if (!StringUtil.isEmpty(memberQueryParam.getKeyword())) {
             sql.append(" and (uname like ? or mobile like ? or nickname like ? ) ");
             term.add("%" + memberQueryParam.getKeyword() + "%");
             term.add("%" + memberQueryParam.getKeyword() + "%");
             term.add("%" + memberQueryParam.getKeyword() + "%");
         }
-        //对会员手机号码的查询处理
+        // Inquire and deal with members mobile phone number
         if (memberQueryParam.getMobile() != null) {
             sql.append(" and mobile like ?");
             term.add("%" + memberQueryParam.getMobile() + "%");
         }
-        //用户名查询
+        // User name Query
         if (memberQueryParam.getUname() != null) {
             sql.append(" and uname like ?");
             term.add("%" + memberQueryParam.getUname() + "%");
         }
-        //对会员邮箱的查询处理
+        // Member email enquiry processing
         if (memberQueryParam.getEmail() != null) {
             sql.append(" and email = ?");
             term.add(memberQueryParam.getEmail());
         }
-        //对会员性别的查询处理,如果输入其他数值则查询所有性别
+        // Member gender query processing, if input other values to query all genders
         if (memberQueryParam.getSex() != null) {
             if (memberQueryParam.getSex() == 1 || memberQueryParam.getSex() == 0) {
                 sql.append(" and sex = ?");
                 term.add(memberQueryParam.getSex() + "");
             }
         }
-        //对会员注册时间的处理
+        // Handling of member registration time
         if (memberQueryParam.getStartTime() != null && !StringUtil.isEmpty(memberQueryParam.getStartTime())) {
             sql.append(" and create_time > ?");
             term.add(memberQueryParam.getStartTime());
@@ -447,20 +447,20 @@ public class MemberManagerImpl implements MemberManager {
     }
 
     /**
-     * 手机号码登录验证
-     * @param mobile 手机号码
+     * Mobile phone number login authentication
+     * @param mobile Mobile phone number
      * @return
      */
     private Member mobileLoginValidation(String mobile) {
-        //获取用户信息
+        // Obtaining User information
         Member member = this.getMemberByMobile(mobile);
-        //校验账号是否存在
+        // Verify that the account exists
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "账号密码错误！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "Incorrect account password！");
         }
-        //校验账号是否正常
+        // Verify that the account is normal
         if (member.getDisabled().equals(-1)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "当前账号已经禁用，请联系管理员");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The current account is disabled. Contact the administrator");
         }
 
         return member;
@@ -470,39 +470,39 @@ public class MemberManagerImpl implements MemberManager {
     private TokenManager tokenManager;
 
     /**
-     * 生成member的token
+     * generatememberthetoken
      *
      * @param member
      * @param uuid
      * @return
      */
     private MemberVO convertMember(Member member, String uuid) {
-        //校验当前账号是否被禁用
+        // Verify that the current account is disabled
         if (!member.getDisabled().equals(0)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "当前账号已经禁用，请联系管理员");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The current account is disabled. Contact the administrator");
         }
 
-        //新建买家用户角色对象
+        // Create a buyer user role object
         Buyer buyer = new Buyer();
-        //设置用户ID
+        // Setting a User ID
         buyer.setUid(member.getMemberId());
-        //设置用户名称
+        // Setting a User Name
         buyer.setUsername(member.getUname());
-        //设置uuid
+        // Set the uuid
         buyer.setUuid(uuid);
-        //创建Token
+        // Create a Token
         Token token = tokenManager.create(buyer);
-        //获取访问Token
+        // Obtaining an Access Token
         String accessToken = token.getAccessToken();
-        //获取刷新Token
+        // Obtaining the Refresh Token
         String refreshToken = token.getRefreshToken();
-        //组织返回数据
+        // Organization returns data
         MemberVO memberVO = new MemberVO(member, accessToken, refreshToken);
         return memberVO;
     }
 
     /**
-     * 发送登录消息
+     * Sending a Login message
      *
      * @param member
      */

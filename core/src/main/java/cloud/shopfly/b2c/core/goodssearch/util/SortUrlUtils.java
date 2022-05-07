@@ -24,16 +24,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 排序url生成工具
+ * sorturlGeneration tool
  *
  * @author fk
- * 2017年6月30日18:01:50
+ * 2017years6month30day18:01:50
  */
 public class SortUrlUtils {
 
 
     /**
-     * 向map中压入sort selector
+     * tomapMedium voltage into thesort selector
      *
      * @param map
      */
@@ -50,10 +50,10 @@ public class SortUrlUtils {
 
 
     /**
-     * 创建排序url
+     * Create a sorturl
      *
      * @param sort
-     * @return 数组第一个元素是url，第二个元素是：是否为当前排序
+     * @return The first element of the array is thetaurlThe second element is：Whether to be the current sort
      */
     private static SearchSelector creareSortUrl(Map<String, String> sort) {
 
@@ -81,12 +81,12 @@ public class SortUrlUtils {
             String oldId = sortar[0];
             String upordown = defSort;
 
-            //防止非法的排序
+            // Prevent illegal sorting
             if (!checkExists(oldId)) {
                 oldId = "def";
             }
 
-            //当前排序，则切换 升降序
+            // The current sort, then switch the ascending sequence
             if (oldId.equals(id)) {
                 isCurrent = "yes";
                 if (sortar.length == 2) {
@@ -98,7 +98,7 @@ public class SortUrlUtils {
 
                 oldSort = id + "_" + upordown;
             } else {
-                //非当前排序
+                // Not current sort
                 oldSort = id + "_" + defSort;
             }
 
@@ -107,7 +107,7 @@ public class SortUrlUtils {
 
         params.put("sort", oldSort);
 
-        //是否当前排序
+        // Current Sort
         if ("yes".equals(isCurrent)) {
             searchSelector.setSelected(true);
         } else {
@@ -126,7 +126,7 @@ public class SortUrlUtils {
 
 
     /**
-     * 检测request中的排序是否有定义
+     * detectionrequestIs the sort defined in
      *
      * @param oldSort
      * @return

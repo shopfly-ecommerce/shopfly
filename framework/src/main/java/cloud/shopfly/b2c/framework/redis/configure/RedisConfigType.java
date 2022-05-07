@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.framework.redis.configure;
 /**
  * Created by kingapex on 26/12/2017.
  *
- * Redis 配置类型
+ * Redis Configuration type
  * @author kingapex
  * @version 1.0
  * @since 6.4.0
@@ -27,10 +27,10 @@ package cloud.shopfly.b2c.framework.redis.configure;
 public enum RedisConfigType {
 
 
-    //手动指定
+    // Manually specify
     manual,
 
-    //通过cache cloud 的rest api来获取配置
+    // The configuration is obtained through the Rest API of cache Cloud
     rest
 
 

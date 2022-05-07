@@ -22,11 +22,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 验证码默认实现
+ * Verification code is implemented by default
  *
  * @author zh
  * @version v7.0
- * @date 18/7/31 上午10:51
+ * @date 18/7/31 In the morning10:51
  * @since v7.0
  */
 @Service

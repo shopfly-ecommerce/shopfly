@@ -28,7 +28,7 @@ import java.util.Map;
 
 /**
  * Created by kingapex on 2019-02-13.
- * 默认elasticsearch构建器
+ * defaultelasticsearchThe builder
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -76,7 +76,7 @@ public class DefaultEsTemplateBuilder implements  EsTemplateBuilder {
     }
 
     /**
-     * 解析节点IP信息,多个节点用逗号隔开,IP和端口用冒号隔开
+     * Parsing the nodeIPinformation,Multiple nodes are separated by commas,IPAnd ports are separated by colons
      *
      * @return
      */

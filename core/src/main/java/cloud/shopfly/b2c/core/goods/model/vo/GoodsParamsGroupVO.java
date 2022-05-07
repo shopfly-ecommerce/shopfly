@@ -24,11 +24,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 商品参数vo
+ * Product parametersvo
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月26日 下午4:17:03
+ * 2018years3month26On the afternoon4:17:03
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -38,13 +38,13 @@ public class GoodsParamsGroupVO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1450550797436233753L;
-	@ApiModelProperty("参数组关联的参数集合")
+	@ApiModelProperty("Parameter group Indicates the associated parameter set")
 	private List<GoodsParamsVO> params;
 
-	@ApiModelProperty("参数组名称")
+	@ApiModelProperty("Parameter group name")
 	private String groupName;
 
-	@ApiModelProperty("参数组id")
+	@ApiModelProperty("Parameter setid")
 	private Integer groupId;
 	
 	

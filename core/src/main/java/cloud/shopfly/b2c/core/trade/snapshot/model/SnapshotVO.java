@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 快照
+ * @Description: The snapshot
  * @date 2018/8/1 16:41
  * @since v7.0.0
  */
@@ -40,19 +40,19 @@ import java.util.List;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SnapshotVO extends GoodsSnapshot {
 
-    @ApiModelProperty(value = "相册列表")
+    @ApiModelProperty(value = "Album list")
     private List<GoodsGalleryDO> galleryList;
 
-    @ApiModelProperty(value = "参数列表")
+    @ApiModelProperty(value = "The list of parameters")
     private List<GoodsParamsGroupVO> paramList;
 
-    @ApiModelProperty(value = "规格列表")
+    @ApiModelProperty(value = "Specification list")
     private List<SpecValueVO> specList;
 
-    @ApiModelProperty(value = "促销列表")
+    @ApiModelProperty(value = "The promotion list")
     private List<PromotionVO> promotionList;
 
-    @ApiModelProperty(value = "优惠券列表")
+    @ApiModelProperty(value = "Coupon list")
     private List<CouponDO> couponList;
 
     public SnapshotVO() {

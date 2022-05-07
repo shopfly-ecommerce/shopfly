@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 积分商品业务类
+ * Integral commodity business class
  *
  * @author Snow
  * @version v7.0.0
@@ -101,7 +101,7 @@ public class ExchangeGoodsManagerImpl implements ExchangeGoodsManager {
             long endTime = DateUtil.endOfSomeDay(365);
 
             PromotionDetailDTO detailDTO = new PromotionDetailDTO();
-            detailDTO.setTitle("积分活动");
+            detailDTO.setTitle("Integral activities");
             detailDTO.setPromotionType(PromotionTypeEnum.EXCHANGE.name());
             detailDTO.setActivityId(settingId);
             detailDTO.setStartTime(nowTime);
@@ -118,9 +118,9 @@ public class ExchangeGoodsManagerImpl implements ExchangeGoodsManager {
     public ExchangeDO edit(ExchangeDO exchangeSetting, PromotionGoodsDTO goodsDTO) {
 
         if (exchangeSetting != null && exchangeSetting.getEnableExchange() == 1) {
-            //删除之前的相关信息
+            // Delete previous information
             this.deleteByGoods(goodsDTO.getGoodsId());
-            //添加
+            // add
             this.add(exchangeSetting, goodsDTO);
 
         } else {
@@ -132,11 +132,11 @@ public class ExchangeGoodsManagerImpl implements ExchangeGoodsManager {
 
     @Override
     public void delete(Integer id) {
-        //删除数据库信息
+        // Deleting database Information
         this.daoSupport.delete(ExchangeDO.class, id);
-        //删除活动商品对照表的关系
+        // Delete the active goods comparison table relationship
         this.promotionGoodsManager.delete(id, PromotionTypeEnum.EXCHANGE.name());
-        //删除缓存
+        // Delete the cache
         this.cache.remove(PromotionCacheKeys.getExchangeKey(id));
     }
 

@@ -20,24 +20,24 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Redis连接配置 对象
+ * RedisConnection configuration Object
  * @author kingapex
  * @version v1.0
- * @since v6.4.1 2017年12月26日
+ * @since v6.4.1 2017years12month26day
  */
 @Configuration
 @ConfigurationProperties(prefix="redis")
 public class RedisConnectionConfig {
 
 	/**
-	 * Redis类型
+	 * Redistype
 	 * @see RedisType
 	 */
 	private  String type;
 
 
 	/**
-	 * 配置类型
+	 * Configuration type
 	 * @see RedisConfigType
 	 */
 	@Value("${redis.config.type:''}")
@@ -45,22 +45,22 @@ public class RedisConnectionConfig {
 
 
 	/**
-	 * 获取配置rest api的url
-	 * 要包含端口号
+	 * Access to the configurationrest apitheurl
+	 * Include the port number
 	 */
 	@Value("${redis.config.restUrl:''}")
 	private  String restUrl;
 
 
 	/**
-	 * 获取配置rest api中的appid参数
+	 * Access to the configurationrest apiIn theappidparameter
 	 */
 	@Value("${redis.config.restAppid:''}")
 	private String  restAppid;
 
 
 	/**
-	 * 客户端版本
+	 * Client Version
 	 */
 	@Value("${redis.config.restClientVersion:''}")
 	private String restClientVersion;
@@ -68,41 +68,41 @@ public class RedisConnectionConfig {
 
 	/**
 	 * redis host ,like:127.0.0.1
-	 * 当configType 为manual（手工）时有效
+	 * whenconfigType formanual（manual）Effective when
 	 */
 	private String host;
 
 	/**
 	 * redis port ,like : 6379
-	 * 当configType 为manual（手工）时有效
+	 * whenconfigType formanual（manual）Effective when
 	 */
 	private  Integer port;
 
 	/**
-	 * redis 密码
-	 * 当configType 为manual（手工）时有效
+	 * redis Password
+	 * whenconfigType formanual（manual）Effective when
 	 */
 	private String password;
 
 
 	/**
-	 * 集群节点配置,like : 127.0.0.1:6379, 127.0.0.1:6380
-	 * 当configType 为manual（手工）时有效
+	 * Cluster Node Configuration,like : 127.0.0.1:6379, 127.0.0.1:6380
+	 * whenconfigType formanual（manual）Effective when
 	 */
 	@Value("${redis.cluster.nodes:''}")
 	private String clusterNodes;
 
 
 	/**
-	 * sentine Master 名称
-	 * 当configType 为manual（手工）时有效
+	 * sentine Master The name of the
+	 * whenconfigType formanual（manual）Effective when
 	 */
 	@Value("${redis.sentinel.master:''}")
 	private String sentinelMaster;
 
 	/**
-	 * sentine节点配置,like : 127.0.0.1:6379, 127.0.0.1:6380
-	 * 当configType 为manual（手工）时有效
+	 * sentineNode configuration,like : 127.0.0.1:6379, 127.0.0.1:6380
+	 * whenconfigType formanual（manual）Effective when
 	 */
 	@Value("${redis.sentinel.nodes:''}")
 	private String sentinelNodes;

@@ -22,14 +22,14 @@ import java.util.List;
 /**
  * @author zs
  * @version v1.0
- * @Description: 热点关键字client
+ * @Description: Hot keywordsclient
  * @date 2021-01-19
  * @since v7.1.0
  */
 public interface HotkeywordClient {
 
     /**
-     * 查询热门关键字
+     * Query the popular keywords
      * @param num
      * @return
      */

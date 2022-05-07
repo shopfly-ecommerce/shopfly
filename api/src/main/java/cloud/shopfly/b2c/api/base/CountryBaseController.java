@@ -22,7 +22,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/countries")
-@Api(description = "国家、洲相关API")
+@Api(description = "countries、States relatedAPI")
 public class CountryBaseController {
 
     @Autowired
@@ -31,14 +31,14 @@ public class CountryBaseController {
     @Autowired
     private StateManager stateManager;
 
-    @ApiOperation("获取所有国家")
+    @ApiOperation("Get all nations")
     @GetMapping()
     public List<Country> all() {
 
         return countryManager.allCountry();
     }
 
-    @ApiOperation("根据code获取下级地区")
+    @ApiOperation("According to thecodeAcquisition of subordinate area")
     @GetMapping("/{code}/states")
     public List<State> state(@PathVariable String code) {
 

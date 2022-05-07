@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.trade.order.model.dos.OrderDO;
 import cloud.shopfly.b2c.core.trade.order.model.vo.OrderDetailVO;
 
 /**
- * 订单操作接口
+ * Order operation interface
  *
  * @author Snow create in 2018/5/21
  * @version v2.0
@@ -28,7 +28,7 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.OrderDetailVO;
 public interface OrderManager {
 
     /**
-     * 修改订单信息
+     * Modify order information
      *
      * @param orderDO
      * @return

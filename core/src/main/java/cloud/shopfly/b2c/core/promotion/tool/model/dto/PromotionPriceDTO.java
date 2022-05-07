@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 活动DTO
+ * activityDTO
  *
  * @author zh create in 2018/7/9
  * @version v2.0
@@ -31,10 +31,10 @@ public class PromotionPriceDTO implements Serializable {
 
     private static final long serialVersionUID = -975019606881133067L;
 
-    @ApiModelProperty(value = "商品商品")
+    @ApiModelProperty(value = "commodity")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "活动价格")
+    @ApiModelProperty(value = "Activity price")
     private Double price;
 
     public PromotionPriceDTO(Integer goodsId, Double price) {

@@ -18,9 +18,9 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description qq信任登录参数项枚举类
+ * @Description qqTrusted login parameter enumeration class
  * @ClassName QqConnectConfigItemEnum
- * @since v7.0 下午6:12 2018/6/28
+ * @since v7.0 In the afternoon6:12 2018/6/28
  */
 public enum QqConnectConfigItemEnum {
     /**

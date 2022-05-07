@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 品牌实体
+ * Brand entity
  *
  * @author fk
  * @version v2.0
@@ -44,27 +44,27 @@ public class BrandDO implements Serializable {
     private static final long serialVersionUID = 9122931201151887L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "brand_id")
     @ApiModelProperty(hidden = true)
     private Integer brandId;
     /**
-     * 品牌名称
+     *  name
      */
     @Column()
-    @NotEmpty(message = "品牌名称不能为空")
-    @ApiModelProperty(value = "品牌名称", required = true)
+    @NotEmpty(message = "The brand name cannot be empty")
+    @ApiModelProperty(value = " name", required = true)
     private String name;
     /**
-     * 品牌图标
+     * Brand icon
      */
     @Column()
-    @NotEmpty(message = "品牌图标不能为空")
-    @ApiModelProperty(value = "品牌图标", required = true)
+    @NotEmpty(message = "The brand icon cannot be empty")
+    @ApiModelProperty(value = "Brand icon", required = true)
     private String logo;
     /**
-     * 是否删除，0删除1未删除
+     * Whether to delete,0delete1未delete
      */
     @Column()
     @ApiModelProperty(hidden = true)

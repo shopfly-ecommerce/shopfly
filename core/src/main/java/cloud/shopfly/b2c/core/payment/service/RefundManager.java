@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.payment.service;
 import java.util.Map;
 
 /**
- * 退款接口
+ * Refund interface
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -28,20 +28,20 @@ import java.util.Map;
 public interface RefundManager {
 
     /**
-     * 原路退回
+     * The way back
      *
-     * @param returnTradeNo 第三方订单号
-     * @param refundSn      退款编号
-     * @param refundPrice   退款金额
+     * @param returnTradeNo Third Party Order No.
+     * @param refundSn      The refund number
+     * @param refundPrice   The refund amount
      * @return
      */
     Map originRefund(String returnTradeNo, String refundSn, Double refundPrice);
 
     /**
-     * 查询退款状态
+     * Querying refund Status
      *
-     * @param returnTradeNo 第三方订单号
-     * @param refundSn      退款编号
+     * @param returnTradeNo Third Party Order No.
+     * @param refundSn      The refund number
      * @return
      */
     String queryRefundStatus(String returnTradeNo, String refundSn);

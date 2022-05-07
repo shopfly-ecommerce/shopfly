@@ -49,7 +49,7 @@ import java.util.List;
 
 
 /**
- * 单品立减实现类
+ * Single product reduction implementation class
  * @author Snow create in 2018/3/22
  * @version v2.0
  * @since v7.0.0
@@ -122,17 +122,17 @@ public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implement
         List<MinusVO> minusVOList = webPage.getData();
         for (MinusVO minusVO :minusVOList){
             long nowTime = DateUtil.getDateline();
-            //当前时间小于活动的开始时间 则为活动未开始
+            // If the current time is less than the start time of the activity, the activity has not started
             if(nowTime < minusVO.getStartTime().longValue() ){
-                minusVO.setStatusText("活动未开始");
+                minusVO.setStatusText("Activity not started");
                 minusVO.setStatus(PromotionStatusEnum.WAIT.toString());
-                //大于活动的开始时间，小于活动的结束时间
+                // Greater than the start time of the activity and less than the end time of the activity
             }else if(minusVO.getStartTime().longValue() < nowTime && nowTime < minusVO.getEndTime() ){
-                minusVO.setStatusText("正在进行中");
+                minusVO.setStatusText("In progress");
                 minusVO.setStatus(PromotionStatusEnum.UNDERWAY.toString());
 
             }else{
-                minusVO.setStatusText("活动已失效");
+                minusVO.setStatusText("Activity expired");
                 minusVO.setStatus(PromotionStatusEnum.END.toString());
             }
         }
@@ -146,25 +146,25 @@ public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implement
 
         this.verifyTime(minusVO.getStartTime(),minusVO.getEndTime(), PromotionTypeEnum.MINUS,null);
 
-        //初步形成商品的DTO列表
+        // Form the DTO list of commodities initially
         List<PromotionGoodsDTO> goodsDTOList = new ArrayList<>();
-        //是否是全部商品参与
+        // Whether all goods are involved
         if(minusVO.getRangeType() == 1){
             PromotionGoodsDTO goodsDTO = new PromotionGoodsDTO();
             goodsDTO.setGoodsId(-1);
-            goodsDTO.setGoodsName("全部商品");
+            goodsDTO.setGoodsName("All the goods");
             goodsDTO.setThumbnail("path");
             goodsDTOList.add(goodsDTO);
             minusVO.setGoodsList(goodsDTOList);
         }
-        //检测活动规则
+        // Test activity rule
         this.verifyRule(minusVO.getGoodsList());
 
         MinusDO minusDO = new MinusDO();
         BeanUtils.copyProperties(minusVO,minusDO);
         this.daoSupport.insert(minusDO);
 
-        // 获取活动Id
+        // Get active Id
         Integer minusId = this.daoSupport.getLastId("es_minus");
         minusDO.setMinusId(minusId);
         minusVO.setMinusId(minusId);
@@ -176,7 +176,7 @@ public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implement
         detailDTO.setPromotionType(PromotionTypeEnum.MINUS.name());
         detailDTO.setTitle(minusVO.getTitle());
 
-        //将活动商品入库
+        // Warehousing of moving goods
         this.promotionGoodsManager.add(minusVO.getGoodsList(),detailDTO);
 
         String minusKey = PromotionCacheKeys.getMinusKey(minusId);
@@ -189,29 +189,29 @@ public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implement
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = {RuntimeException.class, Exception.class, ServiceException.class, NoPermissionException.class})
     public	MinusVO  edit(MinusVO	minusVO, Integer id){
 
-        //检查此活动是否可操作
+        // Check that this activity is actionable
         this.verifyStatus(id);
 
         this.verifyTime(minusVO.getStartTime(),minusVO.getEndTime(), PromotionTypeEnum.MINUS,id);
 
-        //初步形成商品的DTO列表
+        // Form the DTO list of commodities initially
         List<PromotionGoodsDTO> goodsDTOList = new ArrayList<>();
-        //是否是全部商品参与
+        // Whether all goods are involved
         if(minusVO.getRangeType() == 1){
             PromotionGoodsDTO goodsDTO = new PromotionGoodsDTO();
             goodsDTO.setGoodsId(-1);
-            goodsDTO.setGoodsName("全部商品");
+            goodsDTO.setGoodsName("All the goods");
             goodsDTO.setThumbnail("");
             goodsDTOList.add(goodsDTO);
             minusVO.setGoodsList(goodsDTOList);
         }
-        //检测活动规则
+        // Test activity rule
         this.verifyRule(minusVO.getGoodsList());
         MinusDO minusDO = new MinusDO();
         BeanUtils.copyProperties(minusVO,minusDO);
         this.daoSupport.update(minusDO, id);
 
-        //删除之前的活动与商品的对照关系
+        // Delete the previous activity and product comparison relationship
         PromotionDetailDTO detailDTO = new PromotionDetailDTO();
         detailDTO.setStartTime(minusVO.getStartTime());
         detailDTO.setEndTime(minusVO.getEndTime());
@@ -219,7 +219,7 @@ public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implement
         detailDTO.setPromotionType(PromotionTypeEnum.MINUS.name());
         detailDTO.setTitle(minusVO.getTitle());
 
-        //将活动商品入库
+        // Warehousing of moving goods
         this.promotionGoodsManager.edit(minusVO.getGoodsList(),detailDTO);
 
         String minusKey = PromotionCacheKeys.getMinusKey(id);
@@ -234,7 +234,7 @@ public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implement
 
         this.verifyStatus(id);
         this.daoSupport.delete(MinusDO.class,id);
-        //删除单品立减商品活动对照表
+        // Delete the comparison table of the activity of the single item
         this.promotionGoodsManager.delete(id, PromotionTypeEnum.MINUS.name());
         this.cache.remove(PromotionCacheKeys.getMinusKey(id));
     }
@@ -243,25 +243,25 @@ public class MinusManagerImpl extends AbstractPromotionRuleManagerImpl implement
     @Override
     public void verifyAuth(Integer minusId) {
         MinusDO minusDO = this.getFromDB(minusId);
-        //验证越权操作
+        // Verify unauthorized operations
         if (minusDO == null){
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
     }
 
 
     /**
-     * 验证此活动是否可进行编辑删除操作<br/>
-     * 如有问题则抛出异常
-     * @param minusId   活动id
+     * Verify that this activity is editable and deleted<br/>
+     * Throw an exception if there is a problem
+     * @param minusId   activityid
      */
     private void verifyStatus(Integer minusId) {
         MinusVO minusVO = this.getFromDB(minusId);
         long nowTime = DateUtil.getDateline();
 
-        //如果活动起始时间小于现在时间，活动已经开始了。
+        // If the start time is less than the present time, the activity has already started.
         if(minusVO.getStartTime().longValue() < nowTime && minusVO.getEndTime().longValue() > nowTime){
-            throw new ServiceException(PromotionErrorCode.E400.code(),"活动已经开始，不能进行编辑删除操作");
+            throw new ServiceException(PromotionErrorCode.E400.code(),"The activity has started. You cannot edit or delete the activity");
         }
     }
 

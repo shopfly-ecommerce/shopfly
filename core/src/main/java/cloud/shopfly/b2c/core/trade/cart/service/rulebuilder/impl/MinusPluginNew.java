@@ -27,11 +27,11 @@ import cloud.shopfly.b2c.framework.util.DateUtil;
 import org.springframework.stereotype.Component;
 
 /**
- * 单品立减插件
+ * Single product vertical reduction plug-in
  *
  * @author mengyuanming
  * @version v1.0
- * @date 2017年8月18日下午9:15:00
+ * @date 2017years8month18On the afternoon9:15:00
  * @since v6.4.0
  */
 @Component
@@ -39,7 +39,7 @@ public class MinusPluginNew implements SkuPromotionRuleBuilder {
 
 
     /**
-     * 单品立减活动，计算插件
+     * Single product vertical reduction activities, computing plug-ins
      */
     @Override
     public PromotionRule build(CartSkuVO skuVO, PromotionVO promotionVO) {
@@ -47,34 +47,34 @@ public class MinusPluginNew implements SkuPromotionRuleBuilder {
         PromotionRule rule = new PromotionRule(PromotionTarget.SKU);
 
         /**
-         * 过期判定
+         * Overdue decision
          */
-        //开始时间和结束时间
+        // Start time and end time
         MinusVO minusDO = promotionVO.getMinusVO();
         long startTime = minusDO.getStartTime();
         long endTime = minusDO.getEndTime();
 
-        //是否过期了
+        // Is it expired?
         boolean expired = !DateUtil.inRangeOf(startTime, endTime);
         if (expired) {
             rule.setInvalid(true);
-            rule.setInvalidReason("单品立减已过期,有效期为:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "至" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
+            rule.setInvalidReason("The item has expired,Is valid for:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "to" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
             return rule;
         }
 
-        //商品优惠的总金额
+        // The total amount of the merchandise discount
         Double reducedTotalPrice = CurrencyUtil.mul(minusDO.getSingleReductionValue(), skuVO.getNum());
 
-        //单品立减的金额
+        // The amount immediately reduced for a single item
         Double reducedPrice = minusDO.getSingleReductionValue();
-//如果活动促销金额，大雨 总金额，则减免金额 = 总金额
+//If the amount of promotional activities, rain total amount, then reduced amount= The total amount
         if (reducedTotalPrice > CurrencyUtil.mul(skuVO.getNum(), skuVO.getPurchasePrice())) {
             reducedTotalPrice = CurrencyUtil.mul(skuVO.getNum(), skuVO.getPurchasePrice());
         }
         rule.setReducedPrice(reducedPrice);
         rule.setReducedTotalPrice(reducedTotalPrice);
-        rule.setTips("单品立减[" + minusDO.getSingleReductionValue() + "]元");
-        rule.setTag("单品立减");
+        rule.setTips("Item set[" + minusDO.getSingleReductionValue() + "]USD");
+        rule.setTag("Item set");
 
         return rule;
 

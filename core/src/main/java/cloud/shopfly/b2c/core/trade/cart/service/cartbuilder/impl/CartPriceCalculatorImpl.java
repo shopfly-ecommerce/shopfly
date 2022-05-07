@@ -48,7 +48,7 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
     @Override
     public PriceDetailVO countPrice(List<CartVO> cartList) {
 
-        //根据规则计算价格
+        // Calculate the price according to the rules
         PriceDetailVO priceDetailVO = this.countPriceWithRule(cartList);
 
 
@@ -68,7 +68,7 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
             cartPrice.setFreightPrice(cart.getPrice().getFreightPrice());
             for (CartSkuVO cartSku : cart.getSkuList()) {
 
-                ////如果是结算页，则忽略未选中的   update by liuyulei 2019-05-07
+                // // If it is a settlement page, ignore the unchecked update by liuyulei 2019-05-07
                 if (CartType.CHECKOUT.equals(cart.getCartType()) && cartSku.getChecked() == 0) {
                     continue;
                 }
@@ -78,7 +78,7 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
 
                     this.applyRule(cartSku, skuRule, cart);
 
-                    //有一个商品免运费则全部免运费
+                    // Free shipping for one item means free shipping for all
                     if (!freeShipping) {
                         freeShipping = skuRule.getFreeShipping();
                     }
@@ -86,23 +86,23 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
                 } else {
                     skuRule = new PromotionRule(PromotionTarget.SKU);
                 }
-                //未选中的不计入合计中   update by liuyulei 2019-05-07
+                // Unselected items are not included in the total. Update by liuyulei 2019-05-07
                 if (cartSku.getChecked() == 0) {
                     continue;
                 }
-                //购物车全部商品的原价合
+                // The original price of all items in the shopping cart
                 cartPrice.setOriginalPrice(CurrencyUtil.add(cartPrice.getOriginalPrice(), CurrencyUtil.mul(cartSku.getOriginalPrice(), cartSku.getNum())));
 
-                //购物车所有小计合
+                // Shopping cart all subtotals
                 cartPrice.setGoodsPrice(CurrencyUtil.add(cartPrice.getGoodsPrice(), cartSku.getSubtotal()));
 
-                //购物车返现合
+                // Shopping cart cashback
                 cartPrice.setCashBack(CurrencyUtil.add(cartPrice.getCashBack(), skuRule.getReducedTotalPrice()));
 
-                //购物车使用积分
+                // Shopping cart usage points
                 cartPrice.setExchangePoint(cartPrice.getExchangePoint() + skuRule.getUsePoint());
 
-                //累计商品重量
+                // Accumulated commodity weight
                 double weight = CurrencyUtil.mul(cartSku.getGoodsWeight(), cartSku.getNum());
                 double cartWeight = CurrencyUtil.add(cart.getWeight(), weight);
                 cart.setWeight(cartWeight);
@@ -111,12 +111,12 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
             }
 
 
-            //应用购物车级别的促销规则
+            // Apply shopping cart level promotion rules
             List<PromotionRule> cartRuleList = cart.getRuleList();
 
             boolean cartFreeShipping = false;
             for (PromotionRule rule : cartRuleList) {
-                //应用购物车的促销规则
+                // Apply shopping cart promotion rules
                 this.applyCartRule(rule, cartPrice, cart);
                 if (rule != null) {
                     cartFreeShipping = rule.getFreeShipping();
@@ -124,18 +124,18 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
             }
 
 
-            //单品规则中有免运费或满减里有免运费
+            // There is free freight in the single product rules or free freight in the full reduction
             if (freeShipping || cartFreeShipping) {
                 cartPrice.setIsFreeFreight(1);
                 cartPrice.setFreightPrice(0D);
             }
 
 
-            //计算店铺商品总优惠金额
+            // Calculate the total discount amount of goods in the store
             double totalDiscount = CurrencyUtil.add(cartPrice.getCashBack(), cartPrice.getCouponPrice());
             cartPrice.setDiscountPrice(totalDiscount);
 
-            //总价为商品价加运费
+            // Total price is commodity price plus freight
             double totalPrice = CurrencyUtil.add(cartPrice.getGoodsPrice(), cartPrice.getFreightPrice());
             cartPrice.setTotalPrice(totalPrice);
             cart.setPrice(cartPrice);
@@ -147,9 +147,9 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
 
 
         if(logger.isDebugEnabled()){
-            logger.debug("计算完优惠后购物车数据为：");
+            logger.debug("After calculating the discount, the shopping cart data is：");
             logger.debug(cartList.toString());
-            logger.debug("价格为：");
+            logger.debug("The price for：");
             logger.debug(price.toString());
         }
 
@@ -157,11 +157,11 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
     }
 
     /**
-     * 为购物车应用一个购物车促销规则
+     * Apply a shopping cart promotion rule to the shopping cart
      *
-     * @param cartRule  购物车规则
-     * @param cartPrice 购物车价格
-     * @param cart      购物车
+     * @param cartRule  Shopping cart rules
+     * @param cartPrice Shopping cart price
+     * @param cart      The shopping cart
      */
     private void applyCartRule(PromotionRule cartRule, PriceDetailVO cartPrice, CartVO cart) {
 
@@ -169,32 +169,32 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
             return;
         }
 
-        //减掉要优惠的总金额
+        // Subtract the total amount of the discount
         if (cartRule.getReducedTotalPrice() != null) {
 
             double subtotal = cartPrice.getGoodsPrice();
-            //减
+            // Reduction of
             subtotal = CurrencyUtil.sub(subtotal, cartRule.getReducedTotalPrice());
 
-            //总之不能为负数
+            // It cant be negative
             if (subtotal < 0) {
                 subtotal = 0;
             }
-            //设置
+            // Set up the
             cartPrice.setFullMinus(cartRule.getReducedTotalPrice());
             cartPrice.setGoodsPrice(subtotal);
-            //购物车返现合
+            // Shopping cart cashback
             cartPrice.setCashBack(CurrencyUtil.add(cartPrice.getCashBack(), cartRule.getReducedTotalPrice()));
         }
 
-        //优惠券不计入,合计的时候会算
+        // Coupons are not included, they will be counted when adding up
         if (cartRule.getUseCoupon() != null) {
 
             double subtotal = cartPrice.getGoodsPrice();
-            //减
+            // Reduction of
             subtotal = CurrencyUtil.sub(subtotal, cartRule.getUseCoupon().getAmount());
 
-            //总之不能为负数
+            // It cant be negative
             if (subtotal < 0) {
                 subtotal = 0;
             }
@@ -202,17 +202,17 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
             cartPrice.setCouponPrice(cartRule.getUseCoupon().getAmount());
 
         }
-        //赠送的优惠券
+        // Complimentary coupons
         if (cartRule.getCouponGift() != null) {
             cart.getGiftCouponList().add(cartRule.getCouponGift());
         }
 
-        //赠送的赠品
+        // Complimentary gifts
         if (cartRule.getGoodsGift() != null) {
             cart.getGiftList().add(cartRule.getGoodsGift());
         }
 
-        //赠送的积分
+        // Bonus points
         if (cartRule.getPointGift() != null) {
             cart.setGiftPoint(cartRule.getPointGift());
         }
@@ -222,11 +222,11 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
 
 
     /**
-     * 为购物车应用一个单品促销规则
+     * Apply an item promotion rule to the shopping cart
      *
-     * @param cartSku 购物车商品sku
-     * @param skuRule 促销规则
-     * @param cart    购物车
+     * @param cartSku Shopping cart itemsku
+     * @param skuRule The promotion rules
+     * @param cart    The shopping cart
      */
     private void applyRule(CartSkuVO cartSku, PromotionRule skuRule, CartVO cart) {
 
@@ -235,24 +235,24 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
             cartSku.setErrorMessage(skuRule.getInvalidReason());
         }
 
-        //如果已经失效，标记为不选中和失效原因，且不参与计算价格
+        // If it has expired, mark it as unselected and the reason for the expiration, and do not participate in the calculation of the price
         if (skuRule.isInvalid()) {
             cartSku.setChecked(0);
             cartSku.setInvalid(1);
             return;
         }
 
-        //设置促销tag
+        // Set promotional tag
         if (!StringUtil.isEmpty(skuRule.getTag())) {
             cartSku.getPromotionTags().add(skuRule.getTag());
         }
 
-        //减掉要优惠的总金额
+        // Subtract the total amount of the discount
         if (skuRule.getReducedTotalPrice() != null) {
             double subtotal = cartSku.getSubtotal();
             subtotal = CurrencyUtil.sub(subtotal, skuRule.getReducedTotalPrice());
 
-            //总之不能为负数
+            // It cant be negative
             if (subtotal < 0) {
                 subtotal = 0;
             }
@@ -261,12 +261,12 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
         }
 
 
-        //单价
+        // Price
         if (skuRule.getReducedPrice() != null) {
             double originalPrice = cartSku.getOriginalPrice();
             double purchasePrice = CurrencyUtil.sub(originalPrice, skuRule.getReducedPrice());
 
-            //总之不能为负数
+            // It cant be negative
             if (purchasePrice < 0) {
                 purchasePrice = 0;
             }
@@ -276,24 +276,24 @@ public class CartPriceCalculatorImpl implements CartPriceCalculator {
 
 
         if (skuRule.getUsePoint() != null) {
-            //要使用的积分
+            // The integral that Im going to use
             double point = CurrencyUtil.div(skuRule.getUsePoint(), cartSku.getNum());
 
             cartSku.setPoint(new Double(point).intValue());
         }
 
 
-        //赠送的优惠券
+        // Complimentary coupons
         if (skuRule.getCouponGift() != null) {
             cart.getGiftCouponList().add(skuRule.getCouponGift());
         }
 
-        //赠送的赠品
+        // Complimentary gifts
         if (skuRule.getGoodsGift() != null) {
             cart.getGiftList().add(skuRule.getGoodsGift());
         }
 
-        //赠送的积分
+        // Bonus points
         if (skuRule.getPointGift() != null) {
             cart.setGiftPoint(skuRule.getPointGift());
         }

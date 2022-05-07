@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * 平台管理员业务类
+ * Platform administrator business class
  *
  * @author zh
  * @version v7.0
@@ -78,18 +78,18 @@ public class AdminUserManagerImpl implements AdminUserManager {
     public AdminUser add(AdminUserVO adminUserVO) {
         boolean bool = Pattern.matches("[a-fA-F0-9]{32}", adminUserVO.getPassword());
         if (!bool) {
-            throw new ServiceException(SystemErrorCode.E917.code(), "密码格式不正确");
+            throw new ServiceException(SystemErrorCode.E917.code(), "The password format is incorrect");
         }
-        //校验用户名称是否重复
+        // Verify whether the user name is duplicated
         AdminUser user = this.systemDaoSupport.queryForObject("select * from es_admin_user where username = ? and user_state = 0", AdminUser.class, adminUserVO.getUsername());
         if (user != null) {
-            throw new ServiceException(SystemErrorCode.E915.code(), "管理员名称重复");
+            throw new ServiceException(SystemErrorCode.E915.code(), "Duplicate administrator name");
         }
-        //不是超级管理员的情况下再校验权限是否存在
+        // If you are not a super administrator, check whether the permission exists
         if (!adminUserVO.getFounder().equals(1)) {
             RoleDO roleDO = roleManager.getModel(adminUserVO.getRoleId());
             if (roleDO == null) {
-                throw new ResourceNotFoundException("所属权限不存在");
+                throw new ResourceNotFoundException("The owning permission does not exist");
             }
         }
         String password = adminUserVO.getPassword();
@@ -106,34 +106,34 @@ public class AdminUserManagerImpl implements AdminUserManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public AdminUser edit(AdminUserVO adminUserVO, Integer id) {
-        //对要修改的管理员是否存在进行校验
+        // Verify that the administrator to be modified exists
         AdminUser adminUser = this.getModel(id);
         if (adminUser == null) {
-            throw new ResourceNotFoundException("当前管理员不存在");
+            throw new ResourceNotFoundException("The current administrator does not exist");
         }
-        //如果修改的是从超级管理员到普通管理员 需要校验此管理员是否是最后一个超级管理员
+        // If the administrator is changed from a super administrator to a common administrator, check whether the administrator is the last super administrator
         if (adminUser.getFounder().equals(1) && !adminUserVO.getFounder().equals(1)) {
             String sql = "select * from es_admin_user where founder = 1 and user_state = 0";
             List<AdminUser> adminUsers = this.systemDaoSupport.queryForList(sql, AdminUser.class);
             if (adminUsers.size() <= 1) {
-                throw new ServiceException(SystemErrorCode.E916.code(), "必须保留一个超级管理员");
+                throw new ServiceException(SystemErrorCode.E916.code(), "You must retain a super administrator");
             }
         }
         if (!adminUserVO.getFounder().equals(1)) {
             RoleDO roleDO = roleManager.getModel(adminUserVO.getRoleId());
             if (roleDO == null) {
-                throw new ResourceNotFoundException("所属权限不存在");
+                throw new ResourceNotFoundException("The owning permission does not exist");
             }
         } else {
             adminUserVO.setRoleId(0);
         }
-        //管理员原密码
+        // Old password of administrator
         String password = adminUser.getPassword();
-        //对管理员是否修改密码进行校验
+        // Verify whether the administrator changes the password
         if (!StringUtil.isEmpty(adminUserVO.getPassword())) {
             boolean bool = Pattern.matches("[a-fA-F0-9]{32}", adminUserVO.getPassword());
             if (!bool) {
-                throw new ServiceException(SystemErrorCode.E917.code(), "密码格式不正确");
+                throw new ServiceException(SystemErrorCode.E917.code(), "The password format is incorrect");
             }
             adminUserVO.setPassword(StringUtil.md5(adminUserVO.getPassword() + adminUser.getUsername().toLowerCase()));
         } else {
@@ -148,16 +148,16 @@ public class AdminUserManagerImpl implements AdminUserManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
-        //校验当前管理员是否存在
+        // Verify that the current administrator exists
         AdminUser adminUser = this.getModel(id);
         if (adminUser == null) {
-            throw new ResourceNotFoundException("当前管理员不存在");
+            throw new ResourceNotFoundException("The current administrator does not exist");
         }
-        //校验要删除的管理员是否是最后一个超级管理员
+        // Verify that the administrator to be deleted is the last super administrator
         String sql = "select * from es_admin_user where founder = 1 and user_state = 0";
         List<AdminUser> adminUsers = this.systemDaoSupport.queryForList(sql, AdminUser.class);
         if (adminUsers.size() <= 1 && adminUser.getFounder().equals(1)) {
-            throw new ServiceException(SystemErrorCode.E916.code(), "必须保留一个超级管理员");
+            throw new ServiceException(SystemErrorCode.E916.code(), "You must retain a super administrator");
         }
         this.systemDaoSupport.execute("update es_admin_user set user_state = -1 where id = ?", id);
     }
@@ -172,7 +172,7 @@ public class AdminUserManagerImpl implements AdminUserManager {
         String sql = "select * from es_admin_user where username = ? and password = ? and user_state = 0";
         AdminUser adminUser = this.systemDaoSupport.queryForObject(sql, AdminUser.class, name, StringUtil.md5(password + name.toLowerCase()));
         if (adminUser == null || !StringUtil.equals(adminUser.getUsername(), name)) {
-            throw new ServiceException(SystemErrorCode.E918.code(), "管理员账号密码错误");
+            throw new ServiceException(SystemErrorCode.E918.code(), "The administrator account password is incorrect");
         }
         AdminLoginVO adminLoginVO = new AdminLoginVO();
         adminLoginVO.setUid(adminUser.getId());
@@ -181,7 +181,7 @@ public class AdminUserManagerImpl implements AdminUserManager {
         adminLoginVO.setFace(adminUser.getFace());
         adminLoginVO.setRoleId(adminUser.getRoleId());
         adminLoginVO.setFounder(adminUser.getFounder());
-        // 设置访问token的失效时间维持管理员在线状态
+        // Set the validity period of the access token to keep the administrator online
         Token token = createToken(adminUser);
 
         String accessToken = token.getAccessToken();
@@ -199,14 +199,14 @@ public class AdminUserManagerImpl implements AdminUserManager {
 
             Integer uid = admin.getUid();
 
-            //获取uuid
+            // Get uuid
             String uuid = ThreadContextHolder.getHttpRequest().getHeader("uuid");
-            //根据id获取管理员 校验当前管理员是否存在
+            // Obtain an administrator by ID To verify whether the current administrator exists
             AdminUser adminUser = this.getModel(uid);
             if (adminUser == null) {
-                throw new ResourceNotFoundException("当前管理员不存在");
+                throw new ResourceNotFoundException("The current administrator does not exist");
             }
-            //重新获取token
+            // Obtain the Token again
             Token token = createToken(adminUser);
 
             String newAccessToken = token.getAccessToken();
@@ -219,13 +219,13 @@ public class AdminUserManagerImpl implements AdminUserManager {
             return JsonUtil.objectToJson(map);
 
         }
-        throw new ResourceNotFoundException("当前管理员不存在");
+        throw new ResourceNotFoundException("The current administrator does not exist");
     }
 
     /**
-     * 创建token
+     * createtoken
      *
-     * @param adminUser 管理员
+     * @param adminUser The administrator
      * @return
      */
     private Token createToken(AdminUser adminUser) {

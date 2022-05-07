@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 第二件半价业务类
+ * The second half price business category
  *
  * @author Snow
  * @version v7.0.0
@@ -90,18 +90,18 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
         List<HalfPriceVO> halfPriceVOList = webPage.getData();
         for (HalfPriceVO halfPriceVO : halfPriceVOList) {
             long nowTime = DateUtil.getDateline();
-            //当前时间小于活动的开始时间 则为活动未开始
+            // If the current time is less than the start time of the activity, the activity has not started
             if (nowTime < halfPriceVO.getStartTime().longValue()) {
-                halfPriceVO.setStatusText("活动未开始");
+                halfPriceVO.setStatusText("Activity not started");
                 halfPriceVO.setStatus(PromotionStatusEnum.WAIT.toString());
 
-                //大于活动的开始时间，小于活动的结束时间
+                // Greater than the start time of the activity and less than the end time of the activity
             } else if (halfPriceVO.getStartTime().longValue() < nowTime && nowTime < halfPriceVO.getEndTime()) {
-                halfPriceVO.setStatusText("正在进行中");
+                halfPriceVO.setStatusText("In progress");
                 halfPriceVO.setStatus(PromotionStatusEnum.UNDERWAY.toString());
 
             } else {
-                halfPriceVO.setStatusText("活动已失效");
+                halfPriceVO.setStatusText("Activity expired");
                 halfPriceVO.setStatus(PromotionStatusEnum.END.toString());
             }
         }
@@ -115,13 +115,13 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
 
         this.verifyTime(halfPriceVO.getStartTime(), halfPriceVO.getEndTime(), PromotionTypeEnum.HALF_PRICE, null);
 
-        //初步形成商品的DTO列表
+        // Form the DTO list of commodities initially
         List<PromotionGoodsDTO> goodsDTOList = new ArrayList<>();
-        //是否是全部商品参与
+        // Whether all goods are involved
         if (halfPriceVO.getRangeType() == 1) {
             PromotionGoodsDTO goodsDTO = new PromotionGoodsDTO();
             goodsDTO.setGoodsId(-1);
-            goodsDTO.setGoodsName("全部商品");
+            goodsDTO.setGoodsName("All the goods");
             goodsDTO.setThumbnail("");
             goodsDTOList.add(goodsDTO);
             halfPriceVO.setGoodsList(goodsDTOList);
@@ -145,7 +145,7 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
         detailDTO.setPromotionType(PromotionTypeEnum.HALF_PRICE.name());
         detailDTO.setTitle(halfPriceVO.getTitle());
 
-        //将活动商品入库
+        // Warehousing of moving goods
         this.promotionGoodsManager.add(halfPriceVO.getGoodsList(), detailDTO);
 
         cache.put(PromotionCacheKeys.getHalfPriceKey(halfPriceVO.getHpId()), halfPriceDO);
@@ -161,13 +161,13 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
 
         this.verifyTime(halfPriceVO.getStartTime(), halfPriceVO.getEndTime(), PromotionTypeEnum.HALF_PRICE, id);
 
-        //初步形成商品的DTO列表
+        // Form the DTO list of commodities initially
         List<PromotionGoodsDTO> goodsDTOList = new ArrayList<>();
-        //是否是全部商品参与
+        // Whether all goods are involved
         if (halfPriceVO.getRangeType() == 1) {
             PromotionGoodsDTO goodsDTO = new PromotionGoodsDTO();
             goodsDTO.setGoodsId(-1);
-            goodsDTO.setGoodsName("全部商品");
+            goodsDTO.setGoodsName("All the goods");
             goodsDTO.setThumbnail("");
             goodsDTOList.add(goodsDTO);
             halfPriceVO.setGoodsList(goodsDTOList);
@@ -187,7 +187,7 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
         detailDTO.setPromotionType(PromotionTypeEnum.HALF_PRICE.name());
         detailDTO.setTitle(halfPriceVO.getTitle());
 
-        //将活动商品入库
+        // Warehousing of moving goods
         this.promotionGoodsManager.edit(halfPriceVO.getGoodsList(), detailDTO);
 
         cache.put(PromotionCacheKeys.getHalfPriceKey(halfPriceVO.getHpId()), halfPriceDO);
@@ -201,7 +201,7 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
 
         this.verifyStatus(id);
         this.daoSupport.delete(HalfPriceDO.class, id);
-        //删除活动关系对照表
+        // Delete the activity relation mapping table
         this.promotionGoodsManager.delete(id, PromotionTypeEnum.HALF_PRICE.name());
         this.cache.remove(PromotionCacheKeys.getHalfPriceKey(id));
 
@@ -210,28 +210,28 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
 
     @Override
     public HalfPriceVO getFromDB(Integer id) {
-        //读取缓存中的活动信息
+        // Read the activity information in the cache
         HalfPriceDO halfPriceDO = (HalfPriceDO) this.cache.get(PromotionCacheKeys.getHalfPriceKey(id));
-        //如果为空从数据库中读取
+        // If empty, read from the database
         if (halfPriceDO == null) {
             halfPriceDO = this.daoSupport.queryForObject(HalfPriceDO.class, id);
         }
-        //如果从缓存和数据库读取都是空，则抛出异常
+        // If reads from the cache and database are empty, an exception is thrown
         if (halfPriceDO == null) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动不存在");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Activity does not exist");
         }
 
         HalfPriceVO halfPriceVO = new HalfPriceVO();
         BeanUtils.copyProperties(halfPriceDO, halfPriceVO);
 
-        //读取此活动参与的商品
+        // Read the commodities that participate in this activity
         List<PromotionGoodsDO> goodsDOList = this.promotionGoodsManager.getPromotionGoods(id, PromotionTypeEnum.HALF_PRICE.name());
         Integer[] goodsIds = new Integer[goodsDOList.size()];
         for (int i = 0; i < goodsDOList.size(); i++) {
             goodsIds[i] = goodsDOList.get(i).getGoodsId();
         }
 
-        //读取商品的信息
+        // Read information about goods
         List<GoodsSelectLine> goodsSelectLineList = this.goodsClient.query(goodsIds);
         List<PromotionGoodsDTO> goodsList = new ArrayList<>();
 
@@ -249,26 +249,26 @@ public class HalfPriceManagerImpl extends AbstractPromotionRuleManagerImpl imple
     @Override
     public void verifyAuth(Integer id) {
         HalfPriceVO halfPriceVO = this.getFromDB(id);
-        //验证越权操作
+        // Verify unauthorized operations
         if (halfPriceVO == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
     }
 
 
     /**
-     * 验证此活动是否可进行编辑删除操作<br/>
-     * 如有问题则抛出异常
+     * Verify that this activity is editable and deleted<br/>
+     * Throw an exception if there is a problem
      *
-     * @param halfPriceId 活动id
+     * @param halfPriceId activityid
      */
     private void verifyStatus(Integer halfPriceId) {
         HalfPriceVO halfPriceVO = this.getFromDB(halfPriceId);
         long nowTime = DateUtil.getDateline();
 
-        //如果活动起始时间小于现在时间，活动已经开始了。
+        // If the start time is less than the present time, the activity has already started.
         if (halfPriceVO.getStartTime().longValue() < nowTime && halfPriceVO.getEndTime().longValue() > nowTime) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动已经开始，不能进行编辑删除操作");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The activity has started. You cannot edit or delete the activity");
         }
 
     }

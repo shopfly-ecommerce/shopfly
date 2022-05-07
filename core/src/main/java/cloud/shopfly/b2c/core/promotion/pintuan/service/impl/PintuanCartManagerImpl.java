@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by kingapex on 2019-01-23.
- * 拼团购物车业务类实现
+ * Group shopping cart business class implementation
  *
  * @author kingapex
  * @version 1.0
@@ -52,40 +52,40 @@ public class PintuanCartManagerImpl implements PintuanCartManager {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     /**
-     * 购物车促销渲染器
+     * Shopping cart promotion renderer
      */
     @Autowired
     @Qualifier(value = "pintuanCartPromotionRuleRendererImpl")
     private CartPromotionRuleRenderer cartPromotionRuleRenderer;
 
     /**
-     * 购物车价格计算器
+     * Shopping cart price calculator
      */
     @Autowired
     @Qualifier(value = "pintuanCartPriceCalculatorImpl")
     private CartPriceCalculator cartPriceCalculator;
 
     /**
-     * 拼团购物车sku数据渲染器
+     * Group shopping cartskuData renderer
      */
     @Autowired
     @Qualifier(value = "pintuanCartSkuRenderer")
     private CartSkuRenderer pintuanCartSkuRenderer;
 
     /**
-     * 数据校验
+     * Data validation
      */
     @Autowired
     private CheckDataRebderer checkDataRebderer;
 
     /**
-     * 购物车优惠券渲染器
+     * Shopping cart coupon renderer
      */
     @Autowired
     private CartCouponRenderer cartCouponRenderer;
 
     /**
-     * 购物车运费价格计算器
+     * Shopping cart freight price calculator
      */
     @Autowired
     private CartShipPriceCalculator cartShipPriceCalculator;
@@ -101,10 +101,10 @@ public class PintuanCartManagerImpl implements PintuanCartManager {
 
     @Override
     public CartView getCart() {
-        //调用CartView生产流程线进行生产
+        // Call CartView production flow line for production
         CartBuilder cartBuilder = new DefaultCartBuilder(CartType.PINTUAN, pintuanCartSkuRenderer, cartPromotionRuleRenderer, cartPriceCalculator, cartCouponRenderer, cartShipPriceCalculator, checkDataRebderer);
 
-        //生产流程为：渲染sku->渲染促销规则(计算优惠券）->计算运费->计算价格 -> 渲染优惠券 ->生成成品
+        // Production process: render SKU -> render promotional rules (calculate coupons) -> calculate freight -> calculate prices -> render coupons -> generate finished products
         CartView cartView = cartBuilder.renderSku().countShipPrice().countPrice().checkData().build();
         return cartView;
     }
@@ -115,16 +115,16 @@ public class PintuanCartManagerImpl implements PintuanCartManager {
         CartSkuOriginVo skuVo = new CartSkuOriginVo();
         GoodsSkuVO sku = this.goodsClient.getSkuFromCache(skuId);
         if (sku == null) {
-            throw new ServiceException(TradeErrorCode.E451.code(), "商品已失效，请刷新购物车");
+            throw new ServiceException(TradeErrorCode.E451.code(), "Item no longer valid, please refresh cart");
         }
         if (num <= 0) {
-            throw new ServiceException(TradeErrorCode.E451.code(), "商品数量不能小于等于0。");
+            throw new ServiceException(TradeErrorCode.E451.code(), "The quantity of goods cannot be less than or equal to0。");
         }
 
-        //读取sku的可用库存
+        // Read the available inventory of the SKU
         Integer enableQuantity = sku.getEnableQuantity();
         if (enableQuantity <= 0) {
-            throw new ServiceException(TradeErrorCode.E451.code(), "商品库存已不足，不能购买。");
+            throw new ServiceException(TradeErrorCode.E451.code(), "The goods are out of stock and cannot be purchased.");
         }
 
         BeanUtils.copyProperties(sku, skuVo);
@@ -137,14 +137,14 @@ public class PintuanCartManagerImpl implements PintuanCartManager {
 
 
         if (logger.isDebugEnabled()) {
-            logger.debug("将拼团商品加入缓存：" + skuVo);
+            logger.debug("Add grouped items to the cache：" + skuVo);
         }
 
         return skuVo;
     }
 
     /**
-     * 读取当前会员购物车原始数据key
+     * Read the current member shopping cart raw datakey
      *
      * @return
      */
@@ -152,7 +152,7 @@ public class PintuanCartManagerImpl implements PintuanCartManager {
     protected String getOriginKey() {
 
         String cacheKey = "";
-        //如果会员登陆了，则要以会员id为key
+        // If the member logs in, the member ID is the key
         Buyer buyer = UserContext.getBuyer();
         if (buyer != null) {
             cacheKey = CachePrefix.CART_SKU_PREFIX.getPrefix() + buyer.getUid();

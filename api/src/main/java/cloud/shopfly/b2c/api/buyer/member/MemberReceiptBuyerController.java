@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 会员发票控制器
+ * Member invoice controller
  *
  * @author zh
  * @version v7.0.0
@@ -48,7 +48,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/members/receipt")
-@Api(description = "会员发票相关API")
+@Api(description = "Member invoice correlationAPI")
 public class MemberReceiptBuyerController {
 
     @Autowired
@@ -57,18 +57,18 @@ public class MemberReceiptBuyerController {
     private ReceiptHistoryManager receiptHistoryManager;
 
 
-    @ApiOperation(value = "查询当前会员发票列表", response = MemberReceipt.class)
+    @ApiOperation(value = "Query the list of current member invoices", response = MemberReceipt.class)
     @GetMapping
     public Map list() {
         Map<String, Object> map = new HashMap<>(16);
-        //查询普通发票列表
+        // Query the list of general invoices
         List<MemberReceipt> list = this.memberReceiptManager.list(ReceiptTypeEnum.VATORDINARY.name());
         map.put(ReceiptTypeEnum.VATORDINARY.name(), list);
         return map;
     }
 
 
-    @ApiOperation(value = "添加会员增值税普通发票", response = MemberReceipt.class)
+    @ApiOperation(value = "Add member VAT general invoice", response = MemberReceipt.class)
     @PostMapping("ordinary")
     public MemberReceipt add(@Valid OrdinaryReceiptVO ordinaryReceiptVO) {
         MemberReceiptVO memberReceiptVO = new MemberReceiptVO(ordinaryReceiptVO);
@@ -77,9 +77,9 @@ public class MemberReceiptBuyerController {
     }
 
     @PutMapping(value = "/{id}/ordinary")
-    @ApiOperation(value = "修改会员增值税普通发票", response = MemberReceipt.class)
+    @ApiOperation(value = "Revise general VAT invoice of member", response = MemberReceipt.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public MemberReceipt edit(@Valid OrdinaryReceiptVO ordinaryReceiptVO, @PathVariable Integer id) {
         MemberReceiptVO memberReceiptVO = new MemberReceiptVO(ordinaryReceiptVO);
@@ -89,21 +89,21 @@ public class MemberReceiptBuyerController {
     }
 
     @PutMapping(value = "/{id}/default")
-    @ApiOperation(value = "设置会员发票为默认", response = MemberReceipt.class)
+    @ApiOperation(value = "Set membership invoice as default", response = MemberReceipt.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "会员发票主键,如果选择个人则设置此参数为0", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "receipt_type", value = "枚举，ELECTRO:电子普通发票，VATORDINARY：增值税普通发票，VATOSPECIAL：增值税专用发票", required = true, dataType = "String", paramType = "query", allowableValues = "ELECTRO,VATORDINARY,VATOSPECIAL")
+            @ApiImplicitParam(name = "id", value = "Member invoice master key,Set this parameter to if individuals are selected0", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "receipt_type", value = "Enumeration,ELECTRO:Electronic general invoice,VATORDINARY：VAT general invoice,VATOSPECIAL：VAT special invoice", required = true, dataType = "String", paramType = "query", allowableValues = "ELECTRO,VATORDINARY,VATOSPECIAL")
     })
-    public void setDefault(@PathVariable Integer id, @ApiIgnore @NotEmpty(message = "发票类型不能为空") String receiptType) {
+    public void setDefault(@PathVariable Integer id, @ApiIgnore @NotEmpty(message = "The invoice type cannot be empty") String receiptType) {
         this.memberReceiptManager.setDefaultReceipt(receiptType, id);
 
     }
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除会员发票")
+    @ApiOperation(value = "Delete member invoice")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的会员发票主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Member invoice primary key to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -114,16 +114,16 @@ public class MemberReceiptBuyerController {
 
 
     @GetMapping(value = "/{order_sn}")
-    @ApiOperation(value = "根据订单sn查询订单发票信息")
+    @ApiOperation(value = "According to the ordersnQuery the invoice information of an order")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单sn", required = true, dataType = "String", paramType = "path")
+            @ApiImplicitParam(name = "order_sn", value = "The ordersn", required = true, dataType = "String", paramType = "path")
     })
     public ReceiptHistory getReceiptByOrderSn(@PathVariable("order_sn") String orderSn) {
         ReceiptHistory receiptHistory = this.receiptHistoryManager.getReceiptHistory(orderSn);
         if (receiptHistory != null && receiptHistory.getMemberId().equals(UserContext.getBuyer().getUid())) {
             return receiptHistory;
         }
-        throw new NoPermissionException("无权限");
+        throw new NoPermissionException("Without permission");
 
     }
 }

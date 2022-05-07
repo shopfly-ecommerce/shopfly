@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.ReceiptVO;
 import cloud.shopfly.b2c.core.trade.order.model.vo.CheckoutParamVO;
 
 /**
- * 结算参数 业务层接口
+ * Settlement parameters business layer interface
  *
  * @author Snow create in 2018/4/8
  * @version v2.0
@@ -29,75 +29,75 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.CheckoutParamVO;
 public interface CheckoutParamManager {
 
     /**
-     * 获取订单的创建参数<br>
-     * 如果没有设置过参数，则用默认
+     * Gets the creation parameters for the order<br>
+     * If no parameter has been set, the default is used
      *
-     * @return 结算参数
+     * @return Settlement parameter
      */
     CheckoutParamVO getParam();
 
 
     /**
-     * 设置收货地址id
+     * Set the shipping addressid
      *
-     * @param addressId 收货地址id
+     * @param addressId Shipping addressid
      */
     void setAddressId(Integer addressId);
 
 
     /**
-     * 设置支付式
+     * Set payment mode
      *
-     * @param paymentTypeEnum 支付方式{@link PaymentTypeEnum}
+     * @param paymentTypeEnum Method of payment{@link PaymentTypeEnum}
      */
     void setPaymentType(PaymentTypeEnum paymentTypeEnum);
 
 
     /**
-     * 设置发票
+     * Set the invoice
      *
-     * @param receipt 发票vo {@link  ReceiptVO }
+     * @param receipt invoicevo {@link  ReceiptVO }
      */
     void setReceipt(ReceiptVO receipt);
 
     /**
-     * 取消发票
+     * Cancel the invoice
      */
     void deleteReceipt();
 
 
     /**
-     * 设置送货时间
+     * Set delivery time
      *
-     * @param receiveTime 送货时间
+     * @param receiveTime Delivery time
      */
     void setReceiveTime(String receiveTime);
 
 
     /**
-     * 设置订单备注
+     * Set order remarks
      *
-     * @param remark 订单备注
+     * @param remark The order note
      */
     void setRemark(String remark);
 
     /**
-     * 设置订单来源
+     * Set order Source
      *
-     * @param clientType 客户端来源
+     * @param clientType Client source
      */
     void setClientType(String clientType);
 
 
     /**
-     * 批量设置所有参数
+     * Set all parameters in batches
      *
-     * @param param 结算参数 {@link CheckoutParamVO}
+     * @param param Settlement parameter{@link CheckoutParamVO}
      */
     void setAll(CheckoutParamVO param);
 
     /**
-     * 检测是否支持货到付款
+     * Check whether cash on delivery is supported
      * @param paymentTypeEnum
      */
     void checkCod(PaymentTypeEnum paymentTypeEnum);

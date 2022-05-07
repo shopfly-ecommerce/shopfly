@@ -41,7 +41,7 @@ import java.util.List;
 
 
 /**
- * 订单表实体
+ * Order form entity
  *
  * @author Snow
  * @version v7.0.0
@@ -56,365 +56,365 @@ public class OrderDO implements Serializable {
     private static final long serialVersionUID = 3154292647603519L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "order_id")
     @ApiModelProperty(hidden = true)
     private Integer orderId;
 
     /**
-     * 交易编号
+     * Transaction number
      */
     @Column(name = "trade_sn")
-    @ApiModelProperty(name = "trade_sn", value = "交易编号", required = false)
+    @ApiModelProperty(name = "trade_sn", value = "Transaction number", required = false)
     private String tradeSn;
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "sn", value = "Order no.", required = false)
     private String sn;
     /**
-     * 店铺ID
+     * The storeID
      */
     @Column(name = "seller_id")
-    @ApiModelProperty(name = "seller_id", value = "店铺ID", required = false)
+    @ApiModelProperty(name = "seller_id", value = "The storeID", required = false)
     private Integer sellerId;
     /**
-     * 店铺名称
+     * Shop name
      */
     @Column(name = "seller_name")
-    @ApiModelProperty(name = "seller_name", value = "店铺名称", required = false)
+    @ApiModelProperty(name = "seller_name", value = "Shop name", required = false)
     private String sellerName;
     /**
-     * 会员ID
+     * membersID
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员ID", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersID", required = false)
     private Integer memberId;
     /**
-     * 买家账号
+     * Buyers account
      */
     @Column(name = "member_name")
-    @ApiModelProperty(name = "member_name", value = "买家账号", required = false)
+    @ApiModelProperty(name = "member_name", value = "Buyers account", required = false)
     private String memberName;
     /**
-     * 订单状态
+     * Status
      */
     @Column(name = "order_status")
-    @ApiModelProperty(name = "order_status", value = "订单状态", required = false)
+    @ApiModelProperty(name = "order_status", value = "Status", required = false)
     private String orderStatus;
     /**
-     * 付款状态
+     * Payment status
      */
     @Column(name = "pay_status")
-    @ApiModelProperty(name = "pay_status", value = "付款状态", required = false)
+    @ApiModelProperty(name = "pay_status", value = "Payment status", required = false)
     private String payStatus;
     /**
-     * 货运状态
+     * Cargo status
      */
     @Column(name = "ship_status")
-    @ApiModelProperty(name = "ship_status", value = "货运状态", required = false)
+    @ApiModelProperty(name = "ship_status", value = "Cargo status", required = false)
     private String shipStatus;
     /**
-     * 配送方式ID
+     * Shipping typeID
      */
     @Column(name = "shipping_id")
-    @ApiModelProperty(name = "shipping_id", value = "配送方式ID", required = false)
+    @ApiModelProperty(name = "shipping_id", value = "Shipping typeID", required = false)
     private Integer shippingId;
     /**
-     * 评论是否完成
+     * Whether the comment is complete
      */
     @Column(name = "comment_status")
-    @ApiModelProperty(name = "comment_status", value = "评论是否完成", required = false)
+    @ApiModelProperty(name = "comment_status", value = "Whether the comment is complete", required = false)
     private String commentStatus;
     /**
-     * 配送方式
+     * Shipping type
      */
     @Column(name = "shipping_type")
-    @ApiModelProperty(name = "shipping_type", value = "配送方式", required = false)
+    @ApiModelProperty(name = "shipping_type", value = "Shipping type", required = false)
     private String shippingType;
     /**
-     * 支付方式id
+     * Method of paymentid
      */
     @Column(name = "payment_method_id")
-    @ApiModelProperty(name = "payment_method_id", value = "支付方式id", required = false)
+    @ApiModelProperty(name = "payment_method_id", value = "Method of paymentid", required = false)
     private String paymentMethodId;
     /**
-     * 支付插件id
+     * Pay the plug-inid
      */
     @Column(name = "payment_plugin_id")
-    @ApiModelProperty(name = "payment_plugin_id", value = "支付插件id", required = false)
+    @ApiModelProperty(name = "payment_plugin_id", value = "Pay the plug-inid", required = false)
     private String paymentPluginId;
     /**
-     * 支付方式名称
+     * Name of Payment Method
      */
     @Column(name = "payment_method_name")
-    @ApiModelProperty(name = "payment_method_name", value = "支付方式名称", required = false)
+    @ApiModelProperty(name = "payment_method_name", value = "Name of Payment Method", required = false)
     private String paymentMethodName;
     /**
-     * 支付方式类型
+     * Type of payment
      */
     @Column(name = "payment_type")
-    @ApiModelProperty(name = "payment_type", value = "支付方式类型", required = false)
+    @ApiModelProperty(name = "payment_type", value = "Type of payment", required = false)
     private String paymentType;
     /**
-     * 支付时间
+     * Payment time
      */
     @Column(name = "payment_time")
-    @ApiModelProperty(name = "payment_time", value = "支付时间", required = false)
+    @ApiModelProperty(name = "payment_time", value = "Payment time", required = false)
     private Long paymentTime;
     /**
-     * 已支付金额
+     * Amount paid
      */
     @Column(name = "pay_money")
-    @ApiModelProperty(name = "pay_money", value = "已支付金额", required = false)
+    @ApiModelProperty(name = "pay_money", value = "Amount paid", required = false)
     private Double payMoney;
     /**
-     * 收货人姓名
+     * Name of consignee
      */
     @Column(name = "ship_name")
-    @ApiModelProperty(name = "ship_name", value = "收货人姓名", required = false)
+    @ApiModelProperty(name = "ship_name", value = "Name of consignee", required = false)
     private String shipName;
     /**
-     * 收货地址
+     * Shipping address
      */
     @Column(name = "ship_addr")
-    @ApiModelProperty(name = "ship_addr", value = "收货地址", required = false)
+    @ApiModelProperty(name = "ship_addr", value = "Shipping address", required = false)
     private String shipAddr;
     /**
-     * 收货人邮编
+     * Consignees zip code
      */
     @Column(name = "ship_zip")
-    @ApiModelProperty(name = "ship_zip", value = "收货人邮编", required = false)
+    @ApiModelProperty(name = "ship_zip", value = "Consignees zip code", required = false)
     private String shipZip;
     /**
-     * 收货人手机
+     * Consignees mobile phone
      */
     @Column(name = "ship_mobile")
-    @ApiModelProperty(name = "ship_mobile", value = "收货人手机", required = false)
+    @ApiModelProperty(name = "ship_mobile", value = "Consignees mobile phone", required = false)
     private String shipMobile;
     /**
-     * 收货时间
+     * The goods time
      */
     @Column(name = "receive_time")
-    @ApiModelProperty(name = "receive_time", value = "收货时间", required = false)
+    @ApiModelProperty(name = "receive_time", value = "The goods time", required = false)
     private String receiveTime;
     /**
-     * 配送地区-国家
+     *  -countries
      */
     @Column(name = "ship_country")
-    @ApiModelProperty(name = "ship_country", value = "配送地区-国家", required = false)
+    @ApiModelProperty(name = "ship_country", value = " -countries", required = false)
     private String shipCountry;
     /**
-     * 配送地区-州/省
+     *  -state/province
      */
     @Column(name = "ship_state")
-    @ApiModelProperty(name = "ship_state", value = "配送地区-州/省", required = false)
+    @ApiModelProperty(name = "ship_state", value = " -state/province", required = false)
     private String shipState;
     /**
-     * 配送地区-城市
+     *  -city
      */
     @Column(name = "ship_city")
-    @ApiModelProperty(name = "ship_city", value = "配送地区-城市", required = false)
+    @ApiModelProperty(name = "ship_city", value = " -city", required = false)
     private String shipCity;
     /**
-     * 配送地区-国家编码
+     *  -Country code
      */
     @Column(name = "ship_country_code")
-    @ApiModelProperty(name = "ship_country_code", value = "配送地区-国家编码", required = false)
+    @ApiModelProperty(name = "ship_country_code", value = " -Country code", required = false)
     private String shipCountryCode;
     /**
-     * 配送地区-州/省编码
+     *  -state/Province code
      */
     @Column(name = "ship_state_code")
-    @ApiModelProperty(name = "ship_state_code", value = "配送地区-州/省编码", required = false)
+    @ApiModelProperty(name = "ship_state_code", value = " -state/Province code", required = false)
     private String shipStateCode;
     /**
-     * 订单总额
+     * The total order
      */
     @Column(name = "order_price")
-    @ApiModelProperty(name = "order_price", value = "订单总额", required = false)
+    @ApiModelProperty(name = "order_price", value = "The total order", required = false)
     private Double orderPrice;
     /**
-     * 商品总额
+     * The total amount of goods
      */
     @Column(name = "goods_price")
-    @ApiModelProperty(name = "goods_price", value = "商品总额", required = false)
+    @ApiModelProperty(name = "goods_price", value = "The total amount of goods", required = false)
     private Double goodsPrice;
     /**
-     * 配送费用
+     * Distribution costs
      */
     @Column(name = "shipping_price")
-    @ApiModelProperty(name = "shipping_price", value = "配送费用", required = false)
+    @ApiModelProperty(name = "shipping_price", value = "Distribution costs", required = false)
     private Double shippingPrice;
     /**
-     * 优惠金额
+     * Discount amount
      */
     @Column(name = "discount_price")
-    @ApiModelProperty(name = "discount_price", value = "优惠金额", required = false)
+    @ApiModelProperty(name = "discount_price", value = "Discount amount", required = false)
     private Double discountPrice;
     /**
-     * 是否被删除
+     * Deleted or not
      */
     @Column(name = "disabled")
-    @ApiModelProperty(name = "disabled", value = "是否被删除", required = false)
+    @ApiModelProperty(name = "disabled", value = "Deleted or not", required = false)
     private Integer disabled;
     /**
-     * 订单商品总重量
+     * Total weight of goods ordered
      */
     @Column(name = "weight")
-    @ApiModelProperty(name = "weight", value = "订单商品总重量", required = false)
+    @ApiModelProperty(name = "weight", value = "Total weight of goods ordered", required = false)
     private Double weight;
     /**
-     * 商品数量
+     * The number
      */
     @Column(name = "goods_num")
-    @ApiModelProperty(name = "goods_num", value = "商品数量", required = false)
+    @ApiModelProperty(name = "goods_num", value = "The number", required = false)
     private Integer goodsNum;
     /**
-     * 订单备注
+     * The order note
      */
     @Column(name = "remark")
-    @ApiModelProperty(name = "remark", value = "订单备注", required = false)
+    @ApiModelProperty(name = "remark", value = "The order note", required = false)
     private String remark;
     /**
-     * 订单取消原因
+     * Reason for Order Cancellation
      */
     @Column(name = "cancel_reason")
-    @ApiModelProperty(name = "cancel_reason", value = "订单取消原因", required = false)
+    @ApiModelProperty(name = "cancel_reason", value = "Reason for Order Cancellation", required = false)
     private String cancelReason;
     /**
-     * 签收人
+     * Sign for people
      */
     @Column(name = "the_sign")
-    @ApiModelProperty(name = "the_sign", value = "签收人", required = false)
+    @ApiModelProperty(name = "the_sign", value = "Sign for people", required = false)
     private String theSign;
 
     /**
-     * 转换 List<OrderSkuVO>
+     * conversionList<OrderSkuVO>
      */
     @Column(name = "items_json")
-    @ApiModelProperty(name = "items_json", value = "货物列表json", required = false)
+    @ApiModelProperty(name = "items_json", value = "List of goodsjson", required = false)
     private String itemsJson;
 
     @Column(name = "warehouse_id")
-    @ApiModelProperty(name = "warehouse_id", value = "发货仓库ID", required = false)
+    @ApiModelProperty(name = "warehouse_id", value = "The delivery warehouseID", required = false)
     private Integer warehouseId;
 
     @Column(name = "need_pay_money")
-    @ApiModelProperty(name = "need_pay_money", value = "应付金额", required = false)
+    @ApiModelProperty(name = "need_pay_money", value = "Amount payable", required = false)
     private Double needPayMoney;
 
     @Column(name = "ship_no")
-    @ApiModelProperty(name = "ship_no", value = "发货单号", required = false)
+    @ApiModelProperty(name = "ship_no", value = "Invoice no.", required = false)
     private String shipNo;
 
     /**
-     * 收货地址ID
+     * Shipping addressID
      */
     @Column(name = "address_id")
-    @ApiModelProperty(name = "address_id", value = "收货地址ID", required = false)
+    @ApiModelProperty(name = "address_id", value = "Shipping addressID", required = false)
     private Integer addressId;
     /**
-     * 管理员备注
+     * Administrator Remarks
      */
     @Column(name = "admin_remark")
-    @ApiModelProperty(name = "admin_remark", value = "管理员备注", required = false)
+    @ApiModelProperty(name = "admin_remark", value = "Administrator Remarks", required = false)
     private Integer adminRemark;
     /**
-     * 物流公司ID
+     * Logistics companyID
      */
     @Column(name = "logi_id")
-    @ApiModelProperty(name = "logi_id", value = "物流公司ID", required = false)
+    @ApiModelProperty(name = "logi_id", value = "Logistics companyID", required = false)
     private Integer logiId;
     /**
-     * 物流公司名称
+     * Name of logistics Company
      */
     @Column(name = "logi_name")
-    @ApiModelProperty(name = "logi_name", value = "物流公司名称", required = false)
+    @ApiModelProperty(name = "logi_name", value = "Name of logistics Company", required = false)
     private String logiName;
 
     /**
-     * 完成时间
+     * Completion time
      */
     @Column(name = "complete_time")
-    @ApiModelProperty(name = "complete_time", value = "完成时间", required = false)
+    @ApiModelProperty(name = "complete_time", value = "Completion time", required = false)
     private Long completeTime;
     /**
-     * 订单创建时间
+     * Order Creation time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "订单创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Order Creation time", required = false)
     private Long createTime;
 
     /**
-     * 签收时间
+     * To sign for the time
      */
     @Column(name = "signing_time")
-    @ApiModelProperty(name = "signing_time", value = "签收时间", required = false)
+    @ApiModelProperty(name = "signing_time", value = "To sign for the time", required = false)
     private Long signingTime;
 
     /**
-     * 送货时间
+     * Delivery time
      */
     @Column(name = "ship_time")
-    @ApiModelProperty(name = "ship_time", value = "送货时间", required = false)
+    @ApiModelProperty(name = "ship_time", value = "Delivery time", required = false)
     private Long shipTime;
 
     /**
-     * 支付方式返回的交易号
+     * Payment method returns the transaction number
      */
     @Column(name = "pay_order_no")
-    @ApiModelProperty(name = "pay_order_no", value = "支付方式返回的交易号", required = false)
+    @ApiModelProperty(name = "pay_order_no", value = "Payment method returns the transaction number", required = false)
     private String payOrderNo;
 
     /**
-     * 售后状态
+     * After state
      */
     @Column(name = "service_status")
-    @ApiModelProperty(name = "service_status", value = "售后状态", required = false)
+    @ApiModelProperty(name = "service_status", value = "After state", required = false)
     private String serviceStatus;
 
     /**
-     * 结算状态
+     * Settlement status
      */
     @Column(name = "bill_status")
-    @ApiModelProperty(name = "bill_status", value = "结算状态", required = false)
+    @ApiModelProperty(name = "bill_status", value = "Settlement status", required = false)
     private Integer billStatus;
 
     /**
-     * 结算单号
+     * Statement no.
      */
     @Column(name = "bill_sn")
-    @ApiModelProperty(name = "bill_sn", value = "结算单号", required = false)
+    @ApiModelProperty(name = "bill_sn", value = "Statement no.", required = false)
     private String billSn;
 
     /**
-     * 订单来源
+     * Source of the order
      */
     @Column(name = "client_type")
-    @ApiModelProperty(name = "client_type", value = "订单来源", required = false)
+    @ApiModelProperty(name = "client_type", value = "Source of the order", required = false)
     private String clientType;
 
     @Column(name = "need_receipt")
-    @ApiModelProperty(name = "need_receipt", value = "是否需要发票,0：否，1：是")
+    @ApiModelProperty(name = "need_receipt", value = "Do you need an invoice?,0：No,1：is")
     private Integer needReceipt;
 
     /**
      * @see OrderTypeEnum
-     * 因增加拼团业务新增订单类型字段 kingapex 2019/1/28 on v7.1.0
+     * Added order type field due to added group servicekingapex 2019/1/28 on v7.1.0
      */
-    @ApiModelProperty(value = "订单类型")
+    @ApiModelProperty(value = "Order type")
     @Column(name = "order_type")
     private String orderType;
 
 
     /**
-     * 订单的扩展数据
-     * 为了增加订单的扩展性，个性化的业务可以将个性化数据（如拼团所差人数）存在此字段 kingapex 2019/1/28 on v7.1.0
+     * Extended data for orders
+     * To increase the scalability of orders, personalized business can personalize data（Such as the number of people missing from the group）This field existskingapex 2019/1/28 on v7.1.0
      */
-    @ApiModelProperty(value = "扩展数据", hidden = true)
+    @ApiModelProperty(value = "Extension data", hidden = true)
     @Column(name = "order_data")
     private String orderData;
 
@@ -1115,7 +1115,7 @@ public class OrderDO implements Serializable {
     }
 
     /**
-     * 带初始化参数的构造器
+     * Constructor with initialization parameters
      *
      * @param orderDTO
      */
@@ -1126,7 +1126,7 @@ public class OrderDO implements Serializable {
         this.shipTime = orderDTO.getShipTime();
         this.paymentType = orderDTO.getPaymentType();
 
-        // 收货人
+        // The consignee
         ConsigneeVO consignee = orderDTO.getConsignee();
         this.shipName = consignee.getName();
         this.shipAddr = consignee.getAddress();
@@ -1140,7 +1140,7 @@ public class OrderDO implements Serializable {
         this.shipZip = consignee.getZipCode();
 
 
-        // 价格
+        // The price
         PriceDetailVO priceDetail = orderDTO.getPrice();
         this.orderPrice = priceDetail.getTotalPrice();
         this.goodsPrice = priceDetail.getGoodsPrice();
@@ -1150,18 +1150,18 @@ public class OrderDO implements Serializable {
         this.weight = orderDTO.getWeight();
         this.shippingId = orderDTO.getShippingId();
 
-        // 卖家
+        // The seller
         this.sellerId = orderDTO.getSellerId();
         this.sellerName = orderDTO.getSellerName();
 
-        // 买家
+        // buyers
         this.memberId = orderDTO.getMemberId();
         this.memberName = orderDTO.getMemberName();
 
-        // 创建时间
+        // Creation time
         this.createTime = orderDTO.getCreateTime();
 
-        // 初始化状态
+        // Initialization state
         this.shipStatus = ShipStatusEnum.SHIP_NO.value();
         this.orderStatus = OrderStatusEnum.NEW.value();
         this.payStatus = PayStatusEnum.PAY_NO.value();
@@ -1176,16 +1176,16 @@ public class OrderDO implements Serializable {
             orderSkuVOList.add(orderSkuVO);
         }
 
-        // 产品列表
+        // Product list
         this.itemsJson = JsonUtil.objectToJson(orderSkuVOList);
 
-        // 备注
+        // note
         this.remark = orderDTO.getRemark();
 
-        //发票
+        // invoice
         this.needReceipt = orderDTO.getNeedReceipt();
 
-        //订单来源
+        // Source of the order
         this.clientType = orderDTO.getClientType();
         this.orderType = orderDTO.getOrderType();
 

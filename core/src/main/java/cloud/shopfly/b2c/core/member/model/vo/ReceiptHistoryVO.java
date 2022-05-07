@@ -26,11 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 发票历史对象vo
+ * Invoice history objectvo
  *
  * @author zh
  * @version v7.0
- * @date 18/7/24 下午4:22
+ * @date 18/7/24 In the afternoon4:22
  * @since v7.0
  */
 public class ReceiptHistoryVO extends ReceiptHistory {
@@ -66,34 +66,34 @@ public class ReceiptHistoryVO extends ReceiptHistory {
     }
 
     /**
-     * 商品的sku信息
+     * The goodsskuinformation
      */
     private List<ReceiptGoodsSkuVO> skuList;
     /**
-     * 配送地址 省
+     * Delivery address province
      */
-    @ApiModelProperty(value = "配送地址 省")
+    @ApiModelProperty(value = "Delivery address province")
     private String shipProvince;
 
     /**
-     * 配送地址 镇
+     * Delivery address Town
      */
-    @ApiModelProperty(value = "配送地址 镇")
+    @ApiModelProperty(value = "Delivery address Town")
     private String shipTown;
     /**
-     * 配送地址  城
+     * Delivery address city
      */
-    @ApiModelProperty(value = "配送地址  城")
+    @ApiModelProperty(value = "Delivery address city")
     private String shipCity;
     /**
-     * 配送地址 县
+     * Delivery address County
      */
-    @ApiModelProperty(value = "配送地址 县")
+    @ApiModelProperty(value = "Delivery address County")
     private String shipCounty;
     /**
-     * 配送详细地址
+     * Delivery address
      */
-    @ApiModelProperty(value = "配送详细地址")
+    @ApiModelProperty(value = "Delivery address")
     private String shipAddr;
 
     public List<ReceiptGoodsSkuVO> getSkuList() {

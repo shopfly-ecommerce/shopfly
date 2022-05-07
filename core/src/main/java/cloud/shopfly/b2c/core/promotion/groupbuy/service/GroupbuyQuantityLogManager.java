@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.promotion.groupbuy.model.dos.GroupbuyQuantityLog;
 import java.util.List;
 
 /**
- * 团购商品库存日志表业务层
+ * Group purchase commodity inventory log table business layer
  * @author xlp
  * @version v1.0
  * @since v7.0.0
@@ -29,16 +29,16 @@ import java.util.List;
 public interface GroupbuyQuantityLogManager {
 
 	/**
-	 * 还原团购库存
-	 * @param orderSn 订单编号
-	 * @return 团购取消订单日志
+	 * Restore group purchase inventory
+	 * @param orderSn Order no.
+	 * @return Group purchase cancellation order log
 	 */
 	List<GroupbuyQuantityLog> rollbackReduce(String orderSn);
 
 	/**
-	 * 添加团购商品库存日志表
-	 * @param groupbuyQuantityLog 团购商品库存日志表
-	 * @return 团购商品库存日志表
+	 * Add group purchase inventory log table
+	 * @param groupbuyQuantityLog Group purchase inventory log sheet
+	 * @return Group purchase inventory log sheet
 	 */
 	GroupbuyQuantityLog add(GroupbuyQuantityLog groupbuyQuantityLog);
 

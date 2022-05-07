@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Jwt token 创建实现
+ * Jwt token Create the implementation
  *
  * @author kingapex
  * @version 1.0
@@ -50,7 +50,7 @@ public class JwtTokenCreater implements TokenCreater {
 
         accessTokenExp=60*60;
 
-        //默认session失效时间为1小时：60秒 x 60 (=1分钟) * 60 (=1小时)
+        // The default session expiration time is 1 hour: 60 seconds x 60 (=1 minute) x 60 (=1 hour)
         refreshTokenExp = 60 * 60 * 60;
     }
 
@@ -61,13 +61,13 @@ public class JwtTokenCreater implements TokenCreater {
 
         Map buyerMap = oMapper.convertValue(user, HashMap.class);
 
-        //使用Calendar计算时间的加减，以免出现精度问题
+        // Use Calendar to calculate addition and subtraction to avoid accuracy problems
         Calendar cal = Calendar.getInstance();
 
-        //设置为当期日期
+        // Set to the current date
         cal.setTime(new Date());
 
-        //由当前日期加上访问令牌的有效时长即为访问令牌失效时间
+        // The current date plus the access token validity period is the access token expiration time
         cal.add(Calendar.SECOND,accessTokenExp);
         String accessToken = Jwts.builder()
                 .setClaims(buyerMap)
@@ -76,7 +76,7 @@ public class JwtTokenCreater implements TokenCreater {
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact();
 
-        //由当前日期加上刷新令牌的有效时长即为刷新令牌失效时间
+        // The refreshing token expiration time is the current date plus the refreshing token expiration time
         cal.add(Calendar.SECOND,refreshTokenExp);
         String refreshToken = Jwts.builder()
                 .setClaims(buyerMap)

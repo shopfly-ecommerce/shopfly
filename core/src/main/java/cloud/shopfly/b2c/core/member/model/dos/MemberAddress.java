@@ -32,7 +32,7 @@ import java.util.Objects;
 
 
 /**
- * 会员收货地址表实体
+ * Member receiving address list entity
  *
  * @author zh
  * @version v7.0.0

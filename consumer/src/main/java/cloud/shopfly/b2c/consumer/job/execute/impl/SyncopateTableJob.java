@@ -23,12 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 分表任务每日执行
+ * Sub-table tasks are executed daily
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-16 下午4:17
+ * 2018-07-16 In the afternoon4:17
  */
 @Component
 public class SyncopateTableJob implements EveryDayExecute {
@@ -39,14 +39,14 @@ public class SyncopateTableJob implements EveryDayExecute {
     private SyncopateTableClient syncopateTableClient;
 
     /**
-     * 每年执行
+     * Execute each year
      */
     @Override
     public void everyDay() {
         try {
             syncopateTableClient.everyDay();
         } catch (Exception e) {
-            logger.error("分表业务执行异常：", e);
+            logger.error("The sub-table service is abnormal：", e);
         }
 
     }

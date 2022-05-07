@@ -33,8 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.Valid;
 
 /**
- * 会员积分实现
- * 调用此接口需要完整填写每项属性
+ * Realization of member points
+ * Calling this interface requires that each attribute be completely filled out
  *
  * @author zh
  * @version v7.0
@@ -57,15 +57,15 @@ public class MemberPointManagerImpl implements MemberPointManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void pointOperation(@Valid MemberPointHistory memberPointHistory) {
         this.checkMemberPoint(memberPointHistory);
-        //添加历史记录
+        // Adding history
         Member member = memberManager.getModel(memberPointHistory.getMemberId());
         if (member == null) {
-            throw new ResourceNotFoundException("此会员不存在");
+            throw new ResourceNotFoundException("This member does not exist");
         }
         memberPointHistory.setTime(DateUtil.getDateline());
         memberPointHistory.setMemberId(member.getMemberId());
         memberPointHistoryManager.add(memberPointHistory);
-        //给会员添加值,等级积分的处理
+        // Add value to member, grade points processing
         if (member.getGradePoint() == null) {
             member.setGradePoint(0);
         }
@@ -78,7 +78,7 @@ public class MemberPointManagerImpl implements MemberPointManager {
                 this.memberDaoSupport.execute("update es_member set grade_point=0 where member_id=?", member.getMemberId());
             }
         }
-        //给会员添加值,消费积分的处理
+        // Add value to member, consumption points processing
         if (member.getConsumPoint() == null) {
             member.setConsumPoint(0);
         }
@@ -97,29 +97,29 @@ public class MemberPointManagerImpl implements MemberPointManager {
 
 
     private MemberPointHistory checkMemberPoint(MemberPointHistory memberPointHistory) {
-        //对消费积分类型的处理
+        // Treatment of consumption credit types
         Integer consumPointType = memberPointHistory.getConsumPointType();
         boolean bool = consumPointType == null || (consumPointType != 1 && consumPointType != 0);
         if (bool) {
-            throw new ServiceException(MemberErrorCode.E106.code(), "消费积分类型不正确");
+            throw new ServiceException(MemberErrorCode.E106.code(), "Incorrect consumption credit type");
         }
-        //对消费积分的处理
+        // The treatment of consumption points
         Integer consumPoint = memberPointHistory.getConsumPoint();
         bool = consumPoint == null || consumPoint < 0;
         if (bool) {
-            throw new ServiceException(MemberErrorCode.E106.code(), "消费积分不正确");
+            throw new ServiceException(MemberErrorCode.E106.code(), "Consumption points are incorrect");
         }
-        //对等级积分类型的处理
+        // The treatment of grade integral types
         Integer gadePointType = memberPointHistory.getGradePointType();
         bool = gadePointType == null || (gadePointType != 1 && gadePointType != 0);
         if (bool) {
-            throw new ServiceException(MemberErrorCode.E106.code(), "等级积分类型不正确");
+            throw new ServiceException(MemberErrorCode.E106.code(), "The grade integral type is incorrect");
         }
-        //对消费积分的处理
+        // The treatment of consumption points
         Integer gadePoint = memberPointHistory.getGradePoint();
         bool = gadePoint == null || gadePoint < 0;
         if (bool) {
-            throw new ServiceException(MemberErrorCode.E106.code(), "等级积分不正确");
+            throw new ServiceException(MemberErrorCode.E106.code(), "The grade integral is not correct");
         }
         return memberPointHistory;
 

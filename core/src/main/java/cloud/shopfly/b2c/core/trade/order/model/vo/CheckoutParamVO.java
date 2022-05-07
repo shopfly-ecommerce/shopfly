@@ -22,31 +22,31 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 结算参数VO
+ * Settlement parameterVO
  *
  * @author Snow create in 2018/4/8
  * @version v2.0
  * @since v7.0.0
  */
-@ApiModel(description = "结算参数")
+@ApiModel(description = "Settlement parameter")
 public class CheckoutParamVO {
 
-    @ApiModelProperty(name = "address_id", value = "收货地址id")
+    @ApiModelProperty(name = "address_id", value = "Shipping addressid")
     private Integer addressId;
 
-    @ApiModelProperty(name = "payment_type", value = "支付方式")
+    @ApiModelProperty(name = "payment_type", value = "Method of payment")
     private PaymentTypeEnum paymentType;
 
-    @ApiModelProperty(value = "发票信息")
+    @ApiModelProperty(value = "The invoice information")
     private ReceiptVO receipt;
 
-    @ApiModelProperty(name = "receive_time", value = "收货时间")
+    @ApiModelProperty(name = "receive_time", value = "The goods time")
     private String receiveTime;
 
-    @ApiModelProperty(value = "订单备注")
+    @ApiModelProperty(value = "The order note")
     private String remark;
 
-    @ApiModelProperty(name = "client_type", value = "客户端类型")
+    @ApiModelProperty(name = "client_type", value = "Client type")
     private String clientType;
 
 

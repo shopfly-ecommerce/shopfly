@@ -31,7 +31,7 @@ import java.io.Serializable;
 
 
 /**
- * 文章实体
+ * The article entity
  *
  * @author fk
  * @version v1.0
@@ -46,62 +46,62 @@ public class Article implements Serializable {
     private static final long serialVersionUID = 9461532743001614L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "article_id")
     @ApiModelProperty(hidden = true)
     private Integer articleId;
     /**
-     * 文章名称
+     * The article name
      */
     @Column(name = "article_name")
-    @ApiModelProperty(name = "article_name", value = "文章名称", required = true)
-    @NotEmpty(message = "文章名称不能为空")
-    @Length(max = 20,message = "文章名称不能超过20个字符")
+    @ApiModelProperty(name = "article_name", value = "The article name", required = true)
+    @NotEmpty(message = "Article names cannot be empty")
+    @Length(max = 20,message = "Article names cannot exceed20A character")
     private String articleName;
     /**
-     * 分类id
+     * Categoriesid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "category_id", value = "分类id", required = true)
-    @NotNull(message = "文章分类不能为空")
+    @ApiModelProperty(name = "category_id", value = "Categoriesid", required = true)
+    @NotNull(message = "Article categories cannot be empty")
     private Integer categoryId;
     /**
-     * 文章排序
+     * The article sorted
      */
     @Column(name = "sort")
-    @ApiModelProperty(name = "sort", value = "文章排序")
+    @ApiModelProperty(name = "sort", value = "The article sorted")
     private Integer sort;
     /**
-     * 外链url
+     * Outside the chainurl
      */
     @Column(name = "outside_url")
-    @ApiModelProperty(name = "outside_url", value = "外链url", required = false)
+    @ApiModelProperty(name = "outside_url", value = "Outside the chainurl", required = false)
     private String outsideUrl;
     /**
-     * 文章内容
+     * The article content
      */
     @Column(name = "content")
-    @ApiModelProperty(name = "content", value = "文章内容", required = true)
-    @NotEmpty(message = "文章内容不能为空")
+    @ApiModelProperty(name = "content", value = "The article content", required = true)
+    @NotEmpty(message = "The content of the article cannot be empty")
     private String content;
     /**
-     * 显示位置
+     * Display position
      */
     @Column(name = "show_position")
-    @ApiModelProperty(name = "show_position", value = "显示位置", hidden = true)
+    @ApiModelProperty(name = "show_position", value = "Display position", hidden = true)
     private String showPosition;
     /**
-     * 添加时间
+     * Add the time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "添加时间", hidden = true)
+    @ApiModelProperty(name = "create_time", value = "Add the time", hidden = true)
     private Long createTime;
     /**
-     * 修改时间
+     * Modify the time
      */
     @Column(name = "modify_time")
-    @ApiModelProperty(name = "modify_time", value = "修改时间", hidden = true)
+    @ApiModelProperty(name = "modify_time", value = "Modify the time", hidden = true)
     private Long modifyTime;
 
     @PrimaryKeyField

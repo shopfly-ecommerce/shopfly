@@ -16,29 +16,29 @@
 package cloud.shopfly.b2c.core.payment.model.enums;
 
 /**
- * 交易类型
+ * Transaction type
  *
  * @author kingapex
  * @version 1.0
  * @since pangu1.0
- * 2017年4月5日下午5:12:55
+ * 2017years4month5On the afternoon5:12:55
  */
 public enum TradeType {
 
     /**
-     * 订单类型
+     * Order type
      */
-    order("订单"),
+    order("The order"),
 
     /**
-     * 交易类型
+     * Transaction type
      */
-    trade("交易"),
+    trade("trading"),
 
     /**
-     * 调试器类型（程序调试用，不会人为用到）
+     * Debugger type（Program debugging, not artificial use）
      */
-    debugger("调试器");
+    debugger("The debugger");
 
     private String description;
 

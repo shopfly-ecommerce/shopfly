@@ -26,16 +26,16 @@ import java.util.Map;
 
 
 /**
- * 参数工具类
+ * Parameter tool class
  * @author fk
  * @version v1.0
- * 2017年4月19日 下午4:40:30
+ * 2017years4month19On the afternoon4:40:30
  */
 public class ParamsUtils {
 	
 	
 	/**
-	 * 将参数mapl转为url字串
+	 * The parametermapltourlstring
 	 * @param params
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public class ParamsUtils {
 	
 	
 	/**
-	 * 由request中获取参数map
+	 * byrequestTo obtain parameters frommap
 	 * @return
 	 */
 	public static  Map<String,String> getReqParams(){
@@ -86,8 +86,8 @@ public class ParamsUtils {
 	
 	
 	/**
-	 * 由request中根据prop参数获取属性数组<br>
-	 * 由\@分割的
+	 * byrequestAccording to thepropParameter gets an array of properties<br>
+	 * by\@Segmentation of
 	 * @return
 	 */
 	public static  String[] getProps(){
@@ -105,8 +105,8 @@ public class ParamsUtils {
 	}
 
 	/**
-	 * 在原有的url基础上根据参数名和值生成新的属性url<br>
-	 * 如原url为 search.html?cat=1&prop=p1_1，生成新的url:search.html?cat=1&prop=p1_1@name_value
+	 * In the originalurlNew attributes are generated based on parameter names and valuesurl<br>
+	 * Such as the originalurlforsearch.html?cat=1&prop=p1_1, generate a newurl:search.html?cat=1&prop=p1_1@name_value
 	 * @param name
 	 * @param value
 	 * @return

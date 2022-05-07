@@ -18,87 +18,87 @@ package cloud.shopfly.b2c.core.system.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 消息模板编号枚举类
+ * @Description Message template number enumeration class
  * @ClassName MessageCodeEnum
- * @since v7.0 下午5:03 2018/7/5
+ * @since v7.0 In the afternoon5:03 2018/7/5
  */
 public enum MessageCodeEnum {
     /**
-     * 店铺新订单创建提醒
+     * Store new order creation reminder
      */
-    SHOPORDERSNEW("店铺新订单创建提醒"),
+    SHOPORDERSNEW("Store new order creation reminder"),
     /**
-     * 店铺订单支付提醒
+     * Store order payment reminder
      */
-    SHOPORDERSPAY("店铺订单支付提醒"),
+    SHOPORDERSPAY("Store order payment reminder"),
     /**
-     * 店铺订单收货提醒
+     * Store order receipt reminder
      */
-    SHOPORDERSRECEIVE("店铺订单收货提醒"),
+    SHOPORDERSRECEIVE("Store order receipt reminder"),
     /**
-     * 店铺订单评价提醒
+     * Store order evaluation reminder
      */
-    SHOPORDERSEVALUATE("店铺订单评价提醒"),
+    SHOPORDERSEVALUATE("Store order evaluation reminder"),
     /**
-     * 店铺订单取消提醒
+     * Store order cancellation reminder
      */
-    SHOPORDERSCANCEL("店铺订单取消提醒"),
+    SHOPORDERSCANCEL("Store order cancellation reminder"),
     /**
-     * 店铺退款提醒
+     * Store Refund Reminder
      */
-    SHOPREFUND("店铺退款提醒"),
+    SHOPREFUND("Store Refund Reminder"),
     /**
-     * 店铺退货提醒
+     * Store Return Reminder
      */
-    SHOPRETURN("店铺退货提醒"),
+    SHOPRETURN("Store Return Reminder"),
     /**
-     * 商品违规被禁售提醒（商品下架）
+     * Reminder of goods being banned for violation（Goods from the shelves）
      */
-    SHOPGOODSVIOLATION("商品违规被禁售提醒（商品下架）"),
+    SHOPGOODSVIOLATION("Reminder of goods being banned for violation（Goods from the shelves）"),
     /**
-     * 商品审核失败提醒
+     * Product audit failure reminder
      */
-    SHOPGOODSVERIFY("商品审核失败提醒"),
+    SHOPGOODSVERIFY("Product audit failure reminder"),
     /**
-     * 退货提醒
+     * Return to remind
      */
-    MEMBERRETURNUPDATE("退货提醒"),
+    MEMBERRETURNUPDATE("Return to remind"),
     /**
-     * 退款提醒
+     * Refund to remind
      */
-    MEMBERREFUNDUPDATE("退款提醒"),
+    MEMBERREFUNDUPDATE("Refund to remind"),
     /**
-     * 订单发货提醒
+     * Order shipping Reminder
      */
-    MEMBERORDERSSEND("订单发货提醒"),
+    MEMBERORDERSSEND("Order shipping Reminder"),
     /**
-     * 订单收货提醒
+     * Order receipt reminder
      */
-    MEMBERORDERSRECEIVE("订单收货提醒"),
+    MEMBERORDERSRECEIVE("Order receipt reminder"),
     /**
-     * 订单支付提醒
+     * Order Payment reminder
      */
-    MEMBERORDERSPAY("订单支付提醒"),
+    MEMBERORDERSPAY("Order Payment reminder"),
     /**
-     * 订单取消提醒
+     * Order Cancellation Reminder
      */
-    MEMBERORDERSCANCEL("订单取消提醒"),
+    MEMBERORDERSCANCEL("Order Cancellation Reminder"),
     /**
-     * 手机发送验证码
+     * The phone sends the verification code
      */
-    MOBILECODESEND("手机发送验证码"),
+    MOBILECODESEND("The phone sends the verification code"),
     /**
-     * 商品下架消息提醒
+     * Notification of merchandise removal
      */
-    SHOPGOODSMARKETENABLE("商品下架消息提醒"),
+    SHOPGOODSMARKETENABLE("Notification of merchandise removal"),
     /**
-     * 会员登陆成功提醒
+     * Member login successful reminder
      */
-    MEMBERLOGINSUCCESS("会员登陆成功提醒"),
+    MEMBERLOGINSUCCESS("Member login successful reminder"),
     /**
-     * 会员注册成功提醒
+     * Member registration success reminder
      */
-    MEMBERREGISTESUCCESS("会员注册成功提醒");
+    MEMBERREGISTESUCCESS("Member registration success reminder");
 
     private String description;
 

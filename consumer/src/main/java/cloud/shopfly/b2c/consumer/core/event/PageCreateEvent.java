@@ -16,16 +16,16 @@
 package cloud.shopfly.b2c.consumer.core.event;
 
 /**
- * 页面生成事件
+ * Page generation event
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午9:52:43
+ * 2018years3month23The morning of9:52:43
  */
 public interface PageCreateEvent {
 
 	/**
-	 * 生成
+	 * generate
 	 * @param choosePages
 	 */
 	void createPage(String[] choosePages);

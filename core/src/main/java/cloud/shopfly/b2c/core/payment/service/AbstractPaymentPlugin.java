@@ -35,19 +35,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 支付插件父类<br>
- * 具有读取配置的能力
+ * Payment plug-in parent class<br>
+ * The ability to read configurations
  *
  * @author kingapex
  * @version 1.0
  * @since pangu1.0
- * 2017年4月3日下午11:38:38
+ * 2017years4month3On the afternoon11:38:38
  */
 public abstract class AbstractPaymentPlugin {
 
     protected final Log logger = LogFactory.getLog(getClass());
     /**
-     * 测试环境 0  生产环境  1
+     * The test environment0  The production environment1
      */
     protected int isTest = 0;
 
@@ -71,12 +71,12 @@ public abstract class AbstractPaymentPlugin {
 
 
     /**
-     * 获取插件的配置方式
+     * Gets how the plug-in is configured
      *
      * @return
      */
     protected Map<String, String> getConfig(ClientType clientType) {
-        //获取当前支付插件的id
+        // Gets the ID of the current payment plug-in
         String paymentMethodId = this.getPluginId();
 
         String config = (String) cache.get(CachePrefix.PAYMENT_CONFIG.getPrefix() + clientType.getDbColumn() + paymentMethodId);
@@ -93,7 +93,7 @@ public abstract class AbstractPaymentPlugin {
         Map map = JsonUtil.jsonToObject(config, Map.class);
         List<Map> list = (List<Map>) map.get("config_list");
         if (!"1".equals(map.get("is_open").toString())) {
-            throw new ServiceException(PaymentErrorCode.E502.code(), "支付方式未开启");
+            throw new ServiceException(PaymentErrorCode.E502.code(), "The payment method is not enabled");
         }
 
         Map<String, String> result = new HashMap<>(list.size());
@@ -109,7 +109,7 @@ public abstract class AbstractPaymentPlugin {
 
 
     /**
-     * 获取插件id
+     * To get the pluginid
      *
      * @return
      */
@@ -117,9 +117,9 @@ public abstract class AbstractPaymentPlugin {
 
 
     /**
-     * 获取同步通知url
+     * Getting synchronization Notificationsurl
      *
-     * @param bill 交易
+     * @param bill trading
      * @return
      */
     protected String getReturnUrl(PayBill bill) {
@@ -133,7 +133,7 @@ public abstract class AbstractPaymentPlugin {
 
 
     /**
-     * 获取异步通知url
+     * Getting asynchronous notificationsurl
      *
      * @param tradeType
      * @return
@@ -143,15 +143,15 @@ public abstract class AbstractPaymentPlugin {
     }
 
     /**
-     * 支付回调后执行方法
+     * Execute method after payment callback
      *
-     * @param billSn        支付账号单
-     * @param returnTradeNo 第三方平台回传支付单号
+     * @param billSn        Payment account slip
+     * @param returnTradeNo The third-party platform sends back the payment order number
      * @param tradeType
      * @param payPrice
      */
     protected void paySuccess(String billSn, String returnTradeNo, TradeType tradeType, double payPrice) {
-        //调用账单接口完成相关交易及流程的状态变更
+        // Invokes the billing interface to complete state changes for related transactions and processes
         this.paymentBillManager.paySuccess(billSn, returnTradeNo, tradeType, payPrice);
     }
 

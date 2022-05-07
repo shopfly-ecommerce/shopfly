@@ -22,14 +22,14 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 订单支付
+ * @Description: Order payment
  * @date 2018/4/1617:09
  * @since v7.0.0
  */
 public interface OrderPayManager {
 
     /**
-     * 支付
+     * pay
      *
      * @param param
      * @return

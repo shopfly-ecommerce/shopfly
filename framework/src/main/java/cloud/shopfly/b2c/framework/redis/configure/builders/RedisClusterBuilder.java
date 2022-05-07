@@ -36,12 +36,12 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 集群构建器
- * v2.0: 新增手动配置方式,by kingapex 2017-12-26
+ * Cluster builder
+ * v2.0: Added the manual configuration mode,by kingapex 2017-12-26
  * @author fk,kingapex
  * @version v2.0
  * @since v6.4
- * 2017年10月27日 下午2:43:03
+ * 2017years10month27On the afternoon2:43:03
  */
 @Service
 public class RedisClusterBuilder implements IRedisBuilder {
@@ -64,25 +64,25 @@ public class RedisClusterBuilder implements IRedisBuilder {
 
 
     /**
-     * 构建redis cluster的配置
-     * @return redis cluster的配置
+     * buildredis clusterThe configuration of the
+     * @return redis clusterThe configuration of the
      */
     public    RedisClusterConfiguration buildClusterConfig(){
 
-        //cache cloud rest api配置方式
+        // Cache Cloud REST API configuration mode
         if(RedisConfigType.rest.name().equals(config.getConfigType() )){
             RedisClusterConfiguration clusterConfiguration = this.createRestClusterConfig();
             return  clusterConfiguration;
         }
 
-        //手动配置方式
+        // Manual configuration
         if(RedisConfigType.manual.name().equals(config.getConfigType() )){
             RedisClusterConfiguration  clusterConfiguration = this.createManualClusterConfig();
 
             return  clusterConfiguration;
         }
 
-        throw  new RuntimeException("redis 配置错误：错误的redis.config.type，只允许com.enation.eop.sdk.config.redis.configure.RedisConfigType中定义的值");
+        throw  new RuntimeException("redis Configuration error：The wrongredis.config.type, allowing onlycom.enation.eop.sdk.config.redis.configure.RedisConfigTypeValues defined in");
 
 
     }
@@ -92,13 +92,13 @@ public class RedisClusterBuilder implements IRedisBuilder {
 
 
     /**
-     * 构建手动方式的 redis cluster配置
+     * Build manualredis clusterconfiguration
      * @return
      */
     private RedisClusterConfiguration createManualClusterConfig(){
         String nodes = config.getClusterNodes();
         List<String> nodeList = RedisNodeBuilder.build(nodes);
-        //如果指定了密码，设置密码
+        // If a password is specified, set the password
         RedisClusterConfiguration clusterConfiguration = new RedisClusterConfiguration(nodeList);
         String password =config.getPassword();
         if(StringUtil.notEmpty(password)) {
@@ -110,7 +110,7 @@ public class RedisClusterBuilder implements IRedisBuilder {
 
 
     /**
-     * 构建rest方式的cluster 配置
+     * buildrestThe way ofcluster configuration
      * @return
      */
     private RedisClusterConfiguration createRestClusterConfig(){
@@ -131,7 +131,7 @@ public class RedisClusterBuilder implements IRedisBuilder {
         }
 
 
-        /** 检查客户端版本 **/
+        /** Check the client version**/
         if (heartbeatInfo.getStatus() == ClientStatusEnum.ERROR.getStatus()) {
             throw new IllegalStateException(heartbeatInfo.getMessage());
         }
@@ -142,9 +142,9 @@ public class RedisClusterBuilder implements IRedisBuilder {
         }
 
         Set<String> nodeList = new HashSet<String>();
-        //形如 ip1:port1,ip2:port2,ip3:port3
+        // Like ip1: port1, ip2: port2, ip3: port3
         String nodeInfo = heartbeatInfo.getShardInfo();
-        //为了兼容,如果允许直接nodeInfo.split(" ")
+        // For compatibility, if direct nodeinfo.split (" ") is allowed
         nodeInfo = nodeInfo.replace(" ", ",");
         String[] nodeArray = nodeInfo.split(",");
         for (String node : nodeArray) {

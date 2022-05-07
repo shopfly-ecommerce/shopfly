@@ -21,19 +21,19 @@ package cloud.shopfly.b2c.core.payment.plugin.weixin.signaturer;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-21 下午12:16
+ * 2019-02-21 In the afternoon12:16
  */
 
 import java.security.MessageDigest;
 
 /**
- * 微信签名工具类
- * @author 楪祈
+ * Wechat signature tool class
+ * @author 楪 qi
  *
  */
 public class SignUtil {
     /**
-     * 获得分享链接的签名。
+     * Get a signature to share a link.
      *
      * @param ticket
      * @param nonceStr
@@ -52,7 +52,7 @@ public class SignUtil {
 
 
     /**
-     * 验证签名。
+     * Verify the signature.
      *
      * @param signature
      * @param timestamp
@@ -68,7 +68,7 @@ public class SignUtil {
     }
 
     /**
-     * 将字节数组转换为十六进制字符串
+     * Converts a byte array to a hexadecimal string
      *
      * @param byteArray
      * @return
@@ -82,7 +82,7 @@ public class SignUtil {
     }
 
     /**
-     * 将字节转换为十六进制字符串
+     * Converts a byte to a hexadecimal string
      *
      * @param mByte
      * @return

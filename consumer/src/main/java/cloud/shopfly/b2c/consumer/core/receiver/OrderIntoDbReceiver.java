@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 订单入库消息处理
+ * Order entry message processing
  *
  * @author Snow create in 2018/5/10
  * @version v2.0
@@ -63,7 +63,7 @@ public class OrderIntoDbReceiver {
                 try {
                     event.onTradeIntoDb(tradeVO);
                 } catch (Exception e) {
-                    logger.error("交易入库消息出错", e);
+                    logger.error("Transaction entry message error", e);
                 } finally {
                     cache.remove(tradeVOKey);
                 }

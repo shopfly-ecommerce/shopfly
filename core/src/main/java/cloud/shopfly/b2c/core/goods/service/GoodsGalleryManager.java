@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.goods.model.dos.GoodsGalleryDO;
 import java.util.List;
 
 /**
- * 商品相册业务层
+ * Commodity album business layer
  *
  * @author fk
  * @version v2.0
@@ -29,7 +29,7 @@ import java.util.List;
 public interface GoodsGalleryManager {
 
     /**
-     * 查询某商品的相册
+     * Query an album for an item
      *
      * @param goodsId
      * @return
@@ -37,7 +37,7 @@ public interface GoodsGalleryManager {
     List<GoodsGalleryDO> list(Integer goodsId);
 
     /**
-     * 使用原始图片得到商品的其他规格的图片格式
+     * Use the original image to get the image format of the other specifications of the product
      *
      * @param origin
      * @return
@@ -45,15 +45,15 @@ public interface GoodsGalleryManager {
     GoodsGalleryDO getGoodsGallery(String origin);
 
     /**
-     * 添加商品相册
+     * Add a commodity album
      *
-     * @param goodsGallery 商品相册
-     * @return GoodsGallery 商品相册
+     * @param goodsGallery Photo album
+     * @return GoodsGallery Photo album
      */
     GoodsGalleryDO add(GoodsGalleryDO goodsGallery);
 
     /**
-     * 添加商品的相册
+     * Add an album of goods
      *
      * @param goodsGalleryList
      * @param goodsId
@@ -61,18 +61,18 @@ public interface GoodsGalleryManager {
     void add(List<GoodsGalleryDO> goodsGalleryList, Integer goodsId);
 
     /**
-     * 修改某商品的相册
+     * Modify an album for an item
      * @param goodsGalleryList
      * @param goodsId
      */
     void edit(List<GoodsGalleryDO> goodsGalleryList, Integer goodsId);
 
     /**
-     * 获取商品相册
+     * Get commodity album
      *
      * @param id
-     *            商品相册主键
-     * @return GoodsGallery 商品相册
+     *            Commodity album main key
+     * @return GoodsGallery Photo album
      */
     GoodsGalleryDO getModel(Integer id);
 

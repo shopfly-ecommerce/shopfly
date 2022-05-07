@@ -24,13 +24,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 短链接实现类
+ * Short link implementation class
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/14 上午7:13
+ * 2018/6/14 In the morning7:13
  */
 
 @Component
@@ -61,7 +61,7 @@ public class ShortUrlManagerImpl implements ShortUrlManager {
         }
         String[] shortUrls = ShortUrlGenerator.getShortUrl(url);
 
-        //检测是否存在
+        // Check for presence
         for (String tempUrl : shortUrls) {
             String sql = "SELECT count(0) FROM es_short_url WHERE su = ?";
             int num = this.daoSupport.queryForInt(sql, tempUrl);

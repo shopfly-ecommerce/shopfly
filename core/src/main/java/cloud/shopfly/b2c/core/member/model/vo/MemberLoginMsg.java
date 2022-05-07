@@ -18,23 +18,23 @@ package cloud.shopfly.b2c.core.member.model.vo;
 import java.io.Serializable;
 
 /**
- * 会员登陆消息
+ * Member login message
  *
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年10月18日 下午9:39:06
+ * 2017years10month18On the afternoon9:39:06
  */
 public class MemberLoginMsg implements Serializable {
 
     private static final long serialVersionUID = 8173084471934834777L;
 
     /**
-     * 会员id
+     * membersid
      */
     private Integer memberId;
     /**
-     * 上次登录时间
+     * Last login time
      */
     private Long lastLoginTime;
 

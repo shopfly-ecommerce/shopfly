@@ -30,13 +30,13 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 支付宝配置相关
+ * @Description: Alipay configuration related
  * @date 2018/4/12 10:25
  * @since v7.0.0
  */
 public class AlipayPluginConfig extends AbstractPaymentPlugin {
 
-    protected final String siteName = "shopfly商城";
+    protected final String siteName = "shopflymall";
 
     @Autowired
     private Debugger debugger;
@@ -49,7 +49,7 @@ public class AlipayPluginConfig extends AbstractPaymentPlugin {
 
 
     /**
-     * 构建alipay client
+     * buildalipay client
      * @param clientType
      * @return
      */
@@ -67,7 +67,7 @@ public class AlipayPluginConfig extends AbstractPaymentPlugin {
         String merchantPrivateKey = config.get("merchant_private_key");
         String alipayPublicKey = config.get("alipay_public_key");
 
-        debugger.log("使用如下参数构建client:");
+        debugger.log("Build with the following parametersclient:");
         debugger.log(config.toString());
 
         AlipayClient alipayClient = new SfAlipayPayClient(AlipayConfig.gatewayUrl, appId, merchantPrivateKey, "json", AlipayConfig.charset, alipayPublicKey, AlipayConfig.signType);
@@ -81,12 +81,12 @@ public class AlipayPluginConfig extends AbstractPaymentPlugin {
      */
     protected Map<String, String> createParam(PayBill bill) {
 
-        // 商户网站订单
+        // Merchant website order
         String outTradeNo = bill.getBillSn();
         Double payMoney = bill.getOrderPrice();
 
-        // 订单名称
-        String subject = siteName + "订单";
+        // Name of the order
+        String subject = siteName + "The order";
 
         Map<String, String> sParaTemp = new HashMap<String, String>(16);
         sParaTemp.put("out_trade_no", outTradeNo);

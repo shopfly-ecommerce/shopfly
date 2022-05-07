@@ -16,15 +16,15 @@
 package cloud.shopfly.b2c.core.system.enums;
 
 /**
- * 通知类型 枚举
+ * Notification type enumeration
  *
  * @author zh
  * @version v7.0
- * @since v7.0 2017年10月17日 上午10:49:25
+ * @since v7.0 2017years10month17The morning of10:49:25
  */
 public enum DisplayTypeEnum {
     /**
-     * 通知:消息送达到用户设备后，由友盟SDK接管处理并在通知栏上显示通知内容。
+     * notice:After the message reaches the users device, it is sent by UmengSDK接管处理并在notice栏上显示notice内容。
      */
     NOTIFICATION {
         @Override
@@ -33,7 +33,7 @@ public enum DisplayTypeEnum {
         }
     },
     /**
-     * 消息:消息送达到用户设备后，消息内容透传给应用自身进行解析处理。
+     * The message:The message送达到用户设备后，The message内容透传给应用自身进行解析处理。
      */
     MESSAGE {
         @Override

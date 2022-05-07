@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.member.service;
 import cloud.shopfly.b2c.core.member.model.dos.MemberPointHistory;
 
 /**
- * 会员积分管理
+ * Member Points Management
  *
  * @author zh
  * @version v2.0
@@ -28,27 +28,27 @@ import cloud.shopfly.b2c.core.member.model.dos.MemberPointHistory;
 public interface MemberPointManager {
 
     /**
-     * 会员积分操作，这个方法可同时进行添加积分和消费积分
-     * 1、添加积分
-     * gadePointType 为1则为添加等级积分  gadePoint为积分值
-     * consumPointType 为1则为添加消费积分  consumPoint为消费积分值
+     * Member points operation, this method can add points and consumption points at the same time
+     * 1、Add integral
+     * gadePointType for1则for添加等级积分gadePointfor积分值
+     * consumPointType for1则for添加消费积分consumPointfor消费积分值
      * <p>
-     * 2、消费积分
-     * gadePointType 为0则为消费等级积分  gadePoint为积分值
-     * consumPointType 为0则为消费消费积分  consumPoint为消费积分值
+     * 2、consumption score
+     * gadePointType for0则for消费等级积分gadePointfor积分值
+     * consumPointType for0则for消费消费积分consumPointfor消费积分值
      * <p>
-     * 如果没有操作则gadePointType 为0 gadePointType为1
-     * 如果没有操作则consumPoint 为0 consumPointType为1
+     * If no operation is performedgadePointType for0 gadePointTypefor1
+     * If no operation is performedconsumPoint for0 consumPointTypefor1
      *
-     * @param memberPointHistory 会员积分
+     * @param memberPointHistory Member of the integral
      */
     void pointOperation(MemberPointHistory memberPointHistory);
 
 
     /**
-     * 检测积分设置是否开启
+     * Check whether integral setting is enabled
      *
-     * @return 是否开启
+     * @return Whether open
      */
     boolean checkPointSettingOpen();
 

@@ -26,7 +26,7 @@ package cloud.shopfly.b2c.core.trade.cart.model.enums;
 public enum PromotionTarget {
 
     /**
-     * 促销目标
+     * Sales target
      */
     CART,
 

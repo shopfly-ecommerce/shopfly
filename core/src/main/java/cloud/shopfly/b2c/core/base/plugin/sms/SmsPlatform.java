@@ -21,50 +21,50 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 短信发送
+ * Text messaging
  *
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2018年3月23日 下午3:07:05
+ * 2018years3month23On the afternoon3:07:05
  */
 public interface SmsPlatform {
     /**
-     * 配置各个存储方案的参数
+     * Configure the parameters of each storage solution
      *
-     * @return 参数列表
+     * @return The list of parameters
      */
     List<ConfigItem> definitionConfigItem();
 
     /**
-     * 发送短信事件
+     * Sending SMS Messages
      *
-     * @param phone   手机号
-     * @param content 发送内容
-     * @param param   其它参数
+     * @param phone   Mobile phone no.
+     * @param content Send content
+     * @param param   Other parameters
      * @return
      */
     boolean onSend(String phone, String content, Map param);
 
 
     /**
-     * 获取插件ID
+     * To get the pluginID
      *
-     * @return 插件beanId
+     * @return The plug-inbeanId
      */
     String getPluginId();
 
     /**
-     * 获取插件名称
+     * Get the plug-in name
      *
-     * @return 插件名称
+     * @return The plug-in name
      */
     String getPluginName();
 
     /**
-     * 短信网关是否开启
+     * Whether the SMS gateway is enabled
      *
-     * @return 0 不开启  1 开启
+     * @return 0 Dont open1 open
      */
     Integer getIsOpen();
 }

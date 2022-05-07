@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 确认收款发放促销活动赠送优惠券
+ * Confirm receivables issue promotional activities complimentary coupons
  *
  * @author Snow create in 2018/5/22
  * @version v2.0
@@ -61,12 +61,12 @@ public class CouponConsumer implements OrderStatusChangeEvent, TradeIntoDbEvent 
 
         if ((orderMessage.getNewStatus().name()).equals(OrderStatusEnum.PAID_OFF.name())) {
 
-            //读取已发放的优惠券json
+            // Read the issued coupon JSON
             String itemJson = this.orderMetaManager.getMetaValue(orderMessage.getOrderDO().getSn(), OrderMetaKeyEnum.COUPON);
             List<CouponVO> couponList = JsonUtil.jsonToList(itemJson, CouponVO.class);
             if (couponList != null && couponList.size() > 0) {
 
-                // 循环发放的优惠券
+                // A coupon that circulates
                 for (CouponVO couponVO : couponList) {
                     this.memberClient.receiveBonus(orderMessage.getOrderDO().getMemberId(), couponVO.getCouponId());
                 }
@@ -79,23 +79,23 @@ public class CouponConsumer implements OrderStatusChangeEvent, TradeIntoDbEvent 
     public void onTradeIntoDb(TradeVO tradeVO) {
         try {
 
-            //优惠券状态提前变更
-            //将使用过的优惠券变为已使用
+            // Coupon status changes in advance
+            // Turn used coupons into used coupons
             List<CouponVO> useCoupons = tradeVO.getCouponList();
             if (useCoupons != null) {
                 for (CouponVO couponVO : useCoupons) {
                     this.memberClient.usedCoupon(couponVO.getMemberCouponId());
                     MemberCoupon memberCoupon = this.memberClient.getModel(tradeVO.getMemberId(), couponVO.getMemberCouponId());
-                    //修改店铺已经使用优惠券数量
+                    // Modify the number of coupons the store has used
                     this.couponManager.addUsedNum(memberCoupon.getCouponId());
                 }
             }
             if (logger.isDebugEnabled()) {
-                logger.debug("更改优惠券的状态完成");
+                logger.debug("Changing the status of the coupon is complete");
             }
 
         } catch (Exception e) {
-            logger.error("更改优惠券的状态出错", e);
+            logger.error("Error changing coupon status", e);
         }
     }
 }

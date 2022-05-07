@@ -18,24 +18,24 @@ package cloud.shopfly.b2c.core.payment.model.enums;
 /**
  * @author fk
  * @version v2.0
- * @Description: 支付宝客户端使用配置参数
+ * @Description: Alipay client uses configuration parameters
  * @date 2018/4/11 17:05
  * @since v7.0.0
  */
 public enum AlipayConfigItem {
 
     /**
-     * 支付宝公钥
+     * Alipay public Key
      */
-    alipay_public_key("支付宝公钥"),
+    alipay_public_key("Alipay public Key"),
     /**
-     * 应用ID
+     * applicationID
      */
-    app_id("应用ID"),
+    app_id("applicationID"),
     /**
-     * 商户私钥
+     * Merchants private key
      */
-    merchant_private_key("商户私钥");
+    merchant_private_key("Merchants private key");
 
     private String text;
 

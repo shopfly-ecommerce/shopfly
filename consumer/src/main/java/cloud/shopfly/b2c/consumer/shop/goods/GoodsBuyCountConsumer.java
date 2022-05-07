@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v1.0
- * @Description: 商品购买数量变化
+ * @Description: Change in the quantity of goods purchased
  * @date 2018/6/2510:13
  * @since v7.0.0
  */
@@ -44,7 +44,7 @@ public class GoodsBuyCountConsumer implements OrderStatusChangeEvent {
     @Override
     public void orderChange(OrderStatusChangeMsg orderMessage) {
 
-        // 收货后更新商品的购买数量
+        // Update the purchase quantity after receiving the goods
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.ROG.name())) {
             OrderDO order = orderMessage.getOrderDO();
             String itemsJson = order.getItemsJson();

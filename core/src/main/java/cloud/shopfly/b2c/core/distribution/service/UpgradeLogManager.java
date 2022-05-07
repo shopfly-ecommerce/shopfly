@@ -21,29 +21,29 @@ import cloud.shopfly.b2c.framework.database.Page;
 
 
 /**
- * 升级日志管理类
+ * Upgrade the log management class
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 下午12:56
+ * 2018/5/22 In the afternoon12:56
  */
 
 public interface UpgradeLogManager {
 
     /**
-     * 搜索
+     * search
      *
-     * @param page       分页
-     * @param pageSize   分页每页数量
-     * @param memberName 会员名
+     * @param page       paging
+     * @param pageSize   Number of pages per page
+     * @param memberName Member name
      * @return Page
      */
     Page<UpgradeLogDO> page(int page, int pageSize, String memberName);
 
     /**
-     * 新增一个模板升级日志
+     * A template upgrade log is added
      *
      * @param upgradeLog
      * @return do
@@ -51,11 +51,11 @@ public interface UpgradeLogManager {
     UpgradeLogDO add(UpgradeLogDO upgradeLog);
 
     /**
-     * 新增日志,一定要再修改之前【因为旧的模板id是根据用户id现查的】
+     * The new log,Be sure to revise again before【Because of the old templateidIs based on the useridNow check the】
      *
-     * @param memberId        会员id
-     * @param newTplId        新的模板id
-     * @param upgradeTypeEnum 模版操作类型
+     * @param memberId        membersid
+     * @param newTplId        A new templateid
+     * @param upgradeTypeEnum Template operation type
      */
     void addUpgradeLog(int memberId, int newTplId, UpgradeTypeEnum upgradeTypeEnum);
 }

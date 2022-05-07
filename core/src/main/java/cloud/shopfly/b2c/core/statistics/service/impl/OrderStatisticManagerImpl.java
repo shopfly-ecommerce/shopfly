@@ -44,13 +44,13 @@ import java.text.NumberFormat;
 import java.util.*;
 
 /**
- * 订单统计实现类
+ * Order statistics implementation class
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/4/28 下午5:11
+ * 2018/4/28 In the afternoon5:11
  */
 @Service
 public class OrderStatisticManagerImpl implements OrderStatisticManager {
@@ -83,14 +83,14 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             StringBuffer lastSql = new StringBuffer("SELECT SUM(mo.order_price) AS order_money,mo.create_time AS create_time,e_create_time FROM (SELECT o.sn,o.order_price,o.create_time,FROM_UNIXTIME(o.create_time,?) AS e_create_time FROM es_sss_order_data o WHERE o.create_time >= ? AND o.create_time <= ?");
 
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
             params.add(circle);
             params.add(timestamp[0]);
             params.add(timestamp[1]);
             /*
-             * 参数
+             * parameter
              */
             List<Object> lastParams = new ArrayList<>();
             lastParams.add(circle);
@@ -143,12 +143,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
                 }
             }
 
-            ChartSeries chartSeries = new ChartSeries("本月", data, new String[0]);
-            ChartSeries lastChartSeries = new ChartSeries("上月", lastData, new String[0]);
+            ChartSeries chartSeries = new ChartSeries("This month,", data, new String[0]);
+            ChartSeries lastChartSeries = new ChartSeries("Last month,", lastData, new String[0]);
 
             if (searchCriteria.getCycleType().equals(QueryDateType.YEAR.name())) {
-                chartSeries = new ChartSeries("今年", data, new String[0]);
-                lastChartSeries = new ChartSeries("去年", lastData, new String[0]);
+                chartSeries = new ChartSeries("This year,", data, new String[0]);
+                lastChartSeries = new ChartSeries("Last year,", lastData, new String[0]);
             }
             List<ChartSeries> chartSeriess = new ArrayList<>();
             chartSeriess.add(chartSeries);
@@ -248,12 +248,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
                 }
             }
 
-            ChartSeries chartSeries = new ChartSeries("本月", data, new String[0]);
-            ChartSeries lastChartSeries = new ChartSeries("上月", lastData, new String[0]);
+            ChartSeries chartSeries = new ChartSeries("This month,", data, new String[0]);
+            ChartSeries lastChartSeries = new ChartSeries("Last month,", lastData, new String[0]);
 
             if (searchCriteria.getCycleType().equals(QueryDateType.YEAR.name())) {
-                chartSeries = new ChartSeries("今年", data, new String[0]);
-                lastChartSeries = new ChartSeries("去年", lastData, new String[0]);
+                chartSeries = new ChartSeries("This year,", data, new String[0]);
+                lastChartSeries = new ChartSeries("Last year,", lastData, new String[0]);
             }
             List<ChartSeries> chartSeriess = new ArrayList<>();
             chartSeriess.add(chartSeries);
@@ -274,12 +274,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
 
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer("SELECT oi.`goods_name`,oi.goods_num,oi.`price`,oi.price*oi.goods_num as total FROM es_sss_order_goods_data oi LEFT JOIN es_sss_order_data o "
                     + " ON oi.`order_sn` = o.`sn` WHERE o.`create_time` >= ? AND o.`create_time` <= ?"
@@ -290,7 +290,7 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             return StatisticsUtil.getDataPage(this.daoSupport, searchCriteria.getYear(), sql.toString(), pageNo, pageSize, params.toArray());
         } catch (BadSqlGrammarException e) {
 
-            //某个年份的统计表不存在，则返回空数据
+            // If the statistics table for a certain year does not exist, null data is returned
             if (e.getMessage().endsWith("doesn't exist")) {
                 return new Page(pageNo, 0L, pageSize, new ArrayList());
             } else {
@@ -309,12 +309,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
         searchCriteria = new SearchCriteria(searchCriteria);
         long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
         /*
-         * 参数
+         * parameter
          */
         List<Object> params = new ArrayList<>();
 
         /*
-         * 查询sql
+         * The querysql
          */
         StringBuffer sql = new StringBuffer("SELECT refund_sn,order_sn,refund_price,create_time from es_sss_refund_data WHERE `create_time` >= ? AND `create_time` <= ?");
         params.add(timestamp[0]);
@@ -330,12 +330,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
         try {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer("SELECT SUM(o.`order_price`) AS receive_money,SUM(r.`refund_price`) AS refund_money "
                     + " FROM es_sss_order_data o LEFT JOIN es_sss_refund_data r ON o.`sn` = r.`order_sn` WHERE o.`create_time` >= ? AND o.`create_time` <= ? ");
@@ -349,7 +349,7 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
                 }
             } catch (ObjectNotFoundException e) {
 
-                //某个年份的统计表不存在，则返回空数据
+                // If the statistics table for a certain year does not exist, null data is returned
                 map = new HashMap<>();
             }
 
@@ -373,12 +373,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             List<Regions> regionsList = this.regionsClient.getRegionsChildren(0);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer("SELECT o.`ship_province_id` AS region_id,COUNT(DISTINCT o.`buyer_id`) AS value FROM es_sss_order_data o "
                     + " WHERE o.`create_time` >= ? AND o.`create_time` <= ? ");
@@ -422,12 +422,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             List<Regions> regionsList = this.regionsClient.getRegionsChildren(0);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer("SELECT o.`ship_province_id` AS region_id,COUNT(o.`sn`) AS value FROM es_sss_order_data o "
                     + " WHERE o.`create_time` > ? AND o.`create_time` < ? ");
@@ -474,12 +474,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             List<Regions> regionsList = this.regionsClient.getRegionsChildren(0);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -529,12 +529,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             List<Regions> regionsList = this.regionsClient.getRegionsChildren(0);
             /**
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -594,12 +594,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
 
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -613,7 +613,7 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             params.add(timestamp[0]);
             params.add(timestamp[1]);
 
-            // 拼接价格区间
+            // Splicing price range
 
             sql.append(" GROUP BY CASE ");
             ChartSqlUtil.appendPriceSql(prices, sql, params);
@@ -644,7 +644,7 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             }
 
 
-            ChartSeries chartSeries = new ChartSeries("下单量", data, localName);
+            ChartSeries chartSeries = new ChartSeries("Order quantity", data, localName);
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
             e.printStackTrace();
@@ -720,12 +720,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
 
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
             sql.append("SELECT DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(o.`create_time`), @@session.time_zone, '+8:00'), '%k') AS order_time,COUNT(o.`sn`) AS order_num FROM es_sss_order_data o "
@@ -747,7 +747,7 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
                 dataList = new ArrayList<>();
             }
 
-            // 小时数
+            // Number of hours
             int hours = 24;
             int index = 0;
             for (int i = 0; i < hours; i++) {
@@ -764,7 +764,7 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
                 index++;
             }
 
-            ChartSeries chartSeries = new ChartSeries("下单量", data, new String[0]);
+            ChartSeries chartSeries = new ChartSeries("Order quantity", data, new String[0]);
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
             logger.error(e);
@@ -781,12 +781,12 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
 
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -825,7 +825,7 @@ public class OrderStatisticManagerImpl implements OrderStatisticManager {
                 }
                 index++;
             }
-            ChartSeries chartSeries = new ChartSeries("退款", data, new String[0]);
+            ChartSeries chartSeries = new ChartSeries("A refund", data, new String[0]);
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
             logger.error(e);

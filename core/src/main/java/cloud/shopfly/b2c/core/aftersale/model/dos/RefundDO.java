@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 退(货)款单实体
+ * refund(cargo)To the entity
  *
  * @author zjp
  * @version v7.0.0
@@ -43,181 +43,181 @@ public class RefundDO implements Serializable {
     private static final long serialVersionUID = 3043923149260205L;
 
     /**
-     * 退(货)款单id
+     * refund(cargo)A single paragraphid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 退货(款)单编号
+     * Return of the goods(paragraph)A single number
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "退货(款)单编号", required = false)
+    @ApiModelProperty(name = "sn", value = "Return of the goods(paragraph)A single number", required = false)
     private String sn;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersid", required = false)
     private Integer memberId;
     /**
-     * 会员名称
+     * Member name
      */
     @Column(name = "member_name")
-    @ApiModelProperty(value = "会员名称")
+    @ApiModelProperty(value = "Member name")
     private String memberName;
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
     /**
-     * 退(货)款状态
+     * refund(cargo)Kind of state
      */
     @Column(name = "refund_status")
-    @ApiModelProperty(name = "refund_status", value = "退(货)款状态", required = false)
+    @ApiModelProperty(name = "refund_status", value = "refund(cargo)Kind of state", required = false)
     private String refundStatus;
     /**
-     * 创建时间
+     * Last update
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Last update", required = false)
     private Long createTime;
     /**
-     * 退款金额
+     * The refund amount
      */
     @Column(name = "refund_price")
-    @ApiModelProperty(name = "refund_price", value = "退款金额", required = false)
+    @ApiModelProperty(name = "refund_price", value = "The refund amount", required = false)
     private Double refundPrice;
     /**
-     * 退还积分
+     * Return the integral
      */
     @Column(name = "refund_point")
-    @ApiModelProperty(name = "refund_point", value = "退还积分", required = false)
+    @ApiModelProperty(name = "refund_point", value = "Return the integral", required = false)
     private Integer refundPoint;
     /**
-     * 退款方式(原路退回，在线支付，线下支付)
+     * The refund way(The original way back, online payment, offline payment)
      */
     @Column(name = "refund_way")
-    @ApiModelProperty(name = "refund_way", value = "退款方式(原路退回，线下支付)", required = false)
+    @ApiModelProperty(name = "refund_way", value = "The refund way(The original way back, offline payment)", required = false)
     private String refundWay;
     /**
-     * 退款账户类型
+     * Type of Refund Account
      */
     @Column(name = "account_type")
-    @ApiModelProperty(name = "account_type", value = "退款账户类型", required = false)
+    @ApiModelProperty(name = "account_type", value = "Type of Refund Account", required = false)
     private String accountType;
     /**
-     * 退款账户
+     * Refund account
      */
     @Column(name = "return_account")
-    @ApiModelProperty(name = "return_account", value = "退款账户", required = false)
+    @ApiModelProperty(name = "return_account", value = "Refund account", required = false)
     private String returnAccount;
     /**
-     * 客户备注
+     * Customer remarks
      */
     @Column(name = "customer_remark")
-    @ApiModelProperty(name = "customer_remark", value = "客户备注", required = false)
+    @ApiModelProperty(name = "customer_remark", value = "Customer remarks", required = false)
     private String customerRemark;
     /**
-     * 库管备注
+     * Warehouse note
      */
     @Column(name = "warehouse_remark")
-    @ApiModelProperty(name = "warehouse_remark", value = "库管备注", required = false)
+    @ApiModelProperty(name = "warehouse_remark", value = "Warehouse note", required = false)
     private String warehouseRemark;
     /**
-     * 财务备注
+     * Financial note
      */
     @Column(name = "finance_remark")
-    @ApiModelProperty(name = "finance_remark", value = "财务备注", required = false)
+    @ApiModelProperty(name = "finance_remark", value = "Financial note", required = false)
     private String financeRemark;
     /**
-     * 退款原因
+     * A refund reason
      */
     @Column(name = "refund_reason")
-    @ApiModelProperty(name = "refund_reason", value = "退款原因", required = false)
+    @ApiModelProperty(name = "refund_reason", value = "A refund reason", required = false)
     private String refundReason;
     /**
-     * 拒绝原因
+     * Refuse to reason
      */
     @Column(name = "refuse_reason")
-    @ApiModelProperty(name = "refuse_reason", value = "拒绝原因", required = false)
+    @ApiModelProperty(name = "refuse_reason", value = "Refuse to reason", required = false)
     private String refuseReason;
     /**
-     * 银行名称
+     * Bank name
      */
     @Column(name = "bank_name")
-    @ApiModelProperty(name = "bank_name", value = "银行名称", required = false)
+    @ApiModelProperty(name = "bank_name", value = "Bank name", required = false)
     private String bankName;
     /**
-     * 银行账号
+     * The bank account
      */
     @Column(name = "bank_account_number")
-    @ApiModelProperty(name = "bank_account_number", value = "银行账号", required = false)
+    @ApiModelProperty(name = "bank_account_number", value = "The bank account", required = false)
     private String bankAccountNumber;
     /**
-     * 银行开户名
+     * Bank account name
      */
     @Column(name = "bank_account_name")
-    @ApiModelProperty(name = "bank_account_name", value = "银行开户名", required = false)
+    @ApiModelProperty(name = "bank_account_name", value = "Bank account name", required = false)
     private String bankAccountName;
     /**
-     * 银行开户行
+     * Bank opening bank
      */
     @Column(name = "bank_deposit_name")
-    @ApiModelProperty(name = "bank_deposit_name", value = "银行开户行", required = false)
+    @ApiModelProperty(name = "bank_deposit_name", value = "Bank opening bank", required = false)
     private String bankDepositName;
     /**
-     * 交易编号
+     * Transaction number
      */
     @Column(name = "trade_sn")
-    @ApiModelProperty(name = "trade_sn", value = "交易编号", required = false)
+    @ApiModelProperty(name = "trade_sn", value = "Transaction number", required = false)
     private String tradeSn;
     /**
-     * 售后类型(取消订单,申请售后)
+     * After type(Cancel the order,Apply for after sales)
      */
     @Column(name = "refund_type")
-    @ApiModelProperty(name = "refund_type", value = "售后类型(取消订单,申请售后)", required = false)
+    @ApiModelProperty(name = "refund_type", value = "After type(Cancel the order,Apply for after sales)", required = false)
     private String refundType;
     /**
-     * 订单类型(在线支付,货到付款)
+     * Order type(Online payment,Cash on delivery)
      */
     @Column(name = "payment_type")
-    @ApiModelProperty(name = "payment_type", value = "订单类型(在线支付,货到付款)", required = false)
+    @ApiModelProperty(name = "payment_type", value = "Order type(Online payment,Cash on delivery)", required = false)
     private String paymentType;
     /**
-     * 退(货)款类型(退货，退款)
+     * refund(cargo)New type(refundcargo，refund款)
      */
     @Column(name = "refuse_type")
-    @ApiModelProperty(name = "refuse_type", value = "退(货)款类型(退货，退款)", required = false, hidden = true)
+    @ApiModelProperty(name = "refuse_type", value = "refund(cargo)New type(refundcargo，refund款)", required = false, hidden = true)
     private String refuseType;
     /**
-     * 支付结果交易号
+     * Payment result transaction number
      */
     @Column(name = "pay_order_no")
-    @ApiModelProperty(name = "pay_order_no", value = "支付结果交易号", required = false)
+    @ApiModelProperty(name = "pay_order_no", value = "Payment result transaction number", required = false)
     private String payOrderNo;
 
     @Column(name = "refund_fail_reason")
-    @ApiModelProperty(name = "refund_fail_reason", value = "退款失败原因", required = false)
+    @ApiModelProperty(name = "refund_fail_reason", value = "Reasons for refund Failure", required = false)
     private String refundFailReason;
 
     @Column(name = "refund_time")
-    @ApiModelProperty(name = "refund_time", value = "退款时间", hidden = true)
+    @ApiModelProperty(name = "refund_time", value = "A refund of time", hidden = true)
     private Long refundTime;
     /**
-     * 客服备注
+     * The note of the service
      */
     @Column(name = "seller_remark")
-    @ApiModelProperty(name = "seller_remark", value = "客服备注", required = false)
+    @ApiModelProperty(name = "seller_remark", value = "The note of the service", required = false)
     private String sellerRemark;
 
     /**
-     * 赠品信息
+     * Merchandise information
      */
     @Column(name = "refund_gift")
-    @ApiModelProperty(name = "refund_gift", value = "赠品信息", required = false)
+    @ApiModelProperty(name = "refund_gift", value = "Merchandise information", required = false)
     private String refundGift;
 
     @PrimaryKeyField

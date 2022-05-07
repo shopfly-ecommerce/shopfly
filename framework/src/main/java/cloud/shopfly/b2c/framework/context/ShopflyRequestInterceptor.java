@@ -22,29 +22,29 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
 /**
- * shopfly 上下文初始化
- * 以及跨域的支持
+ * shopfly Context initialization
+ * And cross-domain support
  * @author kingapex
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 public class ShopflyRequestInterceptor extends HandlerInterceptorAdapter {
 
 
 	/**
-	 * 拦截request和response并放到上下文中
-	 * @param request 要拦截的request
-	 * @param response 要拦截的response
-	 * @param handler spring 机制传递过来的
-	 * @return 不中断，继续执行，返回为true
+	 * interceptrequestandresponseAnd put it in context
+	 * @param request To interceptrequest
+	 * @param response To interceptresponse
+	 * @param handler spring Its delivered by mechanism
+	 * @return Continue without interruption, return totrue
 	 * @throws Exception
 	 */
 	@Override
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception {
 
-		//request 和response存到 上下文中
+		// Request and response are stored in the context
 		ThreadContextHolder.setHttpResponse(response);
 		ThreadContextHolder.setHttpRequest(request);
 
@@ -53,7 +53,7 @@ public class ShopflyRequestInterceptor extends HandlerInterceptorAdapter {
 
 
 	/**
-	 * 处理完成 从上下文中移除 request 和respseon
+	 * The process is removed from the contextrequest andrespseon
 	 * @param request
 	 * @param response
 	 * @param handler

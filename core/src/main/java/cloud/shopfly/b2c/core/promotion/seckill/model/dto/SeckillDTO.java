@@ -28,19 +28,19 @@ import java.util.List;
  * @author Snow
  * @version 1.0
  * @since 6.4.1
- * 2017年12月14日 16:58:55
+ * 2017years12month14day16:58:55
  */
-@ApiModel(description = "限时抢购活动vo")
+@ApiModel(description = "Flash salesvo")
 public class SeckillDTO extends SeckillDO {
 
-    @ApiModelProperty(name = "range_list", value = "活动时刻表")
+    @ApiModelProperty(name = "range_list", value = "Active schedule")
     @Size(min = 1, max = 23)
     private List<Integer> rangeList;
 
-    @ApiModelProperty(name = "0:未报名,1:已报名,2:已截止")
+    @ApiModelProperty(name = "0:Did not sign up,1:Have to sign up,2:Has as")
     private Integer isApply;
 
-    @ApiModelProperty(name = "seckill_status_text", value = "状态值")
+    @ApiModelProperty(name = "seckill_status_text", value = "The status value")
     private String seckillStatusText;
 
 

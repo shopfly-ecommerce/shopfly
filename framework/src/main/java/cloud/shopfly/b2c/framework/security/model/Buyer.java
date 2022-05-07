@@ -27,7 +27,7 @@ public class Buyer extends User {
 
 
     /**
-     * 定义买家的角色
+     * Define the buyers role
      */
     public Buyer() {
         this.add(Role.BUYER.name());

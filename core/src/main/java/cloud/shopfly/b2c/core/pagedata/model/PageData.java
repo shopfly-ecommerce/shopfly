@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 楼层实体
+ * Floor entity
  *
  * @author fk
  * @version v1.0
@@ -44,32 +44,32 @@ public class PageData implements Serializable {
     private static final long serialVersionUID = 3806389481183972L;
 
     /**
-     * 主键id
+     * A primary keyid
      */
     @Id(name = "page_id")
     @ApiModelProperty(hidden = true)
     private Integer pageId;
     /**
-     * 楼层名称
+     * Name of floor
      */
     @Column(name = "page_name")
-    @ApiModelProperty(name = "page_name", value = "楼层名称", required = true)
-    @NotEmpty(message = "名称不能为空")
+    @ApiModelProperty(name = "page_name", value = "Name of floor", required = true)
+    @NotEmpty(message = "The name cannot be empty")
     private String pageName;
     /**
-     * 楼层数据
+     * Floor data
      */
     @Column(name = "page_data")
-    @ApiModelProperty(name = "page_data", value = "楼层数据", required = true)
-    @NotEmpty(message = "页面数据不能为空")
+    @ApiModelProperty(name = "page_data", value = "Floor data", required = true)
+    @NotEmpty(message = "Page data cannot be empty")
     private String pageData;
 
     @Column(name = "page_type")
-    @ApiModelProperty(name = "page_type", value = "页面类型", hidden = true)
+    @ApiModelProperty(name = "page_type", value = "Page type", hidden = true)
     private String pageType;
 
     @Column(name = "client_type")
-    @ApiModelProperty(name = "client_type", value = "客户端类型", hidden = true)
+    @ApiModelProperty(name = "client_type", value = "Client type", hidden = true)
     private String clientType;
 
     @PrimaryKeyField

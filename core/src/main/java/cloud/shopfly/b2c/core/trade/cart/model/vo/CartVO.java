@@ -28,42 +28,42 @@ import java.util.Map;
 
 
 /**
- * 购物车展示Vo
+ * Shopping cart displayVo
  *
  * @author Snow
  * @version v1.0
- * 2017年08月23日14:22:48
+ * 2017years08month23day14:22:48
  * @since v6.4
  */
 
-@ApiModel(description = "购物车展示Vo")
+@ApiModel(description = "Shopping cart displayVo")
 public class CartVO extends CartDO implements Serializable {
 
 
     private static final long serialVersionUID = 6382186311779188645L;
     /**
-     * 把Cart.SkuList 数据 根据促销活动压入到此集合中。
+     * theCart.SkuList Data is pushed into this collection based on promotional activity.
      */
-    @ApiModelProperty(value = "促销活动集合（包含商品")
+    @ApiModelProperty(value = "Collection of promotional activities（Contains the goods")
     private List<GroupPromotionVO> promotionList;
 
-    @ApiModelProperty(value = "已参与的的促销活动提示，直接展示给客户")
+    @ApiModelProperty(value = "Present the promotion tips directly to customers")
     private String promotionNotice;
 
 
     /**
-     * 购物车与运费dto的map映射
-     * key为skuid value 为模版
+     * Shopping cart and Freightdtothemapmapping
+     * keyforskuid value for模版
      */
     private Map<Integer, ShipTemplateSettingVO> shipTemplateChildMap;
 
-    @ApiModelProperty(value = "购物车页展示时，店铺内的商品是否全选状态.1为店铺商品全选状态,0位非全选")
+    @ApiModelProperty(value = "When the shopping cart page is displayed, whether all the goods in the shop are selected.1Is the state of all goods in the store,0A non selection")
     private Integer checked;
 
     private List<PromotionRule> ruleList;
 
     /**
-     * 购物车类型：购物车页面和或结算页
+     * Shopping cart type：Shopping cart page and or billing page
      */
     private CartType cartType;
 
@@ -73,7 +73,7 @@ public class CartVO extends CartDO implements Serializable {
     }
 
     /**
-     * 父类的构造器
+     * Constructor for the parent class
      *
      * @param sellerId
      * @param sellerName

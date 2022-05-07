@@ -19,22 +19,22 @@ import cloud.shopfly.b2c.core.distribution.model.dos.CommissionTpl;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 提成模板manager接口
+ * Royalty templatemanagerinterface
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 上午10:52
+ * 2018/5/22 In the morning10:52
  */
 
 public interface CommissionTplManager {
 
 
     /**
-     * 获取某个会员使用的模版
+     * Get a template used by a member
      *
-     * @param memberId 会员id
+     * @param memberId membersid
      * @return CommissionTplDO
      */
     CommissionTpl getCommissionTplByMember(int memberId);
@@ -42,14 +42,14 @@ public interface CommissionTplManager {
     /**
      * page
      *
-     * @param page     页码
-     * @param pageSize 分页大小
+     * @param page     The page number
+     * @param pageSize Page size
      * @return page
      */
     Page page(int page, int pageSize);
 
     /**
-     * 通过id获得CommissionTpl
+     * throughidTo obtainCommissionTpl
      *
      * @param id
      * @return CommissionTpl
@@ -58,16 +58,16 @@ public interface CommissionTplManager {
 
 
     /**
-     * 添加一个commissionTpl
+     * Add acommissionTpl
      *
-     * @param commissionTpl 模版
+     * @param commissionTpl template
      * @return CommissionTplDO
      */
     CommissionTpl add(CommissionTpl commissionTpl);
 
 
     /**
-     * 修改一个CommissionTpl
+     * To modify aCommissionTpl
      *
      * @param commissionTpl
      * @return CommissionTplDO
@@ -75,14 +75,14 @@ public interface CommissionTplManager {
     CommissionTpl edit(CommissionTpl commissionTpl);
 
     /**
-     * 删除一个CommissionTpl
+     * To delete aCommissionTpl
      *
      * @param tplId
      */
     void delete(Integer tplId);
 
     /**
-     * 得到一个默认的模版
+     * Get a default template
      *
      * @return DO
      */

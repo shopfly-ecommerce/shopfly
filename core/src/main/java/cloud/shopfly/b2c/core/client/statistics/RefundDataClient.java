@@ -19,19 +19,19 @@ package cloud.shopfly.b2c.core.client.statistics;
 import cloud.shopfly.b2c.core.statistics.model.dto.RefundData;
 
 /**
- * 退货收集manager
+ * Return to collectmanager
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/8 下午4:10
+ * 2018/5/8 In the afternoon4:10
  */
 
 public interface RefundDataClient {
 
     /**
-     * 退款消息写入
+     * Write refund message
      *
      * @param refundData
      */

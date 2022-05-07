@@ -30,12 +30,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 商品vo
+ * productvo
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月21日 上午11:25:10
+ * 2018years3month21The morning of11:25:10
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -45,111 +45,111 @@ public class GoodsDTO implements Serializable {
     @ApiModelProperty(hidden = true)
     private Integer goodsId;
 
-    @ApiModelProperty(name = "category_id", value = "分类id", required = true)
-    @NotNull(message = "商城分类不能为空")
-    @Min(value = 0, message = "商城分类值不正确")
+    @ApiModelProperty(name = "category_id", value = "Categoriesid", required = true)
+    @NotNull(message = "Mall classification cannot be empty")
+    @Min(value = 0, message = "The mall classification value is incorrect")
     private Integer categoryId;
 
     /**
-     * 用作显示
+     * Used to display
      */
-    @ApiModelProperty(name = "category_name", value = "分类名称", required = true)
+    @ApiModelProperty(name = "category_name", value = "name", required = true)
     private String categoryName;
 
-    @ApiModelProperty(name = "brand_id", value = "品牌id", required = false)
-    @Min(value = 0, message = "品牌值不正确")
+    @ApiModelProperty(name = "brand_id", value = "brandid", required = false)
+    @Min(value = 0, message = "The brand value is incorrect")
     private Integer brandId;
 
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = true)
-    @NotEmpty(message = "商品名称不能为空")
+    @ApiModelProperty(name = "goods_name", value = "Name", required = true)
+    @NotEmpty(message = "The commodity name cannot be empty")
     private String goodsName;
 
-    @ApiModelProperty(name = "sn", value = "商品编号", required = true)
-    @Length(max = 30, message = "商品编号太长，不能超过30个字符")
+    @ApiModelProperty(name = "sn", value = "SN", required = true)
+    @Length(max = 30, message = "Item number is too long and cannot be exceeded30A character")
     private String sn;
 
-    @ApiModelProperty(name = "price", value = "商品价格", required = true)
-    @NotNull(message = "商品价格不能为空")
-    @Min(value = 0, message = "商品价格不能为负数")
-    @Max(value = 99999999, message = "商品价格不能超过99999999")
+    @ApiModelProperty(name = "price", value = "Price", required = true)
+    @NotNull(message = "Commodity prices cannot be empty")
+    @Min(value = 0, message = "Commodity prices cannot be negative")
+    @Max(value = 99999999, message = "Commodity prices cannot exceed99999999")
     private Double price;
 
-    @ApiModelProperty(name = "cost", value = "成本价格", required = true)
-    @NotNull(message = "成本价格不能为空")
-    @Min(value = 0, message = "成本价格不能为负数")
-    @Max(value = 99999999, message = "成本价格不能超过99999999")
+    @ApiModelProperty(name = "cost", value = "Cost price", required = true)
+    @NotNull(message = "The cost price cannot be empty")
+    @Min(value = 0, message = "The cost price cannot be negative")
+    @Max(value = 99999999, message = "The cost price cannot exceed99999999")
     private Double cost;
 
-    @ApiModelProperty(name = "mktprice", value = "市场价格", required = true)
-    @NotNull(message = "市场价格不能为空")
-    @Min(value = 0, message = "市场价格不能为负数")
-    @Max(value = 99999999, message = "市场价格不能超过99999999")
+    @ApiModelProperty(name = "mktprice", value = "Marking price", required = true)
+    @NotNull(message = "The market price cannot be empty")
+    @Min(value = 0, message = "The market price cannot be negative")
+    @Max(value = 99999999, message = "The market price cannot exceed99999999")
     private Double mktprice;
 
-    @ApiModelProperty(name = "weight", value = "重量", required = true)
-    @NotNull(message = "商品重量不能为空")
-    @Min(value = 0, message = "重量不能为负数")
-    @Max(value = 99999999, message = "重量不能超过99999999")
+    @ApiModelProperty(name = "weight", value = "Weight", required = true)
+    @NotNull(message = "The weight of goods cannot be empty")
+    @Min(value = 0, message = "The weight cannot be negative")
+    @Max(value = 99999999, message = "Weight shall not exceed99999999")
     private Double weight;
 
-    @ApiModelProperty(name = "goods_transfee_charge", value = "谁承担运费0：买家承担，1：卖家承担", required = true)
-    @NotNull(message = "承担运费不能为空")
-    @Min(value = 0, message = "承担运费值不正确")
-    @Max(value = 1, message = "承担运费值不正确")
+    @ApiModelProperty(name = "goods_transfee_charge", value = "Who bears the freight0：The buyer bears,1：The seller bear", required = true)
+    @NotNull(message = "Bear freight cannot be empty")
+    @Min(value = 0, message = "The borne freight value is incorrect")
+    @Max(value = 1, message = "The borne freight value is incorrect")
     private Integer goodsTransfeeCharge;
 
-    @ApiModelProperty(name = "intro", value = "详情", required = false)
+    @ApiModelProperty(name = "intro", value = "details", required = false)
     private String intro;
 
-    @ApiModelProperty(name = "have_spec", value = "是否有规格0没有1有", hidden = true)
+    @ApiModelProperty(name = "have_spec", value = "Are there specifications?0There is no1There are", hidden = true)
     private Integer haveSpec;
 
-    @ApiModelProperty(name = "quantity", value = "库存", required = false)
-    @Max(value = 99999999, message = "库存不能超过99999999")
+    @ApiModelProperty(name = "quantity", value = "Inventory", required = false)
+    @Max(value = 99999999, message = "Stock cannot exceed99999999")
     private Integer quantity;
 
-    @ApiModelProperty(name = "market_enable", value = "是否上架，1上架 0下架", required = true)
-    @Min(value = 0, message = "是否上架值不正确")
-    @Max(value = 1, message = "是否上架值不正确")
+    @ApiModelProperty(name = "market_enable", value = "Whether its on the shelf,1save0off", required = true)
+    @Min(value = 0, message = "Whether the mounting value is incorrect")
+    @Max(value = 1, message = "Whether the mounting value is incorrect")
     private Integer marketEnable;
 
-    @ApiModelProperty(name = "sku_list", value = "sku列表", required = false)
+    @ApiModelProperty(name = "sku_list", value = "skuThe list of", required = false)
     @Valid
     private List<GoodsSkuVO> skuList;
 
-    @ApiModelProperty(name = "goods_params_list", value = "商品参数", required = false)
+    @ApiModelProperty(name = "goods_params_list", value = "Product parameters", required = false)
     @Valid
     private List<GoodsParamsDO> goodsParamsList;
 
-    @ApiModelProperty(name = "goods_gallery_list", value = "商品相册", required = true)
-    @NotNull(message = "商品相册图片不能为空")
-    @Size(min = 1, message = "商品相册图片不能为空")
+    @ApiModelProperty(name = "goods_gallery_list", value = "Photo album", required = true)
+    @NotNull(message = "Product album picture cannot be empty")
+    @Size(min = 1, message = "Product album picture cannot be empty")
     private List<GoodsGalleryDO> goodsGalleryList;
 
-    @ApiModelProperty(name = "exchange", value = "积分兑换对象，不是积分兑换商品可以不传", required = false)
+    @ApiModelProperty(name = "exchange", value = "Points exchange object, not points exchange goods can not pass", required = false)
     private ExchangeVO exchange;
 
-    @ApiModelProperty(name = "has_changed", value = "sku数据变化或者组合变化判断 0:没变化，1：变化", required = true)
+    @ApiModelProperty(name = "has_changed", value = "skuData change or combination change judgment0:No change,1：change", required = true)
     private Integer hasChanged;
 
-    @ApiModelProperty(name = "page_title", value = "seo标题", required = false)
+    @ApiModelProperty(name = "page_title", value = "seo title", required = false)
     private String pageTitle;
 
-    @ApiModelProperty(name = "meta_keywords", value = "seo关键字", required = false)
+    @ApiModelProperty(name = "meta_keywords", value = "seokeyword", required = false)
     private String metaKeywords;
 
-    @ApiModelProperty(name = "meta_description", value = "seo描述", required = false)
+    @ApiModelProperty(name = "meta_description", value = "seo describe", required = false)
     private String metaDescription;
 
-    @ApiModelProperty(value = "商品的评论数量", hidden = true)
+    @ApiModelProperty(value = "Number of reviews for items", hidden = true)
     private Integer commentNum;
 
-    @ApiModelProperty(name = "template_id", value = "运费模板id,不需要运费模板时值是0", required = true)
-    @NotNull(message = "运费模板不能为空，没有运费模板时，传值0")
-    @Min(value = 0, message = "运费模板值不正确")
+    @ApiModelProperty(name = "template_id", value = "The freight templateid,不需要The freight template时值是0", required = true)
+    @NotNull(message = "Freight template cannot be empty. If there is no freight template, pass the value0")
+    @Min(value = 0, message = "The freight template value is incorrect")
     private Integer templateId;
 
-    @ApiModelProperty(value = "可用库存", hidden = true)
+    @ApiModelProperty(value = "Available", hidden = true)
     private Integer enableQuantity;
 
     public GoodsDTO() {

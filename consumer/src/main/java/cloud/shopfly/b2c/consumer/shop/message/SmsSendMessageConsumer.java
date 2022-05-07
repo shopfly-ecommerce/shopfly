@@ -50,12 +50,12 @@ import java.util.Map;
 
 
 /**
- * 消息模版发送短信
+ * Message template sends SMS messages
  *
  * @author zjp
  * @version v7.0
  * @since v7.0
- * 2018年3月25日 下午3:15:01
+ * 2018years3month25On the afternoon3:15:01
  */
 @Component
 public class SmsSendMessageConsumer extends AbstractMessage implements OrderStatusChangeEvent, RefundStatusChangeEvent, GoodsChangeEvent, MemberLoginEvent, MemberRegisterEvent, TradeIntoDbEvent, GoodsCommentEvent {
@@ -83,33 +83,33 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
     @Override
     public void orderChange(OrderStatusChangeMsg orderMessage) {
         OrderDO orderDO = orderMessage.getOrderDO();
-        //获取模板
+        // Access to the template
         MessageTemplateDO messageTemplate = null;
-        //获取系统配置
+        // Obtaining system Configuration
         SiteSetting siteSetting = this.getSiteSetting();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
-        //获取当前下单会员信息
+        // Get the current order member information
         Member member = memberClient.getModel(orderDO.getMemberId());
-        //订单支付提醒
+        // Order Payment reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.PAID_OFF.name())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("paymentTime", DateUtil.toString(orderDO.getPaymentTime(), "yyyy-MM-dd"));
             valuesMap.put("siteName", siteSetting.getSiteName());
-            // 店铺订单支付提醒
+            // Store order payment reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSPAY);
-            // 判断短信是否开启
+            // Check whether SMS is enabled
             if (messageTemplate != null) {
                 if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
-                    // 发送短信
+                    // Send a text message
                     this.sendSms(this.getSmsMessage(infoSetting.getPhone(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                 }
             }
-            // 会员订单支付提醒
+            // Member order payment reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSPAY);
             if (messageTemplate != null) {
-                // 判断短信是否开启
+                // Check whether SMS is enabled
                 if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     this.sendSms(this.getSmsMessage(member.getMobile(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                 }
@@ -117,61 +117,61 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
 
         }
 
-        //订单收货提醒
+        // Order receipt reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.ROG.name())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("finishTime", DateUtil.toString(DateUtil.getDateline(), "yyyy-MM-dd"));
             valuesMap.put("siteName", siteSetting.getSiteName());
-            // 店铺订单收货提醒
+            // Store order receipt reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSRECEIVE);
             if (messageTemplate != null) {
-                // 判断短信是否开启
+                // Check whether SMS is enabled
                 if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     this.sendSms(this.getSmsMessage(infoSetting.getPhone(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                 }
             }
-            //会员订单收货提醒
+            // Member order receipt reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSRECEIVE);
             if (messageTemplate != null) {
-                // 判断短信是否开启
+                // Check whether SMS is enabled
                 if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     this.sendSms(this.getSmsMessage(member.getMobile(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                 }
             }
         }
 
-        //订单取消提醒
+        // Order Cancellation Reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.CANCELLED.name())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("cancelTime", DateUtil.toString(DateUtil.getDateline(), "yyyy-MM-dd"));
             valuesMap.put("siteName", siteSetting.getSiteName());
-            // 发送会员消息
+            // Send membership messages
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSCANCEL);
             if (messageTemplate != null) {
-                // 判断短信是否开启
+                // Check whether SMS is enabled
                 if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     this.sendSms(this.getSmsMessage(member.getMobile(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                 }
             }
 
-            // 发送店铺消息
+            // Send store messages
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSCANCEL);
             if (messageTemplate != null) {
-                // 判断短信是否开启
+                // Check whether SMS is enabled
                 if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     this.sendSms(this.getSmsMessage(infoSetting.getPhone(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                 }
             }
         }
 
-        //订单发货提醒
+        // Order shipping Reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.SHIPPED.name())) {
-            // 会员消息发送
+            // Member Message sending
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSSEND);
             if (messageTemplate != null) {
-                // 判断短信是否开启
+                // Check whether SMS is enabled
                 if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                     valuesMap.put("ordersSn", orderDO.getSn());
@@ -186,20 +186,20 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
 
 
     /**
-     * 售后消息
+     * After the news
      */
     @Override
     public void refund(RefundChangeMsg refundChangeMsg) {
         SmsSendVO smsSendVO = new SmsSendVO();
         OrderDetailDTO orderDetailDTO = orderClient.getModel(refundChangeMsg.getRefund().getOrderSn());
         smsSendVO.setMobile(orderDetailDTO.getShipTel());
-        //获取当前下单会员信息
+        // Get the current order member information
         Member member = memberClient.getModel(refundChangeMsg.getRefund().getMemberId());
-        //获取系统配置
+        // Obtaining system Configuration
         SiteSetting siteSetting = this.getSiteSetting();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
-        //退货/款提醒
+        // Return/payment reminder
         if (refundChangeMsg.getRefundStatusEnum().equals(RefundStatusEnum.APPLY)) {
             if (orderDetailDTO != null) {
 
@@ -208,8 +208,8 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
                 Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                 valuesMap.put("refundSn", refundChangeMsg.getRefund().getSn());
                 valuesMap.put("siteName", siteSetting.getSiteName());
-                // 会员信息发送
-                // 记录会员订单取消信息（会员中心查看）
+                // Member Information sending
+                // Record cancellation information of member order (check in member Center)
                 if (refundChangeMsg.getRefund().getRefuseType().equals(RefuseTypeEnum.RETURN_GOODS.name())) {
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERRETURNUPDATE);
                 }
@@ -219,14 +219,14 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
                 }
 
                 if (messageTemplate != null) {
-                    // 判断短信是否开启
+                    // Check whether SMS is enabled
                     if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         this.sendSms(this.getSmsMessage(member.getMobile(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                     }
                 }
 
 
-                // 店铺信息发送
+                // Store Information sending
                 messageTemplate = null;
                 if (refundChangeMsg.getRefund().getRefuseType().equals(RefuseTypeEnum.RETURN_GOODS.name())) {
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPRETURN);
@@ -236,9 +236,9 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPREFUND);
                 }
 
-                // 记录店铺订单取消信息（商家中心查看）
+                // Record store order cancellation information (view in merchant center)
                 if (messageTemplate != null) {
-                    // 判断短信是否开启
+                    // Check whether SMS is enabled
                     if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         this.sendSms(this.getSmsMessage(infoSetting.getPhone(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
                     }
@@ -251,21 +251,21 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
     @Override
     public void goodsChange(GoodsChangeMsg goodsChangeMsg) {
         SmsSendVO smsSendVO = new SmsSendVO();
-        //获取系统配置
+        // Obtaining system Configuration
         SiteSetting siteSetting = this.getSiteSetting();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
 
-        //商品下架消息提醒
+        // Notification of merchandise removal
         if (GoodsChangeMsg.UNDER_OPERATION == goodsChangeMsg.getOperationType() && !StringUtil.isEmpty(goodsChangeMsg.getMessage())) {
-            //发送店铺消息
+            // Send store messages
             for (Integer goodsId : goodsChangeMsg.getGoodsIds()) {
                 CacheGoods goods = goodsClient.getFromCache(goodsId);
                 smsSendVO.setMobile(infoSetting.getPhone());
-                // 记录店铺订单取消信息（商家中心查看）
+                // Record store order cancellation information (view in merchant center)
                 MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPGOODSMARKETENABLE);
                 if (messageTemplate != null) {
-                    // 判断短信是否开启
+                    // Check whether SMS is enabled
                     if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                         valuesMap.put("siteName", siteSetting.getSiteName());
@@ -281,7 +281,7 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
 
     @Override
     public void memberLogin(MemberLoginMsg memberLoginMsg) {
-        //获取系统配置
+        // Obtaining system Configuration
         SiteSetting siteSetting = this.getSiteSetting();
         Member member = memberClient.getModel(memberLoginMsg.getMemberId());
 
@@ -290,11 +290,11 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
 
         MessageTemplateDO messageTemplate = null;
 
-        // 记录会员登陆成功信息（会员中心查看）
+        // Record member login success information (check in member center)
         messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERLOGINSUCCESS);
-        // 判断站内信是否开启
+        // Check whether the station message is open
         if (messageTemplate != null) {
-            // 判断短信是否开启
+            // Check whether SMS is enabled
             if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                 valuesMap.put("name", member.getUname());
@@ -308,16 +308,16 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
 
     @Override
     public void memberRegister(MemberRegisterMsg memberRegisterMsg) {
-        //获取系统配置
+        // Obtaining system Configuration
         SiteSetting siteSetting = this.getSiteSetting();
         Member member = memberClient.getModel(memberRegisterMsg.getMember().getMemberId());
         SmsSendVO smsSendVO = new SmsSendVO();
         smsSendVO.setMobile(member.getMobile());
 
-        //会员注册成功提醒
+        // Member registration success reminder
         MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERREGISTESUCCESS);
         if (messageTemplate != null) {
-            // 判断短信是否开启
+            // Check whether SMS is enabled
             if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
 
                 Map<String, Object> valuesMap = new HashMap<String, Object>(4);
@@ -332,16 +332,16 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
 
     @Override
     public void onTradeIntoDb(TradeVO tradeVO) {
-        //获取系统配置
+        // Obtaining system Configuration
         SiteSetting siteSetting = this.getSiteSetting();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
-        //店铺新订单创建提醒
+        // Store new order creation reminder
         List<OrderDTO> orderList = tradeVO.getOrderList();
         SmsSendVO smsSendVO = new SmsSendVO();
         for (OrderDTO orderDTO : orderList) {
             MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSNEW);
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                 valuesMap.put("ordersSn", orderDTO.getSn());
@@ -355,17 +355,17 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
     }
 
     /**
-     * 商品评论
+     * Product comments
      *
-     * @param goodsCommentMsg 商品评论消息
+     * @param goodsCommentMsg Product Review messages
      */
     @Override
     public void goodsComment(GoodsCommentMsg goodsCommentMsg) {
-        //获取系统配置
+        // Obtaining system Configuration
         SiteSetting siteSetting = this.getSiteSetting();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
-        //获取坪林的消息模板
+        // Get pinglins message template
         MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSEVALUATE);
         if (messageTemplate != null) {
             if (messageTemplate.getSmsState().equals(MessageOpenStatusEnum.OPEN.value())) {
@@ -374,7 +374,7 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
                 valuesMap.put("ordersSn", goodsCommentMsg.getComment().getOrderSn());
                 valuesMap.put("userName", goodsCommentMsg.getComment().getMemberName());
                 valuesMap.put("evalTime", DateUtil.toString(goodsCommentMsg.getComment().getCreateTime(), "yyyy-MM-dd"));
-                //获取当前店铺所有者的联系方式
+                // Gets the contact information of the current store owner
                 this.sendSms(this.getSmsMessage(infoSetting.getPhone(), this.replaceContent(messageTemplate.getSmsContent(), valuesMap)));
             }
         }
@@ -382,10 +382,10 @@ public class SmsSendMessageConsumer extends AbstractMessage implements OrderStat
 
 
     /**
-     * 组织短信发送的相关信息
+     * Organize messages to be sent
      *
-     * @param mobile  手机号
-     * @param content 内容
+     * @param mobile  Mobile phone no.
+     * @param content content
      * @return
      */
     private SmsSendVO getSmsMessage(String mobile, String content) {

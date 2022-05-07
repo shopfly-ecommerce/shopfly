@@ -21,12 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 每小时执行
+ * Hourly execution
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-25 上午10:21
+ * 2018-07-25 In the morning10:21
  */
 @Component
 public class RefundStatusJob implements EveryHourExecute {
@@ -34,7 +34,7 @@ public class RefundStatusJob implements EveryHourExecute {
     @Autowired
     private AfterSaleManager afterSaleManager;
     /**
-     * 每小时执行
+     * Hourly execution
      */
     @Override
     public void everyHour() {

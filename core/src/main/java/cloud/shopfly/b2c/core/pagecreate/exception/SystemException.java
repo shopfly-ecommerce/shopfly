@@ -19,12 +19,12 @@ import cloud.shopfly.b2c.framework.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 
 /**
- * 系统异常
+ * A system exception
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-10 上午7:11
+ * 2018-05-10 In the morning7:11
  */
 
 public class SystemException extends ServiceException {

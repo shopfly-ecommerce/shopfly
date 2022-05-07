@@ -26,24 +26,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 路由配置=
+ * The routing configuration=
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2019/2/12 下午3:25
+ * 2019/2/12 In the afternoon3:25
  */
 
 @Configuration
 public class TimeTriggerConfig {
 
     /**
-     * 队列枚举
+     * Queue enumeration
      */
     public final static String IMMEDIATE_QUEUE_XDELAY = "IMMEDIATE_QUEUE_XDELAY";
     /**
-     * 交换机
+     * switches
      */
     public final static String DELAYED_EXCHANGE_XDELAY = "DELAYED_EXCHANGE_XDELAY";
     /**

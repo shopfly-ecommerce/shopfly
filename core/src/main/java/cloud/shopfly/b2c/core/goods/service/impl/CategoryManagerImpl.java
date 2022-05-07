@@ -42,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
- * 商品分类业务类
+ * Commodity classification business class
  *
  * @author fk
  * @version v1.0
@@ -66,11 +66,11 @@ public class CategoryManagerImpl implements CategoryManager {
 
     @Override
     public List<CategoryVO> listAllChildren(Integer parentId) {
-        // 从缓存取所有的分类
+        // Cache access all categories
         List<CategoryDO> list = (List<CategoryDO>) cache.get(CATEGORY_CACHE_ALL);
         if (list == null) {
 
-            // 调用初始化分类缓存方法
+            // Call the initialization class cache method
             list = initCategory();
         }
         List<CategoryVO> topCatList = new ArrayList<CategoryVO>();
@@ -105,25 +105,25 @@ public class CategoryManagerImpl implements CategoryManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public CategoryDO add(CategoryDO category) {
         CategoryDO parent = null;
-        //不能添加重复的分类名称
+        // You cannot add duplicate category names
         String sqlQuery = "select * from es_category where name = ? ";
         List list = this.goodsDaoSupport.queryForList(sqlQuery, category.getName());
         if(StringUtil.isNotEmpty(list)){
-            throw new ServiceException(GoodsErrorCode.E300.code(), "该分类名称已存在");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "The category name already exists");
         }
 
-        // 非顶级分类
+        // Non-top-level classification
         if (category.getParentId() != null && category.getParentId() != 0) {
             parent = this.getModel(category.getParentId());
             if (parent == null) {
-                throw new ServiceException(GoodsErrorCode.E300.code(), "父分类不存在");
+                throw new ServiceException(GoodsErrorCode.E300.code(), "The parent category does not exist");
             }
-            // 替换catPath 根据catPath规则来匹配级别
+            // Replace catPath to match levels according to catPath rules
             String catPath = parent.getCategoryPath().replace("|", ",");
             String[] str = catPath.split(",");
-            // 如果当前的catPath length 大于4 证明当前分类级别大于五级 提示
+            // If the current catPath length is greater than 4, the current classification level is greater than 5
             if (str.length >= 4) {
-                throw new ServiceException(GoodsErrorCode.E300.code(), "最多为三级分类,添加失败");
+                throw new ServiceException(GoodsErrorCode.E300.code(), "It is at most tertiary classification,Add failure");
             }
         }
 
@@ -132,12 +132,12 @@ public class CategoryManagerImpl implements CategoryManager {
         category.setCategoryId(categoryId);
 
         String sql = "";
-        // 判断是否是顶级类似别，如果parentid为空或为0则为顶级类似别
-        // 注意末尾都要加|，以防止查询子孙时出错
-        // 不是顶级类别，有父
+        // Check whether it is a top-level similarity. If parentid is empty or 0, it is a top-level similarity
+        // Note at the end of all want to add |, an error occurred when sons in order to prevent the query
+        // Its not a top-level category, it has a parent
         if (parent != null) {
             category.setCategoryPath(parent.getCategoryPath() + categoryId + "|");
-        } else {// 是顶级类别
+        } else {// Is the top-level category
             category.setCategoryPath("0|" + categoryId + "|");
         }
 
@@ -159,31 +159,31 @@ public class CategoryManagerImpl implements CategoryManager {
 
         CategoryDO catTemp = this.getModel(id);
 
-        //不能添加重复的分类名称
+        // You cannot add duplicate category names
         String sqlQuery = "select * from es_category where name = ? and category_id != ? ";
         List listQuery = this.goodsDaoSupport.queryForList(sqlQuery, category.getName(),id);
         if(StringUtil.isNotEmpty(listQuery)){
-            throw new ServiceException(GoodsErrorCode.E300.code(), "该分类名称已存在");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "The category name already exists");
         }
 
-        // 如果有子分类则不能更换上级分类
-        // 更换上级分类
+        // If there are subcategories, you cannot change the parent category
+        // Replacement of superior classification
         if (!category.getParentId().equals(catTemp.getParentId())) {
-            // 查看是否有子分类
+            // Check to see if there are subcategories
             List list = this.list(id, null);
             if (list != null && list.size() > 0) {
-                throw new ServiceException(GoodsErrorCode.E300.code(), "当前分类有子分类，不能更换上级分类");
+                throw new ServiceException(GoodsErrorCode.E300.code(), "The current category has subcategories and cannot be replaced");
             } else {
                 parent = this.getModel(category.getParentId());
                 if (parent == null) {
-                    throw new ServiceException(GoodsErrorCode.E300.code(), "父分类不存在");
+                    throw new ServiceException(GoodsErrorCode.E300.code(), "The parent category does not exist");
                 }
-                // 替换catPath 根据catPath规则来匹配级别
+                // Replace catPath to match levels according to catPath rules
                 String catPath = parent.getCategoryPath().replace("|", ",");
                 String[] str = catPath.split(",");
-                // 如果当前的catPath length 大于4 证明当前分类级别大于五级 提示
+                // If the current catPath length is greater than 4, the current classification level is greater than 5
                 if (str.length >= 4) {
-                    throw new ServiceException(GoodsErrorCode.E300.code(), "最多为三级分类,添加失败");
+                    throw new ServiceException(GoodsErrorCode.E300.code(), "It is at most tertiary classification,Add failure");
                 }
                 category.setCategoryPath(parent.getCategoryPath() + category.getCategoryId() + "|");
             }
@@ -204,17 +204,17 @@ public class CategoryManagerImpl implements CategoryManager {
     public void delete(Integer id) {
         List<CategoryVO> list = this.listAllChildren(id);
         if (list != null && list.size() > 0) {
-            throw new ServiceException(GoodsErrorCode.E300.code(), "此类别下存在子类别不能删除");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "Subcategories exist under this category and cannot be deleted");
         }
-        // 查询某商品分类的商品
+        // Query the commodities of a commodity category
         String goodsSql = "select count(0) from es_goods where category_id = ? and disabled != -1";
         Integer count = this.goodsDaoSupport.queryForInt(goodsSql, id);
 
         if (count > 0) {
-            throw new ServiceException(GoodsErrorCode.E300.code(), "此类别下存在商品不能删除");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "Items in this category cannot be deleted");
         }
 
-        // 缓存
+        // The cache
         cache.remove(CachePrefix.GOODS_CAT.getPrefix() + id);
         cache.remove(CATEGORY_CACHE_ALL);
 
@@ -227,7 +227,7 @@ public class CategoryManagerImpl implements CategoryManager {
     public List<CategoryBrandDO> saveBrand(Integer categoryId, Integer[] chooseBrands) {
         CategoryDO category = this.getModel(categoryId);
         if (category == null) {
-            throw new ServiceException(GoodsErrorCode.E300.code(), "该分类不存在");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "The category does not exist");
         }
         List<CategoryBrandDO> res = new ArrayList<>();
         if(chooseBrands==null){
@@ -236,13 +236,13 @@ public class CategoryManagerImpl implements CategoryManager {
         }
 
 
-        //查看所选品牌是否存在
+        // Check whether the selected brand exists
         List<Object> term = new ArrayList<>();
         String str = SqlUtil.getInSql(chooseBrands, term);
         Integer count = this.goodsDaoSupport.queryForInt("select count(0) from es_brand where brand_id in(" + str + ")", term.toArray());
 
         if (count < chooseBrands.length) {
-            throw new ServiceException(GoodsErrorCode.E300.code(), "品牌传参错误");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "Brand parameter transfer error");
         }
         String sql = "delete from es_category_brand where category_id = ?";
         this.goodsDaoSupport.execute(sql, categoryId);
@@ -262,12 +262,12 @@ public class CategoryManagerImpl implements CategoryManager {
     @Override
     public List<CategorySpecDO> saveSpec(Integer categoryId, Integer[] chooseSpecs) {
 
-        //修改规格前判断规格有没有商品，如果有则不允许删除
+        // Before modifying the specifications, check whether the specifications exist. If yes, the specifications cannot be deleted
         this.checkOldSpecs(categoryId,chooseSpecs);
 
         CategoryDO category = this.getModel(categoryId);
         if (category == null) {
-            throw new ServiceException(GoodsErrorCode.E300.code(), "该分类不存在");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "The category does not exist");
         }
         List<CategorySpecDO> res = new ArrayList<>();
         if(chooseSpecs==null){
@@ -275,13 +275,13 @@ public class CategoryManagerImpl implements CategoryManager {
             return res;
         }
 
-        //查看所选规格是否存在
+        // Check whether the selected specifications exist
         List<Object> term = new ArrayList<>();
         String str = SqlUtil.getInSql(chooseSpecs, term);
         Integer count = this.goodsDaoSupport.queryForInt("select count(0) from es_specification where spec_id in(" + str + ")", term.toArray());
 
         if (count < chooseSpecs.length) {
-            throw new ServiceException(GoodsErrorCode.E300.code(), "规格绑定传参错误");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "Specifications binding parameter transmission error");
         }
 
         String sql = "delete from es_category_spec where category_id = ?";
@@ -298,12 +298,12 @@ public class CategoryManagerImpl implements CategoryManager {
     }
 
     /**
-     * 判断规格有没有商品，如果有则不允许删除
-     * @param categoryId 分类id
-     * @param chooseSpecs 新规格id数组
+     * Check whether the specification has goods, if there is not allowed to delete
+     * @param categoryId Categoriesid
+     * @param chooseSpecs The new specificationsidAn array of
      */
     private void checkOldSpecs(Integer categoryId,Integer[] chooseSpecs) {
-        //查询出旧的分类和规则关系数据
+        // Query old classification and rule relational data
         List<CategorySpecDO> oldCategorySpecDOList = goodsDaoSupport.queryForList("select * from es_category_spec where category_id = ?",CategorySpecDO.class,categoryId);
         List<Integer> newSpecList = null;
         if (null == chooseSpecs){
@@ -312,7 +312,7 @@ public class CategoryManagerImpl implements CategoryManager {
             newSpecList = Arrays.asList(chooseSpecs);
         }
         List<Integer> newDeleteSpecList = Lists.newArrayList();
-        //查询出将被删除的分类下的规则
+        // Query the rules of the category to be deleted
         if (oldCategorySpecDOList!=null && oldCategorySpecDOList.size()>0){
             for (CategorySpecDO item :oldCategorySpecDOList) {
                 if (!newSpecList.contains(item.getSpecId())){
@@ -320,20 +320,20 @@ public class CategoryManagerImpl implements CategoryManager {
                 }
             }
         }
-        //判断将被删除的规则是否正在被使用，如果正在被使用则不允许删除
+        // Determines whether the rule to be deleted is in use. If it is in use, the deletion is not allowed
         if (newDeleteSpecList.size()>0){
             for (Integer specId :newDeleteSpecList) {
                 Integer count = goodsDaoSupport.queryForInt("select count(0) from es_goods_sku where category_id = ? and specs like '%"+specId+"%'",categoryId);
                 if (count>0){
                     SpecificationDO specificationDO = goodsDaoSupport.queryForObject(SpecificationDO.class,specId);
-                    throw new ServiceException(GoodsErrorCode.E300.code(),"解绑的规格正被商品使用，如"+specificationDO.getSpecName());
+                    throw new ServiceException(GoodsErrorCode.E300.code(),"Unbound specifications are being used by goods such as"+specificationDO.getSpecName());
                 }
             }
         }
     }
 
     /**
-     * 初始化分类缓存
+     * Initialize the class cache
      *
      * @return
      */
@@ -349,23 +349,23 @@ public class CategoryManagerImpl implements CategoryManager {
     }
 
     /**
-     * 查询分类列表
+     * Querying a Category List
      *
      * @return
      */
     private List<CategoryDO> getCategoryList() {
-        // 不能修改为缓存读取
+        // Cannot be changed to cache read
         String sql = "select * from es_category order by category_order asc";
         List<CategoryDO> list = this.goodsDaoSupport.queryForList(sql, CategoryDO.class);
         return list;
     }
 
     /**
-     * 得到当前分类的子孙
+     * Get the descendants of the current classification
      *
-     * @param catList  分类集合
-     * @param parentid 父分类id
-     * @return 带子分类的集合
+     * @param catList  Classified collection
+     * @param parentid The parent categoryid
+     * @return A collection of tape classifications
      */
     private List<CategoryVO> getChildren(List<CategoryDO> catList, Integer parentid) {
         List<CategoryVO> children = new ArrayList<CategoryVO>();
@@ -402,16 +402,16 @@ public class CategoryManagerImpl implements CategoryManager {
     }
 
     /**
-     * 获取某个类别的所有子类
+     * Gets all subclasses of a category
      *
      * @param parentId
      * @return
      */
     private List<CategoryVO> listChildren(Integer parentId) {
-        // 从缓存取所有的分类
+        // Cache access all categories
         List<CategoryDO> list = (List<CategoryDO>) cache.get(CATEGORY_CACHE_ALL);
         if (list == null) {
-            // 调用初始化分类缓存方法
+            // Call the initialization class cache method
             list = initCategory();
         }
         List<CategoryVO> topCatList = new ArrayList<CategoryVO>();

@@ -29,7 +29,7 @@ import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**
- * 会员积分表实体
+ * Member points form entity
  *
  * @author zh
  * @version v7.0.0
@@ -44,64 +44,64 @@ public class MemberPointHistory implements Serializable {
     private static final long serialVersionUID = 5222393178191730L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 会员ID
+     * membersID
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员ID", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersID", required = false)
     private Integer memberId;
     /**
-     * 等级积分
+     * Level score
      */
     @Column(name = "grade_point")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "gade_point", value = "等级积分", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "gade_point", value = "Level score", required = false)
     private Integer gradePoint;
     /**
-     * 操作时间
+     * Operating time
      */
     @Column(name = "time")
-    @ApiModelProperty(name = "time", value = "操作时间", required = false)
+    @ApiModelProperty(name = "time", value = "Operating time", required = false)
     private Long time;
     /**
-     * 操作理由
+     * Operation reason
      */
     @Column(name = "reason")
-    @ApiModelProperty(name = "reason", value = "操作理由", required = false)
+    @ApiModelProperty(name = "reason", value = "Operation reason", required = false)
     private String reason;
     /**
-     * 等级积分类型
+     * Grade integral type
      */
     @Column(name = "grade_point_type")
-    @Min(message = "最小值为0", value = 0)
-    @Max(message = "最大值为1", value = 1)
-    @ApiModelProperty(name = "grade_point_type", value = "等级积分类型 1为增加，0为消费", required = false)
+    @Min(message = "The minimum value for0", value = 0)
+    @Max(message = "The maximum value for1", value = 1)
+    @ApiModelProperty(name = "grade_point_type", value = "Grade integral type1In order to increase,0For the consumer", required = false)
     private Integer gradePointType;
     /**
-     * 操作者
+     * The operator
      */
     @Column(name = "operator")
-    @ApiModelProperty(name = "operator", value = "操作者", required = false)
+    @ApiModelProperty(name = "operator", value = "The operator", required = false)
     private String operator;
     /**
-     * 消费积分
+     * consumption score
      */
     @Column(name = "consum_point")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "consum_point", value = "消费积分", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "consum_point", value = "consumption score", required = false)
     private Integer consumPoint;
     /**
-     * 消费积分类型
+     * Consumption Credit type
      */
     @Column(name = "consum_point_type")
-    @Min(message = "最小值为0", value = 0)
-    @Max(message = "最大值为1", value = 1)
-    @ApiModelProperty(name = "consum_point_type", value = "消费积分类型，1为增加，0为消费", required = false)
+    @Min(message = "The minimum value for0", value = 0)
+    @Max(message = "The maximum value for1", value = 1)
+    @ApiModelProperty(name = "consum_point_type", value = "Consumption point type,1In order to increase,0For the consumer", required = false)
     private Integer consumPointType;
 
     @PrimaryKeyField

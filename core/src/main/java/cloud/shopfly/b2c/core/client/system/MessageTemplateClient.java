@@ -20,15 +20,15 @@ import cloud.shopfly.b2c.core.system.model.dos.MessageTemplateDO;
 
 /**
  * @version v7.0
- * @Description: 消息模版client
+ * @Description: The message templateclient
  * @Author: zjp
  * @Date: 2018/7/27 09:42
  */
 public interface MessageTemplateClient {
     /**
-     * 获取消息模版
-     * @param messageCodeEnum 消息模版编码
-     * @return MessageTemplateDO  消息模版
+     * Get the message template
+     * @param messageCodeEnum Message template encoding
+     * @return MessageTemplateDO  The message template
      */
     MessageTemplateDO getModel(MessageCodeEnum messageCodeEnum);
 

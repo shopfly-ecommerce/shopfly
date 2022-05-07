@@ -16,18 +16,18 @@
 package cloud.shopfly.b2c.core.aftersale.model.enums;
 
 /**
- * 退款(货)类型
+ * A refund(cargo)type
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午9:41 2018/5/3
+ * @since v7.0 In the morning9:41 2018/5/3
  */
 public enum RefuseTypeEnum {
 
-    //退款
-    RETURN_MONEY("退款"),
-    //退货
-    RETURN_GOODS("退货");
+    // A refund
+    RETURN_MONEY("A refund"),
+    // Return of the goods
+    RETURN_GOODS("Return of the goods");
 
     private String description;
 

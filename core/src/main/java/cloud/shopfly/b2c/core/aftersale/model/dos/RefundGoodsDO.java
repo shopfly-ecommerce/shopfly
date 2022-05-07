@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 退货商品表实体
+ * Returned goods form entity
  *
  * @author zjp
  * @version v7.0.0
@@ -61,77 +61,77 @@ public class RefundGoodsDO implements Serializable {
     }
 
     /**
-     * 退货表id
+     * Return of the tableid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 退货(款)编号
+     * Return of the goods(paragraph)Serial number
      */
     @Column(name = "refund_sn")
-    @ApiModelProperty(name = "refund_sn", value = "退货(款)编号", required = false)
+    @ApiModelProperty(name = "refund_sn", value = "Return of the goods(paragraph)Serial number", required = false)
     private String refundSn;
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", required = false)
+    @ApiModelProperty(name = "goods_id", value = "productid", required = false)
     private Integer goodsId;
     /**
-     * 产品id
+     * productid
      */
     @Column(name = "sku_id")
-    @ApiModelProperty(name = "sku_id", value = "产品id", required = false)
+    @ApiModelProperty(name = "sku_id", value = "productid", required = false)
     private Integer skuId;
     /**
-     * 发货数量
+     * The delivery number
      */
     @Column(name = "ship_num")
-    @ApiModelProperty(name = "ship_num", value = "发货数量", required = false)
+    @ApiModelProperty(name = "ship_num", value = "The delivery number", required = false)
     private Integer shipNum;
     /**
-     * 商品价格
+     * Price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "商品价格", required = false)
+    @ApiModelProperty(name = "price", value = "Price", required = false)
     private Double price;
     /**
-     * 退货数量
+     * Returns the number of
      */
     @Column(name = "return_num")
-    @ApiModelProperty(name = "return_num", value = "退货数量", required = false)
+    @ApiModelProperty(name = "return_num", value = "Returns the number of", required = false)
     private Integer returnNum;
     /**
-     * 入库数量
+     * Inventory quantity
      */
     @Column(name = "storage_num")
-    @ApiModelProperty(name = "storage_num", value = "入库数量", required = false)
+    @ApiModelProperty(name = "storage_num", value = "Inventory quantity", required = false)
     private Integer storageNum;
     /**
-     * 商品编号
+     * SN
      */
     @Column(name = "goods_sn")
-    @ApiModelProperty(name = "goods_sn", value = "商品编号", required = false)
+    @ApiModelProperty(name = "goods_sn", value = "SN", required = false)
     private String goodsSn;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "goods_name", value = "Name", required = false)
     private String goodsName;
     /**
-     * 商品图片
+     * Commodity images
      */
     @Column(name = "goods_image")
-    @ApiModelProperty(name = "goods_image", value = "商品图片", required = false)
+    @ApiModelProperty(name = "goods_image", value = "Commodity images", required = false)
     private String goodsImage;
 
     /**
-     * 规格数据
+     * Specification data
      */
     @Column(name = "spec_json")
-    @ApiModelProperty(name = "spec_json", value = "规格数据", required = false)
+    @ApiModelProperty(name = "spec_json", value = "Specification data", required = false)
     private String specJson;
 
     @PrimaryKeyField

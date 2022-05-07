@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartPromotionVo;
 import org.springframework.beans.BeanUtils;
 
 /**
- * 转换promotion包下，此包使用到的model及字段
+ * conversionpromotionPackage, used by this packagemodelAnd the field
  *
  * @author Snow create in 2018/3/20
  * @version v2.0

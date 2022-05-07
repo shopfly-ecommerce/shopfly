@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 请求登陆model
+ * Request landingmodel
  *
  * @author cs
  * @version v1.0
@@ -37,7 +37,7 @@ public class LoginAppDTO implements Serializable {
 
     private static final long serialVersionUID = -1232483319436590972L;
 
-    @ApiModelProperty(name = "uuid", value = "此次登陆随机数", required = false)
+    @ApiModelProperty(name = "uuid", value = "This login random number", required = false)
     private String uuid;
 
     @ApiModelProperty(name = "openid", value = "openid", required = true)
@@ -46,19 +46,19 @@ public class LoginAppDTO implements Serializable {
     @ApiModelProperty(name = "unionid", value = "unionid", required = true)
     private String unionid;
 
-    @ApiModelProperty(name = "headimgurl", value = "头像", required = false,hidden = true)
+    @ApiModelProperty(name = "headimgurl", value = "Head portrait", required = false,hidden = true)
     private String headimgurl;
 
-    @ApiModelProperty(name = "nickName", value = "用户昵称", required = false)
+    @ApiModelProperty(name = "nickName", value = "The user nickname", required = false)
     private String nickName;
 
-    @ApiModelProperty(name = "sex", value = "性别：1:男;0:女", required = false)
+    @ApiModelProperty(name = "sex", value = "gender：1:male;0:female", required = false)
     private Integer sex;
 
-    @ApiModelProperty(name = "province", value = "省份", required = false)
+    @ApiModelProperty(name = "province", value = "provinces", required = false)
     private String province;
 
-    @ApiModelProperty(name = "city", value = "城市", required = false)
+    @ApiModelProperty(name = "city", value = "city", required = false)
     private String city;
 
 

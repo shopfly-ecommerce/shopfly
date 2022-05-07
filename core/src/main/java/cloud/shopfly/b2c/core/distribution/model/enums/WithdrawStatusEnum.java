@@ -18,19 +18,19 @@ package cloud.shopfly.b2c.core.distribution.model.enums;
 import cloud.shopfly.b2c.framework.util.StringUtil;
 
 /**
- * 提现审核状态枚举
+ * Enumeration of withdrawal audit status
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/25 上午11:37
+ * 2018/5/25 In the morning11:37
  */
 
 public enum WithdrawStatusEnum {
-    //提现状态
-    APPLY("申请中"), VIA_AUDITING("审核成功"), FAIL_AUDITING("审核失败"),
-    TRANSFER_ACCOUNTS("已转账");
+    // Withdrawal state
+    APPLY("In the application"), VIA_AUDITING("Review the success"), FAIL_AUDITING("Audit failure"),
+    TRANSFER_ACCOUNTS("Have transfer");
 
     private String name;
 

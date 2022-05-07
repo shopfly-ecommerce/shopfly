@@ -23,11 +23,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * 收货人实体
+ * Consignee entity
  *
  * @author kingapex
  * @version 1.0
- * @created 2017年08月03日14:39:25
+ * @created 2017years08month03day14:39:25
  */
 @SuppressWarnings("AlibabaPojoMustOverrideToString")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -37,22 +37,22 @@ public class ConsigneeVO implements Serializable {
     @ApiModelProperty(value = "id")
     private Integer consigneeId;
 
-    @ApiModelProperty(value = "收货人姓名")
+    @ApiModelProperty(value = "Name of consignee")
     private String name;
 
-    @ApiModelProperty(value = "国家")
+    @ApiModelProperty(value = "countries")
     private String country;
 
-    @ApiModelProperty(value = "州名/省名")
+    @ApiModelProperty(value = "state/Province name")
     private String stateName;
 
-    @ApiModelProperty(value = "城市")
+    @ApiModelProperty(value = "city")
     private String city;
 
-    @ApiModelProperty(value = "详细地址")
+    @ApiModelProperty(value = "Detailed address")
     private String address;
 
-    @ApiModelProperty(value = "手机号")
+    @ApiModelProperty(value = "Mobile phone no.")
     private String mobile;
 
     @ApiModelProperty(value = "Country code")

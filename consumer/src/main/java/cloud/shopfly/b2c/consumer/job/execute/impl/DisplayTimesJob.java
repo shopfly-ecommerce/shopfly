@@ -21,12 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 流量如果不能达到阙值，则每天消费掉积攒掉流量
+ * If the flow can not reach the threshold, the daily consumption accumulated flow
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-08 上午8:48
+ * 2018-08-08 In the morning8:48
  */
 @Component
 public class DisplayTimesJob implements EveryDayExecute {
@@ -35,7 +35,7 @@ public class DisplayTimesJob implements EveryDayExecute {
     private DisplayTimesManager displayTimesManager;
 
     /**
-     * 每日执行
+     * Perform daily
      */
     @Override
     public void everyDay() {

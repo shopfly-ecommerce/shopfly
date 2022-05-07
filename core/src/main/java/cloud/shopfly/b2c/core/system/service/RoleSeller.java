@@ -24,7 +24,7 @@ import java.util.Map;
 
 
 /**
- * 角色表业务层
+ * Role table business layer
  *
  * @author admin
  * @version v7.0.0
@@ -34,68 +34,68 @@ import java.util.Map;
 public interface RoleSeller {
 
     /**
-     * 查询角色表列表
+     * Example Query the role list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加角色表
+     * Adding a role table
      *
-     * @param role 角色表
-     * @return Role 角色表
+     * @param role Character sheet
+     * @return Role Character sheet
      */
     RoleVO add(RoleVO role);
 
     /**
-     * 修改角色表
+     * Modifying the role table
      *
-     * @param role 角色表
-     * @param id   角色表主键
-     * @return Role 角色表
+     * @param role Character sheet
+     * @param id   Primary key of the role table
+     * @return Role Character sheet
      */
     RoleVO edit(RoleVO role, Integer id);
 
     /**
-     * 删除角色表
+     * Deleting a role table
      *
-     * @param id 角色表主键
+     * @param id Primary key of the role table
      */
     void delete(Integer id);
 
     /**
-     * 获取角色表
+     * Get the role table
      *
-     * @param id 角色表主键
-     * @return Role  角色表
+     * @param id Primary key of the role table
+     * @return Role  Character sheet
      */
     RoleDO getModel(Integer id);
 
     /**
-     * 获取角色表
+     * Get the role table
      *
-     * @param id 角色表主键
-     * @return Role  角色表
+     * @param id Primary key of the role table
+     * @return Role  Character sheet
      */
     RoleVO getRole(Integer id);
 
 
     /**
-     * 获取所有角色的权限对照表
+     * Obtain the permission mapping table of all roles
      *
-     * @return 权限对照表
+     * @return Permission comparison table
      */
     Map<String, List<String>> getRoleMap();
 
 
     /**
-     * 根据角色id获取所属菜单
+     * According to the characteridGet owning menu
      *
-     * @param id 角色id
-     * @return 菜单唯一标识
+     * @param id roleid
+     * @return Menu unique identifier
      */
     List<String> getRoleMenu(Integer id);
 

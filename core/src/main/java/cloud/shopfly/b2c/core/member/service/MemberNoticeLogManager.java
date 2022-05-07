@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.member.model.dos.MemberNoticeLog;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 会员站内消息历史业务层
+ * Member station message history business layer
  *
  * @author zh
  * @version v7.0.0
@@ -29,35 +29,35 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface MemberNoticeLogManager {
 
     /**
-     * 查询会员站内消息历史列表
+     * Query the message history list of member sites
      *
-     * @param page     页码
-     * @param pageSize 每页数量
-     * @param read     是否已读,1已读 0未读
+     * @param page     The page number
+     * @param pageSize Number each page
+     * @param read     Have read,1read0unread
      * @return Page
      */
     Page list(int page, int pageSize, Integer read);
 
     /**
-     * 添加会员站内消息历史
+     * Add member site message history
      *
-     * @param content  消息内容
-     * @param sendTime 发送时间
-     * @param memberId 会员id
-     * @param title    标题
-     * @return 历史消息
+     * @param content  The message content
+     * @param sendTime Send time
+     * @param memberId membersid
+     * @param title     title
+     * @return Message history
      */
     MemberNoticeLog add(String content, long sendTime, Integer memberId, String title);
 
     /**
-     * 设置已读
+     * Setup has been read
      *
-     * @param ids 消息id
+     * @param ids The messageid
      */
     void read(Integer[] ids);
 
     /**
-     * 删除历史消息
+     * Deleting Historical Messages
      *
      * @param ids
      */

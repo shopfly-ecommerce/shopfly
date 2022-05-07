@@ -34,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 焦点图业务类
+ * Focus diagram business class
  *
  * @author fk
  * @version v1.0
@@ -62,25 +62,25 @@ public class FocusPictureManagerImpl implements FocusPictureManager {
     @Operation
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public FocusPicture add(FocusPicture cmsFocusPicture) {
-        //焦点图不能超过5个
+        // No more than 5 focus graphs
         String sql = "select count(0) from es_focus_picture where client_type=?";
         Integer count = this.daoSupport.queryForInt(sql, cmsFocusPicture.getClientType());
         if (count >= 5) {
-            throw new ServiceException(SystemErrorCode.E956.code(), "焦点图数量不能超过五张");
+            throw new ServiceException(SystemErrorCode.E956.code(), "The number of focus images cannot exceed five");
         }
 
         this.daoSupport.insert(cmsFocusPicture);
 
         cmsFocusPicture.setId(this.daoSupport.getLastId("es_focus_picture"));
 
-        //发送消息
+        // Send a message
         sendFocusChangeMessage(cmsFocusPicture.getClientType());
 
         return cmsFocusPicture;
     }
 
     /**
-     * 发送首页变化消息
+     * Send home page change messages
      *
      * @param clientType
      */
@@ -100,7 +100,7 @@ public class FocusPictureManagerImpl implements FocusPictureManager {
     public FocusPicture edit(FocusPicture cmsFocusPicture, Integer id) {
 
         this.daoSupport.update(cmsFocusPicture, id);
-        //发送消息
+        // Send a message
         sendFocusChangeMessage(cmsFocusPicture.getClientType());
 
         return cmsFocusPicture;
@@ -114,7 +114,7 @@ public class FocusPictureManagerImpl implements FocusPictureManager {
 
         this.daoSupport.delete(FocusPicture.class, id);
 
-        //发送消息
+        // Send a message
         sendFocusChangeMessage(cmsFocusPicture.getClientType());
     }
 

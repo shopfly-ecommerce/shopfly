@@ -26,27 +26,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 访问次数统计
+ * Access Statistics
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/8/7 上午8:17
+ * 2018/8/7 In the morning8:17
  */
 
 @RestController
 @RequestMapping("/view")
-@Api(description = "访问次数统计")
+@Api(description = "Access Statistics")
 public class DisplayTimesBuyerController {
 
     @Autowired
     private DisplayTimesManager displayTimesManager;
 
     @GetMapping()
-    @ApiOperation(value = "访问页面")
+    @ApiOperation(value = "To access the page")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "url", value = "url地址", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "url", value = "urladdress", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "uuid", value = "uuid", required = true, dataType = "String", paramType = "query")
     })
     public void view(String url, String uuid) {

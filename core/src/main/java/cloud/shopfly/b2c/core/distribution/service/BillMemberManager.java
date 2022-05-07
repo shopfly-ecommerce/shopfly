@@ -26,19 +26,19 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 用户结算单
+ * Customer statement
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 上午8:51
+ * 2018/5/22 In the morning8:51
  */
 
 public interface BillMemberManager {
 
     /**
-     * 获取某个会员的下线业绩
+     * Get a members referral performance
      *
      * @param memberId
      * @param billId
@@ -48,7 +48,7 @@ public interface BillMemberManager {
 
 
     /**
-     * 获取结算单
+     * Get the statement
      *
      * @param totalSn
      * @param memberId
@@ -57,7 +57,7 @@ public interface BillMemberManager {
     BillMemberDO getBillByTotalSn(String totalSn, Integer memberId);
 
     /**
-     * 分页获取会员历史业绩
+     * Page access to member history performance
      *
      * @param memberId
      * @param pageNo
@@ -67,7 +67,7 @@ public interface BillMemberManager {
     Page<BillMemberVO> getAllByMemberId(Integer memberId, Integer pageNo, Integer pageSize);
 
     /**
-     * 新增一个结算单
+     * Add a new statement
      *
      * @param billMember
      * @return
@@ -75,7 +75,7 @@ public interface BillMemberManager {
     BillMemberDO add(BillMemberDO billMember);
 
     /**
-     * 查询一个总结算单的会员结算单
+     * Query a members statement of a master statement
      *
      * @param page
      * @param pageSize
@@ -87,23 +87,23 @@ public interface BillMemberManager {
 
 
     /**
-     * 获取分销商结算单
+     * Obtain distributor statements
      *
-     * @param billId 总结算单id
+     * @param billId General statementid
      * @return do
      */
     BillMemberDO getBillMember(Integer billId);
 
 
     /**
-     * 购买商品产生的结算
+     * The settlement of goods purchased
      *
      * @param order
      */
     void buyShop(DistributionOrderDO order);
 
     /**
-     * 退货商品产生的结算
+     * Settlement of returned goods
      *
      * @param order
      * @param distributionRefundDTO
@@ -111,7 +111,7 @@ public interface BillMemberManager {
     void returnShop(DistributionOrderDO order, DistributionRefundDTO distributionRefundDTO);
 
     /**
-     * 获取分销账单
+     * Get distribution bill
      *
      * @param page
      * @param pageSize
@@ -123,7 +123,7 @@ public interface BillMemberManager {
 
 
     /**
-     * 获取分销退款单
+     * Get distribution refund slip
      *
      * @param page
      * @param pagesize
@@ -134,7 +134,7 @@ public interface BillMemberManager {
     Page<DistributionSellbackOrderVO> listSellback(Integer page, Integer pagesize, Integer id, Integer memberId);
 
     /**
-     * 获取当前分销商当月结算单
+     * Obtain the current distributors monthly statement
      * @param memberId
      * @param billId
      * @return
@@ -142,7 +142,7 @@ public interface BillMemberManager {
     BillMemberVO getCurrentBillMember(Integer memberId, Integer billId);
 
     /**
-     * 获取指定sn的分销商结算单
+     * Access to specifysnDistributor statement
      *
      * @param memberId
      * @param sn
@@ -152,7 +152,7 @@ public interface BillMemberManager {
 
 
     /**
-     * 结算单会员分页查询
+     * Statement member paging query
      *
      * @param pageNo
      * @param pageSize

@@ -45,7 +45,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 支付宝pc端
+ * @Description: Alipaypcend
  * @date 2018/4/1714:55
  * @since v7.0.0
  */
@@ -56,7 +56,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
     private Debugger debugger;
 
     /**
-     * 支付
+     * pay
      * @param bill
      * @return
      */
@@ -66,7 +66,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
 
             AlipayClient alipayClient =  super.buildClient(bill.getClientType());
 
-            //设置请求参数
+            // Setting request Parameters
             AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
             alipayRequest.setReturnUrl(this.getReturnUrl(bill));
             alipayRequest.setNotifyUrl(this.getCallBackUrl(bill.getTradeType(), bill.getClientType()));
@@ -76,7 +76,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
 
             Map<String, String> sParaTemp =  createParam(bill);
 
-            // 扫描二维码模式
+            // Scanning TWO-DIMENSIONAL code mode
             if (PayMode.qr.name().equals(bill.getPayMode())) {
                 sParaTemp.put("qr_pay_mode", "4");
                 sParaTemp.put("qrcode_width", "200");
@@ -86,7 +86,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
 
             String bizContent =  json.writeValueAsString( sParaTemp);
 
-            //填充业务参数
+            // Populate business parameters
             alipayRequest.setBizContent(bizContent);
             AlipayResponse response = alipayClient.pageExecute(alipayRequest);
             return JsonUtil.toMap(response.getBody());
@@ -98,65 +98,65 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
     }
 
     /**
-     * 同步支付回调
+     * Synchronous payment callback
      *
      * @param tradeType
      */
     public String onReturn(TradeType tradeType) {
 
-        //支付账单编号
+        // Bill No.
         String billSn = "";
-        // 交易号
+        // Transaction no.
         try {
 
             HttpServletRequest request = ThreadContextHolder.getHttpRequest();
             billSn = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
-            // 支付宝交易号WAIT_BUYER_PAY	交易创建，等待买家付款 TRADE_CLOSED	未付款交易超时关闭，或支付完成后全额退款 TRADE_SUCCESS	交易支付成功 TRADE_FINISHED	交易结束，不可退款
+            // TRADE_CLOSED unpaid trade timeout closed, or full refund after payment is completed TRADE_SUCCESS trade paid successfully TRADE_FINISHED trade closed, non-refundable
             String returnTradeNo = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
-            // 付款金额
+            // The payment amount
             String totalAmount = request.getParameter("total_amount");
 
             Map<String, String> cfgparams = this.getConfig(ClientType.PC);
             String alipayPublicKey = cfgparams.get("alipay_public_key");
 
-            // 验证是否成功
+            // Verify success
             if (ShopflyAlipayUtil.verify(alipayPublicKey)) {
-                //新版本同步没有交易状态
+                // New version synchronization has no transaction status
                 double payPrice = StringUtil.toDouble(totalAmount, 0d);
                 //this.paySuccess(billSn, returnTradeNo, tradeType, payPrice);
             } else {
 
-                throw new ServiceException(PaymentErrorCode.E503.code(), "验证失败");
+                throw new ServiceException(PaymentErrorCode.E503.code(), "Validation fails");
             }
 
         } catch (Exception e) {
             if (logger.isErrorEnabled()) {
-                logger.error("验证发生异常", e);
+                logger.error("Verify an exception", e);
             }
         }
         return billSn;
     }
 
     /**
-     * 异步支付回调
+     * Asynchronous payment callback
      *
      * @param tradeType
      */
     public String onCallback(TradeType tradeType, ClientType clientType) {
-        debugger.log("进入支付宝回调");
+        debugger.log("Enter alipay callback");
         try {
 
             HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
-            // 商户订单号
+            // Merchant Order Number
             String outTradeNo = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
-            // 支付宝交易号
+            // Alipay transaction number
             String returnTradeNo = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
-            // 交易状态
+            // Transaction status
             String tradeStatus = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
-            // 付款金额
+            // The payment amount
             String totalAmount = request.getParameter("total_amount");
 
             Map<String, String> cfgparams = this.getConfig(clientType);
@@ -166,22 +166,22 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
             debugger.log("alipayPublicKey:");
             debugger.log(alipayPublicKey);
 
-            // 验证成功
+            // Authentication is successful
             if (ShopflyAlipayUtil.verify(alipayPublicKey)) {
-                debugger.log("验证成功");
+                debugger.log("Authentication is successful");
 
                 if ("TRADE_SUCCESS".equals(tradeStatus) || "TRADE_FINISHED".equals(tradeStatus)) {
                     double payPrice = StringUtil.toDouble(totalAmount, 0d);
                     this.paySuccess(outTradeNo, returnTradeNo, tradeType, payPrice);
                 }
-                // 请不要修改或删除
+                // Please do not modify or delete
                 return "success";
-            } else {// 验证失败
-                debugger.log("验证失败");
+            } else {// Validation fails
+                debugger.log("Validation fails");
                 return "fail";
             }
         } catch (Exception e) {
-            this.logger.error("验证发生异常", e);
+            this.logger.error("Verify an exception", e);
             return "fail";
         }
 
@@ -189,7 +189,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
     }
 
     /**
-     * 查询支付结果
+     * Query payment result
      *
      * @param bill
      * @return
@@ -214,7 +214,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
             if (response.isSuccess()) {
 
                 String tradeStatus = response.getTradeStatus();
-                // 交易状态：WAIT_BUYER_PAY（交易创建，等待买家付款）、TRADE_CLOSED（未付款交易超时关闭，或支付完成后全额退款）、TRADE_SUCCESS（交易支付成功）、TRADE_FINISHED（交易结束，不可退款）
+                // Trade status: WAIT_BUYER_PAY (transaction created, waiting for buyer to pay), TRADE_CLOSED (unpaid transaction closed over time, or full refund after payment completed), TRADE_SUCCESS (transaction paid successfully), TRADE_FINISHED (transaction completed, non-refundable)
                 if ("TRADE_SUCCESS".equals(tradeStatus) || "TRADE_FINISHED".equals(tradeStatus)) {
 
                     String totalAmount = response.getTotalAmount();
@@ -227,7 +227,7 @@ public class AliPayPaymentExecutor extends AlipayPluginConfig {
                 }
             } else {
 
-                logger.error("支付查询失败");
+                logger.error("Payment query failed");
             }
 
         } catch (JsonProcessingException e) {

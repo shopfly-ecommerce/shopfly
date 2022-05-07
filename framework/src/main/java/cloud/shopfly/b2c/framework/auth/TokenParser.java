@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.framework.auth;
 
 /**
- * Token 解析器
+ * Token The parser
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -25,9 +25,9 @@ package cloud.shopfly.b2c.framework.auth;
 public interface TokenParser {
 
     /**
-     * 解析token
+     * parsingtoken
      * @param token
-     * @return 用户对象
+     * @return The user object
      */
     <T>  T parse(Class<T> clz, String token) throws TokenParseException;
 

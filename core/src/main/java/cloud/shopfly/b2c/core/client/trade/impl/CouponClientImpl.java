@@ -22,11 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 优惠券client实现
+ * couponsclientimplementation
  *
  * @author zh
  * @version v7.0
- * @date 18/12/6 下午4:28
+ * @date 18/12/6 In the afternoon4:28
  * @since v7.0
  */
 @Service

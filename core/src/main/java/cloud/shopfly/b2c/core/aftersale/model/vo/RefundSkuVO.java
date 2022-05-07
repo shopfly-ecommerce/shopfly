@@ -27,14 +27,14 @@ import java.io.Serializable;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-12-18 上午9:04
+ * 2018-12-18 In the morning9:04
  */
 public class RefundSkuVO extends OrderSkuVO implements Serializable {
 
-    @ApiModelProperty("单件可退款金额")
+    @ApiModelProperty("Single refundable amount")
     private double refundPrice;
 
-    @ApiModelProperty("最后一件商品可退款金额（针对购买多件相同商品）")
+    @ApiModelProperty("Refundable amount for the last item（For buying more than one item）")
     private double lastRefundPrice;
 
     public double getRefundPrice() {

@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * 活动商品DTO
+ * Activities of goodsDTO
  *
  * @author Snow create in 2018/3/30
  * @version v2.0
@@ -34,25 +34,25 @@ public class PromotionGoodsDTO implements Serializable {
 
     private static final long serialVersionUID = 698984607262185052L;
 
-    @ApiModelProperty(name = "goods_id", value = "商品id")
+    @ApiModelProperty(name = "goods_id", value = "productid")
     private Integer goodsId;
 
-    @ApiModelProperty(name = "goods_name", value = "商品名称")
+    @ApiModelProperty(name = "goods_name", value = "Name")
     private String goodsName;
 
-    @ApiModelProperty(value = "商品缩略图")
+    @ApiModelProperty(value = "Product thumbnail")
     private String thumbnail;
 
-    @ApiModelProperty(value = "商品编号")
+    @ApiModelProperty(value = "SN")
     private String sn;
 
-    @ApiModelProperty(value = "商品价格")
+    @ApiModelProperty(value = "Price")
     private Double price;
 
-    @ApiModelProperty(value = "库存")
+    @ApiModelProperty(value = "Inventory")
     private Integer quantity;
 
-    @ApiModelProperty(value = "可用库存")
+    @ApiModelProperty(value = "Available")
     private Integer enableQuantity;
 
     public Integer getGoodsId() {

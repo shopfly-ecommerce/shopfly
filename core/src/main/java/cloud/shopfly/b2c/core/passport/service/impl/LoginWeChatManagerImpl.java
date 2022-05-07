@@ -52,7 +52,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 微信统一登陆服务实现
+ * Wechat unified login service has been realized
  * @author cs
  * @since v1.0
  * @version 7.2.2
@@ -123,7 +123,7 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
         loginUserDTO = this.getWechatInfo(loginUserDTO, access_token, openid);
         loginUserDTO.setUnionType(ConnectTypeEnum.WECHAT);
         if (StringUtil.isEmpty(loginUserDTO.getUnionid())){
-            throw new ServiceException("403","请将公众号绑定到微信开放平台");
+            throw new ServiceException("403","Please bind the public account to wechat open platform");
         }
         return loginManager.loginByUnionId(loginUserDTO);
     }
@@ -170,10 +170,10 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
         String openid = json.getString("openid");
         loginUserDTO.setOpenid(openid);
         loginUserDTO.setOpenType(ConnectTypeEnum.WECHAT_MINI);
-        // 获取会话密钥（session_key）
+        // Get session key (session_key)
         String sessionKey = json.get("session_key").toString();
         cache.put(WX_MINI_SESSIONKEY+openid,sessionKey,60*60*24*2);
-        //获取不到unionid
+        // Failed to obtain the UnionID
         JSONObject userInfoJson = connectManager.getUserInfo(weChatMiniLoginDTO.getEdata(), sessionKey, weChatMiniLoginDTO.getIv());
         if (logger.isDebugEnabled()) {
             logger.debug("miniLogin==userInfoJson===" + userInfoJson.toString());
@@ -276,7 +276,7 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
                 String mobile = jsonObject.getString("phoneNumber");
                 Member member = memberManager.getMemberByMobile(mobile);
                 if (member != null ){
-                    throw new ServiceException(MemberErrorCode.E111.code(),"当前手机号已经绑定其他用户");
+                    throw new ServiceException(MemberErrorCode.E111.code(),"The current mobile number has been bound to another user");
                 }
                 Map<String,Object> where = Maps.newHashMap();
                 where.put("member_id",uid);
@@ -304,7 +304,7 @@ public class LoginWeChatManagerImpl implements LoginWeChatManager {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
         cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
-        //解析解密后的字符串
+        // Parse the decrypted string
         return new String(cipher.doFinal(encData),"UTF-8");
     }
 

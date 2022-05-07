@@ -35,7 +35,7 @@ import java.util.List;
 
 
 /**
- * 邮件业务类
+ * Mail business class
  *
  * @author zh
  * @version v7.0.0
@@ -71,14 +71,14 @@ public class SmtpManagerImpl implements SmtpManager {
             cache.remove(CachePrefix.SMTP.getPrefix());
             return smtp;
         }
-        throw new ResourceNotFoundException("该smtp未找到！");
+        throw new ResourceNotFoundException("thesmtpNot found！");
     }
 
     @Override
     public SmtpDO getModel(Integer id) {
         SmtpDO smtp = this.systemDaoSupport.queryForObject(SmtpDO.class, id);
         if (smtp == null) {
-            throw new ResourceNotFoundException("该smtp未找到！");
+            throw new ResourceNotFoundException("thesmtpNot found！");
         }
         return smtp;
     }
@@ -100,7 +100,7 @@ public class SmtpManagerImpl implements SmtpManager {
     public void delete(Integer id) {
         SmtpDO smtp = this.getModel(id);
         if (smtp == null) {
-            throw new ResourceNotFoundException("该smtp未找到！");
+            throw new ResourceNotFoundException("thesmtpNot found！");
 
         }
         this.systemDaoSupport.delete(SmtpDO.class, id);
@@ -110,10 +110,10 @@ public class SmtpManagerImpl implements SmtpManager {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void send(String send, SmtpDO smtp) {
         EmailVO emailVO = new EmailVO();
-        emailVO.setTitle("测试邮件");
+        emailVO.setTitle("Test email");
         emailVO.setEmail(send);
-        emailVO.setType("测试邮件");
-        emailVO.setContent("测试邮件发送");
+        emailVO.setType("Test email");
+        emailVO.setContent("Test Email sending");
 
         if (smtp.getOpenSsl() == 1 || "smtp.qq.com".equals(smtp.getHost())) {
             emailManager.sendMailByTransport(smtp, emailVO);
@@ -138,22 +138,22 @@ public class SmtpManagerImpl implements SmtpManager {
             }
         }
         if (currentSmtp == null) {
-            throw new ResourceNotFoundException("未找到可用smtp，都已达到最大发信数 ");
+            throw new ResourceNotFoundException("Not found availablesmtp, have reached the maximum number of messages sent");
         }
         return currentSmtp;
 
     }
 
     /**
-     * 检测smtp服务器是否可以用
+     * detectionsmtpWhether the server is available
      *
      * @param smtp
-     * @return 检查是否通过
+     * @return Check whether it passes
      */
     private boolean checkCount(SmtpDO smtp) {
-        //最后一次发送时间
+        // Last sending time
         long lastSendTime = smtp.getLastSendTime();
-        //已经不是今天
+        // Its not today
         if (!DateUtil.toString(new Date(lastSendTime * 1000), "yyyy-MM-dd").equals(DateUtil.toString(new Date(), "yyyy-MM-dd"))) {
             smtp.setSendCount(0);
         }

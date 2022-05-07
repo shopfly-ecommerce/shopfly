@@ -29,11 +29,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 订单发票历史消费者
+ * Order invoice history consumer
  *
  * @author zh
  * @version v7.0
- * @date 18/7/21 下午5:50
+ * @date 18/7/21 In the afternoon5:50
  * @since v7.0
  */
 @Component
@@ -45,9 +45,9 @@ public class OrderReceiptHistoryConsumer implements TradeIntoDbEvent {
     @Override
     public void onTradeIntoDb(TradeVO tradeVO) {
 
-        //从交易中获取订单列表
+        // Get the order list from the transaction
         List<OrderDTO> orderDTOS = tradeVO.getOrderList();
-        //循环订单取出发票信息
+        // Loop order to retrieve invoice information
         for (OrderDTO orderDTO : orderDTOS) {
             ReceiptVO receiptVO = orderDTO.getReceiptVO();
             if (receiptVO != null && receiptVO.getReceiptTitle() != null && receiptVO.getReceiptType() != null) {
@@ -58,7 +58,7 @@ public class OrderReceiptHistoryConsumer implements TradeIntoDbEvent {
                 receiptHistory.setOrderSn(orderDTO.getSn());
                 receiptHistory.setReceiptTitle(receiptVO.getReceiptTitle());
                 receiptHistory.setReceiptContent(receiptVO.getReceiptContent());
-                //发票金额为待支付金额减去运费  update by liuyulei 2019-05-13
+                // Invoice amount is the amount to be paid minus freight
                 Double receiptAmount = tradeVO.getPriceDetail().getIsFreeFreight() != 1 ? CurrencyUtil.sub(orderDTO.getNeedPayMoney(), orderDTO.getPrice().getFreightPrice()) : 0;
                 if (receiptAmount < 0) {
                     receiptAmount = 0D;

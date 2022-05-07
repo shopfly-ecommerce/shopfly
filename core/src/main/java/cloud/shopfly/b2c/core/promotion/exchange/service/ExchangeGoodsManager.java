@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 积分商品业务层
+ * Points commodity business layer
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -33,55 +33,55 @@ public interface ExchangeGoodsManager {
 
 
 	/**
-	 * 查询积分商品列表
+	 * Query the list of credits
 	 * @param param
 	 * @return
 	 */
 	Page list(ExchangeQueryParam param);
 
 	/**
-	 * 添加积分兑换
-	 * @param exchangeSetting 积分兑换
-	 * @param goodsDTO 商品DTO
-	 * @return ExchangeSetting 积分兑换 */
+	 * Add point redemption
+	 * @param exchangeSetting Status
+	 * @param goodsDTO productDTO
+	 * @return ExchangeSetting Status*/
 	ExchangeDO add(ExchangeDO exchangeSetting, PromotionGoodsDTO goodsDTO);
 
 	/**
-	* 修改积分兑换
-	* @param exchangeSetting 积分兑换
-	* @param goodsDTO 商品DTO
-	* @return ExchangeSetting 积分兑换
+	* Modified point redemption
+	* @param exchangeSetting Status
+	* @param goodsDTO productDTO
+	* @return ExchangeSetting Status
 	*/
 	ExchangeDO edit(ExchangeDO exchangeSetting, PromotionGoodsDTO goodsDTO);
 
 	/**
-	 * 删除积分兑换
-	 * @param id 积分兑换主键
+	 * Delete Points redemption
+	 * @param id Points are converted to primary keys
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取积分兑换
-	 * @param id 积分兑换主键
-	 * @return ExchangeSetting  积分兑换
+	 * Get points for redemption
+	 * @param id Points are converted to primary keys
+	 * @return ExchangeSetting  Status
 	 */
 	ExchangeDO getModel(Integer id);
 
 	/**
-	 * 查询某个商品的积分兑换信息
+	 * Query information about a product
 	 * @param goodsId
 	 * @return
 	 */
     ExchangeDO getModelByGoods(Integer goodsId);
 
 	/**
-	 * 删除某个商品的积分信息
+	 * Delete credit information for an item
 	 * @param goodsId
 	 */
 	void deleteByGoods(Integer goodsId);
 
 	/**
-	 * 查询某个积分分类的积分兑换信息
+	 * Query the point redemption information for a point category
 	 * @param categoryId
 	 * @return
 	 */

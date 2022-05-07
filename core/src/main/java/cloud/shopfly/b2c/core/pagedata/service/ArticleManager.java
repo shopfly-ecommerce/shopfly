@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 文章业务层
+ * Article Business Layer
  *
  * @author fk
  * @version v1.0
@@ -31,10 +31,10 @@ import java.util.List;
 public interface ArticleManager {
 
     /**
-     * 查询文章列表
+     * Query the list of articles
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @param name
      * @param categoryId
      * @return Page
@@ -42,53 +42,53 @@ public interface ArticleManager {
     Page list(int page, int pageSize, String name, Integer categoryId);
 
     /**
-     * 添加文章
+     * Add the article
      *
-     * @param article 文章
-     * @return Article 文章
+     * @param article The article
+     * @return Article The article
      */
     Article add(Article article);
 
     /**
-     * 修改文章
+     * Modify the article
      *
-     * @param article 文章
-     * @param id      文章主键
-     * @return Article 文章
+     * @param article The article
+     * @param id      The article primary key
+     * @return Article The article
      */
     Article edit(Article article, Integer id);
 
     /**
-     * 删除文章
+     * Delete articles
      *
-     * @param id 文章主键
+     * @param id The article primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取文章
+     * Access to the article
      *
-     * @param id 文章主键
-     * @return Article  文章
+     * @param id The article primary key
+     * @return Article  The article
      */
     Article getModel(Integer id);
 
     /**
-     * 查询某位置的文章
+     * Query for articles in a location
      * @param position
      * @return
      */
     List<Article> listByPosition(String position);
 
     /**
-     * 某分类类型下的文章
+     * An article under a certain classification type
      * @param categoryType
      * @return
      */
     List<Article> listByCategoryType(String categoryType);
 
     /**
-     * 获取所有文章id
+     * Get all articlesid
      * @return
      */
     List<Integer> getAllArticleIds();

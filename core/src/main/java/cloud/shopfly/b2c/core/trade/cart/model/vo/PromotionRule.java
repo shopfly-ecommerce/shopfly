@@ -47,12 +47,12 @@ public class PromotionRule implements Serializable {
     }
 
     /**
-     * 一共要减多少钱
+     * How much will be taken off altogether
      */
     private Double reducedTotalPrice;
 
     /**
-     * 单价减多少钱
+     * How much is the unit price minus
      */
     private Double reducedPrice;
 
@@ -141,7 +141,7 @@ public class PromotionRule implements Serializable {
     }
 
     /**
-     * 促销标签
+     * Promotion label
      */
     private String tag;
 
@@ -162,13 +162,13 @@ public class PromotionRule implements Serializable {
     }
 
     /**
-     * 是否失效了
+     * Is it invalid?
      */
     private boolean invalid;
 
 
     /**
-     * 失效原因
+     * The failure reason
      */
     private String invalidReason;
 

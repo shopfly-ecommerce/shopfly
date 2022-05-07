@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 订单相关SDK
+ * Order relatedSDK
  *
  * @author Snow create in 2018/5/28
  * @version v2.0
@@ -122,9 +122,9 @@ public class OrderClientImpl implements OrderClient {
     }
 
     /**
-     * 读取一个订单详细<br/>
+     * Read an order detail<br/>
      *
-     * @param orderSn 订单编号 必传
+     * @param orderSn Order number must be uploaded
      * @return
      */
     @Override

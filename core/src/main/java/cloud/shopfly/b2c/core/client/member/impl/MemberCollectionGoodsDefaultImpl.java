@@ -22,11 +22,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 会员收藏商品默认实现
+ * Member collection of goods by default
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 下午4:47
+ * @date 18/7/27 In the afternoon4:47
  * @since v7.0
  */
 @Service

@@ -30,7 +30,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 品牌控制器
+ * Brand controller
  *
  * @author fk
  * @version v2.0
@@ -38,25 +38,25 @@ import javax.validation.constraints.NotEmpty;
  */
 @RestController
 @RequestMapping("/seller/goods/brands")
-@Api(description = "品牌相关API")
+@Api(description = "Brand relatedAPI")
 public class BrandSellerController {
     @Autowired
     private BrandManager brandManager;
 
-    @ApiOperation(value = "查询品牌列表", response = BrandDO.class)
+    @ApiOperation(value = "Query brand list", response = BrandDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "name", value = "品牌名称", dataType = "string", paramType = "query")})
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = " name", dataType = "string", paramType = "query")})
     @GetMapping
-    public Page list(@ApiIgnore @NotEmpty(message = "页码不能为空") Integer pageNo,
-                     @ApiIgnore @NotEmpty(message = "每页数量不能为空") Integer pageSize,
+    public Page list(@ApiIgnore @NotEmpty(message = "The page number cannot be blank") Integer pageNo,
+                     @ApiIgnore @NotEmpty(message = "The number of pages cannot be empty") Integer pageSize,
                      String name) {
 
         return this.brandManager.list(pageNo, pageSize,name);
     }
 
-    @ApiOperation(value = "添加品牌", response = BrandDO.class)
+    @ApiOperation(value = "Add a brand", response = BrandDO.class)
     @PostMapping
     public BrandDO add(@Valid BrandDO brand) {
 
@@ -66,9 +66,9 @@ public class BrandSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改品牌", response = BrandDO.class)
+    @ApiOperation(value = "Modify the brand", response = BrandDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")})
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")})
     public BrandDO edit(@Valid BrandDO brand, @PathVariable Integer id) {
 
         this.brandManager.edit(brand, id);
@@ -77,9 +77,9 @@ public class BrandSellerController {
     }
 
     @DeleteMapping(value = "/{ids}")
-    @ApiOperation(value = "删除品牌")
+    @ApiOperation(value = "Delete the brand")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ids", value = "要删除的品牌主键集合", required = true, dataType = "int", paramType = "path", allowMultiple = true)})
+            @ApiImplicitParam(name = "ids", value = "Collection of brand primary keys to delete", required = true, dataType = "int", paramType = "path", allowMultiple = true)})
     public String delete(@PathVariable Integer[] ids) {
 
         this.brandManager.delete(ids);
@@ -88,9 +88,9 @@ public class BrandSellerController {
     }
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个品牌")
+    @ApiOperation(value = "Query a brand")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的品牌主键", required = true, dataType = "int", paramType = "path")})
+            @ApiImplicitParam(name = "id", value = "Primary key of the brand to be queried", required = true, dataType = "int", paramType = "path")})
     public BrandDO get(@PathVariable Integer id) {
 
         BrandDO brand = this.brandManager.getModel(id);

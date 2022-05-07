@@ -20,11 +20,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Base64相关
+ * Base64related
  * @author fk
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 @SuppressWarnings("AlibabaUndefineMagicConstant")
 public class Base64 {

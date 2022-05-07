@@ -39,11 +39,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 会员安全业务实现
+ * Member security business implementation
  *
  * @author zh
  * @version v7.0
- * @date 18/4/23 下午3:24
+ * @date 18/4/23 In the afternoon3:24
  * @since v7.0
  */
 @Service
@@ -64,61 +64,61 @@ public class MemberSecurityManagerImpl implements MemberSecurityManager {
     @Override
     public void sendBindSmsCode(String mobile) {
         if (!Validator.isMobile(mobile)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "手机号码格式不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The mobile phone number format is incorrect");
         }
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.getMemberByMobile(mobile);
         if (member != null) {
-            throw new ServiceException(MemberErrorCode.E111.code(), "此手机号码已经绑定其他用户");
+            throw new ServiceException(MemberErrorCode.E111.code(), "The mobile phone number has been bound to another user");
         }
-        smsManager.sendSmsMessage("手机绑定操作", mobile, SceneType.BIND_MOBILE);
+        smsManager.sendSmsMessage("Mobile phone Binding", mobile, SceneType.BIND_MOBILE);
     }
 
     @Override
     public void sendValidateSmsCode(String mobile) {
         if (!Validator.isMobile(mobile)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "手机号码格式不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The mobile phone number format is incorrect");
         }
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.getMemberByMobile(mobile);
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("Current member does not exist");
         }
-        smsManager.sendSmsMessage("手机验证码验证", mobile, SceneType.VALIDATE_MOBILE);
+        smsManager.sendSmsMessage("Mobile phone verification code authentication", mobile, SceneType.VALIDATE_MOBILE);
     }
 
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void updatePassword(Integer memberId, String password) {
-        //校验是否经过手机验证而进行此步骤
+        // Verify whether this step is performed after mobile phone authentication
         Member member = memberManager.getModel(memberId);
-        //校验当前会员是否存在
+        // Check whether the current member exists
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("Current member does not exist");
         }
-        //校验当前会员是否被禁用
+        // Verify that the current membership is disabled
         if (!member.getDisabled().equals(0)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "当前账号已经禁用");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The current account is disabled");
         }
-        //校验密码长度
+        // Verify password length
         String newPassword = StringUtil.md5(password + member.getUname().toLowerCase());
         String sql = "update es_member set password = ? where member_id =? ";
         this.memberDaoSupport.execute(sql, newPassword, memberId);
-        //清除步骤标记缓存
+        // Clear step marker cache
         passportManager.clearSign(member.getMobile(), SceneType.VALIDATE_MOBILE.name());
     }
 
     @Override
     public void bindMobile(String mobile) {
         Buyer buyer = UserContext.getBuyer();
-        //校验手机号码是否已经被占用
+        // Check whether the mobile phone number is occupied
         Member member = memberManager.getModel(buyer.getUid());
         if (member != null && !StringUtil.isEmpty(member.getMobile())) {
-            throw new ServiceException(MemberErrorCode.E111.code(), "当前会员已经绑定手机号");
+            throw new ServiceException(MemberErrorCode.E111.code(), "The current member has a mobile phone number bound");
         }
         List list = memberDaoSupport.queryForList("select * from es_member where mobile = ?", mobile);
         if (list.size() > 0) {
-            throw new ServiceException(MemberErrorCode.E111.code(), "当前手机号已经被占用");
+            throw new ServiceException(MemberErrorCode.E111.code(), "The current mobile phone number is occupied");
         }
         String sql = "update es_member set mobile = ? where member_id = ?";
         this.memberDaoSupport.execute(sql, mobile, buyer.getUid());
@@ -128,19 +128,19 @@ public class MemberSecurityManagerImpl implements MemberSecurityManager {
     public void changeBindMobile(String mobile) {
         Buyer buyer = UserContext.getBuyer();
         if (buyer != null) {
-            //校验是否经过手机验证而进行此步骤
+            // Verify whether this step is performed after mobile phone authentication
             Member member = memberManager.getModel(buyer.getUid());
             String str = StringUtil.toString(cache.get(CachePrefix.MOBILE_VALIDATE.getPrefix() + SceneType.VALIDATE_MOBILE.name() + "_" + member.getMobile()));
             if (StringUtil.isEmpty(str)) {
-                throw new ServiceException(MemberErrorCode.E115.code(), "对已绑定手机校验失效");
+                throw new ServiceException(MemberErrorCode.E115.code(), "Verification of bound mobile phones is invalid");
             }
             List list = memberDaoSupport.queryForList("select * from es_member where mobile = ?", mobile);
             if (list.size() > 0) {
-                throw new ServiceException(MemberErrorCode.E111.code(), "当前手机号已经被占用");
+                throw new ServiceException(MemberErrorCode.E111.code(), "The current mobile phone number is occupied");
             }
             String sql = "update es_member set mobile = ? where member_id = ?";
             this.memberDaoSupport.execute(sql, mobile, buyer.getUid());
-            //清除步骤标记缓存
+            // Clear step marker cache
             passportManager.clearSign(member.getMobile(), SceneType.VALIDATE_MOBILE.name());
         }
     }

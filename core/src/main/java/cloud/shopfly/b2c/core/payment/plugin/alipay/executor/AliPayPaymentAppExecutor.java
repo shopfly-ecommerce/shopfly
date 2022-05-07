@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 支付宝app端
+ * @Description: Alipayappend
  * @date 2018/4/1714:55
  * @since v7.0.0
  */
@@ -37,7 +37,7 @@ public class AliPayPaymentAppExecutor extends AlipayPluginConfig {
 
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return
@@ -49,16 +49,16 @@ public class AliPayPaymentAppExecutor extends AlipayPluginConfig {
         try {
             AlipayClient alipayClient =  super.buildClient(bill.getClientType());
 
-             //设置请求参数
+             // Setting request Parameters
             AlipayTradeAppPayRequest alipayRequest = new AlipayTradeAppPayRequest();
             alipayRequest.setNotifyUrl(this.getCallBackUrl(bill.getTradeType(), bill.getClientType()));
 
-            // 商户网站订单
+            // Merchant website order
             String outTradeNo = bill.getBillSn();
             double payMoney = bill.getOrderPrice();
 
-            // 订单名称
-            String subject = siteName + "订单";
+            // Name of the order
+            String subject = siteName + "The order";
 
             String body = "";
 

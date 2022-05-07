@@ -24,13 +24,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 分销订单
+ * Distribution of orders
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 上午11:13
+ * 2018/5/21 In the morning11:13
  */
 @Table(name = "es_distribution_order")
 @ApiModel
@@ -38,66 +38,66 @@ import io.swagger.annotations.ApiModelProperty;
 public class DistributionOrderDO {
 
     /**
-     * 主键id
+     * A primary keyid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
 
     /**
-     * 关联的普通订单的id
+     * Associated with ordinary ordersid
      */
     @Column(name = "order_id")
-    @ApiModelProperty(value = "关联的普通订单的id", required = true)
+    @ApiModelProperty(value = "Associated with ordinary ordersid", required = true)
     private Integer orderId;
 
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(value = "订单编号", required = true)
+    @ApiModelProperty(value = "Order no.", required = true)
     private String orderSn;
 
     /**
-     * 购买会员的id
+     * Purchase membershipid
      */
     @Column(name = "buyer_member_id")
-    @ApiModelProperty(value = "购买会员的id", required = true)
+    @ApiModelProperty(value = "Purchase membershipid", required = true)
     private Integer buyerMemberId;
 
     /**
-     * 购买会员的名称
+     * Purchase the name of the member
      */
     @Column(name = "buyer_member_name")
-    @ApiModelProperty(value = "购买会员的名称", required = true)
+    @ApiModelProperty(value = "Purchase the name of the member", required = true)
     private String buyerMemberName;
 
     /**
-     * 1级分销商id
+     * 1Level distributorsid
      */
     @Column(name = "member_id_lv1")
-    @ApiModelProperty(value = "1级分销商id", required = true)
+    @ApiModelProperty(value = "1Level distributorsid", required = true)
     private Integer memberIdLv1;
 
     /**
-     * 2级分销商id
+     * 2Level distributorsid
      */
     @Column(name = "member_id_lv2")
-    @ApiModelProperty(value = "2级分销商id", required = true)
+    @ApiModelProperty(value = "2Level distributorsid", required = true)
     private Integer memberIdLv2;
 
 
     @Column(name = "lv1_point")
-    @ApiModelProperty(value = "一级模版返现比例", required = true)
+    @ApiModelProperty(value = "Cashback ratio of first-class template", required = true)
     private Double lv1Point;
 
 
     @Column(name = "lv2_point")
-    @ApiModelProperty(value = "二级模版返现比例", required = true)
+    @ApiModelProperty(value = "Cash back ratio of secondary templates", required = true)
     private Double lv2Point;
 
     @Column(name = "goods_rebate")
-    @ApiModelProperty(value = "商品返现详情", required = true)
+    @ApiModelProperty(value = "Cash back details", required = true)
     /**
      * see DistributionGoods.java
      * detail as list<DistributionGoods>
@@ -106,79 +106,79 @@ public class DistributionOrderDO {
 
 
     /**
-     * 结算单id
+     * statementsid
      */
     @Column(name = "bill_id")
-    @ApiModelProperty(value = "结算单id", required = true)
+    @ApiModelProperty(value = "statementsid", required = true)
     private Integer billId;
 
     /**
-     * 解冻日期
+     * Release date
      */
     @Column(name = "settle_cycle")
-    @ApiModelProperty(value = "解冻日期", required = true)
+    @ApiModelProperty(value = "Release date", required = true)
     private Integer settleCycle;
 
     /**
-     * 订单总价
+     * Total
      */
     @Column(name = "order_price")
-    @ApiModelProperty(value = "订单总价", required = true)
+    @ApiModelProperty(value = "Total", required = true)
     private Double orderPrice;
 
     /**
-     * 订单创建时间
+     * Order Creation time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(value = "订单创建时间", required = true)
+    @ApiModelProperty(value = "Order Creation time", required = true)
     private Long createTime;
 
     /**
-     * 1级提成金额
+     * 1Grade commission amount
      */
     @Column(name = "grade1_rebate")
-    @ApiModelProperty(value = "1级提成金额", required = true)
+    @ApiModelProperty(value = "1Grade commission amount", required = true)
     private Double grade1Rebate;
 
     /**
-     * 2级提成金额
+     * 2Grade commission amount
      */
     @Column(name = "grade2_rebate")
-    @ApiModelProperty(value = "2级提成金额", required = true)
+    @ApiModelProperty(value = "2Grade commission amount", required = true)
     private Double grade2Rebate;
 
 
     /**
-     * 1级退款金额
+     * 1Grade refund amount
      */
     @Column(name = "grade1_sellback_price")
-    @ApiModelProperty(value = "1级退款金额", required = true)
+    @ApiModelProperty(value = "1Grade refund amount", required = true)
     private Double grade1SellbackPrice;
 
     /**
-     * 2级退款金额
+     * 2Grade refund amount
      */
     @Column(name = "grade2_sellback_price")
-    @ApiModelProperty(value = "2级退款金额", required = true)
+    @ApiModelProperty(value = "2Grade refund amount", required = true)
     private Double grade2SellbackPrice;
 
 
     /**
-     * 是否退货  0=未退货 1=已退货
+     * Whether to return0=Did not return1=Have to return
      */
     @Column(name = "is_return")
-    @ApiModelProperty(value = "是否退货  0=未退货 1=已退货", required = true)
+    @ApiModelProperty(value = "Whether to return0=Did not return1=Have to return", required = true)
     private Integer isReturn;
 
     /**
-     * 退款金额
+     * The refund amount
      */
     @Column(name = "return_money")
-    @ApiModelProperty(value = "退款金额", required = true)
+    @ApiModelProperty(value = "The refund amount", required = true)
     private Double returnMoney;
 
     @Column(name = "is_withdraw")
-    @ApiModelProperty(value = "是否结算  0=未结算  1=已结算", required = true)
+    @ApiModelProperty(value = "Whether settlement0=No settlement1=Has been settled", required = true)
     private Integer isWithdraw;
 
 

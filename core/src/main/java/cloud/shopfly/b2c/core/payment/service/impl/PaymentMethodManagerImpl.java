@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 支付方式表业务类
+ * Payment mode table business class
  *
  * @author fk
  * @version v2.0
@@ -68,7 +68,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
         List<PaymentPluginVO> resultList = new ArrayList<>();
 
-        //查询数据库中的支付方式
+        // Query the payment method in the database
         String sql = "select * from es_payment_method ";
         List<PaymentMethodDO> list = this.daoSupport.queryForList(sql, PaymentMethodDO.class);
         Map<String, PaymentMethodDO> map = new HashMap<>(list.size());
@@ -81,7 +81,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
             PaymentMethodDO payment = map.get(plugin.getPluginId());
             PaymentPluginVO result = null;
 
-            //数据库中已经有支付方式
+            // The payment method is already in the database
             if (payment != null) {
                 result = new PaymentPluginVO(payment);
             } else {
@@ -99,26 +99,26 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PaymentMethodDO add(PaymentPluginVO paymentMethod, String paymentPluginId) {
 
-        //删除库中的插件
+        // Delete plug-ins in the library
         String sql = "delete from es_payment_method where plugin_id = ? ";
         this.daoSupport.execute(sql, paymentPluginId);
 
         PaymentPluginManager paymentPlugin = findPlugin(paymentPluginId);
         if (paymentPlugin == null) {
-            throw new ServiceException(PaymentErrorCode.E501.code(), "插件id不正确");
+            throw new ServiceException(PaymentErrorCode.E501.code(), "The plug-inidIs not correct");
         }
 
         paymentMethod.setMethodName(paymentPlugin.getPluginName());
         paymentMethod.setPluginId(paymentPluginId);
 
-        // 配置信息
+        // Configuration information
         List<ClientConfig> clients = paymentMethod.getEnableClient();
         Map<String, ClientConfig> map = new HashMap(16);
         for (ClientConfig client : clients) {
 
             String keyStr = client.getKey();
             keyStr = keyStr.replace("amp;", "");
-            // 区分客户端 pc_config&wap_config
+            // Distinguish between client pc_config and wap_config
             String[] keys = keyStr.split("&");
 
             for (String key : keys) {
@@ -127,43 +127,43 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
         }
 
-        //为了防止传值格式错误，以自定义格式为准
+        // To avoid incorrect value format, use the custom format
         List<ClientConfig> needClients = paymentPlugin.definitionClientConfig();
         Map jsonMap = new HashMap(16);
         for (ClientConfig clientConfig : needClients) {
             String keyStr = clientConfig.getKey();
-            // 区分客户端 pc_config&wap_config
+            // Distinguish between client pc_config and wap_config
             String[] keys = keyStr.split("&");
             for (String key : keys) {
-                // 传值来的对象
+                // The object to which the value is passed
                 ClientConfig client = map.get(key);
                 if (client == null) {
-                    throw new ServiceException(PaymentErrorCode.E501.code(), "缺少" + clientConfig.getName() + "相关配置");
+                    throw new ServiceException(PaymentErrorCode.E501.code(), "The lack of" + clientConfig.getName() + "The related configuration");
                 }
-                //未开启
+                // Did not open
                 Integer open = client.getIsOpen();
                 clientConfig.setIsOpen(client.getIsOpen());
                 if (open == 0) {
-                    //未开启则不保存配置参数
+                    // If this parameter is not enabled, configuration parameters are not saved
                     jsonMap.put(StringUtil.lowerUpperCaseColumn(key), JsonUtil.objectToJson(clientConfig));
                     continue;
                 }
-                //传值来的配置参数
+                // Configuration parameters to which values are passed
                 List<PayConfigItem> list = client.getConfigList();
                 if (list == null) {
-                    throw new ServiceException(PaymentErrorCode.E501.code(), clientConfig.getName() + "的配置不能为空");
+                    throw new ServiceException(PaymentErrorCode.E501.code(), clientConfig.getName() + "Cannot be empty");
                 }
-                // 循环成key value 格式
+                // Loop to key value format
                 Map<String, String> valueMap = new HashMap<>(list.size());
                 for (PayConfigItem item : list) {
                     valueMap.put(item.getName(), item.getValue());
                 }
-                // 配置参数设置
+                // Configuration Parameter Settings
                 List<PayConfigItem> configList = clientConfig.getConfigList();
                 for (PayConfigItem item : configList) {
                     String value = valueMap.get(item.getName());
                     if (StringUtil.isEmpty(value)) {
-                        throw new ServiceException(PaymentErrorCode.E501.code(), clientConfig.getName() + "的" + item.getText() + "必填");
+                        throw new ServiceException(PaymentErrorCode.E501.code(), clientConfig.getName() + "the" + item.getText() + "required");
                     }
                     item.setValue(value);
                 }
@@ -176,7 +176,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
 
         PaymentMethodDO payment = new PaymentMethodDO();
-        //复制配置信息
+        // Copying configuration Information
         BeanUtil.copyPropertiesInclude(jsonMap, payment);
 
         BeanUtil.copyProperties(paymentMethod, payment);
@@ -190,7 +190,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
             keys.add(CachePrefix.PAYMENT_CONFIG.getPrefix() + clientType.getDbColumn() + paymentPluginId);
         }
 
-        //删除缓存
+        // Delete the cache
         cache.multiDel(keys);
 
         return payment;
@@ -202,7 +202,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
         PaymentMethodDO method = this.daoSupport.queryForObject(PaymentMethodDO.class, id);
         if (method == null) {
-            throw new ServiceException(PaymentErrorCode.E501.code(), "支付方式不存在");
+            throw new ServiceException(PaymentErrorCode.E501.code(), "Payment method does not exist");
         }
 
         this.daoSupport.update(paymentMethod, id);
@@ -212,7 +212,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
             keys.add(CachePrefix.PAYMENT_CONFIG.getPrefix() + clientType.getDbColumn() + id);
         }
 
-        //删除缓存
+        // Delete the cache
         cache.multiDel(keys);
 
         return paymentMethod;
@@ -227,7 +227,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
         for (ClientType clientType : ClientType.values()) {
             keys.add(CachePrefix.PAYMENT_CONFIG.getPrefix() + clientType.getDbColumn() + id);
         }
-        // 删除缓存
+        // Delete the cache
         cache.multiDel(keys);
     }
 
@@ -263,7 +263,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
             PaymentPluginManager plugin = findPlugin(pluginId);
             if(plugin == null ){
-                throw new ServiceException(PaymentErrorCode.E501.code(),"支付方式不存在");
+                throw new ServiceException(PaymentErrorCode.E501.code(),"Payment method does not exist");
             }
             PaymentPluginVO payment = new PaymentPluginVO(plugin);
             payment.setEnableClient(plugin.definitionClientConfig());
@@ -304,7 +304,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
             PaymentPluginVO pluginVO = new PaymentPluginVO();
             BeanUtil.copyProperties(paymentMethod, pluginVO);
-            // 配置信息
+            // Configuration information
             List<ClientConfig> clientConfigs = new ArrayList<>();
             for (String key : map.keySet()) {
                 clientConfigs.add(map.get(key));
@@ -318,7 +318,7 @@ public class PaymentMethodManagerImpl implements PaymentMethodManager {
 
 
     /**
-     * 查找支付插件
+     * Find payment plug-ins
      *
      * @param pluginId
      * @return

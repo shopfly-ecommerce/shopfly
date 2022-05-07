@@ -33,12 +33,12 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 
 /**
- * 付款单相关API
+ * Payment order correlationAPI
  * @author Snow create in 2018/7/18
  * @version v2.0
  * @since v7.0.0
  */
-@Api(description = "付款单相关API")
+@Api(description = "Payment order correlationAPI")
 @RestController
 @RequestMapping("/seller/trade/orders")
 @Validated
@@ -47,7 +47,7 @@ public class PayLogSellerController {
     @Autowired
     private PayLogManager payLogManager;
 
-    @ApiOperation(value = "查询付款单列表")
+    @ApiOperation(value = "Query the list of payments")
     @GetMapping("/pay-log")
     public Page<PayLog> list(PayLogQueryParam param) {
 
@@ -57,13 +57,13 @@ public class PayLogSellerController {
     }
 
 
-    @ApiOperation(value = "收款单导出Excel")
+    @ApiOperation(value = "Receipt exportExcel")
     @ApiImplicitParams({
-            @ApiImplicitParam(name	= "order_sn", value = "订单编号",  dataType = "String",	paramType =	"query"),
-            @ApiImplicitParam(name	= "pay_way", value = "支付方式",  dataType = "String",	paramType =	"query"),
-            @ApiImplicitParam(name	= "start_time", value = "开始时间",  dataType = "Long",	paramType =	"query"),
-            @ApiImplicitParam(name	= "end_time", value = "结束时间",  dataType = "Long",	paramType =	"query"),
-            @ApiImplicitParam(name	= "member_name", value = "会员名",  dataType = "String",	paramType =	"query")
+            @ApiImplicitParam(name	= "order_sn", value = "Order no.",  dataType = "String",	paramType =	"query"),
+            @ApiImplicitParam(name	= "pay_way", value = "Method of payment",  dataType = "String",	paramType =	"query"),
+            @ApiImplicitParam(name	= "start_time", value = "The start time",  dataType = "Long",	paramType =	"query"),
+            @ApiImplicitParam(name	= "end_time", value = "The end of time",  dataType = "Long",	paramType =	"query"),
+            @ApiImplicitParam(name	= "member_name", value = "Member name",  dataType = "String",	paramType =	"query")
     })
     @GetMapping(value = "/pay-log/list")
     public List<PayLog> excel(@ApiIgnore String orderSn, @ApiIgnore String payWay, @ApiIgnore String memberName,

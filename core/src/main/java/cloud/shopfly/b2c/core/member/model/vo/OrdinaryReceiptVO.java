@@ -20,36 +20,36 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 普通发票对象
+ * Object of general invoice
  *
  * @author zh
  * @version v7.0
- * @date 18/7/23 上午9:52
+ * @date 18/7/23 In the morning9:52
  * @since v7.0
  */
 public class OrdinaryReceiptVO {
 
     /**
-     * 发票类型
+     * Invoice type
      */
-    @ApiModelProperty(name = "receipt_type", value = "枚举，ELECTRO:电子普通发票，VATORDINARY：增值税普通发票，VATOSPECIAL：增值税专用发票", required = false, hidden = true)
+    @ApiModelProperty(name = "receipt_type", value = "Enumeration,ELECTRO:Electronic general invoice,VATORDINARY：VAT general invoice,VATOSPECIAL：VAT special invoice", required = false, hidden = true)
     private String receiptType;
     /**
-     * 发票抬头
+     * The invoice looked up
      */
-    @NotEmpty(message = "发票抬头不能为空")
-    @ApiModelProperty(name = "receipt_title", value = "发票抬头", required = true)
+    @NotEmpty(message = "Invoice title must not be blank")
+    @ApiModelProperty(name = "receipt_title", value = "The invoice looked up", required = true)
     private String receiptTitle;
     /**
-     * 发票内容
+     * The invoice content
      */
-    @NotEmpty(message = "发票内容不能为空")
-    @ApiModelProperty(name = "receipt_content", value = "发票内容", required = true)
+    @NotEmpty(message = "The invoice cannot be blank")
+    @ApiModelProperty(name = "receipt_content", value = "The invoice content", required = true)
     private String receiptContent;
     /**
-     * 发票税号
+     * The invoice id number
      */
-    @ApiModelProperty(name = "tax_no", value = "发票税号", required = true)
+    @ApiModelProperty(name = "tax_no", value = "The invoice id number", required = true)
     private String taxNo;
 
     public String getReceiptType() {

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 促销信息构建器
+ * Promotion message builder
  *
  * @author kingapex
  * @version 1.0
@@ -41,33 +41,33 @@ public class DefaultCartBuilder implements CartBuilder {
 
 
     /**
-     * 购物车促销规则渲染器
+     * Shopping cart promotion rule renderer
      */
     private CartPromotionRuleRenderer cartPromotionRuleRenderer;
 
     /**
-     * 购物车价格计算器
+     * Shopping cart price calculator
      */
     private CartPriceCalculator cartPriceCalculator;
 
     /**
-     * 数据校验
+     * Data validation
      */
     private CheckDataRebderer checkDataRebderer;
 
     /**
-     * 购物车sku渲染器
+     * The shopping cartskuThe renderer
      */
     private CartSkuRenderer cartSkuRenderer;
 
     /**
-     * 购物车优惠券渲染
+     * Shopping cart coupon Rendering
      */
     private CartCouponRenderer cartCouponRenderer;
 
 
     /**
-     * 运费价格计算器
+     * Freight price calculator
      */
     private CartShipPriceCalculator cartShipPriceCalculator;
 
@@ -98,8 +98,8 @@ public class DefaultCartBuilder implements CartBuilder {
     }
 
     /**
-     * 渲染sku<br/>
-     * 此步通过{@link CartSkuOriginVo}生产出一个全新的cartList
+     * Apply colours to a drawingsku<br/>
+     * This step by{@link CartSkuOriginVo}Make a brand new onecartList
      *
      * @return
      */
@@ -110,8 +110,8 @@ public class DefaultCartBuilder implements CartBuilder {
     }
 
     /**
-     * 带过滤器式的渲染sku<br/>
-     * 可以过滤为指定条件{@link  CartSkuFilter}的商品<br/>
+     * Filter renderingsku<br/>
+     * Can be filtered for specified conditions{@link  CartSkuFilter}The goods<br/>
      *
      * @return
      * @see CartSkuFilter
@@ -124,9 +124,9 @@ public class DefaultCartBuilder implements CartBuilder {
 
 
     /**
-     * 此步通过
+     * This step by
      * {@link SelectedPromotionVo}
-     * 生产出
+     * To produce
      * {@link PromotionRule}
      *
      * @param includeCoupon
@@ -139,9 +139,9 @@ public class DefaultCartBuilder implements CartBuilder {
     }
 
     /**
-     * 此步通过上一步的产出物
+     * This step passes through the output of the previous step
      * {@link PromotionRule}
-     * 来计算出价格:
+     * To figure out the price:
      * {@link PriceDetailVO}
      *
      * @return
@@ -154,7 +154,7 @@ public class DefaultCartBuilder implements CartBuilder {
 
 
     /**
-     * 调用运费模板来算出运费，只接应用到购物车的价格中
+     * Call the shipping template to figure out the shipping cost, which applies only to the cart price
      *
      * @return
      */
@@ -166,7 +166,7 @@ public class DefaultCartBuilder implements CartBuilder {
 
 
     /**
-     * 此步读取出会员的可用优惠券，加入到购物车的couponList中
+     * This step takes out the memberships available coupon and adds it to the shopping cartcouponListIn the
      *
      * @return
      */

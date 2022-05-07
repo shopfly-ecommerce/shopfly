@@ -20,16 +20,16 @@ import java.io.Serializable;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录用户信息
+ * @Description Trust login user information
  * @ClassName Auth2Token
- * @since v7.0 上午10:09 2018/6/6
+ * @since v7.0 In the morning10:09 2018/6/6
  */
 public class Auth2Token implements Serializable {
 
 
     private static final long serialVersionUID = 761784446368906457L;
     /**
-     * 开放用户ID
+     * Open the userID
      */
     private String unionid;
 
@@ -39,27 +39,27 @@ public class Auth2Token implements Serializable {
     private String opneId;
 
     /**
-     * OpenId类型
+     * OpenIdtype
      */
     private String type;
 
     /**
-     * 获取openid的令牌
+     * To obtainopenidThe token
      */
     private String accessToken;
 
     /**
-     * 微信刷新token 如果日后需要，从这里获取
+     * WeChat refreshtoken If you need it later, get it from here
      */
     private String refreshToken;
 
     /**
-     * 有效时间 用于刷新token
+     * Valid time is used for refreshingtoken
      */
     private Long expires;
 
     /**
-     * 存储appid 用于刷新token
+     * storageappid To refreshtoken
      */
     private String appid;
 

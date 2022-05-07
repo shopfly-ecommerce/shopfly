@@ -30,8 +30,8 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /**
- * 管理端访问决策控制<br/>
- * 根据权限数据源提供的权限来判断是否可以通过
+ * Management side access decision control<br/>
+ * Check whether the permission is approved based on the permission provided by the permission data source
  *
  * @author kingapex
  * @version 1.0
@@ -48,7 +48,7 @@ public class SellerAccessDecisionManager implements org.springframework.security
 
         FilterInvocation filterInvocation = (FilterInvocation) object;
         String url = filterInvocation.getRequestUrl();
-        //过滤swagger系列
+        // Filter Swagger series
         AntPathMatcher matcher = new AntPathMatcher();
         Boolean result = matcher.match("/swagger-ui.html", url);
         result = result || matcher.match("/v2/api-docs**", url);
@@ -59,7 +59,7 @@ public class SellerAccessDecisionManager implements org.springframework.security
         if (result) {
             return;
         }
-        //过滤后台管理员登录
+        // Filter background administrator login
         result = matcher.match("/seller/login**", url);
         result = result || matcher.match("/seller/systems/admin-users/token**", url);
         result = result || matcher.match("/seller/members/logout**", url);
@@ -85,27 +85,27 @@ public class SellerAccessDecisionManager implements org.springframework.security
                     return;
                 }
                 if (ga.getAuthority().equals(needRole)) {
-                    //匹配到有对应角色,则允许通过
+                    // If a role is matched, the system allows the user to pass
                     return;
                 }
             }
         }
-        //该url有配置权限,但是当然登录用户没有匹配到对应权限,则禁止访问
+        // The URL has configuration permission. However, if the login user does not match the corresponding permission, the access is prohibited
         throw new AccessDeniedException("not allow");
     }
 
     /**
-     * 登录之后通用权限控制
+     * General permission control after login
      *
-     * @param url api路径
+     * @param url apiThe path
      * @return
      */
     private boolean adminRolesChecked(String url) {
-        //精确匹配
+        // An exact match
         if ("/seller/index/page".equals(url)) {
             return true;
         }
-        //正则匹配
+        // Regular match
         boolean isMatch = Pattern.matches("/seller/systems/roles/[1-9].*", url);
         isMatch = isMatch || Pattern.matches("/regions/[1-9].*", url);
         isMatch = isMatch || Pattern.matches("/uploaders.*", url);

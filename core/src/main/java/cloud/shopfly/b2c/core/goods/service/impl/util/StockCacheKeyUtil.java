@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 库存中缓存中的key工具类<br/>
- * 主要作用是集中管理这些字串，防止散在代码中<br/>
+ * Inventory in the cachekeyUtility class<br/>
+ * The main purpose is to centrally manage these strings and prevent them from being scattered in the code<br/>
  *
  * @author kingapex
  * @version 1.0
@@ -35,7 +35,7 @@ public class StockCacheKeyUtil {
 
 
     /**
-     * sku可用库存key
+     * skuAvailablekey
      *
      * @param skuId sku id
      * @return
@@ -45,7 +45,7 @@ public class StockCacheKeyUtil {
     }
 
     /**
-     * sku实际库存key
+     * skuThe actual inventorykey
      *
      * @param skuId sku id
      * @return
@@ -56,7 +56,7 @@ public class StockCacheKeyUtil {
 
 
     /**
-     * 商品可用库存key
+     * Available inventory of goodskey
      *
      * @param goodsId goods id
      * @return
@@ -66,7 +66,7 @@ public class StockCacheKeyUtil {
     }
 
     /**
-     * 商品实际库存key
+     * Actual inventory of goodskey
      *
      * @param goodsId goods id
      * @return
@@ -77,7 +77,7 @@ public class StockCacheKeyUtil {
 
 
     /**
-     * 批量生成sku的keys列表，包含可用的和实际的
+     * Mass productionskuthekeys列表，包含可用the和实际the
      *
      * @param skuIdList
      * @return

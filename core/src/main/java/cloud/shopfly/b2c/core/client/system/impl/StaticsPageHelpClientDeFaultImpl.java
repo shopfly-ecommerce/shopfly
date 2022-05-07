@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 静态页帮助中心
+ * @Description: Static page help center
  * @date 2018/8/14 10:40
  * @since v7.0.0
  */

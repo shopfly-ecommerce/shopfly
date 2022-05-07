@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 热门关键字控制器
+ * Hot keyword controller
  *
  * @author fk
  * @version v1.0
@@ -38,16 +38,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/pages/hot-keywords")
-@Api(description = "热门关键字相关API")
+@Api(description = "Popular keywords are relevantAPI")
 public class HotKeywordBuyerController {
 
     @Autowired
     private HotKeywordManager hotKeywordManager;
 
 
-    @ApiOperation(value = "查询热门关键字列表", response = HotKeyword.class)
+    @ApiOperation(value = "Example Query the list of popular keywords", response = HotKeyword.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "num", value = "查询的数量", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "num", value = "Number of queries", required = true, dataType = "int", paramType = "query"),
     })
     @GetMapping
     public List<HotKeyword> list(Integer num) {

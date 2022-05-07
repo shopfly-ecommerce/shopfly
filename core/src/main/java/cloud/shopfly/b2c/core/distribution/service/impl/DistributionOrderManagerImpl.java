@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.core.distribution.service.impl;
 
@@ -42,13 +42,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 分销订单Manager 实现
+ * Distribution of ordersManager implementation
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 下午12:05
+ * 2018/5/22 In the afternoon12:05
  */
 
 @Component
@@ -85,7 +85,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     @Override
     public DistributionOrderDO getModelByOrderSn(String orderSn) {
 
-        // 如果订单id有效
+        // If the order ID is valid
         if (!StringUtil.isEmpty(orderSn)) {
             String getFxOrderDOSql = "SELECT * FROM es_distribution_order WHERE order_sn = ?";
             DistributionOrderDO distributionOrderDO = this.daoSupport.queryForObject(getFxOrderDOSql, DistributionOrderDO.class, orderSn);
@@ -97,7 +97,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     @Override
     public DistributionOrderDO getModel(Integer orderId) {
 
-        // 如果订单id有效
+        // If the order ID is valid
         if (orderId != null) {
             String getFxOrderDOSql = "SELECT * FROM es_distribution_order WHERE order_id = ?";
             DistributionOrderDO distributionOrderDO = this.daoSupport.queryForObject(getFxOrderDOSql, DistributionOrderDO.class, orderId);
@@ -111,7 +111,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
         distributionOrderDO.setGrade1SellbackPrice(0D);
         distributionOrderDO.setGrade2SellbackPrice(0D);
 
-        // 如果Order有效
+        // If Order is valid
         if (distributionOrderDO != null) {
             this.daoSupport.insert("es_distribution_order", distributionOrderDO);
         }
@@ -122,19 +122,19 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     @Override
     public boolean calCommission(String orderSn) {
 
-        // 如果是一个正确的编号
+        // If its a correct number
         if (orderSn != null) {
 
             DistributionOrderDO model = this.getModelByOrderSn(orderSn);
             double price = model.getOrderPrice();
 
-            // 1.获取各个级别的memberid
+            // 1. Obtain the memberiD of each level
             Integer lv1MemberId = model.getMemberIdLv1();
             Integer lv2MemberId = model.getMemberIdLv2();
 
             calRebate(model, lv1MemberId, lv2MemberId);
 
-            // 2.保存到分销商冻结金额
+            // 2. Save the frozen amount to the distributor
             if (lv1MemberId != null && lv1MemberId != 0) {
                 this.distributionManager.addFrozenCommission(model.getGrade1Rebate(), lv1MemberId);
                 this.distributionManager.addTotalPrice(price, model.getGrade1Rebate(), lv1MemberId);
@@ -144,7 +144,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
                 this.distributionManager.addFrozenCommission(model.getGrade2Rebate(), lv2MemberId);
                 this.distributionManager.addTotalPrice(price, model.getGrade2Rebate(), lv2MemberId);
             }
-            // 3.保存订单
+            // 3. Save the order
             Map where = new HashMap(16);
             where.put("id", model.getId());
             this.daoSupport.update("es_distribution_order", model, where);
@@ -154,20 +154,20 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     }
 
     /**
-     * 计算模板退款时需要退的返利金额
+     * Calculate the amount of rebate needed for template refund
      *
-     * @param refundDO 退款信息
+     * @param refundDO The refund information
      */
     private void calReturnGoodsCommission(RefundDO refundDO, DistributionOrderDO distributionOrder) {
 
         List<RefundGoodsDO> refundGoodsList = afterSaleClient.getRefundGoods(refundDO.getSn());
 
         if (CollUtil.isEmpty(refundGoodsList)) {
-            logger.info("退款商品信息不存在");
+            logger.info("Refundable item information does not exist");
             return;
         }
 
-        // 1.获取各个级别的memberid
+        // 1. Obtain the memberiD of each level
         Integer lv1MemberId = distributionOrder.getMemberIdLv1();
         Integer lv2MemberId = distributionOrder.getMemberIdLv2();
 
@@ -181,20 +181,20 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
         List<DistributionGoods> goodsList = JSONUtil.parseArray(goodsRebate).toList(DistributionGoods.class);
 
 
-        //获取带有返佣记录的商品集合
+        // Gets a collection of goods with a rebate record
         List<DistributionGoods> rebateGoodsList = goodsList.stream()
                 .filter(goods -> refundGoodsList.stream().anyMatch(refundGoods -> refundGoods.getGoodsId().equals(goods.getGoodsId())))
                 .filter(goods -> Objects.nonNull(goods.getGrade1Rebate()))
                 .collect(Collectors.toList());
 
         if (CollUtil.isEmpty(rebateGoodsList)) {
-            logger.info("返佣商品不存在");
+            logger.info("Rebate goods do not exist");
             return;
         }
 
-        //设置退款佣金
+        // Set up refund commission
         if (lv1MemberId != null && lv1MemberId != 0) {
-            //获取退款商品对应的一级佣金加和
+            // Get the first level commission plus for the refund item
             double grade1Rebate = rebateGoodsList.stream()
                     .mapToDouble(goods -> goods.getGrade1Rebate())
                     .sum();
@@ -202,7 +202,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
             distributionRefundDTO.setRefundLv1(grade1Rebate);
         }
         if (lv2MemberId != null && lv2MemberId != 0) {
-            //获取退款商品对应的二级佣金加和
+            // Obtain a secondary commission plus for refunded items
             double grade2Rebate = rebateGoodsList.stream()
                     .mapToDouble(goods -> goods.getGrade2Rebate())
                     .sum();
@@ -218,71 +218,71 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
         }
         distributionRefundDTO.setRefundMoney(refundDO.getRefundPrice());
         distributionOrder.setReturnMoney(CurrencyUtil.add(distributionOrder.getReturnMoney(), refundDO.getRefundPrice()));
-        //更新退款佣金等信息
+        // Update refund commission and other information
         this.updateReturnCommission(distributionOrder, distributionRefundDTO);
 
     }
 
     /**
-     * 更新退款佣金等信息
+     * Update refund commission and other information
      *
-     * @param distributionOrder     分销订单
-     * @param distributionRefundDTO 佣金退款单
+     * @param distributionOrder     Distribution of orders
+     * @param distributionRefundDTO Commission refund order
      */
     private void updateReturnCommission(DistributionOrderDO distributionOrder, DistributionRefundDTO distributionRefundDTO) {
         Map where = new HashMap(16);
         where.put("id", distributionOrder.getId());
-        // 4.保存订单
+        // 4. Save the order
         this.daoSupport.update("es_distribution_order", distributionOrder, where);
 
-        // 如果id不为0（有效id）
+        // If id is not 0 (valid ID)
         if (distributionRefundDTO.getMemberIdLv1() != null) {
             this.distributionManager.subTotalPrice(distributionRefundDTO.getRefundMoney(), distributionRefundDTO.getRefundLv1(), distributionRefundDTO.getMemberIdLv1());
             this.daoSupport.execute("update es_distribution set can_rebate = can_rebate - ? where member_id = ?",
                     distributionRefundDTO.getRefundLv1(), distributionRefundDTO.getMemberIdLv1());
         }
 
-        // 有效id 则2级有效
+        // The valid ID is valid at level 2
         if (distributionRefundDTO.getMemberIdLv2() != null) {
             this.distributionManager.subTotalPrice(distributionRefundDTO.getRefundMoney(), distributionRefundDTO.getRefundLv2(), distributionRefundDTO.getMemberIdLv2());
             this.daoSupport.execute("update es_distribution set can_rebate = can_rebate - ? where member_id = ?",
                     distributionRefundDTO.getRefundLv2(), distributionRefundDTO.getMemberIdLv2());
         }
 
-        //结算单相关处理
+        // Related processing of statement
         billMemberManager.returnShop(distributionOrderManager.getModelByOrderSn(distributionOrder.getOrderSn()), distributionRefundDTO);
     }
 
     /**
-     * 计算商品模板退款时需要退的返利金额
+     * Calculate the rebate amount to be returned when the commodity template is refunded
      *
-     * @param refundDO          退款信息
+     * @param refundDO          The refund information
      * @param distributionOrder
      */
     private void calReturnTemplateCommission(RefundDO refundDO, DistributionOrderDO distributionOrder) {
         Double price = refundDO.getRefundPrice();
         String orderSn = refundDO.getOrderSn();
-        // 退款可为0 如为0 则需要退的返利金额也为0
+        // The refund can be 0. If 0, the amount of rebate to be returned is also 0
         if (price == 0) {
             return;
         }
-        // 如果订单id有效
+        // If the order ID is valid
         if (orderSn == null) {
             return;
         }
         OrderDetailVO orderDetailVO = orderQueryManager.getModel(orderSn, null);
-        //订单金额为0，则不计算
+        // If the order amount is 0, it will not be calculated
         if (orderDetailVO.getGoodsPrice() == 0) {
             return;
         }
-        //可以返还的比例 = 订单申请退款金额/订单金额
+        // Refundable ratio = order refund amount/order amount
         Double calReturnPercentage = CurrencyUtil.div(CurrencyUtil.mul(price, 100), orderDetailVO.getNeedPayMoney());
 
 
         Double lv1ReturnPrice = 0D;
         Double lv2ReturnPrice = 0D;
 
-        // 1.获取各个级别的memberid
+        // 1. Obtain the memberiD of each level
         Integer lv1MemberId = distributionOrder.getMemberIdLv1();
         Integer lv2MemberId = distributionOrder.getMemberIdLv2();
 
@@ -291,9 +291,9 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
         distributionRefundDTO.setMemberIdLv2(lv2MemberId);
 
         if (lv1MemberId != null && lv1MemberId != 0) {
-            //付值，最初的返现金额
+            // Payment value, the initial amount of cash back
             lv1ReturnPrice += distributionOrder.getGrade1SellbackPrice() == null ? 0D : distributionOrder.getGrade1SellbackPrice();
-            //最初的返现金额+这回返现金额=总返现金额
+            // Initial cash rebate + this cash rebate = total cash rebate
             lv1ReturnPrice +=
                     CurrencyUtil.div(
                             CurrencyUtil.mul(
@@ -325,26 +325,26 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
         }
         distributionRefundDTO.setRefundMoney(price);
         distributionOrder.setReturnMoney(CurrencyUtil.add(distributionOrder.getReturnMoney(), price));
-        //更新退款佣金等信息
+        // Update refund commission and other information
         this.updateReturnCommission(distributionOrder, distributionRefundDTO);
     }
 
 
     @Override
     public boolean addDistributorFreeze(String orderSn) {
-        // 如果是一个正确的id
+        // If its a correct ID
         if (orderSn != null) {
             DistributionOrderDO distributionOrder = this.getModelByOrderSn(orderSn);
 
-            // 1.获取各个级别的memberid
+            // 1. Obtain the memberiD of each level
             Integer lv1MemberId = distributionOrder.getMemberIdLv1();
             Integer lv2MemberId = distributionOrder.getMemberIdLv2();
 
-            // 2.获取各个级别的返利金额
+            // 2. Obtain the rebate amount of each level
             Double lv1Commission = distributionOrder.getGrade1Rebate();
             Double lv2Commission = distributionOrder.getGrade2Rebate();
 
-            // 3.增加到冻结金额中
+            // 3. Add it to the frozen amount
             String sql = "UPDATE es_distribution SET frozen_price = frozen_price+? WHERE member_id=?";
             if (lv1MemberId != null && lv1MemberId != 0) {
                 this.daoSupport.execute(sql, lv1Commission, lv1MemberId);
@@ -374,39 +374,39 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     public void addOrderNum(int buyMemberId) {
         DistributionDO buyDistributor = this.distributionManager.getDistributorByMemberId(buyMemberId);
 
-        // 上级订单数量
+        // Superior order quantity
         Integer lv1MemberId = buyDistributor.getMemberIdLv1();
         Integer lv2MemberId = buyDistributor.getMemberIdLv2();
 
-        // 如果存在上级
+        // If there is a superior
         if (null != lv1MemberId) {
             this.daoSupport.execute("update es_distribution set order_num = order_num+1 where member_id = ?", lv1MemberId);
         }
-        // 如果存在2级
+        // If there is a level 2
         if (lv2MemberId != null) {
             this.daoSupport.execute("update es_distribution set order_num = order_num+1 where member_id = ?", lv2MemberId);
         }
     }
 
     /**
-     * 根据价格 算出lv1 lv2的返利金额
+     * Lets figure it out based on the pricelv1 lv2The amount of rebate
      *
      * @param distributionOrderDO do
-     * @param lv1MemberId         lv1会员id
-     * @param lv2MemberId         lv2会员id
-     *                            Map集合 key： lv1_rebate=lv1返利金额 lv2_rebate=lv2返利金额
+     * @param lv1MemberId         lv1membersid
+     * @param lv2MemberId         lv2membersid
+     *                            MapA collection ofkey： lv1_rebate=lv1The rebate amountlv2_rebate=lv2The rebate amount
      */
     private void calRebate(DistributionOrderDO distributionOrderDO, Integer lv1MemberId, Integer lv2MemberId) {
 
-        //查询系统设置
+        // Querying System Settings
         String json = settingClient.get(SettingGroup.DISTRIBUTION);
         DistributionSetting distributionSetting = JsonUtil.jsonToObject(json, DistributionSetting.class);
 
-        // 1.获取各个级别的分销商
+        // 1. Acquire distributors at all levels
         DistributionDO lv1Distributor = this.distributionManager.getDistributorByMemberId(lv1MemberId);
         DistributionDO lv2Distributor = this.distributionManager.getDistributorByMemberId(lv2MemberId);
 
-        //如果商品模式开启，则优先按照商品进行计算
+        // If commodity mode is enabled, the calculation is based on commodities
         if (distributionSetting.getGoodsModel() == 1) {
             List<OrderItemsDO> orderItemsDOS = orderQueryManager.orderItems(distributionOrderDO.getOrderSn());
             this.goodsRebate(distributionOrderDO, orderItemsDOS, lv1Distributor, lv2Distributor);
@@ -417,7 +417,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     }
 
     /**
-     * 模版返现
+     * Template cashback
      *
      * @param lv1Distributor
      * @param lv2Distributor
@@ -429,8 +429,8 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
         double lv1Commission = 0;
         double lv2Commission = 0;
 
-        // 2.获取各个级别分销商的模板对象
-        // 如果有这个级别的分销商才计算
+        // 2. Obtain template objects of distributors at all levels
+        // Only if there are distributors of this level
         if (lv1Distributor != null) {
             CommissionTpl lv1CommissionTpl = this.commissionTplManager
                     .getModel(lv1Distributor.getCurrentTplId());
@@ -440,7 +440,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
             distributionOrderDO.setLv1Point(lv1CommissionRatio);
         }
 
-        // 如果有这个级别的分销商才计算
+        // Only if there are distributors of this level
         if (lv2Distributor != null) {
 
             CommissionTpl lv2CommissionTpl = this.commissionTplManager
@@ -455,7 +455,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
 
 
     /**
-     * 商品返现
+     * Commodity cashback
      *
      * @param orderItemsDOS
      * @param lv1Distributor
@@ -463,14 +463,14 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
      * @return
      */
     private void goodsRebate(DistributionOrderDO distributionOrderDO, List<OrderItemsDO> orderItemsDOS, DistributionDO lv1Distributor, DistributionDO lv2Distributor) {
-        //计算出商品返现的金额，并且记录商品返现单件返现金额
+        // Calculate the amount of cash back and record the amount of cash back for each item
         Map<Integer, Double> grade1 = new HashMap<>(16);
         Map<Integer, Double> grade2 = new HashMap<>(16);
         Map<Integer, Integer> num = new HashMap<>(16);
         List<DistributionGoods> dgs = new ArrayList<>();
         for (OrderItemsDO orderItemsDO : orderItemsDOS) {
             DistributionGoods distributionGoods = distributionGoodsManager.getModel(orderItemsDO.getGoodsId());
-            //如果没有设置商品返现，则设置一个默认0返现的商品
+            // If no item cashback is set, set a default of 0 cashback for the item
             if (distributionGoods == null) {
                 distributionGoods = new DistributionGoods();
                 distributionGoods.setGoodsId(orderItemsDO.getGoodsId());
@@ -485,7 +485,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
                 num.put(orderItemsDO.getProductId(), orderItemsDO.getNum());
             }
         }
-        //根据商品返现
+        // Cash back on goods
         double lv1Commission = 0;
         double lv2Commission = 0;
         for (Integer productId : grade1.keySet()) {
@@ -572,7 +572,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
 
 
     /**
-     * 确认收款事件
+     * Confirmation of receipt event
      *
      * @param order
      */
@@ -580,12 +580,12 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
     @Override
     public void confirm(OrderDO order) {
 
-        //计算返利金额
+        // Calculate the rebate amount
         try {
             int buyMemberId = order.getMemberId();
             DistributionDO distributor = this.distributionManager.getDistributorByMemberId(buyMemberId);
 
-            // 新增分销关联订单
+            // Added distribution associated order
             DistributionOrderDO distributionOrderDO = new DistributionOrderDO();
             distributionOrderDO.setMemberIdLv1(distributor.getMemberIdLv1());
             distributionOrderDO.setMemberIdLv2(distributor.getMemberIdLv2());
@@ -593,7 +593,7 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
             distributionOrderDO.setBuyerMemberId(buyMemberId);
             distributionOrderDO.setBuyerMemberName(distributor.getMemberName());
             distributionOrderDO.setOrderSn(order.getSn());
-            // 解锁周期
+            // Unlock the cycle
             String setting = settingClient.get(SettingGroup.DISTRIBUTION);
 
             DistributionSetting ds = JsonUtil.jsonToObject(setting, DistributionSetting.class);
@@ -602,16 +602,16 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
             distributionOrderDO.setOrderPrice(order.getNeedPayMoney());
             distributionOrderDO.setCreateTime(order.getCreateTime());
             this.distributionOrderManager.add(distributionOrderDO);
-            this.logger.info("订单【" + order.getSn() + "】支付金额【" + order.getNeedPayMoney() + "】");
+            this.logger.info("The order【" + order.getSn() + "】Pay the amount【" + order.getNeedPayMoney() + "】");
         } catch (RuntimeException e) {
-            this.logger.error("分销提现计算异常", e);
+            this.logger.error("Distribution withdrawal calculation is abnormal", e);
         }
-        // 调用增加订单数量
+        // Call to increase order quantity
         this.distributionOrderManager.addOrderNum(order.getMemberId());
 
-        // 调用计算返利金额方法
+        // Call the method to calculate the rebate amount
         this.distributionOrderManager.calCommission(order.getSn());
-        //计算业绩
+        // Calculation results
         billMemberManager.buyShop(this.distributionOrderManager.getModelByOrderSn(order.getSn()));
     }
 
@@ -620,11 +620,11 @@ public class DistributionOrderManagerImpl implements DistributionOrderManager {
 
         DistributionOrderDO distributionOrder = this.getModelByOrderSn(refundDO.getOrderSn());
         if (Objects.isNull(distributionOrder)) {
-            logger.info("分销订单信息不存在");
+            logger.info("Distribution order information does not exist");
             return;
         }
 
-        //判断历史分销订单类型  分销订单包含商品信息则该订单应该按照商品退款方式进行退佣金
+        // Determine the type of historical distribution order. If the distribution order contains product information, the refund commission shall be based on the product refund method
         if (StringUtil.notEmpty(distributionOrder.getGoodsRebate())) {
             this.calReturnGoodsCommission(refundDO, distributionOrder);
         } else {

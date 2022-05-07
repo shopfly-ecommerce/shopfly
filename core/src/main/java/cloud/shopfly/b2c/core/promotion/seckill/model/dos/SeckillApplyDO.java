@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 限时抢购申请实体
+ * Flash sale application entity
  *
  * @author Snow
  * @version v7.0.0
@@ -45,67 +45,67 @@ public class SeckillApplyDO implements Serializable {
     private static final long serialVersionUID = 2980175459354215L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "apply_id")
     @ApiModelProperty(hidden = true)
     private Integer applyId;
 
     /**
-     * 活动id
+     * activityid
      */
     @Column(name = "seckill_id")
-    @ApiModelProperty(name = "seckill_id", value = "活动id", required = true)
+    @ApiModelProperty(name = "seckill_id", value = "activityid", required = true)
     private Integer seckillId;
 
     /**
-     * 时刻
+     * moment
      */
     @Column(name = "time_line")
-    @ApiModelProperty(name = "time_line", value = "时刻")
+    @ApiModelProperty(name = "time_line", value = "moment")
     private Integer timeLine;
 
     /**
-     * 活动开始日期
+     * Commencement Date
      */
     @Column(name = "start_day")
-    @ApiModelProperty(name = "start_day", value = "活动开始日期")
+    @ApiModelProperty(name = "start_day", value = "Commencement Date")
     private Long startDay;
 
     /**
-     * 商品ID
+     * productID
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品ID")
+    @ApiModelProperty(name = "goods_id", value = "productID")
     private Integer goodsId;
 
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称")
+    @ApiModelProperty(name = "goods_name", value = "Name")
     private String goodsName;
 
     /**
-     * 价格
+     * Price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "价格")
+    @ApiModelProperty(name = "price", value = "Price")
     private Double price;
 
     /**
-     * 售空数量
+     * The number sold out
      */
     @Column(name = "sold_quantity")
-    @ApiModelProperty(name = "sold_quantity", value = "售空数量")
+    @ApiModelProperty(name = "sold_quantity", value = "The number sold out")
     private Integer soldQuantity;
 
     @Column(name = "sales_num")
-    @ApiModelProperty(name = "sales_num", value = "已售数量")
+    @ApiModelProperty(name = "sales_num", value = "The number sold")
     private Integer salesNum;
 
     @Column(name = "original_price")
-    @ApiModelProperty(name = "original_price", value = "商品原始价格")
+    @ApiModelProperty(name = "original_price", value = "Original price of goods")
     private Double originalPrice;
 
 

@@ -25,42 +25,42 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 活动的Vo
+ * Activities of theVo
  *
  * @author Snow
  * @version v1.0
- * 2017年08月24日14:48:36
+ * 2017years08month24day14:48:36
  * @since v6.4
  */
-@ApiModel(description = "购物车中活动Vo")
+@ApiModel(description = "Activities in shopping cartVo")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CartPromotionVo implements Serializable {
 
 
     private static final long serialVersionUID = 1867982008597357312L;
 
-    @ApiModelProperty(value = "活动开始时间")
+    @ApiModelProperty(value = "Activity start time")
     private Long startTime;
 
-    @ApiModelProperty(value = "活动结束时间")
+    @ApiModelProperty(value = "End time")
     private Long endTime;
 
-    @ApiModelProperty(value = "活动id")
+    @ApiModelProperty(value = "activityid")
     private Integer activityId;
 
-    @ApiModelProperty(value = "活动工具类型")
+    @ApiModelProperty(value = "Active tool type")
     private String promotionType;
 
-    @ApiModelProperty(value = "活动名称")
+    @ApiModelProperty(value = "The name of the event")
     private String title;
 
-    @ApiModelProperty(value = "是否选中参与这个活动,1为是 0为否")
+    @ApiModelProperty(value = "Check whether to participate in this activity,1As a0For no")
     private Integer isCheck;
 
     /**
-     * 有些活动,有单独的活动数量，此数量为剩余的活动数量。
+     * Some of the activities,There is a separate number of activities, which is the number of remaining activities.
      */
-    @ApiModelProperty(value = "剩余售空数量")
+    @ApiModelProperty(value = "Quantity of remaining sold space")
     private Integer remianQuantity;
 
     @Override

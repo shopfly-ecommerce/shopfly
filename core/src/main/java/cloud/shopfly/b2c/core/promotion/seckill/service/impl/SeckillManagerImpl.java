@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 限时抢购入库业务类
+ * Flash sale warehousing business class
  *
  * @author Snow
  * @version v7.0.0
@@ -106,23 +106,23 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
 
             if (seckillVO.getSeckillStatus() != null) {
                 SeckillStatusEnum statusEnum = SeckillStatusEnum.valueOf(seckillVO.getSeckillStatus());
-                //如果状态是已发布状态，则判断该活动是否已开始或者已结束
+                // If the state is published, determine whether the activity has started or ended
                 seckillVO.setSeckillStatusText(statusEnum.description());
                 if (SeckillStatusEnum.RELEASE.equals(statusEnum)) {
 
-                    //活动开始时间
+                    // Activity start time
                     long startDay = seckillDO.getStartDay();
 
                     if (DateUtil.startOfTodDay() <= startDay && DateUtil.endOfTodDay() > startDay) {
-                        //不能添加限时抢购商品了
+                        // Cant add flash sale items anymore
                         seckillVO.setIsApply(1);
-                        seckillVO.setSeckillStatusText("已开启");
+                        seckillVO.setSeckillStatusText("Has been open");
                     } else if (startDay < DateUtil.endOfTodDay()) {
-                        //已经关闭了
+                        // Its been closed.
                         seckillVO.setIsApply(2);
-                        seckillVO.setSeckillStatusText("已关闭");
+                        seckillVO.setSeckillStatusText("closed");
                     } else if (seckillDO.getApplyEndTime() > DateUtil.getDateline()) {
-                        //可以申请
+                        // Can apply for
                         seckillVO.setIsApply(0);
                     }
 
@@ -142,7 +142,7 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
         String sql = "select * from es_seckill where seckill_name = ? ";
         List list = this.daoSupport.queryForList(sql, seckill.getSeckillName());
         if (list.size() > 0) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动名称重复");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Duplicate activity name");
         }
 
         String date = DateUtil.toString(seckill.getStartDay(), "yyyy-MM-dd");
@@ -168,7 +168,7 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
         String sql = "select * from es_seckill where seckill_name = ? and seckill_id != ? ";
         List list = this.daoSupport.queryForList(sql, seckill.getSeckillName(), id);
         if (list.size() > 0) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动名称重复");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Duplicate activity name");
         }
 
         String date = DateUtil.toString(seckill.getStartDay(), "yyyy-MM-dd");
@@ -191,28 +191,28 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
 
         SeckillDO seckill = this.getModel(id);
 
-        //只要活动未开启，就可以删除活动
+        // You can delete an activity as long as it is not started
         String statusEnum = seckill.getSeckillStatus();
         boolean flag = false;
         if (SeckillStatusEnum.RELEASE.name().equals(statusEnum)) {
-            //活动开始时间
+            // Activity start time
             long startDay = seckill.getStartDay();
 
             if (DateUtil.startOfTodDay() > startDay) {
                 flag = true;
             }
         }
-        //编辑中可以删除
+        // You can delete it in editing
         if (SeckillStatusEnum.EDITING.name().equals(statusEnum)) {
             flag = true;
         }
 
         if (flag) {
             this.daoSupport.delete(SeckillDO.class, id);
-            //将参与该活动的商品全部删除
+            // Delete all commodities participating in this activity
 
         } else {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "该活动不是能删除的状态");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The activity is not a state that can be deleted");
         }
 
     }
@@ -225,7 +225,7 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
         SeckillDTO seckillVO = new SeckillDTO();
         BeanUtils.copyProperties(seckillDO, seckillVO);
 
-        //查询该限时抢购时刻表
+        // Query the flash sale schedule
         List<Integer> rangeList = new ArrayList<>();
         List<SeckillRangeDO> rangeDOList = this.seckillRangeManager.getList(id);
         for (SeckillRangeDO rangeDO : rangeDOList) {
@@ -242,10 +242,10 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
         SeckillVO seckillVO = new SeckillVO();
         BeanUtils.copyProperties(seckillDO, seckillVO);
 
-        //查询该限时抢购时刻表
+        // Query the flash sale schedule
         List<SeckillRangeDO> rangeDOList = this.seckillRangeManager.getList(id);
 
-        //查询该限时抢购的已经参与的商品数据
+        // Query data for items that have participated in the flash sale
         List<SeckillApplyDO> goodsList = seckillGoodsManager.getListBySeckill(id);
         Map<Integer, List<SeckillApplyDO>> map = new HashMap<>();
         if (StringUtil.isNotEmpty(goodsList)) {
@@ -261,7 +261,7 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
 
         Map<Integer, List<SeckillApplyDO>> resMap = new HashMap<>();
         for (SeckillRangeDO rangeDO : rangeDOList) {
-            //限时抢购时刻
+            // Flash sale time
             resMap.put(rangeDO.getRangeTime(),map.get(rangeDO.getRangeTime()));
         }
         seckillVO.setRangeList(resMap);
@@ -273,7 +273,7 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
 
         SeckillDO seckillDO = this.daoSupport.queryForObject(SeckillDO.class, id);
         if (seckillDO == null) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动不存在");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Activity does not exist");
         }
 
         return seckillDO;
@@ -304,26 +304,26 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
 
         String sql = "select *  from es_seckill_apply where apply_id = ?";
         SeckillApplyDO apply = this.daoSupport.queryForObject(sql, SeckillApplyDO.class, applyId);
-        //申请不存在
+        // Application does not exist
         if (apply == null) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "不是可以审核的状态");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Not an auditable state");
         }
 
         Map where = new HashMap(16);
         where.put("apply_id", applyId);
         this.daoSupport.update("es_seckill_apply", apply, where);
-        //查询商品
+        // Query the goods
         CacheGoods goods = goodsClient.getFromCache(apply.getGoodsId());
-        //将审核通过的商品，存储到活动商品表和缓存中
-        //促销商品表
+        // The approved items are stored in the active goods list and cache
+        // Promotional list
         PromotionGoodsDO promotion = new PromotionGoodsDO();
-        promotion.setTitle("限时抢购");
+        promotion.setTitle("flash");
         promotion.setGoodsId(apply.getGoodsId());
         promotion.setPromotionType(PromotionTypeEnum.SECKILL.name());
         promotion.setActivityId(apply.getApplyId());
         promotion.setNum(apply.getSoldQuantity());
         promotion.setPrice(apply.getPrice());
-        //商品活动的开始时间为当前商品的参加时间段
+        // The start time of commodity activity is the period of participation of the current commodity
         int timeLine = apply.getTimeLine();
         String date = DateUtil.toString(apply.getStartDay(), "yyyy-MM-dd");
         long startTime = DateUtil.getDateline(date + " " + timeLine + ":00:00", "yyyy-MM-dd HH:mm:ss");
@@ -332,12 +332,12 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
         promotion.setStartTime(startTime);
         promotion.setEndTime(endTime);
         this.daoSupport.insert("es_promotion_goods", promotion);
-        //设置延迟加载任务，到活动开始时间后将搜索引擎中的优惠价格设置为0
+        // Set the lazy load task and set the search engine discount to 0 after the start time of the activity
         PromotionPriceDTO promotionPriceDTO = new PromotionPriceDTO();
         promotionPriceDTO.setGoodsId(apply.getGoodsId());
         promotionPriceDTO.setPrice(apply.getPrice());
         timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, startTime, null);
-        //此活动结束后将索引的优惠价格重置为0
+        // Reset the indexs discount price to 0 after this activity ends
         promotionPriceDTO.setPrice(0.0);
         timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, endTime, null);
 
@@ -350,18 +350,18 @@ public class SeckillManagerImpl extends AbstractPromotionRuleManagerImpl impleme
 
         SeckillDO seckill = this.getModel(id);
         if (seckill == null) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动不存在");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Activity does not exist");
         }
 
         String statusEnum = seckill.getSeckillStatus();
         if (SeckillStatusEnum.RELEASE.name().equals(statusEnum)) {
 
-            //活动开始时间
+            // Activity start time
             long startDay = seckill.getStartDay();
 
-            //已开启状态
+            // Open state
             if (DateUtil.startOfTodDay() < startDay && DateUtil.endOfTodDay() > startDay) {
-                //此时可以暂停
+                // You can pause it
 
             }
         }

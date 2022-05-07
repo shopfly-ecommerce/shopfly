@@ -16,40 +16,40 @@
 package cloud.shopfly.b2c.core.promotion.model;
 
 /**
- * 反常促销商品
- * 目前用于检查商品参与活动，返回商品与活动关联的对象
+ * Anomalous promotion
+ * Currently used to check the participation of goods in the activity, return goods and activities associated with the object
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-28 上午5:43
+ * 2019-02-28 In the morning5:43
  */
 public class PromotionAbnormalGoods {
 
 
     /**
-     * 商品id
+     * productid
      */
     private Integer goodsId;
 
     /**
-     * 商品名称
+     * Name
      */
     private String goodsName;
 
     /**
-     * 开始时间
+     * The start time
      */
     private Long startTime;
 
 
     /**
-     * 结束时间
+     * The end of time
      */
     private Long endTime;
 
     /**
-     * 活动类型
+     * The activity type
      */
     private String promotionType;
 

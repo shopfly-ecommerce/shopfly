@@ -31,7 +31,7 @@ import java.util.Map;
 
 
 /**
- * QQ统一登陆服务实现
+ * QQUnified login service implementation
  * @author cs
  * @since v1.0
  * @version 7.2.2
@@ -75,7 +75,7 @@ public class LoginQQManagerImpl implements LoginQQManager {
         loginUserDTO.setUnionType(ConnectTypeEnum.QQ);
         loginUserDTO.setHeadimgurl(qqUserDTO.getHeadimgurl());
         loginUserDTO.setNickName(qqUserDTO.getNickname());
-        if ("男".equals(qqUserDTO.getGender())){
+        if ("male".equals(qqUserDTO.getGender())){
             loginUserDTO.setSex(1);
         }else{
             loginUserDTO.setSex(0);
@@ -103,11 +103,11 @@ public class LoginQQManagerImpl implements LoginQQManager {
         String retJson = HttpUtils.doGet(userBuffer.toString(), "UTF-8", 1000, 1000);
         JSONObject jsonObject = JSONObject.fromObject(retJson);
         if (jsonObject.getInt("ret")!=0){
-            throw new ServiceException("403","获取用户信息失败",retJson);
+            throw new ServiceException("403","Failed to obtain user information. Procedure",retJson);
         }
         loginUserDTO.setHeadimgurl(jsonObject.getString("figureurl_qq"));
         loginUserDTO.setNickName(jsonObject.getString("nickname"));
-        if ("男".equals(jsonObject.getString("gender"))){
+        if ("male".equals(jsonObject.getString("gender"))){
             loginUserDTO.setSex(1);
         }else{
             loginUserDTO.setSex(0);

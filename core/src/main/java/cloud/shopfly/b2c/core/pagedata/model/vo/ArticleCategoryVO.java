@@ -28,7 +28,7 @@ import java.util.List;
 
 
 /**
- * 文章分类实体
+ * Article classification entity
  *
  * @author fk
  * @version v1.0
@@ -43,25 +43,25 @@ public class ArticleCategoryVO implements Serializable {
     private static final long serialVersionUID = 5257682283507488L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
 
     /**
-     * 父id
+     * The fatherid
      */
-    @ApiModelProperty(name = "parent_id", value = "父分类id", required = false)
+    @ApiModelProperty(name = "parent_id", value = "The parent categoryid", required = false)
     private Integer parentId;
     /**
-     * 分类名称
+     * name
      */
     @Column(name = "name")
-    @ApiModelProperty(name = "name", value = "分类名称", required = false)
+    @ApiModelProperty(name = "name", value = "name", required = false)
     private String name;
 
-    @ApiModelProperty(name = "children", value = "子分类", required = false)
+    @ApiModelProperty(name = "children", value = "A subclass", required = false)
     private List<ArticleCategoryVO> children;
 
     private List<ArticleVO> articles;

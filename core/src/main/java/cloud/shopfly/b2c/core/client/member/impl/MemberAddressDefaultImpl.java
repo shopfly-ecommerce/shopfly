@@ -23,11 +23,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 会员地址默认实现
+ * Member address default implementation
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 下午3:54
+ * @date 18/7/27 In the afternoon3:54
  * @since v7.0
  */
 @Service

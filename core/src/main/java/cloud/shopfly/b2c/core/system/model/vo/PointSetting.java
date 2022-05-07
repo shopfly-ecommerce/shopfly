@@ -24,184 +24,184 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * 积分设置
+ * Integral
  *
  * @author zh
  * @version v7.0
- * @date 18/5/30 下午7:25
+ * @date 18/5/30 In the afternoon7:25
  * @since v7.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PointSetting {
 
     /**
-     * 是否开启注册获取积分,1开启,0不开启
+     * Whether to enable registration to obtain credits,1open,0不open
      */
-    @ApiModelProperty(name = "register", value = "是否开启注册获取积分,1开启,0不开启")
-    @Min(message = "是否开启注册获取积分必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启注册获取积分必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启注册获取积分不能为空")
+    @ApiModelProperty(name = "register", value = "Whether to enable registration to obtain credits,1open,0不open")
+    @Min(message = "Whether to enable registration to obtain credits must be a number and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to enable registration to obtain credits must be a number and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether to enable registration to obtain points cannot be left blank")
     private Integer register;
     /**
-     * 注册获取消费积分数
+     * Sign up for credit points
      */
-    @Min(message = "注册获取消费积分数不能为负数", value = 0)
-    @NotNull(message = "注册获取消费积分数不能为空或格式错误")
-    @ApiModelProperty(name = "register_consumer_point", value = "注册获取消费积分数")
+    @Min(message = "The number of points registered for consumption cannot be negative", value = 0)
+    @NotNull(message = "The number of credits registered for consumption cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "register_consumer_point", value = "Sign up for credit points")
     private Integer registerConsumerPoint;
     /**
-     * 注册获取等级积分数
+     * Register to get level points
      */
-    @Min(message = "注册获取等级积分数不能为负数", value = 0)
-    @NotNull(message = "注册获取等级积分数不能为空或格式错误")
-    @ApiModelProperty(name = "register_grade_point", value = "注册获取等级积分数")
+    @Min(message = "The number of registered grade points cannot be negative", value = 0)
+    @NotNull(message = "Register to gain level credits cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "register_grade_point", value = "Register to get level points")
     private Integer registerGradePoint;
     /**
-     * 是否开启登录获取积分,1开启,0不开启
+     * Whether to enable login to obtain credits,1open,0不open
      */
-    @Min(message = "是否开启登录获取积分必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启登录获取积分必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启登录获取积分不能为空或格式错误")
-    @ApiModelProperty(name = "login", value = "是否开启登录获取积分,1开启,0不开启")
+    @Min(message = "Whether to enable login to obtain credits must be numeric and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to enable login to obtain credits must be numeric and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether to enable login to obtain credits cannot be empty or the format is wrong")
+    @ApiModelProperty(name = "login", value = "Whether to enable login to obtain credits,1open,0不open")
     private Integer login;
     /**
-     * 登录获取消费积分数
+     * Log in to get credit points
      */
-    @Min(message = "登录获取消费积分数不能为负数", value = 0)
-    @NotNull(message = "登录获取消费积分数不能为空或格式错误")
-    @ApiModelProperty(name = "login_consumer_point", value = "登录获取消费积分数")
+    @Min(message = "Log in to obtain consumption credits cannot be negative", value = 0)
+    @NotNull(message = "Login to obtain consumption credits cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "login_consumer_point", value = "Log in to get credit points")
     private Integer loginConsumerPoint;
     /**
-     * 登录获取等级积分数
+     * Log in to get rating points
      */
-    @Min(message = "登录获取等级积分数不能为负数", value = 0)
-    @NotNull(message = "登录获取等级积分数不能为空或格式错误")
-    @ApiModelProperty(name = "login_grade_point", value = "登录获取等级积分数")
+    @Min(message = "Log in to get rating points cannot be negative", value = 0)
+    @NotNull(message = "Log in to get level credits cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "login_grade_point", value = "Log in to get rating points")
     private Integer loginGradePoint;
     /**
-     * 是否开启在线支付获取积分,1开启,0不开启
+     * Whether to enable online payment to obtain points,1open,0不open
      */
-    @Min(message = "是否开启在线支付获取积分必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启在线支付获取积分必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启在线支付获取积分不能为空")
-    @ApiModelProperty(name = "online_pay", value = "是否开启在线支付获取积分,1开启,0不开启")
+    @Min(message = "Whether to enable online payment to obtain credits must be numerical and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to enable online payment to obtain credits must be numerical and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether to enable online payment to obtain points cannot be left blank")
+    @ApiModelProperty(name = "online_pay", value = "Whether to enable online payment to obtain points,1open,0不open")
     private Integer onlinePay;
     /**
-     * 在线支付获取消费积分数
+     * Online payment to obtain consumption points
      */
-    @Min(message = "在线支付获取消费积分数不能为负数", value = 0)
-    @NotNull(message = "在线支付获取消费积分数不能为空或格式错误")
-    @ApiModelProperty(name = "online_pay_consumer_point", value = "在线支付获取消费积分数")
+    @Min(message = "Online payment to obtain consumption points can not be negative", value = 0)
+    @NotNull(message = "Online payment to obtain consumption points cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "online_pay_consumer_point", value = "Online payment to obtain consumption points")
     private Integer onlinePayConsumerPoint;
     /**
-     * 在线支付获取等级积分数
+     * Pay online to obtain grade points
      */
-    @Min(message = "在线支付获取等级积分数不能为负数", value = 0)
-    @NotNull(message = "在线支付获取等级积分数不能为空或格式错误")
-    @ApiModelProperty(name = "online_pay_grade_point", value = "在线支付获取等级积分数")
+    @Min(message = "The number of credits for online payments cannot be negative", value = 0)
+    @NotNull(message = "Online payment gain level credits cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "online_pay_grade_point", value = "Pay online to obtain grade points")
     private Integer onlinePayGradePoint;
     /**
-     * 是否开启图片评论获取积分,1开启,0不开启
+     * Whether to enable picture comment to obtain credits,1open,0不open
      */
-    @Min(message = "是否开启图片评论获取积分必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启图片评论获取积分必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启图片评论获取积分不能为空")
-    @ApiModelProperty(name = "comment_img", value = "是否开启图片评论获取积分,1开启,0不开启")
+    @Min(message = "Whether to enable picture comment to obtain credits must be numeric and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to enable picture comment to obtain credits must be numeric and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether to enable picture comment to obtain credits cannot be left blank")
+    @ApiModelProperty(name = "comment_img", value = "Whether to enable picture comment to obtain credits,1open,0不open")
     private Integer commentImg;
     /**
-     * 图片评论获取消费积分数
+     * Picture comments get credit points
      */
-    @Min(message = "图片评论获取消费积分数不能为负数", value = 0)
-    @NotNull(message = "图片评论获取消费积分不能为空或格式错误")
-    @ApiModelProperty(name = "comment_img_consumer_point", value = "图片评论获取消费积分数")
+    @Min(message = "Image comments can not be negative", value = 0)
+    @NotNull(message = "Image comments to obtain consumption credits cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "comment_img_consumer_point", value = "Picture comments get credit points")
     private Integer commentImgConsumerPoint;
     /**
-     * 图片评论获取等级积分数
+     * Picture comments get rating points
      */
-    @Min(message = "图片评论获取等级积分数不能为负数", value = 0)
-    @NotNull(message = "图片评论获取等级积分数不能为空或格式错误")
-    @ApiModelProperty(name = "comment_img_grade_point", value = "图片评论获取等级积分数")
+    @Min(message = "The rating integral for picture comments cannot be negative", value = 0)
+    @NotNull(message = "Image comments can not be empty or incorrectly formatted")
+    @ApiModelProperty(name = "comment_img_grade_point", value = "Picture comments get rating points")
     private Integer commentImgGradePoint;
     /**
-     * 是否开启文字评论获取积分,1开启,0不开启
+     * Whether to enable text comments for credits,1open,0不open
      */
-    @Min(message = "是否开启文字评论获取积分必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启文字评论获取积分必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启文字评论获取积分不能为空")
-    @ApiModelProperty(name = "comment", value = "是否开启文字评论获取积分,1开启,0不开启")
+    @Min(message = "Whether to enable text comments to obtain credits must be numeric and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to enable text comments to obtain credits must be numeric and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether to enable text comments to obtain credits cannot be left blank")
+    @ApiModelProperty(name = "comment", value = "Whether to enable text comments for credits,1open,0不open")
     private Integer comment;
     /**
-     * 文字评论获取消费积分数
+     * Text comments get credit points
      */
-    @Min(message = "文字评论获取消费积分数不能为负数", value = 0)
-    @NotNull(message = "文字评论获取消费积分数不能为空或格式错误")
-    @ApiModelProperty(name = "comment_consumer_point", value = "文字评论获取消费积分数")
+    @Min(message = "The credits for text comments cannot be negative", value = 0)
+    @NotNull(message = "Text comments can not be empty or incorrectly formatted")
+    @ApiModelProperty(name = "comment_consumer_point", value = "Text comments get credit points")
     private Integer commentConsumerPoint;
     /**
-     * 文字评论获取等级积分数
+     * Text comments get rating points
      */
-    @Min(message = "文字评论获取等级积分数不能为负数", value = 0)
-    @NotNull(message = "文字评论获取等级积分数不能为空或格式错误")
-    @ApiModelProperty(name = "comment_grade_point", value = "文字评论获取等级积分数")
+    @Min(message = "The rating score for text comments cannot be negative", value = 0)
+    @NotNull(message = "The number of ratings for text comments cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "comment_grade_point", value = "Text comments get rating points")
     private Integer commentGradePoint;
     /**
-     * 是否开启首次评论获取积分,1开启,0不开启
+     * Whether to enable credits for first comment,1open,0不open
      */
-    @Min(message = "是否开启首次评论获取积分必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启首次评论获取积分必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启首次评论获取积分不能为空或格式错误")
-    @ApiModelProperty(name = "first_comment", value = "是否开启首次评论获取积分,1开启,0不开启")
+    @Min(message = "Whether to open the first review to obtain credits must be numerical and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to open the first review to obtain credits must be numerical and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether to enable first comment to obtain credits cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "first_comment", value = "Whether to enable credits for first comment,1open,0不open")
     private Integer firstComment;
     /**
-     * 首次评论获取消费积分数
+     * Score points for your first comment
      */
-    @Min(message = "首次评论获取消费积分数不能为负数", value = 0)
-    @NotNull(message = "首次评论获取消费积分数不能为空或格式错误")
-    @ApiModelProperty(name = "first_comment_consumer_point", value = "首次评论获取消费积分数")
+    @Min(message = "The number of credits for first reviews cannot be negative", value = 0)
+    @NotNull(message = "The number of credits for first-time comments cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "first_comment_consumer_point", value = "Score points for your first comment")
     private Integer firstCommentConsumerPoint;
     /**
-     * 首次评论获取等级积分数
+     * First comment gets rating points
      */
-    @Min(message = "首次评论获取等级积分数不能为负数", value = 0)
-    @NotNull(message = "首次评论获取等级积分数不能为空或格式错误")
-    @ApiModelProperty(name = "first_comment_grade_point", value = "首次评论获取等级积分数")
+    @Min(message = "The rating score for first review cannot be negative", value = 0)
+    @NotNull(message = "The first comment to get rating points cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "first_comment_grade_point", value = "First comment gets rating points")
     private Integer firstCommentGradePoint;
     /**
-     * 是否开启购买商品获取积分,1开启,0不开启
+     * Whether to enable the purchase of goods to obtain points,1open,0不open
      */
-    @Min(message = "是否开启购买商品获取积分必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启购买商品获取积分必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启购买商品获取积分不能为空")
-    @ApiModelProperty(name = "buy_goods", value = "是否开启购买商品获取积分,1开启,0不开启")
+    @Min(message = "Whether to open the purchase of goods to obtain points must be a number and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to open the purchase of goods to obtain points must be a number and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether to enable the purchase of goods to obtain points cannot be empty")
+    @ApiModelProperty(name = "buy_goods", value = "Whether to enable the purchase of goods to obtain points,1open,0不open")
     private Integer buyGoods;
     /**
-     * 购买商品获取消费积分数
+     * Purchase goods to obtain consumption points
      */
-    @Min(message = "购买商品获取消费积分数不能为负数", value = 0)
-    @NotNull(message = "购买商品获取消费积分数不能为空或格式错误")
-    @ApiModelProperty(name = "buy_goods_consumer_point", value = "购买商品获取消费积分数")
+    @Min(message = "The number of points for purchasing goods cannot be negative", value = 0)
+    @NotNull(message = "The number of credits for purchasing goods cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "buy_goods_consumer_point", value = "Purchase goods to obtain consumption points")
     private Integer buyGoodsConsumerPoint;
     /**
-     * 购买商品获取等级积分数
+     * Purchase items to obtain grade points
      */
-    @Min(message = "购买商品获取等级积分数不能为负数", value = 0)
-    @NotNull(message = "购买商品获取等级积分数不能为空或格式错误")
-    @ApiModelProperty(name = "buy_goods_grade_point", value = "购买商品获取等级积分数")
+    @Min(message = "The number of grade points for purchases cannot be negative", value = 0)
+    @NotNull(message = "Grade points for purchases cannot be empty or incorrectly formatted")
+    @ApiModelProperty(name = "buy_goods_grade_point", value = "Purchase items to obtain grade points")
     private Integer buyGoodsGradePoint;
     /**
-     * 是否开启人民币与积分兑换比例
+     * Whether to enable the conversion ratio between RMB and points
      */
-    @Min(message = "是否开启人民币与积分兑换比例必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "是否开启人民币与积分兑换比例必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否开启人民币与积分兑换比例不能为空")
-    @ApiModelProperty(name = "parities", value = "是否开启人民币与积分兑换比例")
+    @Min(message = "Whether to open the conversion ratio between RMB and points must be numerical and,1To open,0To shut down", value = 0)
+    @Max(message = "Whether to open the conversion ratio between RMB and points must be numerical and,1To open,0To shut down", value = 1)
+    @NotNull(message = "The conversion ratio between RMB and points cannot be empty")
+    @ApiModelProperty(name = "parities", value = "Whether to enable the conversion ratio between RMB and points")
     private Integer parities;
     /**
-     * 人民币与积分兑换积分数
+     * Number of points exchanged between RMB and points
      */
-    @Min(message = "人民币与积分兑换积分数不能为负数", value = 0)
-    @NotNull(message = "人民币与积分兑换积分数不能为空或格式错误")
-    @ApiModelProperty(name = "parities_point", value = "人民币与积分兑换积分数")
+    @Min(message = "The conversion of RMB into points cannot be negative", value = 0)
+    @NotNull(message = "The number of points exchanged between RMB and points cannot be empty or the format is wrong")
+    @ApiModelProperty(name = "parities_point", value = "Number of points exchanged between RMB and points")
     private Integer paritiesPoint;
 
 

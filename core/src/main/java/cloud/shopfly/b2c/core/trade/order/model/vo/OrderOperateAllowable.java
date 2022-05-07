@@ -34,7 +34,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * 订单可进行的操作
+ * Operations that can be performed on an order
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
@@ -43,40 +43,40 @@ import java.util.Map;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OrderOperateAllowable implements Serializable {
 
-    @ApiModelProperty(value = "是否允许被取消")
+    @ApiModelProperty(value = "Whether to allow cancellation")
     private Boolean allowCancel;
 
-    @ApiModelProperty(value = "是否允许被确认")
+    @ApiModelProperty(value = "Whether to allow validation")
     private Boolean allowConfirm;
 
-    @ApiModelProperty(value = "是否允许被支付")
+    @ApiModelProperty(value = "Whether it is allowed to be paid")
     private Boolean allowPay;
 
-    @ApiModelProperty(value = "是否允许被发货")
+    @ApiModelProperty(value = "Whether to allow shipment")
     private Boolean allowShip;
 
-    @ApiModelProperty(value = "是否允许被收货")
+    @ApiModelProperty(value = "Whether the goods are allowed to be received")
     private Boolean allowRog;
 
-    @ApiModelProperty(value = "是否允许被评论")
+    @ApiModelProperty(value = "Whether to allow comments")
     private Boolean allowComment;
 
-    @ApiModelProperty(value = "是否允许被完成")
+    @ApiModelProperty(value = "Whether to allow completion")
     private Boolean allowComplete;
 
-    @ApiModelProperty(value = "是否允许申请售后")
+    @ApiModelProperty(value = "Whether application for after-sales service is allowed")
     private Boolean allowApplyService;
 
-    @ApiModelProperty(value = "是否允许取消(售后)")
+    @ApiModelProperty(value = "Whether cancellation is allowed(after-sales)")
     private Boolean allowServiceCancel;
 
-    @ApiModelProperty(value = "是否允许查看物流信息")
+    @ApiModelProperty(value = "Whether to view logistics information")
     private Boolean allowCheckExpress;
 
-    @ApiModelProperty(value = "是否允许更改收货人信息")
+    @ApiModelProperty(value = "Whether change of consignee information is allowed")
     private Boolean allowEditConsignee;
 
-    @ApiModelProperty(value = "是否允许更改价格")
+    @ApiModelProperty(value = "Whether price changes are allowed")
     private Boolean allowEditPrice;
 
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -234,7 +234,7 @@ public class OrderOperateAllowable implements Serializable {
     }
 
     /**
-     * 空构造器
+     * An empty constructor
      */
     public OrderOperateAllowable() {
 
@@ -242,7 +242,7 @@ public class OrderOperateAllowable implements Serializable {
 
 
     /**
-     * 根据各种状态构建对象
+     * Build objects from various states
      *
      * @param order
      */
@@ -250,73 +250,73 @@ public class OrderOperateAllowable implements Serializable {
 
         String paymentType = order.getPaymentType();
 
-        //定位到相应的订单流程，并构建checker
+        // Locate the appropriate order process and build the Checker
         Map<OrderStatusEnum, OrderStep> flow = OrderOperateFlow.getFlow(PaymentTypeEnum.valueOf(paymentType), OrderTypeEnum.valueOf(order.getOrderType()));
 
-//如需调试时可打开面注释
+//If you need to debug, you can open the surface comment
 //        if (logger.isDebugEnabled()) {
 //
-//            logger.debug("为订单获取flow:");
+//            logger.debug("For order acquisitionflow:");
 //            logger.debug(order.toString());
-//            logger.debug("获取到的flow为：");
+//            logger.debug("To get toflowfor：");
 //            logger.debug(flow.toString());
 //
 //        }
 
         OrderOperateChecker orderOperateChecker = new OrderOperateChecker(flow);
 
-        //订单状态
+        // Status
         OrderStatusEnum orderStatus = OrderStatusEnum.valueOf(order.getOrderStatus());
 
         String serviceStatus = order.getServiceStatus();
-        //是否允许被取消
+        // Whether to allow cancellation
         this.allowCancel = orderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CANCEL);
-        //是否允许被确认
+        // Whether to allow validation
         this.allowConfirm = orderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CONFIRM);
 
-        //是否允许被支付
+        // Whether it is allowed to be paid
         this.allowPay = orderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.PAY);
 
 
-        //是否允许被发货： 要有特殊的要求：申请了售后，或售后已经被通过了
+        // Allowed to be shipped or not: special requirements: after sales have been requested or approved
         this.allowShip = orderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.SHIP)
                 && !ServiceStatusEnum.APPLY.name().equals(serviceStatus)
                 && !ServiceStatusEnum.PASS.name().equals(serviceStatus);
 
-        //是否允许被收货
+        // Whether the goods are allowed to be received
         this.allowRog = orderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.ROG);
 
-        //发货状态
+        // The delivery status
         String shipStatus = order.getShipStatus();
-        //评论状态
+        // Review status
         String commentStatus = order.getCommentStatus();
 
-        //付款状态
+        // Payment status
         String payStatus = order.getPayStatus();
 
-        //是否允许被评论: 收货后可以评论，且评论未完成（评论完成后就不可以再评论了）
+        // Allowed to be commented: comments can be made after receiving the goods, and the comments are not completed (comments can not be made after the completion of the comments)
         this.allowComment = CommentStatusEnum.UNFINISHED.value().equals(commentStatus) && ShipStatusEnum.SHIP_ROG.value().equals(shipStatus);
 
-        //是否允许被完成
+        // Whether to allow completion
         this.allowComplete = orderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.COMPLETE);
 
         boolean defaultServiceStatus = ServiceStatusEnum.NOT_APPLY.value().equals(serviceStatus);
 
-        //货到付款
+        // Cash on delivery
         if (PaymentTypeEnum.COD.name().equals(paymentType)) {
 
-            //是否允许被申请售后 = 已收货 && 未申请过售后 && 订单是已收货状态
+            // Is it allowed to be applied for after sale = Received && Unapplied for after sale && the order is received
             allowApplyService = ShipStatusEnum.SHIP_ROG.value().equals(shipStatus)
                     && defaultServiceStatus
                     && ShipStatusEnum.SHIP_ROG.value().equals(shipStatus);
 
         } else {
-            //是否允许被申请售后 = 已付款 && 未申请过售后 && 订单是已收货状态
+            // Is it allowed to apply for after sale = paid && Not applied for after sale && the order is received status
             allowApplyService = PayStatusEnum.PAY_YES.value().equals(payStatus)
                     && defaultServiceStatus
                     && ShipStatusEnum.SHIP_ROG.value().equals(shipStatus);
 
-            //订单是否允许取消(售后) = 支付状态已付款  &&  订单已付款
+            // Is the order allowed to cancel (after sale) = Payment status paid && The order paid
             this.allowServiceCancel = PayStatusEnum.PAY_YES.value().equals(payStatus)
                     && OrderStatusEnum.PAID_OFF.value().equals(orderStatus.value())
                     && (ServiceStatusEnum.NOT_APPLY.name().equals(serviceStatus)
@@ -324,13 +324,13 @@ public class OrderOperateAllowable implements Serializable {
 
         }
 
-        //是否允许查看物流信息 = 当物流单号不为空并且物流公司不为空
+        // Whether to view logistics information = when the logistics order number is not empty and the logistics company is not empty
         this.allowCheckExpress = order.getLogiId() != null && !order.getLogiId().equals(0) && !StringUtil.isEmpty(order.getShipNo());
-        //不是已取消并且不是出库失败
+        // Not cancelled and not failed to exit
         boolean flag = !OrderStatusEnum.INTODB_ERROR.equals(orderStatus) && !OrderStatusEnum.CANCELLED.equals(orderStatus);
-        //是否允许更改收货人信息 = 发货状态未发货
+        // Allow change of consignee information = Shipping Status Not shipped
         this.allowEditConsignee = flag && ShipStatusEnum.SHIP_NO.value().equals(order.getShipStatus());
-        //是否允许更改价格 = （在线支付 && 未付款）||（货到付款 && 未发货）
+        // Whether to allow change price = (online payment & not paying) | | (cod && unfilled)
         this.allowEditPrice = flag && (PaymentTypeEnum.ONLINE.value().equals(order.getPaymentType())
                 && PayStatusEnum.PAY_NO.value().equals(order.getPayStatus()))
                 || (PaymentTypeEnum.COD.value().equals(order.getPaymentType())

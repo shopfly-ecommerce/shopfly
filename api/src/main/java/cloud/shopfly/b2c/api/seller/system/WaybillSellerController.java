@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 电子面单控制器
+ * Electron plane single controller
  *
  * @author zh
  * @version v7.0.0
@@ -38,28 +38,28 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("/seller/systems/waybills")
-@Api(description = "电子面单相关API")
+@Api(description = "Electron plane dependenceAPI")
 public class WaybillSellerController {
 
     @Autowired
     private WaybillManager waybillManager;
 
 
-    @ApiOperation(value = "查询电子面单列表", response = WayBillDO.class)
+    @ApiOperation(value = "Query the electronic plane single column list", response = WayBillDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
         return this.waybillManager.list(pageNo, pageSize);
     }
 
-    @ApiOperation(value = "修改电子面单", response = UploaderDO.class)
+    @ApiOperation(value = "Modify the electronic sheet", response = UploaderDO.class)
     @PutMapping(value = "/{bean}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bean", value = "电子面单bean id", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "wayBillVO", value = "电子面单对象", required = true, dataType = "WayBillVO", paramType = "body")
+            @ApiImplicitParam(name = "bean", value = "Electronic surface singlebean id", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "wayBillVO", value = "Electron plane single object", required = true, dataType = "WayBillVO", paramType = "body")
     })
     public WayBillVO edit(@PathVariable String bean, @RequestBody @ApiIgnore WayBillVO wayBillVO) {
         wayBillVO.setBean(bean);
@@ -68,7 +68,7 @@ public class WaybillSellerController {
 
 
     @PutMapping(value = "/{bean}/open")
-    @ApiOperation(value = "开启电子面单", response = WayBillDO.class)
+    @ApiOperation(value = "Turn on the electronic plane", response = WayBillDO.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "bean", value = "bean", required = true, dataType = "String", paramType = "path")
     })
@@ -77,9 +77,9 @@ public class WaybillSellerController {
         return null;
     }
 
-    @ApiOperation(value = "获取电子面单配置", response = String.class)
+    @ApiOperation(value = "Get the electronic surface sheet configuration", response = String.class)
     @GetMapping("/{bean}")
-    @ApiImplicitParam(name = "bean", value = "电子面单bean id", required = true, dataType = "String", paramType = "path")
+    @ApiImplicitParam(name = "bean", value = "Electronic surface singlebean id", required = true, dataType = "String", paramType = "path")
     public WayBillVO getWaybillSetting(@PathVariable String bean) {
         return waybillManager.getWaybillConfig(bean);
     }

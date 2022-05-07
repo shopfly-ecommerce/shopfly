@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 前端订单页面TAB标签枚举
+ * Front-end order pageTABLabel the enumeration
  *
  * @author Snow create in 2018/5/14
  * @version v2.0
@@ -26,44 +26,44 @@ public enum OrderTagEnum {
 
 
     /**
-     * 所有订单
+     * All orders
      */
-    ALL("所有订单"),
+    ALL("All orders"),
 
     /**
-     * 待付款
+     * For the payment
      */
-    WAIT_PAY("待付款"),
+    WAIT_PAY("For the payment"),
 
     /**
-     * 待发货
+     * To send the goods
      */
-    WAIT_SHIP("待发货"),
+    WAIT_SHIP("To send the goods"),
 
     /**
-     * 待收货
+     * For the goods
      */
-    WAIT_ROG("待收货"),
+    WAIT_ROG("For the goods"),
 
     /**
-     * 已取消
+     * Has been cancelled
      */
-    CANCELLED("已取消"),
+    CANCELLED("Has been cancelled"),
 
     /**
-     * 已完成
+     * Has been completed
      */
-    COMPLETE("已完成"),
+    COMPLETE("Has been completed"),
 
     /**
-     * 待评论
+     * To comment on
      */
-    WAIT_COMMENT("待评论"),
+    WAIT_COMMENT("To comment on"),
 
     /**
-     * 售后中
+     * In the after-sale
      */
-    REFUND("售后中");
+    REFUND("In the after-sale");
 
     private String description;
 

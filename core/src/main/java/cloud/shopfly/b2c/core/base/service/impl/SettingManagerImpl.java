@@ -30,12 +30,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- * 系统设置接口实现
+ * System setting interface implementation
  *
  * @author zh
  * @version v7.0
  * @since v7.0
- * 2018年3月27日 下午4:50:15
+ * 2018years3month27On the afternoon4:50:15
  */
 @Service
 public class SettingManagerImpl implements SettingManager {
@@ -53,23 +53,23 @@ public class SettingManagerImpl implements SettingManager {
     public void save(SettingGroup group, Object settings) {
         String sql = "select cfg_value from es_settings where cfg_group = ?";
         SettingsDO settingsDO = this.systemDaoSupport.queryForObject(sql, SettingsDO.class, group.name());
-        //将要保存的对象 转换成json
+        // The object to be saved is converted to JSON
         String setting = JsonUtil.objectToJson(settings);
         if (settingsDO == null) {
             this.systemDaoSupport.execute("insert into es_settings set cfg_value = ?,cfg_group = ?", setting, group.name());
         } else {
             this.systemDaoSupport.execute("update es_settings set cfg_value = ? where cfg_group = ?", setting, group.name());
         }
-        //清除缓存
+        // Clear the cache
         cache.remove(CachePrefix.SETTING.getPrefix() + group.name());
     }
 
 
     @Override
     public String get(SettingGroup group) {
-        //从缓存中获取参数配置
+        // Get the parameter configuration from the cache
         String setting = StringUtil.toString(cache.get(CachePrefix.SETTING.getPrefix() + group.name()), false);
-        //如果没有获取到从数据库获取
+        // If not retrieved from the database
         if (StringUtil.isEmpty(setting)) {
             String sql = "select * from es_settings where cfg_group = ?";
             SettingsDO settingsDO = this.systemDaoSupport.queryForObject(sql, SettingsDO.class, group.name());

@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 品牌业务层
+ * Brand business layer
  * 
  * @author fk
  * @version v2.0
@@ -33,69 +33,69 @@ public interface BrandManager {
 
 
 	/**
-	 * 查询某分类下的品牌
+	 * Query brands in a category
 	 *
 	 * @param categoryId
 	 * @return
 	 */
 	List<BrandDO> getBrandsByCategory(Integer categoryId);
 
-	/**查询全部的品牌
+	/**Query all brands
 	 * @return
 	 */
 	List<BrandDO> getAllBrands();
 
 	/**
-	 * 查询品牌列表
+	 * Query brand list
 	 *
 	 * @param page
-	 *            页码
+	 *            The page number
 	 * @param pageSize
-	 *            每页数量
+	 *            Number each page
 	 * @param name
 	 * @return Page
 	 */
 	Page list(int page, int pageSize, String name);
 
 	/**
-	 * 添加品牌
+	 * Add a brand
 	 *
 	 * @param brand
-	 *            品牌
-	 * @return Brand 品牌
+	 *            brand
+	 * @return Brand brand
 	 */
 	BrandDO add(BrandDO brand);
 
 	/**
-	 * 修改品牌
+	 * Modify the brand
 	 *
 	 * @param brand
-	 *            品牌
+	 *            brand
 	 * @param id
-	 *            品牌主键
-	 * @return Brand 品牌
+	 *            Brand is the primary key
+	 * @return Brand brand
 	 */
 	BrandDO edit(BrandDO brand, Integer id);
 
 	/**
-	 * 删除品牌
+	 * Delete the brand
 	 *
 	 * @param ids
-	 *            品牌主键
+	 *            Brand is the primary key
 	 */
 	void delete(Integer[] ids);
 
 	/**
-	 * 获取品牌
+	 * Access to the brand
 	 *
 	 * @param id
-	 *            品牌主键
-	 * @return Brand 品牌
+	 *            Brand is the primary key
+	 * @return Brand brand
 	 */
 	BrandDO getModel(Integer id);
 
 	/**
-	 * 查询分类品牌，所有品牌，分类绑定的品牌为已选中状态
+	 * Query category brands. All brands bound to a category are selected
 	 *
 	 * @param categoryId
 	 * @return

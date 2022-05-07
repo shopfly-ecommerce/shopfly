@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 请求登陆model
+ * Request landingmodel
  *
  * @author cs
  * @version v1.0
@@ -39,44 +39,44 @@ public class LoginUserDTO implements Serializable {
 
     private static final long serialVersionUID = -1232483319436590972L;
 
-    @ApiModelProperty(name = "uuid", value = "此次登陆随机数", required = false)
+    @ApiModelProperty(name = "uuid", value = "This login random number", required = false)
     private String uuid;
 
-    @ApiModelProperty(name = "tokenOutTime", value = "token过期时间", required = false)
+    @ApiModelProperty(name = "tokenOutTime", value = "tokenExpiration time", required = false)
     private Integer tokenOutTime;
 
-    @ApiModelProperty(name = "refreshTokenOutTime", value = "refreshToken过期时间", required = false)
+    @ApiModelProperty(name = "refreshTokenOutTime", value = "refreshTokenExpiration time", required = false)
     private Integer refreshTokenOutTime;
 
     @ApiModelProperty(name = "openid", value = "openid", required = true)
     private String openid;
 
-    @ApiModelProperty(name = "openType", value = "openid类型", required = false)
+    @ApiModelProperty(name = "openType", value = "openidtype", required = false)
     private ConnectTypeEnum openType;
 
     @ApiModelProperty(name = "unionid", value = "unionid", required = true)
     private String unionid;
 
-    @ApiModelProperty(name = "unionType", value = "unionid类型", required = false)
+    @ApiModelProperty(name = "unionType", value = "unionidtype", required = false)
     private ConnectTypeEnum unionType;
 
 
-    @ApiModelProperty(name = "headimgurl", value = "头像", required = false,hidden = true)
+    @ApiModelProperty(name = "headimgurl", value = "Head portrait", required = false,hidden = true)
     private String headimgurl;
 
-    @ApiModelProperty(name = "nickName", value = "用户昵称", required = false)
+    @ApiModelProperty(name = "nickName", value = "The user nickname", required = false)
     private String nickName;
 
-    @ApiModelProperty(name = "sex", value = "性别：1:男;0:女", required = false)
+    @ApiModelProperty(name = "sex", value = "gender：1:male;0:female", required = false)
     private Integer sex;
 
     @ApiModelProperty(name = "country", value = "Country name", required = false)
     private String country;
 
-    @ApiModelProperty(name = "city", value = "城市", required = false)
+    @ApiModelProperty(name = "city", value = "city", required = false)
     private String city;
 
-    @ApiModelProperty(name = "oldUuid", value = "重定向之前的uuid（分销使用）", required = false)
+    @ApiModelProperty(name = "oldUuid", value = "Before the redirectuuid（Distribution using）", required = false)
     private String oldUuid;
 
 

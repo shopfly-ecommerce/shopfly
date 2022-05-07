@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade;
 
 /**
- * 交易异常码 范围：451~499
+ * Transaction exception code range：451~499
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -27,69 +27,69 @@ package cloud.shopfly.b2c.core.trade;
 public enum TradeErrorCode {
 
     /**
-     * 加入购物车商品异常
+     * The item added to the shopping cart is abnormal
      */
-    E451("商品异常"),
+    E451("Abnormal goods"),
 
     /**
-     * 下单前检验异常
+     * Check anomalies before placing orders
      */
-    E452("下单前检验异常"),
+    E452("Check anomalies before placing orders"),
 
     /**
-     * 读取异常：如订单不存在
+     * Read the abnormal：If the order does not exist
      */
-    E453("读取异常"),
+    E453("Read the abnormal"),
 
     /**
-     * 付款异常：如付款金额与订单实付金额不一致
+     * Abnormal payment：If the payment amount is inconsistent with the actual payment amount of the order
      */
-    E454("付款异常"),
+    E454("Abnormal payment"),
 
     /**
-     * 参数异常
+     * Parameters of the abnormal
      */
-    E455("参数异常"),
+    E455("Parameters of the abnormal"),
 
     /**
-     * 订单创建异常
+     * Order creation exception
      */
-    E456("订单创建异常"),
+    E456("Order creation exception"),
 
     /**
-     * 导出Excel异常
+     * exportExcelabnormal
      */
-    E457("导出Excel异常"),
+    E457("exportExcelabnormal"),
 
     /**
-     * 交易不存在
+     * The deal doesnt exist.
      */
-    E458("交易不存在"),
+    E458("The deal doesnt exist."),
 
     /**
-     * 订单不存在
+     * Order does not exist
      */
-    E459("订单不存在"),
+    E459("Order does not exist"),
 
     /**
-     * 操作订单无权限
+     * No permission to operate an order
      */
-    E460("操作订单无权限"),
+    E460("No permission to operate an order"),
 
     /**
-     * 商品不在配送区域
+     * Goods are not in the distribution area
      */
-    E461("商品不在配送区域"),
+    E461("Goods are not in the distribution area"),
 
     /**
-     * 使用促销活动出现错误
+     * There was an error using the promotion
      */
-    E462("使用促销活动出现错误"),
+    E462("There was an error using the promotion"),
 
     /*
-     * 订单金额不正确
+     * The order amount is incorrect
      */
-    E471("订单金额不正确");
+    E471("The order amount is incorrect");
 
 
     private String describe;

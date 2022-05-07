@@ -21,16 +21,16 @@ package cloud.shopfly.b2c.framework.util;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-12-19 下午3:08
+ * 2018-12-19 In the afternoon3:08
  */
 public enum UserTokenPrefix {
 
     /**
-     * 访问令牌
+     * The access token
      */
     ACCESS_TOKEN,
     /**
-     * 刷新令牌
+     * The refresh token
      */
     REFRESH_TOKEN;
 

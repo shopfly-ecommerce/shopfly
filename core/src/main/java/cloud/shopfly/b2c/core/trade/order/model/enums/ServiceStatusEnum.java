@@ -16,39 +16,39 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 申请售后的状态
+ * Status of application after sale
  *
  * @author Snow
  * @version v2.0
  * @since v6.4
- * 2017年9月6日 下午4:16:53
+ * 2017years9month6On the afternoon4:16:53
  */
 public enum ServiceStatusEnum {
 
     /**
-     * 未申请
+     * Did not apply for
      */
-    NOT_APPLY("未申请"),
+    NOT_APPLY("Did not apply for"),
 
     /**
-     * 已申请
+     * Has applied for
      */
-    APPLY("已申请"),
+    APPLY("Has applied for"),
 
     /**
-     * 审核通过
+     * approved
      */
-    PASS("审核通过"),
+    PASS("approved"),
 
     /**
-     * 审核未通过
+     * The audit is not approved.
      */
-    REFUSE("审核未通过"),
+    REFUSE("The audit is not approved."),
 
     /**
-     * 已失效或不允许申请售后
+     * Expired or not allowed to apply for after sales
      */
-    EXPIRED("已失效不允许申请售后");
+    EXPIRED("It is not allowed to apply for after-sales service");
 
 
     private String description;

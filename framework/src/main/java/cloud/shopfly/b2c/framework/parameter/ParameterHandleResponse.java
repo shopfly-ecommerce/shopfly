@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * 处理基本类型的返回，目前只处理了emoji表情的解码
+ * Handles returns of basic types, so far onlyemojiDecoding of expression
  *
  * @author fk
  * @version 1.0
@@ -38,14 +38,14 @@ public class ParameterHandleResponse implements ResponseBodyAdvice {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
-        //只处理基本类型的参数
+        // Only basic types of parameters are handled
         return BeanUtils.isSimpleProperty(methodParameter.getParameterType());
     }
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         Class<?> type = methodParameter.getParameterType();
-        //字符串类型，emoji表情转码
+        // The character string is emoji transcoding
         if (type.equals(String.class) && o != null) {
             return EmojiCharacterUtil.encode(o.toString());
         }

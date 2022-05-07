@@ -26,7 +26,7 @@ import java.io.Serializable;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品相关设置vo
+ * @Description: Commodity related Settingsvo
  * @date 2018/4/911:10
  * @since v7.0.0
  */
@@ -34,32 +34,32 @@ import java.io.Serializable;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GoodsSettingVO implements Serializable {
 
-    @ApiModelProperty(name = "thumbnail_width", value = "缩略图宽度", required = true)
-    @NotNull(message = "缩略图宽度不能为空")
+    @ApiModelProperty(name = "thumbnail_width", value = "Thumbnail width", required = true)
+    @NotNull(message = "The thumbnail width cannot be empty")
     private Integer thumbnailWidth;
 
-    @ApiModelProperty(name = "thumbnail_height", value = "缩略图高度", required = true)
-    @NotNull(message = "缩略图高度不能为空")
+    @ApiModelProperty(name = "thumbnail_height", value = "Thumbnail height", required = true)
+    @NotNull(message = "The thumbnail height cannot be empty")
     private Integer thumbnailHeight;
 
-    @ApiModelProperty(name = "small_width", value = "小图宽度", required = true)
-    @NotNull(message = "小图宽度不能为空")
+    @ApiModelProperty(name = "small_width", value = "The width of the picture", required = true)
+    @NotNull(message = "Small image width cannot be empty")
     private Integer smallWidth;
 
-    @ApiModelProperty(name = "small_height", value = "小图高度", required = true)
-    @NotNull(message = "小图高度不能为空")
+    @ApiModelProperty(name = "small_height", value = "Insets height", required = true)
+    @NotNull(message = "The height of the small map cannot be empty")
     private Integer smallHeight;
 
-    @ApiModelProperty(name = "big_width", value = "大图宽度", required = true)
-    @NotNull(message = "大图宽度不能为空")
+    @ApiModelProperty(name = "big_width", value = "A larger width", required = true)
+    @NotNull(message = "Large image width cannot be empty")
     private Integer bigWidth;
 
-    @ApiModelProperty(name = "big_height", value = "大图高度", required = true)
-    @NotNull(message = "大图高度不能为空")
+    @ApiModelProperty(name = "big_height", value = "A larger image height", required = true)
+    @NotNull(message = "Large map height cannot be empty")
     private Integer bigHeight;
 
-    @ApiModelProperty(name="goods_warning_count",value="货品预警数",required=true)
-    @NotNull(message = "商品预警数不能为空")
+    @ApiModelProperty(name="goods_warning_count",value="Number of goods warning",required=true)
+    @NotNull(message = "The commodity warning number cannot be empty")
     private Integer goodsWarningCount;
 
     public Integer getThumbnailWidth() {

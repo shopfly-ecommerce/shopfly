@@ -18,38 +18,38 @@ package cloud.shopfly.b2c.core.base.message;
 import java.io.Serializable;
 
 /**
- * 分类变更消息vo
+ * Classified change messagevo
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:37:12
+ * 2018years3month23The morning of10:37:12
  */
 public class CategoryChangeMsg implements Serializable{
 
 	private static final long serialVersionUID = 6042345706426853823L;
 	
 	/**
-	 * 分类id
+	 * Categoriesid
 	 */
 	private Integer categoryId;
 
 	/**
-	 * 操作类型
+	 * Operation type
 	 */
 	private Integer operationType;
 
 	/**
-	 * 添加
+	 * add
 	 */
 	public final static int ADD_OPERATION = 1;
 
 	/**
-	 * 修改
+	 * edit
 	 */
 	public final static int UPDATE_OPERATION = 2;
 
 	/**
-	 * 删除
+	 * delete
 	 */
 	public final static int DEL_OPERATION = 3;
 

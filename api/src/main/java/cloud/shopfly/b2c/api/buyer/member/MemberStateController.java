@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 系统状态心跳功能
+ * System Status Heartbeat function
  * @Author shen
  * @Date 2021/6/30 15:49
  */
 
-@Api(description = "系统状态心跳功能")
+@Api(description = "System Status Heartbeat function")
 @RestController
 @RequestMapping("/webjars/system/buyer/state")
 @Validated

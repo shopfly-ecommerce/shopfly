@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author fk
  * @version v1.0
- * @Description: 系统设置
+ * @Description: System Settings
  * @date 2018/7/30 10:49
  * @since v7.0.0
  */

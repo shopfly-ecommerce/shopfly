@@ -36,17 +36,17 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * 会员积分管理API
+ * Member Points ManagementAPI
  *
  * @author zh
  * @version v7.0
- * @date 18/7/14 下午2:05
+ * @date 18/7/14 In the afternoon2:05
  * @since v7.0
  */
 @RestController
 @RequestMapping("/seller/members/point")
 @Validated
-@Api(description = "会员积分后台API")
+@Api(description = "Member Points backgroundAPI")
 public class MemberPointManagerController {
 
     @Autowired
@@ -58,18 +58,18 @@ public class MemberPointManagerController {
     MemberPointHistoryManager memberPointHistoryManager;
 
     @PutMapping(value = "/{member_id}")
-    @ApiOperation(value = "修改会消费积分", response = Member.class)
+    @ApiOperation(value = "Modifications cost points", response = Member.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "member_id", value = "会员id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "point", value = "调整后的会员消费积分", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "member_id", value = "membersid", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "point", value = "Adjusted member consumption points", required = true, dataType = "int", paramType = "query")
     })
-    public void editPoint(@PathVariable("member_id") Integer memberId, @Min(value = 0, message = "消费积分不能小于0") Integer point) {
-        //获取当前会员的积分 如果当前会员积分大于调整后的积分 则为消费，反之则为新增
+    public void editPoint(@PathVariable("member_id") Integer memberId, @Min(value = 0, message = "Consumption points cannot be less than0") Integer point) {
+        // If the current member points are greater than the adjusted points, it is consumption, otherwise, it is new
         Member member = memberManager.getModel(memberId);
         Integer currentPoint = member.getConsumPoint();
-        //增加或者消费的积分数
+        // The number of points added or spent
         Integer operationPoint = point - currentPoint;
-        //操作类型  1为加积分 0为减积分或无操作
+        // Operation type 1 is plus integral and operation type 0 is minus integral or no operation
         Integer type = 0;
         if (operationPoint > 0) {
             type = 1;
@@ -81,20 +81,20 @@ public class MemberPointManagerController {
         memberPointHistory.setGradePoint(0);
         memberPointHistory.setConsumPoint(Math.abs(operationPoint));
         memberPointHistory.setConsumPointType(type);
-        memberPointHistory.setReason("管理员手工修改");
+        memberPointHistory.setReason("Manually Modified by the administrator");
         memberPointHistory.setOperator(admin.getUsername());
         memberPointManager.pointOperation(memberPointHistory);
 
     }
 
-    @ApiOperation(value = "查询会员积分列表", response = MemberPointHistory.class)
+    @ApiOperation(value = "Query membership points list", response = MemberPointHistory.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "member_id", value = "会员id", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "member_id", value = "membersid", required = true, dataType = "int", paramType = "path")
     })
     @GetMapping("/{member_id}")
-    public Page list(@PathVariable("member_id") Integer memberId, @ApiIgnore @NotNull(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotNull(message = "每页数量不能为空") Integer pageSize) {
+    public Page list(@PathVariable("member_id") Integer memberId, @ApiIgnore @NotNull(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotNull(message = "The number of pages cannot be empty") Integer pageSize) {
         return this.memberPointHistoryManager.list(pageNo, pageSize, memberId);
     }
 

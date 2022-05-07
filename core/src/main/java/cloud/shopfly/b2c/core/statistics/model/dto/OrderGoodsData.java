@@ -26,63 +26,63 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Map;
 
 /**
- * 订单商品数据
+ * Order data
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/3/22 下午11:51
+ * 2018/3/22 In the afternoon11:51
  */
 
 @Table(name="es_sss_order_goods_data")
 public class OrderGoodsData {
 
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "A primary keyid")
     @Column(name = "id")
     @Id
     private Integer id;
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     @Column(name = "order_sn")
     private String orderSn;
 
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "productid")
     @Column(name = "goods_id")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "购买数量")
+    @ApiModelProperty(value = "Purchase quantity")
     @Column(name = "goods_num")
     private Integer goodsNum;
 
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     @Column(name = "goods_name")
     private String goodsName;
 
-    @ApiModelProperty(value = "商品价格")
+    @ApiModelProperty(value = "Price")
     @Column(name = "price")
     private Double price;
 
 
-    @ApiModelProperty(value = "小记")
+    @ApiModelProperty(value = "reporter")
     @Column(name = "sub_total")
     private Double subTotal;
 
 
-    @ApiModelProperty(value = "分类id")
+    @ApiModelProperty(value = "Categoriesid")
     @Column(name = "category_id")
     private Integer categoryId;
 
-    @ApiModelProperty(value = "分类path")
+    @ApiModelProperty(value = "Categoriespath")
     @Column(name = "category_path")
     private String categoryPath;
 
-    @ApiModelProperty(value = "行业id")
+    @ApiModelProperty(value = "industryid")
     @Column(name = "industry_id")
     private Integer industryId;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Last update")
     @Column(name = "create_time")
     private Long createTime;
 

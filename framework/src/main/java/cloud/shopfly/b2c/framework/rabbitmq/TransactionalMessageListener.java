@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 /**
- * 对ApplicationEventPublisher的publishEvent的监听，默认在事务提交后执行
+ * rightApplicationEventPublisherthepublishEventthe监听，默认在事务提交后执行
  *
  * @author fk
  * @version v7.2.0
@@ -35,7 +35,7 @@ public class TransactionalMessageListener {
     private AmqpTemplate amqpTemplate;
 
     /**
-     * 默认在事务提交后执行
+     * By default, it is executed after the transaction commits
      * @param message
      */
     @TransactionalEventListener(fallbackExecution = true)

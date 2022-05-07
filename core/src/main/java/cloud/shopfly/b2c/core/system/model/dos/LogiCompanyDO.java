@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 物流公司实体
+ * Logistics company entity
  *
  * @author zjp
  * @version v7.0.0
@@ -60,46 +60,46 @@ public class LogiCompanyDO implements Serializable {
      * ID
      */
     @Id(name = "id")
-    @ApiModelProperty(name = "id", value = "物流公司id", required = false)
+    @ApiModelProperty(name = "id", value = "Logistics companyid", required = false)
     private Integer id;
     /**
-     * 物流公司名称
+     * Name of logistics Company
      */
     @Column(name = "name")
-    @NotEmpty(message = "物流公司名称必填")
-    @ApiModelProperty(name = "name", value = "物流公司名称", required = true)
+    @NotEmpty(message = "Logistics company Name This parameter is mandatory")
+    @ApiModelProperty(name = "name", value = "Name of logistics Company", required = true)
     private String name;
     /**
-     * 物流公司code
+     * Logistics companycode
      */
     @Column(name = "code")
-    @NotEmpty(message = "物流公司code必填")
-    @ApiModelProperty(name = "code", value = "物流公司code", required = true)
+    @NotEmpty(message = "Logistics companycoderequired")
+    @ApiModelProperty(name = "code", value = "Logistics companycode", required = true)
     private String code;
     /**
-     * 快递鸟物流公司code
+     * Express Bird Logistics Companycode
      */
     @Column(name = "kdcode")
-    @ApiModelProperty(name = "kdcode", value = "快递鸟物流公司code", required = true)
+    @ApiModelProperty(name = "kdcode", value = "Express Bird Logistics Companycode", required = true)
     private String kdcode;
     /**
-     * 是否支持电子面单1：支持 0：不支持
+     * Whether electronic planes are supported1：support0：不support
      */
     @Column(name = "is_waybill")
-    @NotNull(message = "是否支持电子面单必填")
-    @ApiModelProperty(name = "is_waybill", value = "是否支持电子面单1：支持 0：不支持", required = true)
+    @NotNull(message = "Supported Or not This parameter is mandatory")
+    @ApiModelProperty(name = "is_waybill", value = "Whether electronic planes are supported1：support0：不support", required = true)
     private Integer isWaybill;
     /**
-     * 物流公司客户号
+     * Customer number of logistics company
      */
     @Column(name = "customer_name")
-    @ApiModelProperty(name = "customer_name", value = "物流公司客户号", required = false)
+    @ApiModelProperty(name = "customer_name", value = "Customer number of logistics company", required = false)
     private String customerName;
     /**
-     * 物流公司电子面单密码
+     * Logistics company electronic surface single password
      */
     @Column(name = "customer_pwd")
-    @ApiModelProperty(name = "customer_pwd", value = "物流公司电子面单密码", required = false)
+    @ApiModelProperty(name = "customer_pwd", value = "Logistics company electronic surface single password", required = false)
     private String customerPwd;
 
     @PrimaryKeyField

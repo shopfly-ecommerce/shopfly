@@ -16,17 +16,17 @@
 package cloud.shopfly.b2c.core.statistics;
 
 /**
- * 统计错误码
+ * Statistical error code
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-03-26 下午11:56
+ * 2018-03-26 In the afternoon11:56
  */
 public enum StatisticsErrorCode {
 
-    // 统计相关错误码
-    E801("错误的请求参数"),
-    E810("业务处理异常");
+    // Statistical error codes
+    E801("Incorrect request parameters"),
+    E810("Service processing exception");
 
     private String describe;
 
@@ -35,9 +35,9 @@ public enum StatisticsErrorCode {
     }
 
     /**
-     * 获取异常码
+     * Get exception code
      *
-     * @return 异常码
+     * @return Abnormal code
      */
     public String code() {
         return this.name().replaceAll("E", "");
@@ -45,7 +45,7 @@ public enum StatisticsErrorCode {
 
 
     /**
-     * 获取统计的错误消息
+     * Get statistics error messages
      *
      * @return
      */

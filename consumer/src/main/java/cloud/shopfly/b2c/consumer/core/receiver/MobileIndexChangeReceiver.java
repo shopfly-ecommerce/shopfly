@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 移动端首页生成
+ * Mobile home page generation
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:31:27
+ * @since v7.0.0 2018years3month23The morning of10:31:27
  */
 @Component
 public class MobileIndexChangeReceiver {
@@ -46,7 +46,7 @@ public class MobileIndexChangeReceiver {
 	private List<MobileIndexChangeEvent> events;
 
 	/**
-	 * 生成首页
+	 * Generated home page
 	 * @param operation
 	 */
 	@RabbitListener(bindings = @QueueBinding(
@@ -60,7 +60,7 @@ public class MobileIndexChangeReceiver {
 				try {
 					event.mobileIndexChange(operation);
 				} catch (Exception e) {
-					logger.error("移动端页面生成消息出错", e);
+					logger.error("Failed to generate messages on the mobile page. Procedure", e);
 				}
 			}
 		}

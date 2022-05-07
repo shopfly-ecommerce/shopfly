@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 运费模板子VO
+ * @Description: Freight templateVO
  * @date 2018/10/2416:15
  * @since v7.0.0
  */
@@ -40,7 +40,7 @@ import java.util.Map;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class RateAreaChildVO implements Serializable {
 
-    @ApiParam("地区‘，‘分隔   示例参数：北京，山西，天津，上海")
+    @ApiParam("region‘，‘Separate example parameters：Beijing, Shanxi, Tianjin, Shanghai")
     @Column(name = "area")
     private String area;
 
@@ -64,7 +64,7 @@ public class RateAreaChildVO implements Serializable {
                 childArea.setName(dto.get("local_name").toString());
                 list.add(childArea);
             } else {
-                //某省份下面的几市
+                // Municipalities in a province
                 Map<String, Map> citiesMap = (Map<String, Map>)dto.get("children");
 
                 for (String cityKey : citiesMap.keySet()) {
@@ -72,7 +72,7 @@ public class RateAreaChildVO implements Serializable {
                     ShipTemplateChildArea childArea1 = new ShipTemplateChildArea();
                     childArea1.setName(cityMap.get("local_name").toString());
 
-                    //如果市没有被全选，则赋值children
+                    // If not all cities are selected, children is assigned
                     if (!(boolean)cityMap.get("selected_all")) {
                         List<ShipTemplateChildArea> children = new ArrayList<>();
                         Map<String, Map> regionMap = (Map<String, Map>)cityMap.get("children");

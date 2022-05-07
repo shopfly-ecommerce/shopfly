@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.core.member.model.dto.AppleIDUserDTO;
 import java.util.Map;
 
 /**
- * AppleID IOS 登陆服务
+ * AppleID IOS Log in service
  * @author snow
  * @since v1.0
  * @version 7.2.2
@@ -31,7 +31,7 @@ import java.util.Map;
 public interface LoginAppleIDManager {
 
     /**
-     * IOS-APP 登录
+     * IOS-APP Sign in
      * @param uuid
      * @param appleIDUserDTO
      * @return

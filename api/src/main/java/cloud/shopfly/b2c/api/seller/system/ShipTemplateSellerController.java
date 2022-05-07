@@ -32,7 +32,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 运费模版控制器
+ * Freight template controller
  *
  * @author zjp
  * @version v7.0.0
@@ -41,7 +41,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/shops/ship-templates")
-@Api(description = "运费模版相关API")
+@Api(description = "Freight template relatedAPI")
 @Validated
 public class ShipTemplateSellerController {
 
@@ -49,14 +49,14 @@ public class ShipTemplateSellerController {
     private ShipTemplateManager shipTemplateManager;
 
 
-    @ApiOperation(value = "查询运费模版列表", response = ShipTemplateVO.class)
+    @ApiOperation(value = "Query the shipping template list", response = ShipTemplateVO.class)
     @GetMapping
     public List<ShipTemplateSellerVO> list() {
         return this.shipTemplateManager.getStoreTemplate();
     }
 
 
-    @ApiOperation(value = "添加运费模版", response = ShipTemplateDO.class)
+    @ApiOperation(value = "Add the shipping template", response = ShipTemplateDO.class)
     @PostMapping
     public ShipTemplateDO add(@Valid @RequestBody ShipTemplateSellerVO shipTemplate) {
 
@@ -64,8 +64,8 @@ public class ShipTemplateSellerController {
     }
 
     @PutMapping(value = "/{template_id}")
-    @ApiOperation(value = "修改运费模版", response = ShipTemplateDO.class)
-    @ApiImplicitParam(name = "template_id", value = "模版id", required = true, dataType = "int", paramType = "path")
+    @ApiOperation(value = "Modify the freight template", response = ShipTemplateDO.class)
+    @ApiImplicitParam(name = "template_id", value = "templateid", required = true, dataType = "int", paramType = "path")
     public ShipTemplateDO edit(@Valid @RequestBody ShipTemplateSellerVO shipTemplate, @ApiIgnore @PathVariable("template_id") Integer templateId) {
         shipTemplate.setId(templateId);
         return this.shipTemplateManager.edit(shipTemplate);
@@ -73,9 +73,9 @@ public class ShipTemplateSellerController {
 
 
     @DeleteMapping(value = "/{template_id}")
-    @ApiOperation(value = "删除运费模版")
+    @ApiOperation(value = "Delete the shipping template")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "template_id", value = "要删除的运费模版主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "template_id", value = "The shipping template primary key to remove", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@ApiIgnore @PathVariable("template_id") Integer templateId) {
         this.shipTemplateManager.delete(templateId);
@@ -83,9 +83,9 @@ public class ShipTemplateSellerController {
     }
 
     @GetMapping(value = "/{template_id}")
-    @ApiOperation(value = "查询一个运费模版")
+    @ApiOperation(value = "Query a shipping template")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "template_id", value = "要查询的运费模版主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "template_id", value = "Primary key of the freight template to be queried", required = true, dataType = "int", paramType = "path")
     })
     public ShipTemplateSellerVO get(@ApiIgnore @PathVariable("template_id") Integer templateId) {
 

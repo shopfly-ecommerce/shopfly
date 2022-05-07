@@ -31,7 +31,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.constraints.NotNull;
 
 /**
- * 会员商品收藏表控制器
+ * Member commodity collection table controller
  *
  * @author zh
  * @version v7.0.0
@@ -40,7 +40,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/members")
-@Api(description = "会员商品收藏表相关API")
+@Api(description = "Member merchandise collection table relatedAPI")
 @Validated
 public class MemberCollectionGoodsBuyerController {
 
@@ -48,10 +48,10 @@ public class MemberCollectionGoodsBuyerController {
     private MemberCollectionGoodsManager memberCollectionGoodsManager;
 
 
-    @ApiOperation(value = "查询会员商品收藏列表", response = MemberCollectionGoods.class)
+    @ApiOperation(value = "Check the list of members collections", response = MemberCollectionGoods.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping("/collection/goods")
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -60,19 +60,19 @@ public class MemberCollectionGoodsBuyerController {
     }
 
 
-    @ApiOperation(value = "添加会员商品收藏", response = MemberCollectionGoods.class)
+    @ApiOperation(value = "Add member merchandise collection", response = MemberCollectionGoods.class)
     @PostMapping("/collection/goods")
-    @ApiImplicitParam(name = "goods_id", value = "商品id", required = true, dataType = "int", paramType = "query")
-    public MemberCollectionGoods add(@NotNull(message = "商品id不能为空") @ApiIgnore Integer goodsId) {
+    @ApiImplicitParam(name = "goods_id", value = "productid", required = true, dataType = "int", paramType = "query")
+    public MemberCollectionGoods add(@NotNull(message = "productidCant be empty") @ApiIgnore Integer goodsId) {
         MemberCollectionGoods memberCollectionGoods = new MemberCollectionGoods();
         memberCollectionGoods.setGoodsId(goodsId);
         return this.memberCollectionGoodsManager.add(memberCollectionGoods);
     }
 
     @DeleteMapping(value = "/collection/goods/{goods_id}")
-    @ApiOperation(value = "删除会员商品收藏")
+    @ApiOperation(value = "Delete member merchandise collection")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_id", value = "商品id", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "goods_id", value = "productid", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable("goods_id") Integer goodsId) {
         this.memberCollectionGoodsManager.delete(goodsId);
@@ -80,9 +80,9 @@ public class MemberCollectionGoodsBuyerController {
     }
 
     @GetMapping(value = "/collection/goods/{id}")
-    @ApiOperation(value = "查询会员是否收藏商品")
+    @ApiOperation(value = "Check whether members collect goods")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "商品id", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "productid", required = true, dataType = "int", paramType = "path")
     })
     public SuccessMessage isCollection(@PathVariable Integer id) {
         return new SuccessMessage(this.memberCollectionGoodsManager.isCollection(id));

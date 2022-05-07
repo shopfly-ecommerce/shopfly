@@ -26,13 +26,13 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
- * 模版升级日志
+ * Template upgrade logs
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 上午10:35
+ * 2018/5/21 In the morning10:35
  */
 
 @Table(name = "es_upgrade_log")
@@ -41,66 +41,66 @@ import java.util.Objects;
 public class UpgradeLogDO {
 
     /**
-     * 模版升级日志id
+     * Template upgrade logsid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
 
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(value = "会员id")
+    @ApiModelProperty(value = "membersid")
     private Integer memberId;
 
     /**
-     * 会员名称
+     * Member name
      */
     @Column(name = "member_name")
-    @ApiModelProperty(value = "会员名称")
+    @ApiModelProperty(value = "Member name")
     private String memberName;
 
     /**
-     * 切换类型（1=手动，2=自动）
+     * Switch type（1=Manual,2=automatic）
      */
     @Column()
-    @ApiModelProperty(value = "切换类型 ")
+    @ApiModelProperty(value = "Switch type")
     private String type;
 
     /**
-     * 旧的模板id
+     * The old templateid
      */
     @Column(name = "old_tpl_id")
-    @ApiModelProperty(value = "旧的模板id")
+    @ApiModelProperty(value = "The old templateid")
     private Integer oldTplId;
 
     /**
-     * 旧的模板名称
+     * Old template name
      */
     @Column(name = "old_tpl_name")
-    @ApiModelProperty(value = "旧的模板名字")
+    @ApiModelProperty(value = "Old template name")
     private String oldTplName;
 
     /**
-     * 新的模板id
+     * A new templateid
      */
     @Column(name = "new_tpl_id")
-    @ApiModelProperty(value = "新的模板id")
+    @ApiModelProperty(value = "A new templateid")
     private Integer newTplId;
 
     /**
-     * 新的模板名
+     * New template name
      */
     @Column(name = "new_tpl_name")
-    @ApiModelProperty(value = "新的模板名字")
+    @ApiModelProperty(value = "New template name")
     private String newTplName;
 
     /**
-     * 升级时间
+     * Update time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Creation date")
     private Long createTime;
 
 

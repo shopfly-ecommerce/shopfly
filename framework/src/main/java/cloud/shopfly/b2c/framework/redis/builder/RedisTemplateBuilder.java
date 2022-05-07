@@ -37,11 +37,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
- * redisTemplateBuilder 待优化
+ * redisTemplateBuilder To optimize
  *
  * @author jianghongyan
  * @version v1.0.0
- * @since v1.0.0 2017年4月10日 下午7:52:35
+ * @since v1.0.0 2017years4month10On the afternoon7:52:35
  */
 @Component
 public class RedisTemplateBuilder {
@@ -54,7 +54,7 @@ public class RedisTemplateBuilder {
     private RedisConnectionConfig config;
 
     /**
-     * 构建锁
+     * Build the lock
      */
     private static final Lock LOCK = new ReentrantLock();
 
@@ -73,7 +73,7 @@ public class RedisTemplateBuilder {
                     IRedisBuilder redisBuilder = this.getRedisBuilder();
                     RedisConnectionFactory lettuceConnectionFactory = redisBuilder.buildConnectionFactory(config);
 
-                    // 初始化连接pool
+                    // Initialize the connection pool
                     redisTemplate = new RedisTemplate<String, Object>();
                     redisTemplate.setConnectionFactory(lettuceConnectionFactory);
                     redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -82,7 +82,7 @@ public class RedisTemplateBuilder {
                     return redisTemplate;
                 }
             } catch (Throwable e) {
-                // 容错
+                // Fault tolerance
                 logger.error(e.getMessage(), e);
 
                 break;
@@ -90,7 +90,7 @@ public class RedisTemplateBuilder {
                 LOCK.unlock();
             }
             try {
-                // 活锁
+                // Live lock
                 TimeUnit.MILLISECONDS.sleep(200 + new Random().nextInt(1000));
             } catch (InterruptedException e) {
                 logger.error(e.getMessage(), e);
@@ -105,7 +105,7 @@ public class RedisTemplateBuilder {
                 return builder;
             }
         }
-        throw new ServiceException(SystemErrorCodeV1.INVALID_CONFIG_PARAMETER, "错误的redis 配置类型，请检查");
+        throw new ServiceException(SystemErrorCodeV1.INVALID_CONFIG_PARAMETER, "The wrongredis Configuration type, please check");
     }
 
 }

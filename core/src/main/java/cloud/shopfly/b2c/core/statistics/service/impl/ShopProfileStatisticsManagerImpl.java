@@ -38,12 +38,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 店铺概况管理实现类
+ * Store overview management implementation class
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018/3/28 上午9:50
+ * 2018/3/28 In the morning9:50
  */
 @Service
 public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsManager {
@@ -55,15 +55,15 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
     private DaoSupport daoSupport;
 
     /**
-     * 获取店铺概况
+     * Get store profile
      *
-     * @return ShopProfileVO 店铺概况展示VO
+     * @return ShopProfileVO Store Overview DisplayVO
      */
     @Override
     public ShopProfileVO data() {
         try {
 
-            // 近30天起始时间
+            // Start time within 30 days
             long startTime = DateUtil.startOfSomeDay(30);
             long endTime = DateUtil.endOfTodDay();
 
@@ -74,7 +74,7 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
             paramList.add(OrderStatusEnum.COMPLETE.value());
             paramList.add(PayStatusEnum.PAY_YES.value());
 
-            // 获取下单金额，下单会员数，下单量，下单商品数
+            // Get order amount, order number of members, order quantity, order number of goods
             String sql = "SELECT SUM(o.order_price) AS order_money ,COUNT(DISTINCT o.buyer_id) AS order_member" +
                     ", COUNT(o.sn) AS order_num,SUM(o.goods_num) AS order_good FROM es_sss_order_data o" +
                     " WHERE o.create_time >= ? AND o.create_time <= ? AND o.order_status = ? AND o.pay_status= ?";
@@ -82,19 +82,19 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
             Map<String, Object> map = this.daoSupport.queryForMap(sql, paramList.toArray());
 
             ShopProfileVO shopProfileVO = new ShopProfileVO();
-            // 下单金额
+            // Place the order amount
             String orderMoney = null == map.get("order_money") ? "0.0" : map.get("order_money").toString();
             shopProfileVO.setOrderMoney(orderMoney);
-            // 下单会员数
+            // Number of order members
             String orderMember = null == map.get("order_member") ? "0" : map.get("order_member").toString();
             shopProfileVO.setOrderMember(orderMember);
-            // 下单量
+            // Order quantity
             String orderNum = null == map.get("order_num") ? "0" : map.get("order_num").toString();
             shopProfileVO.setOrderNum(orderNum);
-            // 下单商品数
+            // Number of goods ordered
             String orderGoods = null == map.get("order_good") ? "0" : map.get("order_good").toString();
             shopProfileVO.setOrderGoods(orderGoods);
-            // 平均客单价
+            // Average unit price
             Double averageMemberMoney = 0.0;
             if (!"0".equals(orderMember)) {
                 double orderMoneyNum = new Double(orderMoney);
@@ -103,7 +103,7 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
             }
             DecimalFormat df = new DecimalFormat("0.##");
             shopProfileVO.setAverageMemberMoney(df.format(averageMemberMoney));
-            // 商品平均价格
+            // Average commodity price
             Double averageGoodsMoney = 0.0;
             if (!"0".equals(orderGoods)) {
                 double orderMoneyNum = new Double(orderMoney);
@@ -117,10 +117,10 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
 
             map = this.daoSupport.queryForMap(sql);
 
-            // 店铺商品总数
+            // Total store merchandise
             String totalGoods = null == map.get("total_goods") ? "0" : map.get("total_goods").toString();
             shopProfileVO.setTotalGoods(totalGoods);
-            // 商品收藏总数
+            // Total commodity collection
             String goodsCollect = null == map.get("goods_collect") ? "0" : map.get("goods_collect").toString();
             shopProfileVO.setGoodsCollect(goodsCollect);
 
@@ -144,7 +144,7 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
             }
 
 
-            String orderFastigium = "暂无";
+            String orderFastigium = "no";
             String time = null == map.get("time") ? "0" : map.get("time").toString();
 
             if (null != time && !"0".equals(time)) {
@@ -158,24 +158,24 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 店铺概况，获取近30天下单金额
+     * Store profile, get close30World order amount
      *
-     * @return SimpleChart 简单图表数据
+     * @return SimpleChart Simple chart data
      */
     @Override
     public SimpleChart chart() {
-        //查询map集合
+        // Querying a Map Collection
         try {
 
             List<Object> paramList = new ArrayList();
             paramList.add(OrderStatusEnum.COMPLETE.value());
             paramList.add(PayStatusEnum.PAY_YES.value());
-            // 数据名称，与x轴刻度名相同
+            // Data name, same as x scale name
             String[] localName = new String[30];
 
             int limitDays = 30;
@@ -194,7 +194,7 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
 
             String[] data = new String[30];
 
-            // 循环xAxis，如果与time相同，则将money放入data数组，无数据的数组元素填入0
+            // Loop through xAxis, and if it is the same as time, put money into the data array, with zero for the array elements that have no data
             for (int i = 0; i < limitDays; i++) {
                 for (Map map : list) {
                     if (localName[i].equals(map.get("time").toString())) {
@@ -206,20 +206,20 @@ public class ShopProfileStatisticsManagerImpl implements ShopProfileStatisticsMa
                 }
             }
 
-            ChartSeries chartSeries = new ChartSeries("下单金额", data, localName);
+            ChartSeries chartSeries = new ChartSeries("Place the order amount", data, localName);
 
             return new SimpleChart(chartSeries, localName, new String[0]);
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     private StringBuilder getConditionSql() {
 
-        // 时间分组，同时获取数据名称
+        // Time group, and get the data name
         StringBuilder conditionSql = new StringBuilder();
-        // 取近30天数据
+        // Data in the last 30 days were collected
         int limitDays = 30;
         for (int i = 0; i < limitDays; i++) {
             Map<String, Object> map = DateUtil.getYearMonthAndDay(i);

@@ -21,13 +21,13 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 提现申请
+ * Withdrawal application
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 下午2:37
+ * 2018/5/21 In the afternoon2:37
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class WithdrawApplyVO {
@@ -37,62 +37,62 @@ public class WithdrawApplyVO {
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 提现金额
+     * Withdrawal amount
      **/
-    @ApiModelProperty(value = "提现金额",name = "apply_money")
+    @ApiModelProperty(value = "Withdrawal amount",name = "apply_money")
     private Double applyMoney;
     /**
-     * 提现状态
+     * Withdrawal state
      **/
-    @ApiModelProperty(value = "提现状态",name = "status")
+    @ApiModelProperty(value = "Withdrawal state",name = "status")
     private String status;
     /**
-     * 会员id
+     * membersid
      **/
-    @ApiModelProperty(value = "会员id",name = "member_id")
+    @ApiModelProperty(value = "membersid",name = "member_id")
     private Integer memberId;
     /**
-     * 会员名称
+     * Member name
      **/
-    @ApiModelProperty(value = "会员名字",name = "member_name")
+    @ApiModelProperty(value = "The member name",name = "member_name")
     private String memberName;
     /**
-     * 申请备注
+     * Application note
      **/
-    @ApiModelProperty(value = "申请备注",name = "apply_remark")
+    @ApiModelProperty(value = "Application note",name = "apply_remark")
     private String applyRemark;
     /**
-     * 审核备注
+     * Review the note
      **/
-    @ApiModelProperty(value = "审核备注",name = "inspect_remark")
+    @ApiModelProperty(value = "Review the note",name = "inspect_remark")
     private String inspectRemark;
     /**
-     * 转账备注
+     * Transfer note
      **/
-    @ApiModelProperty(value = "转账备注",name = "transfer_remark")
+    @ApiModelProperty(value = "Transfer note",name = "transfer_remark")
     private String transferRemark;
     /**
-     * 申请时间
+     * To apply for time
      **/
-    @ApiModelProperty(value = "申请时间",name = "apply_time")
+    @ApiModelProperty(value = "To apply for time",name = "apply_time")
     private Long applyTime;
 
     /**
-     * 审核时间
+     * Audit time
      **/
-    @ApiModelProperty(value = "审核时间",name = "inspect_time")
+    @ApiModelProperty(value = "Audit time",name = "inspect_time")
     private Long inspectTime;
 
     /**
-     * 转账时间
+     * Transfer time
      **/
-    @ApiModelProperty(value = "转账时间",name = "transfer_time")
+    @ApiModelProperty(value = "Transfer time",name = "transfer_time")
     private Long transferTime;
 
     /**
-     * 提现参数
+     * Withdrawal parameters
      **/
-    @ApiModelProperty(value = "提现参数",name = "bank_params")
+    @ApiModelProperty(value = "Withdrawal parameters",name = "bank_params")
     private BankParamsVO bankParamsVO;
 
 

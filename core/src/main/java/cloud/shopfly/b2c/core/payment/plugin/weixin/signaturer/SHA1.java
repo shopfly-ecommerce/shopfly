@@ -23,7 +23,7 @@ import java.security.MessageDigest;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-22 上午11:13
+ * 2019-02-22 In the morning11:13
  */
 public final class SHA1 {
 
@@ -39,7 +39,7 @@ public final class SHA1 {
     private static String getFormattedText(byte[] bytes) {
         int len = bytes.length;
         StringBuilder buf = new StringBuilder(len * 2);
-        // 把密文转换成十六进制的字符串形式
+        // Converts the ciphertext to a hexadecimal string
         for (int j = 0; j < len; j++) {
             buf.append(HEX_DIGITS[(bytes[j] >> 4) & 0x0f]);
             buf.append(HEX_DIGITS[bytes[j] & 0x0f]);

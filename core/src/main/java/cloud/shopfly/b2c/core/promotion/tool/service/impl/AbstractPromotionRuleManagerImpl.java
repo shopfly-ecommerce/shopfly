@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 活动规则检测
+ * Activity rule detection
  *
  * @author Snow create in 2018/4/25
  * @version v2.0
@@ -46,48 +46,48 @@ public abstract class AbstractPromotionRuleManagerImpl {
 
 
     /**
-     * 检测活动与活动之间的规则冲突
+     * Detect rule conflicts between activities
      *
-     * @param goodsDTOList 活动商品
+     * @param goodsDTOList Activities of goods
      */
     protected void verifyRule(List<PromotionGoodsDTO> goodsDTOList) {
 
         if (goodsDTOList == null || goodsDTOList.isEmpty()) {
-            throw new ServiceException(PromotionErrorCode.E401.code(), "没有可用的商品");
+            throw new ServiceException(PromotionErrorCode.E401.code(), "No goods available");
         }
     }
 
     /**
-     * 验证活动名称重名
-     * @param name  名称
-     * @param isUpdate  是否修改
-     * @param activeId  修改时需要填充活动id
+     * The validation activity has the same name
+     * @param name  The name of the
+     * @param isUpdate  Whether to modify
+     * @param activeId  You need to fill in the activity when you modifyid
      */
     protected void verifyName(String name,boolean isUpdate,Integer activeId) {
 
         if(isUpdate){
-            //判断活动重名
+            // Identify activities with the same name
             if (this.daoSupport.queryForInt("select count(0) from es_groupbuy_active where act_name=? and act_id != ?", name,activeId) > 0) {
-                throw new ServiceException(PromotionErrorCode.E402.code(), "当前活动重名，请修正");
+                throw new ServiceException(PromotionErrorCode.E402.code(), "Current activity has same name, please correct");
             }
         }else {
-            //判断活动重名
+            // Identify activities with the same name
             if (this.daoSupport.queryForInt("select count(0) from es_groupbuy_active where act_name=?", name) > 0) {
-                throw new ServiceException(PromotionErrorCode.E402.code(), "当前活动重名，请修正");
+                throw new ServiceException(PromotionErrorCode.E402.code(), "Current activity has same name, please correct");
             }
         }
     }
 
     /**
-     * 验证活动时间
-     * 同一时间只能有一个活动生效
+     * Validation activity time
+     * Only one activity can be active at a time
      *
      * @param startTime
      * @param endTime
      */
     protected void verifyTime(long startTime, long endTime, PromotionTypeEnum typeEnum, Integer activityId) {
 
-        //（新添活动起始时间大于之前活动的起始时间小于之前活动的截止时间）or （新添活动结束时间大于之前活动的起始时间小于之前活动的截止时间）
+        // (The start time of the new activity is greater than the start time of the previous activity and less than the end time of the previous activity) or (The end time of the new activity is greater than the start time of the previous activity and less than the end time of the previous activity)
         String sql = "";
         List params = new ArrayList();
 
@@ -160,7 +160,7 @@ public abstract class AbstractPromotionRuleManagerImpl {
         if (!StringUtil.isEmpty(sql)) {
             int num = this.daoSupport.queryForInt(sql, params.toArray());
             if (num > 0) {
-                throw new ServiceException(PromotionErrorCode.E402.code(), "当前时间内已存在此类活动");
+                throw new ServiceException(PromotionErrorCode.E402.code(), "This activity already exists in the current time");
             }
         }
 

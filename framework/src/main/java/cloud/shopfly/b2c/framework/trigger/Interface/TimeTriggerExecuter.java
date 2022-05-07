@@ -16,11 +16,11 @@
 package cloud.shopfly.b2c.framework.trigger.Interface;
 
 /**
- * 延时任务执行器接口
+ * Delayed task executor interface
  * @author liushuai
  * @version v1.0
  * @since v7.0
- * 2019/2/13 下午5:32
+ * 2019/2/13 In the afternoon5:32
  * @Description:
  *
  */
@@ -28,8 +28,8 @@ public interface TimeTriggerExecuter {
 
 
     /**
-     * 执行任务
-     * @param object 任务参数
+     * Perform a task
+     * @param object The task parameters
      */
     void execute(Object object);
 

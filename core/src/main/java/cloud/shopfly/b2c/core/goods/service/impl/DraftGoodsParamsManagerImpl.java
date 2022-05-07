@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 草稿商品参数表业务类
+ * Draft commodity parameter sheet business class
  * @author fk
  * @version v2.0
  * @since v7.0.0
@@ -64,7 +64,7 @@ public class DraftGoodsParamsManagerImpl implements DraftGoodsParamsManager {
 	public List<GoodsParamsGroupVO> getParamByCatAndDraft(Integer categoryId, Integer draftGoodsId) {
 		
 		String sql = "select * from es_parameter_group where category_id = ?";
-		//查询参数组
+		// Querying parameter Groups
 		List<ParameterGroupDO> groupList = this.daoSupport.queryForList(sql, ParameterGroupDO.class, categoryId);
 		
 		sql = "select p.*,gp.param_value,p.group_id "
@@ -80,7 +80,7 @@ public class DraftGoodsParamsManagerImpl implements DraftGoodsParamsManager {
 	}
 
 	/**
-	 * 拼装返回值
+	 * Assemble return value
 	 * 
 	 * @param paramList
 	 * @return

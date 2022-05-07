@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- * 地区实体
+ * Regional entities
  *
  * @author zh
  * @version v7.0.0
@@ -35,34 +35,34 @@ import javax.validation.constraints.NotNull;
 public class RegionsVO {
 
     /**
-     * 父地区id
+     * The parent regionid
      */
     @Column(name = "parent_id")
-    @Min(message = "必须为数字", value = 0)
-    @NotNull(message = "父id不能为空")
-    @ApiModelProperty(name = "parent_id", value = "父地区id，顶级分类填0", required = true)
+    @Min(message = "Must be a number", value = 0)
+    @NotNull(message = "The fatheridCant be empty")
+    @ApiModelProperty(name = "parent_id", value = "The parent regionid, top-level classification fill0", required = true)
     private Integer parentId;
     /**
-     * 名称
+     * The name of the
      */
     @Column(name = "local_name")
-    @ApiModelProperty(name = "local_name", value = "名称")
-    @NotEmpty(message = "地区名称不能为空")
+    @ApiModelProperty(name = "local_name", value = "The name of the")
+    @NotEmpty(message = "The region name cannot be empty")
     private String localName;
     /**
-     * 邮编
+     * Zip code
      */
     @Column(name = "zipcode")
-    @ApiModelProperty(name = "zipcode", value = "邮编", required = false)
+    @ApiModelProperty(name = "zipcode", value = "Zip code", required = false)
     private String zipcode;
     /**
-     * 是否支持货到付款
+     * Do you support CASH on delivery
      */
     @Column(name = "cod")
-    @ApiModelProperty(name = "cod", value = "是否支持货到付款,1支持,0不支持")
-    @Min(message = "是否支持货到付款,1支持,0不支持", value = 0)
-    @Max(message = "是否支持货到付款,1支持,0不支持", value = 1)
-    @NotNull(message = "是否支持货到付款不能为空")
+    @ApiModelProperty(name = "cod", value = "Do you support CASH on delivery,1support,0不support")
+    @Min(message = "Do you support CASH on delivery,1support,0不support", value = 0)
+    @Max(message = "Do you support CASH on delivery,1support,0不support", value = 1)
+    @NotNull(message = "Whether cash on delivery is supported cannot be empty")
     private Integer cod;
 
 

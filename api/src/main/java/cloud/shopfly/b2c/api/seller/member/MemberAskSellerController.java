@@ -31,7 +31,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 咨询控制器
+ * Consulting controller
  *
  * @author fk
  * @version v1.0
@@ -40,7 +40,7 @@ import javax.validation.constraints.NotEmpty;
  */
 @RestController
 @RequestMapping("/seller/members/asks")
-@Api(description = "咨询相关API")
+@Api(description = "Consulting the relevantAPI")
 @Validated
 public class MemberAskSellerController {
 
@@ -48,10 +48,10 @@ public class MemberAskSellerController {
     private MemberAskManager memberAskManager;
 
 
-    @ApiOperation(value = "查询咨询列表", response = MemberAsk.class)
+    @ApiOperation(value = "Query query list", response = MemberAsk.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, CommentQueryParam param) {
@@ -61,22 +61,22 @@ public class MemberAskSellerController {
     }
 
 
-    @ApiOperation(value = "回复咨询", response = MemberAsk.class)
+    @ApiOperation(value = "Reply to consulting", response = MemberAsk.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "reply_content", value = "回复内容", dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "ask_id", value = "咨询id", dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "reply_content", value = "Reply content", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "ask_id", value = "consultingid", dataType = "int", paramType = "path")
     })
     @PutMapping("/{ask_id}/reply")
-    public MemberAsk reply(@ApiIgnore @NotEmpty(message = "请输入回复内容") String replyContent, @ApiIgnore @PathVariable("ask_id") Integer askId) {
+    public MemberAsk reply(@ApiIgnore @NotEmpty(message = "Please enter your reply") String replyContent, @ApiIgnore @PathVariable("ask_id") Integer askId) {
 
         MemberAsk memberAsk = this.memberAskManager.reply(replyContent, askId);
 
         return memberAsk;
     }
 
-    @ApiOperation(value = "删除咨询", response = MemberAsk.class)
+    @ApiOperation(value = "Delete the consulting", response = MemberAsk.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ask_id", value = "咨询id", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "ask_id", value = "consultingid", dataType = "int", paramType = "path"),
     })
     @DeleteMapping("/{ask_id}")
     public String reply(@PathVariable("ask_id") Integer askId) {
@@ -86,10 +86,10 @@ public class MemberAskSellerController {
         return "";
     }
 
-    @ApiOperation(value = "审核咨询")
+    @ApiOperation(value = "Audit consultation")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ask_id", value = "咨询id", dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "auth_status", value = "审核状态:PASS_AUDIT(审核通过),REFUSE_AUDIT(审核拒绝)",
+            @ApiImplicitParam(name = "ask_id", value = "consultingid", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "auth_status", value = "Review the status:PASS_AUDIT(approved),REFUSE_AUDIT(Audit refused to)",
                     allowableValues = "PASS_AUDIT,REFUSE_AUDIT", dataType = "string", paramType = "query")
     })
     @PostMapping("/auth/{ask_id}")

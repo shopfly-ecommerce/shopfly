@@ -36,14 +36,14 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 商家订单控制器
+ * Merchant order controller
  *
  * @author Snow create in 2018/6/13
  * @version v2.0
  * @since v7.0.0
  */
 
-@Api(description = "商家订单API")
+@Api(description = "Merchants ordersAPI")
 @RestController
 @RequestMapping("/seller/trade/orders")
 @Validated
@@ -58,21 +58,21 @@ public class OrderSellerController {
     @Autowired
     private MemberHistoryReceiptClient memberHistoryReceiptClient;
 
-    @ApiOperation(value = "查询会员订单列表")
+    @ApiOperation(value = "Query membership order list")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "keywords", value = "关键字", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "buyer_name", value = "买家姓名", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "goods_name", value = "商品名称", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "start_time", value = "开始时间", dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "end_time", value = "结束时间", dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "member_id", value = "会员ID", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "order_status", value = "订单状态", dataType = "String", paramType = "query",
+            @ApiImplicitParam(name = "keywords", value = "keyword", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "buyer_name", value = "Buyers name", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "goods_name", value = "Name", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "start_time", value = "The start time", dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "end_time", value = "The end of time", dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "member_id", value = "membersID", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "order_status", value = "Status", dataType = "String", paramType = "query",
                     allowableValues = "ALL,WAIT_PAY,WAIT_SHIP,WAIT_ROG,CANCELLED,COMPLETE,WAIT_COMMENT,REFUND",
-                    example = "ALL:所有订单,WAIT_PAY:待付款,WAIT_SHIP:待发货,WAIT_ROG:待收货," +
-                            "CANCELLED:已取消,COMPLETE:已完成,WAIT_COMMENT:待评论,REFUND:售后中"),
-            @ApiImplicitParam(name = "page_no", value = "页数", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "条数", dataType = "int", paramType = "query"),
+                    example = "ALL:All orders,WAIT_PAY:For the payment,WAIT_SHIP:To send the goods,WAIT_ROG:For the goods," +
+                            "CANCELLED:Has been cancelled,COMPLETE:Has been completed,WAIT_COMMENT:To comment on,REFUND:In the after-sale"),
+            @ApiImplicitParam(name = "page_no", value = "Number of pages", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "A number of", dataType = "int", paramType = "query"),
     })
     @GetMapping()
     public Page<OrderLineVO> list(@ApiIgnore String orderSn, @ApiIgnore String buyerName, @ApiIgnore String goodsName, @ApiIgnore Integer memberId,
@@ -96,9 +96,9 @@ public class OrderSellerController {
     }
 
 
-    @ApiOperation(value = "查询单个订单明细")
+    @ApiOperation(value = "Example Query the details of a single order")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "path")
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "path")
     })
     @GetMapping(value = "/{order_sn}")
     public OrderDetailVO get(@ApiIgnore @PathVariable("order_sn") String orderSn) {
@@ -112,25 +112,25 @@ public class OrderSellerController {
     }
 
 
-    @ApiOperation(value = "查询订单状态的数量")
+    @ApiOperation(value = "Query the quantity of order status")
     @GetMapping(value = "/status-num")
     public OrderStatusNumVO getStatusNum() {
         return this.orderQueryManager.getOrderStatusNum(null);
     }
 
 
-    @ApiOperation(value = "订单发货", notes = "商家对某订单执行发货操作")
+    @ApiOperation(value = "Orders for shipment", notes = "A merchant delivers an order")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单sn", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "ship_no", value = "发货单号", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "logi_id", value = "物流公司id", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "logi_name", value = "物流公司名称", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "order_sn", value = "The ordersn", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "ship_no", value = "Invoice no.", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "logi_id", value = "Logistics companyid", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "logi_name", value = "Name of logistics Company", required = true, dataType = "String", paramType = "query"),
     })
     @ResponseBody
     @PostMapping(value = "/{order_sn}/delivery")
-    public String ship(@ApiIgnore @NotNull(message = "必须指定订单编号") @PathVariable(name = "order_sn") String orderSn,
-                       @ApiIgnore @NotNull(message = "必须输入发货单号") @Length(max = 20, message = "物流单号不正确") String shipNo,
-                       @ApiIgnore @NotNull(message = "必须选择物流公司") Integer logiId,
+    public String ship(@ApiIgnore @NotNull(message = "Order number must be specified") @PathVariable(name = "order_sn") String orderSn,
+                       @ApiIgnore @NotNull(message = "The invoice number must be entered") @Length(max = 20, message = "The tracking number is incorrect") String shipNo,
+                       @ApiIgnore @NotNull(message = "You must choose a logistics company") Integer logiId,
                        @ApiIgnore String logiName) {
 
         DeliveryVO delivery = new DeliveryVO();
@@ -144,30 +144,30 @@ public class OrderSellerController {
     }
 
 
-    @ApiOperation(value = "商家修改收货人地址", notes = "商家发货前，可以修改收货人地址信息")
+    @ApiOperation(value = "The merchant modifies the consignee address", notes = "Merchants can modify the consignee address information before delivering the goods")
     @PutMapping(value = "/{order_sn}/address")
     public OrderConsigneeVO updateOrderConsignee(@ApiIgnore @PathVariable(name = "order_sn") String orderSn, OrderConsigneeVO orderConsignee) {
         return this.orderOperateManager.updateOrderConsignee(orderConsignee);
     }
 
 
-    @ApiOperation(value = "商家修改订单价格", notes = "买家付款前可以修改订单价格")
+    @ApiOperation(value = "The merchant modifies the order price", notes = "Buyers can modify the order price before payment")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单sn", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "order_price", value = "订单价格", required = true, dataType = "Double", paramType = "query"),
+            @ApiImplicitParam(name = "order_sn", value = "The ordersn", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "order_price", value = "The order price", required = true, dataType = "Double", paramType = "query"),
     })
     @PutMapping(value = "/{order_sn}/price")
     public String updateOrderPrice(@ApiIgnore @PathVariable(name = "order_sn") String orderSn,
-                                   @ApiIgnore @NotNull(message = "修改后价格不能为空") Double orderPrice) {
+                                   @ApiIgnore @NotNull(message = "The price cannot be empty after modification") Double orderPrice) {
         this.orderOperateManager.updateOrderPrice(orderSn, orderPrice);
         return "";
     }
 
 
-    @ApiOperation(value = "确认收款")
+    @ApiOperation(value = "Confirm receipt")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "pay_price", value = "付款金额", dataType = "double", paramType = "query")
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "pay_price", value = "The payment amount", dataType = "double", paramType = "query")
     })
     @PostMapping(value = "/{order_sn}/pay")
     public String payOrder(@ApiIgnore @PathVariable("order_sn") String orderSn, @ApiIgnore Double payPrice) {
@@ -176,9 +176,9 @@ public class OrderSellerController {
     }
 
 
-    @ApiOperation(value = "订单流程图数据", notes = "订单流程图数据")
+    @ApiOperation(value = "Order flow chart data", notes = "Order flow chart data")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单sn", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "order_sn", value = "The ordersn", required = true, dataType = "String", paramType = "path"),
     })
     @GetMapping(value = "/{order_sn}/flow")
     public List<OrderFlowNode> getOrderStatusFlow(@ApiIgnore @PathVariable(name = "order_sn") String orderSn) {
@@ -186,18 +186,18 @@ public class OrderSellerController {
         return orderFlowList;
     }
 
-    @ApiOperation(value = "导出订单列表")
+    @ApiOperation(value = "Exporting order List")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "ship_name", value = "收货人", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "goods_name", value = "商品名称", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "buyer_name", value = "买家名字", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "start_time", value = "开始时间", dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "end_time", value = "结束时间", dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "order_status", value = "订单状态", dataType = "String", paramType = "query",
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "ship_name", value = "The consignee", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "goods_name", value = "Name", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "buyer_name", value = "Buyer name", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "start_time", value = "The start time", dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "end_time", value = "The end of time", dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "order_status", value = "Status", dataType = "String", paramType = "query",
                     allowableValues = "ALL,WAIT_PAY,WAIT_SHIP,WAIT_ROG,CANCELLED,COMPLETE,WAIT_COMMENT,REFUND",
-                    example = "ALL:所有订单,WAIT_PAY:待付款,WAIT_SHIP:待发货,WAIT_ROG:待收货," +
-                            "CANCELLED:已取消,COMPLETE:已完成,WAIT_COMMENT:待评论,REFUND:售后中"),
+                    example = "ALL:All orders,WAIT_PAY:For the payment,WAIT_SHIP:To send the goods,WAIT_ROG:For the goods," +
+                            "CANCELLED:Has been cancelled,COMPLETE:Has been completed,WAIT_COMMENT:To comment on,REFUND:In the after-sale"),
     })
     @GetMapping("/export")
     public List export(@ApiIgnore String orderSn, @ApiIgnore String shipName, @ApiIgnore String goodsName, @ApiIgnore String buyerName,
@@ -218,17 +218,17 @@ public class OrderSellerController {
         return page.getData();
     }
 
-    @ApiOperation(value = "取消订单")
+    @ApiOperation(value = "Cancel the order")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "path"),
     })
     @PostMapping(value = "/{order_sn}/canceled")
     public String cancelledOrder(@ApiIgnore @PathVariable("order_sn") String orderSn) {
 
         CancelVO cancelVO = new CancelVO();
-        cancelVO.setReason("管理员取消");
+        cancelVO.setReason("Administrator Cancel");
         cancelVO.setOrderSn(orderSn);
-        cancelVO.setOperator("平台管理员");
+        cancelVO.setOperator("Platform administrator");
 
         this.orderOperateManager.cancel(cancelVO, OrderPermission.admin);
         return "";

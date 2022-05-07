@@ -31,7 +31,7 @@ import java.util.Map;
  *
  * @author zh
  * @version v7.0
- * @date 18/7/11 下午3:52
+ * @date 18/7/11 In the afternoon3:52
  * @since v7.0
  */
 public class HttpRequest {
@@ -94,7 +94,7 @@ public class HttpRequest {
     }
 
     /**
-     * 组装http请求参数
+     * The assemblyhttpRequest parameters
      *
      * @return
      */

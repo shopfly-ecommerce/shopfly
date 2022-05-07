@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v1.0
- * @Description: 支付宝退款
+ * @Description: Alipay refund
  * @date 2018/4/17 14:55
  * @since v7.0.0
  */
@@ -50,7 +50,7 @@ public class AlipayRefundExcutor extends AlipayPluginConfig {
 
 
 	/**
-	 * 退款
+	 * A refund
 	 * @param bill
 	 * @return
 	 */
@@ -59,19 +59,19 @@ public class AlipayRefundExcutor extends AlipayPluginConfig {
 
 			Map<String, String> config = bill.getConfigMap();
 
-			debugger.log("基础参数为", config.toString());
+			debugger.log("Basic parameters are", config.toString());
 
-			//获得初始化的AlipayClient
+			// Get the initialized AlipayClient
 			AlipayClient alipayClient = buildClient(config);
 
-			//设置请求参数
+			// Setting request Parameters
 			AlipayTradeRefundRequest alipayRequest = new AlipayTradeRefundRequest();
 
-			//需要退款的金额，该金额不能大于订单金额，必填
+			// The amount to be refunded must not be greater than the order amount
 			Double refundAmount = bill.getRefundPrice();
-			//退款的原因说明
-			String refundReason = "正常退款";
-			//标识一次退款请求，同一笔交易多次退款需要保证唯一，如需部分退款，则此参数必传
+			// Explanation of reasons for refund
+			String refundReason = "Normal refund";
+			// Identifies a refund request. Multiple refunds for the same transaction must be guaranteed to be unique. If partial refunds are required, this parameter is mandatory
 			String outRequestNo = bill.getRefundSn();
 			
 			Map<String, String> sParaTemp = new HashMap<>(16);
@@ -80,16 +80,16 @@ public class AlipayRefundExcutor extends AlipayPluginConfig {
 			sParaTemp.put("refund_reason", refundReason);
 			sParaTemp.put("out_request_no", outRequestNo);
 
-			debugger.log("请求参数为：", sParaTemp.toString());
+			debugger.log("Request parameters are：", sParaTemp.toString());
 
 			ObjectMapper json = new ObjectMapper();
-			//填充业务参数
+			// Populate business parameters
 		    alipayRequest.setBizContent(json.writeValueAsString(sParaTemp));
 
-			debugger.log("向支付宝发出请求");
+			debugger.log("Send a request to Alipay");
 		    AlipayTradeRefundResponse response = alipayClient.execute(alipayRequest);
 
-		    debugger.log("请求结果："+ response.isSuccess());
+		    debugger.log("Request the results："+ response.isSuccess());
 		    if(response.isSuccess()){
 		    	return true;
 		    } else {
@@ -104,7 +104,7 @@ public class AlipayRefundExcutor extends AlipayPluginConfig {
 	}
 
 	/**
-	 * 查询退款进度状态
+	 * Query the refund progress
 	 * @param bill
 	 * @return
 	 */
@@ -114,15 +114,15 @@ public class AlipayRefundExcutor extends AlipayPluginConfig {
 
 			Map<String, String> config = bill.getConfigMap();
 
-			//获得初始化的AlipayClient
+			// Get the initialized AlipayClient
 			AlipayClient alipayClient = buildClient(config);
 
-			//设置请求参数
+			// Setting request Parameters
 			AlipayTradeFastpayRefundQueryRequest alipayRequest = new AlipayTradeFastpayRefundQueryRequest();
 
-			//商户订单号，商户网站订单系统中唯一订单号
+			// Merchant order number, the unique order number in the order system of merchant website
 			String tradeNo = bill.getReturnTradeNo();
-			//请求退款接口时，传入的退款请求号，如果在退款请求时未传入，则该值为创建交易时的外部交易号，必填
+			// This parameter is mandatory. If the refund request interface is not passed in the refund request, the value is the external transaction number when the transaction is created
 			String refundSn = bill.getRefundSn();
 
 			Map<String, String> sParaTemp = new HashMap<String, String>(16);

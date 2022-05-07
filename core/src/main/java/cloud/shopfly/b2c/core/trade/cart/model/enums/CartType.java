@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.core.trade.cart.model.enums;
 
 /**
  * Created by kingapex on 2018/12/20.
- * 购物车类型
+ * Shopping cart type
  *
  * @author kingapex
  * @version 1.0
@@ -27,17 +27,17 @@ package cloud.shopfly.b2c.core.trade.cart.model.enums;
 public enum CartType {
 
     /**
-     * 表明是在购物车
+     * Show is in the shopping cart
      */
     CART,
 
     /**
-     * 表明是在结算页
+     * Indicates that it is on the settlement page
      */
     CHECKOUT,
 
     /**
-     * 表明是在拼团
+     * Its a sign of a group
      */
     PINTUAN
 

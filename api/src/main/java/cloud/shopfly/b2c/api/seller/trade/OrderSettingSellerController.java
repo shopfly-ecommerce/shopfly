@@ -31,12 +31,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * 订单设置相关API
+ * Order setting relatedAPI
  * @author Snow create in 2018/7/13
  * @version v2.0
  * @since v7.0.0
  */
-@Api(description = "订单设置相关API")
+@Api(description = "Order setting relatedAPI")
 @RestController
 @RequestMapping("/seller/trade/orders")
 @Validated
@@ -47,7 +47,7 @@ public class OrderSettingSellerController {
     private SettingClient settingClient;
 
     @GetMapping("/setting")
-    @ApiOperation(value = "获取订单任务设置信息")
+    @ApiOperation(value = "Get the order task setting information")
     public OrderSettingVO getOrderSetting(){
 
         String json = this.settingClient.get(SettingGroup.TRADE);
@@ -56,7 +56,7 @@ public class OrderSettingSellerController {
     }
 
     @PostMapping("/setting")
-    @ApiOperation(value = "保存订单任务设置信息")
+    @ApiOperation(value = "Save the order task setting information")
     public OrderSettingVO save(@Valid OrderSettingVO setting){
 
         System.out.println(setting.toString());

@@ -18,27 +18,27 @@ package cloud.shopfly.b2c.core.client.statistics;
 import cloud.shopfly.b2c.core.trade.order.model.dos.OrderDO;
 
 /**
- * 订单信息收集manager
+ * Order Information Collectionmanager
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/8 上午8:22
+ * 2018/5/8 In the morning8:22
  */
 
 public interface OrderDataClient {
 
 
     /**
-     * 订单新增
+     * Orders for new
      *
      * @param order
      */
     void put(OrderDO order);
 
     /**
-     * 订单修改
+     * Order to modify
      *
      * @param order
      */

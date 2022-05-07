@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 积分兑换分类实体
+ * Points exchange classification entity
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -41,37 +41,37 @@ public class ExchangeCat implements Serializable {
 
     private static final long serialVersionUID = 8629683606901701L;
 
-    /**分类id*/
+    /**Categoriesid*/
     @Id(name = "category_id")
     @ApiModelProperty(hidden=true)
     private Integer categoryId;
-    /**分类名称*/
+    /**name*/
     @Column(name = "name")
-    @ApiModelProperty(name="name",value="分类名称",required=false)
+    @ApiModelProperty(name="name",value="name",required=false)
     private String name;
-    /**父分类*/
+    /**The parent category*/
     @Column(name = "parent_id")
-    @ApiModelProperty(name="parent_id",value="父分类",required=false)
+    @ApiModelProperty(name="parent_id",value="The parent category",required=false)
     private Integer parentId;
-    /**分类id路径*/
+    /**CategoriesidThe path*/
     @Column(name = "category_path")
-    @ApiModelProperty(name="category_path",value="分类id路径",required=false)
+    @ApiModelProperty(name="category_path",value="CategoriesidThe path",required=false)
     private String categoryPath;
-    /**商品数量*/
+    /**The number*/
     @Column(name = "goods_count")
-    @ApiModelProperty(name="goods_count",value="商品数量",required=false)
+    @ApiModelProperty(name="goods_count",value="The number",required=false)
     private Integer goodsCount;
-    /**分类排序*/
+    /**sort*/
     @Column(name = "category_order")
-    @ApiModelProperty(name="category_order",value="分类排序",required=false)
+    @ApiModelProperty(name="category_order",value="sort",required=false)
     private Integer categoryOrder;
-    /**是否在页面上显示*/
+    /**Whether to display on the page*/
     @Column(name = "list_show")
-    @ApiModelProperty(name="list_show",value="是否在页面上显示",required=false,example = "1为显示，0为不显示")
+    @ApiModelProperty(name="list_show",value="Whether to display on the page",required=false,example = "1For display,0For not showing")
     private Integer listShow;
-    /**分类图片*/
+    /**Image*/
     @Column(name = "image")
-    @ApiModelProperty(name="image",value="分类图片",required=false)
+    @ApiModelProperty(name="image",value="Image",required=false)
     private String image;
 
     @PrimaryKeyField

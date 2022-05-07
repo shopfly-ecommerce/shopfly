@@ -21,24 +21,24 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 分销订单
+ * Distribution of orders
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-23 下午2:33
+ * 2018-05-23 In the afternoon2:33
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DistributionOrderVO {
 
-    @ApiModelProperty("订单编号")
+    @ApiModelProperty("Order no.")
     private String sn;
-    @ApiModelProperty(value = "购买会员名称", name = "member_name")
+    @ApiModelProperty(value = "Purchase member name", name = "member_name")
     private String memberName;
     private Double price;
-    @ApiModelProperty(value = "订单金额", name = "order_price")
+    @ApiModelProperty(value = "Amount", name = "order_price")
     private Double orderPrice;
-    @ApiModelProperty(value = "下单时间", name = "create_time")
+    @ApiModelProperty(value = "Create time", name = "create_time")
     private Long createTime;
 
     public DistributionOrderVO(DistributionOrderDO distributionOrderDO, Integer memberId) {

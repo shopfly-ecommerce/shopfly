@@ -20,7 +20,7 @@ package cloud.shopfly.b2c.core.member.model.vo;
  * @version v7.0
  * @Description
  * @ClassName ConnectSettingConfigItem
- * @since v7.0 下午7:59 2018/6/28
+ * @since v7.0 In the afternoon7:59 2018/6/28
  */
 public class ConnectSettingConfigItem {
     private String key;

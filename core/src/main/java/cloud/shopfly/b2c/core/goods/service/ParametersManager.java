@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.goods.model.dos.ParametersDO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 参数业务层
+ * Parameter business layer
  * 
  * @author fk
  * @version v2.0
@@ -28,55 +28,55 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface ParametersManager {
 
 	/**
-	 * 查询参数列表
+	 * Querying the Parameter List
 	 * 
 	 * @param page
-	 *            页码
+	 *            The page number
 	 * @param pageSize
-	 *            每页数量
+	 *            Number each page
 	 * @return Page
 	 */
 	Page list(int page, int pageSize);
 
 	/**
-	 * 添加参数
+	 * Add parameters
 	 * 
 	 * @param parameters
-	 *            参数
-	 * @return Parameters 参数
+	 *            parameter
+	 * @return Parameters parameter
 	 */
 	ParametersDO add(ParametersDO parameters);
 
 	/**
-	 * 修改参数
+	 * Modify the parameters
 	 * 
 	 * @param parameters
-	 *            参数
+	 *            parameter
 	 * @param id
-	 *            参数主键
-	 * @return Parameters 参数
+	 *            Parameter the primary key
+	 * @return Parameters parameter
 	 */
 	ParametersDO edit(ParametersDO parameters, Integer id);
 
 	/**
-	 * 删除参数
+	 * Delete the parameter
 	 * 
 	 * @param id
-	 *            参数主键
+	 *            Parameter the primary key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取参数
+	 * To obtain parameters
 	 * 
 	 * @param id
-	 *            参数主键
-	 * @return Parameters 参数
+	 *            Parameter the primary key
+	 * @return Parameters parameter
 	 */
 	ParametersDO getModel(Integer id);
 
 	/**
-	 * 参数排序
+	 * Parameters of the sort
 	 * 
 	 * @param paramId
 	 * @param sortType
@@ -84,7 +84,7 @@ public interface ParametersManager {
 	void paramSort(Integer paramId, String sortType);
 
 	/**
-	 * 删除参数，使用参数组
+	 * Delete parameters and use parameter groups
 	 * 
 	 * @param groupId
 	 */

@@ -23,23 +23,23 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 收入总览
+ * Revenue overview
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-17 上午12:15
+ * 2018-04-17 In the morning12:15
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SalesTotal implements Serializable {
 
-    @ApiModelProperty(value = "收入金额")
+    @ApiModelProperty(value = "Income amount")
     @Column(name = "receive_money")
     private Double receiveMoney;
-    @ApiModelProperty(value = "退款金额")
+    @ApiModelProperty(value = "The refund amount")
     @Column(name = "refund_money")
     private Double refundMoney;
-    @ApiModelProperty(value = "最终金额")
+    @ApiModelProperty(value = "The final amount")
     @Column(name = "real_money")
     private Double realMoney;
 

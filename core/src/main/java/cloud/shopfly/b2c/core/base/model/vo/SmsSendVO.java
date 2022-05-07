@@ -18,22 +18,22 @@ package cloud.shopfly.b2c.core.base.model.vo;
 import java.io.Serializable;
 
 /**
- * 短信业务传递参数使用vo
+ * SMS service transfer parametersvo
  *
  * @author zh
  * @version v7.0
  * @since v7.0
- * 2018年3月25日 下午3:20:17
+ * 2018years3month25On the afternoon3:20:17
  */
 public class SmsSendVO implements Serializable {
 
     private static final long serialVersionUID = -6222644764379603685L;
     /**
-     * 手机号码
+     * Mobile phone number
      */
     private String mobile;
     /**
-     * 手机短信内容
+     * Text Message Content
      */
     private String content;
 

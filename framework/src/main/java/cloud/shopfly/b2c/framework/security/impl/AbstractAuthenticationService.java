@@ -45,13 +45,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 公用的安全配置
- * 7.2.0起，废弃掉重放攻击的判断
- * v2.0: 优化token解析，使用统一的tokenParser
+ * Common security configuration
+ * 7.2.0Discard the replay attack judgment
+ * v2.0: To optimize thetokenParse, using unifiedtokenParser
  *
  * @author zh
  * @version v2.0
- * @date 18/8/7 下午8:23
+ * @date 18/8/7 In the afternoon8:23
  * @since v7.0
  */
 public abstract class AbstractAuthenticationService implements AuthenticationService {
@@ -63,7 +63,7 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     /**
-     * 单例模式的cache
+     * Singleton modecache
      */
     private static Cache<String, Integer> cache;
 
@@ -73,9 +73,9 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
 
 
     /**
-     * 鉴权，先获取token，再根据token来鉴权
-     * 生产环境要由nonce和时间戳，签名来获取token
-     * 开发环境可以直接传token
+     * Authentication, obtained firsttokenAnd then according to thetokenTo the authentication
+     * The production environment is made up ofnonceAnd time stamp, signature to gettoken
+     * The development environment can pass directlytoken
      *
      * @param req
      */
@@ -98,8 +98,8 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
     }
 
     /**
-     * 解析一个token
-     * 子类需要将token解析自己的子业务权限模型：Admin,seller buyer...
+     * Parsing atoken
+     * Subclasses need to addtokenParse your own sub-business permission model：Admin,seller buyer...
      *
      * @param token
      * @return
@@ -107,10 +107,10 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
     protected abstract AuthUser parseToken(String token);
 
     /**
-     * 根据一个 token 生成授权
+     * According to atoken Generate the authorization
      *
      * @param token
-     * @return 授权
+     * @return authorization
      */
     protected Authentication getAuthentication(String token) {
         try {
@@ -129,14 +129,14 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
 
             return authentication;
         } catch (Exception e) {
-            logger.error("认证异常", e);
+            logger.error("Authentication exception", e);
             return new UsernamePasswordAuthenticationToken("anonymous", null);
         }
     }
 
     /**
-     * 获取token
-     * 7.2.0起，废弃掉重放攻击的判断
+     * To obtaintoken
+     * 7.2.0Discard the replay attack judgment
      *
      * @param req
      * @return
@@ -154,10 +154,10 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
     private static final Object lock = new Object();
 
     /**
-     * 获取本地缓存<br/>
-     * 用于记录被禁用的用户<br/>
-     * 此缓存的key为：角色+用户id，如： admin_1
-     * value为：1则代表此用户被禁用
+     * Get local cache<br/>
+     * Used to record disabled users<br/>
+     * This cachekeyfor：role+The userid, such as： admin_1
+     * valuefor：1It indicates that the user is disabled
      *
      * @return
      */
@@ -170,12 +170,12 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
             if (cache != null) {
                 return cache;
             }
-            //缓存时间为session有效期+一分钟
-            //也就表示，用户如果被禁用，session超时这个cache也就不需要了：
-            //因为他需要重新登录就可以被检测出无效
+            // The cache time is the session validity period plus one minute
+            // If a user is disabled, the session timeout cache is not needed:
+            // Because he needs to log in again to be detected as invalid
             int sessionTimeout = shopflyConfig.getRefreshTokenTimeout() - shopflyConfig.getAccessTokenTimeout() + 60;
 
-            //使用ehcache作为缓存
+            // Use EhCache as the cache
             CachingProvider provider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");
             CacheManager cacheManager = provider.getCacheManager();
 

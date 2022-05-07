@@ -30,13 +30,13 @@ import java.util.Map;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-01-25 下午4:17
+ * 2019-01-25 In the afternoon4:17
  */
 public class SearchUtil {
 
 
     /**
-     * 分类查询
+     * Classification of query
      *
      * @param goodsQueryParam
      * @param term
@@ -44,14 +44,14 @@ public class SearchUtil {
      * @param daoSupport
      */
     public static void categoryQuery(GoodsQueryParam goodsQueryParam, List<Object> term, StringBuffer sqlBuffer, DaoSupport daoSupport) {
-        // 商城分类，同时需要查询出子分类的商品
+        // Mall classification, at the same time need to query the sub-classification of goods
         if (!StringUtil.isEmpty(goodsQueryParam.getCategoryPath())) {
             List<Map> list = daoSupport.queryForList(
                     "select category_id from es_category where category_path like ? ",
                     goodsQueryParam.getCategoryPath() + "%");
 
             if (!StringUtil.isNotEmpty(list)) {
-                throw new ServiceException(GoodsErrorCode.E301.code(), "分类不存在");
+                throw new ServiceException(GoodsErrorCode.E301.code(), "Classification does not exist");
             }
 
             String[] temp = new String[list.size()];
@@ -66,7 +66,7 @@ public class SearchUtil {
     }
 
     /**
-     * 基础查询
+     * Based on the query
      *
      * @param goodsQueryParam
      * @param term
@@ -79,30 +79,30 @@ public class SearchUtil {
         sqlBuffer.append(" where  g.disabled = ? ");
         term.add(goodsQueryParam.getDisabled());
 
-        // 上下架
+        // Stand up and down
         if (goodsQueryParam.getMarketEnable() != null) {
             sqlBuffer.append(" and g.market_enable = ? ");
             term.add(goodsQueryParam.getMarketEnable());
         }
-        // 模糊关键字
+        // Fuzzy keyword
         if (!StringUtil.isEmpty(goodsQueryParam.getKeyword())) {
             sqlBuffer.append(" and (g.goods_name like ? or g.sn like ? ) ");
             term.add("%" + goodsQueryParam.getKeyword() + "%");
             term.add("%" + goodsQueryParam.getKeyword() + "%");
         }
-        // 名称
+        // The name of the
         if (!StringUtil.isEmpty(goodsQueryParam.getGoodsName())) {
             sqlBuffer.append(" and g.goods_name like ?");
             term.add("%" + goodsQueryParam.getGoodsName() + "%");
         }
 
-        // 商品编号
+        // Product id
         if (!StringUtil.isEmpty(goodsQueryParam.getGoodsSn())) {
             sqlBuffer.append(" and g.sn like ?");
             term.add("%" + goodsQueryParam.getGoodsSn() + "%");
         }
 
-        //商品类型
+        // Type
         if (!StringUtil.isEmpty(goodsQueryParam.getGoodsType())) {
             sqlBuffer.append(" and g.goods_type = ?");
             term.add(goodsQueryParam.getGoodsType());

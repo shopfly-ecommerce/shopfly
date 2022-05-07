@@ -23,34 +23,34 @@ import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
 /**
- * 加密使用
+ * Encrypted using
  * @author kingapex
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 public class DesUtils {
 
 	/**
-	 * 密钥
+	 * The key
  	 */
 	private final static String SECRETKEY = "shopfly@enation@89889$#365#$";
 
 	/**
-	 * 向量
+	 * vector
 	 */
 	private final static String IV = "82757891";
 
 	/**
-	 * 加解密统一使用的编码方式
+	 * Encryption and decryption unified use of the encoding method
 	 */
 	private final static String ENCODING = "utf-8";
 
 	/**
-	 * 3DES加密
+	 * 3DESencryption
 	 * 
 	 * @param plainText
-	 *            普通文本
+	 *            Plain text
 	 * @return
 	 * @throws Exception
 	 */
@@ -68,10 +68,10 @@ public class DesUtils {
 	}
 
 	/**
-	 * 3DES解密
+	 * 3DESdecryption
 	 * 
 	 * @param encryptText
-	 *            加密文本
+	 *            Encrypted text
 	 * @return
 	 * @throws Exception
 	 */

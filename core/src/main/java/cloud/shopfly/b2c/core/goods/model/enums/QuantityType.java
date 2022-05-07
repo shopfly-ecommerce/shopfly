@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.core.goods.model.enums;
 
 /**
  * Created by kingapex on 2019-01-17.
- * 库存数类型
+ * Inventory type
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -26,12 +26,12 @@ package cloud.shopfly.b2c.core.goods.model.enums;
 public enum QuantityType {
 
     /**
-     * 实际的库存，包含了待发货的
+     * The actual inventory, which includes the goods to be shipped
      */
     actual,
 
     /**
-     * 可以售的库存，不包含待发货的
+     * Inventory available for sale, excluding those to be shipped
      */
     enable
 

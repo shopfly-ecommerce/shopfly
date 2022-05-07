@@ -41,7 +41,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 团购商品控制器
+ * Group purchase merchandise controller
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -49,7 +49,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/promotion/group-buy-goods")
-@Api(description = "团购商品相关API")
+@Api(description = "Group purchase merchandise relatedAPI")
 @Validated
 public class GroupbuyGoodsSellerController	{
 
@@ -59,18 +59,18 @@ public class GroupbuyGoodsSellerController	{
 	@Autowired
 	private GroupbuyActiveManager groupbuyActiveManager;
 
-	@ApiOperation(value	= "查询团购商品列表")
+	@ApiOperation(value	= "Check the list of group purchases")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name	= "act_id", value = "团购活动id",required = true,dataType = "int",paramType =	"query"),
-			@ApiImplicitParam(name	= "keywords", value = "关键字", dataType = "String",	paramType =	"query"),
-			@ApiImplicitParam(name	= "goods_name", value = "商品名称", dataType = "String",	paramType =	"query"),
-			@ApiImplicitParam(name	= "start_time", value = "开始时间", dataType = "long",paramType =	"query"),
-			@ApiImplicitParam(name	= "end_time", value = "结束时间", dataType = "long",paramType =	"query"),
-			@ApiImplicitParam(name	= "page_no", value = "页码", dataType = "int",	paramType =	"query"),
-			@ApiImplicitParam(name	= "page_size", value = "条数", dataType = "int",	paramType =	"query")
+			@ApiImplicitParam(name	= "act_id", value = "Group-buying activitiesid",required = true,dataType = "int",paramType =	"query"),
+			@ApiImplicitParam(name	= "keywords", value = "keyword", dataType = "String",	paramType =	"query"),
+			@ApiImplicitParam(name	= "goods_name", value = "Name", dataType = "String",	paramType =	"query"),
+			@ApiImplicitParam(name	= "start_time", value = "The start time", dataType = "long",paramType =	"query"),
+			@ApiImplicitParam(name	= "end_time", value = "The end of time", dataType = "long",paramType =	"query"),
+			@ApiImplicitParam(name	= "page_no", value = "The page number", dataType = "int",	paramType =	"query"),
+			@ApiImplicitParam(name	= "page_size", value = "A number of", dataType = "int",	paramType =	"query")
 	})
 	@GetMapping
-	public Page<GroupbuyGoodsVO> list(@ApiIgnore @NotNull(message = "活动ID必传") Integer actId, @ApiIgnore String keywords, @ApiIgnore String goodsName,
+	public Page<GroupbuyGoodsVO> list(@ApiIgnore @NotNull(message = "activityIDWill pass") Integer actId, @ApiIgnore String keywords, @ApiIgnore String goodsName,
 									   @ApiIgnore Long startTime, @ApiIgnore Long endTime, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
 
 		GroupbuyQueryParam param = new GroupbuyQueryParam();
@@ -86,8 +86,8 @@ public class GroupbuyGoodsSellerController	{
 	}
 
 
-	@ApiOperation(value	= "添加团购商品", response = GroupbuyGoodsDO.class)
-	@ApiImplicitParam(name = "groupbuyGoods", value = "团购商品信息", required = true, dataType = "GroupbuyGoodsDO", paramType = "body")
+	@ApiOperation(value	= "Add group purchase items", response = GroupbuyGoodsDO.class)
+	@ApiImplicitParam(name = "groupbuyGoods", value = "Group purchase commodity information", required = true, dataType = "GroupbuyGoodsDO", paramType = "body")
 	@PostMapping
 	public GroupbuyGoodsDO add(@Valid  GroupbuyGoodsDO groupbuyGoods) {
 		groupbuyGoods.setAddTime(DateUtil.getDateline());
@@ -100,9 +100,9 @@ public class GroupbuyGoodsSellerController	{
 	}
 
 	@PutMapping(value = "/{id}")
-	@ApiOperation(value	= "修改团购商品", response = GroupbuyGoodsDO.class)
+	@ApiOperation(value	= "Modify group purchase goods", response = GroupbuyGoodsDO.class)
 	@ApiImplicitParams({
-		 @ApiImplicitParam(name	= "id",	value =	"主键",	required = true, dataType = "int",	paramType =	"path")
+		 @ApiImplicitParam(name	= "id",	value =	"A primary key",	required = true, dataType = "int",	paramType =	"path")
 	})
 	public GroupbuyGoodsDO edit(@Valid  GroupbuyGoodsDO groupbuyGoods, @PathVariable Integer id) {
 
@@ -115,9 +115,9 @@ public class GroupbuyGoodsSellerController	{
 
 
 	@DeleteMapping(value = "/{id}")
-	@ApiOperation(value	= "删除团购商品")
+	@ApiOperation(value	= "Delete group purchase products")
 	@ApiImplicitParams({
-		 @ApiImplicitParam(name	= "id",	value =	"要删除的团购商品主键",	required = true, dataType = "int",	paramType =	"path")
+		 @ApiImplicitParam(name	= "id",	value =	"Primary key of group purchase goods to be deleted",	required = true, dataType = "int",	paramType =	"path")
 	})
 	public	String	delete(@PathVariable Integer id) {
 
@@ -129,20 +129,20 @@ public class GroupbuyGoodsSellerController	{
 
 
 	@GetMapping(value =	"/{id}")
-	@ApiOperation(value	= "查询一个团购商品")
+	@ApiOperation(value	= "Query a group purchase item")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "id",	value = "要查询的团购商品主键",	required = true, dataType = "int",	paramType = "path")
+		@ApiImplicitParam(name = "id",	value = "The primary key of group purchase commodities to query",	required = true, dataType = "int",	paramType = "path")
 	})
 	public GroupbuyGoodsVO get(@PathVariable Integer id)	{
 		GroupbuyGoodsVO groupbuyGoods = this.groupbuyGoodsManager.getModelAndQuantity(id);
 		if(groupbuyGoods == null){
-			throw new NoPermissionException("无权操作");
+			throw new NoPermissionException("Have the right to operate");
 		}
 		return	groupbuyGoods;
 	}
 
 
-	@ApiOperation(value	= "查询可以参与的团购活动列表", response = GroupbuyGoodsDO.class)
+	@ApiOperation(value	= "Query the list of group buying activities you can participate in", response = GroupbuyGoodsDO.class)
 	@GetMapping(value = "/active")
 	public List<GroupbuyActiveDO> listActive()	{
 
@@ -151,14 +151,14 @@ public class GroupbuyGoodsSellerController	{
 
 
 	/**
-	 * 验证参数
+	 * Validate parameter
 	 * @param goodsDO
 	 */
 	private void verifyParam(GroupbuyGoodsDO goodsDO){
 
 		String gbName = goodsDO.getGbName();
 		if(!StringUtil.validMaxLen(gbName,30)){
-			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"团购名称字数超限");
+			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"Group purchase name word limit");
 		}
 
 	}

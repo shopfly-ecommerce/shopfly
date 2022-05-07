@@ -16,8 +16,8 @@
 package cloud.shopfly.b2c.framework.redis.configure.builders;
 
 /**
- * 由sohu tv cache cloud copy过来的
- * 客户端口状态类
+ * bysohu tv cache cloud copyCome over
+ * Customer port status class
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -27,15 +27,15 @@ package cloud.shopfly.b2c.framework.redis.configure.builders;
  */
 public enum ClientStatusEnum {
     /**
-     * 正确
+     * correct
      */
     GOOD(1),
     /**
-     * 警告
+     * warning
      */
     WARN(0),
     /**
-     * 错误
+     * error
      */
     ERROR(-1);
 

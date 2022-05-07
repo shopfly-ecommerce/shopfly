@@ -27,87 +27,87 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.List;
 
 /**
- * 订单商品项
+ * Order items
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
  * @since v7.0.0
  */
-@ApiModel(description = "订单商品项")
+@ApiModel(description = "Order items")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OrderSkuVO {
 
 
-    @ApiModelProperty(value = "卖家id")
+    @ApiModelProperty(value = "The sellerid")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "卖家姓名")
+    @ApiModelProperty(value = "The sellers name")
     private String sellerName;
 
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "productid")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "产品id")
+    @ApiModelProperty(value = "productid")
     private Integer skuId;
 
-    @ApiModelProperty(value = "产品sn")
+    @ApiModelProperty(value = "productsn")
     private String skuSn;
 
-    @ApiModelProperty(value = "商品所属的分类id")
+    @ApiModelProperty(value = "The category to which the goods belongid")
     private Integer catId;
 
-    @ApiModelProperty(value = "购买数量")
+    @ApiModelProperty(value = "Purchase quantity")
     private Integer num;
 
-    @ApiModelProperty(value = "商品重量")
+    @ApiModelProperty(value = "Weight")
     private Double goodsWeight;
 
-    @ApiModelProperty(value = "商品原价")
+    @ApiModelProperty(value = "Product  price")
     private Double originalPrice;
 
-    @ApiModelProperty(value = "购买时的成交价")
+    @ApiModelProperty(value = "The purchase price at the time of purchase")
     private Double purchasePrice;
 
-    @ApiModelProperty(value = "小计")
+    @ApiModelProperty(value = "subtotal")
     private Double subtotal;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     private String name;
 
-    @ApiModelProperty(value = "商品图片")
+    @ApiModelProperty(value = "Commodity images")
     private String goodsImage;
 
     /**
-     * 商品规格列表
+     * List of specifications
      */
-    @ApiModelProperty(value = "规格列表")
+    @ApiModelProperty(value = "Specification list")
     private List<SpecValueVO> specList;
 
     /**
-     * 积分换购活动中，购买这个商品需要消费的积分
+     * In the point exchange activity, the amount of points needed to purchase the product
      */
-    @ApiModelProperty(value = "使用积分")
+    @ApiModelProperty(value = "Using the integral")
     private Integer point;
 
-    @ApiModelProperty(value = "快照ID")
+    @ApiModelProperty(value = "The snapshotID")
     private Integer snapshotId;
 
-    @ApiModelProperty(value = "售后状态")
+    @ApiModelProperty(value = "After state")
     private String serviceStatus;
 
-    @ApiModelProperty(value = "已参与的单品活动工具列表")
+    @ApiModelProperty(value = "List of single product activity tools that have been participated")
     private List<CartPromotionVo> singleList;
 
-    @ApiModelProperty(value = "已参与的组合活动工具列表")
+    @ApiModelProperty(value = "List of participating composite activity tools")
     private List<CartPromotionVo> groupList;
 
-    @ApiModelProperty(value = "商品操作允许情况")
+    @ApiModelProperty(value = "Merchandise operation permit")
     private GoodsOperateAllowable goodsOperateAllowableVO;
 
-    @ApiModelProperty(value = "此商品需要提示给顾客的优惠标签")
+    @ApiModelProperty(value = "This product needs to be prompted to the customers discount label")
     private List<String> promotionTags;
 
-    @ApiModelProperty(value = "优惠数量数量")
+    @ApiModelProperty(value = "Preferential quantity")
     private Integer purchaseNum;
 
     public Integer getPurchaseNum() {

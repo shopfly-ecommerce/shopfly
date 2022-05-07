@@ -20,14 +20,14 @@ import cloud.shopfly.b2c.core.base.model.vo.EmailVO;
 /**
  * @author fk
  * @version v2.0
- * @Description: 邮件
+ * @Description: mail
  * @date 2018/8/13 16:25
  * @since v7.0.0
  */
 public interface EmailClient {
 
     /**
-     * 邮件发送实现，供消费者调用
+     * Mail delivery implementation for consumers to call
      *
      * @param emailVO
      */

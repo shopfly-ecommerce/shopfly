@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 优惠券业务层
+ * Coupon business layer
  *
  * @author Snow
  * @version v2.0
@@ -31,66 +31,66 @@ import java.util.List;
 public interface CouponManager {
 
     /**
-     * 查询当前商家优惠券列表
+     * Query the list of current merchant coupons
      *
-     * @param page      页码
-     * @param pageSize  每页数量
-     * @param startTime 起始时间
-     * @param endTime   截止时间
-     * @param keyword   搜索关键字
+     * @param page      The page number
+     * @param pageSize  Number each page
+     * @param startTime Starting time
+     * @param endTime   By the time
+     * @param keyword   Search keywords
      * @return Page
      */
     Page list(int page, int pageSize, Long startTime, Long endTime, String keyword);
 
     /**
-     * 读取商家优惠券，正在进行中的
+     * Reading merchant coupons, in progress
      *
      * @return
      */
     List<CouponDO> getList();
 
     /**
-     * 添加优惠券
+     * Add coupons
      *
-     * @param coupon 优惠券
-     * @return Coupon 优惠券
+     * @param coupon coupons
+     * @return Coupon coupons
      */
     CouponDO add(CouponDO coupon);
 
     /**
-     * 修改优惠券
+     * Modify coupons
      *
-     * @param coupon 优惠券
-     * @param id     优惠券主键
-     * @return Coupon 优惠券
+     * @param coupon coupons
+     * @param id     Coupon primary key
+     * @return Coupon coupons
      */
     CouponDO edit(CouponDO coupon, Integer id);
 
     /**
-     * 删除优惠券
+     * Delete coupons
      *
-     * @param id 优惠券主键
+     * @param id Coupon primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取优惠券
+     * Get coupons
      *
-     * @param id 优惠券主键
-     * @return Coupon  优惠券
+     * @param id Coupon primary key
+     * @return Coupon  coupons
      */
     CouponDO getModel(Integer id);
 
     /**
-     * 验证操作权限<br/>
-     * 如有问题直接抛出权限异常
+     * Verifying operation rights<br/>
+     * Throw a permission exception if there is a problem
      *
      * @param id
      */
     void verifyAuth(Integer id);
 
     /**
-     * 增加优惠券使用数量
+     * Increase the number of coupons used
      *
      * @param id
      */
@@ -98,7 +98,7 @@ public interface CouponManager {
 
 
     /**
-     * 增加被领取数量
+     * Increase the number of claims
      *
      * @param couponId
      */
@@ -106,18 +106,18 @@ public interface CouponManager {
 
 
     /**
-     * 查询所有商家优惠券列表
+     * Check the list of all merchant coupons
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page all(int page, int pageSize);
 
 
     /**
-     * 根据失效状态获取优惠券数据集合
-     * @param status 失效状态 0：全部，1：有效，2：失效
+     * Get the coupon data set according to the expired state
+     * @param status The failure state0：All,1：Effective,2：failure
      * @return
      */
     List<CouponDO> getByStatus(Integer status);

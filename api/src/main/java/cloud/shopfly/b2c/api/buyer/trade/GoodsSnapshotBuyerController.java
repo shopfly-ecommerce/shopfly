@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 交易快照控制器
+ * Transaction snapshot controller
  *
  * @author fk
  * @version v1.0
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/trade/snapshots")
-@Api(description = "交易快照相关API")
+@Api(description = "Transaction snapshot correlationAPI")
 public class GoodsSnapshotBuyerController {
 
     @Autowired
@@ -45,9 +45,9 @@ public class GoodsSnapshotBuyerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个交易快照")
+    @ApiOperation(value = "Query a trade snapshot")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的交易快照主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The transaction to query is quick key", required = true, dataType = "int", paramType = "path")
     })
     public SnapshotVO get(@PathVariable Integer id) {
 

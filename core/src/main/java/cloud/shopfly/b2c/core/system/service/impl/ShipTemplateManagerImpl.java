@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 运费模版业务类
+ * Freight template business class
  *
  * @author zjp
  * @version v7.0.0
@@ -74,7 +74,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
         this.daoSupport.insert(t);
         int id = this.daoSupport.getLastId("es_ship_template");
         t.setId(id);
-        //保存运费模板子模板
+        // Save the freight template subtemplate
         List<ShipTemplateSettingVO> items = template.getItems();
 
         this.addTemplateChildren(items, id);
@@ -91,14 +91,14 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
 
         Integer id = template.getId();
         this.daoSupport.update(t, id);
-        //删除子模板
+        // Deleting a subtemplate
         this.daoSupport.execute("delete from es_ship_template_setting where template_id = ?", id);
 
-        //保存运费模板子模板
+        // Save the freight template subtemplate
         List<ShipTemplateSettingVO> items = template.getItems();
         this.addTemplateChildren(items, id);
 
-        //移除缓存某个VO
+        // Remove the cache of a VO
         this.cache.remove(CachePrefix.SHIP_TEMPLATE_ONE.getPrefix() + id);
 
         cache.remove(CachePrefix.SHIP_TEMPLATE.getPrefix());
@@ -107,7 +107,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
     }
 
     /**
-     * 添加运费模板子模板
+     * Add the freight template subtemplate
      */
     private void addTemplateChildren(List<ShipTemplateSettingVO> items, Integer templateId) {
 
@@ -119,7 +119,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
         List term = new ArrayList<>();
         String idsStr = SqlUtil.getInSql(rateAreaIds.toArray(new Integer[rateAreaIds.size()]), term);
 
-        //检测是否有分类关联
+        // Detects whether there is a classification association
         String sql = "select id,name from es_rate_area where id in (" + idsStr + ")";
         List<RateAreaDO> areaDOList = this.daoSupport.queryForList(sql,RateAreaDO.class,term.toArray());
         for (ShipTemplateSettingVO settingVO : items) {
@@ -159,18 +159,18 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
     public void delete(Integer templateId) {
         GoodsDO goodsDO = this.goodsClient.checkShipTemplate(templateId);
         if (goodsDO != null) {
-            throw new ServiceException(SystemErrorCode.E226.code(), "模版被商品【" + goodsDO.getGoodsName() + "】使用，无法删除该模版");
+            throw new ServiceException(SystemErrorCode.E226.code(), "Templates are commodities【" + goodsDO.getGoodsName() + "】Cannot delete the template");
         }
 
 
-        //删除运费模板
+        // Delete shipping template
         this.daoSupport.execute("delete from es_ship_template where id=?", templateId);
-        //删除运费模板关联地区
+        // Delete a region associated with a freight template
         this.daoSupport.execute("delete from es_ship_template_setting where template_id = ?", templateId);
 
-        //移除缓存某个VO
+        // Remove the cache of a VO
         this.cache.remove(CachePrefix.SHIP_TEMPLATE_ONE.getPrefix() + templateId);
-        //移除缓存某商家的VO列表
+        // Removes the VO list cached for a merchant
         this.cache.remove(CachePrefix.SHIP_TEMPLATE.getPrefix());
     }
 
@@ -178,12 +178,12 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
     public ShipTemplateVO getFromCache(Integer templateId) {
         ShipTemplateVO tpl = (ShipTemplateVO) this.cache.get(CachePrefix.SHIP_TEMPLATE_ONE.getPrefix() + templateId);
         if (tpl == null) {
-            //编辑运费模板的查询一个运费模板
+            // Edit freight template query for a freight template
             ShipTemplateDO template = this.getOneDB(templateId);
             tpl = new ShipTemplateVO();
             BeanUtils.copyProperties(template, tpl);
 
-            //查询运费模板的子模板
+            // Query the subtemplate of the freight template
             String sql = "select * from es_ship_template_setting where template_id = ?";
             List<ShipTemplateSettingDO> settingDOList = this.daoSupport.queryForList(sql, ShipTemplateSettingDO.class, templateId);
 
@@ -205,7 +205,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
         ShipTemplateSellerVO tpl = new ShipTemplateSellerVO();
         BeanUtils.copyProperties(template, tpl);
 
-        //查询运费模板的子模板
+        // Query the subtemplate of the freight template
         String sql = "select * from es_ship_template_setting where template_id = ?";
         List<ShipTemplateSettingDO> settingDOList = this.daoSupport.queryForList(sql, ShipTemplateSettingDO.class, templateId);
 
@@ -227,17 +227,17 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
         List<ShipTemplateSettingDO> list= daoSupport.queryForList("select distinct template_id from es_ship_template_setting where rate_area_id = ?",ShipTemplateSettingDO.class,rateAreaId);
         if (list!=null&&list.size()>0){
             for (ShipTemplateSettingDO settingDO : list) {
-                //移除缓存某个VO
+                // Remove the cache of a VO
                 this.cache.remove(CachePrefix.SHIP_TEMPLATE_ONE.getPrefix() + settingDO.getTemplateId());
             }
-            //移除缓存某商家的VO列表
+            // Removes the VO list cached for a merchant
             this.cache.remove(CachePrefix.SHIP_TEMPLATE.getPrefix());
         }
     }
 
     /**
      *
-     * ShipTemplateSettingDO在转换VO，增加地区相关信息
+     * ShipTemplateSettingDOIn the transformationVOTo add information about the region
      * @param settingDOList
      * @param flag
      * @return
@@ -260,7 +260,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
 
             String idsStr = SqlUtil.getInSql(rateAreaIds.toArray(new Integer[rateAreaIds.size()]), term);
 
-            //检测是否有分类关联
+            // Detects whether there is a classification association
             sql = "select * from es_rate_area where id in (" + idsStr + ")";
             List<RateAreaDO> areaDOList = this.daoSupport.queryForList(sql,RateAreaDO.class, term.toArray());
 
@@ -275,7 +275,7 @@ public class ShipTemplateManagerImpl implements ShipTemplateManager {
     }
 
     /**
-     * 数据库中查询运费模板
+     * Query the freight template in the database
      *
      * @param templateId
      * @return

@@ -18,11 +18,11 @@ package cloud.shopfly.b2c.framework.validation.annotation;
 import java.lang.annotation.*;
 
 /**
- * 手机号码校验注解
+ * Mobile phone number verification annotation
  *
  * @author zh
  * @version v7.0
- * @date 19/2/25 上午8:58
+ * @date 19/2/25 In the morning8:58
  * @since v7.0
  */
 @Target(ElementType.METHOD)

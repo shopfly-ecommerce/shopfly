@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.trade.snapshot.model.SnapshotVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 交易快照业务层
+ * Transaction snapshot business layer
  * @author fk
  * @version v1.0
  * @since v7.0.0
@@ -30,48 +30,48 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface GoodsSnapshotManager	{
 
 	/**
-	 * 查询交易快照列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
+	 * Example Query the trade snapshot list
+	 * @param page The page number
+	 * @param pageSize Number each page
 	 * @return Page 
 	 */
 	Page list(int page, int pageSize);
 	/**
-	 * 添加交易快照
-	 * @param goodsSnapshot 交易快照
-	 * @return GoodsSnapshot 交易快照
+	 * Adding a Transaction Snapshot
+	 * @param goodsSnapshot Trading snapshot
+	 * @return GoodsSnapshot Trading snapshot
 	 */
 	GoodsSnapshot add(GoodsSnapshot goodsSnapshot);
 
 	/**
-	* 修改交易快照
-	* @param goodsSnapshot 交易快照
-	* @param id 交易快照主键
-	* @return GoodsSnapshot 交易快照
+	* Modifying a trade Snapshot
+	* @param goodsSnapshot Trading snapshot
+	* @param id Transaction flash key
+	* @return GoodsSnapshot Trading snapshot
 	*/
 	GoodsSnapshot edit(GoodsSnapshot goodsSnapshot, Integer id);
 	
 	/**
-	 * 删除交易快照
-	 * @param id 交易快照主键
+	 * Deleting a Transaction Snapshot
+	 * @param id Transaction flash key
 	 */
 	void delete(Integer id);
 	
 	/**
-	 * 获取交易快照
-	 * @param id 交易快照主键
-	 * @return GoodsSnapshot  交易快照
+	 * Get a trade snapshot
+	 * @param id Transaction flash key
+	 * @return GoodsSnapshot  Trading snapshot
 	 */
 	GoodsSnapshot getModel(Integer id);
 
 	/**
-	 * 添加交易快照
+	 * Adding a Transaction Snapshot
 	 * @param orderDO
 	 */
 	void add(OrderDO orderDO);
 
 	/**
-	 * 查询快照VO
+	 * Query the snapshotVO
 	 * @param id
 	 * @return
 	 */

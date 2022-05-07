@@ -29,11 +29,11 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * 手机号码校验注解
+ * Mobile phone number verification annotation
  *
  * @author zh
  * @version v7.0
- * @date 18/5/9 下午3:04
+ * @date 18/5/9 In the afternoon3:04
  * @since v7.0
  */
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
@@ -44,7 +44,7 @@ public @interface Mobile {
 
     String regexp() default "";
 
-    String message() default "手机号码格式不正确";
+    String message() default "The mobile phone number format is incorrect";
 
     Class<?>[] groups() default {};
 

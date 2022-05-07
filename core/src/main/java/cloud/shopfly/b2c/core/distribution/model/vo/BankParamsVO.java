@@ -24,28 +24,28 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
- * 提现参数
+ * Withdrawal parameters
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-22 下午1:22
+ * 2018-05-22 In the afternoon1:22
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class BankParamsVO implements Serializable {
 
-    @ApiModelProperty(value = "户名", required = true, name = "member_name")
-    @NotEmpty(message = "户名不能为空")
+    @ApiModelProperty(value = "Account name", required = true, name = "member_name")
+    @NotEmpty(message = "The account name cannot be empty")
     private String memberName;
-    @ApiModelProperty(value = "银行名称", required = true, name = "bank_name")
-    @NotEmpty(message = "银行名称不能为空")
+    @ApiModelProperty(value = "Bank name", required = true, name = "bank_name")
+    @NotEmpty(message = "The bank name cannot be empty")
     private String bankName;
-    @ApiModelProperty(value = "开户行号", required = true, name = "opening_num")
-    @NotEmpty(message = "开户行号不能为空")
+    @ApiModelProperty(value = "Bank no.", required = true, name = "opening_num")
+    @NotEmpty(message = "The opening bank number cannot be blank")
     private String openingNum;
-    @ApiModelProperty(value = "银行卡号", required = true, name = "bank_card")
-    @NotEmpty(message = "银行卡号不能为空")
+    @ApiModelProperty(value = "Bank card number", required = true, name = "bank_card")
+    @NotEmpty(message = "The bank card number cannot be empty")
     private String bankCard;
 
 

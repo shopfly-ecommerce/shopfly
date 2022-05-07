@@ -23,30 +23,30 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 管理员审核退(款)货VO
+ * Administrator audit retreat(paragraph)cargoVO
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午11:21 2018/5/2
+ * @since v7.0 In the morning11:21 2018/5/2
  */
 public class AdminRefundApprovalVO implements Serializable {
 
-    @ApiModelProperty(value = "退款单号", name = "sn", required = true)
-    @NotBlank(message = "退款单号必填")
+    @ApiModelProperty(value = "The refund number", name = "sn", required = true)
+    @NotBlank(message = "Refund receipt number Mandatory")
     private String sn;
 
-    @ApiModelProperty(value = "是否同意退款:同意 1，不同意 0", allowableValues = "1,0", required = true)
-    @NotNull(message = "是否同意必填")
+    @ApiModelProperty(value = "Do you agree to refund?:agree1，不agree0", allowableValues = "1,0", required = true)
+    @NotNull(message = "This parameter is mandatory")
     private Integer agree;
 
-    @ApiModelProperty(value = "退款金额", name = "refund_price", required = true)
-    @NotNull(message = "退款金额必填")
-    @Min(value = 0, message = "退款金额不能为负数")
+    @ApiModelProperty(value = "The refund amount", name = "refund_price", required = true)
+    @NotNull(message = "Refund amount mandatory")
+    @Min(value = 0, message = "The refund amount cannot be negative")
     private Double refundPrice;
 
-    @ApiModelProperty(value = "退款备注", name = "remark", required = false)
+    @ApiModelProperty(value = "The refund note", name = "remark", required = false)
     private String remark;
-    @ApiModelProperty(value = "退还积分", name = "refund_point", required = false)
+    @ApiModelProperty(value = "Return the integral", name = "refund_point", required = false)
     private Integer refundPoint;
 
     public String getSn() {

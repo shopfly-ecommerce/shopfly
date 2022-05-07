@@ -24,28 +24,28 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 分销返现设置
+ * Distribution cashback setup
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-06-12 上午4:06
+ * 2018-06-12 In the morning4:06
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DistributionSetting implements Serializable {
 
     /**
-     * 提现金额冻结周期
+     * Withdrawal amount freezing period
      */
-    @Min(message = "冻结周期不能为负数", value = 0)
-    @NotNull(message = "冻结周期不能为空")
-    @ApiModelProperty(name = "cycle", value = "冻结周期")
+    @Min(message = "The freezing period cannot be negative", value = 0)
+    @NotNull(message = "The freezing period cannot be empty")
+    @ApiModelProperty(name = "cycle", value = "Freeze cycle")
     private Integer cycle = 0;
     /**
-     * 是否开启商品返现
+     * Whether to open goods cash back
      */
-    @ApiModelProperty(name = "goods_model", value = "是否开启商品返现,1开启,0不开启")
-    @NotNull(message = "商品返现模式开关：1开启/0关闭")
+    @ApiModelProperty(name = "goods_model", value = "Whether to open goods cash back,1open,0不open")
+    @NotNull(message = "Commodity cash back mode switch：1open/0close")
     private Integer goodsModel = 0;
 
     public Integer getCycle() {

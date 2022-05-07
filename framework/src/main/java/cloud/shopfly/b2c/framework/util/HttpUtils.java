@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Http工具
+ * Httptool
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -71,12 +71,12 @@ public final class HttpUtils {
             // .setRequestProperty(
             // "User-Agent",
             // "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3");
-            // （单位：毫秒）jdk
+            // (milliseconds) JDK
             urlConn.setConnectTimeout(connectTimeout);
-            // （单位：毫秒）jdk 1.5换成这个,读操作超时
+            // In JDK 1.5, the read timed out
             urlConn.setReadTimeout(readTimeout);
             urlConn.setDoOutput(true);
-            // String按照字节处理是一个好方法
+            // Its a good idea to treat strings as bytes
             byte[] b = params.getBytes(encoding);
             urlConn.getOutputStream().write(b, 0, b.length);
             urlConn.getOutputStream().flush();
@@ -144,7 +144,7 @@ public final class HttpUtils {
     }
 
     /**
-     * UTF-8编码
+     * UTF-8coding
      *
      * @param link
      * @return
@@ -154,7 +154,7 @@ public final class HttpUtils {
     }
 
     /**
-     * 将parameters中数据转换成用"&"链接的http请求参数形式
+     * willparametersData is converted to use"&"Of the linkhttpRequest parameter form
      *
      * @param parameters
      * @return

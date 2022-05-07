@@ -16,19 +16,19 @@
 package cloud.shopfly.b2c.core.client.distribution;
 
 /**
- * 分销结算
+ * Distribution and settlement
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/8/14 下午1:02
+ * 2018/8/14 In the afternoon1:02
  */
 public interface WithdrawCountClient {
 
 
     /**
-     * 每日进行结算
+     * Daily settlement
      */
     void everyDay();
 }

@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 物流公司业务层
+ * Logistics company business layer
  *
  * @author zjp
  * @version v7.0.0
@@ -31,72 +31,72 @@ import java.util.List;
 public interface LogiCompanyManager {
 
     /**
-     * 查询物流公司列表
+     * Query the list of logistics companies
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加物流公司
+     * Add logistics Company
      *
-     * @param logi 物流公司
-     * @return Logi 物流公司
+     * @param logi Logistics company
+     * @return Logi Logistics company
      */
     LogiCompanyDO add(LogiCompanyDO logi);
 
     /**
-     * 修改物流公司
+     * Modify logistics company
      *
-     * @param logi 物流公司
-     * @param id   物流公司主键
-     * @return Logi 物流公司
+     * @param logi Logistics company
+     * @param id   Logistics company primary key
+     * @return Logi Logistics company
      */
     LogiCompanyDO edit(LogiCompanyDO logi, Integer id);
 
     /**
-     * 删除物流公司
+     * Delete logistics company
      *
-     * @param id 物流公司主键
+     * @param id Logistics company primary key
      */
     void delete(Integer[] id);
 
     /**
-     * 获取物流公司
+     * Acquisition logistics company
      *
-     * @param id 物流公司主键
-     * @return Logi  物流公司
+     * @param id Logistics company primary key
+     * @return Logi  Logistics company
      */
     LogiCompanyDO getModel(Integer id);
 
     /**
-     * 通过code获取物流公司
+     * throughcodeAcquisition logistics company
      *
-     * @param code 物流公司code
-     * @return 物流公司
+     * @param code Logistics companycode
+     * @return Logistics company
      */
     LogiCompanyDO getLogiByCode(String code);
 
     /**
-     * 通过快递鸟物流code获取物流公司
+     * Bird Logistics via express deliverycodeAcquisition logistics company
      *
-     * @param kdcode 快递鸟公司code
-     * @return 物流公司
+     * @param kdcode Express Bird Companycode
+     * @return Logistics company
      */
     LogiCompanyDO getLogiBykdCode(String kdcode);
 
     /**
-     * 根据物流名称查询物流信息
+     * Query logistics information by logistics name
      *
-     * @param name 物流名称
-     * @return 物流公司
+     * @param name The name of the logistics
+     * @return Logistics company
      */
     LogiCompanyDO getLogiByName(String name);
 
     /**
-     * 查询物流公司列表(不分页)
+     * Query the list of logistics companies(No paging)
      *
      * @return Page
      */

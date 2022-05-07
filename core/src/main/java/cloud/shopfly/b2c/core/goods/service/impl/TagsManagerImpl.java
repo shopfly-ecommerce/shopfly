@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 商品标签业务类
+ * Commodity label business class
  *
  * @author fk
  * @version v2.0
@@ -71,7 +71,7 @@ public class TagsManagerImpl implements TagsManager {
     public Page queryTagGoods(Integer tagId, Integer pageNo, Integer pageSize) {
         TagsDO tag = this.getModel(tagId);
         if (tag == null ) {
-            throw new ServiceException(GoodsErrorCode.E309.code(), "无权操作");
+            throw new ServiceException(GoodsErrorCode.E309.code(), "Have the right to operate");
         }
 
         String sql = "select g.goods_id,g.goods_name,g.price,g.buy_count,g.enable_quantity,g.thumbnail from es_tag_goods r LEFT JOIN es_goods g ON g.goods_id=r.goods_id  "
@@ -85,7 +85,7 @@ public class TagsManagerImpl implements TagsManager {
     public void saveTagGoods(Integer tagId, Integer[] goodsIds) {
         TagsDO tag = this.getModel(tagId);
         if (tag == null ) {
-            throw new ServiceException(GoodsErrorCode.E309.code(), "无权操作");
+            throw new ServiceException(GoodsErrorCode.E309.code(), "Have the right to operate");
         }
 
         if(goodsIds[0] != -1){
@@ -93,19 +93,19 @@ public class TagsManagerImpl implements TagsManager {
             String idStr = SqlUtil.getInSql(goodsIds, term);
             Integer count = this.daoSupport.queryForInt("select count(1) from es_goods where goods_id in (" + idStr + ") ",term.toArray());
             if (goodsIds.length != count) {
-                throw new ServiceException(GoodsErrorCode.E309.code(), "无权操作");
+                throw new ServiceException(GoodsErrorCode.E309.code(), "Have the right to operate");
             }
         }
 
-        //删除
+        // delete
         String sql = "delete from es_tag_goods where tag_id = ?";
         this.daoSupport.execute(sql,tagId);
 
         if(goodsIds[0] == -1){
-            //表示这个标签下不保存商品
+            // Indicates that no goods are saved under this label
             return;
         }
-        //添加
+        // add
         for (Integer goodsId : goodsIds) {
             TagGoodsDO tagGoods = new TagGoodsDO(tagId, goodsId);
             this.daoSupport.insert(tagGoods);

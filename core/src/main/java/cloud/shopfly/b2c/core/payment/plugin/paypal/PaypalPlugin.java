@@ -60,7 +60,7 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
 
         config.setKey(ClientType.PC.getDbColumn() + "&" + ClientType.WAP.getDbColumn() + "&" + ClientType.NATIVE.getDbColumn() + "&" + ClientType.REACT.getDbColumn());
         config.setConfigList(configList);
-        config.setName("是否开启");
+        config.setName("Whether open");
 
         resultList.add(config);
         return resultList;
@@ -73,7 +73,7 @@ public class PaypalPlugin extends PayPalClient implements PaymentPluginManager  
 
     @Override
     public void onReturn(TradeType tradeType) {
-        System.out.println("同步支付回调");
+        System.out.println("Synchronous payment callback");
     }
 
     @Override

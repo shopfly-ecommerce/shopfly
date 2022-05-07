@@ -26,64 +26,64 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * 蛇形转驼峰参数转换器
- * 以及防xss的参数过滤
- * 用于基本类型
+ * Snake-to-hump parameter converter
+ * As well as thexssParameter filtering of
+ * For basic types
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
- * 2017年5月19日上午12:45:33
+ * 2017years5month19The morning of12:45:33
  */
 public class SnakeToCamelArgumentResolver implements HandlerMethodArgumentResolver {
 
 	/**
-	 * 默认分页大小
+	 * Default page size
 	 */
 	private static final int DEFAULT_SIZE = 10;
 
 	/**
-	 * 默认开始页码
+	 * Default start page number
 	 */
 	private static final int DEFAULT_NO = 1;
 	
 	/**
-	 * 定义只有基本类型参数才转换
-	 * @param parameter spring机制传过来的当前要处理的参数
-	 * @return 只有基本类型参数才返回true,否则返回false
+	 * Defines that only primitive type parameters are converted
+	 * @param parameter springThe current parameter to process passed by the mechanism
+	 * @return Only basic type parameters are returnedtrue,Otherwise returnsfalse
 	 */
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		//只处理基本类型的参数
+		// Only basic types of parameters are handled
 		return  BeanUtils.isSimpleProperty(parameter.getParameterType());
 	}
 
 
 	/**
-	 * 将蛇形参数值转换给驼峰参数值
-	 * @param parameter 要处理的参数
+	 * Converts the snake parameter value to the hump parameter value
+	 * @param parameter Parameters to process
 	 * @param mavContainer spring mavContainer
 	 * @param webRequest  spring  webRequest
 	 * @param binderFactory spring binderFactory
-	 * @return 转换后的参数值
+	 * @return Parameter value after conversion
 	 * @throws Exception
 	 */
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
-		//将蛇形参数名转为驼峰参数名，再读值返回
+		// Convert the snake parameter name to the hump parameter name and return the value
 		String paramName  = parameter.getParameterName();
 		String camelName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, paramName);
 		SimpleTypeConverter converter = new SimpleTypeConverter();
 
 		Object param = converter.convertIfNecessary(webRequest.getParameter(camelName),parameter.getParameterType());
 
-		//如果是字串型参数，则进行xss过滤
+		// If it is a string parameter, XSS filtering is performed
 		if( param instanceof String){
 			param = XssUtil.clean((String)param);
 		}
 
-		//分页相关，增加默认分页
+		// Paging related, adding default paging
 		if(param == null ){
 			if ("pageNo".equals(paramName)) {
 

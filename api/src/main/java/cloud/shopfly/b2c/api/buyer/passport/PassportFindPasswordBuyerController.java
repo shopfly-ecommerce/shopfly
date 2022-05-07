@@ -44,16 +44,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 会员找回密码api
+ * Member Password Recoveryapi
  *
  * @author zh
  * @version v7.0
- * @date 18/5/16 下午4:07
+ * @date 18/5/16 In the afternoon4:07
  * @since v7.0
  */
 @RestController
 @RequestMapping("/passport")
-@Api(description = "会员找回密码api")
+@Api(description = "Member Password Recoveryapi")
 @Validated
 public class PassportFindPasswordBuyerController {
 
@@ -73,34 +73,34 @@ public class PassportFindPasswordBuyerController {
     private ShopflyConfig shopflyConfig;
 
 
-    @ApiOperation(value = "获取账户信息")
+    @ApiOperation(value = "Get account information")
     @GetMapping("find-pwd")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uuid", value = "uuid客户端的唯一标识",
+            @ApiImplicitParam(name = "uuid", value = "uuidUnique identifier of the client",
                     required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "captcha", value = "图片验证码",
+            @ApiImplicitParam(name = "captcha", value = "Image verification code",
                     required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "account", value = "账户名称",
+            @ApiImplicitParam(name = "account", value = "The name of the account",
                     required = true, dataType = "String", paramType = "query"),
     })
-    public String getMemberInfo(@NotEmpty(message = "uuid不能为空") String uuid,
-                                @NotEmpty(message = "图片验证码不能为空") String captcha,
-                                @NotEmpty(message = "账户名称不能为空") String account) {
+    public String getMemberInfo(@NotEmpty(message = "uuidCant be empty") String uuid,
+                                @NotEmpty(message = "The image verification code cannot be empty") String captcha,
+                                @NotEmpty(message = "The account name cannot be empty") String account) {
         boolean isPass = captchaClient.valid(uuid, captcha, SceneType.FIND_PASSWORD.name());
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "图片验证码不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The image verification code is incorrect");
         }
-        //对会员状态进行校验
+        // Verify member status
         Member member = memberManager.getMemberByAccount(account);
         if (!member.getDisabled().equals(0)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "当前账号已经禁用，请联系管理员");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The current account is disabled. Contact the administrator");
         }
-        //对获得的会员信息进行处理
+        // Process the obtained member information
         String mobile = member.getMobile();
         mobile = mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
-        //对用户名的处理
+        // Processing of user names
         String name = member.getUname();
-        //将数据组织好json格式返回
+        // Organize the data and return it in JSON format
         uuid = StringUtil.getUUId();
         Map map = new HashMap(16);
         map.put("mobile", mobile);
@@ -112,37 +112,37 @@ public class PassportFindPasswordBuyerController {
     }
 
     @PostMapping(value = "/find-pwd/send")
-    @ApiOperation(value = "发送验证码")
+    @ApiOperation(value = "Send verification code")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uuid", value = "uuid客户端的唯一标识",
+            @ApiImplicitParam(name = "uuid", value = "uuidUnique identifier of the client",
                     required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "captcha", value = "图片验证码",
+            @ApiImplicitParam(name = "captcha", value = "Image verification code",
                     required = true, dataType = "String", paramType = "query")
     })
-    public String sendSmsCode(@NotEmpty(message = "uuid不能为空") String uuid,
-                              @NotEmpty(message = "图片验证码不能为空") String captcha) {
+    public String sendSmsCode(@NotEmpty(message = "uuidCant be empty") String uuid,
+                              @NotEmpty(message = "The image verification code cannot be empty") String captcha) {
         boolean isPass = captchaClient.valid(uuid, captcha, SceneType.FIND_PASSWORD.name());
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "图片验证码不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The image verification code is incorrect");
         }
         Member member = (Member) cache.get(uuid);
         if (member != null) {
             passportManager.sendFindPasswordCode(member.getMobile());
             return shopflyConfig.getSmscodeTimout() / 60 + "";
         }
-        throw new ServiceException(MemberErrorCode.E119.code(), "请先对当前用户进行身份校验");
+        throw new ServiceException(MemberErrorCode.E119.code(), "Verify the identity of the current user");
     }
 
 
     @PutMapping(value = "/find-pwd/update-password")
-    @ApiOperation(value = "修改密码")
+    @ApiOperation(value = "Change the password")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uuid", value = "uuid客户端的唯一标识",
+            @ApiImplicitParam(name = "uuid", value = "uuidUnique identifier of the client",
                     required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "password", value = "密码",
+            @ApiImplicitParam(name = "password", value = "Password",
                     required = true, dataType = "String", paramType = "query")
     })
-    public String updatePassword(@NotEmpty(message = "uuid不能为空") String uuid, String password) {
+    public String updatePassword(@NotEmpty(message = "uuidCant be empty") String uuid, String password) {
         Object o = cache.get(CachePrefix.SMS_VERIFY.getPrefix() + uuid);
         if (o != null) {
             Member member = (Member) cache.get(uuid);
@@ -153,33 +153,33 @@ public class PassportFindPasswordBuyerController {
             cache.remove(CachePrefix.SMS_VERIFY.getPrefix() + uuid);
             cache.remove(uuid);
         }
-        throw new ServiceException(MemberErrorCode.E119.code(), "请先对当前用户进行身份校验");
+        throw new ServiceException(MemberErrorCode.E119.code(), "Verify the identity of the current user");
     }
 
 
     @GetMapping(value = "/find-pwd/valid")
-    @ApiOperation(value = "验证找回密码验证码")
+    @ApiOperation(value = "Authentication Retrieve password Verification code")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uuid", value = "uuid客户端的唯一标识",
+            @ApiImplicitParam(name = "uuid", value = "uuidUnique identifier of the client",
                     required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "sms_code", value = "验证码",
+            @ApiImplicitParam(name = "sms_code", value = "captcha",
                     required = true, dataType = "String", paramType = "query")
     })
-    public String updateCodeCheck(@Valid @ApiIgnore @NotEmpty(message = "验证码不能为空") String smsCode,
-                                  @NotEmpty(message = "uuid不能为空") String uuid) {
+    public String updateCodeCheck(@Valid @ApiIgnore @NotEmpty(message = "The verification code cannot be empty") String smsCode,
+                                  @NotEmpty(message = "uuidCant be empty") String uuid) {
         Member member = (Member) cache.get(uuid);
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E119.code(), "请先对当前用户进行身份校验");
+            throw new ServiceException(MemberErrorCode.E119.code(), "Verify the identity of the current user");
         }
         if (StringUtil.isEmpty(member.getMobile())) {
             cache.remove(uuid);
-            throw new ServiceException(MemberErrorCode.E119.code(), "请先对账户进行手机号码绑定在进行此操作");
+            throw new ServiceException(MemberErrorCode.E119.code(), "Before performing this operation, bind the mobile phone number to the account");
         }
         boolean isPass = smsClient.valid(SceneType.VALIDATE_MOBILE.name(), member.getMobile(), smsCode);
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "短信验证码不正确");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The SMS verification code is incorrect");
         } else {
-            // 通过验证的请求，会存放一分钟。
+            // Authenticated requests are held for one minute.
             cache.put(CachePrefix.SMS_VERIFY.getPrefix() + uuid, " ", 1 * 60);
         }
         return null;

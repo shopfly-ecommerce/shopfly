@@ -16,17 +16,17 @@
 package cloud.shopfly.b2c.core.distribution.model.enums;
 
 /**
- * 模版切换状态枚举
+ * Enumeration of template switching states
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/25 上午11:39
+ * 2018/5/25 In the morning11:39
  */
 public enum UpgradeTypeEnum {
-    //提现状态
-    MANUAL("手动"), AUTOMATIC("自动");
+    // Withdrawal state
+    MANUAL("manual"), AUTOMATIC("automatic");
 
     private String name;
 

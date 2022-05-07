@@ -46,12 +46,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 微信签名工具
+ * Wechat signature tool
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-21 上午11:04
+ * 2019-02-21 In the morning11:04
  */
 @Component
 public class WechatSignaturer {
@@ -62,12 +62,12 @@ public class WechatSignaturer {
     @Autowired
     protected Debugger debugger;
     /**
-     * 微信访问 平台签名key前缀
+     * Wechat access platform signaturekeyThe prefix
      */
     private static final String PLATEFORM_SIGNATURE = "singnature_plateform_";
 
     /**
-     * 微信访问 buyer签名key前缀
+     * WeChat accessbuyerThe signaturekeyThe prefix
      */
     private static final String BUYER_SIGNATURE = "singnature_buyer_";
 
@@ -80,14 +80,14 @@ public class WechatSignaturer {
     private Cache cache;
 
     /**
-     * 获取 微信签名 前端调用分享等功能权限
+     * Obtain the rights of wechat signature front-end call sharing and other functions
      *
      * @param type @see  cloud.shopfly.b2c.service.passport.signaturer.WechatTypeEnmu
      *             WAP("WAP"),
-     *             REACT("原生"),
+     *             REACT("native"),
      *             NATIVE("NAAPP"),
-     *             MINI("小程序");
-     * @param url  需要签名等url
+     *             MINI("Small program");
+     * @param url  You need signatures and so onurl
      * @return
      */
     public Map signature(String type, String url) {
@@ -102,11 +102,11 @@ public class WechatSignaturer {
                 Map<String, String> config = getConnectConfig(type);
 
                 SignatureParams signatureParams = new SignatureParams();
-                //获取access
+                // To obtain access
                 signatureParams.setWechatAccessToken(this.getCgiAccessToken(config.get("app_id"), config.get("app_key")));
                 signatureParams.setWechatJsapiTicket(getJsapiTicket(signatureParams.getWechatAccessToken().getAccessToken()));
                 signatureParams.setAppId(config.get("app_id"));
-                //这个方法调用，其实前端主要使用到的ticket 所以这里暂时用ticket的有效时间，并且做10秒缓冲。
+                // This method call, in fact, the front end is mainly using ticket so were going to temporarily use the valid time of ticket, and were going to buffer it for 10 seconds.
                 cache.put(PLATEFORM_SIGNATURE + type, signatureParams, signatureParams.getWechatJsapiTicket().getExpires() - 100);
                 object = signatureParams;
             }
@@ -119,32 +119,32 @@ public class WechatSignaturer {
             stringBuffer.append("url=");
             stringBuffer.append(url.replaceAll("&amp;", "&"));
             if(logger.isDebugEnabled()){
-                logger.debug("签名参数：" + stringBuffer.toString());
+                logger.debug("Signature parameters：" + stringBuffer.toString());
             }
             map.put("timestamp", timestamp);
             map.put("nonceStr", nonceStr);
             map.put("signature", SHA1.encode(stringBuffer.toString()));
             map.put("appid", ((SignatureParams) object).getAppId());
             if(logger.isDebugEnabled()){
-                logger.debug("map参数：" + map);
+                logger.debug("mapparameter：" + map);
             }
         } catch (WeixinSignatrueExceprion e) {
             if(logger.isDebugEnabled()){
-                logger.debug("未开启签名配置2");
+                logger.debug("Signature configuration is not enabled2");
             }
-            this.logger.error("微信签名异常：", e);
+            this.logger.error("The wechat signature is abnormal：", e);
             throw e;
         } catch (Exception e) {
-            this.logger.error("微信签名异常：", e);
-            throw new WeixinSignatrueExceprion("微信签名异常错误");
+            this.logger.error("The wechat signature is abnormal：", e);
+            throw new WeixinSignatrueExceprion("The wechat signature is abnormal");
         }
         return map;
     }
 
     /**
-     * 获取微信配置参数
+     * Get wechat configuration parameters
      *
-     * @param type 枚举之详情见  WechatTypeEnmu
+     * @param type See enumeration for detailsWechatTypeEnmu
      * @return
      */
     public Map<String, String> getConnectConfig(String type) {
@@ -171,9 +171,9 @@ public class WechatSignaturer {
             appKey = map.get("wechat_rn_app_key");
         } else {
             if(logger.isDebugEnabled()){
-                logger.debug("未开启签名配置2");
+                logger.debug("Signature configuration is not enabled2");
             }
-            throw new WeixinSignatrueExceprion("未开启签名配置");
+            throw new WeixinSignatrueExceprion("Signature configuration is not enabled");
         }
         Map result = new HashMap();
         result.put("app_id", appId);
@@ -184,7 +184,7 @@ public class WechatSignaturer {
 
 
     /**
-     * 获取买家accesstoken
+     * Access to the buyeraccesstoken
      *
      * @param client
      * @return
@@ -192,21 +192,21 @@ public class WechatSignaturer {
     public Auth2Token getCallbackAccessToken(String client) {
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
-        //获取code
+        // Access code
         String code = request.getParameter("code");
-        //回传uuid state
+        // Back uuid state
         String uuid = request.getParameter("state");
 
-        //pc使用的是开放平台，微信端使用的是公众平台，参数是不一致
+        // The PC uses an open platform, while the wechat terminal uses a public platform, and the parameters are inconsistent
         String ua = request.getHeader("user-agent").toLowerCase();
 
         String appId = null;
         String key = null;
         Map map;
         WechatTypeEnmu wechatEnum = WechatTypeEnmu.NATIVE;
-        //如果是微信浏览器则获取 微信网页端参数
+        // If it is wechat browser, get the parameters of wechat web page
         if (ua.indexOf("micromessenger") > 0) {
-            debugger.log("是微信浏览器");
+            debugger.log("Its wechat browser");
             wechatEnum = WechatTypeEnmu.WAP;
         } else if (client != null) {
             wechatEnum = WechatTypeEnmu.valueOf(client.toUpperCase());
@@ -216,21 +216,21 @@ public class WechatSignaturer {
 
         appId = StringUtil.toString(map.get("app_id"));
         key = StringUtil.toString(map.get("app_key"));
-        //文档见
-        //通过code获取access_token及openid
+        // See the document
+        // Obtain the access_token and OpenID by code
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
                 "appid=" + appId +
                 "&secret=" + key +
                 "&code=" + code +
                 "&grant_type=authorization_code";
 
-        debugger.log("生成获取access_token url: ");
+        debugger.log("For gettingaccess_token url: ");
         debugger.log(url);
-        debugger.log("向微信发起请求");
+        debugger.log("Send a request to wechat");
         String content = HttpUtils.doGet(url, "UTF-8", 100, 1000);
-        debugger.log("微信返回内容为：");
+        debugger.log("Wechat returns the content as：");
         debugger.log(content);
-        //获取openid
+        // To obtain the openid
         JSONObject json = JSONObject.fromObject(content);
         String accessToken = json.getString("access_token");
         String unionId = json.getString("unionid");
@@ -238,7 +238,7 @@ public class WechatSignaturer {
         Integer expires = json.getInt("expires_in");
 
 
-        //将信息封装到对象当中
+        // Encapsulate information into objects
         Auth2Token auth2Token = new Auth2Token();
         auth2Token.setUnionid(unionId);
         if(!WechatTypeEnmu.PC.equals(wechatEnum)){
@@ -250,11 +250,11 @@ public class WechatSignaturer {
         auth2Token.setType(ConnectTypeEnum.WECHAT.value());
         auth2Token.setExpires(expires + DateUtil.getDateline());
         auth2Token.setAppid(appId);
-        // 存储token 这里说明一下存储策略：
-        // 因为刷新token有效时间是1个月，但是买家不可能一个月不退出微信浏览器，所以这里为了缓存的占用问题，将token存储时间设置为24小时
+        // Storage token The storage policy is as follows:
+        // The valid time of refreshing the token is one month, but the buyer cannot quit the wechat browser for a month. Therefore, in order to occupy the cache, the token storage time is set to 24 hours
         this.cache.put(WechatSignaturer.BUYER_SIGNATURE + uuid, auth2Token, expires * 12);
 
-        debugger.log("生成accessToken:");
+        debugger.log("generateaccessToken:");
         debugger.log(accessToken);
 
         return auth2Token;
@@ -262,7 +262,7 @@ public class WechatSignaturer {
 
 
     /**
-     * 赋值微信用户信息
+     * Assign wechat user information
      *
      * @param accessToken token
      * @param openId      opneid
@@ -272,7 +272,7 @@ public class WechatSignaturer {
         String url = "https://api.weixin.qq.com/sns/userinfo?" +
                 "access_token=" + accessToken +
                 "&openid=" + openId;
-        //通过openid获取userinfo
+        // Obtain userInfo from openID
         String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
         JSONObject jsonObject = JSONObject.fromObject(content);
         return jsonObject;
@@ -280,7 +280,7 @@ public class WechatSignaturer {
 
 
     /**
-     * 生成 CGI 接口 access token ，服务器与微信的接口token
+     * generateCGI interfaceaccess token ，服务器与微信的interfacetoken
      *
      * @param wechatTypeEnmu
      * @return
@@ -295,7 +295,7 @@ public class WechatSignaturer {
     }
 
     /**
-     * 生成 CGI 接口 access token ，服务器与微信的接口token
+     * generateCGI interfaceaccess token ，服务器与微信的interfacetoken
      *
      * @param appid
      * @param secret
@@ -304,15 +304,15 @@ public class WechatSignaturer {
     public WechatAccessToken getCgiAccessToken(String appid, String secret) {
 
         if(StringUtil.isEmpty(appid)|| StringUtil.isEmpty(secret)){
-            throw new WeixinSignatrueExceprion("微信网页端参数没有配置，请前往信任登录正确配置");
+            throw new WeixinSignatrueExceprion("Wechat web page parameters are not configured, please go to the trusted login to configure correctly");
         }
         String content = HttpUtils.doGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + secret + "&code=CODE&grant_type=authorization_code");
         if(logger.isDebugEnabled()){
-            logger.debug("获取access_token响应:" + content);
+            logger.debug("To obtainaccess_tokenThe response:" + content);
         }
         JSONObject object = JSONObject.fromObject(content);
         if(object.get("access_token")==null){
-            throw new WeixinSignatrueExceprion("未获取到正确的认证信息，请联系管理员查看日志解决");
+            throw new WeixinSignatrueExceprion("If no correct authentication information is obtained, contact the administrator to view logs");
         }
         String accessToken = object.get("access_token").toString();
         String expires = object.get("expires_in").toString();
@@ -324,7 +324,7 @@ public class WechatSignaturer {
     }
 
     /**
-     * 生成jsapi ticket 用于前端分享接口，调用微信api的微信分享之类功能所需
+     * generatejsapi ticket Used for front-end sharing interface, call wechatapiFor functions like wechat sharing
      *
      * @param accessToken
      * @return
@@ -334,7 +334,7 @@ public class WechatSignaturer {
         try {
             String content = HttpUtils.doGet("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken + "&type=jsapi");
             if(logger.isDebugEnabled()){
-                logger.debug("获取ticket响应:" + content);
+                logger.debug("To obtainticketThe response:" + content);
             }
             JSONObject object = JSONObject.fromObject(content);
             String ticket = object.get("ticket").toString();
@@ -345,13 +345,13 @@ public class WechatSignaturer {
             return wechatJsapiTicket;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new WeixinSignatrueExceprion("微信签名：jsapi ticket获取失败");
+            throw new WeixinSignatrueExceprion("WeChat signature：jsapi ticketFor failure");
         }
     }
 
 
     /**
-     * 获取缓存中的 buyer token
+     * Get the cachebuyer token
      *
      * @param uuid
      * @return
@@ -360,26 +360,26 @@ public class WechatSignaturer {
         Object auth2Token = this.cache.get(BUYER_SIGNATURE + uuid);
         if (auth2Token != null) {
             Auth2Token token = (Auth2Token) auth2Token;
-            //如果token在有效期，直接返回
+            // If the token is valid, return it
             if (token.getExpires() > DateUtil.getDateline()) {
                 return token;
             } else {
                 String url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=" + token.getAppid() +
                         "&grant_type=refresh_token&refresh_token=" + token.getRefreshToken();
-                debugger.log("刷新获取access_token url: ");
+                debugger.log("The refresh to getaccess_token url: ");
                 debugger.log(url);
-                debugger.log("向微信发起请求");
+                debugger.log("Send a request to wechat");
                 String content = HttpUtils.doGet(url, "UTF-8", 100, 1000);
-                debugger.log("微信返回内容为：");
+                debugger.log("Wechat returns the content as：");
                 debugger.log(content);
-                //获取openid
+                // To obtain the openid
                 JSONObject json = JSONObject.fromObject(content);
                 String openid = json.getString("openid");
                 String accessToken = json.getString("access_token");
                 String unionId = json.getString("unionid");
                 String refreshToken = json.getString("refresh_token");
                 Integer expires = json.getInt("expires_in");
-                //将信息封装到对象当中
+                // Encapsulate information into objects
                 token.setUnionid(unionId);
                 token.setOpneId(openid);
                 token.setAccessToken(accessToken);
@@ -387,10 +387,10 @@ public class WechatSignaturer {
                 token.setType(ConnectTypeEnum.WECHAT.value());
                 token.setExpires(expires + DateUtil.getDateline());
 
-                // 存储token 这里说明一下存储策略：
-                // 因为刷新token有效时间是1个月，但是买家不可能一个月不退出微信浏览器，所以这里为了缓存的占用问题，将token存储时间设置为24小时
+                // Storage token The storage policy is as follows:
+                // The valid time of refreshing the token is one month, but the buyer cannot quit the wechat browser for a month. Therefore, in order to occupy the cache, the token storage time is set to 24 hours
                 this.cache.put(WechatSignaturer.BUYER_SIGNATURE + uuid, token, expires * 12);
-                debugger.log("生成accessToken:");
+                debugger.log("generateaccessToken:");
                 debugger.log(accessToken);
                 return token;
             }
@@ -399,22 +399,22 @@ public class WechatSignaturer {
     }
 
     /**
-     * 尝试获取缓存中的token，组成dto为调用者使用
+     * Try to get the cachetokenOf,dtoUsed by the caller
      *
-     * @param uuid 买家uuid
+     * @param uuid buyersuuid
      * @return
      */
     public WechatDTO getAccesstoken(String uuid) {
 
         Auth2Token auth2Token = this.getSnsAccessToken(uuid);
-        //如果为空，则重新获取，返回跳转的地址
+        // If it is empty, it gets it again and returns the address of the jump
         if (auth2Token == null) {
             WechatDTO wechatDTO = new WechatDTO();
             wechatDTO.setNeedRedirect(true);
             wechatDTO.setRedirectUrl(this.getAuthorizeUrl(null));
             return wechatDTO;
         } else {
-            //返回对应的token，包含openid 等参数
+            // Return the corresponding token, including openID and other parameters
             WechatDTO wechatDTO = new WechatDTO();
             wechatDTO.setAuth2Token(auth2Token);
             wechatDTO.setNeedRedirect(false);
@@ -426,7 +426,7 @@ public class WechatSignaturer {
 
 
     /**
-     * 获取买家 openid 这里是通过数据库中查询的结果
+     * Access to the buyeropenid Here is the result of a query through the database
      *
      * @param memberId
      * @return openid
@@ -440,29 +440,29 @@ public class WechatSignaturer {
     }
 
     /**
-     * 获取微信授权url
+     * Obtain wechat authorizationurl
      *
-     * @param callbackUrl 非 微信浏览器跳转时，需要自定义回调地址。
-     *                    注：如果调用方在非微信浏览器环境中进行调用，并且传递回调地址，以调用房回调地址为准
+     * @param callbackUrl When non-wechat browser hops, you need to customize the callback address.
+     *                    note：If the caller makes the call in a non-wechat browser environment and passes the callback address, the callback address will prevail
      * @return
      */
     public String getAuthorizeUrl(String callbackUrl) {
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
-        //获取买家 uuid
+        // Get the buyerS UUID
         String uuid = request.getParameter("uuid");
         String ua = request.getHeader("user-agent").toLowerCase();
 
-        //回调地址 如果为空，则方法内部制定回调地址，否则 根据调用方法地址进行回调
+        // If the callback address is empty, the callback address is specified internally; otherwise, the callback is based on the calling method address
         String callBack = StringUtil.isEmpty(callbackUrl) ?
                 domainHelper.getCallback() + "/passport/connect/wechat/auth/back" : callbackUrl;
 
 
-        //微信浏览器
+        // Wechat browser
         if (ua.indexOf("micromessenger") > -1) {
             /**
-             文档见 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842 这里主要获取买家授权平台code
-             应当使用https链接来确保授权code的安全性
-             state 这个参数，是微信回调会回传的参数，这里选择携带 买家uuid
+             See the documenthttps://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842 Here is mainly to obtain buyer authorization platformcode
+             Should be usedhttpsLink to ensure authorizationcodeThe safety of
+             state This parameter, is the wechat callback will be returned to the parameter, here select carry buyeruuid
              */
             Map map = this.getConnectConfig(WechatTypeEnmu.WAP.name());
             String url = "https://open.weixin.qq.com/connect/oauth2/authorize" +
@@ -473,11 +473,11 @@ public class WechatSignaturer {
                     "&state=" + uuid
                     + "#wechat_redirect";
 
-            debugger.log("确定是微信浏览器,生成跳转地址为：");
+            debugger.log("Make sure its wechat browser,The forward address is generated：");
             debugger.log(url);
             return url;
 
-        } //非微信浏览器
+        } //Non-wechat browser
         else {
             Map map = this.getConnectConfig(WechatTypeEnmu.PC.name());
             try {
@@ -488,12 +488,12 @@ public class WechatSignaturer {
                         "&scope=snsapi_login" +
                         "&state=" + uuid +
                         "#wechat_redirect";
-                debugger.log("非微信浏览器,生成跳转地址为：");
+                debugger.log("Non-wechat browser,The forward address is generated：");
                 debugger.log(url);
                 return url;
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
-                debugger.log("非微信浏览器,生成跳转地址异常");
+                debugger.log("Non-wechat browser,The forward address generation is abnormal. Procedure");
             }
             return null;
         }

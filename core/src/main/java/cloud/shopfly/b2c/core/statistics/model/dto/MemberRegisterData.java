@@ -21,12 +21,12 @@ import cloud.shopfly.b2c.framework.database.annotation.Table;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 会员注册数据
+ * Member registration Data
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/3/25 下午10:47
+ * 2018/3/25 In the afternoon10:47
  */
 
 @Table(name="es_sss_member_register_data")
@@ -35,15 +35,15 @@ public class MemberRegisterData {
 
     private Integer id;
 
-    @ApiModelProperty(value = "会员id")
+    @ApiModelProperty(value = "membersid")
     @Column(name = "member_id")
     private Integer memberId;
 
-    @ApiModelProperty(value = "会员名称")
+    @ApiModelProperty(value = "Member name")
     @Column(name = "member_name")
     private String memberName;
 
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Creation date")
     @Column(name = "create_time")
     private Long createTime;
 

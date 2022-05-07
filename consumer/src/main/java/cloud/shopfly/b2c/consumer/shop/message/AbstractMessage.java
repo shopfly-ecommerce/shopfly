@@ -27,11 +27,11 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 消息设置获取公有方法
+ * Message set to get public methods
  *
  * @author zh
  * @version v7.0
- * @date 19/7/31 下午2:13
+ * @date 19/7/31 In the afternoon2:13
  * @since v7.0
  */
 
@@ -42,32 +42,32 @@ public class AbstractMessage {
     private SettingClient settingClient;
 
     /**
-     * 获取站点设置
+     * Get site Settings
      *
      * @return
      */
     protected SiteSetting getSiteSetting() {
         String siteSettingJson = settingClient.get(SettingGroup.SITE);
-        //获取系统配置
+        // Obtaining system Configuration
         return JsonUtil.jsonToObject(siteSettingJson, SiteSetting.class);
     }
 
     /**
-     * 获取平台联系方式
+     * Obtain platform contact information
      *
      * @return
      */
     protected InformationSetting getInfoSetting() {
-        //系统联系方式
+        // System Contact
         String infoSettingJson = settingClient.get(SettingGroup.INFO);
         return JsonUtil.jsonToObject(infoSettingJson, InformationSetting.class);
     }
 
     /**
-     * 替换中的内容
+     * Whats in the replacement
      *
      * @param content
-     * @param map     替换的文本内容
+     * @param map     Replace the text content
      * @return
      */
     protected String replaceContent(String content, Map map) {

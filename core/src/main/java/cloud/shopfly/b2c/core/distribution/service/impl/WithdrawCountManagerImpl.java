@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-15 上午8:43
+ * 2018-08-15 In the morning8:43
  */
 @Service
 public class WithdrawCountManagerImpl implements WithdrawCountManager {
@@ -41,7 +41,7 @@ public class WithdrawCountManagerImpl implements WithdrawCountManager {
     private DaoSupport daoSupport;
 
     /**
-     * 整理解冻金额
+     * Amount of defrosting
      */
     @Override
     public void withdrawCount() {
@@ -54,7 +54,7 @@ public class WithdrawCountManagerImpl implements WithdrawCountManager {
             this.daoSupport.execute(sql, currentData, currentData, currentData, currentData);
             this.daoSupport.execute("update es_distribution_order set is_withdraw = 1 where settle_cycle <?", currentData);
         } catch (Exception e) {
-            logger.error("每日将解锁金额自动添加到可提现金额异常：", e);
+            logger.error("The unlock amount will be automatically added to the withdrawal amount anomaly every day：", e);
         }
     }
 }

@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.trade.order.model.enums.OrderOutStatusEnum;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 订单出库状态业务层
+ * Order outbound status business layer
  *
  * @author xlp
  * @version v2.0
@@ -31,45 +31,45 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface OrderOutStatusManager {
 
     /**
-     * 查询订单出库状态列表
+     * Query the order outbound status list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加订单出库状态
+     * Add order outgoing status
      *
-     * @param orderOutStatus 订单出库状态
-     * @return OrderOutStatus 订单出库状态
+     * @param orderOutStatus Order delivery status
+     * @return OrderOutStatus Order delivery status
      */
     OrderOutStatus add(OrderOutStatus orderOutStatus);
 
     /**
-     * 修改订单出库状态
+     * Modify the order outgoing status
      *
-     * @param orderSn    订单编号
-     * @param typeEnum   出库类型
-     * @param statusEnum 出库状态
-     * @return OrderOutStatus 订单出库状态
+     * @param orderSn    Order no.
+     * @param typeEnum   Outbound type
+     * @param statusEnum The delivery status
+     * @return OrderOutStatus Order delivery status
      */
     void edit(String orderSn, OrderOutTypeEnum typeEnum, OrderOutStatusEnum statusEnum);
 
     /**
-     * 删除订单出库状态
+     * Delete order outgoing status
      *
-     * @param id 订单出库状态主键
+     * @param id Order outbound status primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取订单出库状态
+     * Get order outgoing status
      *
-     * @param orderSn  订单编号
-     * @param typeEnum 出库类型
-     * @return OrderOutStatus  订单出库状态
+     * @param orderSn  Order no.
+     * @param typeEnum Outbound type
+     * @return OrderOutStatus  Order delivery status
      */
     OrderOutStatus getModel(String orderSn, OrderOutTypeEnum typeEnum);
 

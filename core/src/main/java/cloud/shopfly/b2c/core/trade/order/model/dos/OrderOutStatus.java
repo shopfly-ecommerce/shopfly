@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 订单出库状态实体
+ * Order outgoing status entity
  *
  * @author xlp
  * @version v2.0
@@ -43,31 +43,31 @@ public class OrderOutStatus implements Serializable {
     private static final long serialVersionUID = 582319689134779L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "out_id")
     @ApiModelProperty(hidden = true)
     private Integer outId;
 
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
 
     /**
-     * 出库类型
+     * Outbound type
      */
     @Column(name = "out_type")
-    @ApiModelProperty(name = "out_type", value = "出库类型", required = false)
+    @ApiModelProperty(name = "out_type", value = "Outbound type", required = false)
     private String outType;
 
     /**
-     * 出库状态
+     * The delivery status
      */
     @Column(name = "out_status")
-    @ApiModelProperty(name = "out_status", value = "出库状态", required = false)
+    @ApiModelProperty(name = "out_status", value = "The delivery status", required = false)
     private String outStatus;
 
     @PrimaryKeyField

@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.passport.service;
 import java.util.Map;
 
 /**
- * 支付宝登陆相关接口
+ * Pay treasure to land relevant interface
  * @author cs
  * @version v1.0
  * @since v7.2.2
@@ -28,7 +28,7 @@ public interface LoginAlipayManager {
 
 
     /**
-     * 获取wap登陆跳转地址
+     * To obtainwapLogin redirect address
      * @param redirectUri
      * @return
      */
@@ -36,7 +36,7 @@ public interface LoginAlipayManager {
 
 
     /**
-     * wap登陆
+     * waplanding
      * @param code
      * @param uuid
      * @return

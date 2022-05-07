@@ -30,7 +30,7 @@ public class RedisNodeBuilder {
 
     public static List<String> build(String nodes){
         if(StringUtil.isEmpty(nodes)){
-            throw new RuntimeException("redis 配置错误：集群节点为空");
+            throw new RuntimeException("redis Configuration error：The cluster node is empty");
         }
 
         List<String> nodeList  = new ArrayList<>();

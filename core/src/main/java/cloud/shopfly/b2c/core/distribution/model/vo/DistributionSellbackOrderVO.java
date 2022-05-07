@@ -21,29 +21,29 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 分销订单
+ * Distribution of orders
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-23 下午2:33
+ * 2018-05-23 In the afternoon2:33
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DistributionSellbackOrderVO {
 
-    @ApiModelProperty(value = "订单编号", name = "sn")
+    @ApiModelProperty(value = "Order no.", name = "sn")
     private String sn;
 
-    @ApiModelProperty(value = "购买会员名称", name = "member_name")
+    @ApiModelProperty(value = "Purchase member name", name = "member_name")
     private String memberName;
 
-    @ApiModelProperty("退还返利金额")
+    @ApiModelProperty("Refund the rebate amount")
     private Double price;
 
-    @ApiModelProperty(value = "退款金额", name = "orderPrice")
+    @ApiModelProperty(value = "The refund amount", name = "orderPrice")
     private Double orderPrice;
 
-    @ApiModelProperty("下单时间")
+    @ApiModelProperty("Create time")
     private Long createTime;
 
     public DistributionSellbackOrderVO(DistributionOrderDO distributionOrderDO, Integer memberId) {

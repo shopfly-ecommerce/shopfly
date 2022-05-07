@@ -24,7 +24,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * @author fk
  * @version v2.0
- * @Description: GradeType 验证
+ * @Description: GradeType validation
  * @date 2018/4/3 11:44
  * @since v7.0.0
  */

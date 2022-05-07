@@ -24,7 +24,7 @@ import java.lang.annotation.*;
 /**
  * @author fk
  * @version v2.0
- * @Description: 操作类型验证
+ * @Description: Operation type validation
  * @date 2018/4/311:42
  * @since v7.0.0
  */
@@ -34,7 +34,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface OperationType {
 
-    String message() default "不正确的操作类型";
+    String message() default "Incorrect operation type";
 
     Class<?>[] groups() default {};
 

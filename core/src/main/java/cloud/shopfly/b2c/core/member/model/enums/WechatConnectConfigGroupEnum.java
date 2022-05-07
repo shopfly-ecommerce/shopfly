@@ -18,31 +18,31 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 微信信任登录参数组枚举类
- * @ClassName 微信ConnectConfigGroupEnum
- * @since v7.0 下午8:05 2018/6/28
+ * @Description Wechat trusted login parameter group enumeration class
+ * @ClassName WeChatConnectConfigGroupEnum
+ * @since v7.0 In the afternoon8:05 2018/6/28
  */
 public enum WechatConnectConfigGroupEnum {
     /**
-     * PC网页端参数
+     * PCWebpage parameters
      */
-    pc("PC网页端参数"),
+    pc("PCWebpage parameters"),
     /**
-     * 微信网页端参数
+     * Parameters of wechat webpage
      */
-    wechat("微信网页端参数"),
+    wechat("Parameters of wechat webpage"),
     /**
-     * 原生-APP参数
+     * native-APPparameter
      */
-    app("原生-APP参数"),
+    app("native-APPparameter"),
     /**
-     * RN-APP参数"
+     * RN-APPparameter"
      */
-    rn("RN-APP参数"),
+    rn("RN-APPparameter"),
     /**
-     * 小程序参数
+     * Applets parameter
      */
-    miniprogram("小程序参数");
+    miniprogram("Applets parameter");
 
 
     private String text;

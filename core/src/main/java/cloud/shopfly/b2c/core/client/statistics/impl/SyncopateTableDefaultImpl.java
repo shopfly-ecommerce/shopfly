@@ -22,12 +22,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 统计数据填充
+ * Statistical data filling
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-06-22 上午8:41
+ * 2018-06-22 In the morning8:41
  */
 @Service
 @ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
@@ -36,7 +36,7 @@ public class SyncopateTableDefaultImpl implements SyncopateTableClient {
     private SyncopateTableManager syncopateTableManager;
 
     /**
-     * 每日填充数据
+     * Daily filling data
      */
     @Override
     public void everyDay() {

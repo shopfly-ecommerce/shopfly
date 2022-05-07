@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 电子面单业务类
+ * Electronic surface single business class
  *
  * @author zh
  * @version v7.0.0
@@ -80,16 +80,16 @@ public class WaybillManagerImpl implements WaybillManager {
     public WayBillDO add(WayBillVO wayBill) {
         WayBillDO wayBillDO = new WayBillDO(wayBill);
         if (wayBill.getId() == null || wayBill.getId().equals(0)) {
-            //查询此方案是否已经存在数据库中
+            // Query whether the scheme already exists in the database
             WayBillDO wb = this.getWayBillByBean(wayBillDO.getBean());
             if (wb != null) {
-                throw new ServiceException(SystemErrorCode.E910.code(), "该电子面单方案已经存在");
+                throw new ServiceException(SystemErrorCode.E910.code(), "The electron plane single scheme already exists");
             }
             this.systemDaoSupport.insert("es_waybill", wayBillDO);
             Integer waybillId = this.systemDaoSupport.getLastId("es_waybill");
             wayBillDO.setId(waybillId);
         }
-        // 更新缓存
+        // Update the cache
         cache.remove(CachePrefix.WAYBILL.getPrefix());
         return wayBillDO;
     }
@@ -103,7 +103,7 @@ public class WaybillManagerImpl implements WaybillManager {
         }
         WayBillDO way = this.getWayBillByBean(wayBill.getBean());
         if (way == null) {
-            throw new ResourceNotFoundException("该电子面单方案不存在");
+            throw new ResourceNotFoundException("The electron plane single scheme does not exist");
         }
         wayBill.setId(way.getId());
         this.systemDaoSupport.update(new WayBillDO(wayBill), way.getId());
@@ -124,11 +124,11 @@ public class WaybillManagerImpl implements WaybillManager {
         }
         WayBillDO wayBillDO = this.getWayBillByBean(bean);
         if (wayBillDO == null) {
-            throw new ResourceNotFoundException("该电子面单方案不存在");
+            throw new ResourceNotFoundException("The electron plane single scheme does not exist");
         }
         this.systemDaoSupport.execute("UPDATE es_waybill SET open=0");
         this.systemDaoSupport.execute("UPDATE es_waybill SET open=1 WHERE bean = ?", bean);
-        // 更新缓存
+        // Update the cache
         cache.remove(CachePrefix.WAYBILL.getPrefix());
     }
 
@@ -140,9 +140,9 @@ public class WaybillManagerImpl implements WaybillManager {
 
 
     /**
-     * 获取所有的电子面单方案
+     * Get all electron plane single schemes
      *
-     * @return 所有的电子面单方案
+     * @return All electron surface single scheme
      */
     private List<WayBillVO> getWayBills() {
         List<WayBillVO> resultList = new ArrayList<>();
@@ -175,7 +175,7 @@ public class WaybillManagerImpl implements WaybillManager {
         }
         WayBillDO wayBillDO = this.getWayBillByBean(bean);
         if (wayBillDO == null) {
-            throw new ResourceNotFoundException("该电子面单方案不存在");
+            throw new ResourceNotFoundException("The electron plane single scheme does not exist");
         }
         return new WayBillVO(wayBillDO);
     }
@@ -184,7 +184,7 @@ public class WaybillManagerImpl implements WaybillManager {
     public String createPrintData(String orderSn, Integer logisticsId) {
         OrderDetailDTO orderDetailDTO = orderclient.getModel(orderSn);
         if (orderDetailDTO == null) {
-            throw new ResourceNotFoundException("订单无效");
+            throw new ResourceNotFoundException("The order is invalid");
         }
         Object object = cache.get(CachePrefix.WAYBILL.getPrefix());
         WayBillDO wayBillDO = null;
@@ -194,7 +194,7 @@ public class WaybillManagerImpl implements WaybillManager {
             String sql = "select * from es_waybill where open = 1";
             wayBillDO = this.systemDaoSupport.queryForObject(sql, WayBillDO.class);
             if (wayBillDO == null) {
-                throw new ResourceNotFoundException("找不到可用的电子面单方案");
+                throw new ResourceNotFoundException("Unable to find available electron plane single scheme");
             }
             cache.put(CachePrefix.WAYBILL.getPrefix(), wayBillDO);
         }
@@ -204,14 +204,14 @@ public class WaybillManagerImpl implements WaybillManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        throw new ServiceException(SystemErrorCode.E911.code(), "电子面单生成失败");
+        throw new ServiceException(SystemErrorCode.E911.code(), "Failed to generate electron face order");
     }
 
     /**
-     * 根据beanid获取电子面单方案
+     * According to thebeanidObtain electron plane single scheme
      *
-     * @param bean 电子面单bean id
-     * @return 电子面单插件
+     * @param bean Electronic surface singlebean id
+     * @return Single plug for electronic surface
      */
 
     private WayBillEvent findByBean(String bean) {
@@ -220,13 +220,13 @@ public class WaybillManagerImpl implements WaybillManager {
                 return wayBillEvent;
             }
         }
-        //如果走到这里，说明找不到可用的电子面单方案
-        throw new ResourceNotFoundException("未找到可用的电子面单方案");
+        // If you get to this point, you cant find the available electron plane single scheme
+        throw new ResourceNotFoundException("No available electron plane single scheme was found");
     }
 
 
     /**
-     * 获取存储方案配置
+     * Obtain the storage scheme configuration
      *
      * @return
      */

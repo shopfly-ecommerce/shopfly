@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 规格项业务类
+ * Specification business class
  *
  * @author fk
  * @version v2.0
@@ -69,12 +69,12 @@ public class SpecificationManagerImpl implements SpecificationManager {
     public SpecificationDO add(SpecificationDO specification) {
 
 
-        //如果是管理端添加的规格，则验证管理端的对个名称是否重复
+        // If the specifications are added by the management end, verify that the names of the management end are the same
         String sql = "select * from es_specification  where disabled = 1 and spec_name = ? ";
         List list = this.daoSupport.queryForList(sql, specification.getSpecName());
 
         if (list.size() > 0) {
-            throw new ServiceException(GoodsErrorCode.E305.code(), "规格名称重复");
+            throw new ServiceException(GoodsErrorCode.E305.code(), "Duplicate specification name");
         }
 
 
@@ -91,14 +91,14 @@ public class SpecificationManagerImpl implements SpecificationManager {
 
         SpecificationDO model = this.getModel(id);
         if (model == null) {
-            throw new ServiceException(GoodsErrorCode.E305.code(), "规格不存在");
+            throw new ServiceException(GoodsErrorCode.E305.code(), "Specifications do not exist");
         }
 
         String sql = "select * from es_specification  where disabled = 1 and spec_name = ? and spec_id!=? ";
         List list = this.daoSupport.queryForList(sql, specification.getSpecName(),id);
 
         if (list.size() > 0) {
-            throw new ServiceException(GoodsErrorCode.E305.code(), "规格名称重复");
+            throw new ServiceException(GoodsErrorCode.E305.code(), "Duplicate specification name");
         }
 
         this.daoSupport.update(specification, id);
@@ -111,12 +111,12 @@ public class SpecificationManagerImpl implements SpecificationManager {
 
         List<Object> term = new ArrayList<>();
         String idsStr = SqlUtil.getInSql(ids, term);
-        //查看是否已经有分类绑定了该规格
+        // Check whether a category has been bound to this specification
         String sql = "select * from es_category_spec where spec_id in (" + idsStr + ")";
         List<CategorySpecDO> list = this.daoSupport.queryForList(sql, CategorySpecDO.class, term.toArray());
         if (list.size() > 0) {
 
-            throw new ServiceException(GoodsErrorCode.E305.code(), "有分类已经绑定要删除的规格，请先解绑分类规格");
+            throw new ServiceException(GoodsErrorCode.E305.code(), "A category has been bound to specifications to be deleted. Unbind the category specifications first");
         }
 
         sql = " update es_specification set disabled = 0 where spec_id in (" + idsStr + ")";
@@ -144,17 +144,17 @@ public class SpecificationManagerImpl implements SpecificationManager {
 
     @Override
     public List<SpecificationVO> querySpec(Integer categoryId) {
-        //查询规格
+        // The query specification
         String sql = "select s.spec_id,s.spec_name "
                 + "from es_specification s inner join es_category_spec cs on s.spec_id=cs.spec_id "
                 + "where cs.category_id = ? ";
         List<SpecificationVO> specList = this.daoSupport.queryForList(sql, SpecificationVO.class, categoryId);
 
-        //没有规格
+        // No specification
         if (specList == null || specList.size() == 0) {
             return new ArrayList<>();
         }
-        //封装规格id的集合
+        // A collection of encapsulation specification ids
         String[] temp = new String[specList.size()];
         List<Object> specIdList = new ArrayList<>();
 
@@ -165,7 +165,7 @@ public class SpecificationManagerImpl implements SpecificationManager {
         String str = StringUtil.arrayToString(temp, ",");
 
         String sqlValue = "select * from es_spec_values where spec_id in (" + str + ")";
-        //查询到的是所有规格的规格值
+        // The values of all specifications are displayed
         List<SpecValuesDO> valueList = this.daoSupport.queryForList(sqlValue, SpecValuesDO.class, specIdList.toArray());
 
         Map<Integer, List<SpecValuesDO>> map = new HashMap<>(valueList.size());
@@ -178,7 +178,7 @@ public class SpecificationManagerImpl implements SpecificationManager {
             list.add(specValue);
             map.put(specValue.getSpecId(), list);
         }
-        //赋值规格值
+        // Assign a specification value
         for (SpecificationVO vo : specList) {
             vo.setValueList(map.get(vo.getSpecId()));
         }

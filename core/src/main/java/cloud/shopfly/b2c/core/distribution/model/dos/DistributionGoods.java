@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-06-11 上午7:39
+ * 2018-06-11 In the morning7:39
  */
 
 @Table(name = "es_distribution_goods")
@@ -42,15 +42,15 @@ public class DistributionGoods {
     private Integer id;
 
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", required = true)
+    @ApiModelProperty(name = "goods_id", value = "productid", required = true)
     private Integer goodsId;
 
     @Column(name = "grade1_rebate")
-    @ApiModelProperty(name = "grade1_rebate", value = "1级提成金额", required = true)
+    @ApiModelProperty(name = "grade1_rebate", value = "1Grade commission amount", required = true)
     private double grade1Rebate = 0;
 
     @Column(name = "grade2_rebate")
-    @ApiModelProperty(name = "grade2_rebate", value = "2级提成金额", required = true)
+    @ApiModelProperty(name = "grade2_rebate", value = "2Grade commission amount", required = true)
     private double grade2Rebate = 0;
 
 

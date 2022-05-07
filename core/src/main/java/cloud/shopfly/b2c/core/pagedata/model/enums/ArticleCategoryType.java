@@ -18,32 +18,32 @@ package cloud.shopfly.b2c.core.pagedata.model.enums;
 /**
  * @author fk
  * @version v1.0
- * @Description: 文章分类类型
+ * @Description: Article classification type
  * @date 2018/5/21 16:05
  * @since v7.0.0
  */
 public enum ArticleCategoryType {
 
     /**
-     * 帮助中心
+     * Help center
      */
-    HELP("帮助中心"),
+    HELP("Help center"),
     /**
-     * 商城公告
+     * notes
      */
-    NOTICE("商城公告"),
+    NOTICE("notes"),
     /**
-     * 固定位置
+     * A fixed position
      */
-    POSITION("固定位置"),
+    POSITION("A fixed position"),
     /**
-     * 商城促销
+     * promotion
      */
-    PROMOTION("商城促销"),
+    PROMOTION("promotion"),
     /**
-     * 其他
+     * other
      */
-    OTHER("其他");
+    OTHER("other");
 
     private String description;
 

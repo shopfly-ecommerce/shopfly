@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 站内消息业务类
+ * Intra-station message business class
  *
  * @author zh
  * @version v7.0.0
@@ -65,7 +65,7 @@ public class MessageManagerImpl implements MessageManager {
     public Message add(MessageVO messageVO) {
         if (messageVO.getSendType().equals(1)) {
             if (StringUtil.isEmpty(messageVO.getMemberIds())) {
-                throw new ServiceException(MemberErrorCode.E122.code(), "请指定发送会员");
+                throw new ServiceException(MemberErrorCode.E122.code(), "Please specify sending member");
             }
         }
         Message message = new Message();

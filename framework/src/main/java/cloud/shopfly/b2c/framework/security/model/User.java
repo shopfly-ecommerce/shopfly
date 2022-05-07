@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 用户
+ * The user
  * Created by kingapex on 2018/3/8.
  *
  * @author kingapex
@@ -32,21 +32,21 @@ import java.util.List;
 public class User implements AuthUser {
 
     /**
-     * 会员id
+     * membersid
      */
     private Integer uid;
 
     /**
-     * 唯一标识
+     * A unique identifier
      */
     private String uuid;
 
     /**
-     * 用户名
+     * Username
      */
     private String username;
     /**
-     * 角色
+     * role
      */
     private List<String> roles;
 
@@ -57,9 +57,9 @@ public class User implements AuthUser {
     }
 
     /**
-     * 为用户定义角色
+     * Define roles for users
      *
-     * @param roles 角色集合
+     * @param roles Character set
      */
     public void add(String... roles) {
         for (String role : roles) {

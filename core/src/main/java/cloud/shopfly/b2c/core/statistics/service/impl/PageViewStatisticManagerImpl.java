@@ -33,11 +33,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 平台后台 流量分析
+ * Platform background traffic analysis
  *
  * @author mengyuanming
  * @version 2.0
- * @since 7.0 2018年3月19日上午9:35:06
+ * @since 7.0 2018years3month19The morning of9:35:06
  */
 @Service
 public class PageViewStatisticManagerImpl implements PageViewStatisticManager {
@@ -50,21 +50,21 @@ public class PageViewStatisticManagerImpl implements PageViewStatisticManager {
 
 
     /**
-     * 统计商品访问量
+     * Statistics of Product visits
      *
-     * @param searchCriteria 时间参数
-     * @return SimpleChart 简单图表数据
+     * @param searchCriteria The time parameter
+     * @return SimpleChart Simple chart data
      */
     @Override
     public SimpleChart countGoods(SearchCriteria searchCriteria) {
 
         searchCriteria = new SearchCriteria(searchCriteria);
-        // 获取参数，便于使用
+        // Gets parameters for easy use
         String type = searchCriteria.getCycleType();
 
         String sql = "select sum(vs_num) as num, goods_name from es_sss_goods_pv ";
 
-        // 查询条件集合，和参数集合
+        // Query a set of conditions, and a set of parameters
         List<String> sqlList = new ArrayList<>();
         List<Integer> paramList = new ArrayList<>();
 
@@ -75,32 +75,32 @@ public class PageViewStatisticManagerImpl implements PageViewStatisticManager {
             sqlList.add(" vs_month = ? ");
             paramList.add(searchCriteria.getMonth());
         }
-        // 按商品名分组，按流量排序，取前30
+        // Group by commodity name, sort by traffic, take the top 30
         sql += SqlUtil.sqlSplicing(sqlList) + " group by goods_id,goods_name order by num desc limit 30  ";
 
         List<Map<String, Object>> list = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
 
         int dataLength = 30;
 
-        // 获取x轴数据，包括商品名和访问量
+        // Get X-axis data, including product names and visits
         String[] data = new String[dataLength];
         String[] goodsName = new String[dataLength];
-        // 获取x轴刻度
+        // Get the X-axis scale
         String[] xAxis = new String[dataLength];
-        // 赋值
+        // The assignment
         for (int i = 0; i < dataLength; i++) {
             if (null != list && i < list.size()) {
                 Map map = list.get(i);
                 data[i] = map.get("num").toString();
                 goodsName[i] = map.get("goods_name").toString();
             } else {
-                data[i] = "无";
-                goodsName[i] = "无";
+                data[i] = "There is no";
+                goodsName[i] = "There is no";
             }
             xAxis[i] = i + 1 + "";
         }
 
-        ChartSeries series = new ChartSeries("访问量", data, goodsName);
+        ChartSeries series = new ChartSeries("traffic", data, goodsName);
 
         return new SimpleChart(series, xAxis, new String[0]);
 

@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 会员商品收藏业务类
+ * Member commodity collection business category
  *
  * @author zh
  * @version v7.0.0
@@ -74,24 +74,24 @@ public class MemberCollectionGoodsManagerImpl implements MemberCollectionGoodsMa
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberCollectionGoods add(MemberCollectionGoods memberCollectionGoods) {
         Buyer buyer = UserContext.getBuyer();
-        //查询当前会员是否存在
+        // Query whether the current member exists
         Member member = memberManager.getModel(buyer.getUid());
         if (member == null) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("Current member does not exist");
         }
-        //获取商品id
+        // Get commodity ID
         Integer goodsId = memberCollectionGoods.getGoodsId();
-        //查询此商品信息
+        // Query information about this product
         CacheGoods goods = goodsClient.getFromCache(memberCollectionGoods.getGoodsId());
-        //判断商品是否存在
+        // Determine whether goods exist
         if (goods == null) {
-            throw new ResourceNotFoundException("此商品不存在");
+            throw new ResourceNotFoundException("This item does not exist");
         }
-        //判断当前商品是否已经添加为收藏
+        // Determines whether the current item has been added to the collection
         String sql = "select * from es_member_collection_goods where member_id = ? and goods_id = ?";
         List<MemberCollectionGoods> list = this.memberDaoSupport.queryForList(sql, MemberCollectionGoods.class, buyer.getUid(), goodsId);
         if (list.size() > 0) {
-            throw new ServiceException(MemberErrorCode.E105.code(), "当前商品已经添加为收藏");
+            throw new ServiceException(MemberErrorCode.E105.code(), "The current item has been added to the collection");
         }
         memberCollectionGoods.setMemberId(buyer.getUid());
         memberCollectionGoods.setGoodsName(goods.getGoodsName());
@@ -101,7 +101,7 @@ public class MemberCollectionGoodsManagerImpl implements MemberCollectionGoodsMa
         memberCollectionGoods.setGoodsPrice(goods.getPrice());
         this.memberDaoSupport.insert("es_member_collection_goods", memberCollectionGoods);
         memberCollectionGoods.setId(memberDaoSupport.getLastId("es_member_collection_goods"));
-        //发送消息
+        // Send a message
         GoodsData goodsData = new GoodsData();
         goodsData.setGoodsId(goodsId);
         goodsData.setFavoriteNum(this.getGoodsCollectCount(goodsId));
@@ -117,7 +117,7 @@ public class MemberCollectionGoodsManagerImpl implements MemberCollectionGoodsMa
         MemberCollectionGoods memberCollectionGoods = this.memberDaoSupport.queryForObject("select * from es_member_collection_goods where goods_id = ? and member_id = ?", MemberCollectionGoods.class, goodsId, buyer.getUid());
         if (memberCollectionGoods != null) {
             this.memberDaoSupport.delete(MemberCollectionGoods.class, memberCollectionGoods.getId());
-            //发送消息
+            // Send a message
             GoodsData goodsData = new GoodsData();
             goodsData.setGoodsId(goodsId);
             goodsData.setFavoriteNum(this.getGoodsCollectCount(goodsId));
@@ -145,9 +145,9 @@ public class MemberCollectionGoodsManagerImpl implements MemberCollectionGoodsMa
     }
 
     /**
-     * 获取会员收藏商品数
+     * Obtain the number of items collected by members
      *
-     * @return 收藏商品数
+     * @return Number of goods collected
      */
     @Override
     public Integer getGoodsCollectCount(Integer goodsId) {

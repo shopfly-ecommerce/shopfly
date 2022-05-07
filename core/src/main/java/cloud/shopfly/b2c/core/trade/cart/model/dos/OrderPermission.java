@@ -17,33 +17,33 @@ package cloud.shopfly.b2c.core.trade.cart.model.dos;
 
 
 /**
- * 订单权限
+ * Order permissions
  *
  * @author kingapex
  * @version 1.0
  * @since v7.0.0
- * 2017年4月12日下午1:36:38
+ * 2017years4month12On the afternoon1:36:38
  */
 public enum OrderPermission {
 
     /**
-     * 卖家权限
+     * The seller permissions
      */
     seller,
 
 
     /**
-     * 买家权限
+     * Buyers permissions
      */
     buyer,
 
     /**
-     * 管理员权限
+     * Administrator rights
      */
     admin,
 
     /**
-     * 客户端权限
+     * Client permissions
      */
     client
 

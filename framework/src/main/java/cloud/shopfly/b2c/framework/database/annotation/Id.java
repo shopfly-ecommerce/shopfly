@@ -21,7 +21,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标识为此表的主键ID
+ * Identifies the primary key for this tableID
  * @author Snow
  */
 @Target(ElementType.FIELD)

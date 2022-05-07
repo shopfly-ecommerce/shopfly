@@ -28,7 +28,7 @@ import org.springframework.jdbc.support.JdbcUtils;
  * @author kingapex
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 public class FilterColumnMapRowMapper extends ColumnMapRowMapper {
 	private IRowMapperColumnFilter filter;
@@ -46,7 +46,7 @@ public class FilterColumnMapRowMapper extends ColumnMapRowMapper {
 			key  = key.toLowerCase();
 			Object obj = getColumnValue(rs, i);
 			mapOfColValues.put(key, obj);
-			//对此行结果集进行过滤
+			// Filter the row result set
 			this.filter.filter(mapOfColValues, rs);
 		}
 		return mapOfColValues;

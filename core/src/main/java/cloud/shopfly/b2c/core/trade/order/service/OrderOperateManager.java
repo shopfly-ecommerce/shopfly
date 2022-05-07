@@ -28,7 +28,7 @@ import cloud.shopfly.b2c.core.trade.sdk.model.OrderSkuDTO;
 import java.util.List;
 
 /**
- * 订单流程操作
+ * Order flow operation
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
@@ -37,65 +37,65 @@ import java.util.List;
 public interface OrderOperateManager {
 
     /**
-     * 确认订单
+     * Make sure the order
      *
-     * @param confirmVO  订单确认vo
-     * @param permission 需要检测的订单权限
+     * @param confirmVO  Order confirmationvo
+     * @param permission The order permission to check
      */
     void confirm(ConfirmVO confirmVO, OrderPermission permission);
 
     /**
-     * 为某订单付款<br/>
+     * Make payment for an order<br/>
      *
-     * @param orderSn    订单号
-     * @param payPrice   本次付款金额
-     * @param returnTradeNo   本次付款金额
-     * @param permission 需要检测的订单权限
-     * @param permission 权限 {@link OrderPermission}
+     * @param orderSn    The order number
+     * @param payPrice   Amount of this payment
+     * @param returnTradeNo   Amount of this payment
+     * @param permission The order permission to check
+     * @param permission permissions{@link OrderPermission}
      * @return
-     * @throws IllegalArgumentException 下列情形之一抛出此异常:
-     *                                  <li>order_sn(订单id)为null</li>
-     * @throws IllegalStateException    如果订单支付状态为已支付
+     * @throws IllegalArgumentException This exception is thrown in one of the following cases:
+     *                                  <li>order_sn(The orderid)fornull</li>
+     * @throws IllegalStateException    If the order payment status is paid
      */
     OrderDO payOrder(String orderSn, Double payPrice, String returnTradeNo, OrderPermission permission);
 
 
     /**
-     * 发货
+     * The delivery
      *
-     * @param deliveryVO 运单</br>
-     * @param permission 需要检测的订单权限
+     * @param deliveryVO waybill</br>
+     * @param permission The order permission to check
      */
     void ship(DeliveryVO deliveryVO, OrderPermission permission);
 
 
     /**
-     * 订单收货
+     * Order the goods
      *
-     * @param rogVO      收货VO
-     * @param permission 需要检测的订单权限
+     * @param rogVO      The goodsVO
+     * @param permission The order permission to check
      */
     void rog(RogVO rogVO, OrderPermission permission);
 
 
     /**
-     * 订单取消
+     * Order cancellation
      *
-     * @param cancelVO   取消vo
-     * @param permission 需要检测的订单权限
+     * @param cancelVO   cancelvo
+     * @param permission The order permission to check
      */
     void cancel(CancelVO cancelVO, OrderPermission permission);
 
     /**
-     * 订单完成
+     * The order finished
      *
-     * @param completeVO 订单完成vo
-     * @param permission 需要检测的订单权限
+     * @param completeVO The order finishedvo
+     * @param permission The order permission to check
      */
     void complete(CompleteVO completeVO, OrderPermission permission);
 
     /**
-     * 更新订单的售后状态
+     * Update the after-sale status of orders
      *
      * @param orderSn
      * @param serviceStatus
@@ -104,7 +104,7 @@ public interface OrderOperateManager {
 
 
     /**
-     * 修改收货人信息
+     * Modify consignee information
      *
      * @param orderConsignee
      * @return
@@ -112,7 +112,7 @@ public interface OrderOperateManager {
     OrderConsigneeVO updateOrderConsignee(OrderConsigneeVO orderConsignee);
 
     /**
-     * 修改订单价格
+     * Modify order price
      *
      * @param orderSn
      * @param orderPrice
@@ -120,7 +120,7 @@ public interface OrderOperateManager {
     void updateOrderPrice(String orderSn, Double orderPrice);
 
     /**
-     * 更新订单的评论状态
+     * Update the comment status of the order
      *
      * @param orderSn
      * @param commentStatus
@@ -128,7 +128,7 @@ public interface OrderOperateManager {
     void updateCommentStatus(String orderSn, CommentStatusEnum commentStatus);
 
     /**
-     * 更新订单项快照ID
+     * Update order item snapshotID
      *
      * @param itemsJson
      * @param orderSn
@@ -137,7 +137,7 @@ public interface OrderOperateManager {
     void updateItemJson(String itemsJson, String orderSn);
 
     /**
-     * 更新订单的订单状态
+     * Update the order status of an order
      *
      * @param orderSn
      * @param orderStatus
@@ -145,32 +145,32 @@ public interface OrderOperateManager {
     void updateOrderStatus(String orderSn, OrderStatusEnum orderStatus);
 
     /**
-     * 更新交易状态
+     * Update transaction Status
      *
-     * @param sn          交易sn
-     * @param orderStatus 状态
+     * @param sn          tradingsn
+     * @param orderStatus Status
      */
     void updateTradeStatus(String sn, OrderStatusEnum orderStatus);
 
     /**
-     * 执行操作
+     * Perform operations
      *
-     * @param orderSn      订单编号
-     * @param permission   权限
-     * @param orderOperate 要执行什么操作
-     * @param paramVO      参数对象
+     * @param orderSn      Order no.
+     * @param permission   permissions
+     * @param orderOperate What operations do you want to perform
+     * @param paramVO      Parameter object
      */
     void executeOperate(String orderSn, OrderPermission permission, OrderOperateEnum orderOperate, Object paramVO);
 
     /**
-     * 更新订单项可退款金额
+     * Update order item refundable amount
      *
      * @param order
      */
     void updateItemRefundPrice(OrderDetailVO order);
 
     /**
-     * 更改订单的售后状态
+     * Change the after-sale status of the order
      *
      * @param orderSn
      * @param statusEnum
@@ -178,7 +178,7 @@ public interface OrderOperateManager {
     void updateOrderServiceStatus(String orderSn, String statusEnum);
 
     /**
-     * 修改订单货物项的售后状态
+     * Modify the after-sale status of the goods in the order
      *
      * @param sn
      * @param orderSkuDTOList
@@ -186,7 +186,7 @@ public interface OrderOperateManager {
     void updateOrderItemServiceStatus(String sn, List<OrderSkuDTO> orderSkuDTOList);
 
     /**
-     * 根据订单号修改第三方支付流水号
+     * Modify the third-party payment serial number according to the order number
      * @param payOrderNo
      * @param sn
      */

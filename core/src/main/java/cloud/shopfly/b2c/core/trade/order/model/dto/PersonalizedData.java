@@ -25,7 +25,7 @@ import java.util.Map;
 
 /**
  * Created by kingapex on 2019-02-11.
- * 个性化数据
+ * Personalized data
  *
  * @author kingapex
  * @version 1.0
@@ -45,13 +45,13 @@ public class PersonalizedData {
 
 
     /**
-     * 设置个性化的数据
+     * Set up personalized data
      */
     public void setPersonalizedData(OrderDataKey key, Object personalizedData) {
         Gson gson = new GsonBuilder().create();
 
-        //如果个性化数据为空new 一个map
-        //如果不为空，用orderData转回map
+        // If personalization data is empty, new a map
+        // If not empty, use orderData to go back to map
         Map data;
         if (StringUtil.isEmpty(this.data)) {
             data = new HashMap(16);
@@ -59,7 +59,7 @@ public class PersonalizedData {
             data = gson.fromJson(this.data, HashMap.class);
         }
 
-        //把个性化数据转为json存在map中，再转为json给orderData
+        // Convert the personalization data to JSON and store it in the map, which then converts it to JSON for orderData
         String json = gson.toJson(personalizedData);
         data.put(key.name(), json);
         this.data = gson.toJson(data);

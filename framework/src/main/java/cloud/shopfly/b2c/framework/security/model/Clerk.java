@@ -16,35 +16,35 @@
 package cloud.shopfly.b2c.framework.security.model;
 
 /**
- * 店员
+ * The shop assistant
  *
  * @author zh
  * @version v7.0
- * @date 18/8/4 下午3:12
+ * @date 18/8/4 In the afternoon3:12
  * @since v7.0
  */
 
 public class Clerk extends Seller {
 
     /**
-     * 店员id
+     * The shop assistantid
      */
     private Integer clerkId;
     /**
-     * 店员名称
+     * Name of the clerk
      */
     private String clerkName;
     /**
-     * 是否是超级店员
+     * Is it super shop assistant
      */
     private Integer founder;
     /**
-     * 权限
+     * permissions
      */
     private String role;
 
     public Clerk() {
-        //clerk有 买家的角色和卖宾角色
+        // Clerk has the role of buyer and seller
         add(Role.CLERK.name());
     }
 

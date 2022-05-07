@@ -23,16 +23,16 @@ import java.util.Date;
 
 
 /**
- * 促销活动缓存
+ * Promotion caching
  * @author Snow
  * @since v6.4
  * @version v1.0
- * 2017年08月18日17:58:12
+ * 2017years08month18day17:58:12
  */
 public class PromotionCacheKeys {
 
 	/**
-	 * 读取积分换购redis key
+	 * Read the points for exchangeredis key
 	 * @param activityId
 	 * @return
 	 */
@@ -42,7 +42,7 @@ public class PromotionCacheKeys {
 	}
 
 	/**
-	 * 读取满优惠redis key
+	 * Read full discountredis key
 	 * @param activityId
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public class PromotionCacheKeys {
 	}
 
 	/**
-	 * 读取团购活动redis key
+	 * Read group buying activityredis key
 	 * @param activityId
 	 * @return
 	 */
@@ -62,7 +62,7 @@ public class PromotionCacheKeys {
 	}
 
 	/**
-	 * 读取第二件半价活动redis key
+	 * Read the second half price activityredis key
 	 * @param activityId
 	 * @return
 	 */
@@ -73,7 +73,7 @@ public class PromotionCacheKeys {
 
 	/**
 	 *
-	 * 读取单品立减活动 redis key
+	 * Read the activity of single itemredis key
 	 * @param activityId
 	 * @return
 	 */
@@ -83,8 +83,8 @@ public class PromotionCacheKeys {
 	}
 
 	/**
-	 * 读取限时抢购 redis key
-	 * @param time 格式为(年月日):20171215   如果为空则默认查询当天
+	 * Read flash saleredis key
+	 * @param time Format for((date) (month) (year)):20171215   If the value is empty, the current day is queried by default
 	 * @return
 	 */
 	public static final String getSeckillKey(String time){

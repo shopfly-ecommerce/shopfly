@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author cs
  * @version v2.0
- * @Description: 区域VO
+ * @Description: areaVO
  * @date 2018/8/22 15:16
  * @since v7.0.0
  */
@@ -37,7 +37,7 @@ import java.util.List;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class RateAreaVO extends RateAreaDO implements Serializable {
 
-    @ApiParam("地区列表")
+    @ApiParam("In the list")
     @Column(name = "areas")
     private List<AreaVO> areas;
 

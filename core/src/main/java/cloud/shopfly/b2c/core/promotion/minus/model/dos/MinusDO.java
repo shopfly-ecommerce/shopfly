@@ -34,7 +34,7 @@ import java.io.Serializable;
 
 
 /**
- * 单品立减实体
+ * Single product immediately reduced entity
  *
  * @author Snow
  * @version v7.0.0
@@ -49,76 +49,76 @@ public class MinusDO implements Serializable {
     private static final long serialVersionUID = 7245840976162683L;
 
     /**
-     * 单品立减活动id
+     * Single product reduction activityid
      */
     @Id(name = "minus_id")
     @ApiModelProperty(hidden = true)
     private Integer minusId;
 
     /**
-     * 单品立减金额
+     * Immediate reduction for each item
      */
     @Column(name = "single_reduction_value")
-    @Min(value = 0, message = "立减金额不能为负数")
-    @ApiModelProperty(name = "single_reduction_value", value = "单品立减金额", required = false)
+    @Min(value = 0, message = "The amount of immediate reduction cannot be negative")
+    @ApiModelProperty(name = "single_reduction_value", value = "Immediate reduction for each item", required = false)
     private Double singleReductionValue;
 
     /**
-     * 起始时间
+     * Starting time
      */
     @Column(name = "start_time")
-    @NotNull(message = "活动起始时间必填")
-    @Min(value = 0, message = "活动起始时间不正确")
-    @ApiModelProperty(name = "start_time", value = "起始时间", required = true)
+    @NotNull(message = "Start time of the activity Mandatory")
+    @Min(value = 0, message = "The activity start time is incorrect")
+    @ApiModelProperty(name = "start_time", value = "Starting time", required = true)
     private Long startTime;
 
     /**
-     * 结束时间
+     * The end of time
      */
     @Column(name = "end_time")
-    @NotNull(message = "活动结束时间必填")
-    @Min(value = 0, message = "活动结束时间不正确")
-    @ApiModelProperty(name = "end_time", value = "结束时间", required = true)
+    @NotNull(message = "End time Mandatory")
+    @Min(value = 0, message = "The activity end time is incorrect")
+    @ApiModelProperty(name = "end_time", value = "The end of time", required = true)
     private Long endTime;
 
     @Column(name = "start_time_str")
-    @ApiModelProperty(name = "start_time_str", value = "起始时间字符串", required = false)
+    @ApiModelProperty(name = "start_time_str", value = "Start time string", required = false)
     private String startTimeStr;
 
     @Column(name = "end_time_str")
-    @ApiModelProperty(name = "end_time_str", value = "结束时间字符串", required = false)
+    @ApiModelProperty(name = "end_time_str", value = "End time string", required = false)
     private String endTimeStr;
 
     /**
-     * 单品立减活动标题
+     * Single product immediately reduce the activity title
      */
     @Column(name = "title")
-    @NotEmpty(message = "标题必填")
-    @ApiModelProperty(name = "title", value = "单品立减活动标题", required = false)
+    @NotEmpty(message = "The title will be")
+    @ApiModelProperty(name = "title", value = "Single product immediately reduce the activity title", required = false)
     private String title;
 
     /**
-     * 商品参与方式
+     * Mode of Commodity participation
      */
     @Column(name = "range_type")
-    @NotNull(message = "请选择商品参与方式")
-    @Min(value = 1, message = "商品参与方式值不正确")
-    @Max(value = 2, message = "商品参与方式值不正确")
-    @ApiModelProperty(name = "range_type", value = "商品参与方式,全部商品：1，部分商品：2", required = true)
+    @NotNull(message = "Please select the mode of product participation")
+    @Min(value = 1, message = "Item participation mode value is incorrect")
+    @Max(value = 2, message = "Item participation mode value is incorrect")
+    @ApiModelProperty(name = "range_type", value = "Mode of Commodity participation,All the goods：1, some commodities：2", required = true)
     private Integer rangeType;
 
     /**
-     * 是否停用
+     * Whether discontinuation
      */
     @Column(name = "disabled")
-    @ApiModelProperty(name = "disabled", value = "是否停用", required = false)
+    @ApiModelProperty(name = "disabled", value = "Whether discontinuation", required = false)
     private Integer disabled;
 
     /**
-     * 描述
+     *  describe
      */
     @Column(name = "description")
-    @ApiModelProperty(name = "description", value = "描述", required = false)
+    @ApiModelProperty(name = "description", value = " describe", required = false)
     private String description;
 
 

@@ -19,10 +19,10 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartView;
 import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.impl.CartSkuFilter;
 
 /**
- * 购物车构建器<br/>
- * 他的目标是要生产出一个{@link CartView}
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >购物车架构</a>
+ * Shopping cart builder<br/>
+ * His goal was to produce one{@link CartView}
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >Shopping cart architecture</a>
  *
  * @author kingapex
  * @version 1.0
@@ -32,14 +32,14 @@ import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.impl.CartSkuFilter;
 public interface CartBuilder {
 
     /**
-     * 渲染购物车的sku信息
+     * Render shopping cartskuinformation
      *
      * @return
      */
     CartBuilder renderSku();
 
     /**
-     * 带过滤器的渲染sku
+     * Render with filterssku
      *
      * @param filter
      * @return
@@ -47,16 +47,16 @@ public interface CartBuilder {
     CartBuilder renderSku(CartSkuFilter filter);
 
     /**
-     * 渲染促销信息
+     * Render promotional information
      *
-     * @param includeCoupon 是否包含优惠券的计算
+     * @param includeCoupon Whether or not to include the calculation of coupons
      * @return builder
      */
     CartBuilder renderPromotionRule(boolean includeCoupon);
 
 
     /**
-     * 计算购物车价格
+     * Calculate shopping cart prices
      *
      * @return
      */
@@ -64,28 +64,28 @@ public interface CartBuilder {
 
 
     /**
-     * 计算运费
+     * Calculate the freight
      *
      * @return builder
      */
     CartBuilder countShipPrice();
 
     /**
-     * 计算优惠券费用
+     * Calculate coupon fees
      *
      * @return builder
      */
     CartBuilder renderCoupon();
 
     /**
-     * 检测数据正确性
+     * Test data correctness
      *
      * @return
      */
     CartBuilder checkData();
 
     /**
-     * 构建购物车视图
+     * Building the shopping cart View
      *
      * @return
      */

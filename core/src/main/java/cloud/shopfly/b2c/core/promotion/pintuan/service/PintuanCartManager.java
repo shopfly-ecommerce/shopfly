@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartView;
 
 /**
  * Created by kingapex on 2019-01-23.
- * 拼团购物车业务类接口
+ * Group shopping cart business class interface
  *
  * @author kingapex
  * @version 1.0
@@ -31,18 +31,18 @@ public interface PintuanCartManager {
 
 
     /**
-     * 获取拼团购物车
+     * Get group shopping cart
      *
-     * @return 购物车视图
+     * @return Shopping cart view
      */
     CartView getCart();
 
 
     /**
-     * 将一个拼团的sku加入到购物车中
+     * Put together a groupskuAdd to shopping cart
      *
      * @param skuId
-     * @param num   加入的数量
+     * @param num   Number of additions
      * @return
      */
     CartSkuOriginVo addSku(Integer skuId, Integer num);

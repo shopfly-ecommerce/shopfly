@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0.0
  * 2022-04-29 16:58:00
  */
-@Api(description = "Paypal支付API")
+@Api(description = "PaypalpayAPI")
 @RestController
 @RequestMapping("/order/pay/paypal")
 @Validated
@@ -51,10 +51,10 @@ public class PaypalBuyerController {
     private Debugger debugger;
 
     @ApiIgnore
-    @ApiOperation(value = "接收支付异步回调")
+    @ApiOperation(value = "Receive payment asynchronous callback")
     @PostMapping(value = "/return/paypalPlugin", produces = MediaType.TEXT_HTML_VALUE)
     public String payReturnPost( HttpServletResponse response) {
-        System.out.println("post 调用成功"+ DateUtil.date());
+        System.out.println("post The call is successful"+ DateUtil.date());
         String paymentPluginId = "paypalPlugin";
 
         String result = this.paymentManager.payCallback(TradeType.trade, paymentPluginId, ClientType.PC);

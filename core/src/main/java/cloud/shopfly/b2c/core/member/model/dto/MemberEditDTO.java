@@ -29,11 +29,11 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 买家修改会员DTO
+ * Buyer modification membershipDTO
  *
  * @author zh
  * @version v7.0
- * @date 18/4/26 下午10:40
+ * @date 18/4/26 In the afternoon10:40
  * @since v7.0
  */
 @ApiModel
@@ -43,51 +43,51 @@ public class MemberEditDTO implements Serializable {
     private static final long serialVersionUID = -2199494753773301940L;
 
     /**
-     * 昵称
+     * nickname
      */
     @Column(name = "nickname")
-    @ApiModelProperty(name = "nickname", value = "昵称", required = true)
-    @Length(min = 2, max = 20, message = "会员昵称必须为2到20位之间")
+    @ApiModelProperty(name = "nickname", value = "nickname", required = true)
+    @Length(min = 2, max = 20, message = "Member nickname must be2to20Between a")
     private String nickname;
     /**
-     * 会员性别
+     * Member of the gender
      */
     @Column(name = "sex")
-    @Min(message = "必须为数字且1为男,0为女", value = 0)
-    @Max(message = "必须为数字且1为男,0为女", value = 1)
-    @NotNull(message = "会员性别不能为空")
-    @ApiModelProperty(name = "sex", value = "会员性别,1为男，0为女", required = true)
+    @Min(message = "The value must be a number and1For male,0For female", value = 0)
+    @Max(message = "The value must be a number and1For male,0For female", value = 1)
+    @NotNull(message = "Member gender cannot be blank")
+    @ApiModelProperty(name = "sex", value = "Member of the gender,1For men,0For female", required = true)
     private Integer sex;
     /**
-     * 会员生日
+     * Members birthday
      */
     @Column(name = "birthday")
-    @ApiModelProperty(name = "birthday", value = "会员生日")
+    @ApiModelProperty(name = "birthday", value = "Members birthday")
     private Long birthday;
     /**
-     * 详细地址
+     * Detailed address
      */
     @Column(name = "address")
-    @ApiModelProperty(name = "address", value = "详细地址")
+    @ApiModelProperty(name = "address", value = "Detailed address")
     private String address;
     /**
-     * 邮箱
+     * email
      */
     @Column(name = "email")
-    @Email(message = "邮箱格式不正确")
-    @ApiModelProperty(name = "email", value = "邮箱")
+    @Email(message = "The mailbox format is incorrect")
+    @ApiModelProperty(name = "email", value = "email")
     private String email;
     /**
-     * 座机号码
+     * Machine number
      */
     @Column(name = "tel")
-    @ApiModelProperty(name = "tel", value = "座机号码")
+    @ApiModelProperty(name = "tel", value = "Machine number")
     private String tel;
     /**
-     * 会员头像
+     * Member of the head
      */
     @Column(name = "face")
-    @ApiModelProperty(name = "face", value = "会员头像")
+    @ApiModelProperty(name = "face", value = "Member of the head")
     private String face;
     /**
      * Country name
@@ -114,10 +114,10 @@ public class MemberEditDTO implements Serializable {
     @ApiModelProperty(name = "state_code", value = "State code")
     private String stateCode;
     /**
-     * 所属城市名称
+     * Name of City
      */
     @Column(name = "city")
-    @ApiModelProperty(name = "city", value = "所属城市名称", required = false)
+    @ApiModelProperty(name = "city", value = "Name of City", required = false)
     private String city;
 
     public String getNickname() {

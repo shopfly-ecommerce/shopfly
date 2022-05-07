@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
  * Created by kingapex on 2019-02-11.
- * 订单个性化数据key
+ * Order personalization datakey
  *
  * @author kingapex
  * @version 1.0
@@ -27,12 +27,12 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 public enum OrderDataKey {
 
     /**
-     * 拼团
+     * Spell group
      */
     pintuan,
 
     /**
-     * 测试用
+     * The test
      */
     test
 }

@@ -18,35 +18,35 @@ package cloud.shopfly.b2c.core.pagedata.model.enums;
 /**
  * @author fk
  * @version v1.0
- * @Description: 文章显示位置
+ * @Description: Article display position
  * @date 2018/5/21 16:05
  * @since v7.0.0
  */
 public enum ArticleShowPosition {
 
     /**
-     * 注册协议
+     * The registration agreement
      */
-    REGISTRATION_AGREEMENT("注册协议"),
+    REGISTRATION_AGREEMENT("The registration agreement"),
     /**
-     * 入驻协议
+     * In the agreement
      */
-    COOPERATION_AGREEMENT("入驻协议"),
+    COOPERATION_AGREEMENT("In the agreement"),
     /**
-     * 平台联系方式
+     * Platform contact Information
      */
-    CONTACT_INFORMATION("平台联系方式"),
+    CONTACT_INFORMATION("Platform contact Information"),
 
     /**
-     * 团购活动协议
+     * Group purchase activity agreement
      */
-    GROUP_BUY_AGREEMENT("团购活动协议"),
+    GROUP_BUY_AGREEMENT("Group purchase activity agreement"),
 
 
     /**
-     * 其他
+     * other
      */
-    OTHER("其他");
+    OTHER("other");
 
     private String description;
 

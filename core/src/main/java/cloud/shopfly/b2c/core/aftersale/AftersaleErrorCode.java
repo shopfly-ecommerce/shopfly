@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.aftersale;
 
 /**
- * 售后异常码
+ * After sale exception code
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -27,18 +27,18 @@ package cloud.shopfly.b2c.core.aftersale;
 public enum AftersaleErrorCode {
 
     /**
-     * 某个异常
+     * An exception
      */
-    E600("退款金额不能大于支付金额"),
-    E601("操作不允许"),
-    E602("商品不存在"),
-    E603("退款单不存在"),
-    E604("订单不存在"),
-    E605("退款方式必填"),
-    E606("入库失败"),
-    E607("申请售后货品数量不能大于购买数量"),
-    E608("导出数据失败"),
-    E609("可退款金额为0，无需申请退款/退货，请与平台联系解决");
+    E600("The refund amount cannot be greater than the amount paid"),
+    E601("Operation not allowed"),
+    E602("Goods dont exist"),
+    E603("Refund slip does not exist"),
+    E604("Order does not exist"),
+    E605("Refund method Mandatory"),
+    E606("Storage failure"),
+    E607("The quantity of goods applied for after sale should not be greater than the purchased quantity"),
+    E608("Failed to export data"),
+    E609("The refundable amount is0, no need to apply for a refund/Return, please contact the platform to solve");
 
     private String describe;
 
@@ -47,7 +47,7 @@ public enum AftersaleErrorCode {
     }
 
     /**
-     * 获取异常码
+     * Get exception code
      *
      * @return
      */
@@ -56,7 +56,7 @@ public enum AftersaleErrorCode {
     }
 
     /**
-     * 获取异常描述
+     * Obtaining exception Description
      *
      * @return
      */

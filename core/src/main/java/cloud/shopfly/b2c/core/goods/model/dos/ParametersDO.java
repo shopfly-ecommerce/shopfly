@@ -33,7 +33,7 @@ import java.io.Serializable;
 
 
 /**
- * 参数实体
+ * Parameter entities
  *
  * @author fk
  * @version v2.0
@@ -48,67 +48,67 @@ public class ParametersDO implements Serializable {
     private static final long serialVersionUID = 320610453789555L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "param_id")
     @ApiModelProperty(hidden = true)
     private Integer paramId;
     /**
-     * 参数名称
+     * name
      */
     @Column(name = "param_name")
-    @ApiModelProperty(name = "param_name", value = "参数名称", required = true)
-    @NotEmpty(message = "参数名称必填")
-    @Length(max = 50, message = "参数名称不能超过50字")
+    @ApiModelProperty(name = "param_name", value = "name", required = true)
+    @NotEmpty(message = "Parameter Name This parameter is mandatory")
+    @Length(max = 50, message = "The parameter name cannot exceed50word")
     private String paramName;
     /**
-     * 参数类型1 输入项   2 选择项
+     * type1 Input item2 Select item
      */
     @Column(name = "param_type")
-    @ApiModelProperty(name = "param_type", value = "参数类型1 输入项   2 选择项", required = true)
-    @NotNull(message = "参数类型必选")
-    @Min(value = 1, message = "参数类型传值不正确")
-    @Max(value = 2, message = "参数类型传值不正确")
+    @ApiModelProperty(name = "param_type", value = "type1 Input item2 Select item", required = true)
+    @NotNull(message = "Parameter Type This parameter is mandatory")
+    @Min(value = 1, message = "The value of the parameter type is incorrect")
+    @Max(value = 2, message = "The value of the parameter type is incorrect")
     private Integer paramType;
     /**
-     * 选择值，当参数类型是选择项2时，必填，逗号分隔
+     * Select a value when the parameter type is an option2", separated by commas (,)
      */
     @Column(name = "options")
-    @ApiModelProperty(value = "选择值，当参数类型是选择项2时，必填，逗号分隔", required = false)
+    @ApiModelProperty(value = "Select a value when the parameter type is an option2  separated by commas (,)", required = false)
     private String options;
     /**
-     * 是否可索引，0 不显示 1 显示
+     * Whether indexable,0 Dont show1 According to
      */
     @Column(name = "is_index")
-    @ApiModelProperty(name = "is_index", value = "是否可索引，0 不显示 1 显示", required = true)
-    @NotNull(message = "是否可索引必选")
-    @Min(value = 0, message = "是否可索引传值不正确")
-    @Max(value = 1, message = "是否可索引传值不正确")
+    @ApiModelProperty(name = "is_index", value = "Whether indexable,0 Dont show1 According to", required = true)
+    @NotNull(message = "Indexable This parameter is mandatory")
+    @Min(value = 0, message = "Indexable or not The value is incorrect")
+    @Max(value = 1, message = "Indexable or not The value is incorrect")
     private Integer isIndex;
     /**
-     * 是否必填是  1    否   0
+     * Mandatory Yes1    no0
      */
     @Column(name = "required")
-    @ApiModelProperty(value = "是否必填是  1    否   0", required = true)
-    @NotNull(message = "是否必填必选")
-    @Min(value = 0, message = "是否必填传值不正确")
-    @Max(value = 1, message = "是否必填传值不正确")
+    @ApiModelProperty(value = "Mandatory Yes1    no0", required = true)
+    @NotNull(message = "Mandatory Mandatory")
+    @Min(value = 0, message = "Mandatory Whether the input value is incorrect")
+    @Max(value = 1, message = "Mandatory Whether the input value is incorrect")
     private Integer required;
     /**
-     * 参数分组id
+     * Parameters of the groupid
      */
     @Column(name = "group_id")
-    @ApiModelProperty(name = "group_id", value = "参数分组id", required = true)
-    @NotNull(message = "所属参数组不能为空")
+    @ApiModelProperty(name = "group_id", value = "Parameters of the groupid", required = true)
+    @NotNull(message = "The owning parameter group cannot be empty")
     private Integer groupId;
     /**
-     * 分类id
+     * Categoriesid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "category_id", value = "分类id", hidden = true)
+    @ApiModelProperty(name = "category_id", value = "Categoriesid", hidden = true)
     private Integer categoryId;
     /**
-     * 排序
+     * sort
      */
     @Column(name = "sort")
     @ApiModelProperty(hidden = true)

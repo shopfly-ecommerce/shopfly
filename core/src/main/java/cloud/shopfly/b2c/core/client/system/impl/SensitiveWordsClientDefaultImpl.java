@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 敏感词
+ * @Description: Sensitive words
  * @date 2018/8/10 15:30
  * @since v7.0.0
  */

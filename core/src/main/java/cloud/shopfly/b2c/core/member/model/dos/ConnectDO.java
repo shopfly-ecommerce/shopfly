@@ -26,9 +26,9 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录DO
+ * @Description Trust the loginDO
  * @ClassName ConnectDO
- * @since v7.0 下午2:43 2018/6/20
+ * @since v7.0 In the afternoon2:43 2018/6/20
  */
 @Table(name = "es_connect")
 @ApiModel
@@ -41,28 +41,28 @@ public class ConnectDO {
     private Integer id;
 
     /**
-     * 会员ID
+     * membersID
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id",value = "会员id")
+    @ApiModelProperty(name = "member_id",value = "membersid")
     private Integer memberId;
     /**
-     * 唯一标示union_id
+     * The only signunion_id
      */
     @Column(name = "union_id")
-    @ApiModelProperty(name = "union_id", value = "唯一标示")
+    @ApiModelProperty(name = "union_id", value = "The only sign")
     private String unionId;
     /**
-     * 信任登录类型
+     * Trusted Login type
      */
     @Column(name = "union_type")
-    @ApiModelProperty(name = "union_type", value = "信任登录类型")
+    @ApiModelProperty(name = "union_type", value = "Trusted Login type")
     private String unionType;
     /**
-     * 解绑时间
+     * Solution of time
      */
     @Column(name = "unbound_time")
-    @ApiModelProperty(name = "unbound_time",value = "解绑时间")
+    @ApiModelProperty(name = "unbound_time",value = "Solution of time")
     private Long unboundTime;
 
     public Integer getId() {

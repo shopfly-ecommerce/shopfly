@@ -51,12 +51,12 @@ import java.util.Map;
 
 
 /**
- * 快递鸟电子面板插件
+ * Express bird electronic panel plug-in
  *
  * @author dongxin
  * @version v1.0
  * @since v6.4.0
- * 2017年8月14日 上午10:39:03
+ * 2017years8month14The morning of10:39:03
  */
 @SuppressWarnings("unchecked")
 @Component("kdnPlugin")
@@ -74,17 +74,17 @@ public class KDNPlugin implements WayBillEvent {
         List<ConfigItem> list = new ArrayList<>();
         ConfigItem sellerMchidItem = new ConfigItem();
         sellerMchidItem.setName("EBusinessID");
-        sellerMchidItem.setText("电商ID");
+        sellerMchidItem.setText("electricityID");
         sellerMchidItem.setType("text");
 
         ConfigItem selleAppidItem = new ConfigItem();
         selleAppidItem.setName("AppKey");
-        selleAppidItem.setText("密钥");
+        selleAppidItem.setText("The key");
         selleAppidItem.setType("text");
 
         ConfigItem sellerKeyItem = new ConfigItem();
         sellerKeyItem.setName("ReqURL");
-        sellerKeyItem.setText("请求url");
+        sellerKeyItem.setText("requesturl");
         sellerKeyItem.setType("text");
 
         list.add(sellerMchidItem);
@@ -101,11 +101,11 @@ public class KDNPlugin implements WayBillEvent {
     @Override
     public String createPrintData(String orderSn, Integer logisticsId, Map config) throws Exception {
         if (config == null) {
-            throw new ServiceException(SystemErrorCode.E912.code(), "电子面单参数错误");
+            throw new ServiceException(SystemErrorCode.E912.code(), "Single parameter error of electron surface");
         }
-        //获取订单信息
+        // Get order information
         OrderDetailDTO orderDetailDTO = orderclient.getModel(orderSn);
-        //获取物流公司信息
+        // Access logistics company information
         LogiCompanyDO logiCompanyDO = logiCompanyClient.getModel(logisticsId);
 
         JSONObject jsonObject = JSONObject.fromObject(config);
@@ -113,11 +113,11 @@ public class KDNPlugin implements WayBillEvent {
         String appKey = jsonObject.getString("AppKey");
         String reqURL = jsonObject.getString("ReqURL");
 
-        //支付方式的对接,获取订单的支付方式
-        //邮费支付方式:1-现付，2-到付，3-月结，4-第三方支付
+        // Payment method docking, obtain the order payment method
+        // Postage payment :1- cash, 2- collect, 3- monthly settlement, 4- third-party payment
         Integer payType = 1;
         WayBillJson wayBillJson = new WayBillJson();
-        //发送者赋值
+        // Sender assignment
         String siteSettingJson = settingClient.get(SettingGroup.SITE);
         SiteSetting siteSetting = JsonUtil.jsonToObject(siteSettingJson, SiteSetting.class);
 
@@ -131,7 +131,7 @@ public class KDNPlugin implements WayBillEvent {
         senders.setCityName(informationSetting.getCity());
         senders.setExpAreaName(informationSetting.getCounty());
         senders.setAddress(informationSetting.getAddress());
-        //接收者赋值
+        // Receiver assignment
         Information receivers = new Information();
         receivers.setName(orderDetailDTO.getShipName());
         receivers.setMobile(orderDetailDTO.getShipMobile());
@@ -163,7 +163,7 @@ public class KDNPlugin implements WayBillEvent {
         wayBillJson.setQuantity(orderDetailDTO.getGoodsNum());
         wayBillJson.setVolume(0.0);
         wayBillJson.setRemark(orderDetailDTO.getRemark());
-        wayBillJson.setRemark("小心轻放");
+        wayBillJson.setRemark("Handle with care");
         wayBillJson.setIsReturnPrintTemplate("1");
         wayBillJson.setSender(senders);
         wayBillJson.setReceiver(receivers);
@@ -185,7 +185,7 @@ public class KDNPlugin implements WayBillEvent {
 
     @Override
     public String getPluginName() {
-        return "快递鸟";
+        return "Express bird";
     }
 
     @Override
@@ -202,11 +202,11 @@ public class KDNPlugin implements WayBillEvent {
     }
 
     /**
-     * 向指定 URL 发送POST方法的请求
+     * To specify theURL sendPOSTMethod request
      *
-     * @param url    发送请求的 URL
-     * @param params 请求的参数集合
-     * @return 远程资源的响应结果
+     * @param url    requestingURL
+     * @param params A collection of requested parameters
+     * @return Response result of the remote resource
      */
     @SuppressWarnings("unused")
     private String sendPost(String url, Map<String, String> params) {
@@ -216,21 +216,21 @@ public class KDNPlugin implements WayBillEvent {
         try {
             URL realUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
-            // 发送POST请求必须设置如下两行
+            // The following two lines must be set to send a POST request
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            // POST方法
+            // POST method
             conn.setRequestMethod("POST");
-            // 设置通用的请求属性
+            // Set common request properties
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.connect();
-            // 获取URLConnection对象对应的输出流
+            // Gets the output stream corresponding to the URLConnection object
             out = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
-            // 发送请求参数
+            // Send request parameters
             if (params != null) {
                 StringBuilder param = new StringBuilder();
                 for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -243,9 +243,9 @@ public class KDNPlugin implements WayBillEvent {
                 }
                 out.write(param.toString());
             }
-            // flush输出流的缓冲
+            // Flush Buffers the output stream
             out.flush();
-            // 定义BufferedReader输入流来读取URL的响应
+            // Defines the BufferedReader input stream to read the response to the URL
             in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             String line;
             while ((line = in.readLine()) != null) {
@@ -254,7 +254,7 @@ public class KDNPlugin implements WayBillEvent {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //使用finally块来关闭输出流、输入流
+        // Use the finally block to close the output stream, input stream
         finally {
             try {
                 if (out != null) {

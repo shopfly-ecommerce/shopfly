@@ -24,55 +24,55 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 规格值实体
+ * Specification value entity
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月22日 上午9:17:33
+ * 2018years3month22The morning of9:17:33
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SpecValueVO extends SpecValuesDO implements Serializable {
 
 	/**
-	 * 序列号
+	 * The serial number
 	 */
 	private static final long serialVersionUID = 1426807099688672502L;
 	/**
-	 * 商品sku——id
+	 * productsku——id
 	 */
 	@ApiModelProperty(name="sku_id",hidden=true)
 	private Integer skuId;
 	/**
-	 * 商品大图
+	 * A larger product
 	 */
 	@ApiModelProperty(hidden=true)
 	private String big;
 	/**
-	 * 商品小图
+	 * Commodity insets
 	 */
 	@ApiModelProperty(hidden=true)
 	private String small;
 	/**
-	 * 商品缩略图
+	 * Product thumbnail
 	 */
 	@ApiModelProperty(hidden=true)
 	private String thumbnail;
 	/**
-	 * 商品极小图
+	 * Commodity minimum diagram
 	 */
 	@ApiModelProperty(hidden=true)
 	private String tiny;
 	
 	/**
-	 * 规格类型，1图片  0 非图片
+	 * Specification type,1Image0 非Image
 	 */
-	@ApiModelProperty(name="spec_type",value="该规格是否有图片，1 有 0 没有")
+	@ApiModelProperty(name="spec_type",value="Is there a picture of this specification?1 There are0 没There are")
 	private Integer specType;
 	/**
-	 * 规格图片
+	 * Sku pictures
 	 */
-	@ApiModelProperty(name="spec_image",value="规格的图片")
+	@ApiModelProperty(name="spec_image",value="Specification picture")
 	private String specImage;
 
 	public SpecValueVO() {

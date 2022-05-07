@@ -49,7 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 交易快照业务类
+ * Transaction snapshot business class
  *
  * @author fk
  * @version v1.0
@@ -119,20 +119,20 @@ public class GoodsSnapshotManagerImpl implements GoodsSnapshotManager {
     @Override
     public void add(OrderDO orderDO) {
 
-        //查看订单中的商品
+        // View items in your order
         List<OrderSkuVO> skuList = JsonUtil.jsonToList(orderDO.getItemsJson(), OrderSkuVO.class);
         if (skuList != null) {
             for (OrderSkuVO sku : skuList) {
 
                 GoodsSnapshotVO snapshotGoods = goodsClient.queryGoodsSnapShotInfo(sku.getGoodsId());
 
-                //商品的促销信息
+                // Promotional information about a product
                 List<PromotionVO> promotionVOList = this.promotionGoodsManager.getPromotion(sku.getGoodsId());
 
 
                 GoodsDO goods = snapshotGoods.getGoods();
 
-                //商品的优惠券信息
+                // Coupon information for the product
                 List<CouponDO> couponDOList = this.couponManager.getList();
 
                 CategoryDO category = snapshotGoods.getCategoryDO();
@@ -159,19 +159,19 @@ public class GoodsSnapshotManagerImpl implements GoodsSnapshotManager {
                 snapshot.setCreateTime(DateUtil.getDateline());
                 snapshot.setPromotionJson(JsonUtil.objectToJson(promotionVOList));
                 snapshot.setCouponJson(JsonUtil.objectToJson(couponDOList));
-                //添加快照
+                // Add a snapshot
                 this.add(snapshot);
                 Integer snapshotId = snapshot.getSnapshotId();
                 sku.setSnapshotId(snapshotId);
-                //更新订单项的快照id
+                // Update the snapshot ID of the order item
                 String sql = "update es_order_items set snapshot_id = ? where order_sn = ? and product_id = ?";
                 this.daoSupport.execute(sql, snapshotId, orderDO.getSn(), sku.getSkuId());
             }
 
             if (logger.isDebugEnabled()) {
-                logger.debug("生成商品快照信息");
+                logger.debug("Generate product snapshot information");
             }
-            //更新订单
+            // Update the order
             orderOperateManager.updateItemJson(JsonUtil.objectToJson(skuList), orderDO.getSn());
         }
     }
@@ -184,7 +184,7 @@ public class GoodsSnapshotManagerImpl implements GoodsSnapshotManager {
         BeanUtils.copyProperties(model, snapshotVO);
 
         if (model.getHaveSpec() == 1) {
-            //有规格
+            // Have the specifications
             String sql = "select * from es_order_items where snapshot_id = ?";
             OrderItemsDO items = this.daoSupport.queryForObject(sql, OrderItemsDO.class, id);
             List<SpecValueVO> specs = JsonUtil.jsonToList(items.getSpecJson(), SpecValueVO.class);

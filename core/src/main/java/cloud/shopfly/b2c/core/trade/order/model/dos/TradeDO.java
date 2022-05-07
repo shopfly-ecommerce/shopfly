@@ -33,7 +33,7 @@ import java.util.Objects;
 
 
 /**
- * 交易表实体
+ * Transaction statement entity
  *
  * @author Snow
  * @version v7.0.0
@@ -54,148 +54,148 @@ public class TradeDO implements Serializable {
     @ApiModelProperty(hidden = true)
     private Long tradeId;
     /**
-     * 交易编号
+     * Transaction number
      */
     @Column(name = "trade_sn")
-    @ApiModelProperty(name = "trade_sn", value = "交易编号", required = false)
+    @ApiModelProperty(name = "trade_sn", value = "Transaction number", required = false)
     private String tradeSn;
     /**
-     * 买家id
+     * buyersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "买家id", required = false)
+    @ApiModelProperty(name = "member_id", value = "buyersid", required = false)
     private Integer memberId;
     /**
-     * 买家用户名
+     * Buyer username
      */
     @Column(name = "member_name")
-    @ApiModelProperty(name = "member_name", value = "买家用户名", required = false)
+    @ApiModelProperty(name = "member_name", value = "Buyer username", required = false)
     private String memberName;
     /**
-     * 支付方式id
+     * Method of paymentid
      */
     @Column(name = "payment_method_id")
-    @ApiModelProperty(name = "payment_method_id", value = "支付方式id", required = false)
+    @ApiModelProperty(name = "payment_method_id", value = "Method of paymentid", required = false)
     private String paymentMethodId;
     /**
-     * 支付插件id
+     * Pay the plug-inid
      */
     @Column(name = "payment_plugin_id")
-    @ApiModelProperty(name = "payment_plugin_id", value = "支付插件id", required = false)
+    @ApiModelProperty(name = "payment_plugin_id", value = "Pay the plug-inid", required = false)
     private String paymentPluginId;
     /**
-     * 支付方式名称
+     * Name of Payment Method
      */
     @Column(name = "payment_method_name")
-    @ApiModelProperty(name = "payment_method_name", value = "支付方式名称", required = false)
+    @ApiModelProperty(name = "payment_method_name", value = "Name of Payment Method", required = false)
     private String paymentMethodName;
     /**
-     * 支付方式类型
+     * Type of payment
      */
     @Column(name = "payment_type")
-    @ApiModelProperty(name = "payment_type", value = "支付方式类型", required = false)
+    @ApiModelProperty(name = "payment_type", value = "Type of payment", required = false)
     private String paymentType;
     /**
-     * 总价格
+     * The total price
      */
     @Column(name = "total_price")
-    @ApiModelProperty(name = "total_price", value = "总价格", required = false)
+    @ApiModelProperty(name = "total_price", value = "The total price", required = false)
     private Double totalPrice;
     /**
-     * 商品价格
+     * Price
      */
     @Column(name = "goods_price")
-    @ApiModelProperty(name = "goods_price", value = "商品价格", required = false)
+    @ApiModelProperty(name = "goods_price", value = "Price", required = false)
     private Double goodsPrice;
     /**
-     * 运费
+     * freight
      */
     @Column(name = "freight_price")
-    @ApiModelProperty(name = "freight_price", value = "运费", required = false)
+    @ApiModelProperty(name = "freight_price", value = "freight", required = false)
     private Double freightPrice;
     /**
-     * 优惠的金额
+     * Preferential amount
      */
     @Column(name = "discount_price")
-    @ApiModelProperty(name = "discount_price", value = "优惠的金额", required = false)
+    @ApiModelProperty(name = "discount_price", value = "Preferential amount", required = false)
     private Double discountPrice;
     /**
-     * 收货人id
+     * The consigneeid
      */
     @Column(name = "consignee_id")
-    @ApiModelProperty(name = "consignee_id", value = "收货人id", required = false)
+    @ApiModelProperty(name = "consignee_id", value = "The consigneeid", required = false)
     private Integer consigneeId;
     /**
-     * 收货人姓名
+     * Name of consignee
      */
     @Column(name = "consignee_name")
-    @ApiModelProperty(name = "consignee_name", value = "收货人姓名", required = false)
+    @ApiModelProperty(name = "consignee_name", value = "Name of consignee", required = false)
     private String consigneeName;
     /**
-     * 收货国家
+     * Receiving countries
      */
     @Column(name = "consignee_country")
-    @ApiModelProperty(name = "consignee_country", value = "收货国家", required = false)
+    @ApiModelProperty(name = "consignee_country", value = "Receiving countries", required = false)
     private String consigneeCountry;
     /**
-     * 收货国家编码
+     * Country code of receiving goods
      */
     @Column(name = "consignee_country_code")
-    @ApiModelProperty(name = "consignee_country_code", value = "收货国家编码", required = false)
+    @ApiModelProperty(name = "consignee_country_code", value = "Country code of receiving goods", required = false)
     private String consigneeCountryCode;
     /**
-     * 收货州/省名
+     * Receiving state/Province name
      */
     @Column(name = "consignee_state")
-    @ApiModelProperty(name = "consignee_state", value = "收货州/省名", required = false)
+    @ApiModelProperty(name = "consignee_state", value = "Receiving state/Province name", required = false)
     private String consigneeState;
     /**
-     * 收货州/省名编码
+     * Receiving state/Province code
      */
     @Column(name = "consignee_state_code")
-    @ApiModelProperty(name = "consignee_state_code", value = "收货州/省名编码", required = false)
+    @ApiModelProperty(name = "consignee_state_code", value = "Receiving state/Province code", required = false)
     private String consigneeStateCode;
     /**
-     * 收货市
+     * The goods,
      */
     @Column(name = "consignee_city")
-    @ApiModelProperty(name = "consignee_city", value = "收货市", required = false)
+    @ApiModelProperty(name = "consignee_city", value = "The goods,", required = false)
     private String consigneeCity;
     /**
-     * 收货详细地址
+     * Delivery details address
      */
     @Column(name = "consignee_address")
-    @ApiModelProperty(name = "consignee_address", value = "收货详细地址", required = false)
+    @ApiModelProperty(name = "consignee_address", value = "Delivery details address", required = false)
     private String consigneeAddress;
     /**
-     * 收货人手机号
+     * Consignees mobile phone number
      */
     @Column(name = "consignee_mobile")
-    @ApiModelProperty(name = "consignee_mobile", value = "收货人手机号", required = false)
+    @ApiModelProperty(name = "consignee_mobile", value = "Consignees mobile phone number", required = false)
     private String consigneeMobile;
     /**
-     * 收货地址邮编
+     * Shipping address zip code
      */
     @Column(name = "consignee_zip_code")
-    @ApiModelProperty(name = "consignee_zip_code", value = "收货地址邮编", required = false)
+    @ApiModelProperty(name = "consignee_zip_code", value = "Shipping address zip code", required = false)
     private String consigneeZipCode;
     /**
-     * 交易创建时间
+     * Transaction creation time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "交易创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Transaction creation time", required = false)
     private Long createTime;
     /**
-     * 订单json(预留，7.0可能废弃)
+     * The orderjson(The reserved,7.0May be discarded)
      */
     @Column(name = "order_json")
-    @ApiModelProperty(name = "order_json", value = "订单json(预留，7.0可能废弃)", required = false)
+    @ApiModelProperty(name = "order_json", value = "The orderjson(The reserved,7.0May be discarded)", required = false)
     private String orderJson;
     /**
-     * 订单状态
+     * Status
      */
     @Column(name = "trade_status")
-    @ApiModelProperty(name = "trade_status", value = "订单状态", required = false)
+    @ApiModelProperty(name = "trade_status", value = "Status", required = false)
     private String tradeStatus;
 
     @PrimaryKeyField
@@ -480,7 +480,7 @@ public class TradeDO implements Serializable {
     }
 
     /**
-     * 参数构造器
+     * Parameter constructor
      *
      * @param tradeVO
      */
@@ -508,7 +508,7 @@ public class TradeDO implements Serializable {
         this.setTradeSn(tradeVO.getTradeSn());
         this.setPaymentType(tradeVO.getPaymentType());
 
-        //交易状态
+        // Transaction status
         this.setTradeStatus(TradeStatusEnum.NEW.value());
         this.setMemberId(tradeVO.getMemberId());
         this.setMemberName(tradeVO.getMemberName());

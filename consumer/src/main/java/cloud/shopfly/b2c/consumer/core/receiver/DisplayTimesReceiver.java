@@ -32,12 +32,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 流量统计amqp 消费
+ * Traffic statisticsamqp consumption
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-07 下午4:34
+ * 2018-08-07 In the afternoon4:34
  */
 @Component
 public class DisplayTimesReceiver {
@@ -59,7 +59,7 @@ public class DisplayTimesReceiver {
         try {
             displayTimesManager.countGoods(goodsPageViews);
         } catch (Exception e) {
-            logger.error("流量整理：商品 异常", e);
+            logger.error("Traffic arrangement：Abnormal goods", e);
         }
     }
 

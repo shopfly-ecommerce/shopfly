@@ -83,7 +83,7 @@ public class GoodsIndex {
     private String intro;
 
     /**
-     * 是否自营商品 0否 1是
+     * Self-run goods or not0no1is
      */
     @Field(type = FieldType.Integer)
     private Integer selfOperated;

@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2018/12/9.
- * 用户选择的优惠活动和优惠券<br/>
+ * User selected offers and coupons<br/>
  *
  * @author kingapex
  * @version 1.0
@@ -39,32 +39,32 @@ public class SelectedPromotionVo implements Serializable {
 
     private static final long serialVersionUID = -5721652966259085432L;
     /**
-     * 用户选择的优惠券
+     * Coupons selected by the user
      */
     private CouponVO coupon;
 
     /**
-     * 用户选择的单品优惠活动
+     * User selected single product promotional activities
      */
     private List<PromotionVO> singlePromotionList;
 
     /**
-     * 用户选择的组合活动
+     * User-selected composite activity
      */
     private PromotionVO groupPromotion;
 
 
     /**
-     * 构造器，初始化map
+     * Constructor, initializationmap
      */
     public SelectedPromotionVo() {
     }
 
 
     /**
-     * 设置一个优惠券
+     * Set up a coupon
      *
-     * @param coupon 优惠券
+     * @param coupon coupons
      */
     public void setCoupon(CouponVO coupon) {
         this.coupon = coupon;
@@ -72,9 +72,9 @@ public class SelectedPromotionVo implements Serializable {
 
 
     /**
-     * 设置一个商品的促销活动
+     * Set up a promotional campaign for a product
      *
-     * @param usedPromotionVo 某sku的要使用的促销活动
+     * @param usedPromotionVo someskuPromotional activities to be used
      */
     public void setPromotion(PromotionVO usedPromotionVo) {
         if (usedPromotionVo == null) {
@@ -82,7 +82,7 @@ public class SelectedPromotionVo implements Serializable {
         }
 
 
-        //只有满减是组合活动，其它全是单品活动
+        // Only the full reduction is a combination of activities, the other are all single product activities
         if (usedPromotionVo.getPromotionType().equals(PromotionTypeEnum.FULL_DISCOUNT.name())) {
             this.groupPromotion = usedPromotionVo;
         } else {
@@ -93,9 +93,9 @@ public class SelectedPromotionVo implements Serializable {
 
 
     /**
-     * 设置单品促销活动
+     * Set up individual product promotion activities
      *
-     * @param usedPromotionVo 要使用的单品活动
+     * @param usedPromotionVo Single product activity to be used
      */
     private void putSinglePromotion(PromotionVO usedPromotionVo) {
 
@@ -103,7 +103,7 @@ public class SelectedPromotionVo implements Serializable {
             singlePromotionList = new ArrayList<>();
         }
 
-        //查找当前sku是否有促销活动，如果有，先删掉（单品活动不能重叠）
+        // Check whether the current SKU has promotional activities, if so, delete first (single product activities cannot overlap)
         Iterator<PromotionVO> iterator = singlePromotionList.iterator();
         while (iterator.hasNext()) {
             PromotionVO promotionVO = iterator.next();
@@ -111,7 +111,7 @@ public class SelectedPromotionVo implements Serializable {
                 iterator.remove();
             }
         }
-        //传引用，不用重新压回了
+        // Pass the reference, no need to press back
         singlePromotionList.add(usedPromotionVo);
     }
 

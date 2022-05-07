@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 团购商品库存日志表实体
+ * Group purchase commodity inventory log table entity
  * @author Snow
  * @version v1.0
  * @since v7.0.0
@@ -43,43 +43,43 @@ public class GroupbuyQuantityLog implements Serializable {
 
     private static final long serialVersionUID = 2276297510896449L;
 
-    /**日志id*/
+    /**The logid*/
     @Id(name = "log_id")
     @ApiModelProperty(hidden=true)
     private Integer logId;
 
-    /**订单编号*/
+    /**Order no.*/
     @Column(name = "order_sn")
-    @ApiModelProperty(name="order_sn",value="订单编号",required=false)
+    @ApiModelProperty(name="order_sn",value="Order no.",required=false)
     private String orderSn;
 
-    /**商品ID*/
+    /**productID*/
     @Column(name = "goods_id")
-    @ApiModelProperty(name="goods_id",value="商品ID",required=false)
+    @ApiModelProperty(name="goods_id",value="productID",required=false)
     private Integer goodsId;
 
-    /**数量*/
+    /**Quantity*/
     @Column(name = "quantity")
-    @ApiModelProperty(name="quantity",value="数量",required=false)
+    @ApiModelProperty(name="quantity",value="Quantity",required=false)
     private Integer quantity;
 
-    /**操作时间*/
+    /**Operating time*/
     @Column(name = "op_time")
-    @ApiModelProperty(name="op_time",value="操作时间",required=false)
+    @ApiModelProperty(name="op_time",value="Operating time",required=false)
     private Long opTime;
 
-    /**日志类型*/
+    /**Log type*/
     @Column(name = "log_type")
-    @ApiModelProperty(name="log_type",value="日志类型",required=false)
+    @ApiModelProperty(name="log_type",value="Log type",required=false)
     private String logType;
 
-    /**操作原因*/
+    /**Operation reason*/
     @Column(name = "reason")
-    @ApiModelProperty(name="reason",value="操作原因",required=false)
+    @ApiModelProperty(name="reason",value="Operation reason",required=false)
     private String reason;
 
     @Column(name = "gb_id")
-    @ApiModelProperty(name="gb_id",value="团购活动id",required=false)
+    @ApiModelProperty(name="gb_id",value="Group-buying activitiesid",required=false)
     private Integer gbId;
 
     @PrimaryKeyField

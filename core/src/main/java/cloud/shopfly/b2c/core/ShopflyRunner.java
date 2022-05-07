@@ -29,7 +29,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * shopfly 项目启动配置
+ * shopfly Project startup Configuration
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -42,7 +42,7 @@ public class ShopflyRunner implements ApplicationRunner {
 
 
     /**
-     * 用户信息holder，认证信息的获取者
+     * The user informationholderTo obtain authentication information
      */
     @Autowired
     private UserHolder userHolder;
@@ -58,8 +58,8 @@ public class ShopflyRunner implements ApplicationRunner {
 
 
     /**
-     * 在项目加载时指定认证信息获取者
-     * 默认是由spring 安全上下文中获取
+     * Specify the authentication information getter when the project loads
+     * The default is aspring Get in a security context
      * @param args
      * @throws Exception
      */
@@ -67,7 +67,7 @@ public class ShopflyRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         if (shopflyConfig.getTokenSecret() == null) {
-            String errorMsg = "配置异常:未配置token秘钥，请到config配置中心检查如下：\n";
+            String errorMsg = "Abnormal configuration:Not configuredtokenSecret key, please go toconfigThe configuration center check is as follows：\n";
             errorMsg += "===========================\n";
             errorMsg += "   shopfly.token-secret\n";
             errorMsg += "===========================";

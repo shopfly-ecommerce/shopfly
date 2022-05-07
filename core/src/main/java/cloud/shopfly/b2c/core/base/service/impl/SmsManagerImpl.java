@@ -52,12 +52,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 手机短信实现
+ * SMS realization
  *
  * @author zh
  * @version v7.0
  * @since v7.0.0
- * 2018年3月19日 下午4:01:49
+ * 2018years3month19On the afternoon4:01:49
  */
 @Service
 public class SmsManagerImpl implements SmsManager {
@@ -91,24 +91,24 @@ public class SmsManagerImpl implements SmsManager {
     public void send(SmsSendVO smsSendVO) {
 
         SmsPlatformVO platformVO = smsPlatformManager.getOpen();
-        debugger.log("找到短信插件:",platformVO.toString());
+        debugger.log("Find the SMS plug-in:",platformVO.toString());
         if (platformVO != null) {
             SmsPlatform sendEvent = (SmsPlatform) ApplicationContextHolder.getBean(platformVO.getBean());
             sendEvent.onSend(smsSendVO.getMobile(), smsSendVO.getContent(), this.getConfig(platformVO.getConfig()));
         }
-        LOGER.debug("已发送短信:短信内容为:" + smsSendVO.getContent() + "手机号:" + smsSendVO.getMobile());
+        LOGER.debug("SMS message sent:The message content is:" + smsSendVO.getContent() + "Mobile phone no.:" + smsSendVO.getMobile());
     }
 
     @Override
     public boolean valid(String scene, String mobile, String code) {
-        //从传入参数组织key
+        // Organize keys from incoming parameters
         String valCode = CachePrefix.SMS_CODE.getPrefix() + scene + "_" + mobile;
-        //redis中获取验证码
+        // Obtain the verification code in Redis
         Object obj = cache.get(valCode);
         if (obj != null && obj.equals(code)) {
-            //验证码校验通过后清除缓存
+            // Clear the cache after the verification code passes
             cache.remove(valCode);
-            //将标识放入缓存中，在验证验证码正确后，下一步操作需要校验是否经过验证验证码(缓存中是否存在)
+            // After the verification code is correct, the next step is to verify whether the verification code has been passed (whether it exists in the cache)
             cache.put(CachePrefix.MOBILE_VALIDATE.getPrefix() + scene + "_" + mobile, mobile, shopflyConfig.getCaptchaTimout());
             return true;
         }
@@ -122,7 +122,7 @@ public class SmsManagerImpl implements SmsManager {
 
     @Override
     public void sendSmsMessage(String byName, String mobile, SceneType sceneType) {
-        // 随机生成的动态码
+        // Randomly generated dynamic code
         String dynamicCode = "";
 
         MessageTemplateDO template = messageTemplateClient.getModel(MessageCodeEnum.MOBILECODESEND);
@@ -147,19 +147,19 @@ public class SmsManagerImpl implements SmsManager {
         SmsSendVO smsSendVO = new SmsSendVO();
         smsSendVO.setContent(replace);
         smsSendVO.setMobile(mobile);
-        //发送短信验证码
+        // Send the SMS verification code
         this.messageSender.send(new MqMessage(AmqpExchange.SEND_MESSAGE, AmqpExchange.SEND_MESSAGE + "_QUEUE",
                 smsSendVO));
 
-        //缓存中记录验证码
+        // The verification code is recorded in the cache
         this.record(sceneType.name(), mobile, dynamicCode);
     }
 
     /**
-     * 将json参数转换为map格式
+     * willjsonParameter conversion tomapformat
      *
-     * @param config 短信参数config
-     * @return 短信参数
+     * @param config SMS parametersconfig
+     * @return SMS parameters
      */
     private Map getConfig(String config) {
         if (StringUtil.isEmpty(config)) {

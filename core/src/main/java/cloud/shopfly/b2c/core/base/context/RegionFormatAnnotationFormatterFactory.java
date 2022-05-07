@@ -26,8 +26,8 @@ import static java.util.Arrays.asList;
 
 /**
  * kingapex on 2018/5/2.
- * 地区格式化工厂
- * 被@RegionFormat注解的属性，会接受一个地区id转换为地区对象
+ * Regional format chemical plant
+ * be@RegionFormatThe annotation property accepts a localeidConvert to a locale object
  *
  * @author kingapex
  * @version 1.0
@@ -37,7 +37,7 @@ import static java.util.Arrays.asList;
 public class RegionFormatAnnotationFormatterFactory implements AnnotationFormatterFactory<RegionFormat> {
 
     /**
-     * 获取被注解对象的类型
+     * Gets the type of the annotated object
      *
      * @return
      */
@@ -47,11 +47,11 @@ public class RegionFormatAnnotationFormatterFactory implements AnnotationFormatt
     }
 
     /**
-     * 获取输出对象
+     * Get the output object
      *
-     * @param annotation 注解实例
-     * @param fieldType  被注解字段的类型
-     * @return 地区格式化后输出的对象
+     * @param annotation Annotation instance
+     * @param fieldType  The type of the annotated field
+     * @return The output object of the formatted locale
      */
     @Override
     public Printer<?> getPrinter(RegionFormat annotation, Class<?> fieldType) {
@@ -59,11 +59,11 @@ public class RegionFormatAnnotationFormatterFactory implements AnnotationFormatt
     }
 
     /**
-     * 获取解析器
+     * Get the parser
      *
-     * @param annotation 注解实例
-     * @param fieldType  被注解字段的类型
-     * @return 地区格式化后对象
+     * @param annotation Annotation instance
+     * @param fieldType  The type of the annotated field
+     * @return Area formatted object
      */
     @Override
     public Parser<?> getParser(RegionFormat annotation, Class<?> fieldType) {

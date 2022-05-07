@@ -19,9 +19,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 数据库操作运行期异常
+ * The database operation is abnormal
  * @author kingapex
- * 2010-1-6下午06:16:47
+ * 2010-1-6In the afternoon06:16:47
  */
 public class DBRuntimeException extends RuntimeException {
 
@@ -37,10 +37,10 @@ public class DBRuntimeException extends RuntimeException {
 	}
 	public DBRuntimeException(Exception e,String sql) {
 		
-		super("数据库运行期异常");
+		super("The database is abnormal. Procedure");
 		e.printStackTrace();
 		if(loger.isErrorEnabled()){
-			loger.error("数据库运行期异常，相关sql语句为"+ sql);
+			loger.error("The database is abnormalsqlStatement for"+ sql);
 		}
 	}
 	

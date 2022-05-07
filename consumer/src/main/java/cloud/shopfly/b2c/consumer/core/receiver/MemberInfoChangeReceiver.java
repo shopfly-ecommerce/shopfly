@@ -30,11 +30,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 修改会员资料
+ * Modifying Member information
  *
  * @author zh
  * @version v7.0
- * @date 18/12/26 下午4:17
+ * @date 18/12/26 In the afternoon4:17
  * @since v7.0
  */
 @Component
@@ -56,7 +56,7 @@ public class MemberInfoChangeReceiver {
                 try {
                     event.memberInfoChange(memberId);
                 } catch (Exception e) {
-                    logger.error("处理会员资料变化消息出错", e);
+                    logger.error("Error processing member information change message", e);
                 }
             }
         }

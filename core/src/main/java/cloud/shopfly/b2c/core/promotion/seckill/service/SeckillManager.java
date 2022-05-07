@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.core.promotion.seckill.model.dto.SeckillDTO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 限时抢购入库业务层
+ * Flash purchase warehousing business layer
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -31,59 +31,59 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface SeckillManager	{
 
 	/**
-	 * 查询限时抢购入库列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
-	 * @param keywords 关键字
+	 * Query the flash sale inventory list
+	 * @param page The page number
+	 * @param pageSize Number each page
+	 * @param keywords keyword
 	 * @return Page
 	 */
 	Page list(int page, int pageSize, String keywords);
 
 	/**
-	 * 添加限时抢购入库
-	 * @param seckill 限时抢购入库
-	 * @return Seckill 限时抢购入库
+	 * Add flash sale to store
+	 * @param seckill Flash sale in stock
+	 * @return Seckill Flash sale in stock
 	 */
 	SeckillDTO add(SeckillDTO seckill);
 
 	/**
-	* 修改限时抢购入库
-	* @param seckill 限时抢购入库
-	* @param id 限时抢购入库主键
-	* @return Seckill 限时抢购入库
+	* Modify flash sale to store
+	* @param seckill Flash sale in stock
+	* @param id Flash store main key
+	* @return Seckill Flash sale in stock
 	*/
 	SeckillDTO edit(SeckillDTO seckill, Integer id);
 
 	/**
-	 * 删除限时抢购入库
-	 * @param id 限时抢购入库主键
+	 * Delete flash sale to store
+	 * @param id Flash store main key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取限时抢购入库
-	 * @param id 限时抢购入库主键
-	 * @return Seckill  限时抢购入库
+	 * Get flash sale for storage
+	 * @param id Flash store main key
+	 * @return Seckill  Flash sale in stock
 	 */
 	SeckillDTO getModelAndRange(Integer id);
 
 	/**
-	 * 获取限时抢购入库
-	 * @param id 限时抢购入库主键
-	 * @return Seckill  限时抢购入库
+	 * Get flash sale for storage
+	 * @param id Flash store main key
+	 * @return Seckill  Flash sale in stock
 	 */
 	SeckillVO getModelAndApplys(Integer id);
 
 
 	/**
-	 * 获取限时抢购入库
-	 * @param id 限时抢购入库主键
-	 * @return Seckill  限时抢购入库
+	 * Get flash sale for storage
+	 * @param id Flash store main key
+	 * @return Seckill  Flash sale in stock
 	 */
 	SeckillDO getModel(Integer id);
 
 	/**
-	 * 根据商品ID，读取限时秒杀的活动信息
+	 * According to the goodsID, read the activity information of the timer
 	 * @param goodsId
 	 * @return
 	 */
@@ -91,13 +91,13 @@ public interface SeckillManager	{
 
 
 	/**
-	 * 审核申请
-	 * @param applyId	申请ID
+	 * Review the application
+	 * @param applyId	To apply forID
 	 */
 	void reviewApply(Integer applyId);
 
 	/**
-	 * 关闭某限时抢购
+	 * Close a flash sale
 	 * @param id
 	 */
     void close(Integer id);

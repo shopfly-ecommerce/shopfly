@@ -29,21 +29,21 @@ import java.lang.annotation.Target;
 public @interface RedisTransactional {
 
     /**
-     * 获取锁的最长等待时间，以秒为单位
-     * 如果不指定，则会一直等待
+     * The maximum wait time, in seconds, to get a lock
+     * If this parameter is not specified, the system waits
      */
     int acquireTimeout() default 0;
 
 
     /**
-     * 锁的超时时间，以秒为单位
-     * 如果不指定，则不会超时，只能手工解锁时才会释放
+     * Timeout period of the lock, in seconds
+     * If this parameter is not specified, the system does not time out and can only be unlocked manually
      */
     int lockTimeout() default 0 ;
 
 
     /**
-     * 锁名字，如果不指定，则使用当前方法的全路径名
+     * Lock name. If not specified, the full path name of the current method is used
      * @return
      */
     String lockName() default "";

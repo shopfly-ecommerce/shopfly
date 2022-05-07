@@ -30,11 +30,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 帮助中心页面生成
+ * Help center page generation
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:30:38
+ * @since v7.0.0 2018years3month23The morning of10:30:38
  */
 @Component
 public class HelpChangeReceiver {
@@ -45,7 +45,7 @@ public class HelpChangeReceiver {
 	private List<HelpChangeEvent> events;
 
 	/**
-	 * 消费执行者
+	 * Consumer executor
 	 * 
 	 * @param articeids
 	 */
@@ -60,7 +60,7 @@ public class HelpChangeReceiver {
 				try {
 					event.helpChange(articeids);
 				} catch (Exception e) {
-					logger.error("生成帮助中心页面出错", e);
+					logger.error("Error generating help center page", e);
 				}
 			}
 		}

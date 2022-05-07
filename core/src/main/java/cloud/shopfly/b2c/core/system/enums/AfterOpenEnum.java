@@ -16,28 +16,28 @@
 package cloud.shopfly.b2c.core.system.enums;
 
 /**
- * 操作类型 枚举
+ * Operation type enumeration
  *
  * @author zh
  * @version v7.0
- * @since v7.0 2017年10月17日 上午10:49:25
+ * @since v7.0 2017years10month17The morning of10:49:25
  */
 public enum AfterOpenEnum {
 
     /**
-     * 打开应用
+     * Open the application
      */
     go_app,
     /**
-     * 跳转到URL
+     * Jump toURL
      */
     go_url,
     /**
-     * 打开特定的activity
+     * Open specificactivity
      */
     go_activity,
     /**
-     * 用户自定义内容
+     * User-defined content
      */
     go_custom
 

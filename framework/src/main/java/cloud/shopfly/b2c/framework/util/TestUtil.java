@@ -16,8 +16,8 @@
 package cloud.shopfly.b2c.framework.util;
 
 /**
- * 测试通用类
- * 提供测试开关 统一打印方法
+ * Test generic classes
+ * Provides a unified printing method for test switches
  * @author Sylow
  * @version v1.0 , 2015-08-24
  * @since v4.0
@@ -26,13 +26,13 @@ package cloud.shopfly.b2c.framework.util;
 public class TestUtil {
 	
 	/**
-	 * 打印开关
+	 * Print the switch
 	 */
 	public final static boolean TEST_OPEN = false;
 	
 	
 	/**
-	 * 打印错误信息
+	 * Print error message
 	 * @param e <b>Exception</b>
 	 */
 	public static void print(Exception e){

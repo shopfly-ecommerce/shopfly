@@ -26,28 +26,28 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 评论VO
+ * commentsVO
  * @author fk
  * @version v1.0
  * @since v7.0.0
  * 2018-05-03 10:38:00
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-@ApiModel(description = "会员评论vo")
+@ApiModel(description = "Member commentsvo")
 public class CommentDTO implements Serializable {
 
-	@ApiModelProperty(name = "content", value = "评论内容", required = false)
+	@ApiModelProperty(name = "content", value = "Comment on the content", required = false)
 	private String content;
 
-	@ApiModelProperty(name = "grade", value = "好中差评", required = true,allowableValues = "good,neutral,bad")
+	@ApiModelProperty(name = "grade", value = "Good to bad", required = true,allowableValues = "good,neutral,bad")
 	@GradeType
 	private String grade;
 	
-	@ApiModelProperty(value = "会员评论的图片")
+	@ApiModelProperty(value = "Pictures of member comments")
 	private List<String> images;
 	
-	@ApiModelProperty(value = "会员评论商品规格id",name = "sku_id", required = true)
-	@NotNull(message = "评论的商品不能为空")
+	@ApiModelProperty(value = "Members comment on product specificationsid",name = "sku_id", required = true)
+	@NotNull(message = "Review items cannot be empty")
 	private Integer skuId;
 
 	public String getContent() {

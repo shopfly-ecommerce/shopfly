@@ -46,7 +46,7 @@ import java.util.regex.Pattern;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-07 上午8:22
+ * 2018-08-07 In the morning8:22
  */
 @Service
 public class DisplayTimesManagerImpl implements DisplayTimesManager {
@@ -61,18 +61,18 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
     private GoodsClient goodsClient;
 
     /**
-     * 阙值，数据累计次数后，进行入库操作
+     * Threshold, after the accumulated number of data, warehousing operation will be performed
      */
     private final int THRESHOLD = 100;
 
     /**
-     * 商品访问
+     * Access to goods
      */
     private final String GOODS = "{GOODS_VIEW}";
 
 
     /**
-     * 访问记录
+     * Access records
      */
     private final String HISTORY = "{VIEW_HISTORY}";
 
@@ -84,32 +84,32 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
     }
 
     /**
-     * 访问某地址
+     * Accessing an address
      *
      * @param url
      */
     @Override
     public void view(String url, String uuid) {
 
-        //记录访问
+        // Record access
         List<String> history = new ArrayList<>(16);
 
         Object object = cache.get(HISTORY);
-        //非空判定，为空则创建
+        // Not null, if empty, create
         if (object != null) {
             history = (List) object;
         }
-        //如果已经访问过，则不进行统计
+        // If yes, statistics are not collected
         if (history.contains(url + uuid)) {
             return;
         }
-        //否则记录访问
+        // Otherwise record access
         history.add(url + uuid);
         cache.put(HISTORY, history);
 
-        //判定访问是商品还是店铺
+        // Determine whether the visit is a product or a store
         int type = regular(url);
-        //无效访问过滤
+        // Invalid access filtering
         if (type == 2) {
             return;
         }
@@ -173,10 +173,10 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
     }
 
     /**
-     * 匹配当前url访问的是商品还是店铺
+     * Match the currenturlAre you visiting goods or shops
      *
      * @param url
-     * @return 1 商品 0店铺 2 无效
+     * @return 1 product0The store2 invalid
      */
     private int regular(String url) {
         if (StringUtil.isEmpty(url)) {
@@ -190,7 +190,7 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
     }
 
     /**
-     * 访问商品
+     * Access to goods
      *
      * @param goodsId
      */
@@ -207,7 +207,7 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
         goodsPageView.setMonth(localDate.getMonthValue());
         goodsPageView.setCreateTime(DateUtil.getDateline());
         goodsPageViews.add(goodsPageView);
-        //如果达到阙值，则发送AMQP进行处理
+        // If the threshold is reached, AMQP is sent for processing
         if (goodsPageViews.size() > THRESHOLD) {
             this.messageSender.send(new MqMessage(AmqpExchange.GOODS_VIEW_COUNT, AmqpExchange.GOODS_VIEW_COUNT + "_ROUTING",
                     goodsPageViews));
@@ -219,27 +219,27 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
     }
 
     /**
-     * 获取当前店铺的商品id/或者店铺id
+     * Get the goods of the current storeid/Or the storeid
      *
      * @param url
-     * @return 1 商品 0店铺 2 无效
+     * @return 1 product0The store2 invalid
      */
     private int urlParams(String url, int type) {
         switch (type) {
             case 0:
                 String pattern = "(/shop/)(\\d+)";
-                // 创建 Pattern 对象
+                // Create Pattern object
                 Pattern r = Pattern.compile(pattern);
-                // 现在创建 matcher 对象
+                // Now create the Matcher object
                 Matcher m = r.matcher(url);
                 if (m.find()) {
                     return new Integer(m.group(2));
                 }
             case 1:
                 pattern = "(/goods/)(\\d+)";
-                // 创建 Pattern 对象
+                // Create Pattern object
                 r = Pattern.compile(pattern);
-                // 现在创建 matcher 对象
+                // Now create the Matcher object
                 m = r.matcher(url);
                 if (m.find()) {
                     return new Integer(m.group(2));
@@ -252,12 +252,12 @@ public class DisplayTimesManagerImpl implements DisplayTimesManager {
 
 
     /**
-     * 重新构造商品浏览
+     * Restructure product browsing
      *
      * @param goodsPageViews
      */
     private List<GoodsPageView> reBuildGoods(List<GoodsPageView> goodsPageViews) {
-        //整理商品
+        // Finish goods
         Map<Integer, GoodsPageView> countGoods = new HashMap<>(16);
         for (GoodsPageView goodsPageView : goodsPageViews) {
             if (countGoods.containsKey(goodsPageView.hashCode())) {

@@ -28,11 +28,11 @@ import java.io.Serializable;
 /**
  * @author zjp
  * @version v7.0
- * @Description 操作被允许的情况
+ * @Description The condition under which the operation is allowed
  * @ClassName AfterSaleOperateAllowable
- * @since v7.0 上午11:32 2018/5/8
+ * @since v7.0 In the morning11:32 2018/5/8
  */
-@ApiModel(description = "操作被允许的情况")
+@ApiModel(description = "The condition under which the operation is allowed")
 public class AfterSaleOperateAllowable implements Serializable {
 
     private static final long serialVersionUID = -6083914452276811925L;
@@ -50,16 +50,16 @@ public class AfterSaleOperateAllowable implements Serializable {
         this.paymentType = paymentType;
     }
 
-    @ApiModelProperty(value = "是否允许被取消", name = "allow_cancel")
+    @ApiModelProperty(value = "Whether to allow cancellation", name = "allow_cancel")
     private boolean allowCancel;
 
-    @ApiModelProperty(value = "是否允许申请", name = "allow_apply")
+    @ApiModelProperty(value = "Whether application is allowed", name = "allow_apply")
     private boolean allowApply;
 
-    @ApiModelProperty(value = "是否允许退货入库", name = "allow_stock_in")
+    @ApiModelProperty(value = "Whether returns are allowed for storage", name = "allow_stock_in")
     private boolean allowStockIn;
 
-    @ApiModelProperty(value = "是否管理员退款", name = "allow_admin_refund")
+    @ApiModelProperty(value = "Administrator refund", name = "allow_admin_refund")
     private boolean allowAdminRefund;
 
 

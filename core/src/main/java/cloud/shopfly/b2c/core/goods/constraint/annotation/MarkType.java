@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.goods.constraint.annotation;
 /**
  * @author fk
  * @version v2.0
- * @Description: 标签关键字验证
+ * @Description: Tag keyword verification
  * @date 2018/4/1110:27
  * @since v7.0.0
  */
@@ -35,7 +35,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MarkType {
 
-    String message() default "标签关键字不正确";
+    String message() default "The label keyword is incorrect";
 
     Class<?>[] groups() default {};
 

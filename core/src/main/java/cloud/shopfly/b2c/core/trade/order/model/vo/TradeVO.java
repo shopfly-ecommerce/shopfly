@@ -29,7 +29,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 交易VO
+ * tradingVO
  *
  * @author Snow create in 2018/4/9
  * @version v2.0
@@ -41,31 +41,31 @@ public class TradeVO implements Serializable {
 
     private static final long serialVersionUID = -8580648928412433120L;
 
-    @ApiModelProperty(name = "trade_sn", value = "交易编号")
+    @ApiModelProperty(name = "trade_sn", value = "Transaction number")
     private String tradeSn;
 
-    @ApiModelProperty(value = "会员id")
+    @ApiModelProperty(value = "membersid")
     private Integer memberId;
 
-    @ApiModelProperty(value = "会员昵称")
+    @ApiModelProperty(value = "Members nickname")
     private String memberName;
 
-    @ApiModelProperty(value = "支付方式")
+    @ApiModelProperty(value = "Method of payment")
     private String paymentType;
 
-    @ApiModelProperty(value = "价格信息")
+    @ApiModelProperty(value = "Price information")
     private PriceDetailVO priceDetail;
 
-    @ApiModelProperty(value = "收货人信息")
+    @ApiModelProperty(value = "Consignee information")
     private ConsigneeVO consignee;
 
-    @ApiModelProperty(value = "优惠券集合")
+    @ApiModelProperty(value = "Coupon collection")
     private List<CouponVO> couponList;
 
-    @ApiModelProperty(value = "订单集合")
+    @ApiModelProperty(value = "Orders for collection")
     private List<OrderDTO> orderList;
 
-    @ApiModelProperty(value = "赠品集合")
+    @ApiModelProperty(value = "Gift set")
     private List<GiftVO> giftList;
 
 

@@ -48,12 +48,12 @@ import java.util.Map;
 
 
 /**
- * es的商品索引实现
+ * esCommodity index implementation
  *
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年9月18日 上午11:41:44
+ * 2017years9month18The morning of11:41:44
  */
 @Service
 public class GoodsIndexManagerImpl implements GoodsIndexManager {
@@ -85,7 +85,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
         String goodsName = goods.get("goods_name").toString();
         try {
 
-            //配置文件中定义的索引名字
+            // The index name defined in the configuration file
             String indexName = esConfig.getIndexName() + "_" + EsSettings.GOODS_INDEX_NAME;
 
             GoodsIndex goodsIndex = this.getSource(goods);
@@ -96,25 +96,25 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
             indexQuery.setId(goodsIndex.getGoodsId().toString());
             indexQuery.setObject(goodsIndex);
 
-            //审核通过且没有下架且没有删除
+            // Approved and not removed and not deleted
 //            boolean flag = goodsIndex.getDisabled() == 1 && goodsIndex.getMarketEnable() == 1 ;
 //            if (flag) {
 //
 //
 //                List<String> wordsList = toWordsList(goodsName);
 //
-//                // 分词入库
+//                // Participles warehousing
 //                this.wordsToDb(wordsList);
 //            }
 
             elasticsearchOperations.index(indexQuery);
             if (logger.isDebugEnabled()) {
-                logger.debug("为商品["+goodsName+"]生成索引成功");
+                logger.debug("For the goods["+goodsName+"]Index generation succeeded");
             }
         } catch (Exception e) {
-            logger.error("为商品["+goodsName+"]生成索引异常",e);
-            debugger.log("为商品["+goodsName+"]生成索引异常", StringUtil.getStackTrace(e));
-            throw new RuntimeException("为商品["+goodsName+"]生成索引异常", e);
+            logger.error("For the goods["+goodsName+"]Generate index exception",e);
+            debugger.log("For the goods["+goodsName+"]Generate index exception", StringUtil.getStackTrace(e));
+            throw new RuntimeException("For the goods["+goodsName+"]Generate index exception", e);
         }
 
     }
@@ -122,9 +122,9 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     @Override
     public void updateIndex(Map goods) {
 
-        //删除
+        // delete
         this.deleteIndex(goods);
-        //添加
+        // add
         this.addIndex(goods);
 
     }
@@ -132,7 +132,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     @Override
     public void deleteIndex(Map goods) {
 
-        //配置文件中定义的索引名字
+        // The index name defined in the configuration file
         String indexName = esConfig.getIndexName()+"_"+ EsSettings.GOODS_INDEX_NAME;
         elasticsearchOperations.delete(indexName, EsSettings.GOODS_TYPE_NAME, goods.get("goods_id").toString());
 
@@ -143,7 +143,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     }
 
     /**
-     * 将list中的分词减一
+     * willlistThe participle in minus one
      *
      * @param wordsList
      */
@@ -155,7 +155,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     }
 
     /**
-     * 封装成内存需要格式数据
+     * Encapsulation into memory requires formatted data
      *
      * @param goods
      * @return
@@ -183,7 +183,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
         goodsIndex.setIntro(goods.get("intro") == null ? "" : goods.get("intro").toString());
         goodsIndex.setSelfOperated(goods.get("self_operated") == null ? 0 : StringUtil.toInt(goods.get("self_operated").toString(), 0));
 
-        //参数维度,已填写参数
+        // Parameter dimension, parameter has been entered
         List<Map> params = (List<Map>) goods.get("params");
         List<Param> paramsList = this.convertParam(params);
         goodsIndex.setParams(paramsList);
@@ -192,22 +192,22 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     }
 
     /**
-     * 获取分词结果
+     * Get word segmentation results
      *
      * @param txt
-     * @return 分词list
+     * @return participleslist
      */
     protected List<String> toWordsList(String txt) {
 
 
-        //配置文件中定义的索引名字
+        // The index name defined in the configuration file
         String indexName = esConfig.getIndexName()+"_"+ EsSettings.GOODS_INDEX_NAME;
 
         List<String> list = new ArrayList<String>();
 
         IndicesAdminClient indicesAdminClient = elasticsearchOperations.getClient().admin().indices();
         AnalyzeRequestBuilder request = new AnalyzeRequestBuilder(indicesAdminClient, AnalyzeAction.INSTANCE, indexName, txt);
-        //	分词
+        // participles
 //        request.setAnalyzer("ik_max_word");
 //        request.setTokenizer("ik_max_word");
         List<AnalyzeResponse.AnalyzeToken> listAnalysis = request.execute().actionGet().getTokens();
@@ -218,7 +218,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     }
 
     /**
-     * 转换参数
+     * Transformation parameters
      *
      * @param params
      * @return
@@ -240,7 +240,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
 
 
     /**
-     * 将分词结果写入数据库
+     * Writes the word segmentation results to the database
      *
      * @param wordsList
      */
@@ -253,41 +253,41 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
 
     @Override
     public boolean addAll(List<Map<String, Object>> list, int index) {
-        //配置文件中定义的索引名字
+        // The index name defined in the configuration file
         String indexName = esConfig.getIndexName()+"_"+ EsSettings.GOODS_INDEX_NAME;
-        //删除所有的索引
+        // Delete all indexes
         if (index == 1) {
             if (elasticsearchOperations.indexExists(indexName)) {
-                //删除goods的所有索引
+                // Delete all indexes of goods
                 DeleteQuery deleteQuery = new DeleteQuery();
                 deleteQuery.setIndex(indexName);
                 deleteQuery.setType(EsSettings.GOODS_TYPE_NAME);
-                //删除索引
+                // Remove the index
                 elasticsearchOperations.delete(deleteQuery);
-                //删除分词
+                // Delete the word
                 goodsWordsClient.delete();
             }
         }
 
         boolean hasError =false;
 
-        //循环生成索引
+        // Cyclic index generation
         for (Map goods : list) {
 
-            //如果任务停止则停止生成索引
+            // If the task stops, the index generation stops
             TaskProgress tk = progressManager.getProgress(TaskProgressConstant.GOODS_INDEX);
 
             if (tk != null) {
 
                 try {
-                    /** 生成索引消息 */
-                    progressManager.taskUpdate(TaskProgressConstant.GOODS_INDEX, "正在生成[" + StringUtil.toString(goods.get("goods_name")) + "]");
-                    /** 生成优惠价格索引 */
+                    /** Generate index messages*/
+                    progressManager.taskUpdate(TaskProgressConstant.GOODS_INDEX, "Being generated[" + StringUtil.toString(goods.get("goods_name")) + "]");
+                    /** Generate an index of good prices*/
                     goods.put("discount_price", 0L);
                     this.addIndex(goods);
                 } catch (Exception e) {
                     hasError =true;
-                    logger.error( StringUtil.toString(goods.get("goods_name"))+"索引生成异常" ,e);
+                    logger.error( StringUtil.toString(goods.get("goods_name"))+"Index generation exception" ,e);
                 }
 
 
@@ -300,7 +300,7 @@ public class GoodsIndexManagerImpl implements GoodsIndexManager {
     }
 
     /**
-     * list去重
+     * listduplicate removal
      * @param list
      * @return
      */

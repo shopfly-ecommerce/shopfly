@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 物流公司业务类
+ * Logistics company business
  *
  * @author zjp
  * @version v7.0.0
@@ -63,18 +63,18 @@ public class LogiCompanyManagerImpl implements LogiCompanyManager {
         LogiCompanyDO logikdcode = this.getLogiBykdCode(logi.getKdcode());
         LogiCompanyDO loginame = this.getLogiByName(logi.getName());
         if (loginame != null) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "物流公司名称重复");
+            throw new ServiceException(SystemErrorCode.E214.name(), "The name of logistics company is the same");
         }
         if (logicode != null) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "物流公司代码重复");
+            throw new ServiceException(SystemErrorCode.E214.name(), "Logistics company code duplication");
         }
         if (logikdcode != null) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "快递鸟公司代码重复");
+            throw new ServiceException(SystemErrorCode.E214.name(), "Express bird company code duplication");
         }
-        //支持电子面单时，代码必填
+        // The code is mandatory if the electronic sheet is supported
         if (logi.getIsWaybill() != null && logi.getIsWaybill().equals(1)) {
             if (StringUtil.isEmpty(logi.getKdcode())) {
-                throw new ServiceException(SystemErrorCode.E214.name(), "快递鸟公司代码必填");
+                throw new ServiceException(SystemErrorCode.E214.name(), "Express bird Company code mandatory");
             }
         }
 
@@ -90,24 +90,24 @@ public class LogiCompanyManagerImpl implements LogiCompanyManager {
     public LogiCompanyDO edit(@Valid LogiCompanyDO logi, Integer id) {
         LogiCompanyDO model = this.getModel(id);
         if (model == null) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "物流公司不存在");
+            throw new ServiceException(SystemErrorCode.E214.name(), "Logistics companies do not exist");
         }
-        //当支持电子面单时，需要填写快递鸟物流公司code
+        // The code of express Bird Logistics company needs to be filled in when supporting electronic sheet
         if (logi.getIsWaybill() == 1 && StringUtil.isEmpty(logi.getKdcode())) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "快递鸟公司代码必填");
+            throw new ServiceException(SystemErrorCode.E214.name(), "Express bird Company code mandatory");
         }
 
         LogiCompanyDO logicode = this.getLogiByCode(logi.getCode());
         LogiCompanyDO logikdcode = this.getLogiBykdCode(logi.getKdcode());
         LogiCompanyDO loginame = this.getLogiByName(logi.getName());
         if (logikdcode != null && !logikdcode.getId().equals(logi.getId())) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "快递鸟公司代码重复");
+            throw new ServiceException(SystemErrorCode.E214.name(), "Express bird company code duplication");
         }
         if (loginame != null && !loginame.getId().equals(logi.getId())) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "物流公司名称重复");
+            throw new ServiceException(SystemErrorCode.E214.name(), "The name of logistics company is the same");
         }
         if (logicode != null && !logicode.getId().equals(logi.getId())) {
-            throw new ServiceException(SystemErrorCode.E214.name(), "物流公司代码重复");
+            throw new ServiceException(SystemErrorCode.E214.name(), "Logistics company code duplication");
         }
         this.daoSupport.update(logi, id);
         return logi;
@@ -119,7 +119,7 @@ public class LogiCompanyManagerImpl implements LogiCompanyManager {
         for (Integer logi : logiId) {
             LogiCompanyDO model = this.getModel(logi);
             if (model == null) {
-                throw new ServiceException(SystemErrorCode.E214.name(), "物流公司不存在");
+                throw new ServiceException(SystemErrorCode.E214.name(), "Logistics companies do not exist");
             }
         }
         String id = StringUtil.implode(",", logiId);

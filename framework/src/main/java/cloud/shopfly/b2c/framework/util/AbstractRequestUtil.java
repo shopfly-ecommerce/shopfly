@@ -24,17 +24,17 @@ import java.util.Map;
 
 
 /**
- * httpRequest常用方法工具
+ * httpRequestCommon Method tools
  *
  * @author kingapex
- * 2010-2-12上午11:34:48
+ * 2010-2-12In the morning11:34:48
  */
 public abstract class AbstractRequestUtil {
     private AbstractRequestUtil() {
     }
 
     /**
-     * 将request中的参数转为Map
+     * willrequestIs converted toMap
      *
      * @param request
      * @return
@@ -59,7 +59,7 @@ public abstract class AbstractRequestUtil {
     }
 
     /**
-     * 获取完整的url，包括域名端口等
+     * Get completeurl, including domain names and ports
      *
      * @return
      */
@@ -107,11 +107,11 @@ public abstract class AbstractRequestUtil {
     }
 
     /**
-     * 获取Integer 的值
+     * To obtainInteger The value of the
      *
      * @param request
      * @param name
-     * @return 如果没有返回null
+     * @return If it doesnt returnnull
      */
     public static Integer getIntegerValue(HttpServletRequest request, String name) {
         String value = request.getParameter(name);
@@ -136,11 +136,11 @@ public abstract class AbstractRequestUtil {
 
 
     /**
-     * 获取int的值
+     * To obtainintThe value of the
      *
      * @param request
      * @param name
-     * @return 如果没有返回0
+     * @return If it doesnt return0
      */
     public static int getIntValue(HttpServletRequest request, String name) {
         String value = request.getParameter(name);
@@ -160,9 +160,9 @@ public abstract class AbstractRequestUtil {
 
 
     /**
-     * 检测是不是手机访问
+     * Check for mobile access
      *
-     * @return true为是false为不是手机访问
+     * @return trueAs afalseFor not mobile phone access
      */
     public static boolean isMobile() {
 

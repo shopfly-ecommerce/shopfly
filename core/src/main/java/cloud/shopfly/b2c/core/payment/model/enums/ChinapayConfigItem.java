@@ -18,20 +18,20 @@ package cloud.shopfly.b2c.core.payment.model.enums;
 /**
  * @author fk
  * @version v2.0
- * @Description: 银联在线客户端使用配置参数
+ * @Description: Unionpay online client uses configuration parameters
  * @date 2018/4/11 17:05
  * @since v7.0.0
  */
 public enum ChinapayConfigItem {
 
     /**
-     * 商户代码
+     * Merchant code
      */
-    mer_id("商户代码"),
+    mer_id("Merchant code"),
     /**
-     * 配置文件security.properties存放位置
+     * The configuration filesecurity.propertieslocation
      */
-    merchant_private_key("配置文件security.properties存放位置");
+    merchant_private_key("The configuration filesecurity.propertieslocation");
 
     private String text;
 

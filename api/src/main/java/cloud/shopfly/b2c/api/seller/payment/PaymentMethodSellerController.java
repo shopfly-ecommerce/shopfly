@@ -30,7 +30,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 支付方式表控制器
+ * Payment mode table controller
  *
  * @author fk
  * @version v2.0
@@ -39,17 +39,17 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/payment/payment-methods")
-@Api(description = "支付方式表相关API")
+@Api(description = "Payment method table relatedAPI")
 public class PaymentMethodSellerController {
 
     @Autowired
     private PaymentMethodManager paymentMethodManager;
 
 
-    @ApiOperation(value = "查询支付方式列表", response = PaymentMethodDO.class)
+    @ApiOperation(value = "Query the payment method list", response = PaymentMethodDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -58,10 +58,10 @@ public class PaymentMethodSellerController {
     }
 
 
-    @ApiOperation(value = "修改支付方式", response = PaymentMethodDO.class)
+    @ApiOperation(value = "Modification of payment method", response = PaymentMethodDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "payment_plugin_id", value = "支付插件id", required = true, dataType = "string", paramType = "path"),
-            @ApiImplicitParam(name = "payment_method", value = "支付方式对象", required = true, dataType = "PaymentPluginVO", paramType = "body")
+            @ApiImplicitParam(name = "payment_plugin_id", value = "Pay the plug-inid", required = true, dataType = "string", paramType = "path"),
+            @ApiImplicitParam(name = "payment_method", value = "Payment Method object", required = true, dataType = "PaymentPluginVO", paramType = "body")
     })
     @PutMapping("/{payment_plugin_id}")
     public PaymentMethodDO add(@Valid @RequestBody @ApiIgnore PaymentPluginVO paymentMethod, @PathVariable("payment_plugin_id") String paymentPluginId) {
@@ -70,9 +70,9 @@ public class PaymentMethodSellerController {
     }
 
     @GetMapping(value = "/{plugin_id}")
-    @ApiOperation(value = "查询一个支付方式")
+    @ApiOperation(value = "Query a payment method")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "plugin_id", value = "要查询的支付插件id", required = true, dataType = "string", paramType = "path")
+            @ApiImplicitParam(name = "plugin_id", value = "The payment plug-in to queryid", required = true, dataType = "string", paramType = "path")
     })
     public PaymentPluginVO get(@PathVariable("plugin_id") String pluginId) {
 

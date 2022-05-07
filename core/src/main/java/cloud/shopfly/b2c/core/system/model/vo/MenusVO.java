@@ -22,7 +22,7 @@ import java.util.List;
 
 
 /**
- * 菜单VO 用于读取所有的菜单
+ * The menuVO 用于读取所有的The menu
  *
  * @author zh
  * @version v7.0.0
@@ -32,35 +32,35 @@ import java.util.List;
 public class MenusVO implements Serializable {
 
     /**
-     * 菜单id
+     * The menuid
      */
     private Integer id;
     /**
-     * 父id
+     * The fatherid
      */
     private Integer parentId;
     /**
-     * 菜单标题
+     * The menu title
      */
     private String title;
     /**
-     * 菜单url
+     * The menuurl
      */
     private String url;
     /**
-     * 菜单唯一标识
+     * Menu unique identifier
      */
     private String identifier;
     /**
-     * 权限表达式
+     * Permission expression
      */
     private String authRegular;
     /**
-     * 删除标记
+     * Remove the tag
      */
     private Integer deleteFlag;
     /**
-     * 子菜单
+     * Sub menu
      */
     private List<MenusVO> children;
 

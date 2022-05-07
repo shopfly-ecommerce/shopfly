@@ -36,7 +36,7 @@ import java.net.URLDecoder;
 import java.util.Map;
 
 /**
- * 新浪微博登陆相关接口
+ * Sina Weibo login interface
  * @author cs
  * @version v1.0
  * @since v7.2.2

@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.core.payment.plugin.weixin.executor;
 
@@ -18,7 +18,7 @@ import java.util.TreeMap;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信wap端
+ * @Description: WeChatwapend
  * @date 2018/4/1810:12
  * @since v7.0.0
  */
@@ -27,7 +27,7 @@ public class WeixinPaymentAppExecutor extends WeixinPuginConfig {
 
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return
@@ -54,7 +54,7 @@ public class WeixinPaymentAppExecutor extends WeixinPuginConfig {
                 return result;
             }
         } catch (Exception e) {
-            this.logger.error("返回参数转换失败", e);
+            this.logger.error("Parameter conversion failed", e);
         }
         return null;
     }

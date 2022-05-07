@@ -22,17 +22,17 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * 通用统计图VO
+ * General statisticsVO
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-09 上午10:51
+ * 2018-04-09 In the morning10:51
  */
 @JsonNaming(value = SimpleChart.class)
 public class SimpleChart extends BaseChart implements Serializable {
 
-    @ApiModelProperty(value = "表数据")
+    @ApiModelProperty(value = "Table data")
     private ChartSeries series;
 
     public SimpleChart() {

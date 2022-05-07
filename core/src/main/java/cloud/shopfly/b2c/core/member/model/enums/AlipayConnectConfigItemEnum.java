@@ -18,9 +18,9 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 支付宝信任登录参数项枚举类
+ * @Description Alipay trust login parameter enumeration class
  * @ClassName AlipayConnectConfigItemEnum
- * @since v7.0 下午6:13 2018/6/28
+ * @since v7.0 In the afternoon6:13 2018/6/28
  */
 public enum AlipayConnectConfigItemEnum {
     /**
@@ -28,17 +28,17 @@ public enum AlipayConnectConfigItemEnum {
      */
     app_id("app_id"),
     /**
-     * 支付宝私钥
+     * Alipay private key
      */
-    private_key("支付宝私钥"),
+    private_key("Alipay private key"),
     /**
-     * 支付宝公钥
+     * Alipay public Key
      */
-    public_key("支付宝公钥"),
+    public_key("Alipay public Key"),
     /**
-     * 支付宝公钥
+     * Alipay public Key
      */
-    pid("app的pid");
+    pid("appthepid");
 
     private String text;
 

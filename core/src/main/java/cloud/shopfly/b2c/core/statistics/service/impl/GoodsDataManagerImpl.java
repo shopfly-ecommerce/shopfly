@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品数据收集
+ * Commodity data collection
  *
  * @author mengyuanming
  * @version 2.0
@@ -66,7 +66,7 @@ public class GoodsDataManagerImpl implements GoodsDataManager {
             try {
                 gd.setCategoryPath(goodsClient.getCategory(gd.getCategoryId()).getCategoryPath());
             } catch (Exception e) {
-                this.logger.error("错误的商品分类id：" + gd.getCategoryId());
+                this.logger.error("Wrong classification of goodsid：" + gd.getCategoryId());
                 gd.setCategoryPath("");
             }
             this.daoSupport.insert("es_sss_goods_data", gd);
@@ -74,7 +74,7 @@ public class GoodsDataManagerImpl implements GoodsDataManager {
     }
 
     /**
-     * 似有方法，新增商品
+     * There seems to be a way to add new goods
      *
      * @param cacheGoods
      */
@@ -119,7 +119,7 @@ public class GoodsDataManagerImpl implements GoodsDataManager {
 
 
     /**
-     * 商品收藏数量修改
+     * Merchandise collection quantity modification
      *
      * @param goodsData
      */
@@ -129,7 +129,7 @@ public class GoodsDataManagerImpl implements GoodsDataManager {
     }
 
     /**
-     * 获取商品
+     * Access to goods
      *
      * @param goodsId
      * @return
@@ -141,7 +141,7 @@ public class GoodsDataManagerImpl implements GoodsDataManager {
     }
 
     /**
-     * 下架所有商品
+     * Take all merchandise off the shelves
      */
     @Override
     public void underAllGoods() {

@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 订单列表项
+ * Order list item
  *
  * @author Snow create in 2018/5/10
  * @version v2.0
@@ -39,102 +39,102 @@ import java.util.Objects;
  */
 public class OrderLineVO implements Serializable {
 
-    @ApiModelProperty(value = "订单id")
+    @ApiModelProperty(value = "The orderid")
     private Integer orderId;
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String sn;
 
-    @ApiModelProperty(value = "卖家名称")
+    @ApiModelProperty(value = "The seller name")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "卖家名称")
+    @ApiModelProperty(value = "The seller name")
     private String sellerName;
 
-    @ApiModelProperty(value = "配送方式")
+    @ApiModelProperty(value = "Shipping type")
     private String shippingType;
 
-    @ApiModelProperty(value = "支付方式")
+    @ApiModelProperty(value = "Method of payment")
     private String paymentName;
 
-    @ApiModelProperty(value = "订单状态文字")
+    @ApiModelProperty(value = "Order status text")
     private String orderStatusText;
 
-    @ApiModelProperty(value = "付款状态文字")
+    @ApiModelProperty(value = "Payment status text")
     private String payStatusText;
 
-    @ApiModelProperty(value = "货运状态文字")
+    @ApiModelProperty(value = "Freight status text")
     private String shipStatusText;
 
-    @ApiModelProperty(value = "订单状态值")
+    @ApiModelProperty(value = "Order status value")
     private String orderStatus;
 
-    @ApiModelProperty(value = "付款状态值")
+    @ApiModelProperty(value = "Payment status value")
     private String payStatus;
 
-    @ApiModelProperty(value = "货运状态值")
+    @ApiModelProperty(value = "Freight status value")
     private String shipStatus;
 
-    @ApiModelProperty(value = "评论状态")
+    @ApiModelProperty(value = "Review status")
     private String commentStatus;
 
-    @ApiModelProperty(value = "订单操作允许情况")
+    @ApiModelProperty(value = "Order operation permit status")
     private OrderOperateAllowable orderOperateAllowableVO;
 
-    @ApiModelProperty(value = "支付类型")
+    @ApiModelProperty(value = "Payment type")
     private String paymentType;
 
-    @ApiModelProperty(value = "收货人姓名")
+    @ApiModelProperty(value = "Name of consignee")
     private String shipName;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Last update")
     private Long createTime;
 
-    @ApiModelProperty(value = "实际发货时间")
+    @ApiModelProperty(value = "Actual delivery time")
     private Long shipTime;
 
-    @ApiModelProperty(value = "订单总价")
+    @ApiModelProperty(value = "Total")
     private Double orderAmount;
 
-    @ApiModelProperty(value = "运费")
+    @ApiModelProperty(value = "freight")
     private Double shippingAmount;
 
-    @ApiModelProperty(value = "售后状态")
+    @ApiModelProperty(value = "After state")
     private String serviceStatus;
 
-    @ApiModelProperty(value = "产品列表")
+    @ApiModelProperty(value = "Product list")
     private List<OrderSkuVO> skuList;
 
-    @ApiModelProperty(value = "优惠券列表")
+    @ApiModelProperty(value = "Coupon list")
     private List<CouponDO> couponList;
 
-    @ApiModelProperty(value = "赠品列表")
+    @ApiModelProperty(value = "Gift list")
     private List<FullDiscountGiftDO> giftList;
 
-    @ApiModelProperty(value = "订单项 非数据库字段")
+    @ApiModelProperty(value = "Order item is not a database field")
     private List<OrderItem> itemList;
 
-    @ApiModelProperty(value = "订单来源")
+    @ApiModelProperty(value = "Source of the order")
     private String clientType;
 
-    @ApiModelProperty(value = "会员ID")
+    @ApiModelProperty(value = "membersID")
     private Integer memberId;
 
-    @ApiModelProperty(value = "会员昵称")
+    @ApiModelProperty(value = "Members nickname")
     private String memberName;
 
-    @ApiModelProperty(value = "此商品需要提示给顾客的优惠标签")
+    @ApiModelProperty(value = "This product needs to be prompted to the customers discount label")
     private List<String> promotionTags;
 
 
-    @ApiModelProperty(value = "自动取消剩余秒数，如果已经超时会为0")
+    @ApiModelProperty(value = "Automatically cancels the remaining seconds, or if it has already timed out0")
     private Long cancelLeftTime;
 
     /**
-     * 订单是否支持原路退回
-     * 未支付的订单为false
+     * Whether the order can be returned in the original way
+     * The outstanding order isfalse
      */
-    @ApiModelProperty(name = "is_retrace", value = "订单是否支持原路退回")
+    @ApiModelProperty(name = "is_retrace", value = "Whether the order can be returned in the original way")
     private Boolean isRetrace;
 
     public Long getCancelLeftTime() {
@@ -147,21 +147,21 @@ public class OrderLineVO implements Serializable {
 
     /**
      * @see OrderTypeEnum
-     * 因增加拼团业务新增订单类型字段 kingapex 2019/1/28
+     * Added order type field due to added group servicekingapex 2019/1/28
      */
-    @ApiModelProperty(value = "订单类型")
+    @ApiModelProperty(value = "Order type")
     private String orderType;
 
     /**
-     * 因增加拼团业务新增订单类型字段 kingapex 2019/1/28
+     * Added order type field due to added group servicekingapex 2019/1/28
      */
-    @ApiModelProperty(value = "还差几人成团，如果为0则应该不显示")
+    @ApiModelProperty(value = "Were a few people short of a group. If0Should not display")
     private int waitingGroupNums;
 
     /**
-     * 拼团订单状态
+     * Group order status
      */
-    @ApiModelProperty(value = "拼团订单状态")
+    @ApiModelProperty(value = "Group order status")
     private String pingTuanStatus;
 
 
@@ -516,7 +516,7 @@ public class OrderLineVO implements Serializable {
     }
 
     /**
-     * 空构造器
+     * An empty constructor
      */
     public OrderLineVO() {
 
@@ -524,7 +524,7 @@ public class OrderLineVO implements Serializable {
 
 
     /**
-     * 参数赋值构造器
+     * Parameter assignment constructor
      *
      * @param orderDO
      */
@@ -536,7 +536,7 @@ public class OrderLineVO implements Serializable {
         this.shippingType = orderDO.getShippingType();
         this.paymentName = orderDO.getPaymentMethodName();
 
-        //先从特殊的流程-状态显示 定义中读取，如果为空说明不是特殊的状态，直接显示为 状态对应的提示词
+        // It is read from the special process-state display definition first. If it is empty, it indicates that it is not a special state and directly displays the prompt corresponding to the state
         orderStatusText = AbstractOrderSpecialStatus.getStatusText(orderDO.getOrderType(), orderDO.getPaymentType(), orderDO.getOrderStatus());
         if (StringUtil.isEmpty(orderStatusText)) {
             orderStatusText = OrderStatusEnum.valueOf(orderDO.getOrderStatus()).description();
@@ -570,9 +570,9 @@ public class OrderLineVO implements Serializable {
         this.orderType = orderDO.getOrderType();
 
 
-        //遍历所有的商品
+        // Go through all the goods
         for (OrderSkuVO skuVO : skuList) {
-            //设置商品的可操作状态
+            // Sets the operational state of the item
             skuVO.setGoodsOperateAllowableVO(new GoodsOperateAllowable(PaymentTypeEnum.valueOf(this.paymentType), OrderStatusEnum.valueOf(this.orderStatus),
                     ShipStatusEnum.valueOf(this.shipStatus), ServiceStatusEnum.valueOf(skuVO.getServiceStatus()),
                     PayStatusEnum.valueOf(this.payStatus)));

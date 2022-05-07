@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 支付帐单业务类
+ * Pay bills business class
  *
  * @author fk
  * @version v2.0
@@ -79,30 +79,30 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
     public void paySuccess(String billSn, String returnTradeNo, TradeType tradeType, double payPrice) {
 
         if (callbackDeviceList == null && callbackDeviceList.isEmpty()) {
-            logger.error("支付回调失败，原因为：【没有任何回调器声明】");
-            throw new ServiceException(PaymentErrorCode.E507.code(), "支付回调失败，原因为：【没有任何回调器声明】");
+            logger.error("The payment callback failed because：【There are no callback declarations】");
+            throw new ServiceException(PaymentErrorCode.E507.code(), "The payment callback failed because：【There are no callback declarations】");
         } else {
 
             PaymentCallbackDevice device = findDevice(tradeType);
             if (device == null) {
-                logger.error("支付回调失败，原因为：【" + tradeType.name() + "没有适配回调器】");
-                debugger.log("支付回调失败，原因为：【" + tradeType.name() + "没有适配回调器】");
-                throw new ServiceException(PaymentErrorCode.E507.code(), "支付回调失败，原因为：【" + tradeType.name() + "没有适配回调器】");
+                logger.error("The payment callback failed because：【" + tradeType.name() + "No callback is adapted】");
+                debugger.log("The payment callback failed because：【" + tradeType.name() + "No callback is adapted】");
+                throw new ServiceException(PaymentErrorCode.E507.code(), "The payment callback failed because：【" + tradeType.name() + "No callback is adapted】");
             }
 
-            //根据支付单号找到交易单号
+            // Find the transaction number based on the payment number
             PaymentBillDO bill = this.getByBillSn(billSn);
 
             if (bill == null) {
-                debugger.log("支付回调失败，原因为：【" + tradeType.name() + "类型的交易,编号为：" + billSn + "没有找到相应的账单】");
-                logger.error("支付回调失败，原因为：【" + tradeType.name() + "类型的交易,编号为：" + billSn + "没有找到相应的账单】");
-                throw new RuntimeException("支付回调失败，原因为：【" + tradeType.name() + "类型的交易编号为：" + billSn + "没有找到相应的账单】");
+                debugger.log("The payment callback failed because：【" + tradeType.name() + "Type of transaction,Numbers for：" + billSn + "No corresponding bill was found】");
+                logger.error("The payment callback failed because：【" + tradeType.name() + "Type of transaction,Numbers for：" + billSn + "No corresponding bill was found】");
+                throw new RuntimeException("The payment callback failed because：【" + tradeType.name() + "The transaction number of the type is：" + billSn + "No corresponding bill was found】");
             }
 
             if(logger.isDebugEnabled()){
-                logger.debug("找到账单：");
+                logger.debug("Find the bill：");
             }
-            debugger.log("找到账单：");
+            debugger.log("Find the bill：");
             if(logger.isDebugEnabled()){
                 logger.debug(bill.toString());
             }
@@ -110,20 +110,20 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
 
             String tradeSn = bill.getSn();
 
-            //调用回调器完成交易状态的变更
+            // Call the callback to complete the change in the transaction state
             device.paySuccess(tradeSn, returnTradeNo, payPrice);
             if(logger.isDebugEnabled()){
-                logger.debug("调用：" + device + "成功");
+                logger.debug("call：" + device + "successful");
             }
-            debugger.log("调用：" + device + "成功");
+            debugger.log("call：" + device + "successful");
 
-            //修改支付账单的状态
+            // Modify the status of paying bills
             daoSupport.execute("update es_payment_bill set is_pay=1,return_trade_no=? where bill_id=?", returnTradeNo, bill.getBillId());
 
             if (logger.isDebugEnabled()){
-                logger.debug("更改支付账单状态成功");
+                logger.debug("Succeeded in changing the paid bill status");
             }
-            debugger.log("更改支付账单状态成功");
+            debugger.log("Succeeded in changing the paid bill status");
         }
 
     }
@@ -135,9 +135,9 @@ public class PaymentBillManagerImpl implements PaymentBillManager {
     }
 
     /**
-     * 在回调器列表中到合适的回调器
+     * Go to the appropriate callbacks in the callbacks list
      *
-     * @param tradeType 交易类型
+     * @param tradeType Transaction type
      * @return
      */
     private PaymentCallbackDevice findDevice(TradeType tradeType) {

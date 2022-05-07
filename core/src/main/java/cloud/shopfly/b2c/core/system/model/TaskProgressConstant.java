@@ -18,19 +18,19 @@ package cloud.shopfly.b2c.core.system.model;
 /**
  * @author fk
  * @version v1.0
- * @Description: 任务进度常量类
+ * @Description: Task progress constant class
  * @date 2018/6/25 16:43
  * @since v7.0.0
  */
 public class TaskProgressConstant {
 
     /**
-     * 商品索引初始化
+     * The commodity index is initialized
      */
     public static final String GOODS_INDEX = "GOODS_INDEX_INIT";
 
     /**
-     * 静态页生成
+     * Static page generation
      */
     public static final String PAGE_CREATE = "PAGE_CREATE";
 

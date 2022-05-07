@@ -50,7 +50,7 @@ public class GoodsIndexInitManagerImpl implements GoodsIndexInitManager {
             Map goodsMapping = createGoodsMapping();
             elasticsearchTemplate.putMapping(indexName, EsSettings.GOODS_TYPE_NAME, goodsMapping);
 
-            /** 发送索引生成消息 */
+            /** Send index generation message*/
 //            this.messageSender.send(new MqMessage(AmqpExchange.INDEX_CREATE, AmqpExchange.INDEX_CREATE+"_ROUTING","1"));
 //            CmsManageMsg cmsManageMsg = new CmsManageMsg();
 
@@ -66,7 +66,7 @@ public class GoodsIndexInitManagerImpl implements GoodsIndexInitManager {
 
 
     /**
-     * 创建商品mapping
+     * Create goodsmapping
      *
      * @return
      */

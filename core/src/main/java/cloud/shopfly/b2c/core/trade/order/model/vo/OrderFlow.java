@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.core.trade.order.model.enums.PaymentTypeEnum;
 import java.util.List;
 
 /**
- * 订单流程对象，用于定义订单流程图
+ * An order flow object that defines an order flow chart
  *
  * @author kingapex
  * @version 1.0
@@ -33,27 +33,27 @@ import java.util.List;
 public class OrderFlow {
 
     /**
-     * 款到发货流程
+     * Payment delivery process
      */
     private static List<OrderFlowNode> PAY_FIRST_FLOW;
 
     /**
-     * 货到付款流程
+     * Cash on delivery process
      */
     private static List<OrderFlowNode> COD_FLOW;
 
     /**
-     * 拼团流程
+     * Spell the group process
      */
     private static List<OrderFlowNode> PINTUAN_FLOW;
 
     /**
-     * 取消流程
+     * Cancel the process
      */
     private static List<OrderFlowNode> CANCEL_FLOW;
 
     /**
-     * 出库失败流程
+     * Outbound failure process
      */
     private static List<OrderFlowNode> INTODB_ERROR_FLOW;
 
@@ -62,11 +62,11 @@ public class OrderFlow {
     }
 
     /**
-     * 初始化
+     * Initialize the
      */
     private static void initFlow() {
 
-        //款到发货的流程
+        // The process of delivery upon payment
         PAY_FIRST_FLOW = new MyList()
                 .add(OrderStatusEnum.NEW)
                 .add(OrderStatusEnum.CONFIRM)
@@ -76,7 +76,7 @@ public class OrderFlow {
                 .add(OrderStatusEnum.COMPLETE)
                 .getList();
 
-        //货到付款的流程
+        // Cash on delivery process
         COD_FLOW = new MyList()
                 .add(OrderStatusEnum.NEW)
                 .add(OrderStatusEnum.CONFIRM)
@@ -87,7 +87,7 @@ public class OrderFlow {
                 .getList();
 
 
-        //拼团流程
+        // Spell the group process
         PINTUAN_FLOW = new MyList()
                 .add(OrderStatusEnum.NEW)
                 .add(OrderStatusEnum.CONFIRM)
@@ -99,14 +99,14 @@ public class OrderFlow {
                 .getList();
 
 
-        //款到发货的流程
+        // The process of delivery upon payment
         CANCEL_FLOW = new MyList()
                 .add(OrderStatusEnum.NEW)
                 .add(OrderStatusEnum.CONFIRM)
                 .add(OrderStatusEnum.CANCELLED)
                 .getList();
 
-        //出库失败流程
+        // Outbound failure process
         INTODB_ERROR_FLOW = new MyList()
                 .add(OrderStatusEnum.NEW)
                 .add(OrderStatusEnum.INTODB_ERROR)
@@ -116,25 +116,25 @@ public class OrderFlow {
 
 
     /**
-     * 获取相应的订单流程
+     * Get the corresponding order process
      *
-     * @param orderType   订单类型
-     * @param paymentType 付款类型
+     * @param orderType   Order type
+     * @param paymentType Type of payment
      * @return
      */
     public static List<OrderFlowNode> getFlow(String orderType, String paymentType) {
-        //拼团类型的订单直接返回拼团流程
+        // Group orders are returned to the group process directly
         if (orderType.equals(OrderTypeEnum.pintuan.name())) {
             return PINTUAN_FLOW;
         }
 
 
-        //在线支付的是 款到发货流程
+        // Online payment is the payment to delivery process
         if (PaymentTypeEnum.ONLINE.name().equals(paymentType)) {
             return PAY_FIRST_FLOW;
         }
 
-        //货到付款流程
+        // Cash on delivery process
         if (PaymentTypeEnum.COD.name().equals(paymentType)) {
             return COD_FLOW;
         }
@@ -143,7 +143,7 @@ public class OrderFlow {
     }
 
     /**
-     * 获取取消流程
+     * Get the cancellation process
      *
      * @return
      */
@@ -152,7 +152,7 @@ public class OrderFlow {
     }
 
     /**
-     * 获取出库失败流程
+     * Get the outbound failure process
      *
      * @return
      */

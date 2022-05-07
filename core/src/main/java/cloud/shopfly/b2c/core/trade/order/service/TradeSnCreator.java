@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade.order.service;
 
 /**
- *  交易订单号创建
+ *  Transaction order number created
  * @author Snow create in 2018/4/9
  * @version v2.0
  * @since v7.0.0
@@ -24,26 +24,26 @@ package cloud.shopfly.b2c.core.trade.order.service;
 public interface TradeSnCreator {
 
     /**
-     * 生成交易编号  格式如：20171022000011
-     * @return 交易编号
+     * Generate transaction number format as shown in：20171022000011
+     * @return Transaction number
      */
     String generateTradeSn();
 
 
     /**
-     * 生成订单编号  格式如：20171022000011
-     * @return 订单编号
+     * The generated order number format is as follows：20171022000011
+     * @return Order no.
      */
     String generateOrderSn();
 
     /**
-     * 生成付款流水号  格式如：20171022000011
-     * @return 订单编号
+     * Generate the payment serial number format as follows：20171022000011
+     * @return Order no.
      */
     String generatePayLogSn();
 
     /**
-     * 清除
+     * remove
      */
     void cleanCache();
 

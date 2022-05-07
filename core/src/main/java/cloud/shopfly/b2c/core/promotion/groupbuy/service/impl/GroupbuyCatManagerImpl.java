@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 团购分类业务类
+ * Group purchase classification business class
  *
  * @author Snow
  * @version v7.0.0
@@ -58,11 +58,11 @@ public class GroupbuyCatManagerImpl implements GroupbuyCatManager {
     @Override
     public GroupbuyCatDO add(GroupbuyCatDO groupbuyCat) {
 
-        //验证团购分类名称是否重复
+        // Verify whether the group purchase category name is repeated
         String sql = "select * from es_groupbuy_cat where cat_name = ?";
         List list = this.daoSupport.queryForList(sql, groupbuyCat.getCatName());
         if (list.size() > 0) {
-            throw new ServiceException(PromotionErrorCode.E408.code(), "团购分类名称重复");
+            throw new ServiceException(PromotionErrorCode.E408.code(), "Group purchase classification name duplication");
         }
         if (groupbuyCat.getParentId() == null) {
             groupbuyCat.setParentId(0);
@@ -76,11 +76,11 @@ public class GroupbuyCatManagerImpl implements GroupbuyCatManager {
     @Override
     public GroupbuyCatDO edit(GroupbuyCatDO groupbuyCat, Integer id) {
 
-        //验证团购分类名称是否重复
+        // Verify whether the group purchase category name is repeated
         String sql = "select * from es_groupbuy_cat where cat_name = ? and cat_id != ?";
         List list = this.daoSupport.queryForList(sql, groupbuyCat.getCatName(), id);
         if (list.size() > 0) {
-            throw new ServiceException(PromotionErrorCode.E408.code(), "团购分类名称重复");
+            throw new ServiceException(PromotionErrorCode.E408.code(), "Group purchase classification name duplication");
         }
 
         this.daoSupport.update(groupbuyCat, id);

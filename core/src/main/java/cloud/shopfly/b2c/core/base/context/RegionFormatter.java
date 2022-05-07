@@ -27,7 +27,7 @@ import java.util.Locale;
 /**
  * Created by kingapex on 2018/5/2.
  * <p>
- * 地区格式化器
+ * Locale formatter
  *
  * @author kingapex
  * @version 1.0
@@ -47,29 +47,29 @@ public class RegionFormatter implements Formatter<Region> {
     }
 
     /**
-     * 地区转换器
+     * Area converter
      *
-     * @param regionId 地区id(只允许第三级或者第四级地区id)
-     * @param locale   国际化US
-     * @return 地区对象
+     * @param regionId regionid(只允许第三级或者第四级regionid)
+     * @param locale   internationalizationUS
+     * @return Region object
      * @throws ParseException
      */
     @Override
     public Region parse(String regionId, Locale locale) throws ParseException {
         Regions regions = regionsClient.getModel(Integer.valueOf(regionId));
         if (regions == null || regions.getRegionGrade() < 3) {
-            throw new IllegalArgumentException("地区不合法，请联系管理员");
+            throw new IllegalArgumentException("The area is invalid. Please contact your administrator");
         }
-        //根据底层地区id反推出上级id
+        // Invert the upper-level ID based on the lower-level region ID
         String regionPath = regions.getRegionPath();
         regionPath = regionPath.substring(1, regionPath.length());
         String[] regionPathArray = regionPath.split(",");
-        //给地区赋值
+        // Assign a value to the locale
         List rList = new ArrayList();
         for (String path : regionPathArray) {
             Regions region = regionsClient.getModel(Integer.valueOf(path));
             if (regions == null) {
-                throw new IllegalArgumentException("地区不合法，请联系管理员");
+                throw new IllegalArgumentException("The area is invalid. Please contact your administrator");
             }
             rList.add(region);
         }
@@ -77,13 +77,13 @@ public class RegionFormatter implements Formatter<Region> {
     }
 
     /**
-     * 组织地区数据
+     * Organization area data
      *
-     * @param list 地区集合
-     * @return 地区
+     * @param list In the collection
+     * @return region
      */
     private Region createRegion(List<Regions> list) {
-        //将地区数据组织好存入Region对象
+        // Organize the Region data and store it in a Region object
         Region region = new Region();
         region.setProvinceId(list.get(0).getId());
         region.setProvince(list.get(0).getLocalName());
@@ -91,7 +91,7 @@ public class RegionFormatter implements Formatter<Region> {
         region.setCity(list.get(1).getLocalName());
         region.setCountyId(list.get(2).getId());
         region.setCounty(list.get(2).getLocalName());
-        //如果地区数据为四级，为第四级地区赋值
+        // If the region data is level 4, assign a value to the level 4 region
         if (list.size() == 4) {
             region.setTown(list.get(3).getLocalName());
             region.setTownId(list.get(3).getId());
@@ -103,10 +103,10 @@ public class RegionFormatter implements Formatter<Region> {
     }
 
     /**
-     * 将格式化的地区toString输出
+     * Will format the regiontoStringThe output
      *
-     * @param object 地区对象
-     * @param locale 国际化US
+     * @param object Region object
+     * @param locale internationalizationUS
      * @return
      */
     @Override

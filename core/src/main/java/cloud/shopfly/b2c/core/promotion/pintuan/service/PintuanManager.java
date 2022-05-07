@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 拼团业务层
+ * Group business layer
  *
  * @author admin
  * @version vv1.0.0
@@ -31,79 +31,79 @@ import java.util.List;
 public interface PintuanManager {
 
     /**
-     * 查询拼团列表
+     * Query the group list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
-     * @param name     名字
+     * @param page     The page number
+     * @param pageSize Number each page
+     * @param name     The name
      * @return Page
      */
     Page list(int page, int pageSize, String name);
 
     /**
-     * 根据当前状态查询活动
+     * Query activities based on the current state
      *
-     * @param status 状态
-     * @return 拼团活动集合
+     * @param status Status
+     * @return Group activity gathering
      */
     List<Pintuan> get(String status);
 
     /**
-     * 添加拼团
+     * Add spell group
      *
-     * @param pintuan 拼团
-     * @return Pintuan 拼团
+     * @param pintuan Spell group
+     * @return Pintuan Spell group
      */
     Pintuan add(Pintuan pintuan);
 
     /**
-     * 修改拼团
+     * Modify the spell group
      *
-     * @param pintuan 拼团
-     * @param id      拼团主键
-     * @return Pintuan 拼团
+     * @param pintuan Spell group
+     * @param id      Spell the primary key
+     * @return Pintuan Spell group
      */
     Pintuan edit(Pintuan pintuan, Integer id);
 
     /**
-     * 删除拼团
+     * Delete the spell group
      *
-     * @param id 拼团主键
+     * @param id Spell the primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取拼团
+     * Access to spell group
      *
-     * @param id 拼团主键
-     * @return Pintuan  拼团
+     * @param id Spell the primary key
+     * @return Pintuan  Spell group
      */
     Pintuan getModel(Integer id);
 
 
     /**
-     * 停止一个活动
+     * Stop an activity
      *
      * @param promotionId
      */
     void closePromotion(Integer promotionId);
 
     /**
-     * 开始一个活动
+     * Start an activity
      *
      * @param promotionId
      */
     void openPromotion(Integer promotionId);
 
     /**
-     * 停止一个活动
+     * Stop an activity
      *
      * @param promotionId
      */
     void manualClosePromotion(Integer promotionId);
 
     /**
-     * 开始一个活动
+     * Start an activity
      *
      * @param promotionId
      */

@@ -40,7 +40,7 @@ import java.util.Map;
 
 
 /**
- * 角色表业务类
+ * Role table business class
  *
  * @author kingapex
  * @version v1.0.0
@@ -73,7 +73,7 @@ public class RoleManagerImpl implements RoleSeller {
         roleDO.setRoleDescribe(role.getRoleDescribe());
         this.systemDaoSupport.insert(roleDO);
         role.setRoleId(systemDaoSupport.getLastId("es_role"));
-        //删除缓存中角色所拥有的菜单权限
+        // Deletes menu permissions for roles in the cache
         cache.remove(CachePrefix.ADMIN_URL_ROLE.getPrefix());
         return role;
     }
@@ -81,17 +81,17 @@ public class RoleManagerImpl implements RoleSeller {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public RoleVO edit(RoleVO role, Integer id) {
-        //校验权限是否存在
+        // Verify whether the permission exists
         RoleDO roleDO = this.getModel(id);
         if (roleDO == null) {
-            throw new ResourceNotFoundException("此角色不存在");
+            throw new ResourceNotFoundException("This role does not exist");
         }
         roleDO.setRoleName(role.getRoleName());
         roleDO.setAuthIds(JsonUtil.objectToJson(role.getMenus()));
         roleDO.setRoleDescribe(role.getRoleDescribe());
         this.systemDaoSupport.update(roleDO, id);
         role.setRoleId(id);
-        //删除缓存中角色所拥有的菜单权限
+        // Deletes menu permissions for roles in the cache
         cache.remove(CachePrefix.ADMIN_URL_ROLE.getPrefix());
         return role;
     }
@@ -101,14 +101,14 @@ public class RoleManagerImpl implements RoleSeller {
     public void delete(Integer id) {
         RoleDO roleDO = this.getModel(id);
         if (roleDO == null) {
-            throw new ResourceNotFoundException("此角色不存在");
+            throw new ResourceNotFoundException("This role does not exist");
         }
 
-        //查看角色下是否有管理员，有管理员则不能删除
+        // Check whether the role has an administrator. If there is an administrator, the role cannot be deleted
         String sql = "select * from es_admin_user where role_id = ? and user_state != -1";
         List list = this.systemDaoSupport.queryForList(sql, id);
         if (StringUtil.isNotEmpty(list)) {
-            throw new ServiceException(SystemErrorCode.E924.code(), "该角色下有管理员，请删除管理员后再删除角色");
+            throw new ServiceException(SystemErrorCode.E924.code(), "The role has an administrator. Delete the administrator and then delete the role");
         }
 
         this.systemDaoSupport.delete(RoleDO.class, id);
@@ -129,7 +129,7 @@ public class RoleManagerImpl implements RoleSeller {
             List<Menus> menusList = JsonUtil.jsonToList(roles.get(i).getAuthIds(), Menus.class);
             if (menusList != null && menusList.size() > 0) {
                 List<String> authList = new ArrayList<>();
-                //递归查询角色所拥有的菜单权限
+                // Recursively queries the menu permissions of roles
                 this.getChildren(menusList, authList);
                 roleMap.put(roles.get(i).getRoleName(), authList);
                 cache.put(CachePrefix.ADMIN_URL_ROLE.getPrefix(), roleMap);
@@ -139,14 +139,14 @@ public class RoleManagerImpl implements RoleSeller {
     }
 
     /**
-     * 递归将此角色锁拥有的菜单权限保存到list
+     * Recursively saves the menu permissions held by this role lock tolist
      *
-     * @param menuList 菜单集合
-     * @param authList 权限组集合
+     * @param menuList Set menu
+     * @param authList Collection of permission groups
      */
     private void getChildren(List<Menus> menuList, List<String> authList) {
         for (Menus menus : menuList) {
-            //将此角色拥有的菜单权限放入list中
+            // Put the menu permissions that this role has into the list
             if (menus.isChecked()) {
                 authList.add(menus.getAuthRegular());
             }
@@ -160,23 +160,23 @@ public class RoleManagerImpl implements RoleSeller {
     public List<String> getRoleMenu(Integer id) {
         RoleDO roleDO = this.getModel(id);
         if (roleDO == null) {
-            throw new ResourceNotFoundException("此角色不存在");
+            throw new ResourceNotFoundException("This role does not exist");
         }
         List<Menus> menusList = JsonUtil.jsonToList(roleDO.getAuthIds(), Menus.class);
         List<String> authList = new ArrayList<>();
-        //筛选菜单
+        // Filter menu
         this.reset(menusList, authList);
         return authList;
     }
 
     /**
-     * 筛选checked为true的菜单
+     * screeningcheckedfortrueThe menu
      *
-     * @param menuList 菜单集合
+     * @param menuList Set menu
      */
     private void reset(List<Menus> menuList, List<String> authList) {
         for (Menus menus : menuList) {
-            //将此角色拥有的菜单权限放入list中
+            // Put the menu permissions that this role has into the list
             if (menus.isChecked()) {
                 authList.add(menus.getIdentifier());
             }

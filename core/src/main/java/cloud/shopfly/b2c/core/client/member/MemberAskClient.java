@@ -18,14 +18,14 @@ package cloud.shopfly.b2c.core.client.member;
 /**
  * @author fk
  * @version v1.0
- * @Description: 评论对外接口
+ * @Description: Comment External Interface
  * @date 2018/7/26 11:30
  * @since v7.0.0
  */
 public interface MemberAskClient {
 
     /**
-     * 获取未回复的咨询数量
+     * Gets the number of unanswered inquiries
      *
      * @return
      */

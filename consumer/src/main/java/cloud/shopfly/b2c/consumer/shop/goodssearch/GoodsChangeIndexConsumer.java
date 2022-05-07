@@ -26,12 +26,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 消费者
+ * consumers
  *
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2017年4月12日 下午4:33:14
+ * 2017years4month12On the afternoon4:33:14
  */
 @Service
 public class GoodsChangeIndexConsumer implements GoodsChangeEvent {
@@ -48,7 +48,7 @@ public class GoodsChangeIndexConsumer implements GoodsChangeEvent {
         int operationType = goodsChangeMsg.getOperationType();
         List<Map<String, Object>> list = goodsClient.getGoodsAndParams(goodsIds);
 
-        //添加
+        // add
         if (GoodsChangeMsg.ADD_OPERATION == operationType) {
 
             if (list != null && list.size() > 0) {
@@ -71,7 +71,7 @@ public class GoodsChangeIndexConsumer implements GoodsChangeEvent {
         } else if (GoodsChangeMsg.AUTO_UPDATE_OPERATION == operationType
                 || GoodsChangeMsg.MANUAL_UPDATE_OPERATION == operationType
                 || GoodsChangeMsg.INRECYCLE_OPERATION == operationType
-                || GoodsChangeMsg.REVERT_OPERATION == operationType) {//修改(修改，还原，放入购物车，审核)
+                || GoodsChangeMsg.REVERT_OPERATION == operationType) {//edit(edit，还原，放入购物车，审核)
 
             if (list != null) {
                 for (Map<String, Object> map : list) {
@@ -80,7 +80,7 @@ public class GoodsChangeIndexConsumer implements GoodsChangeEvent {
             }
 
         } else if (GoodsChangeMsg.DEL_OPERATION == operationType || GoodsChangeMsg.UNDER_OPERATION == operationType) {
-            //删除
+            // delete
             if (list != null) {
                 for (Map<String, Object> map : list) {
                     goodsIndexManager.deleteIndex(map);

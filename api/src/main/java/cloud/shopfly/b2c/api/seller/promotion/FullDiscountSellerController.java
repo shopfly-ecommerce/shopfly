@@ -35,7 +35,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 满优惠活动控制器
+ * Full discount activity controller
  *
  * @author Snow
  * @version v7.0.0
@@ -44,7 +44,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/promotion/full-discounts")
-@Api(description = "满优惠活动相关API")
+@Api(description = "Full discount activities relatedAPI")
 @Validated
 public class FullDiscountSellerController {
 
@@ -52,11 +52,11 @@ public class FullDiscountSellerController {
     private FullDiscountManager fullDiscountManager;
 
 
-    @ApiOperation(value = "查询满优惠活动列表", response = FullDiscountDO.class)
+    @ApiOperation(value = "Check the list of full offers", response = FullDiscountDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "keywords", value = "关键字", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "keywords", value = "keyword", dataType = "String", paramType = "query"),
     })
     @GetMapping
     public Page<FullDiscountVO> list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @ApiIgnore String keywords) {
@@ -65,7 +65,7 @@ public class FullDiscountSellerController {
     }
 
 
-    @ApiOperation(value = "添加满优惠活动", response = FullDiscountVO.class)
+    @ApiOperation(value = "Add full discount activities", response = FullDiscountVO.class)
     @PostMapping
     public FullDiscountVO add(@Valid @RequestBody FullDiscountVO fullDiscountVO) {
 
@@ -76,9 +76,9 @@ public class FullDiscountSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改满优惠活动", response = FullDiscountDO.class)
+    @ApiOperation(value = "Modify full discount activities", response = FullDiscountDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public FullDiscountVO edit(@Valid @RequestBody FullDiscountVO fullDiscountVO, @PathVariable Integer id) {
 
@@ -92,9 +92,9 @@ public class FullDiscountSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除满优惠活动")
+    @ApiOperation(value = "Delete full discount activities")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的满优惠活动主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key for full offers to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -106,16 +106,16 @@ public class FullDiscountSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个满优惠活动")
+    @ApiOperation(value = "Query a full discount event")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的满优惠活动主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "To query the full discount activity key", required = true, dataType = "int", paramType = "path")
     })
     public FullDiscountVO get(@PathVariable Integer id) {
 
         FullDiscountVO fullDiscount = this.fullDiscountManager.getModel(id);
-        //验证越权操作
+        // Verify unauthorized operations
         if (fullDiscount == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
 
         return fullDiscount;
@@ -123,7 +123,7 @@ public class FullDiscountSellerController {
 
 
     /**
-     * 验证满优惠活动的参数信息
+     * Verify parameter information of full discount activity
      *
      * @param fullDiscountVO
      */
@@ -132,53 +132,53 @@ public class FullDiscountSellerController {
         PromotionValid.paramValid(fullDiscountVO.getStartTime(), fullDiscountVO.getEndTime(),
                 fullDiscountVO.getRangeType(), fullDiscountVO.getGoodsList());
 
-        // 促销活动的优惠方式不能全部为空，至少要选择一项
+        // You should choose at least one of the promotional offers, not all of them
         if (fullDiscountVO.getIsFullMinus() == null && fullDiscountVO.getIsFreeShip() == null && fullDiscountVO.getIsSendGift() == null
                 && fullDiscountVO.getIsSendBonus() == null && fullDiscountVO.getIsDiscount() == null) {
 
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "请选择优惠方式");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Please select a discount option");
         }
 
-        // 如果促销活动优惠详细是否包含满减不为空
+        // If the promotional offer details are included full minus not empty
         if (fullDiscountVO.getIsFullMinus() != null && fullDiscountVO.getIsFullMinus() == 1) {
 
             if (fullDiscountVO.getMinusValue() == null || fullDiscountVO.getMinusValue() == 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "请填写减多少元");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Please fill in the amount deducted");
             }
 
-            // 减少的现金必须小于优惠门槛
+            // The reduced cash must be less than the preferential threshold
             if (fullDiscountVO.getMinusValue() > fullDiscountVO.getFullMoney()) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "减少的金额不能大于门槛金额");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The reduction amount cannot be greater than the threshold amount");
             }
 
         }
 
-        // 如果促销活动优惠详细是否包含满送赠品不为空
+        // If the promotional activity offers detailed whether to include full giveaway is not empty
         if (fullDiscountVO.getIsSendGift() != null && fullDiscountVO.getIsSendGift() == 1) {
-            // 赠品id不能为0
+            // Gift ID cannot be 0
             if (fullDiscountVO.getGiftId() == null || fullDiscountVO.getGiftId() == 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "请选择赠品");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Please select freebies");
             }
         }
 
-        // 如果促销活动优惠详细是否包含满送优惠券不为空
+        // If the promotional offer details are included full send coupons are not empty
         if (fullDiscountVO.getIsSendBonus() != null && fullDiscountVO.getIsSendBonus() == 1) {
-            // 优惠券id不能为0
+            // The coupon ID cannot be 0
             if (fullDiscountVO.getBonusId() == null || fullDiscountVO.getBonusId() == 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "请选择优惠券");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Please select coupons");
             }
         }
 
-        // 如果促销活动优惠详细是否包含打折不为空
+        // If the promotion offers details whether to include a discount is not empty
         if (fullDiscountVO.getIsDiscount() != null && fullDiscountVO.getIsDiscount() == 1) {
-            // 打折的数值不能为空也不能为0
+            // Discounted values cannot be empty or 0
             if (fullDiscountVO.getDiscountValue() == null || fullDiscountVO.getDiscountValue() == 0) {
 
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "请填写打折数值");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Please fill in the discount value");
             }
-            // 打折的数值应介于0-10之间
+            // The discount value should be between 0 and 10
             if (fullDiscountVO.getDiscountValue() >= 10 || fullDiscountVO.getDiscountValue() <= 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "打折的数值应介于0到10之间");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The discount value should be between0to10between");
             }
         }
 

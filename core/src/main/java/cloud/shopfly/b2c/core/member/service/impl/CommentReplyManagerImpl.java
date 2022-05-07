@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 评论回复业务类
+ * Comment reply business class
  * @author fk
  * @version v1.0
  * @since v7.0.0
@@ -95,9 +95,9 @@ public class CommentReplyManagerImpl implements CommentReplyManager {
 		commentIds.toArray(commentIdArray);
 		List<Object> term = new ArrayList<>();
 		String str = SqlUtil.getInSql(commentIdArray, term);
-		//目前商城只支持单次回复，一次对话
+		// Currently the mall only supports a single reply, a dialogue
 		String sql = "select * from es_comment_reply where comment_id in (" + str + ") and parent_id = 0 ";
-		// 查询评论回复
+		// Query comment reply
 		List<CommentReply> resList = this.daoSupport.queryForList(sql,CommentReply.class, term.toArray());
 
 		Map<Integer, CommentReply> resMap = new HashMap<>(resList.size());
@@ -114,7 +114,7 @@ public class CommentReplyManagerImpl implements CommentReplyManager {
 		String sql = "select * from es_comment_reply where comment_id = ? and parent_id = 0 ";
 		List list = this.daoSupport.queryForList(sql, commentId);
 		if(StringUtil.isNotEmpty(list)){
-			throw new ServiceException(MemberErrorCode.E200.code(),"不能重复回复");
+			throw new ServiceException(MemberErrorCode.E200.code(),"Cant reply twice");
 		}
 		CommentReply commentReply = new CommentReply();
 		commentReply.setCommentId(commentId);
@@ -125,7 +125,7 @@ public class CommentReplyManagerImpl implements CommentReplyManager {
 
 		this.daoSupport.insert(commentReply);
 		commentReply.setReplyId(this.daoSupport.getLastId(""));
-		//更改评论的状态为已回复
+		// Change the status of the comment to Replied
 		sql = "update es_member_comment set reply_status = 1 where comment_id = ? ";
 		this.daoSupport.execute(sql,commentId);
 		return commentReply;

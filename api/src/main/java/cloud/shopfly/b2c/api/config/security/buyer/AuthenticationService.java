@@ -21,10 +21,10 @@ import cloud.shopfly.b2c.framework.security.model.Buyer;
 import org.springframework.stereotype.Component;
 
 /**
- * buyer 鉴权管理
+ * buyer Authentication management
  * <p>
  * Created by kingapex on 2018/3/12.
- * v2.0: 重构鉴权机制
+ * v2.0: Reconstruct the authentication mechanism
  *
  * @author kingapex
  * @version 2.0

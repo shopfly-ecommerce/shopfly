@@ -18,21 +18,21 @@ package cloud.shopfly.b2c.core.base.message;
 import java.io.Serializable;
 
 /**
- * 分类变更消息vo
+ * Classified change messagevo
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:37:12
+ * 2018years3month23The morning of10:37:12
  */
 public class PintuanChangeMsg implements Serializable {
 
 	/**
-	 * 拼团id
+	 * Spell groupid
 	 */
 	private Integer pintuanId;
 
 	/**
-	 * 操作类型 0关闭 1开启
+	 * Operation type0close1open
 	 */
 	private Integer optionType;
 

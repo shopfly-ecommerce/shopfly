@@ -33,7 +33,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 单品立减控制器
+ * Single-product vertical reduction controller
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -41,7 +41,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/promotion/minus")
-@Api(description = "单品立减相关API")
+@Api(description = "Individual products immediately reduce correlationAPI")
 @Validated
 public class MinusSellerController {
 
@@ -49,11 +49,11 @@ public class MinusSellerController {
 	private MinusManager minusManager;
 
 
-	@ApiOperation(value	= "查询单品立减列表", response = MinusDO.class)
+	@ApiOperation(value	= "Query the list of items", response = MinusDO.class)
 	@ApiImplicitParams({
-		 @ApiImplicitParam(name	= "page_no",	value =	"页码", dataType = "int",	paramType =	"query"),
-		 @ApiImplicitParam(name	= "page_size",	value =	"每页显示数量", dataType = "int",	paramType =	"query"),
-		 @ApiImplicitParam(name	= "keywords",	value =	"关键字", dataType = "String",	paramType =	"query"),
+		 @ApiImplicitParam(name	= "page_no",	value =	"The page number", dataType = "int",	paramType =	"query"),
+		 @ApiImplicitParam(name	= "page_size",	value =	"Display quantity per page", dataType = "int",	paramType =	"query"),
+		 @ApiImplicitParam(name	= "keywords",	value =	"keyword", dataType = "String",	paramType =	"query"),
 	})
 	@GetMapping
 	public Page<MinusVO> list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, String keywords)	{
@@ -61,8 +61,8 @@ public class MinusSellerController {
 	}
 
 
-	@ApiOperation(value	= "添加单品立减", response = MinusVO.class)
-	@ApiImplicitParam(name = "minus", value = "单品立减信息", required = true, dataType = "MinusVO", paramType = "body")
+	@ApiOperation(value	= "Add a single item for immediate reduction", response = MinusVO.class)
+	@ApiImplicitParam(name = "minus", value = "Single product instant reduction information", required = true, dataType = "MinusVO", paramType = "body")
 	@PostMapping
 	public MinusVO add(@ApiIgnore @Valid @RequestBody MinusVO minus) {
 
@@ -73,9 +73,9 @@ public class MinusSellerController {
 	}
 
 	@PutMapping(value = "/{id}")
-	@ApiOperation(value	= "修改单品立减", response = MinusVO.class)
+	@ApiOperation(value	= "Modify the immediate reduction of single products", response = MinusVO.class)
 	@ApiImplicitParams({
-		 @ApiImplicitParam(name	= "id",	value =	"主键",	required = true, dataType = "int",	paramType =	"path")
+		 @ApiImplicitParam(name	= "id",	value =	"A primary key",	required = true, dataType = "int",	paramType =	"path")
 	})
 	public MinusVO edit(@Valid @RequestBody MinusVO minus, @PathVariable Integer id) {
 
@@ -89,9 +89,9 @@ public class MinusSellerController {
 
 
 	@DeleteMapping(value = "/{id}")
-	@ApiOperation(value	= "删除单品立减")
+	@ApiOperation(value	= "Delete single item subtraction")
 	@ApiImplicitParams({
-		 @ApiImplicitParam(name	= "id",	value =	"要删除的单品立减主键",	required = true, dataType = "int",	paramType =	"path")
+		 @ApiImplicitParam(name	= "id",	value =	"The item to be deleted immediately decreases the primary key",	required = true, dataType = "int",	paramType =	"path")
 	})
 	public	String	delete(@PathVariable Integer id) {
 
@@ -103,16 +103,16 @@ public class MinusSellerController {
 
 
 	@GetMapping(value =	"/{id}")
-	@ApiOperation(value	= "查询一个单品立减")
+	@ApiOperation(value	= "Query a single item for immediate reduction")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "id",	value = "要查询的单品立减主键",	required = true, dataType = "int",	paramType = "path")
+		@ApiImplicitParam(name = "id",	value = "To query the single product minus primary key",	required = true, dataType = "int",	paramType = "path")
 	})
 	public MinusVO get(@PathVariable Integer id)	{
 		MinusVO minusVO = this.minusManager.getFromDB(id);
 
-		//验证越权操作
+		// Verify unauthorized operations
 		if (minusVO == null){
-			throw new NoPermissionException("无权操作");
+			throw new NoPermissionException("Have the right to operate");
 		}
 
 		return	minusVO;

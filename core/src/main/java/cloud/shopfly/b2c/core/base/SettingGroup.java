@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.base;
 
 /**
- * 系统设置分组枚举
+ * System Settings Group enumeration
  * Created by kingapex on 2018/3/19.
  *
  * @author kingapex
@@ -27,47 +27,47 @@ package cloud.shopfly.b2c.core.base;
 public enum SettingGroup {
 
     /**
-     * 系统设置
+     * System Settings
      */
     SYSTEM,
 
     /**
-     * 站点设置
+     * General
      */
     SITE,
 
     /**
-     * 商品设置
+     * Product
      */
     GOODS,
 
     /**
-     * 平台联系方式
+     * Platform contact Information
      */
     INFO,
     /**
-     * 商品图片尺寸
+     * Product picture size
      */
     PHOTO_SIZE,
     /**
-     * 交易设置
+     * Trade setting
      */
     TRADE,
 
     /**
-     * 积分设置
+     * Integral
      */
     POINT,
     /**
-     * 分销设置
+     * Distribution set
      */
     DISTRIBUTION,
     /**
-     * 测试设置
+     * The test set
      */
     TEST,
     /**
-     * app推送设置
+     * appPush Settings
      */
     PUSH,
     /**
@@ -76,7 +76,7 @@ public enum SettingGroup {
 
     PAGE,
     /**
-     * ES_SIGN 分词词库秘钥
+     * ES_SIGN Word segmentation thesaurus key
      */
     ES_SIGN;
 

@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 平台管理员实体
+ * Platform Administrator Entity
  *
  * @author zh
  * @version v7.0
@@ -44,70 +44,70 @@ public class AdminUser implements Serializable {
     private static final long serialVersionUID = 9076352194131639L;
 
     /**
-     * 平台管理员id
+     * Platform administratorid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = false)
     private Integer id;
     /**
-     * 管理员名称
+     * Administrator name
      */
     @Column(name = "username")
-    @ApiModelProperty(name = "username", value = "管理员名称", required = false)
+    @ApiModelProperty(name = "username", value = "Administrator name", required = false)
     private String username;
     /**
-     * 管理员密码
+     * Administrator password
      */
     @Column(name = "password")
-    @ApiModelProperty(name = "password", value = "管理员密码", required = false)
+    @ApiModelProperty(name = "password", value = "Administrator password", required = false)
     private String password;
     /**
-     * 部门
+     * department
      */
     @Column(name = "department")
-    @ApiModelProperty(name = "department", value = "部门", required = false)
+    @ApiModelProperty(name = "department", value = "department", required = false)
     private String department;
     /**
-     * 权限id
+     * permissionsid
      */
     @Column(name = "role_id")
-    @ApiModelProperty(name = "role_id", value = "权限id", required = false)
+    @ApiModelProperty(name = "role_id", value = "permissionsid", required = false)
     private Integer roleId;
     /**
-     * 创建日期
+     * Creation date
      */
     @Column(name = "date_line")
-    @ApiModelProperty(name = "date_line", value = "创建日期", required = false)
+    @ApiModelProperty(name = "date_line", value = "Creation date", required = false)
     private Long dateLine;
     /**
-     * 备注
+     * note
      */
     @Column(name = "remark")
-    @ApiModelProperty(name = "remark", value = "备注", required = false)
+    @ApiModelProperty(name = "remark", value = "note", required = false)
     private String remark;
     /**
-     * 是否删除
+     * Whether or not to delete
      */
     @Column(name = "user_state")
-    @ApiModelProperty(name = "user_state", value = "是否删除,0为正常,-1为删除状态", required = false)
+    @ApiModelProperty(name = "user_state", value = "Whether or not to delete,0For the normal,-1Is deleted state", required = false)
     private Integer userState;
     /**
-     * 管理员真实姓名
+     * Real name of administrator
      */
     @Column(name = "real_name")
-    @ApiModelProperty(name = "real_name", value = "管理员真实姓名", required = false)
+    @ApiModelProperty(name = "real_name", value = "Real name of administrator", required = false)
     private String realName;
     /**
-     * 头像
+     * Head portrait
      */
     @Column(name = "face")
-    @ApiModelProperty(name = "face", value = "头像", required = false)
+    @ApiModelProperty(name = "face", value = "Head portrait", required = false)
     private String face;
     /**
-     * 是否为超级管理员
+     * Whether to be a super administrator
      */
     @Column(name = "founder")
-    @ApiModelProperty(name = "founder", value = "是否为超级管理员,1为超级管理员,0为其他", required = false)
+    @ApiModelProperty(name = "founder", value = "Whether to be a super administrator,1As the super administrator,0For other", required = false)
     private Integer founder;
 
     @PrimaryKeyField

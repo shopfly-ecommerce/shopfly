@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v1.0
- * @Description: 支付请求返回的form
+ * @Description: The payment request returnsform
  * @date 2018/7/17 10:39
  * @since v7.0.0
  */
@@ -33,10 +33,10 @@ import java.util.List;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Form {
 
-    @ApiModelProperty(value = "表单请求地址")
+    @ApiModelProperty(value = "Form request address")
     private String gatewayUrl;
 
-    @ApiModelProperty(value = "表单请求内容")
+    @ApiModelProperty(value = "Form request content")
     private List<FormItem> formItems;
 
     public String getGatewayUrl() {

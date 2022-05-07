@@ -20,7 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * 用户上下文
+ * User context
  * Created by kingapex on 2018/3/12.
  *
  * @author kingapex
@@ -31,7 +31,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class AdminUserContext {
 
     /**
-     * 获取当前管理员
+     * Obtaining the current administrator
      *
      * @return
      */

@@ -24,13 +24,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 提现设置实体
+ * Withdrawal setup entity
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 下午3:01
+ * 2018/5/21 In the afternoon3:01
  */
 @Table(name = "es_withdraw_setting")
 @ApiModel
@@ -38,22 +38,22 @@ import io.swagger.annotations.ApiModelProperty;
 public class WithdrawSettingDO {
 
     /**
-     * 主键id
+     * A primary keyid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 用户id
+     * The userid
      **/
     @Column(name = "member_id")
-    @ApiModelProperty(value = "用户id", required = true)
+    @ApiModelProperty(value = "The userid", required = true)
     private Integer memberId;
     /**
-     * 参数
+     * parameter
      **/
     @Column()
-    @ApiModelProperty(value = "参数", required = true)
+    @ApiModelProperty(value = "parameter", required = true)
     private String param;
 
     public Integer getId() {

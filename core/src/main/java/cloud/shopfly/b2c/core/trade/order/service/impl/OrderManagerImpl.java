@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 订单操作实现
+ * Order operation implementation
  *
  * @author Snow create in 2018/5/21
  * @version v2.0

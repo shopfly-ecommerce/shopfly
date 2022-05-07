@@ -23,7 +23,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 域名配置
+ * The domain name configuration
  *
  * @author kingapex
  * @version 1.0
@@ -35,38 +35,38 @@ import org.springframework.context.annotation.Configuration;
 public class DomainSettings {
 
     /**
-     * 买家端域名
+     * Buyer side domain name
      */
     @Value("${shopfly.name:#{null}}")
     private String name;
 
     /**
-     * 买家端域名
+     * Buyer side domain name
      */
     @Value("${shopfly.domain.buyer:#{null}}")
     private String buyer;
 
     /**
-     * 手机买家端域名
+     * Mobile buyer domain name
      */
     @Value("${shopfly.domain.mobileBuyer:#{null}}")
     private String mobileBuyer;
 
 
     /**
-     * 买家端域名
+     * Buyer side domain name
      */
     @Value("${shopfly.domain.buyer-pc:#{null}}")
     private String buyerPc;
 
     /**
-     * 手机买家端域名
+     * Mobile buyer domain name
      */
     @Value("${shopfly.domain.buyer-wap:#{null}}")
     private String buyerWap;
 
     /**
-     * 支付回调地址
+     * Pay the callback address
      *
      * @return
      */
@@ -105,7 +105,7 @@ public class DomainSettings {
         if (!StringUtil.isEmpty(buyerPc)) {
             return buyerPc;
         }
-        throw new ServiceException(MemberErrorCode.E147.code(), "domainSettings buyer 对象未能正确初始化");
+        throw new ServiceException(MemberErrorCode.E147.code(), "domainSettings buyer The object was not initialized correctly");
     }
 
     public void setBuyerPc(String buyerPc) {
@@ -120,7 +120,7 @@ public class DomainSettings {
         if (!StringUtil.isEmpty(buyerWap)) {
             return buyerWap;
         }
-        throw new ServiceException(MemberErrorCode.E147.code(), "domainSettings mobile buyer 对象未能正确初始化");
+        throw new ServiceException(MemberErrorCode.E147.code(), "domainSettings mobile buyer The object was not initialized correctly");
     }
 
     public void setBuyerWap(String buyerWap) {

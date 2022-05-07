@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 地区VO
+ * regionVO
  *
  * @author zh
  * @version v7.0.0
@@ -31,23 +31,23 @@ public class RegionVO implements Serializable {
     private static final long serialVersionUID = 3444861223072695184L;
 
     /**
-     * 地区名称
+     * In the name of the
      */
     public String localName;
     /**
-     * 地区id
+     * regionid
      */
     public Integer id;
     /**
-     * 父地区id
+     * The parent regionid
      */
     private Integer parentId;
     /**
-     * 子对象集合
+     * Collection of subobjects
      */
     private List<RegionVO> children;
     /**
-     * 级别
+     * level
      */
     private Integer level;
 

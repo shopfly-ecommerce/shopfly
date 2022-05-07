@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 确认订单操作
+ * Confirm order operation
  *
  * @author Snow create in 2018/5/18
  * @version v2.0
@@ -28,13 +28,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class ConfirmVO {
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String orderSn;
 
-    @ApiModelProperty(value = "是否同意确认此订单")
+    @ApiModelProperty(value = "Do you agree to confirm this order")
     private Boolean agree;
 
-    @ApiModelProperty(value = "操作者")
+    @ApiModelProperty(value = "The operator")
     private String operator;
 
 

@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * @version v7.0
- * @Description: 地区Client默认实现
+ * @Description: regionClientThe default implementation
  * @Author: zjp
  * @Date: 2018/7/27 11:18
  */

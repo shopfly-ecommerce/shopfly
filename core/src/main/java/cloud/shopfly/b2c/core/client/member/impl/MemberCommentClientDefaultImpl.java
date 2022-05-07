@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v1.0
- * @Description: 会员评论对外接口实现
+ * @Description: Member comments external interface implementation
  * @date 2018/7/26 11:35
  * @since v7.0.0
  */

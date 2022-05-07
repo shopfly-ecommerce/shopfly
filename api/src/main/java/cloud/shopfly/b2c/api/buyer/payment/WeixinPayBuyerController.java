@@ -43,11 +43,11 @@ import java.io.ByteArrayOutputStream;
 /**
  * @author fk
  * @version v2.0
- * @Description: 订单支付
+ * @Description: Order payment
  * @date 2018/4/1616:44
  * @since v7.0.0
  */
-@Api(description = "订单支付API")
+@Api(description = "Order paymentAPI")
 @RestController
 @RequestMapping("/order/pay")
 @Validated
@@ -62,13 +62,13 @@ public class WeixinPayBuyerController {
     private LoginWeChatManager loginWeChatManager;
 
     @ApiIgnore
-    @ApiOperation(value = "显示一个微信二维码")
+    @ApiOperation(value = "Display a wechat QR code")
     @GetMapping(value = "/weixin/qr/{pr}")
     public byte[] qr(@PathVariable(name = "pr") String pr) throws Exception {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        //图片的宽度
+        // Width of picture
         int width = 200;
-        //高度
+        // highly
         int height = 200;
         QRCodeWriter writer = new QRCodeWriter();
         BitMatrix m = writer.encode("weixin://wxpay/bizpayurl?pr=" + pr, BarcodeFormat.QR_CODE, height, width);
@@ -78,9 +78,9 @@ public class WeixinPayBuyerController {
     }
 
 
-    @ApiOperation(value = "获取微信扫描支付的状态")
+    @ApiOperation(value = "Get the status of wechat scanning payment")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "weixin_trade_sn", value = "微信预付订单号", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "weixin_trade_sn", value = "Wechat prepaid order number", required = true, dataType = "String", paramType = "path"),
     })
     @GetMapping("/weixin/status/{weixin_trade_sn}")
     public String payStatus(@PathVariable(name = "weixin_trade_sn") String weixinTradeSn) {

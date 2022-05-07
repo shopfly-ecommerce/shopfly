@@ -20,9 +20,9 @@ import java.util.List;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录参数VO
+ * @Description Trust login parameterVO
  * @ClassName ConnectSettingParametersVO
- * @since v7.0 下午7:56 2018/6/28
+ * @since v7.0 In the afternoon7:56 2018/6/28
  */
 public class ConnectSettingParametersVO {
     private String name;

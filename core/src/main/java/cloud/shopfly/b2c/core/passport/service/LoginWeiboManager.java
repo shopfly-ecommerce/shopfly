@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.member.model.dto.LoginAppDTO;
 import java.util.Map;
 
 /**
- * 新浪微博登陆相关接口
+ * Sina Weibo login interface
  * @author cs
  * @version v1.0
  * @since v7.2.2
@@ -30,7 +30,7 @@ public interface LoginWeiboManager {
 
 
     /**
-     * 获取wap登陆跳转地址
+     * To obtainwapLogin redirect address
      * @param redirectUri
      * @return
      */
@@ -38,7 +38,7 @@ public interface LoginWeiboManager {
 
 
     /**
-     * wap登陆
+     * waplanding
      * @param code
      * @param uuid
      * @param redirectUri
@@ -47,7 +47,7 @@ public interface LoginWeiboManager {
     Map wapLogin(String code, String uuid, String redirectUri);
 
     /**
-     * app登陆
+     * applanding
      * @param loginAppDTO
      * @return
      */

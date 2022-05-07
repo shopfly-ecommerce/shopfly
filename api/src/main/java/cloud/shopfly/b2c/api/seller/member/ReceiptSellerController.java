@@ -31,14 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 历史发票
+ * History of invoice
  *
  * @author Snow create in 2018/6/27
  * @version v2.0
  * @since v7.0.0
  */
 
-@Api(description = "历史发票API")
+@Api(description = "History of invoiceAPI")
 @RestController
 @RequestMapping("/seller/members/receipts")
 @Validated
@@ -47,10 +47,10 @@ public class ReceiptSellerController {
     @Autowired
     private ReceiptHistoryManager receiptHistoryManager;
 
-    @ApiOperation(value = "查询历史发票列表")
+    @ApiOperation(value = "Query the list of historical invoices")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页数", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "条数", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "Number of pages", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "A number of", dataType = "int", paramType = "query"),
     })
     @GetMapping()
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -60,9 +60,9 @@ public class ReceiptSellerController {
         return page;
     }
 
-    @ApiOperation(value = "查询历史发票详细")
+    @ApiOperation(value = "Inquire historical invoice details")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "history_id", value = "历史发票主键", dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "history_id", value = "History invoice primary key", dataType = "int", paramType = "path")
     })
     @GetMapping("/{history_id}/detail")
     public ReceiptHistoryVO detail(@PathVariable("history_id") Integer historyId) {

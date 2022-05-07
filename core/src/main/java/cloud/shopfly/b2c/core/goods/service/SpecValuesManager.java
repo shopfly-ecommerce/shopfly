@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.goods.model.enums.Permission;
 import java.util.List;
 
 /**
- * 规格值业务层
+ * Specification value business layer
  * 
  * @author fk
  * @version v2.0
@@ -30,36 +30,36 @@ import java.util.List;
 public interface SpecValuesManager {
 
 	/**
-	 * 添加规格值
+	 * Add value
 	 * 
 	 * @param specValues
-	 *            规格值
-	 * @return SpecValues 规格值
+	 *            values
+	 * @return SpecValues values
 	 */
 	SpecValuesDO add(SpecValuesDO specValues);
 
 	/**
-	 * 修改规格值
+	 * values
 	 * 
 	 * @param specValues
-	 *            规格值
+	 *            values
 	 * @param id
-	 *            规格值主键
-	 * @return SpecValues 规格值
+	 *            Specification value primary key
+	 * @return SpecValues values
 	 */
 	SpecValuesDO edit(SpecValuesDO specValues, Integer id);
 
 	/**
-	 * 获取规格值
+	 * Get specification value
 	 * 
 	 * @param id
-	 *            规格值主键
-	 * @return SpecValues 规格值
+	 *            Specification value primary key
+	 * @return SpecValues values
 	 */
 	SpecValuesDO getModel(Integer id);
 
 	/**
-	 * 获取某规格的规格值
+	 * Gets the value of a specification
 	 * 
 	 * @param specId
 	 * @param permission
@@ -68,7 +68,7 @@ public interface SpecValuesManager {
 	List<SpecValuesDO> listBySpecId(Integer specId, Permission permission);
 
 	/**
-	 * 添加某规格的规格值
+	 * Add a specification value
 	 * 
 	 * @param specId
 	 * @param valueList

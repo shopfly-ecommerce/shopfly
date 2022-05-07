@@ -20,14 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @version v7.0
- * @Description: 存储方案Client
+ * @Description: Storage solutionClient
  * @Author: zjp
  * @Date: 2018/7/27 16:26
  */
 public interface UploadFactoryClient {
 
     /**
-     * 获取拼接后的url
+     * Gets the splicedurl
      * @param url
      * @param width
      * @param height
@@ -36,9 +36,9 @@ public interface UploadFactoryClient {
      String getUrl(String url, Integer width, Integer height);
 
     /**
-     * 文件上传
-     * @param file 文件
-     * @param scene	业务类型 goods,shop,member,other
+     * File upload
+     * @param file file
+     * @param scene	Business typesgoods,shop,member,other
      * @return
      */
     FileVO upload(MultipartFile file, String scene);

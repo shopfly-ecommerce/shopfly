@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午2:19
+ * 2018-08-14 In the afternoon2:19
  */
 
 @Service
@@ -39,7 +39,7 @@ public class CommissionTplClientDefaultImpl implements CommissionTplClient {
     private CommissionTplManager commissionTplManager;
 
     /**
-     * 获取默认模版
+     * Get the default template
      *
      * @return
      */

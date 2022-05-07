@@ -26,63 +26,63 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 订单价格信息
+ * Order price information
  *
  * @author kingapex
  * @version v1.0
- * @created 2017年08月17日
+ * @created 2017years08month17day
  * @since v6.2
  */
-@ApiModel(value = "PriceDetailVO", description = "价格明细")
+@ApiModel(value = "PriceDetailVO", description = "The price detail")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PriceDetailVO implements Serializable {
 
 
     private static final long serialVersionUID = -960537582096338500L;
 
-    @ApiModelProperty(value = "总价")
+    @ApiModelProperty(value = "The total price")
     private Double totalPrice;
 
 
     /**
-     * 用来判断满减、优惠券等优惠的基数
+     * Its used to determine full subtraction、The base of a discount such as a coupon
      */
-    @ApiModelProperty(value = "商品原价，没有优惠过的")
+    @ApiModelProperty(value = "Original price, no discount")
     private Double originalPrice;
 
-    @ApiModelProperty(value = "商品价格，优惠后的")
+    @ApiModelProperty(value = "Commodity price, after preferential")
     private Double goodsPrice;
 
 
-    @ApiModelProperty(value = "配送费")
+    @ApiModelProperty(value = "The shipping fee,")
     private Double freightPrice;
 
     /**
-     * 此金额 = 各种优惠工具的优惠金额 + 优惠券优惠的金额
+     * The amount of= Discount amount of various discount tools+ The amount of a discount coupon
      */
-    @ApiModelProperty(value = "优惠金额")
+    @ApiModelProperty(value = "Discount amount")
     private Double discountPrice;
 
-    @ApiModelProperty(value = "返现金额，不含优惠券")
+    @ApiModelProperty(value = "Cash back amount, not including coupons")
     private Double cashBack;
 
-    @ApiModelProperty(value = "优惠券抵扣金额")
+    @ApiModelProperty(value = "Coupon deduction amount")
     private Double couponPrice;
 
-    @ApiModelProperty(value = "满减金额")
+    @ApiModelProperty(value = "Full amount reduction")
     private Double fullMinus;
 
     /**
-     * 1为免运费
+     * 1For free shipping
      */
-    @ApiModelProperty(value = "是否免运费,1为免运费")
+    @ApiModelProperty(value = "Free freight or not,1For free shipping")
     private Integer isFreeFreight;
 
-    @ApiModelProperty(value = "使用的积分")
+    @ApiModelProperty(value = "Integral used")
     private Integer exchangePoint;
 
     /**
-     * 构造器，初始化默认值
+     * Constructor to initialize the default values
      */
     public PriceDetailVO() {
         this.goodsPrice = 0.0;
@@ -99,7 +99,7 @@ public class PriceDetailVO implements Serializable {
 
 
     /**
-     * 清空功能
+     * Emptying function
      */
     public void clear() {
 
@@ -116,7 +116,7 @@ public class PriceDetailVO implements Serializable {
     }
 
     /**
-     * 价格累加运算
+     * Price summation
      *
      * @param price
      * @return
@@ -149,23 +149,23 @@ public class PriceDetailVO implements Serializable {
 
 
     /**
-     * 当前店铺总价计算
+     * Calculate the total price of the current store
      */
     public void countPrice() {
-        //购物车内当前商家的商品原价总计
+        // Total original price of goods of current merchants in the shopping cart
         Double goodsPrice = this.getGoodsPrice();
 
-        //购物车内当前商家的配送金额总计
+        // Total delivery amount of current merchants in the shopping cart
         Double freightPrice = this.getFreightPrice();
 
-        //购物车内当前商家的应付金额总计
-        //运算过程=商品原价总计-返现金额+配送费用
+        // Total amount payable by current merchants in the shopping cart
+        // Calculation process = total original price of goods - cash rebate amount + distribution cost
         Double totalPrice = CurrencyUtil.add(CurrencyUtil.sub(goodsPrice, this.getCashBack()), freightPrice);
 
-        //运算过程=商品原价总计-优惠券金额
+        // Calculation process = total original price of goods - coupon amount
         totalPrice = CurrencyUtil.sub(totalPrice, this.getCouponPrice());
 
-        //防止金额为负数
+        // Prevent negative amounts
         if (totalPrice.doubleValue() <= 0) {
             totalPrice = 0d;
         }
@@ -174,7 +174,7 @@ public class PriceDetailVO implements Serializable {
     }
 
     /**
-     * 重新计算优惠金额
+     * Recalculate the discount amount
      */
     public void reCountDiscountPrice() {
         discountPrice = CurrencyUtil.add(cashBack, couponPrice);

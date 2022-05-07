@@ -33,10 +33,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 活动商品对照表
+ * Comparison table of active goods
  *
  * @author Snow
- * @version v1.0 2017年08月22日
+ * @version v1.0 2017years08month22day
  * @since v6.4
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -47,65 +47,65 @@ public class PromotionVO implements Serializable {
      */
     private static final long serialVersionUID = 4796645552318671313L;
 
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "productid")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "商品图片")
+    @ApiModelProperty(value = "Commodity images")
     private String thumbnail;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     private String name;
 
-    @ApiModelProperty(value = "货品id")
+    @ApiModelProperty(value = "goodsid")
     private Integer skuId;
 
-    @ApiModelProperty(value = "活动开始时间")
+    @ApiModelProperty(value = "Activity start time")
     private Long startTime;
 
-    @ApiModelProperty(value = "活动结束时间")
+    @ApiModelProperty(value = "End time")
     private Long endTime;
 
-    @ApiModelProperty(value = "活动id")
+    @ApiModelProperty(value = "activityid")
     private Integer activityId;
 
     /**
-     * 由此字段识别具体的活动类型
-     * 此字段对应的是一个枚举值
+     * This field identifies the specific activity type
+     * This field corresponds to an enumerated value
      *
      * @see PromotionTypeEnum
      */
-    @ApiModelProperty(value = "活动工具类型")
+    @ApiModelProperty(value = "Active tool type")
     private String promotionType;
 
-    @ApiModelProperty(value = "活动名称")
+    @ApiModelProperty(value = "The name of the event")
     private String title;
 
-    @ApiModelProperty(value = "积分兑换对象")
+    @ApiModelProperty(value = "Redemption object")
     private ExchangeDO exchange;
 
-    @ApiModelProperty(value = "团购活动对象")
+    @ApiModelProperty(value = "Group purchase activity object")
     private GroupbuyGoodsVO groupbuyGoodsVO;
 
-    @ApiModelProperty(value = "满优惠活动")
+    @ApiModelProperty(value = "Full discount")
     private FullDiscountVO fullDiscountVO;
 
-    @ApiModelProperty(value = "满赠的赠品VO")
+    @ApiModelProperty(value = "Full of giftsVO")
     private FullDiscountGiftDO fullDiscountGift;
 
-    @ApiModelProperty(value = "单品立减活动")
+    @ApiModelProperty(value = "Single product reduction activity")
     private MinusVO minusVO;
 
-    @ApiModelProperty(value = "第二件半价活动")
+    @ApiModelProperty(value = "The second half price event")
     private HalfPriceVO halfPriceVO;
 
-    @ApiModelProperty(value = "限时抢购活动")
+    @ApiModelProperty(value = "Flash sales")
     private SeckillGoodsVO seckillGoodsVO;
 
 
-    @ApiModelProperty(value = "售空数量")
+    @ApiModelProperty(value = "The number sold out")
     private Integer num;
 
-    @ApiModelProperty(value = "活动价格")
+    @ApiModelProperty(value = "Activity price")
     private Double price;
 
     public PromotionVO() {

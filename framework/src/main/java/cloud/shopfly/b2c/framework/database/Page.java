@@ -24,51 +24,51 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 分页对象. 包含当前页数据及分页信息如总记录数.
+ * Paging object. Contains current page data and page information such as total records.
  *
- * @param <T> 数据类型
+ * @param <T> The data type
  * @author kingapex
  * @version v1.0
  * @since v7.0.0
- * 2017年8月15日 上午10:55:08
+ * 2017years8month15The morning of10:55:08
  */
-@ApiModel(value = "数据分页对象")
+@ApiModel(value = "Data paging object")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Page<T> implements Serializable {
 
 	/**
-	 * 数据列表
+	 * Data list
 	 */
-	@ApiModelProperty(value = "列表数据")
+	@ApiModelProperty(value = "The list of data")
 	private List<T> data;
 
 	/**
-	 * 当前页码
+	 * The current page number
 	 */
-	@ApiModelProperty(value = "当前页码")
+	@ApiModelProperty(value = "The current page number")
 	private Integer pageNo;
 
 
 	/**
-	 * 分页大小
+	 * Page size
 	 */
-	@ApiModelProperty(value = "分页大小")
+	@ApiModelProperty(value = "Page size")
 	private Integer pageSize;
 
 	/**
-	 * 总计录数
+	 * A total record number
 	 */
-	@ApiModelProperty(value = "总计录数")
+	@ApiModelProperty(value = "A total record number")
 	private Long dataTotal;
 
 
 	/**
-	 * 构造方法
+	 * A constructor
 	 *
-	 * @param data      数据列表
-	 * @param pageNo    当前页码
-	 * @param pageSize  页大小
-	 * @param dataTotal 总计录数
+	 * @param data      Data list
+	 * @param pageNo    The current page number
+	 * @param pageSize  Page size
+	 * @param dataTotal A total record number
 	 */
 	public Page(Integer pageNo, Long dataTotal, Integer pageSize, List<T> data) {
 		this.data = data;

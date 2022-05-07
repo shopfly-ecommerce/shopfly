@@ -32,20 +32,20 @@ import javax.validation.Valid;
 /**
  * @author fk
  * @version v1.0
- * @Description: 商品设置控制器
+ * @Description: Commodity setting controller
  * @date 2018/5/25 10:31
  * @since v7.0.0
  */
 @RestController
 @RequestMapping("/seller/goods/settings")
-@Api(description = "商品设置API")
+@Api(description = "ProductAPI")
 public class GoodsSettingSellerController {
 
     @Autowired
     private SettingClient settingClient;
 
     @GetMapping
-    @ApiOperation(value = "获取商品审核设置信息")
+    @ApiOperation(value = "Obtain product audit setting information")
     public GoodsSettingVO getGoodsSetting(){
 
         String json = this.settingClient.get(SettingGroup.GOODS);
@@ -53,7 +53,7 @@ public class GoodsSettingSellerController {
     }
 
     @PostMapping
-    @ApiOperation(value = "保存商品审核设置信息")
+    @ApiOperation(value = "Save product audit setting information")
     public GoodsSettingVO save(@Valid GoodsSettingVO goodsSetting){
 
         this.settingClient.save(SettingGroup.GOODS,goodsSetting);

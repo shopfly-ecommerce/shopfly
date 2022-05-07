@@ -27,9 +27,9 @@ import java.util.Map.Entry;
 
 
 /**
- * JSON 相关操作
+ * JSON The relevant operation
  * @author Sylow
- * 需要GJSON
+ * Need to beGJSON
  * 2015-07-14 
  */
 public class JsonUtil {
@@ -37,7 +37,7 @@ public class JsonUtil {
 	protected final static Log logger = LogFactory.getLog(JsonUtil.class);
 
 	/**
-	 * 把json格式的字符串转换为map对线
+	 * thejsonFormat string to convert tomapOn the line
 	 * @param json
 	 * @return LinkedHashMap 
 	 */
@@ -46,7 +46,7 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 把json数组格式的字符串转换为 List
+	 * thejsonArray format string conversion toList
 	 * @return List<Object>
 	 */
 	public static List<Map<String,Object>> toList(String jsonArr){
@@ -92,7 +92,7 @@ public class JsonUtil {
 	}*/
 
 	/**
-	 * 获取JsonObject
+	 * To obtainJsonObject
 	 * 
 	 * @param json
 	 * @return
@@ -110,7 +110,7 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 将JSONObjec对象转换成Map-List集合
+	 * willJSONObjecObject converted toMap-ListA collection of
 	 * 
 	 * @param json
 	 * @return
@@ -146,7 +146,7 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 将JSONArray对象转换成List集合
+	 * willJSONArrayObject converted toListA collection of
 	 * 
 	 * @param json
 	 * @return
@@ -176,7 +176,7 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 将json字符串转成list
+	 * willjsonString tolist
 	 * @param jsonData
 	 * @param clz
 	 * @return
@@ -190,14 +190,14 @@ public class JsonUtil {
 		try {
 			return mapper.readValue(jsonData, javaType);
 		} catch (Exception e) {
-			logger.error("转换Object 异常",e);
+			logger.error("conversionObject abnormal",e);
 		}
 		
 		return null;
 	}
 
 	/**
-	 * 将json字符串转成Object
+	 * willjsonString toObject
 	 * @param jsonData
 	 * @param clz
 	 * @return
@@ -208,7 +208,7 @@ public class JsonUtil {
 		try {
 			return mapper.readValue(jsonData,clz);
 		} catch (IOException e) {
-			logger.error("转换Object 异常",e);
+			logger.error("conversionObject abnormal",e);
 		}
 		return null;
 	}

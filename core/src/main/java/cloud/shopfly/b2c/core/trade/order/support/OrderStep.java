@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 订单流程
+ * Order process
  *
  * @author Snow create in 2018/5/16
  * @version v2.0
@@ -32,13 +32,13 @@ public class OrderStep implements Cloneable {
 
 
     /**
-     * 订单状态
+     * Status
      */
     private OrderStatusEnum orderStatus;
 
 
     /**
-     * 允许的操作
+     * Allowed operations
      */
     private List<OrderOperateEnum> allowableOperate;
 

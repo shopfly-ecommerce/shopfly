@@ -31,7 +31,7 @@ import javax.validation.constraints.Min;
 
 
 /**
- * 拼团商品实体
+ * Group commodity entity
  *
  * @author admin
  * @version vv1.0.0
@@ -53,7 +53,7 @@ public class PintuanGoodsDO {
      * sku_id
      */
     @Column(name = "sku_id")
-    @Min(message = "必须为数字", value = 0)
+    @Min(message = "Must be a number", value = 0)
     @ApiModelProperty(name = "sku_id", value = "sku_id")
     private Integer skuId;
 
@@ -63,36 +63,36 @@ public class PintuanGoodsDO {
 
 
     @Column(name = "seller_id")
-    @ApiModelProperty(name = "seller_id", value = "卖家id")
+    @ApiModelProperty(name = "seller_id", value = "The sellerid")
     private Integer sellerId;
 
     /**
-     * 卖家名称
+     * The seller name
      */
     @Column(name = "seller_name")
-    @ApiModelProperty(name = "seller_name", value = "卖家名称", hidden = true)
+    @ApiModelProperty(name = "seller_name", value = "The seller name", hidden = true)
     private String sellerName;
 
 
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = true)
+    @ApiModelProperty(name = "goods_name", value = "Name", required = true)
     private String goodsName;
     /**
-     * 原价
+     * The original price
      */
     @Column(name = "origin_price")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "origin_price", value = "原价")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "origin_price", value = "The original price")
     private Double originPrice;
     /**
-     * 活动价
+     * Activity price
      */
     @Column(name = "sales_price")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "sales_price", value = "活动价")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "sales_price", value = "Activity price")
     private Double salesPrice;
     /**
      * sn
@@ -101,32 +101,32 @@ public class PintuanGoodsDO {
     @ApiModelProperty(name = "sn", value = "sn", required = true)
     private String sn;
     /**
-     * 已售数量
+     * The number sold
      */
     @Column(name = "sold_quantity")
-    @ApiModelProperty(name = "sold_quantity", value = "已售数量")
+    @ApiModelProperty(name = "sold_quantity", value = "The number sold")
     private Integer soldQuantity;
     /**
-     * 待发货数量
+     * Quantity of goods to be shipped
      */
     @Column(name = "locked_quantity")
-    @ApiModelProperty(name = "locked_quantity", value = "待发货数量")
+    @ApiModelProperty(name = "locked_quantity", value = "Quantity of goods to be shipped")
     private Integer lockedQuantity;
     /**
-     * 拼团活动id
+     * Spell group activitiesid
      */
     @Column(name = "pintuan_id")
-    @ApiModelProperty(name = "pintuan_id", value = "拼团活动id")
+    @ApiModelProperty(name = "pintuan_id", value = "Spell group activitiesid")
     private Integer pintuanId;
 
 
     @Column(name = "specs")
-    @ApiModelProperty(name = "specs", value = "规格信息json")
+    @ApiModelProperty(name = "specs", value = "Specification informationjson")
     @JsonRawValue
     private String specs;
 
     @Column(name = "thumbnail")
-    @ApiModelProperty(name = "thumbnail", value = "商品图片")
+    @ApiModelProperty(name = "thumbnail", value = "Commodity images")
     private String thumbnail;
 
     @PrimaryKeyField

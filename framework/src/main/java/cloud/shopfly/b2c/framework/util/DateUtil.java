@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 /**
- * 日期相关的操作
+ * Date-related operations
  *
  * @author Dawei
  */
@@ -30,19 +30,19 @@ import java.util.*;
 @SuppressWarnings({"AlibabaCollectionInitShouldAssignCapacity", "AlibabaUndefineMagicConstant"})
 public class DateUtil {
     /**
-     * 一天的秒数
+     * The number of seconds in a day
      */
     public static final long ONE_DAY = 86400;
 
     /**
-     * 获取当前格式化后的时间
+     * Gets the time after the current formatting
      * @return
      */
     public static String formatNow() {
         return DateUtil.toString(new Date(), "yyyy-MM-dd HH:mm:ss");
     }
     /**
-     * 当天的开始时间
+     * The start time of the day
      *
      * @return
      */
@@ -57,10 +57,10 @@ public class DateUtil {
     }
 
     /**
-     * 将 Sun Apr 15 04:12:39 CST 2018 格式的时间转换为时间戳
+     * willSun Apr 15 04:12:39 CST 2018 Format time is converted to timestamp
      *
-     * @param dateFormat Sun Apr 15 04:12:39 CST 2018 格式的时间
-     * @return 时间戳
+     * @param dateFormat Sun Apr 15 04:12:39 CST 2018 Format time
+     * @return The time stamp
      */
     public static long getFormatDate(String dateFormat) {
         try {
@@ -75,7 +75,7 @@ public class DateUtil {
 
 
     /**
-     * 当天的结束时间
+     * The end of the day
      *
      * @return
      */
@@ -90,7 +90,7 @@ public class DateUtil {
     }
 
     /**
-     * 昨天的开始时间
+     * Yesterdays start time
      *
      * @return
      */
@@ -106,7 +106,7 @@ public class DateUtil {
     }
 
     /**
-     * 昨天的结束时间
+     * Yesterdays closing time
      *
      * @return
      */
@@ -122,10 +122,10 @@ public class DateUtil {
     }
 
     /**
-     * 某天的开始时间
+     * The start time of a day
      *
-     * @param dayUntilNow 距今多少天以前
-     * @return 时间戳
+     * @param dayUntilNow How many days ago
+     * @return The time stamp
      */
     public static long startOfSomeDay(int dayUntilNow) {
         Calendar calendar = Calendar.getInstance();
@@ -139,10 +139,10 @@ public class DateUtil {
     }
 
     /**
-     * 某天的开始时间
+     * The start time of a day
      *
-     * @param dayUntilNow 距今多少天以后
-     * @return 时间戳
+     * @param dayUntilNow How many days from now
+     * @return The time stamp
      */
     public static long endOfSomeDay(int dayUntilNow) {
         Calendar calendar = Calendar.getInstance();
@@ -156,10 +156,10 @@ public class DateUtil {
     }
 
     /**
-     * 某天的年月日
+     * The date of a certain day
      *
-     * @param dayUntilNow 距今多少天以前
-     * @return 年月日map key为 year month day
+     * @param dayUntilNow How many days ago
+     * @return (date) (month) (year)map keyforyear month day
      */
     public static Map<String, Object> getYearMonthAndDay(int dayUntilNow) {
 
@@ -177,7 +177,7 @@ public class DateUtil {
     }
 
     /**
-     * 将一个字符串转换成日期格式
+     * Converts a string to a date format
      *
      * @param date
      * @param pattern
@@ -202,23 +202,23 @@ public class DateUtil {
     }
 
     /**
-     * 获取上个月的开始结束时间
+     * Gets the start and end time of the previous month
      *
      * @return
      */
     public static Long[] getLastMonth() {
-        // 取得系统当前时间
+        // Gets the current system time
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1;
 
-        // 取得系统当前时间所在月第一天时间对象
+        // Obtain the time object on the first day of the month in which the current system time resides
         cal.set(Calendar.DAY_OF_MONTH, 1);
 
-        // 日期减一,取得上月最后一天时间对象
+        // Subtract one from the date to get the last day of the last month
         cal.add(Calendar.DAY_OF_MONTH, -1);
 
-        // 输出上月最后一天日期
+        // Output last day date of last month
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
         String months = "";
@@ -251,21 +251,21 @@ public class DateUtil {
     }
 
     /**
-     * 获取当月的开始结束时间
+     * Gets the start and end time of the month
      *
      * @return
      */
     public static Long[] getCurrentMonth() {
-        // 取得系统当前时间
+        // Gets the current system time
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1;
-        // 输出下月第一天日期
+        // Output the date on the first day of the next month
         int notMonth = cal.get(Calendar.MONTH) + 2;
-        // 取得系统当前时间所在月第一天时间对象
+        // Obtain the time object on the first day of the month in which the current system time resides
         cal.set(Calendar.DAY_OF_MONTH, 1);
 
-        // 日期减一,取得上月最后一天时间对象
+        // Subtract one from the date to get the last day of the last month
         cal.add(Calendar.DAY_OF_MONTH, -1);
 
         String months = "";
@@ -291,7 +291,7 @@ public class DateUtil {
     }
 
     /**
-     * 获取某年开始结束时间
+     * Gets the start and end time of a year
      *
      * @return
      */
@@ -316,7 +316,7 @@ public class DateUtil {
     }
 
     /**
-     * 把日期转换成字符串型
+     * Converts the date to a string
      *
      * @param date
      * @param pattern
@@ -352,8 +352,8 @@ public class DateUtil {
     }
 
     /**
-     * 为了方便mock 设置此属性
-     * 如果设置了此属性，则回直接返回设置的值
+     * In order to facilitatemock Set this property
+     * If this property is set, the set value is returned directly
      */
     public static Long mockDate;
 
@@ -365,11 +365,11 @@ public class DateUtil {
     }
 
     /**
-     * 判断当前时间是否在某个时间范围
+     * Checks whether the current time is in a certain time range
      *
-     * @param start 开始时间，以秒为单位的时间戳
-     * @param end   结束时间，以秒为单位的时间戳
-     * @return 是否在范围内
+     * @param start Start time, timestamp in seconds
+     * @param end   End time, timestamp in seconds
+     * @return Is it within range
      */
     public static boolean inRangeOf(long start, long end) {
         long now = getDateline();

@@ -15,11 +15,11 @@
  */
 package cloud.shopfly.b2c.core.payment.plugin.alipay.executor;
 /**
- * shopfly 支付相应对象
+ * shopfly Pay corresponding object
  *
  * @author zh
  * @version v7.0
- * @date 18/7/19 下午4:47
+ * @date 18/7/19 In the afternoon4:47
  * @since v7.0
  */
 
@@ -28,7 +28,7 @@ import com.alipay.api.AlipayResponse;
 
 public class SfAliPayResponse extends AlipayResponse {
     /**
-     * 组织好数据结构的表单信息
+     * Organize the form information in the data structure
      */
     private Form form;
 

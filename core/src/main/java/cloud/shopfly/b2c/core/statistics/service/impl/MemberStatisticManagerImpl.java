@@ -37,13 +37,13 @@ import java.text.NumberFormat;
 import java.util.*;
 
 /**
- * 会员统计 实现类
+ * Member statistics implementation class
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/4/28 下午5:11
+ * 2018/4/28 In the afternoon5:11
  */
 @Service
 public class MemberStatisticManagerImpl implements MemberStatisticManager {
@@ -55,10 +55,10 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
 
     @Override
     public SimpleChart getIncreaseMember(SearchCriteria searchCriteria) {
-        //参数校验
+        // Parameter calibration
         searchCriteria = new SearchCriteria(searchCriteria);
         try {
-            //获取结果数量
+            // Number of results obtained
             Integer resultSize = DataDisplayUtil.getResultSize(searchCriteria);
 
             Page page = this.getIncreaseMemberPage(searchCriteria);
@@ -66,13 +66,13 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
 
             String[] nowData = new String[resultSize];
 
-            //生成图标数据
+            // Generate icon data
             int i = 0;
             for (Map<String, Object> mrd : result) {
                 nowData[i] = mrd.get("num").toString();
                 i++;
             }
-            ChartSeries chartSeries = new ChartSeries("新增会员数量", nowData);
+            ChartSeries chartSeries = new ChartSeries("Number of new members", nowData);
             return new SimpleChart(chartSeries, ChartUtil.structureXAxis(searchCriteria.getCycleType(), searchCriteria.getYear(), searchCriteria.getMonth()), new String[0]);
         } catch (Exception e) {
             logger.error(e);
@@ -83,26 +83,26 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
 
     @Override
     public Page getIncreaseMemberPage(SearchCriteria searchCriteria) {
-        //参数校验
+        // Parameter calibration
         searchCriteria = new SearchCriteria(searchCriteria);
         try {
 
-            //获取结果数量
+            // Number of results obtained
             Integer resultSize = DataDisplayUtil.getResultSize(searchCriteria);
-            //获取结果数量
+            // Number of results obtained
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             long[] lasttimestamp = DataDisplayUtil.getLastStartTimeAndEndTime(searchCriteria);
 
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
             /*
-             * 参数
+             * parameter
              */
             List<Object> lastParams = new ArrayList<>();
 
-            //判断sql日期分组条件
+            // Determine the SQL date grouping criteria
             String circle;
             if (Objects.equals(searchCriteria.getCycleType(), QueryDateType.YEAR.name())) {
                 circle = "%m";
@@ -122,14 +122,14 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
             List<Map<String, Object>> lastList = this.daoSupport.queryForList(sql.toString(), lastParams.toArray());
 
             DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
-            //将上周期的数据放到map中，以time为key
+            // Put the data of the previous period into the map with time as the key
             Map lastMap = new HashMap();
             for (Map<String, Object> mrd2 : lastList) {
 
                 lastMap.put(Integer.parseInt(mrd2.get("time").toString()),mrd2.get("num"));
             }
 
-            //生成对比数据
+            // Generate comparative data
             Map<Integer,Map<String, Object>> map = new HashMap();
             for (Map<String, Object> mrd : list) {
                 Integer key = Integer.parseInt(mrd.get("time").toString());
@@ -147,7 +147,7 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
                 mrd.put("time",Integer.parseInt(mrd.get("time").toString()));
                 map.put(key,mrd);
             }
-            //最终结果 数据填充
+            // End result data population
             List<Map<String, Object>> result = new ArrayList<>();
 
             for (int i = 1; i <= resultSize; i++) {
@@ -196,12 +196,12 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
                     localName[i] = map.get("member_name").toString();
                 } else {
                     data[i] = "0";
-                    localName[i] = "无";
+                    localName[i] = "There is no";
                 }
                 xAxis[i] = i + 1 + "";
             }
 
-            ChartSeries chartSeries = new ChartSeries("会员下单量", data, localName);
+            ChartSeries chartSeries = new ChartSeries("Member orders", data, localName);
 
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
@@ -220,12 +220,12 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
 
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -263,12 +263,12 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
                     localName[i] = map.get("member_name").toString();
                 } else {
                     data[i] = "0";
-                    localName[i] = "无";
+                    localName[i] = "There is no";
                 }
                 xAxis[i] = i + 1 + "";
             }
 
-            ChartSeries chartSeries = new ChartSeries("会员下单商品数", data, localName);
+            ChartSeries chartSeries = new ChartSeries("Number of items placed by members", data, localName);
 
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
@@ -285,12 +285,12 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
 
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -328,12 +328,12 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
                     localName[i] = map.get("member_name").toString();
                 } else {
                     data[i] = "0";
-                    localName[i] = "无";
+                    localName[i] = "There is no";
                 }
                 xAxis[i] = i + 1 + "";
             }
 
-            ChartSeries chartSeries = new ChartSeries("会员下单金额", data, localName);
+            ChartSeries chartSeries = new ChartSeries("Member order amount", data, localName);
 
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (StatisticsException e) {
@@ -352,12 +352,12 @@ public class MemberStatisticManagerImpl implements MemberStatisticManager {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
 
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 

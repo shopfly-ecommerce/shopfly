@@ -19,87 +19,87 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 促销活动工具枚举
- * <p>类中注释的Cart 指com.enation.app.shop.trade.model.vo.CartDO
+ * Promotion tools enumeration
+ * <p>Class annotatedCart Refers to thecom.enation.app.shop.trade.model.vo.CartDO
  * @author Snow
  * @since V6.4
  * @version v1.0
- * 2017年08月18日17:55:35
+ * 2017years08month18day17:55:35
  */
 public enum PromotionTypeEnum {
 
 	/**
-	 * 不参与活动（指不参与任何单品活动）
+	 * Not participating in activities（Not participating in any single product activity）
 	 */
-	NO("no","不参与活动"),
+	NO("no","Not participating in activities"),
 
 	/**
-	 * 积分商品
+	 * Integral goods
 	 */
-	POINT("point","积分活动"),
+	POINT("point","Integral activities"),
 
 	/**
-	 * 单品立减活动
-	 * 计算价格时:
-	 * 1、CartDO.SkuList.Sku.purchase_price 需要修改。<br>
-	 * 2、CartDO.price.discount_price 需要累加。<br>
-	 * 3、CartDO.SkuList.Sku.subtotal 需要计算<br>
+	 * Single product reduction activity
+	 * When calculating the price:
+	 * 1、CartDO.SkuList.Sku.purchase_price It needs to be modified.<br>
+	 * 2、CartDO.price.discount_price You have to add them up.<br>
+	 * 3、CartDO.SkuList.Sku.subtotal Need to compute<br>
 	 */
-	MINUS("minusPlugin","单品立减"),
+	MINUS("minusPlugin","Item set"),
 
 	/**
-	 * 团购活动
-	 * 计算价格时:
-	 * 1、CartDO.SkuList.Sku.purchase_price 需要修改。<br>
-	 * 2、CartDO.price.discount_price 需要累加。<br>
-	 * 3、CartDO.SkuList.Sku.subtotal 需要计算<br>
+	 * Group-buying activities
+	 * When calculating the price:
+	 * 1、CartDO.SkuList.Sku.purchase_price It needs to be modified.<br>
+	 * 2、CartDO.price.discount_price You have to add them up.<br>
+	 * 3、CartDO.SkuList.Sku.subtotal Need to compute<br>
 	 */
-	GROUPBUY("groupBuyGoodsPlugin","团购"),
+	GROUPBUY("groupBuyGoodsPlugin","A bulk"),
 
 	/**
-	 *积 分换购活动
-	 * 计算价格时:
-	 * 1、CartDO.SkuList.Sku.point 需要修改。<br>
-	 * 2、CartDO.price.exchange_point 需要累加。<br>
-	 * 3、CartDO.price.discount_price 需要累加。<br>
-	 * 4、CartDO.SkuList.Sku.subtotal 需要计算<br>
+	 *Points for purchase
+	 * When calculating the price:
+	 * 1、CartDO.SkuList.Sku.point It needs to be modified.<br>
+	 * 2、CartDO.price.exchange_point You have to add them up.<br>
+	 * 3、CartDO.price.discount_price You have to add them up.<br>
+	 * 4、CartDO.SkuList.Sku.subtotal Need to compute<br>
 	 */
-	EXCHANGE("exchangePlugin","积分换购"),
+	EXCHANGE("exchangePlugin","Integral for"),
 
 	/**
-	 * 第二件半价活动
-	 * 计算价格时:
-	 * 1、CartDO.price.discount_price 需要累加。<br>
-	 * 2、CartDO.SkuList.Sku.subtotal 需要计算<br>
+	 * The second half price event
+	 * When calculating the price:
+	 * 1、CartDO.price.discount_price You have to add them up.<br>
+	 * 2、CartDO.SkuList.Sku.subtotal Need to compute<br>
 	 */
-	HALF_PRICE("halfPricePlugin","第二件半价"),
+	HALF_PRICE("halfPricePlugin","The second one is half price"),
 
 	/**
-	 *满优惠活动
-	 * 计算价格时:
-	 * 1、CartDO.price.discount_price 需要累加。<br>
+	 *Full discount
+	 * When calculating the price:
+	 * 1、CartDO.price.discount_price You have to add them up.<br>
 	 */
-	FULL_DISCOUNT("fullDiscountPlugin","满优惠"),
+	FULL_DISCOUNT("fullDiscountPlugin","With preferential"),
 
 	/**
-	 * 限时抢购
-	 * 如果商品参与的显示抢购活动，则不允许参与其他活动。
-	 * 计算价格时：
-	 * 1、如果购买的数量没有超过售空数量，则商品价格为商家设置的活动价，如果超过售空数量，则将商品的价格设置为原价。
+	 * flash
+	 * If the item participates in the display purchase activity, it is not allowed to participate in other activities.
+	 * When calculating the price：
+	 * 1、If the purchased quantity does not exceed the sold empty quantity, the commodity price is the activity price set by the merchant; if it exceeds the sold empty quantity, the commodity price is set as the original price.
 	 */
-	SECKILL("seckillPlugin","限时抢购"),
+	SECKILL("seckillPlugin","flash"),
 
 	/**
-	 * 拼团活动类型
-	 * 指定商品，优惠价格
+	 * Group activity type
+	 * Designated goods, preferential prices
 	 */
-	PINTUAN("pintuanPlugin","拼团");
+	PINTUAN("pintuanPlugin","Spell group");
 
 	private String pluginId;
 	private String promotionName;
 
 	/**
-	 * 构造器
+	 * The constructor
 	 * @param pluginId
 	 * @param promotionName
 	 */
@@ -130,7 +130,7 @@ public enum PromotionTypeEnum {
 
 
 	/**
-	 * 读取单品活动集合
+	 * Read the item activity collection
 	 * @return
 	 */
 	public static List<String> getSingle(){
@@ -140,13 +140,13 @@ public enum PromotionTypeEnum {
 		pluginId.add(PromotionTypeEnum.HALF_PRICE.getPluginId());
 		pluginId.add(PromotionTypeEnum.MINUS.getPluginId());
 
-		//注意以下活动，不参与其他任何活动
+		// Pay attention to the following activities and do not participate in any other activities
 		pluginId.add(PromotionTypeEnum.SECKILL.getPluginId());
 		return pluginId;
 	}
 
 	/**
-	 * 读取组合活动集合
+	 * Read the composite activity collection
 	 * @return
 	 */
 	public static List<String> getGroup(){
@@ -156,9 +156,9 @@ public enum PromotionTypeEnum {
 	}
 
 	/**
-	 * 读取某些活动具有独立库存的活动工具
-	 * 1：限时抢购活动 (订单付款时，增加已售数量)
-	 * 2：团购活动 (订单创建时，增加已售数量)
+	 * An activity tool that reads some activities that have a separate inventory
+	 * 1：Flash sales(When an order is paid, increase the quantity sold)
+	 * 2：Group-buying activities(When an order is created, increase the quantity sold)
 	 * @return
 	 */
 	public static List<String> getIndependent(){
@@ -169,7 +169,7 @@ public enum PromotionTypeEnum {
 	}
 
 	/**
-	 * 判断是否是单品活动
+	 * Determine if it is a single product activity
 	 * @param type
 	 * @return
 	 */
@@ -187,7 +187,7 @@ public enum PromotionTypeEnum {
 	}
 
 	/**
-	 * 判断是否是组合活动
+	 * Determine if it is a combined activity
 	 * @param type
 	 * @return
 	 */
@@ -196,7 +196,7 @@ public enum PromotionTypeEnum {
     }
 
 	/**
-	 * 获取插件名称。根据type字段
+	 * Gets the plug-in name. According to thetypefield
 	 * @param type
 	 * @return
 	 */
@@ -218,16 +218,16 @@ public enum PromotionTypeEnum {
 
 
 	/**
-	 * 根据活动类型找到枚举值
+	 * Find enumeration values by activity type
 	 * @param promotionName
-	 * @return 如果没有匹配的名字返回空
+	 * @return Returns null if there is no matching name
 	 */
 	public static PromotionTypeEnum myValueOf(String promotionName) {
 
 		try {
 			return PromotionTypeEnum.valueOf(promotionName);
 		} catch (Exception e) {
-			System.out.println("发现未知的活动类型："+ promotionName);
+			System.out.println("Discover unknown activity types："+ promotionName);
 			return null;
 		}
 

@@ -18,17 +18,17 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.member.model.vo.MemberLoginMsg;
 
 /**
- * 会员登陆事件
+ * Member Login Event
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:25:27
+ * 2018years3month23The morning of10:25:27
  */
 public interface MemberLoginEvent {
 
     /**
-     * 会员登陆
+     * Members login
      *
      * @param memberLoginMsg
      */

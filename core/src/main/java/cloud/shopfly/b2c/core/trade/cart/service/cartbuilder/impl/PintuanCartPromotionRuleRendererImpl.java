@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2018/12/10.
- * 购物促销信息渲染实现
+ * Shopping promotion information rendering implementation
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -60,11 +60,11 @@ public class PintuanCartPromotionRuleRendererImpl implements CartPromotionRuleRe
     @Override
     public void render(List<CartVO> cartList, boolean includeCoupon) {
 
-        //渲染规则
+        // Rendering rules
         this.renderRule(cartList,includeCoupon);
 
         if (logger.isDebugEnabled()){
-            logger.debug("购物车处理完促销规则结果为：");
+            logger.debug("The result of shopping cart processing promotion rule is：");
             logger.debug(cartList.toString());
         }
 
@@ -73,7 +73,7 @@ public class PintuanCartPromotionRuleRendererImpl implements CartPromotionRuleRe
 
 
     /**
-     * 规则渲染
+     * The rules apply colours to a drawing
      *
      * @param cartList
      */
@@ -87,11 +87,11 @@ public class PintuanCartPromotionRuleRendererImpl implements CartPromotionRuleRe
 
         for (CartVO cart : cartList) {
 
-            //渲染优惠券
+            // Render coupon
             if (includeCoupon) {
-                //用户选择使用的优惠券
+                // The coupons the user chooses to use
                 CouponVO coupon = selectedPromotionVo.getCoupon();
-                //如果有使用的优惠券，则build rule
+                // Build rule if there are coupons to use
                 if (coupon != null) {
                     PromotionRule couponRule = cartCouponRuleBuilder.build(cart, coupon);
                     cart.getRuleList().add(couponRule);
@@ -100,23 +100,23 @@ public class PintuanCartPromotionRuleRendererImpl implements CartPromotionRuleRe
 
 
 
-            //渲染单品活动
-            //用户选择的单品活动
+            // Render single product activity
+            // User selected single product activity
             List<PromotionVO> skuPromotionList = selectedPromotionVo.getSinglePromotionList();
-            //空过滤
+            // Empty filter
             if (skuPromotionList == null) {
                 continue;
             }
 
-            //循环处理购物车的促销规则
+            // Loop through shopping cart promotion rules
             for (CartSkuVO cartSku : cart.getSkuList()) {
 
-                //跳过未选中的
+                // Skip the unselected ones
                 if (cartSku.getChecked() == 0) {
                     continue;
                 }
 
-                //计算促销规则，形成list，并压入统一的rule list 中
+                // Calculate promotion rules, form a list, and press it into a unified rule list
                 PromotionRule skuRule = oneSku(cartSku, skuPromotionList);
                 cartSku.setRule(skuRule);
 
@@ -131,9 +131,9 @@ public class PintuanCartPromotionRuleRendererImpl implements CartPromotionRuleRe
 
 
     /**
-     * 根据促销类型找到相应的builder
+     * Find the corresponding promotion according to the type of promotionbuilder
      *
-     * @param promotionType 促销类型
+     * @param promotionType Promotion type
      * @return
      */
     private SkuPromotionRuleBuilder getSkuRuleBuilder(String promotionType) {
@@ -156,20 +156,20 @@ public class PintuanCartPromotionRuleRendererImpl implements CartPromotionRuleRe
         for (PromotionVO promotionVo : skuPromotionList) {
 
             if (promotionVo.getSkuId().intValue() == cartSku.getSkuId().intValue()) {
-                //sku优惠规则构建器
+                // Sku preference rule builder
                 SkuPromotionRuleBuilder skuRuleBuilder = this.getSkuRuleBuilder(promotionVo.getPromotionType());
 
                 if (skuRuleBuilder == null) {
                     if(logger.isDebugEnabled()){
-                        logger.debug(cartSku.getSkuId() + "的活动类型[" + promotionVo.getPromotionType() + "]没有找到builder");
+                        logger.debug(cartSku.getSkuId() + "Types of activities[" + promotionVo.getPromotionType() + "]Could not findbuilder");
                     }
                     continue;
                 }
 
-                //设置单品活动的选择中情况
+                // Set the situation in the selection of single product activities
                 selectedPromotion(cartSku, promotionVo);
 
-                //构建促销规则
+                // Build promotion rules
                 return skuRuleBuilder.build(cartSku, promotionVo);
             }
 

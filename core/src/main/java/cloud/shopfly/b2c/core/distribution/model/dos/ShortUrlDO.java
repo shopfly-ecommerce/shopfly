@@ -24,12 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 短链接
+ * Short link
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-06-04 上午8:59
+ * 2018-06-04 In the morning8:59
  */
 @Table(name = "es_short_url")
 @ApiModel
@@ -40,10 +40,10 @@ public class ShortUrlDO {
     private Integer id;
 
     @Column()
-    @ApiModelProperty(value = "跳转地址")
+    @ApiModelProperty(value = "Jump address")
     private String url;
     @Column()
-    @ApiModelProperty(value = "短链接key")
+    @ApiModelProperty(value = "Short linkkey")
     private String su;
 
 

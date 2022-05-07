@@ -33,7 +33,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * Created by kingapex on 2018/3/12.
- * 卖家安全配置
+ * Seller security Configuration
  *
  * @author kingapex
  * @version 1.0
@@ -58,7 +58,7 @@ public class SellerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
-     * 定义seller工程的权限
+     * definesellerProject permissions
      *
      * @param http
      * @throws Exception
@@ -70,7 +70,7 @@ public class SellerSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .antMatcher("/seller/**")
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                //定义验权失败返回格式
+                // Define a validation failure return format
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests().anyRequest().authenticated()
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
@@ -82,7 +82,7 @@ public class SellerSecurityConfig extends WebSecurityConfigurerAdapter {
                         return fsi;
                     }
                 }).and().addFilterBefore(new TokenAuthenticationFilter(sellerAuthenticationService), UsernamePasswordAuthenticationFilter.class);
-        //禁用缓存
+        // Disable caching
         http.headers().cacheControl();
 
 

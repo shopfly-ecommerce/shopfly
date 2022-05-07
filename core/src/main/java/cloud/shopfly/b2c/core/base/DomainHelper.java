@@ -26,11 +26,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 域名相关管理
+ * Domain name Management
  *
  * @author zh
  * @version v7.0
- * @date 19/4/29 下午4:05
+ * @date 19/4/29 In the afternoon4:05
  * @since v7.0
  */
 @Component
@@ -38,7 +38,7 @@ public class DomainHelper {
 
     private static final String RE_TOP = "[\\w-]+\\.(com.cn|net.cn|gov.cn|org\\.nz|org.cn|com|net|org|gov|cc|biz|info|cn|co)\\b()*";
     /**
-     * 买家端api前缀
+     * Buyer sideapiThe prefix
      */
     private static final String BUYER_API = "api.buyer.";
 
@@ -50,13 +50,13 @@ public class DomainHelper {
     private DomainSettings domainSettings;
 
     /**
-     * 获取买家端域名
+     * Obtain the domain name of the buyer
      *
-     * @return 买家端域名
+     * @return Buyer side domain name
      */
     public String getBuyerDomain() {
         String buyerDomain = domainSettings.getBuyerPc();
-        //判断是否携带网络协议
+        // Check whether the network protocol is carried
         if (buyerDomain.indexOf("http") != -1) {
             return buyerDomain;
         }
@@ -65,13 +65,13 @@ public class DomainHelper {
     }
 
     /**
-     * 获取买家端WAP域名
+     * Get buyer sideWAPThe domain name
      *
-     * @return 买家端WAP域名
+     * @return Buyer sideWAPThe domain name
      */
     public String getMobileDomain() {
         String mobileDomain = domainSettings.getBuyerWap();
-        //判断是否携带网络协议
+        // Check whether the network protocol is carried
         if (mobileDomain.indexOf("http") != -1) {
             return mobileDomain;
         }
@@ -80,12 +80,12 @@ public class DomainHelper {
     }
 
     /**
-     * 获取当前的主域名
+     * Gets the current primary domain name
      *
-     * @return 主域名
+     * @return The main domain name
      */
     public String getTopDomain() {
-        //获取当前的访问域名
+        // Gets the current access domain name
         String result = getUrlDomain();
         Pattern pattern = Pattern.compile(RE_TOP, Pattern.CASE_INSENSITIVE);
         try {
@@ -100,24 +100,24 @@ public class DomainHelper {
 
 
     /**
-     * 获取完整回调域名
-     * 思路：如果域名包含协议则直接返回，反之拼接协议和域名返回
+     * Gets the full callback domain name
+     * Train of thought：If the domain name contains a protocol, the domain name is returned. If the domain name contains a protocol, the domain name is returned
      *
-     * @return 完整域名
+     * @return Complete the domain name
      */
     public String getCallback() {
         String callback = domainSettings.getCallback();
-        //如果域名没有配置则读取当前访问的域名
+        // If the domain name is not configured, the current accessed domain name is read
         String buyer = BUYER_API;
         if (StringUtil.isEmpty(callback)) {
-            //校验reques中是否可以获取到地址,如果可以获取到直接读取，如果获取不到则按照既定规则拼接地址
+            // Verify that the address can be obtained from Reques, read it directly if it can be obtained, and concatenate the address according to the established rule if it cannot be obtained
             if (StringUtil.isEmpty(getUrlDomain())) {
                 callback = buyer + getTopDomain();
             } else {
                 callback = getUrlDomain();
             }
         }
-        //如果域名中包含协议则直接返回
+        // Return if the domain name contains a protocol
         if (callback.indexOf("http") != -1) {
             return callback;
         }
@@ -125,12 +125,12 @@ public class DomainHelper {
     }
 
     /**
-     * 没有配置回调获取默认访问回调地址
+     * The callback is not configured to get the default access callback address
      *
      * @return
      */
     private static String getUrlDomain() {
-        //获取request
+        // For the request
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
         if (request != null) {
             String serverName = request.getServerName();

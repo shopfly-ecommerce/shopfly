@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 文章控制器
+ * Article controller
  *
  * @author fk
  * @version v1.0
@@ -40,16 +40,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/pages")
-@Api(description = "文章相关API")
+@Api(description = "The article relatedAPI")
 public class ArticleBuyerController {
 
     @Autowired
     private ArticleManager articleManager;
 
 
-    @ApiOperation(value = "查询某个位置的文章列表", response = ArticleDetail.class)
+    @ApiOperation(value = "Queries a list of articles at a location", response = ArticleDetail.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "position", value = "文章显示位置:注册协议，入驻协议，平台联系方式，团购活动协议,其他", required = true, dataType = "string", paramType = "query",allowableValues = "REGISTRATION_AGREEMENT,COOPERATION_AGREEMENT,CONTACT_INFORMATION,GROUP_BUY_AGREEMENT,OTHER")
+            @ApiImplicitParam(name = "position", value = "Article display position:Registration agreement, settlement agreement, platform contact information, group purchase activity agreement,other", required = true, dataType = "string", paramType = "query",allowableValues = "REGISTRATION_AGREEMENT,COOPERATION_AGREEMENT,CONTACT_INFORMATION,GROUP_BUY_AGREEMENT,OTHER")
     })
     @GetMapping("/articles")
     public List<Article> list(String position) {
@@ -58,9 +58,9 @@ public class ArticleBuyerController {
     }
 
     @GetMapping(value = "/articles/{id}")
-    @ApiOperation(value = "查询一个文章")
+    @ApiOperation(value = "Query an article")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的文章主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the article to be queried", required = true, dataType = "int", paramType = "path")
     })
     public Article get(@PathVariable Integer id) {
 
@@ -69,9 +69,9 @@ public class ArticleBuyerController {
         return article;
     }
 
-    @ApiOperation(value = "查询某个位置的一个文章", response = ArticleDetail.class)
+    @ApiOperation(value = "Query an article at a location", response = ArticleDetail.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "position", value = "文章显示位置,注册协议，入驻协议，平台联系方式，其他", required = true, dataType = "string", paramType = "path",allowableValues = "REGISTRATION_AGREEMENT,COOPERATION_AGREEMENT,CONTACT_INFORMATION,OTHER")
+            @ApiImplicitParam(name = "position", value = "Article display position,Registration agreement, settlement agreement, platform contact information, etc", required = true, dataType = "string", paramType = "path",allowableValues = "REGISTRATION_AGREEMENT,COOPERATION_AGREEMENT,CONTACT_INFORMATION,OTHER")
     })
     @GetMapping("/{position}/articles")
     public Article getOne(@PathVariable String position) {
@@ -80,9 +80,9 @@ public class ArticleBuyerController {
         return list.get(0);
     }
 
-    @ApiOperation(value = "查询某个分类类型下的文章列表", response = ArticleDetail.class)
+    @ApiOperation(value = "Query the list of articles under a category type", response = ArticleDetail.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "category_type", value = "分类类型,帮助中心，商城公告，固定位置，商城促销，其他", required = true, dataType = "string", paramType = "path",allowableValues = "HELP,NOTICE,POSITION,PROMOTION,OTHER"),
+            @ApiImplicitParam(name = "category_type", value = "Classification type,Help center, mall announcements, fixed location, mall promotions, others", required = true, dataType = "string", paramType = "path",allowableValues = "HELP,NOTICE,POSITION,PROMOTION,OTHER"),
     })
     @GetMapping("/article-categories/{category_type}/articles")
     public List<Article> listByCategoryType(@PathVariable("category_type") String categoryType) {

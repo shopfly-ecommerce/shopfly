@@ -36,7 +36,7 @@ import java.util.List;
 
 
 /**
- * 拼团订单实体
+ * Group order entity
  *
  * @author admin
  * @version vv1.0.0
@@ -50,88 +50,88 @@ public class PintuanOrder {
 
 
     /**
-     * 订单id
+     * The orderid
      */
     @Id(name = "order_id")
     @ApiModelProperty(hidden = true)
     private Integer orderId;
 
     @Column(name = "pintuan_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "pintuan_id", value = "拼团id")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "pintuan_id", value = "Spell groupid")
     private Integer pintuanId;
     /**
-     * 结束时间
+     * The end of time
      */
     @Column(name = "end_time")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "end_time", value = "结束时间")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "end_time", value = "The end of time")
     private Long endTime;
     /**
      * sku_id
      */
     @Column(name = "sku_id")
-    @Min(message = "必须为数字", value = 0)
+    @Min(message = "Must be a number", value = 0)
     @ApiModelProperty(name = "sku_id", value = "sku_id", required = true)
     private Integer skuId;
 
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称")
+    @ApiModelProperty(name = "goods_name", value = "Name")
     private String goodsName;
 
     @Column(name = "goods_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "goods_id", value = "商品id")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "goods_id", value = "productid")
     private Integer goodsId;
 
     /**
-     * 缩略图路径
+     * Thumbnail path
      */
     @Column(name = "thumbnail")
-    @ApiModelProperty(name = "thumbnail", value = "缩略图路径")
+    @ApiModelProperty(name = "thumbnail", value = "Thumbnail path")
     private String thumbnail;
 
 
     /**
-     * 成团人数
+     * The number of clusters
      */
     @Column(name = "required_num")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "required_num", value = "成团人数")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "required_num", value = "The number of clusters")
     private Integer requiredNum;
 
 
     /**
-     * 已参团人数
+     * Number of participants
      */
     @Column(name = "offered_num")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "offered_num", value = "已参团人数")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "offered_num", value = "Number of participants")
     private Integer offeredNum;
 
     /**
-     * 参团人
+     * Tuxedo people
      */
     @Column(name = "offered_persons")
-    @NotEmpty(message = "参团人不能为空")
-    @ApiModelProperty(name = "offered_persons", value = "参团人", hidden = true)
+    @NotEmpty(message = "Participants are not allowed to be empty")
+    @ApiModelProperty(name = "offered_persons", value = "Tuxedo people", hidden = true)
     @JsonIgnore
     private String offeredPersons;
 
     /**
-     * 订单状态
-     * new_order 拼团订单创建时为新订单状态
-     * wait 订单支付后
-     * formed 成团
+     * Status
+     * new_order A group order is created as a new order
+     * wait After payment of the order
+     * formed clouds
      */
     @Column(name = "order_status")
-    @ApiModelProperty(name = "order_status", value = "订单状态")
+    @ApiModelProperty(name = "order_status", value = "Status")
     private String orderStatus;
 
-    @ApiModelProperty(name = "participants", value = "参团人列表")
+    @ApiModelProperty(name = "participants", value = "List of participants")
     private List<Participant> participants;
 
     public List<Participant> getParticipants() {
@@ -148,12 +148,12 @@ public class PintuanOrder {
     }
 
     /**
-     * 加入一个参团者
+     * Join a participant
      */
     public void appendParticipant(Participant participant) {
         List<Participant> list = new ArrayList<>();
 
-        //如果不为空说明是参团
+        // If it is not empty, it means participation
         if (!StringUtil.isEmpty(this.offeredPersons)) {
             list = JsonUtil.jsonToList(offeredPersons, Participant.class);
             List<Participant> listCopy = new ArrayList<>();
@@ -168,7 +168,7 @@ public class PintuanOrder {
             list.clear();
             list.addAll(listCopy);
 
-            //为空说明是团长
+            // If it is empty, it indicates the leader
         } else {
             participant.setIsMaster(1);
 

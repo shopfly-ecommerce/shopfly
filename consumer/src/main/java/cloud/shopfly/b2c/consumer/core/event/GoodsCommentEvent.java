@@ -18,17 +18,17 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.base.message.GoodsCommentMsg;
 
 /**
- * 商品评论事件
+ * Product Review Event
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:24:49
+ * 2018years3month23The morning of10:24:49
  */
 public interface GoodsCommentEvent {
 
     /**
-     * 商品评论后执行
+     * Execute after product review
      *
      * @param goodsCommentMsg
      */

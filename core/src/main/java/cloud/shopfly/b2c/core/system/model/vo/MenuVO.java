@@ -24,7 +24,7 @@ import java.io.Serializable;
 
 
 /**
- * 菜单VO
+ * The menuVO
  *
  * @author zh
  * @version v7.0.0
@@ -36,34 +36,34 @@ public class MenuVO implements Serializable {
     private static final long serialVersionUID = 9663234630434717L;
 
     /**
-     * 父id
+     * The fatherid
      */
-    @NotNull(message = "父菜单id不能为空")
-    @Min(message = "父菜单必须为数字且不能为负数", value = 0)
-    @ApiModelProperty(name = "parent_id", value = "父菜单id，如果为顶级菜单传0即可")
+    @NotNull(message = "The parent menuidCant be empty")
+    @Min(message = "The parent menu must be numeric and cannot be negative", value = 0)
+    @ApiModelProperty(name = "parent_id", value = "The parent menuid, if for the top menu pass0Can be")
     private Integer parentId;
     /**
-     * 菜单标题
+     * The menu title
      */
-    @NotEmpty(message = "菜单标题不能为空")
-    @ApiModelProperty(name = "title", value = "菜单标题")
+    @NotEmpty(message = "Menu titles cannot be empty")
+    @ApiModelProperty(name = "title", value = "The menu title")
     private String title;
     /**
-     * 菜单url
+     * The menuurl
      */
-    @ApiModelProperty(name = "url", value = "菜单链接")
+    @ApiModelProperty(name = "url", value = "Menu links")
     private String url;
     /**
-     * 菜单唯一标识
+     * Menu unique identifier
      */
-    @NotEmpty(message = "菜单唯一标识不能为空")
-    @ApiModelProperty(name = "identifier", value = "菜单唯一标识")
+    @NotEmpty(message = "The unique identifier of the menu cannot be empty")
+    @ApiModelProperty(name = "identifier", value = "Menu unique identifier")
     private String identifier;
     /**
-     * 权限表达式
+     * Permission expression
      */
-    @NotEmpty(message = "权限表达式不能为空")
-    @ApiModelProperty(name = "auth_regular", value = "权限表达式")
+    @NotEmpty(message = "Permission expressions cannot be empty")
+    @ApiModelProperty(name = "auth_regular", value = "Permission expression")
     private String authRegular;
 
 

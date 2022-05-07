@@ -21,16 +21,16 @@ import cloud.shopfly.b2c.core.goods.model.vo.GoodsParamsGroupVO;
 import java.util.List;
 
 /**
- * 商品参数关联接口
+ * Item parameter association interface
  *
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月21日 下午5:29:09
+ * @since v7.0.0 2018years3month21On the afternoon5:29:09
  */
 public interface GoodsParamsManager {
 
     /**
-     * 修改商品查询分类和商品关联的参数
+     * Example Modify the parameters of a commodity query category and its association
      *
      * @param categoryId
      * @param goodsId
@@ -39,7 +39,7 @@ public interface GoodsParamsManager {
     List<GoodsParamsGroupVO> queryGoodsParams(Integer categoryId, Integer goodsId);
 
     /**
-     * 添加商品查询分类和商品关联的参数
+     * Add the parameters of commodity query categories and commodity association
      *
      * @param categoryId
      * @return
@@ -47,10 +47,10 @@ public interface GoodsParamsManager {
     List<GoodsParamsGroupVO> queryGoodsParams(Integer categoryId);
 
     /**
-     * 添加商品关联的参数
+     * Add parameters for commodity association
      *
-     * @param goodsId   商品id
-     * @param paramList 参数集合
+     * @param goodsId   productid
+     * @param paramList Parameter collection
      */
     void addParams(List<GoodsParamsDO> paramList, Integer goodsId);
 

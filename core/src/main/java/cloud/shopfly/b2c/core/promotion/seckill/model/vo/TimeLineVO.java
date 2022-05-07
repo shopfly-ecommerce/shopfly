@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 时刻表列表元素
+ * Schedule list element
  *
  * @author Snow create in 2018/7/30
  * @version v2.0
@@ -29,14 +29,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class TimeLineVO {
 
 
-    @ApiModelProperty(value = "距离此组时刻的开始时间，如果为0代表正在进行中。" +
-            "例如：如果此组时刻为18点，现在的时间为16点，那么此时间是已秒为单位的2小时的时间")
+    @ApiModelProperty(value = "The start time from this group of moments, if0The delegate is in progress." +
+            "For example,：If this group of moments is18Point, the present time is zero16Point, then this time is in units of seconds2Hour time")
     private Long distanceTime;
 
-    @ApiModelProperty(value = "时刻文字")
+    @ApiModelProperty(value = "Time words")
     private String timeText;
 
-    @ApiModelProperty(value = "距离下组时刻开始，还差多少时间，仅正在进行中的时刻展示使用。")
+    @ApiModelProperty(value = "How much time is the difference from the start of the next group time, only the time in progress display is used.")
     private Long nextDistanceTime;
 
 

@@ -18,13 +18,13 @@ package cloud.shopfly.b2c.framework.exception;
 import org.springframework.http.HttpStatus;
 
 /**
- * 服务异常类,各业务异常需要继承此异常
- * 业务类如有不能处理异常也要抛出此异常
+ * Service exception class,Each service exception needs to inherit this exception
+ * A business class throws an exception if it cannot handle it
  *
  * @author kingapex
  * @version v1.0.0
  * @since v7.0.0
- * 2017年3月7日 上午11:09:29
+ * 2017years3month7The morning of11:09:29
  */
 public class ServiceException extends RuntimeException {
 
@@ -32,7 +32,7 @@ public class ServiceException extends RuntimeException {
 
     private String code;
     /**
-     * 要返回前端的数据
+     * To return data from the front end
      */
     private Object data;
 

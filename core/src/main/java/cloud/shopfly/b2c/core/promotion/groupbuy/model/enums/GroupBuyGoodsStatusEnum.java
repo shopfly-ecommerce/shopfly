@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.promotion.groupbuy.model.enums;
 
 /**
- * 团购商品审核状态
+ * Group purchase merchandise review status
  *
  * @author Snow create in 2018/4/25
  * @version v2.0
@@ -25,17 +25,17 @@ package cloud.shopfly.b2c.core.promotion.groupbuy.model.enums;
 public enum GroupBuyGoodsStatusEnum {
 
     /**
-     * 待审核
+     * To audit
      */
     PENDING(0),
 
     /**
-     * 通过审核
+     * Through the review
      */
     APPROVED(1),
 
     /**
-     * 未通过审核
+     * Failed the audit
      */
     NOT_APPROVED(2);
 

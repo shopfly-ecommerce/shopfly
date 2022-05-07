@@ -32,7 +32,7 @@ import java.util.List;
 
 
 /**
- * 地区控制器
+ * Area controller
  *
  * @author zh
  * @version v7.0.0
@@ -41,13 +41,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/systems/regions")
-@Api(description = "地区相关API")
+@Api(description = "Areas related toAPI")
 public class RegionsSellerController {
 
     @Autowired
     private RegionsManager regionsManager;
 
-    @ApiOperation(value = "添加地区", response = Regions.class)
+    @ApiOperation(value = "Add region", response = Regions.class)
     @PostMapping
     public Regions add(@Valid RegionsVO regionsVO) {
         return this.regionsManager.add(regionsVO);
@@ -55,14 +55,14 @@ public class RegionsSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改地区", response = Regions.class)
+    @ApiOperation(value = "Modify the area", response = Regions.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public Regions edit(@Valid RegionsVO regionsVO, @PathVariable Integer id) {
         Regions regions = regionsManager.getModel(id);
         if (regions == null) {
-            throw new ResourceNotFoundException("当前地区不存在");
+            throw new ResourceNotFoundException("The current region does not exist");
         }
         BeanUtil.copyProperties(regionsVO, regions);
         this.regionsManager.edit(regions, id);
@@ -71,9 +71,9 @@ public class RegionsSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除地区")
+    @ApiOperation(value = "Delete the region")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的地区主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The primary key of the locale to be deleted", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
         this.regionsManager.delete(id);
@@ -82,9 +82,9 @@ public class RegionsSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个地区")
+    @ApiOperation(value = "Querying a region")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的地区主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the region to be queried", required = true, dataType = "int", paramType = "path")
     })
     public Regions get(@PathVariable Integer id) {
 
@@ -95,9 +95,9 @@ public class RegionsSellerController {
 
 
     @GetMapping(value = "/{id}/children")
-    @ApiOperation(value = "获取某地区的子地区")
+    @ApiOperation(value = "Gets the children of a region")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "地区id", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "regionid", required = true, dataType = "int", paramType = "path")
     })
     public List<Regions> getChildrenById(@PathVariable Integer id) {
 

@@ -17,23 +17,23 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 
 /**
- * 评论状态
+ * Review status
  * @author kingapex
  * @version 1.0
  * @since v7.0.0
- * 2017年6月5日下午9:13:55
+ * 2017years6month5On the afternoon9:13:55
  */
 public enum CommentStatusEnum {
 
 	/**
-	 * 未完成的评论
+	 * Unfinished comments
 	 */
-	UNFINISHED("未完成评论"),
+	UNFINISHED("Unfinished comment"),
 
 	/**
-	 * 已经完成评论
+	 * Comments have been completed
 	 */
-	FINISHED("已经完成评论");
+	FINISHED("Comments have been completed");
 
 	private String description;
 

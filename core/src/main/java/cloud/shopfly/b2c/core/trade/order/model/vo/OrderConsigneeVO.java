@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * 注释
+ * annotation
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
@@ -36,40 +36,40 @@ public class OrderConsigneeVO implements Serializable {
 
     private static final long serialVersionUID = -6095473417556550895L;
 
-    @ApiModelProperty(value = "订单号", name = "order_sn", hidden = true)
+    @ApiModelProperty(value = "The order number", name = "order_sn", hidden = true)
     private String orderSn;
 
-    @ApiModelProperty(value = "收货人姓名", name = "ship_name")
+    @ApiModelProperty(value = "Name of consignee", name = "ship_name")
     private String shipName;
 
-    @ApiModelProperty(value = "订单备注", name = "remark")
+    @ApiModelProperty(value = "The order note", name = "remark")
     private String remark;
 
-    @ApiModelProperty(value = "国家", name = "ship_country")
+    @ApiModelProperty(value = "countries", name = "ship_country")
     private String shipCountry;
 
-    @ApiModelProperty(value = "州/省名称", name = "ship_state")
+    @ApiModelProperty(value = "state/The name of the province", name = "ship_state")
     private String shipState;
 
-    @ApiModelProperty(value = "城市", name = "ship_city")
+    @ApiModelProperty(value = "city", name = "ship_city")
     private String shipCity;
 
-    @ApiModelProperty(value = "国家编码", name = "ship_country_code")
+    @ApiModelProperty(value = "Country code", name = "ship_country_code")
     private String shipCountryCode;
 
-    @ApiModelProperty(value = "州/省编码", name = "ship_state_code")
+    @ApiModelProperty(value = "state/Province code", name = "ship_state_code")
     private String shipStateCode;
 
-    @ApiModelProperty(value = "收货地址", name = "ship_addr")
+    @ApiModelProperty(value = "Shipping address", name = "ship_addr")
     private String shipAddr;
 
-    @ApiModelProperty(value = "联系电话", name = "ship_mobile")
+    @ApiModelProperty(value = "Contact phone number", name = "ship_mobile")
     private String shipMobile;
 
-    @ApiModelProperty(value = "邮编", name = "ship_zip")
+    @ApiModelProperty(value = "Zip code", name = "ship_zip")
     private String shipZip;
 
-    @ApiModelProperty(value = "送货时间", name = "receive_time")
+    @ApiModelProperty(value = "Delivery time", name = "receive_time")
     private String receiveTime;
 
     public String getOrderSn() {

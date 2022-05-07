@@ -16,33 +16,33 @@
 package cloud.shopfly.b2c.framework.exception;
 
 /**
- * 系统级别异常码
+ * System-level exception code
  *
  * @author kingapex
  * @version v1.0.0
  * @since v1.0.0
- * 2017年3月27日 下午6:56:35
+ * 2017years3month27On the afternoon6:56:35
  */
 public class SystemErrorCodeV1 {
 
     /**
-     * 无权限异常
+     * No permission exception
      */
     public final static String NO_PERMISSION = "002";
     /**
-     * 资源未能找到
+     * Resource not found
      */
     public final static String RESOURCE_NOT_FOUND = "003";
     /**
-     * 错误的请求参数
+     * Incorrect request parameters
      */
     public final static String INVALID_REQUEST_PARAMETER = "004";
     /**
-     * 错误的配置参数
+     * Incorrect configuration parameters
      */
     public final static String INVALID_CONFIG_PARAMETER = "005";
     /**
-     * 错误的配置参数
+     * Incorrect configuration parameters
      */
     public final static String INVALID_COTENT = "006";
 }

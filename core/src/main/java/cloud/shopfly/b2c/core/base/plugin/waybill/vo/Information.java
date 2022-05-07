@@ -16,48 +16,48 @@
 package cloud.shopfly.b2c.core.base.plugin.waybill.vo;
 
 /**
- * 电子面单收发件人的信息实体
+ * The electronic senders information entity
  *
  * @author dongxin
  * @version v1.0
  * @since v6.4.0
- * 2017年8月12日 下午6:39:22
+ * 2017years8month12On the afternoon6:39:22
  */
 public class Information {
     /**
-     * 收发件人公司
+     * Receiving and Sender company
      */
     private String company;
     /**
-     * 收发件人
+     * Close the sender
      */
     private String name;
     /**
-     * 手机
+     * Mobile phone
      */
     private String mobile;
     /**
-     * 电话
+     * The phone
      */
     private String tel;
     /**
-     * 收发件省（如广东省，不要缺少“省”）
+     * To send and receive a province（For example, Guangdong Province, do not lack“Province"）
      */
     private String provinceName;
     /**
-     * 收发件市（如深圳市，不要缺少“市”
+     * To send and receive a city（Such as Shenzhen, do not lack“The city"
      */
     private String cityName;
     /**
-     * 收发件区（如福田区，不要缺少“区”或“县”）
+     * To send and receive a zone（Such as Futian District, do not lack“Area "or“County"）
      */
     private String expAreaName;
     /**
-     * 收发件详细地址
+     * Detailed address of sending and receiving
      */
     private String address;
     /**
-     * 收发件人邮编
+     * Sender zip code
      */
     private String postCode;
 

@@ -16,28 +16,28 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 发货状态
+ * The delivery status
  * @author Snow
  * @version 1.0
  * @since v7.0.0
- * 2017年3月31日下午2:44:54
+ * 2017years3month31On the afternoon2:44:54
  */
 public enum ShipStatusEnum {
 
 	/**
-	 * 未发货
+	 * Not to deliver goods
 	 */
-	SHIP_NO("未发货"),
+	SHIP_NO("Not to deliver goods"),
 
 	/**
-	 * 已发货
+	 * Has been shipped
 	 */
-	SHIP_YES("已发货"),
+	SHIP_YES("Has been shipped"),
 
 	/**
-	 * 已收货
+	 * Have the goods
 	 */
-	SHIP_ROG("已收货");
+	SHIP_ROG("Have the goods");
 
 
 	private String description;

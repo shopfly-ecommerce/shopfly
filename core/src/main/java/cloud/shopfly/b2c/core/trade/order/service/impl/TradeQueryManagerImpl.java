@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 交易查询
+ * Trading query
  * @author Snow create in 2018/5/21
  * @version v2.0
  * @since v7.0.0

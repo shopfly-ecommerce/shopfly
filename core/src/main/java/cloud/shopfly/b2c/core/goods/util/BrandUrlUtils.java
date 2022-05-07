@@ -23,18 +23,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 品牌url工具
+ * brandurltool
  *
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年9月15日 下午5:00:28
+ * 2017years9month15On the afternoon5:00:28
  */
 public class BrandUrlUtils {
 
 
     /**
-     * 生成品牌的url
+     * brand-generatingurl
      *
      * @param brandid
      * @return
@@ -48,7 +48,7 @@ public class BrandUrlUtils {
     }
 
     /**
-     * 生成没有品牌的url
+     * Generate unbrandedurl
      *
      * @return
      */
@@ -61,7 +61,7 @@ public class BrandUrlUtils {
     }
 
     /**
-     * 根据id查找brand
+     * According to theidTo find thebrand
      *
      * @param brandList
      * @param brandid
@@ -78,7 +78,7 @@ public class BrandUrlUtils {
     }
 
     /**
-     * 生成已经选择的品牌
+     * Generate the selected brands
      *
      * @param brandList
      * @param brandId

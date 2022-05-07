@@ -33,7 +33,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * 消息模版控制器
+ * Message template controller
  *
  * @author zjp
  * @version v7.0.0
@@ -42,7 +42,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/seller/systems/message-templates")
-@Api(description = "消息模版相关API")
+@Api(description = "Message template correlationAPI")
 @Validated
 public class MessageTemplateSellerController {
 
@@ -50,22 +50,22 @@ public class MessageTemplateSellerController {
     private MessageTemplateManager messageTemplateManager;
 
 
-    @ApiOperation(value = "查询消息模版列表", response = MessageTemplateDO.class)
+    @ApiOperation(value = "Example Query the message template list", response = MessageTemplateDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "type", value = "消息类型", required = true, dataType = "String", paramType = "query", allowableValues = "SHOP,MEMBER")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "Message type", required = true, dataType = "String", paramType = "query", allowableValues = "SHOP,MEMBER")
     })
     @GetMapping
-    public Page list(@ApiIgnore @NotNull(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotNull(message = "每页数量不能为空") Integer pageSize, @NotEmpty(message = "模版类型必填") String type) {
+    public Page list(@ApiIgnore @NotNull(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotNull(message = "The number of pages cannot be empty") Integer pageSize, @NotEmpty(message = "Template type This parameter is mandatory") String type) {
 
         return this.messageTemplateManager.list(pageNo, pageSize, type);
     }
 
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改消息模版", response = MessageTemplateDO.class)
-    @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+    @ApiOperation(value = "Modify the message template", response = MessageTemplateDO.class)
+    @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     public MessageTemplateDO edit(@Valid MessageTemplateDTO messageTemplate, @PathVariable("id") Integer id) {
         return this.messageTemplateManager.edit(messageTemplate, id);
     }

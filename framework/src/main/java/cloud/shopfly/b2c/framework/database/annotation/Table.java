@@ -21,7 +21,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标识为数据库的表名
+ * Identifies the table name of the database
  * @author Snow
  */
 @Target(ElementType.TYPE) 
@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
 public @interface Table {
 
 	/**
-	 * 数据库的表名
+	 * The table name of the database
 	 * @return
 	 */
 	String name();

@@ -49,12 +49,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 消息模版发送邮件
+ * Message templates send messages
  *
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月26日 下午4:45:27
+ * 2018years3month26On the afternoon4:45:27
  */
 @Component
 public class EmailSendMessageConsumer extends AbstractMessage implements OrderStatusChangeEvent, RefundStatusChangeEvent, GoodsChangeEvent, MemberLoginEvent, MemberRegisterEvent, TradeIntoDbEvent, GoodsCommentEvent {
@@ -86,37 +86,37 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
     public void orderChange(OrderStatusChangeMsg orderMessage) {
         OrderDO orderDO = orderMessage.getOrderDO();
 
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
 
         Member member = memberClient.getModel(orderDO.getMemberId());
 
-        //系统设置
+        // System Settings
         SiteSetting siteSetting = this.getSiteSetting();
 
         EmailVO emailVO = new EmailVO();
 
         MessageTemplateDO messageTemplate = null;
 
-        //订单支付提醒
+        // Order Payment reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.PAID_OFF.name())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("paymentTime", DateUtil.toString(orderDO.getPaymentTime(), "yyyy-MM-dd"));
             valuesMap.put("siteName", siteSetting.getSiteName());
-            // 店铺订单支付提醒
+            // Store order payment reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSPAY);
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (infoSetting.getEmail() != null && messageTemplate != null) {
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     emailVO.setEmail(infoSetting.getEmail());
                     this.send(emailVO, messageTemplate, valuesMap);
                 }
             }
-            // 会员订单支付提醒
+            // Member order payment reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSPAY);
             if (member.getEmail() != null && messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     emailVO.setEmail(member.getEmail());
                     this.send(emailVO, messageTemplate, valuesMap);
@@ -125,26 +125,26 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
 
         }
 
-        //订单收货提醒
+        // Order receipt reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.ROG.name())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("finishTime", DateUtil.toString(DateUtil.getDateline(), "yyyy-MM-dd"));
             valuesMap.put("siteName", siteSetting.getSiteName());
-            // 店铺订单收货提醒
+            // Store order receipt reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSRECEIVE);
             if (infoSetting.getEmail() != null && messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     emailVO.setEmail(infoSetting.getEmail());
                     this.send(emailVO, messageTemplate, valuesMap);
                 }
 
             }
-            //会员订单收货提醒
+            // Member order receipt reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSRECEIVE);
             if (member.getEmail() != null && messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     emailVO.setEmail(member.getEmail());
                     this.send(emailVO, messageTemplate, valuesMap);
@@ -152,26 +152,26 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
             }
         }
 
-        //订单取消提醒
+        // Order Cancellation Reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.CANCELLED.name())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("cancelTime", DateUtil.toString(DateUtil.getDateline(), "yyyy-MM-dd"));
             valuesMap.put("siteName", siteSetting.getSiteName());
 
-            // 发送会员消息
+            // Send membership messages
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSCANCEL);
             if (member.getEmail() != null && messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     emailVO.setEmail(member.getEmail());
                     this.send(emailVO, messageTemplate, valuesMap);
                 }
             }
-            // 发送店铺消息
+            // Send store messages
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSCANCEL);
             if (infoSetting.getEmail() != null && messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     emailVO.setEmail(infoSetting.getEmail());
                     this.send(emailVO, messageTemplate, valuesMap);
@@ -179,12 +179,12 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
             }
         }
 
-        //订单发货提醒
+        // Order shipping Reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.SHIPPED.name())) {
-            // 会员消息发送
+            // Member Message sending
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSSEND);
             if (member.getEmail() != null && messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                     valuesMap.put("ordersSn", orderDO.getSn());
@@ -203,12 +203,12 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
         EmailVO emailVO = new EmailVO();
         OrderDetailDTO orderDetailDTO = orderClient.getModel(refundChangeMsg.getRefund().getOrderSn());
         SiteSetting siteSetting = this.getSiteSetting();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
 
         Member member = memberClient.getModel(orderDetailDTO.getMemberId());
 
-        //退货/款提醒
+        // Return/payment reminder
         if (refundChangeMsg.getRefundStatusEnum().equals(RefundStatusEnum.APPLY)) {
             if (orderDetailDTO != null) {
 
@@ -218,8 +218,8 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
                 valuesMap.put("refundSn", refundChangeMsg.getRefund().getSn());
                 valuesMap.put("siteName", siteSetting.getSiteName());
 
-                // 会员信息发送
-                // 记录会员订单取消信息（会员中心查看）
+                // Member Information sending
+                // Record cancellation information of member order (check in member Center)
                 if (refundChangeMsg.getRefund().getRefuseType().equals(RefuseTypeEnum.RETURN_GOODS.name())) {
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERRETURNUPDATE);
                 }
@@ -229,14 +229,14 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
                 }
 
                 if (member.getEmail() != null && messageTemplate != null) {
-                    // 判断是否开启
+                    // Check whether the function is enabled.
                     if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         emailVO.setEmail(member.getEmail());
                         this.send(emailVO, messageTemplate, valuesMap);
                     }
                 }
 
-                // 店铺信息发送
+                // Store Information sending
                 messageTemplate = null;
                 if (refundChangeMsg.getRefund().getRefuseType().equals(RefuseTypeEnum.RETURN_GOODS.name())) {
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPRETURN);
@@ -246,9 +246,9 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPREFUND);
                 }
 
-                // 记录店铺订单取消信息（商家中心查看）
+                // Record store order cancellation information (view in merchant center)
                 if (infoSetting.getEmail() != null && messageTemplate != null) {
-                    // 判断是否开启
+                    // Check whether the function is enabled.
                     if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         emailVO.setEmail(infoSetting.getEmail());
                         this.send(emailVO, messageTemplate, valuesMap);
@@ -261,20 +261,20 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
     @Override
     public void goodsChange(GoodsChangeMsg goodsChangeMsg) {
         EmailVO emailVO = new EmailVO();
-        //商品审核失败提醒
+        // Product audit failure reminder
         SiteSetting siteSetting = this.getSiteSetting();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
 
-        //商品下架消息提醒
+        // Notification of merchandise removal
         if (GoodsChangeMsg.UNDER_OPERATION == goodsChangeMsg.getOperationType() && !StringUtil.isEmpty(goodsChangeMsg.getMessage())) {
-            //发送店铺消息
+            // Send store messages
             for (Integer goodsId : goodsChangeMsg.getGoodsIds()) {
                 CacheGoods goods = goodsClient.getFromCache(goodsId);
-                // 记录店铺订单取消信息（商家中心查看）
+                // Record store order cancellation information (view in merchant center)
                 MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPGOODSMARKETENABLE);
                 if (infoSetting.getEmail() != null && messageTemplate != null) {
-                    // 判断是否开启
+                    // Check whether the function is enabled.
                     if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                         valuesMap.put("siteName", siteSetting.getSiteName());
@@ -290,7 +290,7 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
 
     @Override
     public void memberLogin(MemberLoginMsg memberLoginMsg) {
-        //如果是会员登录
+        // If you are a member login
         EmailVO emailVO = new EmailVO();
         SiteSetting siteSetting = this.getSiteSetting();
         Member member = memberClient.getModel(memberLoginMsg.getMemberId());
@@ -300,11 +300,11 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
 
         MessageTemplateDO messageTemplate = null;
 
-        // 记录会员登陆成功信息（会员中心查看）
+        // Record member login success information (check in member center)
         messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERLOGINSUCCESS);
-        // 判断站内信是否开启
+        // Check whether the station message is open
         if (member.getEmail() != null && messageTemplate != null) {
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                 valuesMap.put("name", member.getUname());
@@ -321,10 +321,10 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
         SiteSetting siteSetting = this.getSiteSetting();
         Member member = memberClient.getModel(memberRegisterMsg.getMember().getMemberId());
         EmailVO emailVO = new EmailVO();
-        //会员注册成功提醒
+        // Member registration success reminder
         MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERREGISTESUCCESS);
         if (member.getEmail() != null && messageTemplate != null) {
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                 valuesMap.put("name", member.getUname());
@@ -339,15 +339,15 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
     @Override
     public void onTradeIntoDb(TradeVO tradeVO) {
         SiteSetting siteSetting = this.getSiteSetting();
-        //店铺新订单创建提醒
+        // Store new order creation reminder
         List<OrderDTO> orderList = tradeVO.getOrderList();
         EmailVO emailVO = new EmailVO();
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
 
         for (OrderDTO orderDTO : orderList) {
             MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSNEW);
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (infoSetting.getEmail() != null && messageTemplate != null) {
                 if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     Map<String, Object> valuesMap = new HashMap<String, Object>(4);
@@ -366,9 +366,9 @@ public class EmailSendMessageConsumer extends AbstractMessage implements OrderSt
     public void goodsComment(GoodsCommentMsg goodsCommentMsg) {
         SiteSetting siteSetting = this.getSiteSetting();
         EmailVO emailVO = new EmailVO();
-        //获取模板信息
+        // Obtaining Template Information
         MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSEVALUATE);
-        //系统联系方式
+        // System Contact
         InformationSetting infoSetting = this.getInfoSetting();
         if (infoSetting.getEmail() != null && messageTemplate != null) {
             if (messageTemplate.getEmailState().equals(MessageOpenStatusEnum.OPEN.value())) {

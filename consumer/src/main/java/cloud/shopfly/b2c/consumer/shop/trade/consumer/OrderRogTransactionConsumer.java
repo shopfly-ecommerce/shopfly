@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 订单确认收货增加交易记录消费者
+ * Order confirmation receipt increases transaction records for consumers
  *
  * @author Snow create in 2018/5/22
  * @version v2.0
@@ -55,7 +55,7 @@ public class OrderRogTransactionConsumer implements OrderStatusChangeEvent {
             TransactionRecord record = new TransactionRecord();
             record.setOrderSn(orderDO.getSn());
             if (orderDO.getMemberId() == null) {
-                record.setUname("游客");
+                record.setUname("tourists");
                 record.setMemberId(0);
             } else {
                 record.setMemberId(orderDO.getMemberId());

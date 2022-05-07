@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.framework.auth;
 
 /**
- * Token创建接口
+ * TokenCreate the interface
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -26,8 +26,8 @@ public interface TokenCreater {
 
 
     /**
-     * 创建token
-     * @param user 用户
+     * createtoken
+     * @param user The user
      * @return token
      */
     Token create(AuthUser user);

@@ -37,7 +37,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 
 /**
- * 限时抢购相关API
+ * Flash sale relatedAPI
  *
  * @author Snow create in 2018/7/23
  * @version v2.0
@@ -45,7 +45,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/promotions/seckill")
-@Api(description = "限时抢购相关API")
+@Api(description = "Flash sale relatedAPI")
 @Validated
 public class SeckillBuyerController {
 
@@ -55,7 +55,7 @@ public class SeckillBuyerController {
     @Autowired
     private SeckillRangeManager seckillRangeManager;
 
-    @ApiOperation(value = "读取秒杀时刻")
+    @ApiOperation(value = "Read the seconds kill time")
     @ResponseBody
     @GetMapping(value = "/time-line")
     public List<TimeLineVO> readTimeLine() {
@@ -64,21 +64,21 @@ public class SeckillBuyerController {
     }
 
 
-    @ApiOperation(value = "根据参数读取限时抢购的商品列表")
+    @ApiOperation(value = "Read the flash sale list according to the parameters")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "range_time", value = "时刻", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "条数", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "range_time", value = "moment", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "A number of", dataType = "int", paramType = "query")
     })
     @GetMapping("/goods-list")
     public Page goodsList(@ApiIgnore Integer rangeTime, @ApiIgnore Integer pageSize, @ApiIgnore Integer pageNo) {
 
         if (rangeTime == null) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "时刻不能为空");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Time cannot be empty");
         }
 
         if (rangeTime > 24) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "时刻必须是0~24的整数");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The moment must be0~24The integer");
         }
 
         SeckillQueryParam param = new SeckillQueryParam();

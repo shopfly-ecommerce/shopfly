@@ -19,11 +19,11 @@ import cloud.shopfly.b2c.framework.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 
 /**
- * 统计异常类
+ * Statistical exception class
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-03-26 下午5:26
+ * 2018-03-26 In the afternoon5:26
  */
 public class StatisticsException extends ServiceException {
 

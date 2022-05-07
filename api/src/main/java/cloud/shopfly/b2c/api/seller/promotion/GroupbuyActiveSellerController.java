@@ -34,7 +34,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 团购活动表控制器
+ * Group purchase activity table controller
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -42,17 +42,17 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/promotion/group-buy-actives")
-@Api(description = "团购活动表相关API")
+@Api(description = "Group purchase activity table relatedAPI")
 @Validated
 public class GroupbuyActiveSellerController {
 
 	@Autowired
 	private GroupbuyActiveManager groupbuyActiveManager;
 
-	@ApiOperation(value	= "查询团购活动表列表")
+	@ApiOperation(value	= "Query group purchase activity list")
 	@ApiImplicitParams({
-		 	@ApiImplicitParam(name	= "page_no",	value =	"页码",	dataType = "int",	paramType =	"query"),
-		 	@ApiImplicitParam(name	= "page_size",	value =	"每页显示数量", dataType = "int",	paramType =	"query")
+		 	@ApiImplicitParam(name	= "page_no",	value =	"The page number",	dataType = "int",	paramType =	"query"),
+		 	@ApiImplicitParam(name	= "page_size",	value =	"Display quantity per page", dataType = "int",	paramType =	"query")
 	})
 	@GetMapping
 	public Page<GroupbuyActiveVO> list(@ApiIgnore  Integer pageNo, @ApiIgnore Integer pageSize)	{
@@ -62,8 +62,8 @@ public class GroupbuyActiveSellerController {
 	}
 
 
-	@ApiOperation(value	= "添加团购活动表", response = GroupbuyActiveDO.class)
-	@ApiImplicitParam(name = "activeDO", value = "团购信息", required = true, dataType = "GroupbuyActiveDO", paramType = "body")
+	@ApiOperation(value	= "Add group purchase activity table", response = GroupbuyActiveDO.class)
+	@ApiImplicitParam(name = "activeDO", value = "Group purchase information", required = true, dataType = "GroupbuyActiveDO", paramType = "body")
 	@PostMapping
 	public GroupbuyActiveDO add(@ApiIgnore @Valid  @RequestBody GroupbuyActiveDO activeDO)	{
 
@@ -73,9 +73,9 @@ public class GroupbuyActiveSellerController {
 	}
 
 
-	@ApiOperation(value	= "修改团购活动表", response = GroupbuyActiveDO.class)
+	@ApiOperation(value	= "Modify the group purchase activity table", response = GroupbuyActiveDO.class)
 	@ApiImplicitParams({
-			@ApiImplicitParam(name	= "id",	value =	"主键",	required = true, dataType = "int",	paramType =	"path")
+			@ApiImplicitParam(name	= "id",	value =	"A primary key",	required = true, dataType = "int",	paramType =	"path")
 	})
 	@PutMapping(value = "/{id}")
 	public GroupbuyActiveDO edit(@Valid @RequestBody GroupbuyActiveDO activeDO, @PathVariable Integer id) {
@@ -86,9 +86,9 @@ public class GroupbuyActiveSellerController {
 
 
 	@DeleteMapping(value = "/{id}")
-	@ApiOperation(value	= "删除团购活动表")
+	@ApiOperation(value	= "Delete the group purchase activity table")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name	= "id",	value =	"要删除的团购活动表主键",	required = true, dataType = "int",	paramType =	"path")
+			@ApiImplicitParam(name	= "id",	value =	"The group purchase activity table primary key to delete",	required = true, dataType = "int",	paramType =	"path")
 	})
 	public	String	delete(@PathVariable Integer id) {
 		this.groupbuyActiveManager.delete(id);
@@ -97,9 +97,9 @@ public class GroupbuyActiveSellerController {
 
 
 	@GetMapping(value =	"/{id}")
-	@ApiOperation(value	= "查询一个团购活动表")
+	@ApiOperation(value	= "Query a group purchase activity list")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id",	value = "要查询的团购活动表主键",	required = true, dataType = "int",	paramType = "path")
+			@ApiImplicitParam(name = "id",	value = "To query the group purchase activity table primary key",	required = true, dataType = "int",	paramType = "path")
 	})
 	public GroupbuyActiveDO get(@PathVariable	Integer	id)	{
 
@@ -109,28 +109,28 @@ public class GroupbuyActiveSellerController {
 	}
 
 	/**
-	 * 验证参数
-	 * @param startTime	活动开始时间
-	 * @param endTime	活动结束时间
-	 * @param joinEndTime	报名截止时间
+	 * Validate parameter
+	 * @param startTime	Activity start time
+	 * @param endTime	End time
+	 * @param joinEndTime	Deadline for registration
 	 */
 	private void verifyParam(long startTime,long endTime,long joinEndTime){
 
 		long nowTime  = DateUtil.getDateline();
 
-		//如果活动起始时间小于现在时间
+		// If the activity start time is less than the present time
 		if(joinEndTime < nowTime){
-			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"报名截止时间必须大于当前时间");
+			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"The registration deadline must be longer than the current time");
 		}
 
-		//如果活动开始时间小于 报名截止时间
+		// If the activity starts before the registration deadline
 		if (startTime < joinEndTime) {
-			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "活动开始时间必须大于报名截止时间");
+			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The start time must be longer than the deadline for registration");
 		}
 
-		// 开始时间不能大于结束时间
+		// The start time cannot be later than the end time
 		if (startTime > endTime ) {
-			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"活动起始时间不能大于活动结束时间");
+			throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"The start time cannot be later than the end time");
 		}
 
 	}

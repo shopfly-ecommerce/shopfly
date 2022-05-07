@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.pagedata.model.PageData;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 楼层业务层
+ * Floor Service floor
  * @author fk
  * @version v1.0
  * @since v7.0.0
@@ -28,42 +28,42 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface PageDataManager {
 
 	/**
-	 * 查询楼层列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
+	 * Querying a Floor List
+	 * @param page The page number
+	 * @param pageSize Number each page
 	 * @return Page
 	 */
 	Page list(int page, int pageSize);
 	/**
-	 * 添加楼层
-	 * @param page 楼层
-	 * @return PageData 楼层
+	 * Add the floor
+	 * @param page floor
+	 * @return PageData floor
 	 */
 	PageData add(PageData page);
 
 	/**
-	* 修改楼层
-	* @param page 楼层
-	* @param id 楼层主键
-	* @return PageData 楼层
+	* Modify the floor
+	* @param page floor
+	* @param id Floor is a primary key
+	* @return PageData floor
 	*/
 	PageData edit(PageData page, Integer id);
 	
 	/**
-	 * 删除楼层
-	 * @param id 楼层主键
+	 * Delete the floor
+	 * @param id Floor is a primary key
 	 */
 	void delete(Integer id);
 	
 	/**
-	 * 获取楼层
-	 * @param id 楼层主键
-	 * @return PageData  楼层
+	 * Access to the floor
+	 * @param id Floor is a primary key
+	 * @return PageData  floor
 	 */
 	PageData getModel(Integer id);
 
 	/**
-	 * 查询数据
+	 * Query data
 	 * @return
 	 * @param clientType
 	 * @param pageType
@@ -71,14 +71,14 @@ public interface PageDataManager {
     PageData queryPageData(String clientType, String pageType);
 
 	/**
-	 * 根据类型修改楼层
+	 * Modify the floor according to the type
 	 * @param pageData
 	 * @return
 	 */
 	PageData editByType(PageData pageData);
 
 	/**
-	 * 根据类型查询数据
+	 * Query data by type
 	 * @param clientType
 	 * @param pageType
 	 * @return

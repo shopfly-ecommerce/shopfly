@@ -41,12 +41,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 文件上传接口实现
+ * File upload interface implementation
  *
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月19日 下午4:38:42
+ * 2018years3month19On the afternoon4:38:42
  */
 @Service
 public class FileManagerImpl implements FileManager {
@@ -75,13 +75,13 @@ public class FileManagerImpl implements FileManager {
 
     @Override
     public FileVO uploadFile(MultipartFile file, String scene) {
-        //使用此方法，验证后缀名由调用者判断，这里主要目前主要是给中台使用 2020年12月17日16:22:08 by fk
+        // With this method, the validation suffix is determined by the caller
         try {
             if (file != null && file.getOriginalFilename() != null) {
-                //文件类型
+                // The file type
                 String contentType = file.getContentType();
                 if (logger.isDebugEnabled()) {
-                    logger.debug("++++++++++++++++++文件类型为：++++++++++++" + contentType);
+                    logger.debug("++++++++++++++++++The file type is：++++++++++++" + contentType);
                 }
                 FileDTO input = new FileDTO();
                 input.setName(file.getOriginalFilename());
@@ -92,7 +92,7 @@ public class FileManagerImpl implements FileManager {
                 }
                 return this.upload(input, scene);
             } else {
-                throw new ResourceNotFoundException("没有文件");
+                throw new ResourceNotFoundException("No files");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class FileManagerImpl implements FileManager {
     }
 
     /**
-     * 获取存储方案配置
+     * Obtain the storage scheme configuration
      *
      * @return
      */

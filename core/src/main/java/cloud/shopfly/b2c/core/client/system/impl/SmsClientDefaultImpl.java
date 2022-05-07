@@ -24,11 +24,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 短信实现
+ * SMS implementation
  *
  * @author zh
  * @version v7.0
- * @date 18/7/31 上午11:13
+ * @date 18/7/31 In the morning11:13
  * @since v7.0
  */
 @Service

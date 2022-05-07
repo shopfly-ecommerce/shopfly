@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 运费模版实体
+ * Freight template entity
  *
  * @author zjp
  * @version v7.0.0
@@ -44,14 +44,14 @@ public class ShipTemplateDO implements Serializable {
     private static final long serialVersionUID = 6348162955890093L;
 
     /**
-     * 模版id
+     * templateid
      */
     @Id(name = "id")
-    @ApiModelProperty(hidden = true, value = "模版id")
+    @ApiModelProperty(hidden = true, value = "templateid")
     private Integer id;
 
     @Column
-    @ApiParam("名字")
+    @ApiParam("The name")
     private String name;
 
 

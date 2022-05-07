@@ -20,28 +20,28 @@ import cloud.shopfly.b2c.core.statistics.model.dos.GoodsPageView;
 import java.util.List;
 
 /**
- * 访问次数manager
+ * visitsmanager
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/8/7 上午8:21
+ * 2018/8/7 In the morning8:21
  */
 
 public interface DisplayTimesManager {
 
 
     /**
-     * 访问某地址
+     * Accessing an address
      *
-     * @param url  访问的地址
-     * @param uuid 客户唯一id
+     * @param url  Address of access
+     * @param uuid The customer onlyid
      */
     void view(String url, String uuid);
 
     /**
-     * 将统计好的商品数据 写入数据库
+     * Write statistical commodity data to the database
      *
      * @param list
      */
@@ -49,7 +49,7 @@ public interface DisplayTimesManager {
 
 
     /**
-     * 立即整理现有的数据
+     * Organize existing data immediately
      */
     void countNow();
 

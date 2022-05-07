@@ -27,12 +27,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 缓存商品对象
+ * Caching commodity objects
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月29日 上午11:50:02
+ * 2018years3month29The morning of11:50:02
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -42,62 +42,62 @@ public class CacheGoods implements Serializable {
      *
      */
     private static final long serialVersionUID = -3642358108471082387L;
-    @ApiModelProperty(name = "goods_id", value = "商品id")
+    @ApiModelProperty(name = "goods_id", value = "productid")
     @Column(name = "goods_id")
     private Integer goodsId;
 
-    @ApiModelProperty(name = "category_id", value = "分类id")
+    @ApiModelProperty(name = "category_id", value = "Categoriesid")
     private Integer categoryId;
 
-    @ApiModelProperty(name = "goods_name", value = "商品名称")
+    @ApiModelProperty(name = "goods_name", value = "Name")
     @Column(name = "goods_name")
     private String goodsName;
 
-    @ApiModelProperty(name = "sn", value = "商品编号")
+    @ApiModelProperty(name = "sn", value = "SN")
     @Column(name = "sn")
     private String sn;
 
-    @ApiModelProperty(name = "price", value = "商品价格")
+    @ApiModelProperty(name = "price", value = "Price")
     @Column(name = "price")
     private Double price;
 
-    @ApiModelProperty(name = "weight", value = "重量")
+    @ApiModelProperty(name = "weight", value = "Weight")
     @Column(name = "weight")
     private Double weight;
 
-    @ApiModelProperty(name = "intro", value = "详情")
+    @ApiModelProperty(name = "intro", value = "details")
     private String intro;
 
-    @ApiModelProperty(name = "goods_transfee_charge", value = "谁承担运费0：买家承担，1：卖家承担")
+    @ApiModelProperty(name = "goods_transfee_charge", value = "Who bears the freight0：The buyer bears,1：The seller bear")
     @Column(name = "goods_transfee_charge")
     private Integer goodsTransfeeCharge;
 
-    @ApiModelProperty(name = "template_id", value = "运费模板id,不需要运费模板时值是0")
+    @ApiModelProperty(name = "template_id", value = "The freight templateid,不需要The freight template时值是0")
     @Column(name = "template_id")
     private Integer templateId;
 
-    @ApiModelProperty(name = "market_enable", value = "是否上架，1上架 0下架")
+    @ApiModelProperty(name = "market_enable", value = "Whether its on the shelf,1save0off")
     @Column(name = "market_enable")
     private Integer marketEnable;
 
-    @ApiModelProperty(name = "disabled", value = "是否放入回收站 0 删除 1未删除")
+    @ApiModelProperty(name = "disabled", value = "Whether to put in the recycle bin0 delete1未delete")
     @Column(name = "disabled")
     private Integer disabled;
 
-    @ApiModelProperty(value = "可用库存")
+    @ApiModelProperty(value = "Available")
     @Column(name = "enable_quantity")
     private Integer enableQuantity;
 
-    @ApiModelProperty(name = "quantity", value = "库存")
+    @ApiModelProperty(name = "quantity", value = "Inventory")
     private Integer quantity;
 
-    @ApiModelProperty(name = "sku_list", value = "sku列表")
+    @ApiModelProperty(name = "sku_list", value = "skuThe list of")
     private List<GoodsSkuVO> skuList;
 
-    @ApiModelProperty(name = "thumbnail", value = "商品缩略图")
+    @ApiModelProperty(name = "thumbnail", value = "Product thumbnail")
     private String thumbnail;
 
-    @ApiModelProperty(name = "last_modify", value = "商品最后修改时间")
+    @ApiModelProperty(name = "last_modify", value = "The last modification time of the product")
     private Long lastModify;
 
     public Integer getGoodsId() {

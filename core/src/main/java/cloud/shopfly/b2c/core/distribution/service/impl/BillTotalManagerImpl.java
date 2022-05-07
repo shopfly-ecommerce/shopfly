@@ -23,13 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 总结算单处理
+ * General statement processing
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/14 上午7:13
+ * 2018/6/14 In the morning7:13
  */
 
 @Service

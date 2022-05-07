@@ -33,7 +33,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 站内消息控制器
+ * Station message controller
  *
  * @author zh
  * @version v7.0.0
@@ -42,17 +42,17 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/systems/messages")
-@Api(description = "站内消息相关API")
+@Api(description = "Intra-station message correlationAPI")
 public class MessageManagerController {
 
     @Autowired
     private MessageManager messageManager;
 
 
-    @ApiOperation(value = "查询站内消息列表", response = Message.class)
+    @ApiOperation(value = "Query the intra-station message list", response = Message.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -61,7 +61,7 @@ public class MessageManagerController {
     }
 
 
-    @ApiOperation(value = "添加站内消息", response = Message.class)
+    @ApiOperation(value = "Add intra-site messages", response = Message.class)
     @PostMapping
     public Message add(@Valid MessageVO messageVO) {
         return this.messageManager.add(messageVO);

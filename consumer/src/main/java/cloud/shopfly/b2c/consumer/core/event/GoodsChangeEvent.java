@@ -18,16 +18,16 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.base.message.GoodsChangeMsg;
 
 /**
- * 商品变化事件
+ * Commodity change event
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:24:40
+ * 2018years3month23The morning of10:24:40
  */
 public interface GoodsChangeEvent {
 
 	/**
-	 * 商品变化后需要执行的方法
+	 * Methods that need to be implemented after product changes
 	 * @param goodsChangeMsg
 	 */
 	void goodsChange(GoodsChangeMsg goodsChangeMsg);

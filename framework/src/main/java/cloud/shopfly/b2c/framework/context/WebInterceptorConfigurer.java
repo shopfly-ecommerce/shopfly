@@ -34,10 +34,10 @@ import java.util.List;
 
 /**
  * 
- * 加载自定义的 拦截器
+ * Load a custom interceptor
  * @author Chopper
  * @version v1.0
- * @since v6.2 2017年3月7日 下午5:29:56
+ * @since v6.2 2017years3month7On the afternoon5:29:56
  *
  */
 @Configuration
@@ -47,7 +47,7 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 
-		//参数蛇形转驼峰拦截
+		// Parameter serpentine turn hump intercept
 		argumentResolvers.add(new SnakeToCamelModelAttributeMethodProcessor(true));
 		argumentResolvers.add(new SnakeToCamelArgumentResolver());
 
@@ -59,20 +59,20 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 	}
 
 	/**
-	 * 自定义 ObjectMapper ，用于xss攻击过滤
+	 * The customObjectMapper forxssAttack filter
  	 * @param builder
 	 * @return
 	 */
 	@Bean
 	@Primary
 	public ObjectMapper xssObjectMapper(Jackson2ObjectMapperBuilder builder) {
-		//解析器
+		// The parser
 		ObjectMapper objectMapper = builder.createXmlMapper(false).build();
-		//注册xss解析器
+		// Register the XSS parser
 		SimpleModule xssModule = new SimpleModule("XssStringJsonSerializer");
 		xssModule.addSerializer(new XssStringJsonSerializer());
 		objectMapper.registerModule(xssModule);
-		//返回
+		// return
 		return objectMapper;
 	}
 	@Override
@@ -82,16 +82,16 @@ public class WebInterceptorConfigurer implements WebMvcConfigurer {
 		File jarFile = home.getSource();
 		String aPath = jarFile.getAbsolutePath();
 		String path = jarFile.getParentFile().toString();
-		//基于jar运行，则定位同级目录/images
+		// Run on jar, locate the sibling directory /images
 		if (aPath.endsWith(".jar")){
 			path+="/images/";
 		}else {
-			//如果基于类运行，则定位为工程目录
+			// If running on a class, it is positioned as a project directory
 			path = path.replaceAll("/framework/target", "/images/");
 		}
 //		System.out.println(path);
 		registry.addResourceHandler("/images/**")
-				//用户文件的路径
+				// Path to the user file
 				.addResourceLocations("/images/**","file:"+path);
 	}
 

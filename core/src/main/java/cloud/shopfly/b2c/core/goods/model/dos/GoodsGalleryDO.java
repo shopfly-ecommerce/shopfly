@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 商品相册实体
+ * Commodity album entity
  *
  * @author fk
  * @version v2.0
@@ -43,58 +43,58 @@ public class GoodsGalleryDO implements Serializable {
     private static final long serialVersionUID = 8150217189133447L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "img_id")
-    @ApiModelProperty(name = "img_id", value = "图片的主键，添加时-1", required = true)
+    @ApiModelProperty(name = "img_id", value = "The primary key of the picture when added-1", required = true)
     private Integer imgId;
     /**
-     * 商品主键
+     * Commodity primary key
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品主键", hidden = true)
+    @ApiModelProperty(name = "goods_id", value = "Commodity primary key", hidden = true)
     private Integer goodsId;
     /**
-     * 缩略图路径
+     * Thumbnail path
      */
     @Column(name = "thumbnail")
-    @ApiModelProperty(name = "thumbnail", value = "缩略图路径", hidden = true)
+    @ApiModelProperty(name = "thumbnail", value = "Thumbnail path", hidden = true)
     private String thumbnail;
     /**
-     * 小图路径
+     * Insets path
      */
     @Column(name = "small")
-    @ApiModelProperty(name = "small", value = "小图路径", hidden = true)
+    @ApiModelProperty(name = "small", value = "Insets path", hidden = true)
     private String small;
     /**
-     * 大图路径
+     * A larger image path
      */
     @Column(name = "big")
-    @ApiModelProperty(name = "big", value = "大图路径", hidden = true)
+    @ApiModelProperty(name = "big", value = "A larger image path", hidden = true)
     private String big;
     /**
-     * 原图路径
+     * The original path
      */
     @Column(name = "original")
-    @ApiModelProperty(name = "original", value = "原图路径", required = true)
+    @ApiModelProperty(name = "original", value = "The original path", required = true)
     private String original;
     /**
-     * 极小图路径
+     * Minimal graph path
      */
     @Column(name = "tiny")
-    @ApiModelProperty(name = "tiny", value = "极小图路径", hidden = true)
+    @ApiModelProperty(name = "tiny", value = "Minimal graph path", hidden = true)
     private String tiny;
     /**
-     * 是否是默认图片1   0没有默认
+     * Is the default image1   0No default
      */
     @Column(name = "isdefault")
-    @ApiModelProperty(name = "isdefault", value = "是否是默认图片1   0没有默认", hidden = true)
+    @ApiModelProperty(name = "isdefault", value = "Is the default image1   0No default", hidden = true)
     private Integer isdefault;
     /**
-     * 排序
+     * sort
      */
     @Column(name = "sort")
-    @ApiModelProperty(name = "sort", value = "排序", required = true)
+    @ApiModelProperty(name = "sort", value = "sort", required = true)
     private Integer sort;
 
     @PrimaryKeyField

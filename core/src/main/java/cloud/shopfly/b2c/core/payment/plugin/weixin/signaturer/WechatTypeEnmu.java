@@ -16,13 +16,13 @@
 package cloud.shopfly.b2c.core.payment.plugin.weixin.signaturer;
 
 /**
- * 微信签名参数枚举
+ * Enumeration of wechat signature parameters
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2019/2/21 下午3:53
+ * 2019/2/21 In the afternoon3:53
  */
 
 public enum WechatTypeEnmu {
@@ -36,17 +36,17 @@ public enum WechatTypeEnmu {
      */
     WAP("WAP"),
     /**
-     * 原生
+     * native
      */
-    REACT("原生"),
+    REACT("native"),
     /**
      * NAAPP
      */
     NATIVE("NAAPP"),
     /**
-     * 小程序
+     * Small program
      */
-    MINI("小程序");
+    MINI("Small program");
     private String text;
 
     WechatTypeEnmu(String text) {

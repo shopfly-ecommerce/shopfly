@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.framework.database;
 
 /**
- * 列数据
+ * Column data
  * @author Snow create in 2018/3/28
  * @version v2.0
  * @since v7.0.0
@@ -24,12 +24,12 @@ package cloud.shopfly.b2c.framework.database;
 public class ColumnMeta {
 
     /**
-     * 字段名
+     * The field name
      */
     private Object[] names;
 
     /**
-     * 字段值
+     * The field values
      */
     private Object[] values;
 

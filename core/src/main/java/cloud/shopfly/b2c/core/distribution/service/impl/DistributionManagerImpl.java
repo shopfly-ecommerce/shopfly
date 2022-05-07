@@ -40,13 +40,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 分销管理实现类
+ * Distribution management implementation class
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 下午3:27
+ * 2018/5/21 In the afternoon3:27
  */
 
 @Component
@@ -64,7 +64,7 @@ public class DistributionManagerImpl implements DistributionManager {
 
     @Override
     public DistributionDO add(DistributionDO distributor) {
-        // 如果分销商值有效
+        // If the distributor value is valid
         if (distributor != null) {
             distributor.setCreateTime(DateUtil.getDateline());
             this.daoSupport.insert("es_distribution", distributor);
@@ -74,7 +74,7 @@ public class DistributionManagerImpl implements DistributionManager {
     }
 
     /**
-     * 所有下线
+     * All referrals
      *
      * @param memberId
      * @return
@@ -85,13 +85,13 @@ public class DistributionManagerImpl implements DistributionManager {
 
 
         List<DistributionVO> vos = new ArrayList<>();
-        //填充一级
+        // Filling level
         for (DistributionDO ddo : dos) {
             if (ddo.getMemberIdLv1().equals(memberId)) {
                 vos.add(new DistributionVO(ddo));
             }
         }
-        //填充二级
+        // Fill in the secondary
 
         if (vos != null) {
             for (DistributionDO ddo : dos) {
@@ -169,34 +169,34 @@ public class DistributionManagerImpl implements DistributionManager {
     @Override
     public boolean setParentDistributorId(Integer memberId, Integer parentId) {
 
-        // 如果会员id有效
+        // If the member ID is valid
         if (memberId != 0) {
-            // 1.得到父级会员信息 就是当前会员的lv1
+            // 1. The parent member information is the LV1 of the current member
             DistributionDO lv1Distributor = this.getDistributorByMemberId(parentId);
 
-            // 2.得到 他的lv1级 （当前会员的lv2级 是他的lv1级的lv1级）
+            // 2. Get his LV1 level (current members LV2 level is his LV1 levels LV1 level)
             Integer lv2MemberId = lv1Distributor.getMemberIdLv1();
 
-            // 3.准备拼接sql
+            // 3. Prepare the CONCatenation SQL
             StringBuffer sql = new StringBuffer("UPDATE es_distribution SET member_id_lv1 = ?");
 
             List<Object> params = new ArrayList<>();
             params.add(lv1Distributor.getMemberId());
 
-            // 如果lv2会员id存在
+            // If the Lv2 member ID exists
             if (null != lv2MemberId) {
                 sql.append(",member_id_lv2 = ?");
                 params.add(lv2MemberId);
             }
 
-            // 4.添加where 并执行
+            // 4. Add where and run
             sql.append(" WHERE member_id = ?");
             params.add(memberId);
             this.daoSupport.execute(sql.toString(), params.toArray());
 
 
             this.countDown(lv1Distributor.getMemberId());
-            // 如果lv2会员id存在
+            // If the Lv2 member ID exists
             if (null != lv2MemberId) {
                 this.countDown(lv2MemberId);
             }
@@ -230,7 +230,7 @@ public class DistributionManagerImpl implements DistributionManager {
                     .queryForObject("select * from es_distribution where member_id = ?", DistributionDO.class, memberId)
                     .getCanRebate();
         } catch (Exception e) {
-            // 如果用户没有提现金额 返回0
+            // Returns 0 if the user does not withdraw the amount
             return 0d;
         }
     }
@@ -244,17 +244,17 @@ public class DistributionManagerImpl implements DistributionManager {
         String[] up = path.split("\\|");
         Integer upMember = Integer.parseInt(up[up.length - 2]);
         if (upMember == 0) {
-            return "没有推荐人";
+            return "No references";
         }
         try {
             DistributionDO distributor = this.getDistributorByMemberId(upMember);
             Member member = memberManager.getModel(distributor.getMemberId());
             if (member == null) {
-                return "没有推荐人";
+                return "No references";
             }
             return member.getUname();
         } catch (Exception e) {
-            return "没有推荐人";
+            return "No references";
         }
     }
 
@@ -266,13 +266,13 @@ public class DistributionManagerImpl implements DistributionManager {
             vos.add(new DistributionVO(ddo));
         }
         List<DistributionVO> result = new ArrayList<>();
-        //第一层关系构造
+        // The first layer of relationship construction
         for (DistributionVO vo : vos) {
             if (vo.getLv1Id().equals(memberId)) {
                 result.add(vo);
             }
         }
-        //第二层关系构造 循环第一层构造
+        // Second layer relationship structure cycle first layer structure
         for (DistributionVO rs : result) {
             List<DistributionVO> items = new ArrayList<>();
             for (DistributionVO vo : vos) {
@@ -298,7 +298,7 @@ public class DistributionManagerImpl implements DistributionManager {
     }
 
     /**
-     * 统计下线人数
+     * Collecting the Number of Offline Users
      */
     @Override
     public void countDown(Integer memberId) {

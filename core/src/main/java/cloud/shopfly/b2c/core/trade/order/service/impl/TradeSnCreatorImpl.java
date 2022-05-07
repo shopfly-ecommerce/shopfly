@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 交易，订单编号创建
+ * Transaction, order number created
  *
  * @author Snow create in 2018/4/9
  * @version v2.0
@@ -85,25 +85,25 @@ public class TradeSnCreatorImpl implements TradeSnCreator {
 
 
     /**
-     * 通过Redis的自增来控制编号的自增
+     * throughRedisTo control the increment of the number
      *
-     * @param key 区分类型的主key，日期会连在这个key后面
-     * @return 生成的编码
+     * @param key Distinguish between types of masterkeyThe date will be linked to thiskeybehind
+     * @return Generated code
      */
     private String generateSn(String key) {
 
         String timeStr = DateUtil.toString(new Date(), "yyyyMMdd");
-        //组合出当天的Key
+        // Make up the Key for the day
         String redisKey = key + "_" + timeStr;
         String redisSignKey = key + "_" + timeStr + "_SIGN";
 
-        //用当天的时间进行自增
+        // Increment with the time of the day
         Long snCount = getSnCount(redisKey, redisSignKey);
 
 
         String sn;
 
-        //预计每天订单不超过1百万单
+        // No more than 1 million orders are expected per day
         int num = 1000000;
         if (snCount < num) {
             sn = "000000" + snCount;
@@ -125,17 +125,17 @@ public class TradeSnCreatorImpl implements TradeSnCreator {
         RedisScript<Long> redisScript = getRedisScript();
         List keys = new ArrayList<>();
 
-        //设置缓存是否被击穿缓存
+        // Set whether the cache is breached
         keys.add(redisSignKey);
         keys.add(redisKey);
 
         Long result = stringRedisTemplate.execute(redisScript, keys);
-        //如果为-1，说明缓存被击穿了
+        // If it is -1, the cache has been penetrated
         if (result == -1) {
-            //从库中读取当天的订单数量
+            // Read the number of orders for the day from the library
             snCount = countFromDB();
             snCount++;
-            //重置计数器
+            // Reset counter
             stringRedisTemplate.opsForValue().set(redisKey, snCount.toString());
         } else {
             snCount = result;

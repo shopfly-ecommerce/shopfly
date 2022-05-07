@@ -29,7 +29,7 @@ import javax.validation.constraints.NotEmpty;
 
 
 /**
- * 拼团实体
+ * Spell group entities
  *
  * @author admin
  * @version vv1.0.0
@@ -49,75 +49,75 @@ public class Pintuan {
     @ApiModelProperty(hidden = true)
     private Integer promotionId;
     /**
-     * 活动名称
+     * The name of the event
      */
     @Column(name = "promotion_name")
-    @NotEmpty(message = "活动名称不能为空")
-    @ApiModelProperty(name = "promotion_name", value = "活动名称", required = true)
+    @NotEmpty(message = "The activity name cannot be empty")
+    @ApiModelProperty(name = "promotion_name", value = "The name of the event", required = true)
     private String promotionName;
     /**
-     * 活动标题
+     * Activity title
      */
     @Column(name = "promotion_title")
-    @ApiModelProperty(name = "promotion_title", value = "活动标题", required = true)
+    @ApiModelProperty(name = "promotion_title", value = "Activity title", required = true)
     private String promotionTitle;
     /**
-     * 活动开始时间
+     * Activity start time
      */
     @Column(name = "start_time")
-    @Min(message = "活动开始时间不能为空", value = 0)
-    @ApiModelProperty(name = "start_time", value = "活动开始时间", required = true)
+    @Min(message = "The activity start time cannot be empty", value = 0)
+    @ApiModelProperty(name = "start_time", value = "Activity start time", required = true)
     private Long startTime;
     /**
-     * 活动结束时间
+     * End time
      */
     @Column(name = "end_time")
-    @Min(message = "活动结束时间不能为空", value = 0)
-    @ApiModelProperty(name = "end_time", value = "活动结束时间", required = true)
+    @Min(message = "The activity end time cannot be empty", value = 0)
+    @ApiModelProperty(name = "end_time", value = "End time", required = true)
     private Long endTime;
     /**
-     * 成团人数
+     * The number of clusters
      */
     @Column(name = "required_num")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "required_num", value = "成团人数")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "required_num", value = "The number of clusters")
     private Integer requiredNum;
     /**
-     * 限购数量
+     * The amount for purchasing
      */
     @Column(name = "limit_num")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "limit_num", value = "限购数量")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "limit_num", value = "The amount for purchasing")
     private Integer limitNum;
     /**
-     * 虚拟成团
+     * Virtual clusters
      */
     @Column(name = "enable_mocker")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "enable_mocker", value = "虚拟成团", required = true)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "enable_mocker", value = "Virtual clusters", required = true)
     private Integer enableMocker;
     /**
-     * 创建时间
+     * Last update
      */
     @Column(name = "create_time")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "create_time", value = "创建时间")
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "create_time", value = "Last update")
     private Long createTime;
 
     @Column(name = "status")
-    @ApiModelProperty(name = "status", value = "状态")
+    @ApiModelProperty(name = "status", value = "Status")
     private String status;
 
     @Column(name = "option_status")
-    @ApiModelProperty(name = "status", value = "api请求操作状态")
+    @ApiModelProperty(name = "status", value = "apiRequest operation status")
     private String optionStatus;
 
     @Column(name = "seller_name")
-    @ApiModelProperty(name = "seller_name", value = "商家名称")
+    @ApiModelProperty(name = "seller_name", value = "Vendor name")
     private String sellerName;
 
     @Column(name = "seller_id")
-    @ApiModelProperty(name = "seller_id", value = "商家id")
+    @ApiModelProperty(name = "seller_id", value = "merchantsid")
     private Integer sellerId;
 
     @PrimaryKeyField

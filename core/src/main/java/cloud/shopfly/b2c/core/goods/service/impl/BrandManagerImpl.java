@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 品牌业务类
+ * Brand Business
  *
  * @author fk
  * @version v2.0
@@ -85,7 +85,7 @@ public class BrandManagerImpl implements BrandManager {
         String sql = "select * from es_brand where name = ? ";
         List list = this.daoSupport.queryForList(sql, brand.getName());
         if (list.size() > 0) {
-            throw new ServiceException(GoodsErrorCode.E302.code(), "品牌名称重复");
+            throw new ServiceException(GoodsErrorCode.E302.code(), "Duplicate brand name");
         }
 
         brand.setDisabled(1);
@@ -100,13 +100,13 @@ public class BrandManagerImpl implements BrandManager {
     public BrandDO edit(BrandDO brand, Integer id) {
         BrandDO brandDO = this.getModel(id);
         if (brandDO == null) {
-            throw new ServiceException(GoodsErrorCode.E302.code(), "品牌不存在");
+            throw new ServiceException(GoodsErrorCode.E302.code(), "The brand doesnt exist");
         }
 
         String sql = "select * from es_brand where name = ? and brand_id != ? ";
         List list = this.daoSupport.queryForList(sql, brand.getName(),id);
         if (list.size() > 0) {
-            throw new ServiceException(GoodsErrorCode.E302.code(), "品牌名称重复");
+            throw new ServiceException(GoodsErrorCode.E302.code(), "Duplicate brand name");
         }
 
         this.daoSupport.update(brand, id);
@@ -120,17 +120,17 @@ public class BrandManagerImpl implements BrandManager {
 
         String idsStr = SqlUtil.getInSql(ids, term);
 
-        //检测是否有分类关联
+        // Detects whether there is a classification association
         String sql = "select count(0) from es_category_brand where brand_id in (" + idsStr + ")";
         Integer count = this.daoSupport.queryForInt(sql, term.toArray());
         if(count > 0){
-            throw new ServiceException(GoodsErrorCode.E302.code(), "已有分类关联，不能删除");
+            throw new ServiceException(GoodsErrorCode.E302.code(), "An existing category association cannot be deleted");
         }
-        // 检测是否有商品关联
+        // Check whether there is a commodity association
         String checkSql = "select count(0) from es_goods where disabled != -1 and brand_id in (" + idsStr + ")";
         int hasRel = this.daoSupport.queryForInt(checkSql, term.toArray());
         if (hasRel > 0) {
-            throw new ServiceException(GoodsErrorCode.E302.code(), "已有商品关联，不能删除");
+            throw new ServiceException(GoodsErrorCode.E302.code(), "A commodity has been associated and cannot be deleted");
         }
 
         sql = "delete from es_brand where brand_id in (" + idsStr + ") ";

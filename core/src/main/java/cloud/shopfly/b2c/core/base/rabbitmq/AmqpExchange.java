@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.base.rabbitmq;
 
 /**
- * AMQP消息定义
+ * AMQPThe message definition
  *
  * @author kingapex
  * @version 1.0
@@ -33,119 +33,119 @@ public class AmqpExchange {
 
 
     /**
-     * PC首页变化消息
+     * PCHome Page Change message
      */
     public final static String PC_INDEX_CHANGE = "PC_INDEX_CHANGE";
 
     /**
-     * 移动端首页变化消息
+     * Change message on the home page of the mobile terminal
      */
     public final static String MOBILE_INDEX_CHANGE = "MOBILE_INDEX_CHANGE";
 
     /**
-     * 商品变化消息
+     * Commodity change message
      */
     public final static String GOODS_CHANGE = "GOODS_CHANGE";
 
     /**
-     * 商品变化消息附带原因
+     * Commodity change information is accompanied by reasons
      */
     public final static String GOODS_CHANGE_REASON = "GOODS_CHANGE_REASON";
 
     /**
-     * 帮助变化消息
+     * Help change messages
      */
     public final static String HELP_CHANGE = "HELP_CHANGE";
 
     /**
-     * 索引生成消息
+     * Index generation message
      */
     public final static String INDEX_CREATE = "INDEX_CREATE";
 
     /**
-     * 订单创建消息
-     * 没有入库
+     * Order creation message
+     * Not put in storage
      */
     public final static String ORDER_CREATE = "ORDER_CREATE";
 
     /**
-     * 入库失败消息
-     * 入库失败
+     * Failed to import message
+     * Storage failure
      */
     public final static String ORDER_INTODB_ERROR = "ORDER_INTODB_ERROR";
 
     /**
-     * 订单状态变化消息
-     * 带入库的
+     * Order status change message
+     * With the received
      */
     public final static String ORDER_STATUS_CHANGE = "ORDER_STATUS_CHANGE";
 
     /**
-     * 会员登录消息
+     * Member login message
      */
     public final static String MEMEBER_LOGIN = "MEMEBER_LOGIN";
 
     /**
-     * 会员注册消息
+     * Member Registration Message
      */
     public final static String MEMEBER_REGISTER = "MEMEBER_REGISTER";
 
     /**
-     * 分类变更消息
+     * Classified change message
      */
     public final static String GOODS_CATEGORY_CHANGE = "GOODS_CATEGORY_CHANGE";
 
     /**
-     * 售后状态改变消息
+     * After-sales status change message
      */
     public final static String REFUND_STATUS_CHANGE = "REFUND_STATUS_CHANGE";
 
     /**
-     * 发送站内信息
+     * Sends in-station messages
      */
     public final static String MEMBER_MESSAGE = "MEMBER_MESSAGE";
 
     /**
-     * 发送手机短信消息
+     * Send SMS messages
      */
     public final static String SEND_MESSAGE = "SEND_MESSAGE";
 
     /**
-     * 邮件发送消息
+     * Sending messages by mail
      */
     public final static String EMAIL_SEND_MESSAGE = "EMAIL_SEND_MESSAGE";
 
     /**
-     * 商品评论消息
+     * Product Review messages
      */
     public final static String GOODS_COMMENT_COMPLETE = "GOODS_COMMENT_COMPLETE";
     /**
-     * 网上支付
+     * Online payment
      */
     public final static String ONLINE_PAY = "ONLINE_PAY";
 
     /**
-     * 完善个人资料
+     * Improve personal data
      */
     public final static String MEMBER_INFO_COMPLETE = "MEMBER_INFO_COMPLETE";
 
     /**
-     * 站点导航栏变化消息
+     * The site navigation bar changes messages
      */
     public final static String SITE_NAVIGATION_CHANGE = "SITE_NAVIGATION_CHANGE";
 
     /**
-     * 商品收藏
+     * Goods collection
      */
     public final static String GOODS_COLLECTION_CHANGE = "GOODS_COLLECTION_CHANGE";
 
     /**
-     * 商品浏览统计
+     * Merchandise Browsing statistics
      */
     public final static String GOODS_VIEW_COUNT = "GOODS_VIEW_COUNT";
 
     /**
-     * 会员资料改变
+     * Change of Member information
      */
     public final static String MEMBER_INFO_CHANGE = "MEMBER_INFO_CHANGE";
 

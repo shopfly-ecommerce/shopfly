@@ -22,36 +22,36 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 商品选择器使用对象
+ * Item selectors use objects
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月28日 下午4:28:32
+ * 2018years3month28On the afternoon4:28:32
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GoodsSelectLine {
 
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "productid")
     @Column(name = "goods_id")
     private Integer goodsId;
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     @Column(name = "goods_name")
     private String goodsName;
-    @ApiModelProperty(value = "商品编号")
+    @ApiModelProperty(value = "SN")
     private String sn;
-    @ApiModelProperty(value = "商品缩略图")
+    @ApiModelProperty(value = "Product thumbnail")
     private String thumbnail;
-    @ApiModelProperty(value = "商品大图")
+    @ApiModelProperty(value = "A larger product")
     private String big;
-    @ApiModelProperty(value = "商品价格")
+    @ApiModelProperty(value = "Price")
     private Double price;
-    @ApiModelProperty(value = "库存")
+    @ApiModelProperty(value = "Inventory")
     private Integer quantity;
-    @ApiModelProperty(value = "可用库存")
+    @ApiModelProperty(value = "Available")
     private Integer enableQuantity;
-    @ApiModelProperty(value = "购买数量")
+    @ApiModelProperty(value = "Purchase quantity")
     @Column(name = "buy_count")
     private Integer buyCount;
 

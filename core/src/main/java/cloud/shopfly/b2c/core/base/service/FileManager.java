@@ -20,34 +20,34 @@ import cloud.shopfly.b2c.core.base.model.vo.FileVO;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 文件上传接口
+ * File upload interface
  *
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月19日 下午4:37:44
+ * 2018years3month19On the afternoon4:37:44
  */
 public interface FileManager {
     /**
-     * 文件上传
+     * File upload
      *
-     * @param input 文件
-     * @param scene 业务类型
+     * @param input file
+     * @param scene Business types
      * @return
      */
     FileVO upload(FileDTO input, String scene);
 
     /**
-     * 删除文件
+     * Delete the file
      *
-     * @param filePath 文件路径
+     * @param filePath The file path
      */
     void deleteFile(String filePath);
 
     /**
-     * 跨服务调用的文件上传
-     * @param file 文件
-     * @param scene	业务类型 goods,shop,member,other
+     * File upload across service invocations
+     * @param file file
+     * @param scene	Business typesgoods,shop,member,other
      * @return
      */
     FileVO uploadFile(MultipartFile file, String scene);

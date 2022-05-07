@@ -18,12 +18,12 @@ package cloud.shopfly.b2c.core.payment.plugin.weixin.signaturer.model;
 import java.io.Serializable;
 
 /**
- * 签名参数
+ * Signature parameters
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-21 下午2:48
+ * 2019-02-21 In the afternoon2:48
  */
 public class SignatureParams  implements Serializable {
 

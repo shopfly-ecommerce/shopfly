@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.core.payment.model.vo.PayBill;
 import java.util.Map;
 
 /**
- * 全局统一支付接口
+ * Global unified Payment interface
  *
  * @author kingapex
  * @version 1.0
@@ -33,7 +33,7 @@ import java.util.Map;
 public interface PaymentManager {
 
     /**
-     * 创建支付账单并支付
+     * Create pay bills and pay them
      *
      * @param payBill
      * @return
@@ -42,7 +42,7 @@ public interface PaymentManager {
 
 
     /**
-     * 同步回调方法
+     * Synchronous callback method
      *
      * @param tradeType
      * @param paymentPluginId
@@ -51,7 +51,7 @@ public interface PaymentManager {
 
 
     /**
-     * 支付异步回调
+     * Pay for asynchronous callbacks
      *
      * @param tradeType
      * @param paymentPluginId
@@ -61,7 +61,7 @@ public interface PaymentManager {
     String payCallback(TradeType tradeType, String paymentPluginId, ClientType clientType);
 
     /**
-     * 查询支付结果并更新订单状态
+     * Query payment results and update order status
      *
      * @param param
      * @return

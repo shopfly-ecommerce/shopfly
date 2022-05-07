@@ -28,7 +28,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 评论业务层
+ * Commenting on the business Layer
  *
  * @author fk
  * @version v1.0
@@ -38,15 +38,15 @@ import java.util.List;
 public interface MemberCommentManager {
 
     /**
-     * 查询评论列表
+     * Querying the Comment list
      *
-     * @param param 条件
+     * @param param conditions
      * @return Page
      */
     Page list(CommentQueryParam param);
 
     /**
-     * 添加评论
+     * Add comments
      *
      * @param comment
      * @param permission
@@ -55,52 +55,52 @@ public interface MemberCommentManager {
     MemberComment add(CommentScoreDTO comment, Permission permission);
 
     /**
-     * 修改评论
+     * Modify comments
      *
-     * @param memberComment 评论
-     * @param id            评论主键
-     * @return MemberComment 评论
+     * @param memberComment comments
+     * @param id            Comment on the primary key
+     * @return MemberComment comments
      */
     MemberComment edit(MemberComment memberComment, Integer id);
 
     /**
-     * 删除评论
+     * Delete the comment
      *
-     * @param id 评论主键
+     * @param id Comment on the primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取评论
+     * Get comments
      *
-     * @param id 评论主键
-     * @return MemberComment  评论
+     * @param id Comment on the primary key
+     * @return MemberComment  comments
      */
     MemberComment getModel(Integer id);
 
     /**
-     * 查询商品的好评比例
+     * Query the percentage of good reviews
      *
      * @return
      */
     List<GoodsGrade> queryGoodsGrade();
 
     /**
-     * 根据商品id获取评论数
+     * According to the goodsidGet number of comments
      *
-     * @param goodsId 商品id
-     * @return 评论数
+     * @param goodsId productid
+     * @return comments
      */
     Integer getGoodsCommentCount(Integer goodsId);
 
     /**
-     * 自动好评
+     * Automatic high praise
      * @param detailDTOList
      */
     void autoGoodComments(List<OrderDetailDTO> detailDTOList);
 
     /**
-     * 查询某个商品的相关评论数量
+     * Query the number of related reviews for an item
      *
      * @param goodsId
      * @return
@@ -108,15 +108,15 @@ public interface MemberCommentManager {
     MemberCommentCount count(Integer goodsId);
 
     /**
-     * 根据会员id修改头像信息
+     * According to the membershipidModifying profile Picture Information
      *
-     * @param memberId 会员id
-     * @param face     头像
+     * @param memberId membersid
+     * @param face     Head portrait
      */
     void editComment(Integer memberId, String face);
 
     /**
-     * 会员追加评论
+     * Additional comments from members
      *
      * @param comments
      * @param permission

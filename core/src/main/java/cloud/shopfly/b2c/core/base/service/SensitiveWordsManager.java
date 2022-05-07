@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 敏感词业务层
+ * Sensitive word business layer
  * @author fk
  * @version v1.0
  * @since v7.0.0
@@ -30,43 +30,43 @@ import java.util.List;
 public interface SensitiveWordsManager {
 
 	/**
-	 * 查询敏感词列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
+	 * Example Query the list of sensitive words
+	 * @param page The page number
+	 * @param pageSize Number each page
 	 * @param keyword
      * @return Page
 	 */
 	Page list(int page, int pageSize, String keyword);
 	/**
-	 * 添加敏感词
-	 * @param sensitiveWords 敏感词
-	 * @return SensitiveWords 敏感词
+	 * Add sensitive words
+	 * @param sensitiveWords Sensitive words
+	 * @return SensitiveWords Sensitive words
 	 */
 	SensitiveWords add(SensitiveWords sensitiveWords);
 
 	/**
-	* 修改敏感词
-	* @param sensitiveWords 敏感词
-	* @param id 敏感词主键
-	* @return SensitiveWords 敏感词
+	* Modify sensitive words
+	* @param sensitiveWords Sensitive words
+	* @param id Sensitive word primary key
+	* @return SensitiveWords Sensitive words
 	*/
 	SensitiveWords edit(SensitiveWords sensitiveWords, Integer id);
 	
 	/**
-	 * 删除敏感词
-	 * @param id 敏感词主键
+	 * Delete sensitive words
+	 * @param id Sensitive word primary key
 	 */
 	void delete(Integer id);
 	
 	/**
-	 * 获取敏感词
-	 * @param id 敏感词主键
-	 * @return SensitiveWords  敏感词
+	 * Get sensitive words
+	 * @param id Sensitive word primary key
+	 * @return SensitiveWords  Sensitive words
 	 */
 	SensitiveWords getModel(Integer id);
 
 	/**
-	 * 查询需要过滤的敏感词汇
+	 * Query sensitive terms to be filtered
 	 * @return
 	 */
 	List<String> listWords();

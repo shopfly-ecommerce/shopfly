@@ -23,33 +23,33 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品搜索
+ * Commodity search
  *
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年9月14日 上午10:52:20
+ * 2017years9month14The morning of10:52:20
  */
 public interface GoodsSearchManager {
 
     /**
-     * 搜索
+     * search
      *
-     * @param goodsSearch 搜索条件
-     * @return 商品分页
+     * @param goodsSearch The search criteria
+     * @return Goods paging
      */
     Page search(GoodsSearchDTO goodsSearch);
 
     /**
-     * 获取筛选器
+     * Get filter
      *
-     * @param goodsSearch 搜索条件
+     * @param goodsSearch The search criteria
      * @return Map
      */
     Map<String, Object> getSelector(GoodsSearchDTO goodsSearch);
 
     /**
-     * 通过关键字获取商品分词索引
+     * Get the item segmentation index by keyword
      *
      * @param keyword
      * @return
@@ -57,9 +57,9 @@ public interface GoodsSearchManager {
     List<GoodsWords> getGoodsWords(String keyword);
 
     /**
-     * 获取'为你推荐'商品列表
-     * @param goodsSearch 查询参数
-     * @return 分页数据
+     * To obtain'Recommend to you'Products
+     * @param goodsSearch Query parameters
+     * @return Paging data
      */
     Page recommendGoodsList(GoodsSearchDTO goodsSearch);
 }

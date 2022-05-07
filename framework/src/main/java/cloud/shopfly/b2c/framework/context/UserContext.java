@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.framework.context;
 import cloud.shopfly.b2c.framework.security.model.Buyer;
 
 /**
- * 用户上下文
+ * User context
  * Created by kingapex on 2018/3/12.
  *
  * @author kingapex
@@ -35,19 +35,19 @@ public class UserContext {
     }
 
     /**
-     * 为了方便在单元测试中测试已登录的情况，请使用此属性
-     * 如果此属性有值，买家上下文中将会直接返回此模拟对象
+     * Use this property to facilitate testing logged on in unit tests
+     * If this property has a value, the buyer context will return the mock object directly
      */
     public static Buyer mockBuyer =null;
 
     /**
-     * 获取当前买家
+     * Get the current buyer
      *
      * @return
      */
     public static Buyer getBuyer() {
 
-        //如果有模拟对象，会直接返回此模拟对象
+        // If there is a mock object, it is returned directly
         if (mockBuyer != null) {
             return mockBuyer;
         }

@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 存储方案业务类
+ * Storage solution business class
  *
  * @author zh
  * @version v7.0.0
@@ -75,13 +75,13 @@ public class UploaderManagerImpl implements UploaderManager {
         if (upload.getId() == null || id == 0) {
             UploaderDO up = this.getUploader(uploader.getBean());
             if (up != null) {
-                throw new ServiceException(SystemErrorCode.E900.code(), "该存储方案已经存在");
+                throw new ServiceException(SystemErrorCode.E900.code(), "The storage scheme already exists");
             }
             this.systemDaoSupport.insert("es_uploader", upload);
             Integer waybillId = this.systemDaoSupport.getLastId("es_uploader");
             upload.setId(waybillId);
         }
-        // 更新缓存
+        // Update the cache
         cache.remove(CachePrefix.UPLOADER.getPrefix());
         return upload;
 
@@ -107,19 +107,19 @@ public class UploaderManagerImpl implements UploaderManager {
         }
         UploaderDO upload = this.getUploader(bean);
         if (upload == null) {
-            throw new ResourceNotFoundException("该存储方案不存在");
+            throw new ResourceNotFoundException("The storage scheme does not exist");
         }
         this.systemDaoSupport.execute("UPDATE es_uploader SET open=0");
         this.systemDaoSupport.execute("UPDATE es_uploader SET open=1 WHERE bean = ?", bean);
-        // 更新缓存
+        // Update the cache
         cache.remove(CachePrefix.UPLOADER.getPrefix());
     }
 
 
     /**
-     * 获取所有的存储方案
+     * Get all storage schemes
      *
-     * @return 所有的存储方案
+     * @return All storage schemes
      */
     private List<UploaderVO> getUploads() {
         List<UploaderVO> resultList = new ArrayList<>();
@@ -157,7 +157,7 @@ public class UploaderManagerImpl implements UploaderManager {
         }
         UploaderDO upload = this.getUploader(bean);
         if (upload == null) {
-            throw new ResourceNotFoundException("该存储方案不存在");
+            throw new ResourceNotFoundException("The storage scheme does not exist");
         }
         return new UploaderVO(upload);
     }
@@ -171,7 +171,7 @@ public class UploaderManagerImpl implements UploaderManager {
         }
         UploaderDO up = this.getUploader(uploader.getBean());
         if (up == null) {
-            throw new ResourceNotFoundException("该存储方案不存在");
+            throw new ResourceNotFoundException("The storage scheme does not exist");
         }
         uploader.setId(up.getId());
         uploader.setOpen(up.getOpen());

@@ -20,11 +20,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * shopfly 配置
+ * shopfly configuration
  *
  * @author zh
  * @version v7.0
- * @date 18/4/13 下午8:19
+ * @date 18/4/13 In the afternoon8:19
  * @since v7.0
  */
 @Configuration
@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Configuration;
 public class ShopflyConfig {
 
     /**
-     * token加密秘钥
+     * tokenAdd the secret key
      */
     private String tokenSecret;
 
@@ -59,7 +59,7 @@ public class ShopflyConfig {
 
 
     /**
-     * 小程序二维码分享图片存储位置
+     * Small program two-dimensional code to share picture storage location
      */
     @Value("${shopfly.mini-program.code-unlimit-position:#{null}}")
     @Deprecated
@@ -67,27 +67,27 @@ public class ShopflyConfig {
 
 
     /**
-     * 缓冲次数
+     * Number of buffer
      */
     @Value("${shopfly.pool.stock.max-update-timet:#{null}}")
     private Integer maxUpdateTime;
 
     /**
-     * 缓冲区大小
+     * Buffer size
      */
     @Value("${shopfly.pool.stock.max-pool-size:#{null}}")
     private Integer maxPoolSize;
 
     /**
-     * 缓冲时间（秒数）
+     * Buffer time（Number of seconds）
      */
     @Value("${shopfly.pool.stock.max-lazy-second:#{null}}")
     private Integer maxLazySecond;
 
     /**
-     * 商品库存缓冲池开关
-     * false：关闭（如果配置文件中没有配置此项，则默认为false）
-     * true：开启（优点：缓解程序压力；缺点：有可能会导致商家中心商品库存数量显示延迟；）
+     * Commodity inventory buffer pool switch
+     * false：close（If this item is not configured in the configuration file, the default value isfalse）
+     * true：open（advantages：Program stress relief；disadvantages：There may be a delay in displaying the inventory quantity of goods in the merchant center；）
      */
     @Value("${shopfly.pool.stock:#{false}}")
     private boolean stock;
@@ -116,9 +116,9 @@ public class ShopflyConfig {
     }
 
     /**
-     * 获取协议
+     * Get agreement
      *
-     * @return 协议
+     * @return agreement
      */
     public final String getScheme() {
         if (this.getSsl()) {

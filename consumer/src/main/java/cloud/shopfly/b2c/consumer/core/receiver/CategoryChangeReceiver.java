@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 分类 变更
+ * Classification of change
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:29:42
+ * 2018years3month23The morning of10:29:42
  */
 @Component
 public class CategoryChangeReceiver {
@@ -58,7 +58,7 @@ public class CategoryChangeReceiver {
 				try {
 					event.categoryChange(categoryChangeMsg);
 				} catch (Exception e) {
-					logger.error("处理商品分类变化消息出错",e);
+					logger.error("Error processing item category change message",e);
 				}
 			}
 		}

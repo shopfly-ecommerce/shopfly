@@ -16,10 +16,10 @@
 package cloud.shopfly.b2c.core.goods.util;
 
 /**
- * 搜索分隔符
+ * Search separator
  * @author fk
  * @version v1.0
- * 2017年4月19日 下午4:35:57
+ * 2017years4month19On the afternoon4:35:57
  */
 public class Separator {
 	

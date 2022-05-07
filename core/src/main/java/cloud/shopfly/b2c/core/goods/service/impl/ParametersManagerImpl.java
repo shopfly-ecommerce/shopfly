@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 参数业务类
+ * Parameter business class
  *
  * @author fk
  * @version v2.0
@@ -59,16 +59,16 @@ public class ParametersManagerImpl implements ParametersManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ParametersDO add(ParametersDO parameters) {
 
-        // 查询参数组
+        // Querying parameter Groups
         ParameterGroupDO group = parameterGroupManager.getModel(parameters.getGroupId());
         if (group == null) {
-            throw new ServiceException(GoodsErrorCode.E303.code(), "所属参数组不存在");
+            throw new ServiceException(GoodsErrorCode.E303.code(), "The owning parameter group does not exist");
         }
         parameters.setCategoryId(group.getCategoryId());
-        // 选择项
+        // The option
         if (parameters.getParamType() == 2) {
             if (!StringUtil.notEmpty(parameters.getOptions())) {
-                throw new ServiceException(GoodsErrorCode.E303.code(), "选择项类型必须填写选择内容");
+                throw new ServiceException(GoodsErrorCode.E303.code(), "The selection item type must be filled in");
             }
         }
         String sql = "select * from es_parameters where group_id = ? order by sort desc limit 0,1";
@@ -92,13 +92,13 @@ public class ParametersManagerImpl implements ParametersManager {
 
         ParametersDO temp = this.getModel(id);
         if (temp == null) {
-            throw new ServiceException(GoodsErrorCode.E303.code(), "参数不存在");
+            throw new ServiceException(GoodsErrorCode.E303.code(), "Parameter does not exist");
         }
         parameters.setCategoryId(temp.getCategoryId());
-        // 选择项
+        // The option
         if (parameters.getParamType() == 2) {
             if (!StringUtil.notEmpty(parameters.getOptions())) {
-                throw new ServiceException(GoodsErrorCode.E303.code(), "选择项类型必须填写选择内容");
+                throw new ServiceException(GoodsErrorCode.E303.code(), "The selection item type must be filled in");
             }
         }
 
@@ -128,7 +128,7 @@ public class ParametersManagerImpl implements ParametersManager {
         ParametersDO curParam = this.getModel(paramId);
 
         if (curParam == null) {
-            throw new ServiceException(GoodsErrorCode.E303.code(), "要移动的参数不存在");
+            throw new ServiceException(GoodsErrorCode.E303.code(), "The parameter to move does not exist");
         }
 
         if ("up".equals(sortType)) {

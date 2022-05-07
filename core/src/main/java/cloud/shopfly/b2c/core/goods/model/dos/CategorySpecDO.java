@@ -26,7 +26,7 @@ import java.io.Serializable;
 
 
 /**
- * 分类规格关联表实体
+ * Classification specification associated table entities
  *
  * @author fk
  * @version v2.0
@@ -41,16 +41,16 @@ public class CategorySpecDO implements Serializable {
     private static final long serialVersionUID = 3127259064985991L;
 
     /**
-     * 分类id
+     * Categoriesid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(value = "分类id", required = false)
+    @ApiModelProperty(value = "Categoriesid", required = false)
     private Integer categoryId;
     /**
-     * 规格id
+     * specificationsid
      */
     @Column(name = "spec_id")
-    @ApiModelProperty(value = "规格id", required = false)
+    @ApiModelProperty(value = "specificationsid", required = false)
     private Integer specId;
 
     public CategorySpecDO() {

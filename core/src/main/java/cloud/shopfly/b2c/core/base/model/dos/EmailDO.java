@@ -32,7 +32,7 @@ import javax.validation.constraints.Email;
 
 
 /**
- * 邮件记录实体
+ * Mail record entity
  * @author zh
  * @version v7.0.0
  * @since v7.0.0
@@ -45,40 +45,40 @@ public class EmailDO implements Serializable {
 
     private static final long serialVersionUID = 5515821199866313L;
 
-    /**邮件记录id*/
+    /**The mail recordid*/
     @Id(name = "id")
     @ApiModelProperty(hidden=true)
     private Integer id;
-    /**邮件标题*/
+    /**Email title*/
     @Column(name = "title")
-    @ApiModelProperty(name="title",value="邮件标题",required=false)
+    @ApiModelProperty(name="title",value="Email title",required=false)
     private String title;
-    /**邮件类型*/
+    /**Email type*/
     @Column(name = "type")
-    @ApiModelProperty(name="type",value="邮件类型",required=false)
+    @ApiModelProperty(name="type",value="Email type",required=false)
     private String type;
-    /**是否成功*/
+    /**The success of*/
     @Column(name = "success")
-    @Min(message="必须为数字", value = 0)
-    @ApiModelProperty(name="success",value="是否成功",required=false)
+    @Min(message="Must be a number", value = 0)
+    @ApiModelProperty(name="success",value="The success of",required=false)
     private Integer success;
-    /**邮件接收者*/
+    /**Mail recipient*/
     @Column(name = "email")
-    @Email(message="格式不正确")
-    @ApiModelProperty(name="email",value="邮件接收者",required=false)
+    @Email(message="Malformed")
+    @ApiModelProperty(name="email",value="Mail recipient",required=false)
     private String email;
-    /**邮件内容*/
+    /**Email content*/
     @Column(name = "content")
-    @ApiModelProperty(name="content",value="邮件内容",required=false)
+    @ApiModelProperty(name="content",value="Email content",required=false)
     private String content;
-    /**错误次数*/
+    /**Wrong number*/
     @Column(name = "error_num")
-    @Min(message="必须为数字", value = 0)
-    @ApiModelProperty(name="error_num",value="错误次数",required=false)
+    @Min(message="Must be a number", value = 0)
+    @ApiModelProperty(name="error_num",value="Wrong number",required=false)
     private Integer errorNum;
-    /**最后发送时间*/
+    /**Last sending time*/
     @Column(name = "last_send")
-    @ApiModelProperty(name="last_send",value="最后发送时间",required=false)
+    @ApiModelProperty(name="last_send",value="Last sending time",required=false)
     private Long lastSend;
 
 

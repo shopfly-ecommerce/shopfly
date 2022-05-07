@@ -48,7 +48,7 @@ import java.util.Map;
 
 /**
  * Created by kingapex on 2019-01-24.
- * 默认交易创建器
+ * Default transaction creator
  *
  * @author kingapex
  * @version 1.0
@@ -73,11 +73,11 @@ public class DefaultTradeCreator implements TradeCreator {
     }
 
     /**
-     * 通过构造器设置构建交易所需要的原料
+     * The constructor sets up the raw materials needed to build the exchange
      *
-     * @param param         结算参数
-     * @param cartView      购物车视图
-     * @param memberAddress 收货地址
+     * @param param         Settlement parameter
+     * @param cartView      Shopping cart view
+     * @param memberAddress Shipping address
      */
     public DefaultTradeCreator(CheckoutParamVO param, CartView cartView, MemberAddress memberAddress) {
 
@@ -109,17 +109,17 @@ public class DefaultTradeCreator implements TradeCreator {
     @Override
     public TradeVO createTrade() {
 
-        Assert.notNull(tradeSnCreator, "tradeSnCreator为空，请先调用setTradeSnCreator设置正确的交易号生成器");
+        Assert.notNull(tradeSnCreator, "tradeSnCreatorEmpty, please call firstsetTradeSnCreatorSet up the correct transaction number generator");
 
 
-        Assert.notNull(param.getAddressId(), "必须选择收货地址");
-        Assert.notNull(param.getPaymentType(), "必须选择支付方式");
+        Assert.notNull(param.getAddressId(), "Shipping address must be selected");
+        Assert.notNull(param.getPaymentType(), "Payment method must be selected");
 
         Buyer buyer = UserContext.getBuyer();
 
         List<CartVO> cartList = cartView.getCartList();
 
-        //收货人
+        // The consignee
         ConsigneeVO consignee = new ConsigneeVO();
         consignee.setConsigneeId(memberAddress.getAddrId());
         consignee.setAddress(memberAddress.getAddr());
@@ -136,68 +136,68 @@ public class DefaultTradeCreator implements TradeCreator {
         String tradeNo = tradeSnCreator.generateTradeSn();
         TradeVO tradeVO = new TradeVO();
 
-        //收货人
+        // The consignee
         tradeVO.setConsignee(consignee);
 
-        //效果编号
+        // Effect of number
         tradeVO.setTradeSn(tradeNo);
 
-        //支付类型
+        // Payment type
         tradeVO.setPaymentType(param.getPaymentType().value());
 
-        //会员信息
+        // The member information
         tradeVO.setMemberId(buyer.getUid());
         tradeVO.setMemberName(buyer.getUsername());
         List<OrderDTO> orderList = new ArrayList<OrderDTO>();
 
-        //订单创建时间
+        // Order Creation time
         long createTime = DateUtil.getDateline();
 
         List<CouponVO> couponVOS = new ArrayList<>();
-        //生成订单
+        // To generate orders
         for (CartVO cart : cartList) {
 
-            //生成订单编号
+            // Generate order number
             String orderSn = tradeSnCreator.generateOrderSn();
 
-            //购物信息
+            // Shopping information
             OrderDTO order = new OrderDTO(cart);
 
-            //创建时间
+            // Last update
             order.setCreateTime(createTime);
 
-            //购买的会员信息
+            // Purchase membership information
             order.setMemberId(buyer.getUid());
             order.setMemberName(buyer.getUsername());
             order.setTradeSn(tradeNo);
             order.setSn(orderSn);
             order.setConsignee(consignee);
 
-            //配送方式 这个参数暂时无效
+            // The shipping mode parameter is temporarily invalid
             order.setShippingId(0);
 
-            //支付类型
+            // Payment type
             order.setPaymentType(param.getPaymentType().value());
-            //发票
+            // invoice
             order.setNeedReceipt(0);
             if (param.getReceipt() != null) {
                 order.setNeedReceipt(1);
             }
             order.setReceiptVO(param.getReceipt());
-            //收货时间
+            // The goods time
             order.setReceiveTime(param.getReceiveTime());
 
-            //订单备注
+            // The order note
             order.setRemark(param.getRemark());
 
-            //订单来源
+            // Source of the order
             order.setClientType(param.getClientType());
 
-            //订单价格
+            // The order price
             order.getPrice().reCountDiscountPrice();
 
             if (logger.isDebugEnabled()) {
-                logger.debug("订单[" + order.getSn() + "]的price:");
+                logger.debug("The order[" + order.getSn() + "]theprice:");
                 logger.debug(order.getPrice());
             }
 
@@ -221,14 +221,14 @@ public class DefaultTradeCreator implements TradeCreator {
 
         }
 
-        //读取结算价格
+        // Reading settlement price
         PriceDetailVO paymentDetail = cartView.getTotalPrice();
         paymentDetail.reCountDiscountPrice();
         if (logger.isDebugEnabled()) {
-            logger.debug("生成TradeVO时price为");
+            logger.debug("generateTradeVOwhenpricefor");
             logger.debug(paymentDetail);
         }
-        //交易价格
+        // The transaction price
         tradeVO.setPriceDetail(paymentDetail);
 
         tradeVO.setOrderList(orderList);
@@ -243,20 +243,20 @@ public class DefaultTradeCreator implements TradeCreator {
     @Override
     public TradeCreator checkShipRange() {
 
-        Assert.notNull(shippingManager, "shippingManager为空，请先调用setShippingManager设置正确的交配送管理业务类");
+        Assert.notNull(shippingManager, "shippingManagerEmpty, please call firstsetShippingManagerSet up the correct delivery management business class");
 
         if (memberAddress == null) {
-            throw new ServiceException(TradeErrorCode.E452.code(), "请填写收货地址");
+            throw new ServiceException(TradeErrorCode.E452.code(), "Please fill in the delivery address");
         }
 
-        //已选中结算的商品
+        // Goods that have been selected for settlement
         List<CartVO> cartList = cartView.getCartList();
 
 
-        //2、筛选不在配送区域的商品
+        // 2, screening goods not in the distribution area
         List<CacheGoods> list = this.shippingManager.checkArea(cartList,memberAddress.getCountryCode(),memberAddress.getStateCode());
 
-        //验证后存在商品问题的集合
+        // A collection of commodity problems after verification
         List<Map> goodsErrorList = new ArrayList();
 
         if (list.size() > 0) {
@@ -266,7 +266,7 @@ public class DefaultTradeCreator implements TradeCreator {
                 errorMap.put("image", goods.getThumbnail());
                 goodsErrorList.add(errorMap);
             }
-            throw new ServiceException(TradeErrorCode.E461.code(), "商品不在配送区域", goodsErrorList);
+            throw new ServiceException(TradeErrorCode.E461.code(), "Goods are not in the distribution area", goodsErrorList);
         }
 
 
@@ -276,21 +276,21 @@ public class DefaultTradeCreator implements TradeCreator {
     @Override
     public TradeCreator checkGoods() {
 
-        Assert.notNull(goodsClient, "goodsClient为空，请先调用setGoodsClient设置正确的商品业务Client");
+        Assert.notNull(goodsClient, "goodsClientEmpty, please call firstsetGoodsClientSet up the right commodity businessClient");
 
 
-        //已选中结算的商品
+        // Goods that have been selected for settlement
         List<CartVO> cartList = cartView.getCartList();
 
-        //1、检测购物车是否为空
+        // 1. Check whether the shopping cart is empty
         if (cartList == null || cartList.isEmpty()) {
-            throw new ServiceException(TradeErrorCode.E452.code(), "购物车为空");
+            throw new ServiceException(TradeErrorCode.E452.code(), "Shopping cart empty");
         }
-        //验证后存在商品问题的集合
+        // A collection of commodity problems after verification
         List<Map> goodsErrorList = new ArrayList();
 
         boolean flag = true;
-        //遍历购物车集合
+        // Iterate through the shopping cart collection
         for (CartVO cartVO : cartList) {
 
             List<CartSkuVO> skuList = cartVO.getSkuList();
@@ -303,30 +303,30 @@ public class DefaultTradeCreator implements TradeCreator {
                 Integer skuId = cartSkuVO.getSkuId();
                 GoodsSkuVO skuVO = this.goodsClient.getSkuFromCache(skuId);
 
-                //检测商品是否存在
+                // Test whether goods exist
                 if (skuVO == null) {
                     goodsErrorList.add(errorMap);
                     continue;
                 }
 
-                //检测商品的上下架状态
+                // Detect the loading and unloading status of goods
                 if (skuVO.getMarketEnable() != null && skuVO.getMarketEnable().intValue() != 1) {
                     goodsErrorList.add(errorMap);
                     continue;
                 }
 
-                //检测商品的删除状态
+                // Detects the deletion status of an item
                 if (skuVO.getDisabled() != null && skuVO.getDisabled().intValue() != 1) {
                     goodsErrorList.add(errorMap);
                     continue;
                 }
 
-                //读取此产品的可用库存数量
+                // Read the amount of stock available for this product
                 int enableQuantity = skuVO.getEnableQuantity();
-                //此产品将要购买的数量
+                // The quantity of this product to be purchased
                 int num = cartSkuVO.getNum();
 
-                //如果将要购买的产品数量大于redis中的数量，则此产品不能下单
+                // If the number of products to be purchased is greater than the number in Redis, this product cannot be ordered
                 if (num > enableQuantity) {
                     flag = false;
                     goodsErrorList.add(errorMap);
@@ -336,7 +336,7 @@ public class DefaultTradeCreator implements TradeCreator {
         }
 
         if (!goodsErrorList.isEmpty()) {
-            throw new ServiceException(TradeErrorCode.E452.code(), "抱歉，您以下商品所在地区无货", JsonUtil.objectToJson(goodsErrorList));
+            throw new ServiceException(TradeErrorCode.E452.code(), "Sorry, the following items are not available in your area", JsonUtil.objectToJson(goodsErrorList));
         }
 
         return this;
@@ -345,7 +345,7 @@ public class DefaultTradeCreator implements TradeCreator {
 
     @Override
     public TradeCreator checkPromotion() {
-        Assert.notNull(memberClient, "memberClient为空，请先调用setMemberClient设置正确的会员业务Client");
+        Assert.notNull(memberClient, "memberClientEmpty, please call firstsetMemberClientSet up the right membership businessClient");
 
         List<CartVO> cartList = cartView.getCartList();
 
@@ -360,10 +360,10 @@ public class DefaultTradeCreator implements TradeCreator {
         }
 
 
-        //读取订单的总交易价格信息
+        // Read the total transaction price information for the order
         PriceDetailVO detailVO = cartView.getTotalPrice();
 
-        //此交易需要扣除用户的积分
+        // This transaction requires deducting the users points
         int point = detailVO.getExchangePoint();
 
         if (point > 0) {
@@ -371,9 +371,9 @@ public class DefaultTradeCreator implements TradeCreator {
             Member member = this.memberClient.getModel(buyer.getUid());
             int consumPoint = member.getConsumPoint();
 
-            //如果用户可使用的消费积分小于 交易需要扣除的积分时，则不能下单
+            // If the number of consumption points available to the user is less than the number of points to be deducted from the transaction, the user cannot place an order
             if (consumPoint < point) {
-                throw new ServiceException(TradeErrorCode.E452.code(), "您可使用的消费积分不足,请返回购物车修改商品");
+                throw new ServiceException(TradeErrorCode.E452.code(), "You do not have enough consumption points available,Please return to your shopping cart to modify the item");
             }
         }
 
@@ -387,23 +387,23 @@ public class DefaultTradeCreator implements TradeCreator {
         errorMap.put("name", cartSkuVO.getName());
         errorMap.put("image", cartSkuVO.getGoodsImage());
 
-        //验证后存在促销活动问题的集合
+        // A collection of promotional activity problems that exist after verification
         List<Map> promotionErrorList = new ArrayList();
         boolean flag = true;
-        //此商品参与的单品活动
+        // A single activity in which this product participates
         List<CartPromotionVo> singlePromotionList = cartSkuVO.getSingleList();
         if (!singlePromotionList.isEmpty()) {
             for (CartPromotionVo promotionGoodsVO : singlePromotionList) {
 
-                // 默认参与的活动 && 非不参与活动的状态
+                // Default participating activity && Non-participating activity status
                 if (promotionGoodsVO.getIsCheck().intValue() == 1 && !promotionGoodsVO.getPromotionType().equals(PromotionTypeEnum.NO.name())) {
-                    //当前活动的失效时间
+                    // The expiration time of the current activity
                     long entTime = promotionGoodsVO.getEndTime();
 
-                    //当前时间
+                    // The current time
                     long currTime = DateUtil.getDateline();
 
-                    //如果当前时间大于失效时间，则此活动已经失效了，不能下单
+                    // If the current time is greater than the expiration time, the activity has expired and cannot be placed
                     if (currTime > entTime) {
                         flag = false;
                         promotionErrorList.add(errorMap);
@@ -414,17 +414,17 @@ public class DefaultTradeCreator implements TradeCreator {
             }
         }
 
-        //此商品参与的组合活动
+        // A combination of activities in which this product participates
         List<CartPromotionVo> groupPromotionList = cartSkuVO.getGroupList();
         if (!groupPromotionList.isEmpty()) {
             for (CartPromotionVo cartPromotionGoodsVo : groupPromotionList) {
-                //当前活动的失效时间
+                // The expiration time of the current activity
                 long entTime = cartPromotionGoodsVo.getEndTime();
 
-                //当前时间
+                // The current time
                 long currTime = DateUtil.getDateline();
 
-                //如果当前时间大于失效时间，则此活动已经失效了，不能下单
+                // If the current time is greater than the expiration time, the activity has expired and cannot be placed
                 if (currTime > entTime) {
                     flag = false;
 

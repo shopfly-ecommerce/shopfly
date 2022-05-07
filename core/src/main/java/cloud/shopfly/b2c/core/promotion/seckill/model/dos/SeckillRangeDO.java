@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 限时抢购时刻实体
+ * Flash sale time entity
  * @author Snow
  * @version v2.0.0
  * @since v7.0.0
@@ -43,19 +43,19 @@ public class SeckillRangeDO implements Serializable {
 
     private static final long serialVersionUID = 9388211981272440L;
 
-    /**主键*/
+    /**A primary key*/
     @Id(name = "range_id")
     @ApiModelProperty(hidden=true)
     private Integer rangeId;
 
-    /**限时抢购活动id*/
+    /**Flash salesid*/
     @Column(name = "seckill_id")
-    @ApiModelProperty(name="seckill_id",value="限时抢购活动id",required=false)
+    @ApiModelProperty(name="seckill_id",value="Flash salesid",required=false)
     private Integer seckillId;
 
-    /**整点时刻*/
+    /**The hour*/
     @Column(name = "range_time")
-    @ApiModelProperty(name="range_time",value="整点时刻",required=false)
+    @ApiModelProperty(name="range_time",value="The hour",required=false)
     private Integer rangeTime;
 
     @PrimaryKeyField

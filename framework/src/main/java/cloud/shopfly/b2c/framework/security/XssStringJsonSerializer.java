@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 /**
- * 防xss攻击的json转换器
+ * preventxssThe attackjsonconverter
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -38,8 +38,8 @@ public class XssStringJsonSerializer extends JsonSerializer<String> {
     }
 
     /**
-     * 覆写 serialize 方法，对string 值进行xss过滤
-     * 使用的是Jsoup的clean方法
+     * overwriteserialize Methods,string The valuexssfilter
+     * Using theJsoupthecleanmethods
      * @param value
      * @param jsonGenerator
      * @param serializerProvider
@@ -50,7 +50,7 @@ public class XssStringJsonSerializer extends JsonSerializer<String> {
                           SerializerProvider serializerProvider) throws IOException {
         if (value != null) {
             value = XssUtil.clean(value);
-            //xss过滤同时，解码emoji表情，这里只能处理response为对象的情况，基本类型在ParameterHandleResponse中处理
+            // XSS filters and decodes emojis. Only response is handled as an object. The basic type is handled in ParameterHandleResponse
             jsonGenerator.writeString(EmojiCharacterUtil.decode(value));
         }
     }

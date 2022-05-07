@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 会员登陆消费者
+ * Member login consumers
  *
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:31:06
+ * @since v7.0.0 2018years3month23The morning of10:31:06
  */
 @Component
 public class MemberLoginReceiver {
@@ -46,7 +46,7 @@ public class MemberLoginReceiver {
     private List<MemberLoginEvent> events;
 
     /**
-     * 会员登陆
+     * Members login
      *
      * @param memberLoginMsg
      */
@@ -61,7 +61,7 @@ public class MemberLoginReceiver {
                 try {
                     event.memberLogin(memberLoginMsg);
                 } catch (Exception e) {
-                    logger.error("会员登录出错", e);
+                    logger.error("Member login error", e);
                 }
             }
         }

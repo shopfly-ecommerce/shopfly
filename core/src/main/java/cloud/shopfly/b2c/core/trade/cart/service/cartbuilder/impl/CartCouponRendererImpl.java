@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 购物车优惠券渲染实现
+ * Shopping cart coupon rendering implementation
  *
  * @author kingapex
  * @version 1.0
@@ -54,10 +54,10 @@ public class CartCouponRendererImpl implements CartCouponRenderer {
     @Override
     public void render(List<CartVO> cartList) {
 
-        //查询出这些店铺的所有优惠券
+        // Look up all the coupons for those stores
         List<MemberCoupon> couponList = (List<MemberCoupon>) this.memberCouponClient.listByCheckout(UserContext.getBuyer().getUid());
 
-        //填充购物车的优惠券列表
+        // Fill your shopping cart with coupons
         cartList.forEach(cartVO -> {
             fillOneCartCoupon(cartVO, couponList);
 
@@ -67,7 +67,7 @@ public class CartCouponRendererImpl implements CartCouponRenderer {
 
 
     /**
-     * 填充一个购物车的优惠劵
+     * Fill a shopping cart with coupons
      *
      * @param cartVo
      * @param couponList
@@ -75,16 +75,16 @@ public class CartCouponRendererImpl implements CartCouponRenderer {
     private void fillOneCartCoupon(CartVO cartVo, List<MemberCoupon> couponList) {
 
 
-        //如果购物车中包含积分商品，则无需渲染积分商品不能使用优惠券  add by liuyulei 2019-05-14
+        // Coupons cannot be used without rendering bonus items if they are included in your shopping cart
         Boolean isEnable = this.checkEnableCoupon();
 
-        //要形成的购物车优惠券列表
+        // Shopping cart coupon list to form
         List<CouponVO> cartCouponList = new ArrayList<>();
 
-        //查找可能存在的优惠劵
+        // Look for coupons that may exist
         CouponVO selectedCoupon = cartPromotionManager.getSelectedPromotion().getCoupon();
 
-        //当前时间，判断是否在有效期使用
+        // Current time: Determines whether the value is in the validity period
         long nowTime = DateUtil.getDateline();
 
         for (MemberCoupon memberCoupon : couponList) {
@@ -92,32 +92,32 @@ public class CartCouponRendererImpl implements CartCouponRenderer {
             CouponVO couponVO = new CouponVO();
             couponVO.setCouponId(memberCoupon.getCouponId());
             couponVO.setAmount(memberCoupon.getCouponPrice());
-            couponVO.setUseTerm("满" + new BigDecimal(memberCoupon.getCouponThresholdPrice() + "") + "可用");
+            couponVO.setUseTerm("full" + new BigDecimal(memberCoupon.getCouponThresholdPrice() + "") + "available");
             couponVO.setMemberCouponId(memberCoupon.getMcId());
             couponVO.setEndTime(memberCoupon.getEndTime());
             couponVO.setCouponThresholdPrice(memberCoupon.getCouponThresholdPrice());
 
-            //判断优惠券使用条件    开始    add by liuyulei 2019-05-14
-            //1.判读是否存在积分商品，如果存在则不能使用优惠券
+            // Liuyulei 2019-05-14
+            // 1. Check whether there is a product with points, if there is, you cannot use the coupon
             if (!isEnable) {
                 couponVO.setEnable(0);
-                couponVO.setErrorMsg("当前购物车内包含积分商品，不能使用优惠券！");
+                couponVO.setErrorMsg("The current shopping cart contains points and cannot use coupons！");
                 couponVO.setSelected(0);
             } else {
-                //不可用条件：
-                // 2.购物车价格小于优惠券门槛价格
-                // 3.在有效期范围内：当前时间大于等于生效时间 && 当前时间小于等于失效时间
+                // Unavailability conditions:
+                // 2. Shopping cart price is less than the coupon threshold price
+                // 3. Within the validity period: The current time is greater than or equal to the effective time && The current time is less than or equal to the expiration time
                 if (cartVo.getPrice().getOriginalPrice() < memberCoupon.getCouponThresholdPrice()) {
 
                     couponVO.setEnable(0);
-                    couponVO.setErrorMsg("订单金额不满足此优惠券使用金额！");
+                    couponVO.setErrorMsg("The order amount does not meet the usage amount of this coupon！");
                 } else if (memberCoupon.getStartTime() > nowTime
                         || memberCoupon.getEndTime() < nowTime) {
                     couponVO.setEnable(0);
-                    couponVO.setErrorMsg("当前时间不在此优惠券可用时间范围内！");
+                    couponVO.setErrorMsg("The current time is not within the available time range of this coupon！");
                 } else {
                     couponVO.setEnable(1);
-                    //如果购物车存在优惠劵  当优惠券可用时才设置是否选中
+                    // If shopping cart has coupons, set check only when coupons are available
                     if (selectedCoupon != null && selectedCoupon.getMemberCouponId().intValue() == couponVO.getMemberCouponId().intValue()) {
                         couponVO.setSelected(1);
                     } else {
@@ -125,7 +125,7 @@ public class CartCouponRendererImpl implements CartCouponRenderer {
                     }
                 }
             }
-            //判断优惠券使用条件    结束    add by liuyulei 2019-05-14
+            // Liuyulei 2019-05-14
 
 
             cartCouponList.add(couponVO);
@@ -137,7 +137,7 @@ public class CartCouponRendererImpl implements CartCouponRenderer {
     }
 
     /**
-     * 积分商品不能使用优惠券
+     * You cant use coupons for points
      *
      * @return add by liuyulei 2019-05-14
      */

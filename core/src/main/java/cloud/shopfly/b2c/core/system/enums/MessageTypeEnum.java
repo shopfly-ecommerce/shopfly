@@ -18,17 +18,17 @@ package cloud.shopfly.b2c.core.system.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 消息类型枚举类
+ * @Description Message type enumeration class
  * @ClassName MessageTypeEnum
- * @since v7.0 下午4:49 2018/7/5
+ * @since v7.0 In the afternoon4:49 2018/7/5
  */
 public enum MessageTypeEnum {
-    //店铺
-    SHOP("店铺"),
-    //会员
-    MEMBER("会员"),
-    //其他
-    OTHER("其他");
+    // The store
+    SHOP("The store"),
+    // members
+    MEMBER("members"),
+    // other
+    OTHER("other");
 
     private String description;
 

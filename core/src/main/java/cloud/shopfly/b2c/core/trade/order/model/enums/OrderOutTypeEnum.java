@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 订单出库的类型
+ * The type of order out of the warehouse
  *
  * @author Snow create in 2018/7/10
  * @version v2.0
@@ -28,19 +28,19 @@ import java.util.List;
 public enum OrderOutTypeEnum {
 
     /**
-     * 商品（除以下两种之外的所有商品）
+     * product（除以下两种之外的所有product）
      */
-    GOODS("商品"),
+    GOODS("product"),
 
     /**
-     * 团购商品
+     * A bulk goods
      */
-    GROUPBUY_GOODS("团购商品"),
+    GROUPBUY_GOODS("A bulk goods"),
 
     /**
-     * 限时抢购商品
+     * Flash sale
      */
-    SECKILL_GOODS("限时抢购商品");
+    SECKILL_GOODS("Flash sale");
 
 
     private String description;

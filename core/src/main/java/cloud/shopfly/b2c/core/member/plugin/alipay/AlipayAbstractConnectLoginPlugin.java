@@ -48,15 +48,15 @@ import java.util.UUID;
 /**
  * @author zjp
  * @version v7.0
- * @Description 支付宝信任登录插件类
+ * @Description Alipay trust login plug-in class
  * @ClassName AlipayAbstractConnectLoginPlugin
- * @since v7.0 下午3:53 2018/6/12
+ * @since v7.0 In the afternoon3:53 2018/6/12
  */
 @Component
 public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin {
 
     /**
-     * 日志记录
+     * logging
      */
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -69,7 +69,7 @@ public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
         Map map =  initConnectSetting();
 
         String uuid = UUID.randomUUID().toString();
-        debugger.log("生成uuid" , uuid);
+        debugger.log("generateuuid" , uuid);
 
         String callBack = this.getCallBackUrl(ConnectTypeEnum.ALIPAY.value());
         return "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?" +
@@ -82,19 +82,19 @@ public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
     @Override
     public Auth2Token loginCallback() {
 
-        debugger.log("进入  AlipayAbstractConnectLoginPlugin  回调");
+        debugger.log("Enter theAlipayAbstractConnectLoginPlugin  The callback");
 
         Map map =  initConnectSetting();
         HttpServletRequest req = ThreadContextHolder.getHttpRequest();
 
-        //获取code
+        // Access code
         String code = req.getParameter("auth_code");
 
         AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do",
                 map.get("alipay_pc_app_id").toString(),  map.get("alipay_pc_private_key").toString(), "json", "utf-8",
                 map.get("alipay_pc_public_key").toString(), "RSA2");
 
-        debugger.log("向支付宝发出请求");
+        debugger.log("Send a request to Alipay");
 
         AlipaySystemOauthTokenRequest request = new AlipaySystemOauthTokenRequest();
         request.setCode(code);
@@ -104,7 +104,7 @@ public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
             String accessToken = oauthTokenResponse.getAccessToken();
             String openid = oauthTokenResponse.getUserId();
 
-            debugger.log("返回的accessToken及openid为：",accessToken,openid);
+            debugger.log("The returnedaccessTokenandopenidfor：",accessToken,openid);
 
 
             Auth2Token auth2Token = new Auth2Token();
@@ -112,9 +112,9 @@ public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
             auth2Token.setAccessToken(accessToken);
             return auth2Token;
         } catch (AlipayApiException e) {
-            //处理异常
+            // Handle exceptions
             this.logger.error(e.getMessage(), e);
-            throw  new ServiceException(MemberErrorCode.E131.name(),"联合登录失败");
+            throw  new ServiceException(MemberErrorCode.E131.name(),"Joint login failure");
         }
     }
 
@@ -131,7 +131,7 @@ public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
             response = alipayClient.execute(request, auth2Token.getAccessToken());
         } catch (AlipayApiException e) {
             this.logger.error(e.getMessage(), e);
-            throw  new ServiceException(MemberErrorCode.E131.name(),"联合登录失败");
+            throw  new ServiceException(MemberErrorCode.E131.name(),"Joint login failure");
         }
 
         if (response.isSuccess()) {
@@ -146,7 +146,7 @@ public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
             return member;
         } else {
             this.logger.error(response.getSubMsg(), response.getSubCode());
-            throw  new ServiceException(MemberErrorCode.E131.name(),"联合登录失败");
+            throw  new ServiceException(MemberErrorCode.E131.name(),"Joint login failure");
         }
     }
 
@@ -167,7 +167,7 @@ public class AlipayAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
             connectSettingParametersVO.setName(alipayConnectConfigGroupEnum.getText());
             list.add(connectSettingParametersVO);
         }
-        connectSetting.setName("支付宝参数配置");
+        connectSetting.setName("Alipay parameter configuration");
         connectSetting.setType(ConnectTypeEnum.ALIPAY.value());
         connectSetting.setConfig(JsonUtil.objectToJson(list));
         return connectSetting;

@@ -44,11 +44,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 会员积分操作
+ * Member Point operation
  *
  * @author zh
  * @version v7.0
- * @date 18/7/16 上午10:44
+ * @date 18/7/16 In the morning10:44
  * @since v7.0
  */
 @Component
@@ -66,23 +66,23 @@ public class MemberPointConsumer implements MemberLoginEvent, MemberRegisterEven
 
     @Override
     public void memberLogin(MemberLoginMsg memberLoginMsg) {
-        //获取积分设置
+        // Get the integral setting
         String pointSettingJson = settingClient.get(SettingGroup.POINT);
         PointSetting pointSetting = JsonUtil.jsonToObject(pointSettingJson, PointSetting.class);
-        //会员登录送积分开启
+        // Member login to send points open
         if (pointSetting.getLogin().equals(1)) {
-            //当第一次注册登录的时候上次登录时间为null
+            // The last login time is null during the first login
             if (memberLoginMsg.getLastLoginTime() == null) {
-                this.setPoint(1, pointSetting.getLoginGradePoint(), 1, pointSetting.getLoginConsumerPoint(), "每天首次登录送积分", memberLoginMsg.getMemberId());
+                this.setPoint(1, pointSetting.getLoginGradePoint(), 1, pointSetting.getLoginConsumerPoint(), "Bonus points for first login every day", memberLoginMsg.getMemberId());
             } else {
-                //上次登录时间
+                // Last login time
                 long lDate = memberLoginMsg.getLastLoginTime() * 1000;
                 Date date = new Date(lDate);
-                //当前时间
+                // The current time
                 Date today = new Date();
-                //判断本地登录是否是今天
+                // Determine if the local login is today
                 if (!DateUtil.toString(date, "yyyy-MM-dd").equals(DateUtil.toString(today, "yyyy-MM-dd"))) {
-                    this.setPoint(1, pointSetting.getLoginGradePoint(), 1, pointSetting.getLoginConsumerPoint(), "每天首次登录送积分", memberLoginMsg.getMemberId());
+                    this.setPoint(1, pointSetting.getLoginGradePoint(), 1, pointSetting.getLoginConsumerPoint(), "Bonus points for first login every day", memberLoginMsg.getMemberId());
                 }
             }
 
@@ -96,9 +96,9 @@ public class MemberPointConsumer implements MemberLoginEvent, MemberRegisterEven
     public void memberRegister(MemberRegisterMsg memberRegisterMsg) {
         String pointSettingJson = settingClient.get(SettingGroup.POINT);
         PointSetting pointSetting = JsonUtil.jsonToObject(pointSettingJson, PointSetting.class);
-        //会员登录送积分开启
+        // Member login to send points open
         if (pointSetting.getRegister().equals(1)) {
-            this.setPoint(1, pointSetting.getRegisterGradePoint(), 1, pointSetting.getRegisterConsumerPoint(), "会员注册送积分", memberRegisterMsg.getMember().getMemberId());
+            this.setPoint(1, pointSetting.getRegisterGradePoint(), 1, pointSetting.getRegisterConsumerPoint(), "Bonus points for member registration", memberRegisterMsg.getMember().getMemberId());
         }
     }
 
@@ -107,18 +107,18 @@ public class MemberPointConsumer implements MemberLoginEvent, MemberRegisterEven
     public void goodsComment(GoodsCommentMsg goodsCommentMsg) {
         String pointSettingJson = settingClient.get(SettingGroup.POINT);
         PointSetting pointSetting = JsonUtil.jsonToObject(pointSettingJson, PointSetting.class);
-        //图片评论送积分
+        // Photo comments give credit
         if (pointSetting.getCommentImg().equals(1) && goodsCommentMsg.getComment().getHaveImage().equals(1)) {
-            this.setPoint(1, pointSetting.getCommentImgGradePoint(), 1, pointSetting.getCommentImgConsumerPoint(), "图片评论送积分", goodsCommentMsg.getComment().getMemberId());
+            this.setPoint(1, pointSetting.getCommentImgGradePoint(), 1, pointSetting.getCommentImgConsumerPoint(), "Photo comments give credit", goodsCommentMsg.getComment().getMemberId());
         }
-        //文字评论送积分
+        // Text comments give points
         if (pointSetting.getComment().equals(1) && goodsCommentMsg.getComment().getHaveImage().equals(1)) {
-            this.setPoint(1, pointSetting.getCommentGradePoint(), 1, pointSetting.getCommentConsumerPoint(), "文字评论送积分", goodsCommentMsg.getComment().getMemberId());
+            this.setPoint(1, pointSetting.getCommentGradePoint(), 1, pointSetting.getCommentConsumerPoint(), "Text comments give points", goodsCommentMsg.getComment().getMemberId());
         }
         Integer count = memberCommentClient.getGoodsCommentCount(goodsCommentMsg.getComment().getGoodsId());
-        //此处评论数量判断为1，因为此时评论数量已经添加了
+        // The number of comments is 1, because the number of comments has already been added
         if (pointSetting.getFirstComment().equals(1) && (count.equals(1) || count.equals(0))) {
-            this.setPoint(1, pointSetting.getFirstCommentGradePoint(), 1, pointSetting.getFirstCommentConsumerPoint(), "每个商品首次评论", goodsCommentMsg.getComment().getMemberId());
+            this.setPoint(1, pointSetting.getFirstCommentGradePoint(), 1, pointSetting.getFirstCommentConsumerPoint(), "First comments", goodsCommentMsg.getComment().getMemberId());
         }
     }
 
@@ -126,24 +126,24 @@ public class MemberPointConsumer implements MemberLoginEvent, MemberRegisterEven
     public void orderChange(OrderStatusChangeMsg orderMessage) {
         String pointSettingJson = settingClient.get(SettingGroup.POINT);
         PointSetting pointSetting = JsonUtil.jsonToObject(pointSettingJson, PointSetting.class);
-        //获取订单信息
+        // Get order information
         OrderDO orderDO = orderMessage.getOrderDO();
-        //已付款状态
+        // Paid status
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.PAID_OFF.name())) {
-            //如果开启了在线支付送积分并且订单状态为已付款且订单支付为在线付款 则送积分
+            // If online payment is enabled and the order status is paid and the order payment is online payment, points will be awarded
             if (pointSetting.getOnlinePay().equals(1) && orderDO.getPaymentType().equals(PaymentTypeEnum.ONLINE.name())) {
-                this.setPoint(1, pointSetting.getOnlinePayGradePoint(), 1, pointSetting.getOnlinePayConsumerPoint(), "在线支付送积分", orderDO.getMemberId());
+                this.setPoint(1, pointSetting.getOnlinePayGradePoint(), 1, pointSetting.getOnlinePayConsumerPoint(), "Pay online and send points", orderDO.getMemberId());
             }
         }
-        //已完成状态
+        // Completed state
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.COMPLETE.name())) {
-            //如果开启购买商品送积分并且为订单状态为已完成状态 则送积分
+            // Credits are awarded if the purchase is enabled and the order status is completed
             if (pointSetting.getBuyGoods().equals(1)) {
-                this.setPoint(1, Integer.parseInt(new java.text.DecimalFormat("0").format(CurrencyUtil.mul(pointSetting.getBuyGoodsGradePoint(), orderDO.getOrderPrice().intValue()))), 1, Integer.parseInt(new java.text.DecimalFormat("0").format(CurrencyUtil.mul(pointSetting.getBuyGoodsConsumerPoint(), orderDO.getOrderPrice().intValue()))), "购买商品送积分", orderDO.getMemberId());
+                this.setPoint(1, Integer.parseInt(new java.text.DecimalFormat("0").format(CurrencyUtil.mul(pointSetting.getBuyGoodsGradePoint(), orderDO.getOrderPrice().intValue()))), 1, Integer.parseInt(new java.text.DecimalFormat("0").format(CurrencyUtil.mul(pointSetting.getBuyGoodsConsumerPoint(), orderDO.getOrderPrice().intValue()))), "Give points for purchases", orderDO.getMemberId());
             }
         }
 
-        // 订单已收货 发放赠送积分
+        // The order has been received and distributed bonus points
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.ROG.name())) {
 
             String metaJson = this.orderMetaManager.getMetaValue(orderMessage.getOrderDO().getSn(), OrderMetaKeyEnum.GIFT_POINT);
@@ -152,20 +152,20 @@ public class MemberPointConsumer implements MemberLoginEvent, MemberRegisterEven
                 return;
             }
 
-            this.setPoint(1, 0, 1, new Integer(metaJson), "满赠优惠活动赠送", orderMessage.getOrderDO().getMemberId());
+            this.setPoint(1, 0, 1, new Integer(metaJson), "Full complimentary preferential activities free", orderMessage.getOrderDO().getMemberId());
 
         }
     }
 
     /**
-     * 对积分的操作
+     * Operations on integrals
      *
-     * @param gradePointType  等级积分类型 1为增加积分 ，如果等级积分为0的时候等级积分类型为0则为无操作，如果等级积分不为0的时候积分类型为0则为消费
-     * @param gradePoint      等级积分
-     * @param consumPointType 消费积分类型 1为增加积分 ，如果消费积分为0的时候消费积分型为0则为无操作，如果消费积分不为0的时候消费积分为0则为消费
-     * @param consumPoint     消费积分
-     * @param remark          备注
-     * @param memberId        会员id
+     * @param gradePointType  Grade integral type1To increase the integral, if the grade integral is zero0的时候Grade integral type为0Is no operation, if the grade integral is not0Is the integral type0For the consumer
+     * @param gradePoint      Level score
+     * @param consumPointType Consumption Credit type1To increase the credits, if the consumption credits are0Is the consumption integral type0Is no operation, if the consumption points are not0When the consumption points are0For the consumer
+     * @param consumPoint     consumption score
+     * @param remark          note
+     * @param memberId        membersid
      */
     private void setPoint(Integer gradePointType, Integer gradePoint, Integer consumPointType, Integer consumPoint, String remark, Integer memberId) {
 
@@ -180,14 +180,14 @@ public class MemberPointConsumer implements MemberLoginEvent, MemberRegisterEven
         memberPointHistory.setConsumPoint(consumPoint);
         memberPointHistory.setReason(remark);
         memberPointHistory.setMemberId(memberId);
-        memberPointHistory.setOperator("系统");
+        memberPointHistory.setOperator("system");
         memberClient.pointOperation(memberPointHistory);
     }
 
     @Override
     public void onTradeIntoDb(TradeVO tradeVO) {
 
-        //订单入库，扣减使用积分
+        // Order in storage, deduction of use points
         List<OrderDTO> orderList = tradeVO.getOrderList();
         for (OrderDTO orderDTO : orderList) {
             int consumerPoint = orderDTO.getPrice().getExchangePoint();
@@ -202,7 +202,7 @@ public class MemberPointConsumer implements MemberLoginEvent, MemberRegisterEven
             history.setGradePoint(0);
             history.setMemberId(orderDTO.getMemberId());
             history.setTime(DateUtil.getDateline());
-            history.setReason("创建订单，消费积分");
+            history.setReason("Create orders and spend points");
             history.setOperator(orderDTO.getMemberName());
             this.memberClient.pointOperation(history);
         }

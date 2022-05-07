@@ -16,64 +16,64 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 订单状态
+ * Status
  *
  * @author Snow
  * @version 1.0
  * @since v7.0.0
- * 2017年3月31日下午2:44:54
+ * 2017years3month31On the afternoon2:44:54
  */
 public enum OrderStatusEnum {
 
     /**
-     * 新订单
+     * The new orders
      */
-    NEW("新订单"),
+    NEW("The new orders"),
 
     /**
-     * 出库失败
+     * Outbound failure
      */
-    INTODB_ERROR("出库失败"),
+    INTODB_ERROR("Outbound failure"),
 
     /**
-     * 已确认
+     * Have been confirmed
      */
-    CONFIRM("已确认"),
+    CONFIRM("Have been confirmed"),
 
     /**
-     * 已付款
+     * Payment has been
      */
-    PAID_OFF("已付款"),
+    PAID_OFF("Payment has been"),
 
     /**
-     * 已成团
+     * Have to make
      */
-    FORMED("已经成团"),
+    FORMED("Have clouds"),
 
     /**
-     * 已发货
+     * Has been shipped
      */
-    SHIPPED("已发货"),
+    SHIPPED("Has been shipped"),
 
     /**
-     * 已收货
+     * Have the goods
      */
-    ROG("已收货"),
+    ROG("Have the goods"),
 
     /**
-     * 已完成
+     * Has been completed
      */
-    COMPLETE("已完成"),
+    COMPLETE("Has been completed"),
 
     /**
-     * 已取消
+     * Has been cancelled
      */
-    CANCELLED("已取消"),
+    CANCELLED("Has been cancelled"),
 
     /**
-     * 售后中
+     * In the after-sale
      */
-    AFTER_SERVICE("售后中");
+    AFTER_SERVICE("In the after-sale");
 
 
     private String description;

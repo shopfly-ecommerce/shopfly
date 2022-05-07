@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 支付方式实体
+ * Payment method entity
  *
  * @author fk
  * @version v2.0
@@ -43,64 +43,64 @@ public class PaymentMethodDO implements Serializable {
     private static final long serialVersionUID = 6216378920396390L;
 
     /**
-     * 支付方式id
+     * Method of paymentid
      */
     @Id(name = "method_id")
     @ApiModelProperty(hidden = true)
     private Integer methodId;
     /**
-     * 支付方式名称
+     * Name of Payment Method
      */
     @Column(name = "method_name")
-    @ApiModelProperty(name = "method_name", value = "支付方式名称", required = false)
+    @ApiModelProperty(name = "method_name", value = "Name of Payment Method", required = false)
     private String methodName;
     /**
-     * 支付插件名称
+     * Payment plug-in name
      */
     @Column(name = "plugin_id")
-    @ApiModelProperty(name = "plugin_id", value = "支付插件名称", required = false)
+    @ApiModelProperty(name = "plugin_id", value = "Payment plug-in name", required = false)
     private String pluginId;
     /**
-     * pc是否可用
+     * pcWhether the available
      */
     @Column(name = "pc_config")
-    @ApiModelProperty(name = "pc_config", value = "pc是否可用", required = false)
+    @ApiModelProperty(name = "pc_config", value = "pcWhether the available", required = false)
     private String pcConfig;
     /**
-     * wap是否可用
+     * wapWhether the available
      */
     @Column(name = "wap_config")
-    @ApiModelProperty(name = "wap_config", value = "wap是否可用", required = false)
+    @ApiModelProperty(name = "wap_config", value = "wapWhether the available", required = false)
     private String wapConfig;
     /**
-     * app 原生是否可用
+     * app Whether native is available
      */
     @Column(name = "app_native_config")
-    @ApiModelProperty(name = "app_native_config", value = "app 原生是否可用", required = false)
+    @ApiModelProperty(name = "app_native_config", value = "app Whether native is available", required = false)
     private String appNativeConfig;
     /**
-     * 支付方式图片
+     * Picture of payment method
      */
     @Column(name = "image")
-    @ApiModelProperty(name = "image", value = "支付方式图片", required = false)
+    @ApiModelProperty(name = "image", value = "Picture of payment method", required = false)
     private String image;
     /**
-     * 是否支持原路退回
+     * Whether to support the original way back
      */
     @Column(name = "is_retrace")
-    @ApiModelProperty(name = "is_retrace", value = "是否支持原路退回", required = false)
+    @ApiModelProperty(name = "is_retrace", value = "Whether to support the original way back", required = false)
     private Integer isRetrace;
     /**
-     * app RN是否可用
+     * app RNWhether the available
      */
     @Column(name = "app_react_config")
-    @ApiModelProperty(name = "app_react_config", value = "app RN是否可用", required = false)
+    @ApiModelProperty(name = "app_react_config", value = "app RNWhether the available", required = false)
     private String appReactConfig;
     /**
-     * 小程序是否可用
+     * Whether applets are available
      */
     @Column(name = "mini_config")
-    @ApiModelProperty(name = "mini_config", value = "pc是否可用", required = false)
+    @ApiModelProperty(name = "mini_config", value = "pcWhether the available", required = false)
     private String miniConfig;
 
     @PrimaryKeyField

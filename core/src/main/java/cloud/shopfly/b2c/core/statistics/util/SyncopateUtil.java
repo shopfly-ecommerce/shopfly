@@ -22,17 +22,17 @@ import cloud.shopfly.b2c.framework.util.StringUtil;
 import java.time.LocalDate;
 
 /**
- * 年份查询sql工具
+ * Year of the querysqltool
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-02 下午8:23
+ * 2018-05-02 In the afternoon8:23
  */
 public class SyncopateUtil {
 
     /**
-     * 需要替换年份的 表名称
+     * The name of the table for which the year needs to be replaced
      */
     private static String[] table = {
             "es_sss_order_data",
@@ -43,9 +43,9 @@ public class SyncopateUtil {
 
 
     /**
-     * sql 处理
+     * sql To deal with
      *
-     * @param year 搜索年份
+     * @param year Search for the year
      * @param sql  sql
      * @return
      */
@@ -55,17 +55,17 @@ public class SyncopateUtil {
             return "";
         }
         sql = sql.toLowerCase();
-        //sql处理
+        // SQL processing
         sql = replaceTable(sql, year);
         return sql;
     }
 
 
     /**
-     * 替换表。
+     * Replace the table.
      *
-     * @param sql  查询语句
-     * @param year 年
+     * @param sql  The query
+     * @param year years
      * @return
      */
     private static String replaceTable(String sql, Integer year) {
@@ -77,7 +77,7 @@ public class SyncopateUtil {
 
 
     /**
-     * 创建对应年份的表
+     * Create tables for corresponding years
      *
      * @param year
      * @param daoSupport
@@ -89,7 +89,7 @@ public class SyncopateUtil {
     }
 
     /**
-     * 切分表
+     * Segmentation table
      *
      * @param year
      * @param daoSupport
@@ -109,7 +109,7 @@ public class SyncopateUtil {
     }
 
     /**
-     * 数据全局初始化
+     * Data is initialized globally
      *
      * @param daoSupport
      */
@@ -117,7 +117,7 @@ public class SyncopateUtil {
         for (int i = 2015; i < LocalDate.now().getYear(); i++) {
             drop(i, daoSupport);
             Long[] year = DateUtil.getYearTime(i);
-//          如果有数据，进行初始化
+//          If there is data, initialize it
             int count = daoSupport.queryForInt("select count(0) from es_sss_order_data where create_time > ? and  create_time <  ?", year[0], year[1]);
             if (count > 0) {
                 SyncopateUtil.syncopateTable(i, daoSupport);
@@ -126,7 +126,7 @@ public class SyncopateUtil {
     }
 
     /**
-     * 创建当前
+     * To create the current
      *
      * @param daoSupport
      */
@@ -136,7 +136,7 @@ public class SyncopateUtil {
     }
 
     /**
-     * 删除表
+     * Delete table
      *
      * @param year
      * @param daoSupport

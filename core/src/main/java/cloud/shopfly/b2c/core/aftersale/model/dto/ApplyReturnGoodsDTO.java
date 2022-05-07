@@ -23,24 +23,24 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 申请退货商品DTO
+ * Applying for returning GoodsDTO
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午10:29 2018/5/2
+ * @since v7.0 In the morning10:29 2018/5/2
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ApplyReturnGoodsDTO implements Serializable {
 
     private static final long serialVersionUID = -9006487940153781080L;
-    @ApiModelProperty(value = "商品id", name = "good_id")
+    @ApiModelProperty(value = "productid", name = "good_id")
     private Integer goodId;
 
-    @ApiModelProperty(value = "产品id", name = "sku_id")
+    @ApiModelProperty(value = "productid", name = "sku_id")
     private Integer skuId;
 
-    @ApiModelProperty(value = "退货数量", name = "return_num")
+    @ApiModelProperty(value = "Returns the number of", name = "return_num")
     private Integer returnNum;
 
     public Integer getGoodId() {

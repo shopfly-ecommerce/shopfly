@@ -22,11 +22,11 @@ import javax.servlet.http.HttpServletResponse;
  
 
 /**
- *  用ThreadLocal来存储Session,以便实现Session any where 
+ *  withThreadLocalTo storeSession,In order to achieveSession any where 
  * @author kingapex
- * <p>2009-12-17 下午03:10:09</p>
+ * <p>2009-12-17 In the afternoon03:10:09</p>
  * @version 1.1
- * 新增request any where
+ * newrequest any where
  */
 public class ThreadContextHolder  {
 

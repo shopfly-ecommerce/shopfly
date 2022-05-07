@@ -25,12 +25,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 商品详情页使用
+ * Product details page use
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月29日 上午9:54:05
+ * 2018years3month29The morning of9:54:05
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -40,40 +40,40 @@ public class GoodsShowDetail extends CacheGoods implements Serializable {
      *
      */
     private static final long serialVersionUID = 3531885212488390703L;
-    @ApiModelProperty(name = "分类名称")
+    @ApiModelProperty(name = "name")
     private String categoryName;
 
-    @ApiModelProperty(name = "是否下架或删除，1正常  0 下架或删除")
+    @ApiModelProperty(name = "Whether to remove or delete,1normal0 Removed or deleted")
     private Integer goodsOff;
 
-    @ApiModelProperty(name = "商品参数")
+    @ApiModelProperty(name = "Product parameters")
     private List<GoodsParamsGroupVO> paramList;
 
-    @ApiModelProperty(name = "商品相册")
+    @ApiModelProperty(name = "Photo album")
     private List<GoodsGalleryDO> galleryList;
 
-    @ApiModelProperty(name = "商品好平率")
+    @ApiModelProperty(name = "Goods have a good flat rate")
     private Double grade;
     /**
-     * seo标题
+     * seo title
      */
-    @ApiModelProperty(name = "page_title", value = "seo标题", required = false)
+    @ApiModelProperty(name = "page_title", value = "seo title", required = false)
     private String pageTitle;
     /**
-     * seo关键字
+     * seokeyword
      */
-    @ApiModelProperty(name = "meta_keywords", value = "seo关键字", required = false)
+    @ApiModelProperty(name = "meta_keywords", value = "seokeyword", required = false)
     private String metaKeywords;
     /**
-     * seo描述
+     * seo describe
      */
-    @ApiModelProperty(name = "meta_description", value = "seo描述", required = false)
+    @ApiModelProperty(name = "meta_description", value = "seo describe", required = false)
     private String metaDescription;
 
     /**
-     * 谁承担运费0：买家承担，1：卖家承担
+     * Who bears the freight0：The buyer bears,1：The seller bear
      */
-    @ApiModelProperty(name = "goods_transfee_charge", value = "谁承担运费0：买家承担，1：卖家承担")
+    @ApiModelProperty(name = "goods_transfee_charge", value = "Who bears the freight0：The buyer bears,1：The seller bear")
     private Integer goodsTransfeeCharge;
 
     @Override

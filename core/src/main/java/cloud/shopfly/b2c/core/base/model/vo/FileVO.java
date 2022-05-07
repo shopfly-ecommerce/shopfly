@@ -20,22 +20,22 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 
- * 文件上传返回值封装
+ * File upload return value encapsulation
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月19日 下午4:42:51
+ * 2018years3month19On the afternoon4:42:51
  */
 @ApiModel
 public class FileVO {
-	/** 文件名称 */
-	@ApiModelProperty(name="name",value="文件名称",required=true)
+	/** The file name*/
+	@ApiModelProperty(name="name",value="The file name",required=true)
 	private String name;
-	/** 文件后缀 */
-	@ApiModelProperty(name="ext",value="文件后缀",required=true)
+	/** The file suffix*/
+	@ApiModelProperty(name="ext",value="The file suffix",required=true)
 	private String ext;
 	/** url */
-	@ApiModelProperty(name="url",value="图片地址",required=true)
+	@ApiModelProperty(name="url",value="Picture address",required=true)
 	private String url;
 
 

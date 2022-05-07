@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 参数组业务层
+ * Parameter group business layer
  * 
  * @author fk
  * @version v2.0
@@ -31,55 +31,55 @@ import java.util.List;
 public interface ParameterGroupManager {
 
 	/**
-	 * 查询参数组列表
+	 * Example Query the parameter group list
 	 * 
 	 * @param page
-	 *            页码
+	 *            The page number
 	 * @param pageSize
-	 *            每页数量
+	 *            Number each page
 	 * @return Page
 	 */
 	Page list(int page, int pageSize);
 
 	/**
-	 * 添加参数组
+	 * Add parameter group
 	 * 
 	 * @param parameterGroup
-	 *            参数组
-	 * @return ParameterGroup 参数组
+	 *            Parameter set
+	 * @return ParameterGroup Parameter set
 	 */
 	ParameterGroupDO add(ParameterGroupDO parameterGroup);
 
 	/**
-	 * 修改参数组
+	 * Modify parameter set
 	 * 
 	 * @param groupName
-	 *            参数组
+	 *            Parameter set
 	 * @param id
-	 *            参数组主键
-	 * @return ParameterGroup 参数组
+	 *            Parameter group primary key
+	 * @return ParameterGroup Parameter set
 	 */
 	ParameterGroupDO edit(String groupName, Integer id);
 
 	/**
-	 * 删除参数组
+	 * Delete parameter set
 	 * 
 	 * @param id
-	 *            参数组主键
+	 *            Parameter group primary key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取参数组
+	 * Get parameter set
 	 * 
 	 * @param id
-	 *            参数组主键
-	 * @return ParameterGroup 参数组
+	 *            Parameter group primary key
+	 * @return ParameterGroup Parameter set
 	 */
 	ParameterGroupDO getModel(Integer id);
 
 	/**
-	 * 查询分类关联的参数组，包括参数
+	 * Example Query the parameter groups associated with a category, including parameters
 	 * 
 	 * @param categoryId
 	 * @return
@@ -87,11 +87,11 @@ public interface ParameterGroupManager {
 	List<ParameterGroupVO> getParamsByCategory(Integer categoryId);
 
 	/**
-	 * 参数组上移或者下移
+	 * The parameter group moves up or down
 	 * 
 	 * @param groupId
 	 * @param sortType
-	 *            上移 up，下移down
+	 *             upupMove down,down
 	 */
 	void groupSort(Integer groupId, String sortType);
 

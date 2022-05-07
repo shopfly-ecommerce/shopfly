@@ -20,7 +20,7 @@ import java.util.Map;
 
 
 /**
- * 快递平台实体
+ * Express platform entity
  *
  * @author zh
  * @version v7.0.0
@@ -31,15 +31,15 @@ import java.util.Map;
 public class ExpressDetailVO {
 
     /**
-     * 快递名称
+     * Courier name
      */
     private String name;
     /**
-     * 快递单号
+     * Courier number
      */
     private String courierNum;
     /**
-     * 物流详细信息
+     * Logistics Details
      */
     private List data;
 

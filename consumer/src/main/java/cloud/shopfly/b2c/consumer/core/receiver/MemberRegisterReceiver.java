@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 会员注册消费者
+ * Member registered consumer
  *
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:31:20
+ * @since v7.0.0 2018years3month23The morning of10:31:20
  */
 @Component
 public class MemberRegisterReceiver {
@@ -46,7 +46,7 @@ public class MemberRegisterReceiver {
     private List<MemberRegisterEvent> events;
 
     /**
-     * 会员注册
+     * Registered members
      *
      * @param vo
      */
@@ -61,7 +61,7 @@ public class MemberRegisterReceiver {
                 try {
                     event.memberRegister(vo);
                 } catch (Exception e) {
-                    logger.error("会员注册消息出错", e);
+                    logger.error("Member registration message error", e);
                 }
             }
         }

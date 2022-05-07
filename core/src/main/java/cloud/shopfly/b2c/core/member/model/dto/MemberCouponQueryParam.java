@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 会员优惠券查询参数
+ * Membership coupon query parameters
  *
  * @author Snow create in 2018/6/12
  * @version v2.0
@@ -28,19 +28,19 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class MemberCouponQueryParam {
 
-    @ApiModelProperty(value = "页码", name = "page_no")
+    @ApiModelProperty(value = "The page number", name = "page_no")
     private Integer pageNo;
 
-    @ApiModelProperty(value = "条数", name = "page_size")
+    @ApiModelProperty(value = "A number of", name = "page_size")
     private Integer pageSize;
 
-    @ApiModelProperty(value = "优惠券状态 0为全部，1为未使用，2为已使用，3为已过期", allowableValues = "0,1,2")
+    @ApiModelProperty(value = "Coupon status0For all,1Is not used,2Is used,3Overdue for", allowableValues = "0,1,2")
     private Integer status;
 
     /**
-     * 此项为订单结算页，根据订单金额读取会员可用的优惠券
+     * This is the order settlement page, which reads the coupons available to members according to the order amount
      */
-    @ApiModelProperty(value = "订单总金额", name = "order_price")
+    @ApiModelProperty(value = "Total order amount", name = "order_price")
     private Double orderPrice;
 
 

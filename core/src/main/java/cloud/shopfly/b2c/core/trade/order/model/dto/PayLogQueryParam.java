@@ -22,7 +22,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 付款单查询参数
+ * Payment order query parameters
  *
  * @author Snow create in 2018/7/18
  * @version v2.0
@@ -31,31 +31,31 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PayLogQueryParam {
 
-    @ApiModelProperty(name = "page_no", value = "第几页")
+    @ApiModelProperty(name = "page_no", value = "What page")
     private Integer pageNo;
 
-    @ApiModelProperty(name = "page_size", value = "每页条数")
+    @ApiModelProperty(name = "page_size", value = "Number each page")
     private Integer pageSize;
 
-    @ApiModelProperty(name = "pay_way", value = "支付方式")
+    @ApiModelProperty(name = "pay_way", value = "Method of payment")
     private String payWay;
 
-    @ApiModelProperty(name = "start_time", value = "开始时间")
+    @ApiModelProperty(name = "start_time", value = "The start time")
     private Long startTime;
 
-    @ApiModelProperty(name = "end_time", value = "截止时间")
+    @ApiModelProperty(name = "end_time", value = "By the time")
     private Long endTime;
 
-    @ApiModelProperty(name = "order_sn", value = "订单编号")
+    @ApiModelProperty(name = "order_sn", value = "Order no.")
     private String orderSn;
 
-    @ApiModelProperty(name = "member_name", value = "付款会员名")
+    @ApiModelProperty(name = "member_name", value = "Paying Member name")
     private String memberName;
 
-    @ApiModelProperty(name = "payment_type", value = "付款方式", allowableValues = "ONLINE,COD")
+    @ApiModelProperty(name = "payment_type", value = "Payment method", allowableValues = "ONLINE,COD")
     private String paymentType;
 
-    @ApiModelProperty(name = "pay_status", value = "支付状态", allowableValues = "PAY_YES,PAY_NO")
+    @ApiModelProperty(name = "pay_status", value = "Payment status", allowableValues = "PAY_YES,PAY_NO")
     private String payStatus;
 
 

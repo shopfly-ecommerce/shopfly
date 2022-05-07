@@ -21,7 +21,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标识为数据库的字段
+ * A field identified as a database
  * @author Snow
  */
 @Target(ElementType.FIELD) 

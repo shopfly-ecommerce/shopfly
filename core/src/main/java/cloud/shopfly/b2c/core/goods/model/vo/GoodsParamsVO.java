@@ -24,12 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 商品关联参数的VO
+ * Of commodity association parametersVO
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月26日 下午4:28:17
+ * 2018years3month26On the afternoon4:28:17
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -37,21 +37,21 @@ public class GoodsParamsVO extends GoodsParamsDO {
 
     private static final long serialVersionUID = -4904700751774005326L;
 
-    @ApiModelProperty("1 输入项   2 选择项")
+    @ApiModelProperty("1 Input item2 Select item")
     @Column(name = "param_type")
     private Integer paramType;
 
-    @ApiModelProperty(" 选择项的内容获取值，使用optionList")
+    @ApiModelProperty(" Select the content of the item to get the value, usingoptionList")
     private String options;
 
-    @ApiModelProperty("是否必填是  1    否   0")
+    @ApiModelProperty("Mandatory Yes1    no0")
     private Integer required;
 
-    @ApiModelProperty("参数组id")
+    @ApiModelProperty("Parameter setid")
     @Column(name = "group_id")
     private Integer groupId;
 
-    @ApiModelProperty("是否可索引  1 可以   0不可以")
+    @ApiModelProperty("Indexable or not1 can0不can")
     @Column(name = "is_index")
     private Integer isIndex;
 

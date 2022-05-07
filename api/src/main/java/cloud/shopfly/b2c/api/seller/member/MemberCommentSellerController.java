@@ -34,7 +34,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 评论控制器
+ * Comment controller
  *
  * @author fk
  * @version v1.0
@@ -43,7 +43,7 @@ import javax.validation.constraints.NotEmpty;
  */
 @RestController
 @RequestMapping("/seller/members/comments")
-@Api(description = "评论相关API")
+@Api(description = "Review relatedAPI")
 @Validated
 public class MemberCommentSellerController {
 
@@ -53,10 +53,10 @@ public class MemberCommentSellerController {
     private CommentReplyManager commentReplyManager;
 
 
-    @ApiOperation(value = "查询评论列表", response = CommentVO.class)
+    @ApiOperation(value = "Querying the Comment list", response = CommentVO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, CommentQueryParam param) {
@@ -65,21 +65,21 @@ public class MemberCommentSellerController {
         return this.memberCommentManager.list(param);
     }
 
-    @ApiOperation(value = "回复评论", notes = "商家回复")
+    @ApiOperation(value = "Reply to comment", notes = "Business reply")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "comment_id", value = "评论id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "reply", value = "商家回复内容", required = true, dataType = "String", paramType = "query")})
+            @ApiImplicitParam(name = "comment_id", value = "commentsid", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "reply", value = "Reply content of merchants", required = true, dataType = "String", paramType = "query")})
     @PostMapping(value = "/{comment_id}/reply")
-    public CommentReply replyComment(@PathVariable(name = "comment_id") Integer commentId, @NotEmpty(message = "回复内容不能为空") String reply) {
+    public CommentReply replyComment(@PathVariable(name = "comment_id") Integer commentId, @NotEmpty(message = "The reply cannot be empty") String reply) {
 
         CommentReply commentReply = this.commentReplyManager.replyComment(commentId, reply, Permission.ADMIN);
 
         return commentReply;
     }
 
-    @ApiOperation(value = "删除评论")
+    @ApiOperation(value = "Delete the comment")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "comment_id", value = "评论id", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "comment_id", value = "commentsid", required = true, dataType = "int", paramType = "path"),
     })
     @DeleteMapping(value = "/{comment_id}")
     public String deleteComment(@PathVariable(name = "comment_id") Integer commentId) {

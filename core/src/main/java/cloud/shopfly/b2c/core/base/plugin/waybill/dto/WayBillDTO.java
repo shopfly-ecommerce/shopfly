@@ -16,21 +16,21 @@
 package cloud.shopfly.b2c.core.base.plugin.waybill.dto;
 
 /**
- * 电子面单dto
+ * Electronic surface singledto
  *
  * @author zh
  * @version v7.0
- * @date 18/6/11 下午5:03
+ * @date 18/6/11 In the afternoon5:03
  * @since v7.0
  */
 
 public class WayBillDTO {
     /**
-     * 电子面单模板
+     * Electronic surface single template
      */
     private String template;
     /**
-     * 物流公司编码
+     * Logistics Company code
      */
     private String code;
 

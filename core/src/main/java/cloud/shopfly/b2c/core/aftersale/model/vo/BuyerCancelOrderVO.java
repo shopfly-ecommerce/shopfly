@@ -24,47 +24,47 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
- * 退款申请VO
+ * Refund applicationVO
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午10:33 2018/5/2
+ * @since v7.0 In the morning10:33 2018/5/2
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class BuyerCancelOrderVO implements Serializable {
 
     private static final long serialVersionUID = 758087208773569549L;
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = true)
-    @NotBlank(message = "订单编号必填")
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = true)
+    @NotBlank(message = "Order number Is mandatory")
     private String orderSn;
 
-    @ApiModelProperty(name = "refund_reason", value = "退款原因", required = true)
-    @NotBlank(message = "退款原因必填")
+    @ApiModelProperty(name = "refund_reason", value = "A refund reason", required = true)
+    @NotBlank(message = "Refund reason must be filled in")
     private String refundReason;
 
-    @ApiModelProperty(name = "account_type", value = "账号类型 支付宝:ALIPAY, 微信:WEIXINPAY, 银行转账:BANKTRANSFER", allowableValues = "ALIPAY,WEIXINPAY,BANKTRANSFER")
+    @ApiModelProperty(name = "account_type", value = "Account type Alipay:ALIPAY, WeChat:WEIXINPAY, Bank transfer:BANKTRANSFER", allowableValues = "ALIPAY,WEIXINPAY,BANKTRANSFER")
     private String accountType;
 
-    @ApiModelProperty(name = "return_account", value = "退款账号", required = false)
+    @ApiModelProperty(name = "return_account", value = "Refund account", required = false)
     private String returnAccount;
 
-    @ApiModelProperty(name = "customer_remark", value = "客户备注", required = false)
+    @ApiModelProperty(name = "customer_remark", value = "Customer remarks", required = false)
     private String customerRemark;
 
-    @ApiModelProperty(name = "bank_name", value = "银行名称", required = false)
+    @ApiModelProperty(name = "bank_name", value = "Bank name", required = false)
     private String bankName;
 
-    @ApiModelProperty(name = "bank_account_number", value = "银行账号", required = false)
+    @ApiModelProperty(name = "bank_account_number", value = "The bank account", required = false)
     private String bankAccountNumber;
 
-    @ApiModelProperty(name = "bank_account_name", value = "银行开户名", required = false)
+    @ApiModelProperty(name = "bank_account_name", value = "Bank account name", required = false)
     private String bankAccountName;
 
-    @ApiModelProperty(name = "bank_deposit_name", value = "银行开户行", required = false)
+    @ApiModelProperty(name = "bank_deposit_name", value = "Bank opening bank", required = false)
     private String bankDepositName;
 
-    @ApiModelProperty(name = "refund_sn", value = "退款单号", required = false, hidden = true)
+    @ApiModelProperty(name = "refund_sn", value = "The refund number", required = false, hidden = true)
     private String refundSn;
 
     public String getOrderSn() {

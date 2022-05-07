@@ -16,24 +16,24 @@
 package cloud.shopfly.b2c.core.member.model.dto;
 
 /**
- * 会员数据附属数据统计
+ * Affiliate data statistics
  *
  * @author zh
  * @version v7.0
- * @date 18/6/13 下午3:07
+ * @date 18/6/13 In the afternoon3:07
  * @since v7.0
  */
 public class MemberStatisticsDTO {
     /**
-     * 订单数
+     * orders
      */
     private Integer orderCount;
     /**
-     * 商品收藏数
+     * Commodity collection
      */
     private Integer goodsCollectCount;
     /**
-     * 待评论数
+     * For comments
      */
     private Integer pendingCommentCount;
 

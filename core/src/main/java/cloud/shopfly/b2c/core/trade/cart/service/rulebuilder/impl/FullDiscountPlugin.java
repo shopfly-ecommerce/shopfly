@@ -42,7 +42,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2018/12/12.
- * 满优惠插件
+ * Full discount plug-in
  *
  * @author kingapex
  * @version v2.0
@@ -61,34 +61,34 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
     public PromotionRule build(CartVO cart, PromotionVO promotionVO) {
 
 
-        //建立一个应用在购物车的规则
+        // Create a rule that applies to the shopping cart
         PromotionRule rule = new PromotionRule(PromotionTarget.CART);
 
 
         FullDiscountVO fullDiscountVO = promotionVO.getFullDiscountVO();
 
-        //计算购物车的总价
+        // Calculate the total price of the shopping cart
         double totalPrice = this.countTotalPrice(cart, fullDiscountVO);
 
-        //达到满减的门槛
+        // Reach the threshold of full reduction
         if (fullDiscountVO.getFullMoney() != null && fullDiscountVO.getFullMoney() <= totalPrice) {
 
-            //满减
+            // Full reduction
             this.manJian(fullDiscountVO, rule);
 
-            //满折
+            // Full fold
             this.manZhe(totalPrice, fullDiscountVO, rule);
 
-            //免运费
+            // Free shipping
             this.freeShip(fullDiscountVO, rule);
 
-            //送赠品
+            // To send gift
             this.giveGift(fullDiscountVO, rule);
 
-            //送优惠券
+            // To send a coupon
             this.giveCoupon(fullDiscountVO, rule);
 
-            //送积分
+            // Award points
             this.givePoint(fullDiscountVO, rule);
 
             setTag(fullDiscountVO.getFdId(), cart, fullDiscountVO.getFullMoney(), true);
@@ -96,12 +96,12 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
 
         } else {
 
-            //没有达到门槛购物车也是要设置的，以便提示用户此商品是参与活动的
+            // The shopping cart that does not meet the threshold is also set up to prompt the user that the item is participating
             if (cart.getCartType().equals(CartType.CART)) {
                 setTag(fullDiscountVO.getFdId(), cart, fullDiscountVO.getFullMoney(), false);
             }
 
-            //如果没有达到满减则设置为已失效
+            // If the full decrement is not reached, set to expired
             rule.setInvalid(true);
         }
 
@@ -114,20 +114,20 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
 
         DecimalFormat df = new DecimalFormat("#.00");
         cartVO.getSkuList().forEach(cartSkuVO -> {
-            //有满减活动，虽然没达到门槛也要显示tag
-            //如果是积分商品，则不能显示
+            // There is a full subtraction activity, even if the threshold is not reached to display the tag
+            // If it is an integral item, it cannot be displayed
             if (cartSkuVO.getGroupList().size() != 0 && !GoodsType.POINT.name().equals(cartSkuVO.getGoodsType())) {
 
                 cartSkuVO.getGroupList().forEach(cartPromotionVo -> {
                     if (cartPromotionVo.getActivityId().equals(activeId)) {
 
-                        //达到门槛了，则选中
+                        // If the threshold is reached, it is selected
                         if (enable) {
                             cartPromotionVo.setIsCheck(1);
                         }
-                        //cart不管有没有达到门槛，都要显示标签,checkout则要达到门槛才显示
+                        // Cart displays the tag whether or not it reaches the threshold, while Checkout does not display it until it reaches the threshold
                         if (cartVO.getCartType().equals(CartType.CART) || enable) {
-                            cartSkuVO.getPromotionTags().add("满" + df.format(fullMoney) + "优惠");
+                            cartSkuVO.getPromotionTags().add("full" + df.format(fullMoney) + "preferential");
                         }
 
                     }
@@ -147,23 +147,23 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
 
 
     /**
-     * 满减
+     * Full reduction
      *
      * @param fullDiscountVO
      * @param rule
      */
     private void manJian(FullDiscountVO fullDiscountVO, PromotionRule rule) {
-        //满减优惠计算
+        // Discount for full reduction
         if (fullDiscountVO.getIsFullMinus() != null && fullDiscountVO.getIsFullMinus() == 1 && fullDiscountVO.getMinusValue() != null) {
-            //设置规则要减掉的金额
+            // Set the amount of the rule to subtract
             rule.setReducedTotalPrice(fullDiscountVO.getMinusValue());
-            rule.setTips("减" + fullDiscountVO.getMinusValue() + "元");
+            rule.setTips("Reduction of" + fullDiscountVO.getMinusValue() + "USD");
         }
     }
 
 
     /**
-     * 满折
+     * Full fold
      *
      * @param totalPrice
      * @param fullDiscountVO
@@ -171,22 +171,22 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
      */
     private void manZhe(double totalPrice, FullDiscountVO fullDiscountVO, PromotionRule rule) {
 
-        //满折优惠计算
+        // Full discount discount calculation
         if (fullDiscountVO.getIsDiscount() != null && fullDiscountVO.getIsDiscount() == 1 && fullDiscountVO.getDiscountValue() != null) {
 
-            //处理折扣比：不能大于10，再用10减就为要减掉的折扣比
+            // Discount ratio: no more than 10, then use 10 to subtract the discount ratio to be deducted
             double discountValue = fullDiscountVO.getDiscountValue();
             discountValue = discountValue > 10 ? 10 : discountValue;
             discountValue = 10 - discountValue;
-            //计算折扣比
+            // Calculate discount ratio
             double discount = CurrencyUtil.mul(discountValue, 0.1);
 
-            //算出要减多少钱
+            // Figure out how much youre going to take off
             double reducedPrice = CurrencyUtil.mul(totalPrice, discount);
 
-            //设置规则要减掉的金额
+            // Set the amount of the rule to subtract
             rule.setReducedTotalPrice(reducedPrice);
-            rule.setTips("折后减" + reducedPrice + "元");
+            rule.setTips("After the fold reduction" + reducedPrice + "USD");
 
 
         }
@@ -202,41 +202,41 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
 
 
     /**
-     * 免运费
+     * Free shipping
      *
      * @param fullDiscountVO
      * @param rule
      */
     private void freeShip(FullDiscountVO fullDiscountVO, PromotionRule rule) {
-        ///免运费优惠计算
+        // / Free shipping discount
         if (fullDiscountVO.getIsFreeShip() != null && fullDiscountVO.getIsFreeShip() == 1) {
             rule.setFreeShipping(true);
-            rule.setTips("免运费");
+            rule.setTips("Free shipping");
 
         }
     }
 
 
     /**
-     * 送赠品
+     * To send gift
      *
      * @param fullDiscountVO
      * @param rule
      */
     private void giveGift(FullDiscountVO fullDiscountVO, PromotionRule rule) {
-        //判断是否赠送赠品
+        // Judge whether to give gifts
         if (fullDiscountVO.getIsSendGift() != null && fullDiscountVO.getIsSendGift() == 1 && fullDiscountVO.getGiftId() != null) {
             FullDiscountGiftDO giftDO = fullDiscountGiftManager.getModel(fullDiscountVO.getGiftId());
 
-            //可用库存大于0才显示
+            // Available inventory is displayed only when greater than 0
             if (giftDO.getEnableStore() > 0) {
 
                 rule.setGoodsGift(giftDO);
-                rule.setTips("送赠品[" + giftDO.getGiftName() + "]");
+                rule.setTips("To send gift[" + giftDO.getGiftName() + "]");
             } else {
-                giftDO.setGiftName(giftDO.getGiftName() + "(赠品已送完)");
+                giftDO.setGiftName(giftDO.getGiftName() + "(The freebies have been given away)");
                 rule.setGoodsGift(giftDO);
-                rule.setTips("赠品已送完");
+                rule.setTips("The freebies have been given away");
             }
 
         }
@@ -244,30 +244,30 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
 
 
     /**
-     * 送积分
+     * Award points
      *
      * @param fullDiscountVO
      * @param rule
      */
     private void givePoint(FullDiscountVO fullDiscountVO, PromotionRule rule) {
 
-        //判断是否赠送积分
+        // Judge whether to give points
         if (fullDiscountVO.getIsSendPoint() != null && fullDiscountVO.getIsSendPoint() == 1 && fullDiscountVO.getPointValue() != null) {
             rule.setPointGift(fullDiscountVO.getPointValue());
-            rule.setTips("送积分[" + fullDiscountVO.getPointValue() + "]");
+            rule.setTips("Award points[" + fullDiscountVO.getPointValue() + "]");
 
         }
     }
 
 
     /**
-     * 送优惠券
+     * To send a coupon
      *
      * @param fullDiscountVO
      * @param rule
      */
     private void giveCoupon(FullDiscountVO fullDiscountVO, PromotionRule rule) {
-        //判断是否赠品优惠券
+        // Determine whether gift coupons are available
         if (fullDiscountVO.getIsSendBonus() != null && fullDiscountVO.getIsSendBonus() == 1 && fullDiscountVO.getBonusId() != null) {
 
             CouponDO couponDO = this.couponManager.getModel(fullDiscountVO.getBonusId());
@@ -277,15 +277,15 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
             couponVO.setUseTerm(couponDO.getTitle());
             couponVO.setAmount(couponDO.getCouponPrice());
             couponVO.setCouponThresholdPrice(couponDO.getCouponThresholdPrice());
-            //剩余可领取数量大于0,显示赠送优惠券,否则不显示
+            // If the remaining available quantity is greater than 0, the free coupon will be displayed. Otherwise, it will not be displayed
             if (CurrencyUtil.sub(couponDO.getCreateNum(), couponDO.getReceivedNum()) <= 0) {
-                couponVO.setErrorMsg("(优惠券已送完)");
+                couponVO.setErrorMsg("(Coupons have been delivered)");
                 rule.setCouponGift(couponVO);
-                rule.setTips("优惠券[" + couponVO.getUseTerm() + "，减" + couponVO.getAmount() + "]已送完");
+                rule.setTips("coupons[" + couponVO.getUseTerm() + "," + couponVO.getAmount() + "]Has been sent out");
             } else {
                 fullDiscountVO.setCouponDO(couponDO);
                 rule.setCouponGift(couponVO);
-                rule.setTips("送优惠券[" + couponVO.getUseTerm() + "，减" + couponVO.getAmount() + "]");
+                rule.setTips("To send a coupon[" + couponVO.getUseTerm() + "," + couponVO.getAmount() + "]");
 
             }
         }
@@ -293,10 +293,10 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
 
 
     /**
-     * 合计购物车的总价
+     * Add up the total price of the shopping cart
      *
-     * @param cart 某个购物车
-     * @return 购物车的总价
+     * @param cart A shopping cart
+     * @return Total price of shopping cart
      */
     private double countTotalPrice(CartDO cart, FullDiscountVO fullDiscountVO) {
 
@@ -309,8 +309,8 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
                 continue;
             }
 
-            //积分商品不参加其它活动
-            //参考需求：http://doc.javamall.com.cn/current/demand/xu-qiu-shuo-ming/cu-xiao.html#重叠关系说明
+            // Bonus items do not participate in other activities
+            // Reference: http://doc.javamall.com.cn/current/demand/xu-qiu-shuo-ming/cu-xiao.html# overlapping relationship
             if (GoodsType.POINT.name().equals(skuVO.getGoodsType())) {
                 continue;
             }
@@ -319,9 +319,9 @@ public class FullDiscountPlugin implements CartPromotionRuleBuilder {
                 continue;
             }
 
-            //合计小计，就是总价
-            //废弃：最原始的总价，不能用成交价来计算门槛，因为可能被别的活动改变了
-            //新：需求是先计算第二件半价，单品立减后计算满折
+            // The total is the total price
+            // Abandoned: the most original total price, cannot use clinch a deal price to calculate threshold, because may be changed by other activities
+            // New: the demand is to calculate the second half price first, and calculate the full fold after the immediate reduction of the single item
             double subTotal = skuVO.getSubtotal();
             PromotionRule rule = skuVO.getRule();
             double reducedTotalPrice = 0.0;

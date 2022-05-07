@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.system.model.vo.RateAreaVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 区域相关接口
+ * Area dependent interface
  * @author cs
  * @version v7.0.0
  * @since v7.0.0
@@ -30,7 +30,7 @@ public interface RateAreaManager {
 
 
 	/**
-	 * 区域列表
+	 * The regional list
 	 * @param name
 	 * @param pageNo
 	 * @param pageSize
@@ -39,7 +39,7 @@ public interface RateAreaManager {
 	Page list(String name, Integer pageNo, Integer pageSize);
 
 	/**
-	 * 新增区域
+	 * The new area
 	 * @param rateAreaVO
 	 * @return
 	 */
@@ -47,20 +47,20 @@ public interface RateAreaManager {
 
 
 	/**
-	 * 修改区域
+	 * Modify the area
 	 * @param rateAreaVO
 	 * @return
 	 */
 	RateAreaDO edit(RateAreaVO rateAreaVO);
 
 	/**
-	 * 删除区域
+	 * Delete the area
 	 * @param rateAreaId
 	 */
 	void delete(Integer rateAreaId);
 
 	/**
-	 * 查询区域详情
+	 * Query Region Details
 	 * @param rateAreaId
 	 * @return
 	 */

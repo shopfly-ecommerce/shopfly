@@ -23,12 +23,12 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 商品的积分兑换信息
+ * Information on the redemption of product points
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月22日 上午11:43:40
+ * 2018years3month22The morning of11:43:40
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -40,27 +40,27 @@ public class ExchangeVO implements Serializable {
     private static final long serialVersionUID = 4702156500500693965L;
 
     /**
-     * 是否允许兑换
+     * Whether exchange is allowed
      */
-    @ApiModelProperty(name = "enable_exchange", value = "是否允许积分兑换")
+    @ApiModelProperty(name = "enable_exchange", value = "Whether points are allowed to be exchanged")
     private Integer enableExchange;
 
     /**
-     * 兑换所需金额
+     * Amount required for exchange
      */
-    @ApiModelProperty(name = "exchange_money", value = "兑换所需金额 ")
+    @ApiModelProperty(name = "exchange_money", value = "Amount required for exchange")
     private Double exchangeMoney;
 
     /**
-     * 商品所属积分分类
+     * Goods belong to the classification of points
      */
-    @ApiModelProperty(name = "category_id", value = "积分兑换所属分类 ")
+    @ApiModelProperty(name = "category_id", value = "The exchange of points belongs to the classification")
     private Integer categoryId;
 
     /**
-     * 兑换所需积分
+     * Redemption points required
      */
-    @ApiModelProperty(name = "exchange_point", value = "积分兑换使用的积分 ")
+    @ApiModelProperty(name = "exchange_point", value = "The credits are exchanged for the credits used")
     private Integer exchangePoint;
 
     public Integer getEnableExchange() {

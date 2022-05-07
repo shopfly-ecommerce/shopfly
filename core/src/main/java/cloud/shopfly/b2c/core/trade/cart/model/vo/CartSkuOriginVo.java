@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2018/12/10.
- * 购物车原始数据
+ * Shopping cart raw data
  *
  * @author kingapex
  * @version 1.0
@@ -57,13 +57,13 @@ public class CartSkuOriginVo extends GoodsSkuVO implements Serializable {
 
 
     /**
-     * 可以参与的单品活动
+     * Can participate in single product activities
      */
     private List<CartPromotionVo> singleList;
 
 
     /**
-     * 可以参与的组合活动
+     * Group activities that you can participate in
      */
     private List<CartPromotionVo> groupList;
 

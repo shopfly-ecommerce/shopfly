@@ -23,13 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 会员数据注入实现
+ * Member data injection implementation
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/22 下午10:12
+ * 2018/6/22 In the afternoon10:12
  *
  */
 @Service

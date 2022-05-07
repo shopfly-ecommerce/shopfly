@@ -25,7 +25,7 @@ import javax.validation.constraints.Pattern;
 
 
 /**
- * 会员参数传递
+ * Member parameter passing
  *
  * @author zh
  * @version v7.0.0
@@ -36,28 +36,28 @@ import javax.validation.constraints.Pattern;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class MemberDTO {
     /**
-     * 会员登陆用户名
+     * Member login user name
      */
-    @Pattern(regexp = "^(?![0-9]+$)[\\u4e00-\\u9fa5_0-9A-Za-z]{2,20}$", message = "用户名不能为纯数字和特殊字符，并且长度为2-20个字符")
-    @ApiModelProperty(name = "username", value = "会员登陆用户名")
+    @Pattern(regexp = "^(?![0-9]+$)[\\u4e00-\\u9fa5_0-9A-Za-z]{2,20}$", message = "The user name cannot contain digits or special characters2-20A character")
+    @ApiModelProperty(name = "username", value = "Member login user name")
     private String username;
     /**
-     * 会员手机号码
+     * Member mobile Phone Number
      */
-    @NotEmpty(message = "手机号不能为空")
-    @ApiModelProperty(name = "mobile", value = "会员手机号码")
+    @NotEmpty(message = "The cell phone number cannot be empty")
+    @ApiModelProperty(name = "mobile", value = "Member mobile Phone Number")
     private String mobile;
     /**
-     * 密码
+     * Password
      */
-    @Pattern(regexp = "[a-fA-F0-9]{32}", message = "密码格式不正确")
-    @ApiModelProperty(name = "password", value = "密码")
+    @Pattern(regexp = "[a-fA-F0-9]{32}", message = "The password format is incorrect")
+    @ApiModelProperty(name = "password", value = "Password")
     private String password;
     /**
-     * 短信验证码
+     * SMS verification code
      */
-    @NotEmpty(message = "短信验证码不能为空")
-    @ApiModelProperty(name = "sms_code", value = "短信验证码")
+    @NotEmpty(message = "The SMS verification code cannot be empty")
+    @ApiModelProperty(name = "sms_code", value = "SMS verification code")
     private String smsCode;
 
     public String getUsername() {

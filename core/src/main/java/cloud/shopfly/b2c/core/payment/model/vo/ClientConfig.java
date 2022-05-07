@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 客户端配置
+ * @Description: Client Configuration
  * @date 2018/4/1117:05
  * @since v7.0.0
  */
@@ -38,20 +38,20 @@ import java.util.List;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ClientConfig implements Serializable {
 
-    @ApiModelProperty(name = "字段name")
-    @NotEmpty(message = "客户端key不能为空")
+    @ApiModelProperty(name = "fieldname")
+    @NotEmpty(message = "The clientkeyCant be empty")
     private String key;
 
-    @ApiModelProperty(name = "字段文本提示")
+    @ApiModelProperty(name = "Field text prompt")
     private String name;
 
-    @ApiModelProperty(name = "字段文本提示", value = "config_list")
+    @ApiModelProperty(name = "Field text prompt", value = "config_list")
     private List<PayConfigItem> configList;
 
-    @ApiModelProperty(name = "是否开启 1开启 0关闭", value = "is_open")
-    @NotNull(message = "是否开启某客户端不能为空")
-    @Min(value = 0, message = "是否开启某客户端值不正确")
-    @Max(value = 1, message = "是否开启某客户端值不正确")
+    @ApiModelProperty(name = "Whether open1open0close", value = "is_open")
+    @NotNull(message = "Whether to enable a client Cannot be left blank")
+    @Min(value = 0, message = "Whether to enable a client The value is incorrect")
+    @Max(value = 1, message = "Whether to enable a client The value is incorrect")
     private Integer isOpen;
 
     public String getKey() {

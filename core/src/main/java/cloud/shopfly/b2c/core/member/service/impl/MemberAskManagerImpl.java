@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 咨询业务类
+ * Consulting business
  *
  * @author fk
  * @version v1.0
@@ -98,7 +98,7 @@ public class MemberAskManagerImpl implements MemberAskManager {
             term.add("%" + param.getKeyword() + "%");
             term.add("%" + param.getKeyword() + "%");
         }
-        //如果是用户端只展示审核通过的,如果是平台管理显示所有的咨询
+        // If the client shows only approved, if the platform management shows all queries
         if (UserContext.getBuyer() != null) {
             sqlBuffer.append(" and c.auth_status = ?");
             term.add(AuditEnum.PASS_AUDIT.name());
@@ -138,7 +138,7 @@ public class MemberAskManagerImpl implements MemberAskManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
 
-        //将状态变成已删除状态
+        // Change the state to the deleted state
         String sql = "update es_member_ask set status = 0 where ask_id = ?";
 
         this.daoSupport.execute(sql, id);
@@ -151,10 +151,10 @@ public class MemberAskManagerImpl implements MemberAskManager {
 
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public MemberAsk reply(@NotEmpty(message = "请输入回复内容") String replyContent, Integer askId) {
+    public MemberAsk reply(@NotEmpty(message = "Please enter your reply") String replyContent, Integer askId) {
         MemberAsk ask = this.getModel(askId);
         if (ask.getReplyStatus() == 1) {
-            throw new ServiceException(MemberErrorCode.E202.code(), "不可重复回复");
+            throw new ServiceException(MemberErrorCode.E202.code(), "Non-repeatable reply");
         }
         ask.setReply(replyContent);
         ask.setReplyStatus(1);
@@ -176,17 +176,17 @@ public class MemberAskManagerImpl implements MemberAskManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void auth(Integer askId, String authStatus) {
 
-        // 校验是否有管理端权限
+        // Verify whether the administrator has permission
         Admin admin = AdminUserContext.getAdmin();
 
         if (admin == null) {
-            throw new NoPermissionException("没有权限审核会员咨询信息!");
+            throw new NoPermissionException("No permission to audit member consulting information!");
         }
 
         MemberAsk memberAsk = this.getModel(askId);
 
         if (memberAsk == null) {
-            throw new ResourceNotFoundException("会员咨询不存在!");
+            throw new ResourceNotFoundException("Member consultation does not exist!");
         }
 
         this.daoSupport.execute("update es_member_ask set auth_status = ? where ask_id = ? ", authStatus, askId);

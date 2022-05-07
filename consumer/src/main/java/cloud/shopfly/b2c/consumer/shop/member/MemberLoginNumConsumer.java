@@ -23,11 +23,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 会员登录后登录次数进行处理
+ * The login times of members after login are processed
  *
  * @author zh
  * @version v7.0
- * @date 18/4/12 下午5:38
+ * @date 18/4/12 In the afternoon5:38
  * @since v7.0
  */
 @Service
@@ -37,7 +37,7 @@ public class MemberLoginNumConsumer implements MemberLoginEvent {
     private MemberClient memberClient;
 
     /**
-     * 会员登录后对会员某些字段进行更新 例如 上次登录时间、登录次数
+     * Update some fields of member after login, such as last login time、The login number
      *
      * @param memberLoginMsg
      */

@@ -27,7 +27,7 @@ import java.io.Serializable;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-07 上午11:19
+ * 2018-08-07 In the morning11:19
  */
 @Table(name = "es_sss_goods_pv")
 public class GoodsPageView implements Serializable {

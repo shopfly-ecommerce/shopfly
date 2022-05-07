@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 错误消息
+ * The error message
  * Created by kingapex on 2018/3/13.
  * @author kingapex
  * @version 1.0

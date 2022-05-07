@@ -28,7 +28,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * 限时抢购插件
+ * Flash sale plugin
  *
  * @version v3.0 by kingapex
  * @since v7.0.0
@@ -49,47 +49,47 @@ public class SeckillPluginNew implements SkuPromotionRuleBuilder {
         }
 
         /**
-         * 过期判定
+         * Overdue decision
          */
-        //开始时间和结束时间
+        // Start time and end time
         long startTime = seckillGoodsVO.getStartTime();
         long endTime = this.coutEndTime(startTime);
 
-        //是否过期了
+        // Is it expired?
         boolean expired = !DateUtil.inRangeOf(startTime, endTime);
         if (expired) {
             rule.setInvalid(true);
-            rule.setInvalidReason("秒杀已过期,有效期为:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "至" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
+            rule.setInvalidReason("The seconds kill has expired,Is valid for:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "to" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
             return rule;
         }
 
 
-        //默认商品标签
-        String tag = "限时抢购";
+        // Default product label
+        String tag = "flash";
 
-        //剩余可售数量 万一发生超卖，这里处理一下
+        // Surplus available quantity in case of oversold, here to deal with it
         int num = seckillGoodsVO.getSoldQuantity() < 0 ? 0 : seckillGoodsVO.getSoldQuantity();
 
 
-        //如果0件享受促销
+        // If 0 pieces enjoy promotion
         if (num == 0) {
             return rule;
         }
 
 
-        //如果 剩余优惠数量不足
+        // If the number of remaining offers is insufficient
         if (skuVO.getNum() > num) {
-            tag = "仅[" + num + "]件享限时抢购";
+            tag = "only[" + num + "]Pieces for a flash sale";
             skuVO.setPurchaseNum(num);
         } else {
             skuVO.setPurchaseNum(skuVO.getNum());
         }
 
 
-        //活动部分价格
+        // Moving part price
         double totalActivityPrice = CurrencyUtil.mul(seckillGoodsVO.getSeckillPrice(), skuVO.getPurchaseNum());
 
-        //非活动部分价格
+        // Inactive part price
         double otherTotal = 0;
         if (!skuVO.getNum().equals(skuVO.getPurchaseNum())) {
             otherTotal = CurrencyUtil.mul((skuVO.getNum() - skuVO.getPurchaseNum()), skuVO.getOriginalPrice());
@@ -98,7 +98,7 @@ public class SeckillPluginNew implements SkuPromotionRuleBuilder {
         double reducedTotalPrice = CurrencyUtil.sub(skuVO.getSubtotal(), totalActivityPrice);
         double reducedPrice = CurrencyUtil.sub(skuVO.getOriginalPrice(), seckillGoodsVO.getSeckillPrice());
 
-        //如果商品金额 小于 优惠金额    则减免金额 = 需要支付的金额
+        // If the amount of goods is less than the discount amount, the discount amount = the amount to be paid
 
         if (skuVO.getSubtotal() < reducedTotalPrice) {
             reducedTotalPrice = totalActivityPrice;
@@ -108,7 +108,7 @@ public class SeckillPluginNew implements SkuPromotionRuleBuilder {
 
 
         rule.setReducedPrice(reducedPrice);
-        rule.setTips("秒杀价[" + seckillGoodsVO.getSeckillPrice() + "]元");
+        rule.setTips("Seconds to bargain[" + seckillGoodsVO.getSeckillPrice() + "]USD");
         rule.setTag(tag);
         return rule;
 
@@ -116,11 +116,11 @@ public class SeckillPluginNew implements SkuPromotionRuleBuilder {
 
 
     /**
-     * 根据开始时间获取结束时间
-     * 规则是开始时间当天晚的23：59：59
+     * Obtain the end time based on the start time
+     * The rules are for the night of the start23：59：59
      *
-     * @param startTime 开始时间
-     * @return 结束时间戳
+     * @param startTime The start time
+     * @return End time stamp
      */
     private long coutEndTime(long startTime) {
         String timeStr = DateUtil.toString(startTime, "yyyy-MM-dd");

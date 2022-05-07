@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 热门关键字业务层
+ * Hot keyword business layer
  * @author fk
  * @version v1.0
  * @since v7.0.0
@@ -30,42 +30,42 @@ import java.util.List;
 public interface HotKeywordManager {
 
 	/**
-	 * 查询热门关键字列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
+	 * Example Query the list of popular keywords
+	 * @param page The page number
+	 * @param pageSize Number each page
 	 * @return Page 
 	 */
 	Page list(int page, int pageSize);
 	/**
-	 * 添加热门关键字
-	 * @param hotKeyword 热门关键字
-	 * @return HotKeyword 热门关键字
+	 * Add hot keywords
+	 * @param hotKeyword Hot keywords
+	 * @return HotKeyword Hot keywords
 	 */
 	HotKeyword add(HotKeyword hotKeyword);
 
 	/**
-	* 修改热门关键字
-	* @param hotKeyword 热门关键字
-	* @param id 热门关键字主键
-	* @return HotKeyword 热门关键字
+	* Modify hot keywords
+	* @param hotKeyword Hot keywords
+	* @param id Hot key primary key
+	* @return HotKeyword Hot keywords
 	*/
 	HotKeyword edit(HotKeyword hotKeyword, Integer id);
 	
 	/**
-	 * 删除热门关键字
-	 * @param id 热门关键字主键
+	 * Remove hot keywords
+	 * @param id Hot key primary key
 	 */
 	void delete(Integer id);
 	
 	/**
-	 * 获取热门关键字
-	 * @param id 热门关键字主键
-	 * @return HotKeyword  热门关键字
+	 * Get the hot keywords
+	 * @param id Hot key primary key
+	 * @return HotKeyword  Hot keywords
 	 */
 	HotKeyword getModel(Integer id);
 
 	/**
-	 * 查询热门关键字
+	 * Query the popular keywords
 	 * @param num
 	 * @return
 	 */

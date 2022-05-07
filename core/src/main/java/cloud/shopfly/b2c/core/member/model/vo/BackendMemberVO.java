@@ -26,7 +26,7 @@ import java.io.Serializable;
 
 
 /**
- * 后台首页会员vo
+ * Background Home Page Membervo
  *
  * @author zh
  * @version v7.0.0
@@ -39,34 +39,34 @@ public class BackendMemberVO implements Serializable {
 
 
     /**
-     * 昵称
+     * nickname
      */
     @Column(name = "nickname")
-    @ApiModelProperty(name = "nickname", value = "昵称", required = false)
+    @ApiModelProperty(name = "nickname", value = "nickname", required = false)
     private String nickname;
     /**
-     * 邮箱
+     * email
      */
     @Column(name = "email")
-    @ApiModelProperty(name = "email", value = "邮箱", required = false)
+    @ApiModelProperty(name = "email", value = "email", required = false)
     private String email;
     /**
-     * 会员注册时间
+     * Membership registration Time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "createTime", value = "会员注册时间", required = false)
+    @ApiModelProperty(name = "createTime", value = "Membership registration Time", required = false)
     private Long createTime;
 
     /**
-     * 手机号码
+     * Mobile phone number
      */
     @Column(name = "mobile")
-    @ApiModelProperty(name = "mobile", value = "手机号码", required = true)
+    @ApiModelProperty(name = "mobile", value = "Mobile phone number", required = true)
     private String mobile;
 
 
     @Column(name = "uname")
-    @ApiModelProperty(name = "uname", value = "会员用户名", required = true)
+    @ApiModelProperty(name = "uname", value = "Member user name", required = true)
     private String uname;
 
 

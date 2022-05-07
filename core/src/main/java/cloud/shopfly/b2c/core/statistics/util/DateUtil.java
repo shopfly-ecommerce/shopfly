@@ -20,7 +20,7 @@ import java.util.Date;
 
 
 /**
- * 日期相关的操作
+ * Date-related operations
  *
  * @author Dawei
  */
@@ -28,7 +28,7 @@ import java.util.Date;
 public class DateUtil {
 
     /**
-     * 将一个字符串转换成日期格式
+     * Converts a string to a date format
      *
      * @param date
      * @param pattern
@@ -54,7 +54,7 @@ public class DateUtil {
     }
 
     /**
-     * 把日期转换成字符串型
+     * Converts the date to a string
      *
      * @param date
      * @param pattern

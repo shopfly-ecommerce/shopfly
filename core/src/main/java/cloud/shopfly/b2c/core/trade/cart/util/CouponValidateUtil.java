@@ -31,7 +31,7 @@ public class CouponValidateUtil {
 
 
     /**
-     * 检测选择的促销活动是否为积分兑换  如果为积分兑换则不能使用优惠券
+     * Check whether the selected promotion is redeemable for points and if it is redeemable for points, the coupon cannot be used
      *
      * @param selectedPromotionVo
      */

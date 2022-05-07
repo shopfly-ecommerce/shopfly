@@ -44,7 +44,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 运费计算业务层实现类
+ * Freight calculation business layer implementation class
  *
  * @author Snow create in 2018/4/8
  * @version v2.0
@@ -69,47 +69,47 @@ public class ShippingManagerImpl implements ShippingManager {
 
 
     /**
-     * 获取购物车价格
+     * Get shopping cart price
      *
-     * @param cartVO 购物车
+     * @param cartVO The shopping cart
      * @return
      */
     @Override
     public Double getShipPrice(CartVO cartVO) {
-        //最终运费
+        // The final freight
         double finalShip = 0;
         List<CartSkuVO> cartSkuVOS = cartVO.getSkuList();
-        //运费模板map。模板id：模板对象
+        // Freight template map. Template ID: indicates the template object
         Map<Integer, ShipTemplateSettingDTO> templateMap = new HashMap<>();
-        //运费模板对应的商品数据列表。模板id:skulist
+        // List of goods data corresponding to the freight template. Template id: skulist
         Map<Integer, List<CartSkuVO>> templateSkuMap = new HashMap<>();
 
         for (CartSkuVO cartSkuVO : cartSkuVOS) {
-            //购物车商品没有被选中的话，则不进行处理
+            // Cart items that are not selected are not processed
             if (cartSkuVO.getChecked() == 0) {
                 continue;
             }
-            //获取购物车 运费模版 映射
+            // Gets the shopping cart freight template map
             Map<Integer, ShipTemplateSettingVO> map = cartVO.getShipTemplateChildMap();
-            //获取当前商品的运费模版
+            // Gets the shipping template for the current item
             ShipTemplateSettingVO settingVO = map.get(cartSkuVO.getSkuId());
             if (settingVO == null || settingVO.getItems().size() == 0) {
                 continue;
             }
-            //创建运费模板数据
+            // Create freight template data
             ShipTemplateSettingDTO shipTemplateSettingDTO = new ShipTemplateSettingDTO();
             List<ShipTemplateSettingDO> items = settingVO.getItems();
-            //筛选出价格区间设置
+            // Filter out price range Settings
             List<ShipTemplateSettingDO> priceSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equalsIgnoreCase(ConditionsTypeEnums.PRICE.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
             shipTemplateSettingDTO.setPriceSettings(priceSettings);
-            //筛选出重量区间设置
+            // Filter weight range Settings
             List<ShipTemplateSettingDO> weightSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equalsIgnoreCase(ConditionsTypeEnums.WEIGHT.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
             shipTemplateSettingDTO.setWeightSettings(weightSettings);
-            //筛选出价格区间设置
+            // Filter out price range Settings
             List<ShipTemplateSettingDO> itemsSettings = items.stream().filter(settingDO -> settingDO.getConditionsType().equalsIgnoreCase(ConditionsTypeEnums.ITEMS.name())).sorted(Comparator.comparing(ShipTemplateSettingDO::getSort)).collect(Collectors.toList());
             shipTemplateSettingDTO.setItemsSettings(itemsSettings);
             templateMap.put(settingVO.getTemplateId(), shipTemplateSettingDTO);
-            //创建运费模板对应商品数据
+            // Create freight template corresponding to commodity data
             List<CartSkuVO> skuList = templateSkuMap.get(settingVO.getTemplateId());
             if(skuList == null){
                 skuList = new ArrayList<>();
@@ -119,21 +119,21 @@ public class ShippingManagerImpl implements ShippingManager {
             templateSkuMap.put(settingVO.getTemplateId(),skuList);
         }
 
-        //计算
+        // To calculate
         for (Integer key : templateSkuMap.keySet()) {
 
             List<CartSkuVO> skuList = templateSkuMap.get(key);
 
             ShipTemplateSettingDTO template = templateMap.get(key);
 
-            //运费金额
+            // The freight amount
             Double shipPrice = 0D;
             Double goodsPrice = 0D;
             for (CartSkuVO cartSkuVO : skuList) {
                 Double originalPrice = CurrencyUtil.mul(cartSkuVO.getOriginalPrice(), cartSkuVO.getNum());
                 goodsPrice = CurrencyUtil.add(goodsPrice, originalPrice);
             }
-            //商品价格算运费
+            // The price of goods is calculated as freight
             List<ShipTemplateSettingDO> priceSettings = template.getPriceSettings();
             if (priceSettings!=null&&priceSettings.size()>0){
                 ShipTemplateSettingDO setting = screen(priceSettings,goodsPrice);
@@ -143,7 +143,7 @@ public class ShippingManagerImpl implements ShippingManager {
 
             }
 
-            //重量算运费
+            // Freight by weight
             List<ShipTemplateSettingDO> weightSettings = template.getWeightSettings();
             if (weightSettings!=null&&weightSettings.size()>0){
 
@@ -158,7 +158,7 @@ public class ShippingManagerImpl implements ShippingManager {
 
             }
 
-            //计件算运费
+            // Piece rate
             List<ShipTemplateSettingDO> itemsSettings = template.getItemsSettings();
             if (itemsSettings!=null&&itemsSettings.size()>0){
                 Integer num = 0;
@@ -174,14 +174,14 @@ public class ShippingManagerImpl implements ShippingManager {
 
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("最终运费金额计算：" + finalShip);
+            logger.debug("The final freight amount is calculated：" + finalShip);
 
         }
         return finalShip;
     }
 
     /**
-     * 筛选设置
+     * Filter Settings
      * @param weightSettings
      * @param unit
      * @return
@@ -196,7 +196,7 @@ public class ShippingManagerImpl implements ShippingManager {
     }
 
     /**
-     * 增加运费价格
+     * Increased freight price
      * @param shipPrice
      * @param goodsPrice
      * @param setting
@@ -204,10 +204,10 @@ public class ShippingManagerImpl implements ShippingManager {
      */
     private Double addShipPirce(Double shipPrice, Double goodsPrice, ShipTemplateSettingDO setting) {
         if (AmtTypeEnums.ABSOLUTE.name().equalsIgnoreCase(setting.getAmtType())) {
-            //如果是绝对值就是直接相加
+            // If its absolute value, it just adds up
             shipPrice = CurrencyUtil.add(shipPrice, setting.getAmt());
         } else if (AmtTypeEnums.PERCENTAGE.name().equalsIgnoreCase(setting.getAmtType())) {
-            //如果是百分比就是商品原价*百分比
+            // If its a percentage, its the original price * percentage
             Double pAmt = CurrencyUtil.mul(goodsPrice, CurrencyUtil.div(setting.getAmt(),100D));
             shipPrice = CurrencyUtil.add(shipPrice, pAmt);
         }
@@ -223,13 +223,13 @@ public class ShippingManagerImpl implements ShippingManager {
             return;
         }
 
-        // 检测不在配送区域的货品
+        // Detect goods outside the distribution area
         this.checkArea(cartList, address.getCountryCode(),address.getStateCode());
 
         for (CartVO cartVo : cartList) {
 
             List<PromotionRule> ruleList = cartVo.getRuleList();
-            //如果满减慢增免邮则不计算邮费
+            // No postage will be calculated if free postage is added
             if (StringUtil.isNotEmpty(ruleList)) {
                 boolean flag = false;
                 for (PromotionRule rule : ruleList) {
@@ -243,44 +243,44 @@ public class ShippingManagerImpl implements ShippingManager {
                 }
             }
 
-            // 获取购物车商品运费总计
+            // Get cart item shipping totals
             double finalShip = this.getShipPrice(cartVo);
             cartVo.getPrice().setFreightPrice(finalShip);
             if (finalShip > 0) {
                 cartVo.getPrice().setIsFreeFreight(0);
             }
-            cartVo.setShippingTypeName("运费");
+            cartVo.setShippingTypeName("freight");
         }
 
 
     }
 
     /**
-     * 校验地区
+     * Check area
      *
-     * @param cartList 购物车
-     * @param countryCode   国家code
-     * @param stateCode      洲code
+     * @param cartList The shopping cart
+     * @param countryCode   countriescode
+     * @param stateCode      chaucode
      * @return
      */
     @Override
     public List<CacheGoods> checkArea(List<CartVO> cartList, String countryCode,String stateCode) {
         List<CacheGoods> errorGoods = new ArrayList<>();
         for (CartVO cartVo : cartList) {
-            //运费模版映射
+            // Freight template mapping
             Map<Integer, ShipTemplateSettingVO> shipMap = new HashMap<>(16);
             List<CartSkuVO> cartSkuVOS = cartVo.getSkuList();
             for (CartSkuVO skuVO : cartSkuVOS) {
-                // 未选中则先不处理
+                // If it is not selected, it is not processed
                 if (skuVO.getChecked() == 0) {
                     continue;
                 }
-                // 不免运费
+                // Not the freight
                 if (skuVO.getIsFreeFreight() != 1) {
                     skuVO.setIsShip(1);
-                    // 获取运费模板信息 没有运费模版的话 记录错误的商品，禁止下单
+                    // If there is no freight template, it is forbidden to record the wrong goods
                     ShipTemplateVO temp = this.shipTemplateClient.get(skuVO.getTemplateId());
-                    //如果模版空
+                    // If template is empty
                     if (temp == null) {
                         errorGoods.add(goodsClient.getFromCache(skuVO.getGoodsId()));
                         skuVO.setIsShip(0);
@@ -288,7 +288,7 @@ public class ShippingManagerImpl implements ShippingManager {
 
                         for (ShipTemplateSettingVO settingVO : temp.getItems()) {
                             if (settingVO.getAreaId() != null) {
-                                /** 校验地区 */
+                                /** Check area*/
                                 if (!StringUtil.isEmpty(stateCode)){
                                     if (settingVO.getAreaId().indexOf("," + stateCode + ",") >= 0) {
                                         shipMap.put(skuVO.getSkuId(), settingVO);
@@ -301,14 +301,14 @@ public class ShippingManagerImpl implements ShippingManager {
                                 }
                             }
                         }
-                        // 如果没有匹配 则当
+                        // If there is no match, pass
                         if (!shipMap.containsKey(skuVO.getSkuId())) {
                             errorGoods.add(goodsClient.getFromCache(skuVO.getGoodsId()));
                             skuVO.setIsShip(0);
                         }
                     }
                 } else {
-                    //如果没有设置运费模版 则默认地区有货
+                    // If no freight template is set, the default region is available
                     skuVO.setIsShip(1);
                 }
             }

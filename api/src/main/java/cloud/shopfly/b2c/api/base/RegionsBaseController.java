@@ -31,16 +31,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 地区api
+ * regionapi
  *
  * @author zh
  * @version v7.0
- * @date 18/5/28 下午7:49
+ * @date 18/5/28 In the afternoon7:49
  * @since v7.0
  */
 @RestController
 @RequestMapping("/regions")
-@Api(description = "地区API")
+@Api(description = "regionAPI")
 public class RegionsBaseController {
 
     @Autowired
@@ -48,9 +48,9 @@ public class RegionsBaseController {
 
 
     @GetMapping(value = "/{id}/children")
-    @ApiOperation(value = "获取某地区的子地区")
+    @ApiOperation(value = "Gets the children of a region")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "地区id", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "regionid", required = true, dataType = "int", paramType = "path")
     })
     public List<Regions> getChildrenById(@PathVariable Integer id) {
 
@@ -59,9 +59,9 @@ public class RegionsBaseController {
 
 
     @GetMapping(value = "/depth/{depth}")
-    @ApiOperation(value = "根据地区深度查询组织好地区数据结构的地区")
+    @ApiOperation(value = "Regions that organize the region data structure according to the region deep query")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "depth", value = "深度", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "depth", value = "The depth of the", required = true, dataType = "int", paramType = "path")
     })
     public List<RegionVO> getRegionByDepth(@PathVariable Integer depth) {
         return regionsManager.getRegionByDepth(depth);

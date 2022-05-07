@@ -32,11 +32,11 @@ import springfox.documentation.annotations.ApiIgnore;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品交易controller
+ * @Description: Commodity tradingcontroller
  * @date 2018/8/15 15:51
  * @since v7.0.0
  */
-@Api(description = "商品交易模块")
+@Api(description = "Commodity transaction module")
 @RestController
 @RequestMapping("/trade/goods")
 public class GoodsSalesBuyerController {
@@ -44,11 +44,11 @@ public class GoodsSalesBuyerController {
     @Autowired
     private MemberSalesManager memberSalesManager;
 
-    @ApiOperation(value = "查询某商品的销售记录", response = SalesVO.class)
+    @ApiOperation(value = "Query sales records of an item", response = SalesVO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "goods_id", value = "商品ID", required = true, paramType = "path", dataType = "int")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "goods_id", value = "productID", required = true, paramType = "path", dataType = "int")
     })
     @GetMapping("/{goods_id}/sales")
     public Page salesList(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @PathVariable("goods_id") Integer goodsId) {

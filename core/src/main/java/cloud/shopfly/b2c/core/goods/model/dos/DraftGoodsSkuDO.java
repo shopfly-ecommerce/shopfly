@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 草稿商品sku实体
+ * The draft of goodsskuentity
  *
  * @author fk
  * @version v2.0
@@ -44,52 +44,52 @@ public class DraftGoodsSkuDO implements Serializable {
     private static final long serialVersionUID = 5684194304207265L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "draft_sku_id")
     @ApiModelProperty(hidden = true)
     private Integer draftSkuId;
     /**
-     * 草稿id
+     * The draftid
      */
     @Column(name = "draft_goods_id")
-    @ApiModelProperty(name = "draft_goods_id", value = "草稿id", required = false)
+    @ApiModelProperty(name = "draft_goods_id", value = "The draftid", required = false)
     private Integer draftGoodsId;
     /**
-     * 货号
+     * SN
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "货号", required = false)
+    @ApiModelProperty(name = "sn", value = "SN", required = false)
     private String sn;
     /**
-     * 总库存
+     * Total inventory
      */
     @Column(name = "quantity")
-    @ApiModelProperty(name = "quantity", value = "总库存", required = false)
+    @ApiModelProperty(name = "quantity", value = "Total inventory", required = false)
     private Integer quantity;
     /**
-     * 价格
+     * Price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "价格", required = false)
+    @ApiModelProperty(name = "price", value = "Price", required = false)
     private Double price;
     /**
-     * 规格
+     * specifications
      */
     @Column(name = "specs")
-    @ApiModelProperty(name = "specs", value = "规格", required = false)
+    @ApiModelProperty(name = "specs", value = "specifications", required = false)
     private String specs;
     /**
-     * 成本
+     * The cost of
      */
     @Column(name = "cost")
-    @ApiModelProperty(name = "cost", value = "成本", required = false)
+    @ApiModelProperty(name = "cost", value = "The cost of", required = false)
     private Double cost;
     /**
-     * 重量
+     * Weight
      */
     @Column(name = "weight")
-    @ApiModelProperty(name = "weight", value = "重量", required = false)
+    @ApiModelProperty(name = "weight", value = "Weight", required = false)
     private Double weight;
 
     public DraftGoodsSkuDO() {

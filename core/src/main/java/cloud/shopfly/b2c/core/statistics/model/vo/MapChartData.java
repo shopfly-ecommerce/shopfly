@@ -23,19 +23,19 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * 地图统计vo
+ * Map of statisticalvo
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-11 上午10:02
+ * 2018-04-11 In the morning10:02
  */
 
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class MapChartData implements Serializable {
-    @ApiModelProperty("地名")
+    @ApiModelProperty("Place names")
     private String[] name;
-    @ApiModelProperty("对应的数据")
+    @ApiModelProperty("Corresponding data")
     private String[] data;
 
     public MapChartData() {

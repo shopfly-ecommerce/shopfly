@@ -32,7 +32,7 @@ import java.util.Objects;
 
 
 /**
- * 商品sku实体
+ * productskuentity
  *
  * @author fk
  * @version v2.0
@@ -47,92 +47,92 @@ public class GoodsSkuDO implements Serializable {
     private static final long serialVersionUID = 5102510694003249L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "sku_id")
     @ApiModelProperty(hidden = true)
     private Integer skuId;
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", hidden = true)
+    @ApiModelProperty(name = "goods_id", value = "productid", hidden = true)
     private Integer goodsId;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", hidden = true)
+    @ApiModelProperty(name = "goods_name", value = "Name", hidden = true)
     private String goodsName;
     /**
-     * 商品编号
+     * SN
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "商品编号", required = false)
-    @Length(max = 30, message = "商品规格编号太长，不能超过30个字符")
+    @ApiModelProperty(name = "sn", value = "SN", required = false)
+    @Length(max = 30, message = "The specification number is too long and cannot be exceeded30A character")
     private String sn;
     /**
-     * 库存
+     * Inventory
      */
     @Column(name = "quantity")
-    @ApiModelProperty(name = "quantity", value = "库存", required = false)
-    @Max(value = 99999999, message = "库存不能超过99999999")
+    @ApiModelProperty(name = "quantity", value = "Inventory", required = false)
+    @Max(value = 99999999, message = "Stock cannot exceed99999999")
     private Integer quantity;
     /**
-     * 可用库存
+     * Available
      */
     @Column(name = "enable_quantity")
-    @ApiModelProperty(name = "enable_quantity", value = "可用库存")
+    @ApiModelProperty(name = "enable_quantity", value = "Available")
     private Integer enableQuantity;
     /**
-     * 商品价格
+     * Price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "商品价格", required = false)
-    @Max(value = 99999999, message = "价格不能超过99999999")
+    @ApiModelProperty(name = "price", value = "Price", required = false)
+    @Max(value = 99999999, message = "The price cannot exceed99999999")
     private Double price;
     /**
-     * 规格信息json
+     * Specification informationjson
      */
     @Column(name = "specs")
-    @ApiModelProperty(name = "specs", value = "规格信息json", hidden = true)
+    @ApiModelProperty(name = "specs", value = "Specification informationjson", hidden = true)
     @JsonIgnore
     private String specs;
     /**
-     * 成本价格
+     * Cost price
      */
     @Column(name = "cost")
-    @ApiModelProperty(name = "cost", value = "成本价格", required = true)
-    @Max(value = 99999999, message = "成本价格不能超过99999999")
+    @ApiModelProperty(name = "cost", value = "Cost price", required = true)
+    @Max(value = 99999999, message = "The cost price cannot exceed99999999")
     private Double cost;
     /**
-     * 重量
+     * Weight
      */
     @Column(name = "weight")
-    @ApiModelProperty(name = "weight", value = "重量", required = true)
-    @Max(value = 99999999, message = "重量不能超过99999999")
+    @ApiModelProperty(name = "weight", value = "Weight", required = true)
+    @Max(value = 99999999, message = "Weight shall not exceed99999999")
     private Double weight;
     /**
-     * 卖家id
+     * The sellerid
      */
-    @ApiModelProperty(name = "seller_id", value = "卖家id", hidden = true)
+    @ApiModelProperty(name = "seller_id", value = "The sellerid", hidden = true)
     private Integer sellerId;
     /**
-     * 卖家名称
+     * The seller name
      */
-    @ApiModelProperty(name = "seller_name", value = "卖家名称", hidden = true)
+    @ApiModelProperty(name = "seller_name", value = "The seller name", hidden = true)
     private String sellerName;
     /**
-     * 分类id
+     * Categoriesid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "category_id", value = "分类id", hidden = true)
+    @ApiModelProperty(name = "category_id", value = "Categoriesid", hidden = true)
     private Integer categoryId;
     /**
-     * 缩略图
+     * The thumbnail
      */
     @Column(name = "thumbnail")
-    @ApiModelProperty(name = "thumbnail", value = "缩略图", hidden = true)
+    @ApiModelProperty(name = "thumbnail", value = "The thumbnail", hidden = true)
     private String thumbnail;
 
 
@@ -268,7 +268,7 @@ public class GoodsSkuDO implements Serializable {
     }
 
     public String getSellerName() {
-        return "平台自营";
+        return "Platform proprietary";
     }
 
     public void setSellerName(String sellerName) {

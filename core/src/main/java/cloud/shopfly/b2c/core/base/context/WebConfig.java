@@ -23,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Created by kingapex on 2018/5/2.
- * 注册自定义的地区格式化器
+ * Register a custom locale formatter
  *
  * @author kingapex
  * @version 1.0

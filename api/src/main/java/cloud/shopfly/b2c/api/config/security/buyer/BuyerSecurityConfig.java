@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.api.config.security.buyer;
 
@@ -30,7 +30,7 @@ import java.net.URISyntaxException;
 
 /**
  * Created by kingapex on 2018/3/12.
- * 买家安全配置
+ * Buyer security configuration
  *
  * @author kingapex
  * @version 1.0
@@ -55,7 +55,7 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
-     * 定义seller工程的权限
+     * definesellerProject permissions
      *
      * @param http
      * @throws Exception
@@ -63,16 +63,16 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                //禁用session
+                // Disable the session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
-                //定义验权失败返回格式
+                // Define a validation failure return format
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests()
                 .and()
                 .addFilterBefore(new TokenAuthenticationFilter(buyerAuthenticationService),
                         UsernamePasswordAuthenticationFilter.class);
-        //过滤掉base api 的路径
+        // Filter the path of the Base API
         http.authorizeRequests().antMatchers("/pages/**"
                 , "/captchas/**"
                 , "/uploaders/**/**"
@@ -83,23 +83,23 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
                 , "/countries/**"
                 , "/ueditor/**").permitAll();
 
-        //过滤掉本地的图片及媒体文件
+        // Filter out local images and media files
         //gif,jpg,png,jpeg,mp4,quicktime
         http.authorizeRequests().antMatchers("/images/**/*.jpeg","/images/**/*.jpg","/images/**/*.gif","/images/**/*.png","/images/**/*.mp4","/images/**/*.quicktime").anonymous();;
 
-        //过滤掉swagger的路径
+        // Filter out Swaggers path
         http.authorizeRequests().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**").anonymous();
-        //过滤掉不需要买家权限的api
+        // Filter out apis that dont require buyer privileges
         http.authorizeRequests().antMatchers("/debugger/**", "/jquery.min.js", "/order/pay/weixin/**", "/order/pay/callback/**", "/order/pay/query/**", "/pintuan/orders/**", "/pintuan/goods", "/pintuan/goods/**", "/goods/**", "/pages/**", "/focus-pictures/**",
                 "/shops/list", "/shops/{spring:[0-9]+}", "/shops/cats/{spring:[0-9]+}", "/shops/navigations/{spring:[0-9]+}", "/promotions/**", "/view",
                 "/shops/sildes/{spring:[0-9]+}", "/members/logout*", "/passport/**", "/trade/goods/**", "/order/pay/return/**",
                 "/isr/**",
                 "/members/asks/goods/{spring:[0-9]+}", "/members/comments/goods/{spring:[0-9]+}", "/members/comments/goods/{spring:[0-9]+}/count", "/distribution/su/**", "/passport/connect/pc/WECHAT/**",
                 "/passport/login-binder/pc/**", "/account-binder/**", "/wechat/**", "/qq/**", "/apple/**", "/alipay/**", "/order/pay/paypal/**").permitAll().and();
-        //定义有买家权限才可以访问
+        // Define access only if you have buyer permission
         http.authorizeRequests().anyRequest().hasRole(Role.BUYER.name());
         http.headers().addHeaderWriter(xFrameOptionsHeaderWriter());
-        //禁用缓存
+        // Disable caching
         http.headers().cacheControl().and().contentSecurityPolicy("script-src 'self'");
 
     }
@@ -119,7 +119,7 @@ public class BuyerSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 定义跨域配置
+     * Define cross-domain configuration
      *
      * @return
      */

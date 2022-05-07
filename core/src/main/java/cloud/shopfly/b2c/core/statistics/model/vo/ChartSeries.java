@@ -28,20 +28,20 @@ import java.util.Arrays;
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-10 上午7:51
+ * 2018-04-10 In the morning7:51
  */
 
 @JsonNaming(value = ChartSeries.class)
 public class ChartSeries extends PropertyNamingStrategy implements Serializable {
 
 
-    @ApiModelProperty(value = "一组数据 名称")
+    @ApiModelProperty(value = "A set of data names")
     private String name;
 
-    @ApiModelProperty(value = "线/柱 数据")
+    @ApiModelProperty(value = "line/Column data")
     private String[] data;
 
-    @ApiModelProperty(value = "每个数据 名字")
+    @ApiModelProperty(value = "Each data name")
     private String[] localName;
 
     public ChartSeries() {

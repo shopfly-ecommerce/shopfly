@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author fk
  * @version v1.0
- * @Description: 评论对外接口实现
+ * @Description: Comment on external interface implementation
  * @date 2018/7/26 11:30
  * @since v7.0.0
  */

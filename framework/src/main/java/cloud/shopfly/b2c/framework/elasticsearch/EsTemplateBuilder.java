@@ -28,7 +28,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 public interface EsTemplateBuilder {
 
      /**
-      * 构建 es template
+      * buildes template
       * @return
       */
      ElasticsearchTemplate build();

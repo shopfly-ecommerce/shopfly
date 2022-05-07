@@ -24,7 +24,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 商品sku业务层
+ * productskuThe business layer
  *
  * @author fk
  * @version v2.0
@@ -33,14 +33,14 @@ import java.util.List;
 public interface GoodsSkuManager {
 
     /**
-     * 查询SKU列表
+     * The querySKUThe list of
      * @param param
      * @return
      */
     Page list(GoodsQueryParam param);
 
     /**
-     * 查询某商品的sku
+     * Inquire about a productsku
      *
      * @param goodsId
      * @return
@@ -48,7 +48,7 @@ public interface GoodsSkuManager {
     List<GoodsSkuVO> listByGoodsId(Integer goodsId);
 
     /**
-     * 添加商品sku
+     * Add the goodssku
      *
      * @param skuList
      * @param goods
@@ -56,7 +56,7 @@ public interface GoodsSkuManager {
     void add(List<GoodsSkuVO> skuList, GoodsDO goods);
 
     /**
-     * 修改商品sku
+     * Modify the goodssku
      *
      * @param skuList
      * @param goods
@@ -64,14 +64,14 @@ public interface GoodsSkuManager {
     void edit(List<GoodsSkuVO> skuList, GoodsDO goods);
 
     /**
-     * 根据商品sku主键id集合获取商品信息
+     * According to the goodsskuA primary keyidCollection to obtain commodity information
      * @param skuIds
      * @return
      */
     List<GoodsSkuVO> query(Integer[] skuIds);
 
     /**
-     * 缓存中查询sku信息
+     * Cached queryskuinformation
      *
      * @param skuId
      * @return
@@ -79,7 +79,7 @@ public interface GoodsSkuManager {
     GoodsSkuVO getSkuFromCache(Integer skuId);
 
     /**
-     * 查询单个sku
+     * Query a singlesku
      *
      * @param id
      * @return

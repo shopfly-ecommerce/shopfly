@@ -24,7 +24,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 订单设置VO
+ * OrderVO
  *
  * @author Snow create in 2018/7/13
  * @version v2.0
@@ -33,22 +33,22 @@ import java.io.Serializable;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OrderSettingVO implements Serializable {
 
-    @ApiModelProperty(name = "cancel_order_day", value = "自动取消订单天数", required = true)
+    @ApiModelProperty(name = "cancel_order_day", value = "Days of automatic cancellation", required = true)
     public Integer cancelOrderDay;
 
-    @ApiModelProperty(name = "rog_order_day", value = "自动确认收货天数", required = true)
+    @ApiModelProperty(name = "rog_order_day", value = "Automatic confirmation of receiving days", required = true)
     public Integer rogOrderDay;
 
-    @ApiModelProperty(name = "comment_order_day", value = "评价超时天数", required = true)
+    @ApiModelProperty(name = "comment_order_day", value = "Evaluate timeout days", required = true)
     public Integer commentOrderDay;
 
-    @ApiModelProperty(name = "service_expired_day", value = "售后失效天数", required = true)
+    @ApiModelProperty(name = "service_expired_day", value = "Number of days after sale", required = true)
     public Integer serviceExpiredDay;
 
-    @ApiModelProperty(name = "complete_order_day", value = "订单完成天数", required = true)
+    @ApiModelProperty(name = "complete_order_day", value = "Order completion days", required = true)
     public Integer completeOrderDay;
 
-    @ApiModelProperty(name = "complete_order_pay", value = "自动支付天数,仅对货到付款的订单有效", required = true)
+    @ApiModelProperty(name = "complete_order_pay", value = "Automatic payment days,Only valid for cash on delivery orders", required = true)
     public Integer completeOrderPay;
 
     public Integer getCancelOrderDay() {

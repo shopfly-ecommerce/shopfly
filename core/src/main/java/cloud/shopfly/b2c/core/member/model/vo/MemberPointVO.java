@@ -21,7 +21,7 @@ import javax.validation.constraints.Min;
 
 /**
  *
- * 会员积分查询
+ * Member Points Enquiry
  * @author zh
  * @version v70
  * @since v7.0
@@ -30,15 +30,15 @@ import javax.validation.constraints.Min;
 public class MemberPointVO {
 
     /**
-     * 等级积分
+     * Level score
      */
-    @Min(message="必须为数字", value = 0)
-    @ApiModelProperty(name="grade_point",value="等级积分",required=false)
+    @Min(message="Must be a number", value = 0)
+    @ApiModelProperty(name="grade_point",value="Level score",required=false)
     private Integer gradePoint;
 
-    /**消费积分*/
-    @Min(message="必须为数字", value = 0)
-    @ApiModelProperty(name="consum_point",value="消费积分",required=false)
+    /**consumption score*/
+    @Min(message="Must be a number", value = 0)
+    @ApiModelProperty(name="consum_point",value="consumption score",required=false)
     private Integer consumPoint;
 
     public Integer getGradePoint() {

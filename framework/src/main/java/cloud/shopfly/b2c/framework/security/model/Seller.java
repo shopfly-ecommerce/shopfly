@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.framework.security.model;
 
 /**
  *
- * 卖家
+ * The seller
  * Created by kingapex on 2018/3/11.
  *
  * @author kingapex
@@ -28,23 +28,23 @@ package cloud.shopfly.b2c.framework.security.model;
 public class Seller extends  Buyer {
 
     /**
-     * 卖家id
+     * The sellerid
      */
     private  Integer sellerId;
 
     /**
-     * 卖家店铺名称
+     * Sellers Shop Name
      */
     private String sellerName;
     
     /**
-     * 是否是自营  0 不是  1是
+     * Proprietary or not0 not1is
      */
     private Integer selfOperated;
 
 
     public Seller() {
-         //seller有 买家的角色和卖宾角色
+         // Seller has the role of buyer and seller
          add( Role.SELLER.name());
     }
 

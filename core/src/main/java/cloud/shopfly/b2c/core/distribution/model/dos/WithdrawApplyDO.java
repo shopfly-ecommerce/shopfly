@@ -24,13 +24,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 提现申请
+ * Withdrawal application
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 下午2:37
+ * 2018/5/21 In the afternoon2:37
  */
 @Table(name = "es_withdraw_apply")
 @ApiModel
@@ -43,64 +43,64 @@ public class WithdrawApplyDO {
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 提现金额
+     * Withdrawal amount
      **/
     @Column(name = "apply_money")
-    @ApiModelProperty(value = "提现金额")
+    @ApiModelProperty(value = "Withdrawal amount")
     private Double applyMoney;
     /**
-     * 提现状态
+     * Withdrawal state
      **/
     @Column()
-    @ApiModelProperty(value = "提现状态")
+    @ApiModelProperty(value = "Withdrawal state")
     private String status;
     /**
-     * 会员id
+     * membersid
      **/
     @Column(name = "member_id")
-    @ApiModelProperty(value = "会员id")
+    @ApiModelProperty(value = "membersid")
     private Integer memberId;
     /**
-     * 会员名字
+     * The member name
      **/
     @Column(name = "member_name")
-    @ApiModelProperty(value = "会员名")
+    @ApiModelProperty(value = "Member name")
     private String memberName;
     /**
-     * 申请备注
+     * Application note
      **/
     @Column(name = "apply_remark")
-    @ApiModelProperty(value = "申请备注")
+    @ApiModelProperty(value = "Application note")
     private String applyRemark;
     /**
-     * 审核备注
+     * Review the note
      **/
     @Column(name = "inspect_remark")
-    @ApiModelProperty(value = "审核备注")
+    @ApiModelProperty(value = "Review the note")
     private String inspectRemark;
     /**
-     * 转账备注
+     * Transfer note
      **/
     @Column(name = "transfer_remark")
-    @ApiModelProperty(value = "转账备注")
+    @ApiModelProperty(value = "Transfer note")
     private String transferRemark;
     /**
-     * 申请时间
+     * To apply for time
      **/
     @Column(name = "apply_time")
-    @ApiModelProperty(value = "申请时间")
+    @ApiModelProperty(value = "To apply for time")
     private Long applyTime;
     /**
-     * 审核时间
+     * Audit time
      **/
     @Column(name = "inspect_time")
-    @ApiModelProperty(value = "审核时间")
+    @ApiModelProperty(value = "Audit time")
     private Long inspectTime;
     /**
-     * 转账时间
+     * Transfer time
      **/
     @Column(name = "transfer_time")
-    @ApiModelProperty(value = "转账时间")
+    @ApiModelProperty(value = "Transfer time")
     private Long transferTime;
 
 

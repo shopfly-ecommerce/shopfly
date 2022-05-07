@@ -31,13 +31,13 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品全文检索
+ * @Description: Full text product search
  * @date 2018/6/1915:55
  * @since v7.0.0
  */
 @RestController
 @RequestMapping("/seller/goods/search")
-@Api(description = "商品检索相关API")
+@Api(description = "Product retrieval correlationAPI")
 public class GoodsSearchSellerController {
 
     @Autowired
@@ -46,13 +46,13 @@ public class GoodsSearchSellerController {
     private MessageSender messageSender;
 
     @GetMapping
-    @ApiOperation(value = "商品索引初始化")
+    @ApiOperation(value = "The commodity index is initialized")
     public String create(){
 
         if (progressManager.getProgress(TaskProgressConstant.GOODS_INDEX) != null) {
-            throw new ResourceNotFoundException("有索引任务正在进行中，需等待本次任务完成后才能再次生成。");
+            throw new ResourceNotFoundException("An index task is in progress and can be generated only after the task is complete.");
         }
-        /** 发送索引生成消息 */
+        /** Send index generation message*/
         this.messageSender.send(new MqMessage(AmqpExchange.INDEX_CREATE, AmqpExchange.INDEX_CREATE+"_ROUTING","1"));
 
         return TaskProgressConstant.GOODS_INDEX;

@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 限时抢购时刻业务层
+ * Flash sale moment business layer
  * @author Snow
  * @version v2.0.0
  * @since v7.0.0
@@ -31,51 +31,51 @@ import java.util.List;
 public interface SeckillRangeManager	{
 
 	/**
-	 * 查询限时抢购时刻列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
+	 * Query the flash sale time list
+	 * @param page The page number
+	 * @param pageSize Number each page
 	 * @return Page
 	 */
 	Page list(int page, int pageSize);
 
 
 	/**
-	* 修改限时抢购时刻
-	* @param seckillRange 限时抢购时刻
-	* @param id 限时抢购时刻主键
-	* @return SeckillRange 限时抢购时刻
+	* Modify flash sale moments
+	* @param seckillRange Flash sale time
+	* @param id Flash sale time primary key
+	* @return SeckillRange Flash sale time
 	*/
 	SeckillRangeDO edit(SeckillRangeDO seckillRange, Integer id);
 
 	/**
-	 * 删除限时抢购时刻
-	 * @param id 限时抢购时刻主键
+	 * Delete flash sale moments
+	 * @param id Flash sale time primary key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取限时抢购时刻
-	 * @param id 限时抢购时刻主键
-	 * @return SeckillRange  限时抢购时刻
+	 * Get a flash sale moment
+	 * @param id Flash sale time primary key
+	 * @return SeckillRange  Flash sale time
 	 */
 	SeckillRangeDO getModel(Integer id);
 
 	/**
-	 * 根据时刻的集合，入库
+	 * According to the set of time, storage
 	 * @param list
 	 * @param seckillId
 	 */
 	void addList(List<Integer> list, Integer seckillId);
 
 	/**
-	 * 根据限时抢购活动ID，读取此时刻集合
+	 * According to a flash saleID, reads the moment collection
 	 * @param seckillId
 	 * @return
 	 */
 	List<SeckillRangeDO> getList(Integer seckillId);
 
 	/**
-	 * 读取当期那秒杀时刻列表
+	 * Read the list of current seconds
 	 * @return
 	 */
 	List<TimeLineVO> readTimeList();

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 草稿商品sku业务类
+ * The draft of goodsskuBusiness class
  * @author fk
  * @version v2.0
  * @since v7.0.0
@@ -54,10 +54,10 @@ public class DraftGoodsSkuManagerImpl implements DraftGoodsSkuManager {
 		List<GoodsSkuVO> skuList = goodsVO.getSkuList();
 		if(StringUtil.isNotEmpty(skuList)){
 			for(GoodsSkuVO skuVO : skuList){
-				// 将specValue 转成json放到specs
+				// Convert specValue to JSON and put specs on it
 				skuVO.setSpecs(JsonUtil.objectToJson(skuVO.getSpecList()));
 				skuVO.setGoodsId(draftGoodsId);
-				// po vo转换
+				// Po vo conversion
 				DraftGoodsSkuDO draftGoodsSku = new DraftGoodsSkuDO(skuVO);
 				this.daoSupport.insert(draftGoodsSku);
 			}

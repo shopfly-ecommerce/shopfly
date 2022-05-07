@@ -30,14 +30,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * 支付宝统一登陆
+ * Alipay unified landing
  *
  * @author cs
  * @version v1.0
  * @since v7.2.2
  * 2020-10-30
  */
-@Api(description = "支付宝统一登陆")
+@Api(description = "Alipay unified landing")
 @RestController
 @RequestMapping("/alipay")
 @Validated
@@ -47,14 +47,14 @@ public class LoginAlipayController {
     @Autowired
     private LoginAlipayManager loginAlipayManager;
 
-    @ApiOperation(value = "获取授权页地址")
-    @ApiImplicitParam(name	= "redirectUri",	value =	"授权成功跳转地址(需要urlEncode整体加密)",	required = true, dataType = "string",	paramType =	"query")
+    @ApiOperation(value = "Gets the authorization page address")
+    @ApiImplicitParam(name	= "redirectUri",	value =	"The redirect address is successfully authorized(Need to beurlEncodeThe whole encryption)",	required = true, dataType = "string",	paramType =	"query")
     @GetMapping("/wap/getLoginUrl")
     public String getLoginUrl(@RequestParam("redirectUri") String  redirectUri){
         return  loginAlipayManager.getLoginUrl(redirectUri);
     }
 
-    @ApiOperation(value = "网页登陆")
+    @ApiOperation(value = "Landing page")
     @GetMapping("/wap/login")
     public Map h5Login(String code, String uuid){
         return loginAlipayManager.wapLogin(code,uuid);

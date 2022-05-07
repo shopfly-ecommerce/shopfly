@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 模版详细配置
+ * Template configuration details
  *
  * @author fk
  * @version v1.0
@@ -67,29 +67,29 @@ public class ShipTemplateSettingDO implements Serializable {
     @Column(name = "rate_area_name")
     private String rateAreaName;
 
-    @ApiParam("价格类型：absolute:绝对值；percentage:百分比")
+    @ApiParam("Price type：absolute:The absolute value；percentage:The percentage")
     @Column(name = "amt_type")
     private String amtType;
 
-    @ApiParam("价格")
+    @ApiParam("Price")
     @Column(name = "amt")
     private Double amt;
 
-    @ApiParam("条件类型：price:价格;weight:重量;items:数量")
+    @ApiParam("Conditions in the：price:Price;weight:Weight;items:Quantity")
     @Column(name = "conditions_type")
     private String conditionsType;
 
 
-    @ApiParam("区间开始")
+    @ApiParam("Interval to")
     @Column(name = "region_start")
     private Double regionStart;
 
-    @ApiParam("区间结束")
+    @ApiParam("End of the range")
     @Column(name = "region_end")
     private Double regionEnd;
 
 
-    @ApiParam("序号")
+    @ApiParam("The serial number")
     @Column(name = "sort")
     private Integer sort;
 

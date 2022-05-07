@@ -21,52 +21,52 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 电子面单参数借口
+ * Electron surface single parameter excuse
  *
  * @author dongxin
  * @version v1.0
  * @since v6.4.0
- * 2017年8月10日 下午2:29:05
+ * 2017years8month10On the afternoon2:29:05
  */
 public interface WayBillEvent {
 
 
     /**
-     * 配置各个电子面单的参数
+     * Configure the parameters of each electronic sheet
      *
-     * @return 在页面加载的电子面单参数
+     * @return Single parameter of the electronic surface loaded in the page
      */
     List<ConfigItem> definitionConfigItem();
 
     /**
-     * 获取插件ID
+     * To get the pluginID
      *
      * @return
      */
     String getPluginId();
 
     /**
-     * 创建电子面单
+     * Create an electron sheet
      *
-     * @param orderSn 订单编号
-     * @param logId   物流公司id
-     * @param config  参数配置
+     * @param orderSn Order no.
+     * @param logId   Logistics companyid
+     * @param config  Parameter configuration
      * @return
      * @throws Exception
      */
     String createPrintData(String orderSn, Integer logId, Map config) throws Exception;
 
     /**
-     * 获取插件名称
+     * Get the plug-in name
      *
-     * @return 插件名称
+     * @return The plug-in name
      */
     String getPluginName();
 
     /**
-     * 电子面单是否开启
+     * Whether the electronic sheet is open
      *
-     * @return 0 不开启  1 开启
+     * @return 0 Dont open1 open
      */
     Integer getOpen();
 

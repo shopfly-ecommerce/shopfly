@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.util.DateUtil;
 import java.util.List;
 
 /**
- * 参数验证
+ * Parameter validation
  * @author Snow create in 2018/3/30
  * @version v2.0
  * @since v7.0.0
@@ -32,39 +32,39 @@ public class PromotionValid {
 
 
     /**
-     * 参数验证
-     * 1、活动起始时间必须大于当前时间
-     * 2、验证活动开始时间是否大于活动结束时间
+     * Parameter validation
+     * 1、The start time of the activity must be greater than the current time
+     * 2、Verify whether the activity start time is longer than the activity end time
      *
-     * 无返回值，如有错误直接抛异常
-     * @param startTime 活动开始时间
-     * @param endTime   活动结束时间
-     * @param rangeType 是否全部商品参与
-     * @param goodsList 选择的商品
+     * No return value. If there is an error, throw an exception directly
+     * @param startTime Activity start time
+     * @param endTime   End time
+     * @param rangeType Whether all goods participate
+     * @param goodsList Selection of goods
      *
      */
     public static void paramValid(Long startTime, Long endTime, int rangeType, List<PromotionGoodsDTO> goodsList){
 
         long nowTime  = DateUtil.getDateline();
 
-        //如果活动起始时间小于现在时间
+        // If the activity start time is less than the present time
         if(startTime.longValue() < nowTime){
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"活动起始时间必须大于当前时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"The start time of the activity must be greater than the current time");
         }
 
-        // 开始时间不能大于结束时间
+        // The start time cannot be later than the end time
         if (startTime.longValue() > endTime.longValue() ) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"活动起始时间不能大于活动结束时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"The start time cannot be later than the end time");
         }
 
-        //部分商品
+        // Part of the goods
         int part = 2;
 
-        // 如果促销活动选择的是部分商品参加活动
+        // If the promotional activities choose to participate in part of the commodity activities
         if (rangeType == part) {
-            // 商品id组不能为空
+            // The commodity ID group cannot be empty
             if (goodsList == null) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"请选择要参与活动的商品");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER,"Please select the products to participate in the campaign");
             }
         }
     }

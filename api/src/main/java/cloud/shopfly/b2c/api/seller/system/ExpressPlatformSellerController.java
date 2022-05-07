@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 快递平台控制器
+ * Express platform controller
  *
  * @author zh
  * @version v7.0.0
@@ -38,17 +38,17 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("/seller/systems/express-platforms")
-@Api(description = "快递平台相关API")
+@Api(description = "Express platform relatedAPI")
 public class ExpressPlatformSellerController {
 
     @Autowired
     private ExpressPlatformManager expressPlatformManager;
 
 
-    @ApiOperation(value = "查询快递平台列表", response = ExpressPlatformDO.class)
+    @ApiOperation(value = "Query the list of delivery platforms", response = ExpressPlatformDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -56,25 +56,25 @@ public class ExpressPlatformSellerController {
         return this.expressPlatformManager.list(pageNo, pageSize);
     }
 
-    @ApiOperation(value = "修改快递平台", response = SmsPlatformDO.class)
+    @ApiOperation(value = "Modify the express delivery platform", response = SmsPlatformDO.class)
     @PutMapping(value = "/{bean}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bean", value = "快递平台bean id", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "express_platform", value = "快递平台对象", required = true, dataType = "ExpressPlatformVO", paramType = "body")
+            @ApiImplicitParam(name = "bean", value = "Delivery platformbean id", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "express_platform", value = "Express platform object", required = true, dataType = "ExpressPlatformVO", paramType = "body")
     })
     public ExpressPlatformVO edit(@PathVariable String bean, @RequestBody @ApiIgnore ExpressPlatformVO expressPlatformVO) {
         expressPlatformVO.setBean(bean);
         return this.expressPlatformManager.edit(expressPlatformVO);
     }
 
-    @ApiOperation(value = "获取快递平台的配置", response = String.class)
+    @ApiOperation(value = "Get the configuration of the delivery platform", response = String.class)
     @GetMapping("/{bean}")
-    @ApiImplicitParam(name = "bean", value = "快递平台bean id", required = true, dataType = "String", paramType = "path")
+    @ApiImplicitParam(name = "bean", value = "Delivery platformbean id", required = true, dataType = "String", paramType = "path")
     public ExpressPlatformVO getUploadSetting(@PathVariable String bean) {
         return this.expressPlatformManager.getExoressConfig(bean);
     }
 
-    @ApiOperation(value = "开启某个快递平台方案", response = String.class)
+    @ApiOperation(value = "Start a delivery platform solution", response = String.class)
     @PutMapping("/{bean}/open")
     @ApiImplicitParam(name = "bean", value = "bean", required = true, dataType = "String", paramType = "path")
     public String open(@PathVariable String bean) {

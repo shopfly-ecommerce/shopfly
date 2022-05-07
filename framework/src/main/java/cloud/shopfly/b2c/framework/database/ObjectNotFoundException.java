@@ -16,10 +16,10 @@
 package cloud.shopfly.b2c.framework.database;
 
 /**
- * 对像未找到异常<br>
- * 多用于根据某id查询一条记录，但此记录不存在
+ * No exception was found on the object<br>
+ * Usually used according toidQuery a record, but the record does not exist
  * @author kingapex
- *2010-4-9上午09:09:20
+ *2010-4-9In the morning09:09:20
  */
 public class ObjectNotFoundException extends DBRuntimeException {
 

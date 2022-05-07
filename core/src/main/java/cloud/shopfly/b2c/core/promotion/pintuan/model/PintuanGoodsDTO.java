@@ -16,22 +16,22 @@
 package cloud.shopfly.b2c.core.promotion.pintuan.model;
 
 /**
- * 拼团商品信息，用于传递pintuan活动包含时间参数的DTO
+ * Group commodity information, used for transmissionpintuanThe activity contains a time parameterDTO
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-28 上午6:38
+ * 2019-02-28 In the morning6:38
  */
 public class PintuanGoodsDTO extends PintuanGoodsDO {
 
     /**
-     * 开始时间
+     * The start time
      */
     private Long startTime;
 
     /**
-     * 结束时间
+     * The end of time
      */
     private Long endTime;
 

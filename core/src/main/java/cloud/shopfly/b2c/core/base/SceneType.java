@@ -16,43 +16,43 @@
 package cloud.shopfly.b2c.core.base;
 
 /**
- * 图片验证码业务类型
+ * Image verification code service type
  *
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月19日 下午4:35:32
+ * 2018years3month19On the afternoon4:35:32
  */
 public enum SceneType {
 
     /**
-     * 验证码登录
+     * Verification code login
      */
-    LOGIN("验证码登录"),
+    LOGIN("Verification code login"),
     /**
-     * 手机注册
+     * Mobile phone registered
      */
-    REGISTER("手机注册"),
+    REGISTER("Mobile phone registered"),
     /**
-     * 找回密码
+     * Retrieve password
      */
-    FIND_PASSWORD("找回密码"),
+    FIND_PASSWORD("Retrieve password"),
     /**
-     * 绑定手机
+     * Binding mobile phone
      */
-    BIND_MOBILE("绑定手机"),
+    BIND_MOBILE("Binding mobile phone"),
     /**
-     * 修改密码
+     * Change the password
      */
-    MODIFY_PASSWORD("修改密码"),
+    MODIFY_PASSWORD("Change the password"),
     /**
-     * 添加店员
+     * Add a clerk
      */
-    ADD_CLERK("添加店员"),
+    ADD_CLERK("Add a clerk"),
     /**
-     * 验证手机
+     * Verify the mobile phone
      */
-    VALIDATE_MOBILE("验证手机");
+    VALIDATE_MOBILE("Verify the mobile phone");
 
     private String description;
 

@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 原路退回使用vo
+ * @Description: Return to the original routevo
  * @date 2018/4/2314:12
  * @since v7.0.0
  */
@@ -30,27 +30,27 @@ public class RefundBill implements Serializable {
     private static final long serialVersionUID = 6902367702212390171L;
 
     /**
-     * 退款编号
+     * The refund number
      */
     private String refundSn;
 
     /**
-     * 退款金额
+     * The refund amount
      */
     private Double refundPrice;
 
     /**
-     * 交易金额
+     * Transaction amount
      */
     private Double tradePrice;
 
     /**
-     * 第三方订单号
+     * Third Party Order No.
      */
     private String returnTradeNo;
 
     /**
-     * 支付时使用的参数
+     * The parameters used to make the payment
      */
     private Map<String, String> configMap;
 

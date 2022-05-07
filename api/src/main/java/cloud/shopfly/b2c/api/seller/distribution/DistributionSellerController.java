@@ -34,17 +34,17 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 后台分销商管理
+ * Background Distributor management
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/25 上午10:55
+ * 2018/5/25 In the morning10:55
  */
 @RestController
 @RequestMapping("/seller/distribution/member")
-@Api(description = "分销商")
+@Api(description = "distributors")
 public class DistributionSellerController {
 
     @Autowired
@@ -52,12 +52,12 @@ public class DistributionSellerController {
 
     protected final Log logger = LogFactory.getLog(this.getClass());
 
-    @ApiOperation("分销商列表")
+    @ApiOperation("List of Distributors")
     @GetMapping
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "member_name", value = "会员名字", required = false, paramType = "query", dataType = "String", allowMultiple = false),
-            @ApiImplicitParam(name = "page_size", value = "页码大小", required = false, paramType = "query", dataType = "int", allowMultiple = false),
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "member_name", value = "The member name", required = false, paramType = "query", dataType = "String", allowMultiple = false),
+            @ApiImplicitParam(name = "page_size", value = "Page size", required = false, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, paramType = "query", dataType = "int", allowMultiple = false),
     })
     public Page<DistributionVO> page(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @ApiIgnore String memberName) {
 
@@ -66,18 +66,18 @@ public class DistributionSellerController {
         } catch (DistributionException e) {
             throw e;
         } catch (Exception e) {
-            logger.error("获取模版异常：", e);
+            logger.error("Template obtaining exception：", e);
             throw new DistributionException(DistributionErrorCode.E1000.code(), DistributionErrorCode.E1000.des());
         }
     }
 
 
 
-    @ApiOperation("修改模版")
+    @ApiOperation("Modify the template")
     @PutMapping("/tpl")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "member_id", value = "会员ID", required = true, paramType = "query", dataType = "int", allowMultiple = false),
-            @ApiImplicitParam(name = "tpl_id", value = "模版id", required = true, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "member_id", value = "membersID", required = true, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "tpl_id", value = "templateid", required = true, paramType = "query", dataType = "int", allowMultiple = false),
     })
     public void changeTpl(@ApiIgnore Integer memberId, @ApiIgnore Integer tplId) throws Exception {
         if (memberId == null || tplId == null) {
@@ -89,7 +89,7 @@ public class DistributionSellerController {
             throw e;
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("修改模版异常：", e);
+            logger.error("Template modification is abnormal：", e);
             throw new DistributionException(DistributionErrorCode.E1000.code(), DistributionErrorCode.E1000.des());
         }
     }

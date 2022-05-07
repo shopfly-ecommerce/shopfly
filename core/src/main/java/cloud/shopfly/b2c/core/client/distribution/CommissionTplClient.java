@@ -18,19 +18,19 @@ package cloud.shopfly.b2c.core.client.distribution;
 import cloud.shopfly.b2c.core.distribution.model.dos.CommissionTpl;
 
 /**
- * 模版client
+ * templateclient
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/8/14 下午2:17
+ * 2018/8/14 In the afternoon2:17
  */
 
 public interface CommissionTplClient {
 
     /**
-     * 获取默认模版
+     * Get the default template
      *
      * @return
      */

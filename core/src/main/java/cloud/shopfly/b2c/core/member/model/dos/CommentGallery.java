@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 评论图片实体
+ * Comment on image entities
  * @author fk
  * @version v1.0
  * @since v7.0.0
@@ -41,25 +41,25 @@ public class CommentGallery implements Serializable {
 			
     private static final long serialVersionUID = 8048552718399969L;
     
-    /**主键*/
+    /**A primary key*/
     @Id(name = "img_id")
     @ApiModelProperty(hidden=true)
     private Integer imgId;
-    /**主键*/
+    /**A primary key*/
     @Column(name = "comment_id")
-    @ApiModelProperty(name="comment_id",value="评论主键",required=false)
+    @ApiModelProperty(name="comment_id",value="Comment on the primary key",required=false)
     private Integer commentId;
-    /**图片路径*/
+    /**Image path*/
     @Column(name = "original")
-    @ApiModelProperty(name="original",value="图片路径",required=false)
+    @ApiModelProperty(name="original",value="Image path",required=false)
     private String original;
-    /**排序*/
+    /**sort*/
     @Column(name = "sort")
-    @ApiModelProperty(name="sort",value="排序",required=false)
+    @ApiModelProperty(name="sort",value="sort",required=false)
     private Integer sort;
-    /**图片所属 0：初评，1：追评*/
+    /**Image host0：The intern,1：After a review of the*/
     @Column(name = "img_belong")
-    @ApiModelProperty(name="img_belong",value="图片所属 0：初评，1：追评",required=false)
+    @ApiModelProperty(name="img_belong",value="Image host0：The intern,1：After a review of the",required=false)
     private Integer imgBelong;
 
     @PrimaryKeyField

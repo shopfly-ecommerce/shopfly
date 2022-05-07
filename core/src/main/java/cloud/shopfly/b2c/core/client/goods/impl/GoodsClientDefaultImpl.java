@@ -46,7 +46,7 @@ import java.util.Set;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品对外的接口实现
+ * @Description: External interface realization of goods
  * @date 2018/7/26 10:43
  * @since v7.0.0
  */
@@ -107,7 +107,7 @@ public class GoodsClientDefaultImpl implements GoodsClient {
     public void updateCommentCount(Integer goodsId) {
         String updateSql = "update es_goods set comment_num=comment_num + 1 where goods_id=?";
         this.daoSupport.execute(updateSql, goodsId);
-        // 发送商品消息变化消息
+        // Send a commodity message change message
         GoodsChangeMsg goodsChangeMsg = new GoodsChangeMsg(new Integer[]{goodsId},
                 GoodsChangeMsg.AUTO_UPDATE_OPERATION);
         this.messageSender.send(new MqMessage(AmqpExchange.GOODS_CHANGE, AmqpExchange.GOODS_CHANGE + "_ROUTING", goodsChangeMsg));
@@ -127,7 +127,7 @@ public class GoodsClientDefaultImpl implements GoodsClient {
             this.daoSupport.execute(sql, sku.getNum(), sku.getGoodsId());
             set.add(sku.getGoodsId());
         }
-        // 发送修改商品消息
+        // Send a modified commodity message
         GoodsChangeMsg goodsChangeMsg = new GoodsChangeMsg(set.toArray(new Integer[set.size()]),
                 GoodsChangeMsg.AUTO_UPDATE_OPERATION);
         this.messageSender.send(new MqMessage(AmqpExchange.GOODS_CHANGE, AmqpExchange.GOODS_CHANGE + "_ROUTING", goodsChangeMsg));
@@ -171,24 +171,24 @@ public class GoodsClientDefaultImpl implements GoodsClient {
     @Override
     public GoodsSnapshotVO queryGoodsSnapShotInfo(Integer goodsId) {
 
-        //商品
+        // product
         GoodsDO goods = this.goodsQueryManager.getModel(goodsId);
 
-        //判断是否为积分商品
+        // Determine whether it is an integral commodity
         if (GoodsType.POINT.name().equals(goods.getGoodsType())) {
-            //积分兑换信息
+            // Points exchange information
             ExchangeDO exchangeDO = this.exchangeGoodsClient.getModelByGoods(goodsId);
             goods.setPoint(exchangeDO.getExchangePoint());
         }
 
 
-        //参数
+        // parameter
         List<GoodsParamsGroupVO> paramList = goodsParamsManager.queryGoodsParams(goods.getCategoryId(), goodsId);
-        //品牌
+        // brand
         BrandDO brand = brandManager.getModel(goods.getBrandId());
-        //分类
+        // Categories
         CategoryDO category = categoryManager.getModel(goods.getCategoryId());
-        //相册
+        // Photo album
         List<GoodsGalleryDO> galleryList = goodsGalleryManager.list(goodsId);
 
         return new GoodsSnapshotVO(goods, paramList, brand, category, galleryList);

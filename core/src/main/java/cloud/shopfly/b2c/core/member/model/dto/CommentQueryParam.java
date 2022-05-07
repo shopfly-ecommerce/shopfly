@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 /**
- * 评论查询条件
+ * Comment Query Conditions
  *
  * @author fk
  * @version v1.0
@@ -30,37 +30,37 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class CommentQueryParam {
 
-    @ApiModelProperty(value = "评论内容", name = "content")
+    @ApiModelProperty(value = "Comment on the content", name = "content")
     private String content;
 
-    @ApiModelProperty(value = "商品id", name = "goods_id")
+    @ApiModelProperty(value = "productid", name = "goods_id")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "商品名称", name = "goods_name")
+    @ApiModelProperty(value = "Name", name = "goods_name")
     private String goodsName;
 
-    @ApiModelProperty(value = "好中差评", name = "grade")
+    @ApiModelProperty(value = "Good to bad", name = "grade")
     private String grade;
 
-    @ApiModelProperty(value = "是否有图", name = "have_image")
+    @ApiModelProperty(value = "If there is a figure", name = "have_image")
     private Boolean haveImage;
 
-    @ApiModelProperty(value = "模糊查询的关键字", name = "keyword")
+    @ApiModelProperty(value = "Fuzzy query keyword", name = "keyword")
     private String keyword;
 
-    @ApiModelProperty(value = "会员id", name = "member_id")
+    @ApiModelProperty(value = "membersid", name = "member_id")
     private Integer memberId;
 
-    @ApiModelProperty(value = "会员名称", name = "member_name")
+    @ApiModelProperty(value = "Member name", name = "member_name")
     private String memberName;
 
-    @ApiModelProperty(value = "页码", name = "page_no")
+    @ApiModelProperty(value = "The page number", name = "page_no")
     private Integer pageNo;
 
-    @ApiModelProperty(value = "分页数", name = "page_size")
+    @ApiModelProperty(value = "Number of pages", name = "page_size")
     private Integer pageSize;
 
-    @ApiModelProperty(value = "回复状态", name = "reply_status")
+    @ApiModelProperty(value = "Reply to state", name = "reply_status")
     private Integer replyStatus;
 
     public String getContent() {

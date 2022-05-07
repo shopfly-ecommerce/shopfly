@@ -23,19 +23,19 @@ import cloud.shopfly.b2c.core.base.SearchCriteria;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 订单相关统计
+ * Order related statistics
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/4/16 下午1:53
+ * 2018/4/16 In the afternoon1:53
  */
 
 public interface OrderStatisticManager {
 
     /**
-     * 获取订单下单金额
+     * Get the order order amount
      *
      * @param searchCriteria
      * @param orderStatus
@@ -44,48 +44,48 @@ public interface OrderStatisticManager {
     MultipleChart getOrderMoney(SearchCriteria searchCriteria, String orderStatus);
 
     /**
-     * 获取订单下单金额
+     * Get the order order amount
      *
-     * @param searchCriteria 搜索参数
-     * @param orderStatus    订单状态
-     * @param pageNo         页码
-     * @param pageSize       分页大小
+     * @param searchCriteria The search parameters
+     * @param orderStatus    Status
+     * @param pageNo         The page number
+     * @param pageSize       Page size
      * @return
      */
     Page getOrderPage(SearchCriteria searchCriteria, String orderStatus, Integer pageNo, Integer pageSize);
 
     /**
-     * 获取订单下单量
+     * Get the order quantity
      *
-     * @param searchCriteria 搜索参数
-     * @param orderStatus    订单状态
+     * @param searchCriteria The search parameters
+     * @param orderStatus    Status
      * @return
      */
     MultipleChart getOrderNum(SearchCriteria searchCriteria, String orderStatus);
 
 
     /**
-     * 获取销售收入统计
+     * Obtain sales revenue statistics
      *
      * @param searchCriteria
-     * @param pageNo         页码
-     * @param pageSize       分页大小
+     * @param pageNo         The page number
+     * @param pageSize       Page size
      * @return
      */
     Page getSalesMoney(SearchCriteria searchCriteria, Integer pageNo, Integer pageSize);
 
     /**
-     * 获取销售收入退款 统计
+     * Obtain sales revenue refund statistics
      *
      * @param searchCriteria
-     * @param pageNo         页码
-     * @param pageSize       分页大小
+     * @param pageNo         The page number
+     * @param pageSize       Page size
      * @return
      */
     Page getAfterSalesMoney(SearchCriteria searchCriteria, Integer pageNo, Integer pageSize);
 
     /**
-     * 销售收入总览
+     * An overview of sales revenue
      *
      * @param searchCriteria
      * @return
@@ -93,7 +93,7 @@ public interface OrderStatisticManager {
     SalesTotal getSalesMoneyTotal(SearchCriteria searchCriteria);
 
     /**
-     * 按区域分析下单会员量
+     * Analyze order member quantity by region
      *
      * @param searchCriteria
      * @return
@@ -101,7 +101,7 @@ public interface OrderStatisticManager {
     MapChartData getOrderRegionMember(SearchCriteria searchCriteria);
 
     /**
-     * 按区域分析下单数
+     * Analyze the singular by region
      *
      * @param searchCriteria
      * @return
@@ -109,7 +109,7 @@ public interface OrderStatisticManager {
     MapChartData getOrderRegionNum(SearchCriteria searchCriteria);
 
     /**
-     * 按区域分析下单金额
+     * Analyze order amount by region
      *
      * @param searchCriteria
      * @return
@@ -117,7 +117,7 @@ public interface OrderStatisticManager {
     MapChartData getOrderRegionMoney(SearchCriteria searchCriteria);
 
     /**
-     * 获取区域分析表格
+     * Get the region analysis table
      *
      * @param searchCriteria
      * @return
@@ -125,7 +125,7 @@ public interface OrderStatisticManager {
     Page getOrderRegionForm(SearchCriteria searchCriteria);
 
     /**
-     * 客单价分布
+     * Customer unit price distribution
      *
      * @param searchCriteria
      * @param prices
@@ -134,14 +134,14 @@ public interface OrderStatisticManager {
     SimpleChart getUnitPrice(SearchCriteria searchCriteria, Integer[] prices);
 
     /**
-     * 购买频次分析
+     * Purchase frequency analysis
      *
      * @return
      */
     Page getUnitNum();
 
     /**
-     * 购买时段分析
+     * Purchase period analysis
      *
      * @param searchCriteria
      * @return
@@ -149,7 +149,7 @@ public interface OrderStatisticManager {
     SimpleChart getUnitTime(SearchCriteria searchCriteria);
 
     /**
-     * 退款统计
+     * Refund statistics
      *
      * @param searchCriteria
      * @return

@@ -26,7 +26,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 商品可进行的操作
+ * Operations that can be performed on a commodity
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
@@ -35,7 +35,7 @@ import java.io.Serializable;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GoodsOperateAllowable implements Serializable {
 
-    @ApiModelProperty(value = "是否允许申请售后")
+    @ApiModelProperty(value = "Whether application for after-sales service is allowed")
     private Boolean allowApplyService;
 
     public Boolean getAllowApplyService() {
@@ -78,14 +78,14 @@ public class GoodsOperateAllowable implements Serializable {
     }
 
     /**
-     * 空构造器
+     * An empty constructor
      */
     public GoodsOperateAllowable() {
 
     }
 
     /**
-     * 根据各种状态构建对象
+     * Build objects from various states
      *
      * @param paymentTypeEnum
      * @param orderStatus
@@ -99,14 +99,14 @@ public class GoodsOperateAllowable implements Serializable {
 
         boolean defaultServiceStatus = ServiceStatusEnum.NOT_APPLY.value().equals(serviceStatus.value());
 
-        //货到付款
+        // Cash on delivery
         if (PaymentTypeEnum.COD.compareTo(paymentTypeEnum) == 0) {
 
-            //是否允许被申请售后 = 已收货 && 订单没有申请售后 && 订单是已发货状态
+            // Allowed to apply for after sale = Received && Order not applied for after sale && Order is shipped
             allowApplyService = PayStatusEnum.PAY_YES.value().equals(payStatus.value())
                     && defaultServiceStatus;
         } else {
-            //是否允许被申请售后 = 已付款 && 订单没有申请售后 && 订单是已收货状态
+            // Is it allowed to be applied for after sale = Paid && Order not applied for after sale && Order is received status
             allowApplyService = PayStatusEnum.PAY_YES.value().equals(payStatus.value())
                     && defaultServiceStatus
                     && ShipStatusEnum.SHIP_ROG.value().equals(shipStatus.value());

@@ -24,7 +24,7 @@ import cloud.shopfly.b2c.core.goods.model.vo.CategoryVO;
 import java.util.List;
 
 /**
- * 商品分类业务层
+ * Commodity classification business layer
  *
  * @author fk
  * @version v2.0
@@ -33,7 +33,7 @@ import java.util.List;
 public interface CategoryManager {
 
     /**
-     * 查询某分类下的子分类
+     * Example Query subcategories of a category
      *
      * @param parentId
      * @param format
@@ -42,7 +42,7 @@ public interface CategoryManager {
     List list(Integer parentId, String format);
 
     /**
-     * 查询所有的分类，父子关系
+     * Query all categories, parent - child relationships
      *
      * @param parentId
      * @return
@@ -50,15 +50,15 @@ public interface CategoryManager {
     List<CategoryVO> listAllChildren(Integer parentId);
 
     /**
-     * 获取商品分类
+     * Get product categories
      *
-     * @param id 商品分类主键
-     * @return CategoryDO 商品分类
+     * @param id Merchandise category primary key
+     * @return CategoryDO Category
      */
     CategoryDO getModel(Integer id);
 
     /**
-     * 获取某分类下的分类
+     * Gets a category under a category
      *
      * @param categoryId
      * @return
@@ -66,35 +66,35 @@ public interface CategoryManager {
     List<CategoryDO> getCategory(Integer categoryId);
 
     /**
-     * 添加商品分类
+     * Adding an item category
      *
      * @param category
-     *            商品分类
-     * @return Category 商品分类
+     *            Category
+     * @return Category Category
      */
     CategoryDO add(CategoryDO category);
 
     /**
-     * 修改商品分类
+     * Modification of commodity classification
      *
      * @param category
-     *            商品分类
+     *            Category
      * @param id
-     *            商品分类主键
-     * @return Category 商品分类
+     *            Merchandise category primary key
+     * @return Category Category
      */
     CategoryDO edit(CategoryDO category, Integer id);
 
     /**
-     * 删除商品分类
+     * Delete product Categories
      *
      * @param id
-     *            商品分类主键
+     *            Merchandise category primary key
      */
     void delete(Integer id);
 
     /**
-     * 保存分类绑定的品牌
+     * Save the brand bound by category
      *
      * @param categoryId
      * @param chooseBrands
@@ -103,7 +103,7 @@ public interface CategoryManager {
     List<CategoryBrandDO> saveBrand(Integer categoryId, Integer[] chooseBrands);
 
     /**
-     * 保存分类绑定的规格
+     * Save the category binding specifications
      *
      * @param categoryId
      * @param chooseSpecs

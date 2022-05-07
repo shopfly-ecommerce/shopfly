@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 收货操作VO
+ * Receiving operationVO
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
@@ -28,10 +28,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class RogVO {
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String orderSn;
 
-    @ApiModelProperty(value = "操作者")
+    @ApiModelProperty(value = "The operator")
     private String operator;
 
 

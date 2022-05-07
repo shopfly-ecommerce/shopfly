@@ -18,27 +18,27 @@ package cloud.shopfly.b2c.core.system.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 店铺站内消息枚举类
+ * @Description In-store message enumeration class
  * @ClassName ShopNoticeTypeEnum
- * @since v7.0 下午2:21 2018/7/10
+ * @since v7.0 In the afternoon2:21 2018/7/10
  */
 public enum NoticeTypeEnum {
     /**
-     * 订单
+     * The order
      */
-    ORDER("订单"),
+    ORDER("The order"),
     /**
-     * 商品
+     * product
      */
-    GOODS("商品"),
+    GOODS("product"),
     /**
-     * 售后
+     * after-sales
      */
-    AFTERSALE("售后"),
+    AFTERSALE("after-sales"),
     /**
-     * 其他
+     * other
      */
-    OTHER("其他");
+    OTHER("other");
 
     private String description;
 

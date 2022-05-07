@@ -27,13 +27,13 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 提成模版
+ * Royalty template
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/17 下午3:24
+ * 2018/5/17 In the afternoon3:24
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -41,77 +41,77 @@ public class CommissionTplVO implements Serializable {
 
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
 
     /**
-     * 模板名称
+     * Template name
      */
     @Column(name = "tpl_name")
-    @NotEmpty(message = "模版名称不能为空")
-    @ApiModelProperty(name = "tpl_name", value = "模版名称", required = false)
+    @NotEmpty(message = "Template names cannot be empty")
+    @ApiModelProperty(name = "tpl_name", value = "The name of the template", required = false)
     private String tplName;
 
     /**
-     * 模板说明
+     * Template description
      */
     @Column(name = "tpl_describe")
-    @ApiModelProperty(name = "tpl_describe", value = "模版描述", required = false)
+    @ApiModelProperty(name = "tpl_describe", value = "Template description", required = false)
     private String tplDescribe;
 
     /**
-     * 自动切换条件
+     * Automatic switching condition
      */
     @Column(name = "switch_model")
-    @NotEmpty(message = "切换模式不能为空 ")
-    @ApiModelProperty(name = "switch_model", value = "模版描述 MANUAL=手动 / AUTOMATIC=自动", required = false)
+    @NotEmpty(message = "The switching mode cannot be null")
+    @ApiModelProperty(name = "switch_model", value = "Template descriptionMANUAL=manual/ AUTOMATIC=automatic", required = false)
     private String switchModel;
 
 
     /**
-     * 切换条件：利润要求
+     * Switching conditions：Margin calls
      */
     @Column()
-    @NotNull(message = "利润要求不能为空")
-    @ApiModelProperty(value = "利润要求", required = false)
+    @NotNull(message = "The profit requirement cannot be empty")
+    @ApiModelProperty(value = "Margin calls", required = false)
     private Double profit;
 
 
     /**
-     * 切换条件：下线人数
+     * Switching conditions：The number of referrals
      */
     @Column()
-    @NotNull(message = "下线人数 不能为空")
-    @ApiModelProperty(value = "下线人数", required = false)
+    @NotNull(message = "The number of offline users cannot be empty")
+    @ApiModelProperty(value = "The number of referrals", required = false)
     private Integer num;
 
 
     /**
-     * 与消费者相差1级 时返利金额
+     * Difference with consumer1Level of rebate amount
      */
     @Column()
-    @NotNull(message = "相差1级返利金额 不能为空")
-    @ApiModelProperty(value = "相差1级返利金额 百分比值：填写1 则为百分之1", required = false)
+    @NotNull(message = "Difference between1The amount of class ii rebate cannot be empty")
+    @ApiModelProperty(value = "Difference between1Percentage value of level rebate amount：Fill in the1 Its percent1", required = false)
     private Double grade1;
 
     /**
-     * 与消费者相差2级 时返利金额
+     * Difference with consumer2Level of rebate amount
      */
     @Column()
-    @NotNull(message = "相差2级返利金额 不能为空")
-    @ApiModelProperty(value = "相差2级返利金额 百分比值：填写1 则为百分之1", required = false)
+    @NotNull(message = "Difference between2The amount of class ii rebate cannot be empty")
+    @ApiModelProperty(value = "Difference between2Percentage value of level rebate amount：Fill in the1 Its percent1", required = false)
     private Double grade2;
 
 
     /**
-     * 是否默认 1 默认，0 非默认
+     * Whether the default1 By default,0  default
      */
     @Column(name = "is_default")
-    @NotNull(message = "默认参数不能为空")
-    @ApiModelProperty(name = "is_default", value = "是否默认：1默认，0非默认", required = false)
+    @NotNull(message = "The default parameter cannot be null")
+    @ApiModelProperty(name = "is_default", value = "Whether the default：1By default,0 default", required = false)
     private Integer isDefault;
 
     public int getId() {

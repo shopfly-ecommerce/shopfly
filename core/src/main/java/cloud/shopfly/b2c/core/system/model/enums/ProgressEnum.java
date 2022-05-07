@@ -16,18 +16,18 @@
 package cloud.shopfly.b2c.core.system.model.enums;
 
 /**
- * 进度枚举
+ * The progress of the enumeration
  *
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2017年9月6日 下午8:44:42
+ * 2017years9month6On the afternoon8:44:42
  */
 public enum ProgressEnum {
 
 
 //  PROGRESS STATUS ENUM
-    DOING("进行中"), SUCCESS("成功"), EXCEPTION("异常");
+    DOING("ongoing"), SUCCESS("successful"), EXCEPTION("abnormal");
 
     String status;
 

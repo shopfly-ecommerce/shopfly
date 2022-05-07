@@ -21,23 +21,23 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 进度条
+ * The progress bar
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-02 下午3:40
+ * 2018-05-02 In the afternoon3:40
  */
 public class ProgressVo implements Serializable {
 
 
-    @ApiModelProperty("百分比")
+    @ApiModelProperty("The percentage")
     private Integer percentage = 0;
-    @ApiModelProperty("状态：枚举 ProgressEnum")
+    @ApiModelProperty("Status：The enumerationProgressEnum")
     private String status = "";
-    @ApiModelProperty("正在生成")
+    @ApiModelProperty("Being generated")
     private String text = "";
-    @ApiModelProperty("消息")
+    @ApiModelProperty("The message")
     private String message = "";
 
     public ProgressVo() {

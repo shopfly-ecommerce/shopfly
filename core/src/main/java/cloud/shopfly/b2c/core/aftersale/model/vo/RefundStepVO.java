@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author zjp
  * @version v7.0
- * @since v7.0 上午11:20 2018/5/2
+ * @since v7.0 In the morning11:20 2018/5/2
  */
 public class RefundStepVO implements Serializable {
 
@@ -44,7 +44,7 @@ public class RefundStepVO implements Serializable {
     }
 
     /**
-     * 检测操作是否在步骤中
+     * Check whether the operation is in the step
      *
      * @param operate
      * @return

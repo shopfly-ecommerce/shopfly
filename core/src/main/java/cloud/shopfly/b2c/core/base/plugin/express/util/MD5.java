@@ -19,13 +19,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * MD5 加密
+ * MD5 encryption
  *
  * @author zh
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/7/5 下午2:40
+ * 2018/7/5 In the afternoon2:40
  */
 public class MD5 {
     private static MessageDigest mdInst = null;
@@ -45,11 +45,11 @@ public class MD5 {
     public final static String encode(String s) {
         try {
             byte[] btInput = s.getBytes();
-            // 使用指定的字节更新摘要
+            // Updates the digest with the specified byte
             getMdInst().update(btInput);
-            // 获得密文
+            // Obtain ciphertext
             byte[] md = getMdInst().digest();
-            // 把密文转换成十六进制的字符串形式
+            // Converts the ciphertext to a hexadecimal string
             int j = md.length;
             char[] str = new char[j * 2];
             int k = 0;

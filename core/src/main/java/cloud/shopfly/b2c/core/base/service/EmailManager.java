@@ -19,42 +19,42 @@ import cloud.shopfly.b2c.core.base.model.vo.EmailVO;
 import cloud.shopfly.b2c.core.system.model.dos.SmtpDO;
 
 /**
- * 发送邮件接口
+ * Mail sending interface
  *
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月26日 下午3:11:00
+ * 2018years3month26On the afternoon3:11:00
  */
 public interface EmailManager {
 
     /**
-     * 邮件发送到amqp，供具体业务使用
+     * Email sent toamqpFor specific business use
      *
-     * @param emailVO 邮件发送vo
+     * @param emailVO Mail deliveryvo
      */
     void sendMQ(EmailVO emailVO);
 
     /**
-     * 邮件发送实现，供消费者调用
+     * Mail delivery implementation for consumers to call
      *
      * @param emailVO
      */
     void sendEmail(EmailVO emailVO);
 
     /**
-     * 通过java Transport发送邮件  支持ssl
+     * throughjava TransportSend Mail Supportssl
      *
-     * @param smtp    smtp设置
-     * @param emailVO 邮件内容
+     * @param smtp    smtpSet up the
+     * @param emailVO Email content
      */
     void sendMailByTransport(SmtpDO smtp, EmailVO emailVO);
 
     /**
-     * 通过java Transport发送邮件  不支持ssl
+     * throughjava TransportSending emails is not supportedssl
      *
-     * @param smtp    smtp设置
-     * @param emailVO 邮件内容
+     * @param smtp    smtpSet up the
+     * @param emailVO Email content
      */
     void sendMailByMailSender(SmtpDO smtp, EmailVO emailVO);
 }

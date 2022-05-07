@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 敏感词业务类
+ * Sensitive word business class
  * @author fk
  * @version v1.0
  * @since v7.0.0

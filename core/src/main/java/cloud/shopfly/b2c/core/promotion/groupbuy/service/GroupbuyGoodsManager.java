@@ -24,7 +24,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 团购商品业务层
+ * Group purchase commodity business layer
  *
  * @author Snow
  * @version v7.0.0
@@ -35,75 +35,75 @@ public interface GroupbuyGoodsManager {
 
 
     /**
-     * 商家查询团购商品列表
+     * Merchants check the list of products for group purchase
      *
-     * @param param 查询参数
+     * @param param Query parameters
      * @return Page
      */
     Page listPage(GroupbuyQueryParam param);
 
 
     /**
-     * 卖家查询团购商品列表
+     * The seller queries the list of group deals
      *
-     * @param param 查询参数
+     * @param param Query parameters
      * @return Page
      */
     Page listPageByBuyer(GroupbuyQueryParam param);
 
 
     /**
-     * 添加团购商品
+     * Add group purchase items
      *
-     * @param groupbuyGoods 团购商品
-     * @return GroupbuyGoods 团购商品
+     * @param groupbuyGoods A bulk goods
+     * @return GroupbuyGoods A bulk goods
      */
     GroupbuyGoodsDO add(GroupbuyGoodsDO groupbuyGoods);
 
     /**
-     * 修改团购商品
+     * Modify group purchase goods
      *
-     * @param groupbuyGoods 团购商品
-     * @param id            团购商品主键
-     * @return GroupbuyGoods 团购商品
+     * @param groupbuyGoods A bulk goods
+     * @param id            Group purchase commodity primary key
+     * @return GroupbuyGoods A bulk goods
      */
     GroupbuyGoodsDO edit(GroupbuyGoodsDO groupbuyGoods, Integer id);
 
     /**
-     * 删除团购商品
+     * Delete group purchase products
      *
-     * @param id 团购商品主键
+     * @param id Group purchase commodity primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取团购商品
+     * Get group-buy items
      *
-     * @param gbId 团购商品主键
-     * @return GroupbuyGoods  团购商品
+     * @param gbId Group purchase commodity primary key
+     * @return GroupbuyGoods  A bulk goods
      */
     GroupbuyGoodsVO getModel(Integer gbId);
 
 
     /**
-     * 获取团购商品
+     * Get group-buy items
      *
-     * @param actId   团购活动ID
-     * @param goodsId 商品ID
-     * @return GroupbuyGoods  团购商品
+     * @param actId   Group-buying activitiesID
+     * @param goodsId productID
+     * @return GroupbuyGoods  A bulk goods
      */
     GroupbuyGoodsDO getModel(Integer actId, Integer goodsId);
 
     /**
-     * 验证操作权限<br/>
-     * 如有问题直接抛出权限异常
+     * Verifying operation rights<br/>
+     * Throw a permission exception if there is a problem
      *
      * @param id
      */
     void verifyAuth(Integer id);
 
     /**
-     * 修改审核状态
+     * Modifying audit Status
      *
      * @param gbId
      * @param status
@@ -112,7 +112,7 @@ public interface GroupbuyGoodsManager {
 
 
     /**
-     * 扣减团购商品库存
+     * Deduct the inventory of group purchase goods
      *
      * @param orderSn
      * @param promotionDTOList
@@ -121,7 +121,7 @@ public interface GroupbuyGoodsManager {
     boolean cutQuantity(String orderSn, List<PromotionDTO> promotionDTOList);
 
     /**
-     * 恢复团购商品库存
+     * Restore group purchase goods inventory
      *
      * @param orderSn
      */
@@ -129,7 +129,7 @@ public interface GroupbuyGoodsManager {
 
 
     /**
-     * 查询团购商品信息和商品库存信息
+     * Query group purchase information and commodity inventory information
      *
      * @param id
      * @return
@@ -138,14 +138,14 @@ public interface GroupbuyGoodsManager {
 
 
     /**
-     * 根据商品id，修改团购商品信息
+     * According to the goodsid, modify group purchase commodity information
      *
      * @param goodsIds
      */
     void updateGoodsInfo(Integer[] goodsIds);
 
     /**
-     * 回滚库存
+     * Roll back the inventory
      *
      * @param promotionDTOList
      * @param orderSn

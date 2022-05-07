@@ -31,7 +31,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * 物流公司控制器
+ * Logistics company controller
  *
  * @author zjp
  * @version v7.0.0
@@ -40,7 +40,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/seller/systems/logi-companies")
-@Api(description = "物流公司相关API")
+@Api(description = "Logistics Company relatedAPI")
 @Validated
 public class LogiCompanySellerController {
 
@@ -48,19 +48,19 @@ public class LogiCompanySellerController {
     private LogiCompanyManager logiManager;
 
 
-    @ApiOperation(value = "查询物流公司列表", response = LogiCompanyDO.class)
+    @ApiOperation(value = "Query the list of logistics companies", response = LogiCompanyDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
-    public Page list(@ApiIgnore @NotNull(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotNull(message = "每页数量不能为空") Integer pageSize) {
+    public Page list(@ApiIgnore @NotNull(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotNull(message = "The number of pages cannot be empty") Integer pageSize) {
 
         return this.logiManager.list(pageNo, pageSize);
     }
 
 
-    @ApiOperation(value = "添加物流公司", response = LogiCompanyDO.class)
+    @ApiOperation(value = "Add logistics Company", response = LogiCompanyDO.class)
     @PostMapping
     public LogiCompanyDO add(@Valid LogiCompanyDO logi) {
 
@@ -70,9 +70,9 @@ public class LogiCompanySellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改物流公司", response = LogiCompanyDO.class)
+    @ApiOperation(value = "Modify logistics company", response = LogiCompanyDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public LogiCompanyDO edit(@Valid LogiCompanyDO logi, @PathVariable("id") Integer id) {
 
@@ -83,9 +83,9 @@ public class LogiCompanySellerController {
 
 
     @DeleteMapping
-    @ApiOperation(value = "删除物流公司")
+    @ApiOperation(value = "Delete logistics company")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的物流公司主键", required = true, dataType = "int", paramType = "query", allowMultiple = true)
+            @ApiImplicitParam(name = "id", value = "Logistics company primary key to delete", required = true, dataType = "int", paramType = "query", allowMultiple = true)
     })
     public String delete(Integer[] id) {
         this.logiManager.delete(id);
@@ -95,9 +95,9 @@ public class LogiCompanySellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个物流公司")
+    @ApiOperation(value = "Inquire about a logistics company")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的物流公司主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "To query the logistics company key", required = true, dataType = "int", paramType = "path")
     })
     public LogiCompanyDO get(@PathVariable("id") Integer id) {
 

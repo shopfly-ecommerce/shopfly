@@ -26,26 +26,26 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 会员追加评论dto
+ * Additional comments from membersdto
  * @author duanmingyu
  * @version v1.0
  * @since v7.1.0
  * @date 2019-05-09
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-@ApiModel(description = "会员评论vo")
+@ApiModel(description = "Member commentsvo")
 public class AdditionalCommentDTO implements Serializable {
 
     private static final long serialVersionUID = 3172988905896956148L;
 
-    @ApiModelProperty(name = "content", value = "追加评论内容", required = false)
+    @ApiModelProperty(name = "content", value = "Additional comments", required = false)
     private String content;
 
-    @ApiModelProperty(value = "追加评论的图片")
+    @ApiModelProperty(value = "Add comments to the picture")
     private List<String> images;
 
-    @ApiModelProperty(value = "会员初评ID",name = "comment_id", required = true)
-    @NotNull(message = "会员初评ID不能为空")
+    @ApiModelProperty(value = "Member of the internID",name = "comment_id", required = true)
+    @NotNull(message = "Member of the internIDCant be empty")
     private Integer commentId;
 
     public String getContent() {

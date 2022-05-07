@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.system.model.vo.ExpressPlatformVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 快递平台业务层
+ * Express delivery platform business layer
  *
  * @author zh
  * @version v7.0.0
@@ -31,32 +31,32 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface ExpressPlatformManager {
 
     /**
-     * 查询快递平台列表
+     * Query the list of delivery platforms
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加快递平台
+     * Add delivery platform
      *
-     * @param expressPlatformVO 快递平台
-     * @return expressPlatformVO 快递平台
+     * @param expressPlatformVO Delivery platform
+     * @return expressPlatformVO Delivery platform
      */
     ExpressPlatformVO add(ExpressPlatformVO expressPlatformVO);
 
     /**
-     * 修改快递平台
+     * Modify the express delivery platform
      *
-     * @param expressPlatformVO 快递平台
-     * @return ExpressPlatformDO 快递平台
+     * @param expressPlatformVO Delivery platform
+     * @return ExpressPlatformDO Delivery platform
      */
     ExpressPlatformVO edit(ExpressPlatformVO expressPlatformVO);
 
     /**
-     * 根据beanid获取快递平台
+     * According to thebeanidObtain express delivery platform
      *
      * @param bean beanid
      * @return
@@ -64,26 +64,26 @@ public interface ExpressPlatformManager {
     ExpressPlatformDO getExpressPlatform(String bean);
 
     /**
-     * 根据快递平台的beanid 获取快递平台的配置项
+     * According to the express platformbeanid Obtain the configuration items of the delivery platform
      *
-     * @param bean 快递平台beanid
-     * @return 快递平台
+     * @param bean Delivery platformbeanid
+     * @return Delivery platform
      */
     ExpressPlatformVO getExoressConfig(String bean);
 
     /**
-     * 开启某个快递平台
+     * Open a delivery platform
      *
      * @param bean
      */
     void open(String bean);
 
     /**
-     * 查询物流信息
+     * Query logistics Information
      *
-     * @param id 物流公司id
-     * @param nu  物流单号
-     * @return 物流详细
+     * @param id Logistics companyid
+     * @param nu  Logistics single number
+     * @return Logistics in detail
      */
     ExpressDetailVO getExpressDetail(Integer id, String nu);
 }

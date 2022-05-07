@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.goods.model.vo.GoodsParamsGroupVO;
 import java.util.List;
 
 /**
- * 草稿商品参数表业务层
+ * Draft commodity parameter sheet business layer
  * @author fk
  * @version v2.0
  * @since v7.0.0
@@ -30,14 +30,14 @@ import java.util.List;
 public interface DraftGoodsParamsManager {
 
 	/**
-	 * 添加草稿商品的参数集合
+	 * Adds a set of parameters for the draft item
 	 * @param goodsParamsList
 	 * @param draftGoodsId
 	 */
 	void addParams(List<GoodsParamsDO> goodsParamsList, Integer draftGoodsId);
 
 	/**
-	 * 查询分类关联的参数，同时返回已经添加的值
+	 * Query the parameters associated with a category and return the added values
 	 * @param categoryId
 	 * @param draftGoodsId
 	 * @return

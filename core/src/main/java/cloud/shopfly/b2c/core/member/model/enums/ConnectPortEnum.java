@@ -20,13 +20,13 @@ package cloud.shopfly.b2c.core.member.model.enums;
  * @version v7.0
  * @Description
  * @ClassName ConnectPortEnum
- * @since v7.0 上午10:31 2018/6/22
+ * @since v7.0 In the morning10:31 2018/6/22
  */
 public enum ConnectPortEnum {
-    //PC端
-    PC("PC端"),
-    //WAP端
-    WAP("WAP端");
+    // PC
+    PC("PCend"),
+    // WAP side
+    WAP("WAPend");
 
     private String description;
 

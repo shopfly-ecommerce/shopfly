@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 评论回复业务层
+ * Comment reply business layer
  *
  * @author fk
  * @version v1.0
@@ -33,48 +33,48 @@ import java.util.Map;
 public interface CommentReplyManager {
 
     /**
-     * 查询评论回复列表
+     * Query the comment reply list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加评论回复
+     * Add a comment to reply
      *
-     * @param commentReply 评论回复
-     * @return CommentReply 评论回复
+     * @param commentReply Comment back
+     * @return CommentReply Comment back
      */
     CommentReply add(CommentReply commentReply);
 
     /**
-     * 修改评论回复
+     * Modify comment reply
      *
-     * @param commentReply 评论回复
-     * @param id           评论回复主键
-     * @return CommentReply 评论回复
+     * @param commentReply Comment back
+     * @param id           Comment reply primary key
+     * @return CommentReply Comment back
      */
     CommentReply edit(CommentReply commentReply, Integer id);
 
     /**
-     * 删除评论回复
+     * Delete comment reply
      *
-     * @param id 评论回复主键
+     * @param id Comment reply primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取评论回复
+     * Get a comment reply
      *
-     * @param id 评论回复主键
-     * @return CommentReply  评论回复
+     * @param id Comment reply primary key
+     * @return CommentReply  Comment back
      */
     CommentReply getModel(Integer id);
 
     /**
-     * 查询评论的相关回复
+     * Query comments for relevant responses
      *
      * @param commentIds
      * @return
@@ -82,7 +82,7 @@ public interface CommentReplyManager {
     Map<Integer, CommentReply> getReply(List<Integer> commentIds);
 
     /**
-     * 回复评论
+     * Reply to comment
      *
      * @param commentId
      * @param reply

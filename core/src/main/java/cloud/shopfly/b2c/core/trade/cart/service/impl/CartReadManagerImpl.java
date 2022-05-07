@@ -34,11 +34,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 购物车只读操作业务类
+ * Shopping cart read-only operation business class
  *
  * @author Snow create in 2018/3/21
  * @version v2.0 by kingapex
- * 此处通过建造者模式来完成，具体架构文档请参考：
+ * This is done through the builder pattern. Please refer to the architecture documentation：
  * http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html
  * @since v7.0.0
  */
@@ -50,38 +50,38 @@ public class CartReadManagerImpl implements CartReadManager {
 
 
     /**
-     * 购物车促销渲染器
+     * Shopping cart promotion renderer
      */
     @Autowired
     private CartPromotionRuleRenderer cartPromotionRuleRenderer;
 
     /**
-     * 购物车价格计算器
+     * Shopping cart price calculator
      */
     @Autowired
     private CartPriceCalculator cartPriceCalculator;
 
     /**
-     * 购物车sku数据渲染器
+     * The shopping cartskuData renderer
      */
     @Autowired
     @Qualifier(value = "cartSkuRendererImpl")
     private CartSkuRenderer cartSkuRenderer;
 
     /**
-     * 数据校验
+     * Data validation
      */
     @Autowired
     private CheckDataRebderer checkDataRebderer;
 
     /**
-     * 购物车优惠券渲染器
+     * Shopping cart coupon renderer
      */
     @Autowired
     private CartCouponRenderer cartCouponRenderer;
 
     /**
-     * 购物车运费价格计算器
+     * Shopping cart freight price calculator
      */
     @Autowired
     private CartShipPriceCalculator cartShipPriceCalculator;
@@ -90,12 +90,12 @@ public class CartReadManagerImpl implements CartReadManager {
     @Override
     public CartView getCartListAndCountPrice() {
 
-        //调用CartView生产流程线进行生产
+        // Call CartView production flow line for production
         CartBuilder cartBuilder = new DefaultCartBuilder(CartType.CART, cartSkuRenderer, cartPromotionRuleRenderer, cartPriceCalculator, checkDataRebderer);
 
         /**
-         * 生产流程：渲染sku->校验sku是否有效->渲染促销规则->计算价格->生成成品
-         * 生产流程说明 ： 校验sku是否有效必须放在渲染促销规则之前，如果参加满减活动的商品失效，那么满减活动无需渲染
+         * The production process：Apply colours to a drawingsku->checkskuThe validity of->Apply colours to a drawing促销规则->Calculate the price->Produce the finished product
+         * Production process Description： checkskuValidity must precede rendering of the promotion rules. If the item participating in the maxed out campaign is invalid, then the maxed out campaign does not need to be rendered
          * update by liuyulei 2019-05-17
          */
         CartView cartView = cartBuilder.renderSku().checkData().renderPromotionRule(false).countPrice().build();
@@ -106,22 +106,22 @@ public class CartReadManagerImpl implements CartReadManager {
 
 
     /**
-     * 处理购物车的选中情况
-     * 根据每个商品的选中情况来 设置店铺是否全选
+     * Handles shopping cart checks
+     * According to the selection of each commodity to set up the shop is all selected
      *
      * @param itemList
      */
     private void processChecked(List<CartVO> itemList) {
         for (CartVO cartVO : itemList) {
-            //设置默认为店铺商品全选
+            // Set the default to select all items in the store
             cartVO.setChecked(1);
             cartVO.setInvalid(0);
 
-            //如果购物车有一个有效的商品
+            // If the cart has a valid item
             Boolean notInvalid = false;
 
             for (CartSkuVO skuVO : cartVO.getSkuList()) {
-                // 如果商品没有选中 并且他不是一个有效的商品
+                // If the item is not selected and it is not a valid item
                 if (skuVO.getChecked() == 0 && skuVO.getInvalid() == 0) {
                     cartVO.setChecked(0);
                 }
@@ -130,12 +130,12 @@ public class CartReadManagerImpl implements CartReadManager {
                 }
             }
 
-            //如果 所有商品都无效 && 购物车状态为以选中
+            // If all items are invalid && cart status is selected
             if (!notInvalid && cartVO.getChecked() == 1) {
                 cartVO.setInvalid(1);
             }
             if (logger.isDebugEnabled()){
-                this.logger.info("购物车选中处理结果===》：");
+                this.logger.info("Shopping cart selected processing results===》：");
                 this.logger.info(cartVO.toString());
             }
         }
@@ -145,19 +145,19 @@ public class CartReadManagerImpl implements CartReadManager {
     @Override
     public CartView getCheckedItems() {
 
-        //调用CartView生产流程线进行生产
+        // Call CartView production flow line for production
         CartBuilder cartBuilder = new DefaultCartBuilder(CartType.CHECKOUT, cartSkuRenderer, cartPromotionRuleRenderer, cartPriceCalculator, cartCouponRenderer, cartShipPriceCalculator, checkDataRebderer);
 
         /**
-         * 生产流程：渲染sku->校验sku是否有效->渲染促销规则(计算优惠券）->计算运费->计算价格 -> 渲染优惠券 ->生成成品
-         * 生产流程说明 ： 校验sku是否有效必须放在渲染促销规则之前，如果参加满减活动的商品失效，那么满减活动无需渲染
+         * The production process：Apply colours to a drawingsku->checkskuThe validity of->Apply colours to a drawing促销规则(Calculate coupons）->Calculate the freight->Calculate the price-> Apply colours to a drawing优惠券->Produce the finished product
+         * Production process Description： checkskuValidity must precede rendering of the promotion rules. If the item participating in the maxed out campaign is invalid, then the maxed out campaign does not need to be rendered
          * update by liuyulei 2019-05-17
          */
         CartView cartView = cartBuilder.renderSku().checkData().renderPromotionRule(true).countShipPrice().countPrice().renderCoupon().build();
         List<CartVO> cartList = cartView.getCartList();
 
 
-        //无效的购物车清
+        // Invalid shopping cart clear
         List<CartVO> invalidCart = new ArrayList<>();
 
         for (CartVO cart : cartList) {
@@ -165,7 +165,7 @@ public class CartReadManagerImpl implements CartReadManager {
             List<CartSkuVO> newSkuList = new ArrayList<CartSkuVO>();
 
             for (CartSkuVO skuVO : skuList) {
-                //只将选中的压入
+                // Only the selected ones are pressed in
                 if (skuVO.getChecked() == 1) {
                     newSkuList.add(skuVO);
                 }
@@ -176,7 +176,7 @@ public class CartReadManagerImpl implements CartReadManager {
                 invalidCart.add(cart);
             }
         }
-        //去除没有可以购买商品的购物车
+        // Get rid of shopping carts that dont have items to buy
         for (CartVO cart : invalidCart) {
             cartList.remove(cart);
         }

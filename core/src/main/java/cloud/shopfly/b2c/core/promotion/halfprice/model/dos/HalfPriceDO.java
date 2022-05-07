@@ -34,7 +34,7 @@ import java.io.Serializable;
 
 
 /**
- * 第二件半价实体
+ * The second half price entity
  *
  * @author Snow
  * @version v7.0.0
@@ -49,60 +49,60 @@ public class HalfPriceDO implements Serializable {
     private static final long serialVersionUID = 6857594636337885L;
 
     /**
-     * 第二件半价活动ID
+     * The second half price eventID
      */
     @Id(name = "hp_id")
     @ApiModelProperty(hidden = true)
     private Integer hpId;
 
     /**
-     * 起始时间
+     * Starting time
      */
     @Column(name = "start_time")
-    @NotNull(message = "请填写活动起始时间")
-    @Min(value = 0, message = "活动起始时间不正确")
-    @ApiModelProperty(name = "start_time", value = "起始时间", required = true)
+    @NotNull(message = "Please fill in the start time of the activity")
+    @Min(value = 0, message = "The activity start time is incorrect")
+    @ApiModelProperty(name = "start_time", value = "Starting time", required = true)
     private Long startTime;
 
     /**
-     * 结束时间
+     * The end of time
      */
     @Column(name = "end_time")
-    @NotNull(message = "请填写活动截止时间")
-    @Min(value = 0, message = "活动结束时间不正确")
-    @ApiModelProperty(name = "end_time", value = "结束时间", required = true)
+    @NotNull(message = "Please fill in the deadline")
+    @Min(value = 0, message = "The activity end time is incorrect")
+    @ApiModelProperty(name = "end_time", value = "The end of time", required = true)
     private Long endTime;
 
     /**
-     * 活动标题
+     * Activity title
      */
     @Column(name = "title")
-    @NotEmpty(message = "请填写活动标题")
-    @ApiModelProperty(name = "title", value = "活动标题", required = true)
+    @NotEmpty(message = "Please fill in the activity title")
+    @ApiModelProperty(name = "title", value = "Activity title", required = true)
     private String title;
 
     /**
-     * 商品参与方式
+     * Mode of Commodity participation
      */
     @Column(name = "range_type")
-    @NotNull(message = "请选择商品参与方式")
-    @Min(value = 1, message = "商品参与方式值不正确")
-    @Max(value = 2, message = "商品参与方式值不正确")
-    @ApiModelProperty(name = "range_type", value = "商品参与方式,全部商品：1，部分商品：2", required = true)
+    @NotNull(message = "Please select the mode of product participation")
+    @Min(value = 1, message = "Item participation mode value is incorrect")
+    @Max(value = 2, message = "Item participation mode value is incorrect")
+    @ApiModelProperty(name = "range_type", value = "Mode of Commodity participation,All the goods：1, some commodities：2", required = true)
     private Integer rangeType;
 
     /**
-     * 是否停用 0.没有停用 1.停用
+     * Whether discontinuation0.No stopping1.disable
      */
     @Column(name = "disabled")
-    @ApiModelProperty(name = "disabled", value = "是否停用", required = false)
+    @ApiModelProperty(name = "disabled", value = "Whether discontinuation", required = false)
     private Integer disabled;
 
     /**
-     * 活动说明
+     * Activities that
      */
     @Column(name = "description")
-    @ApiModelProperty(name = "description", value = "活动说明", required = false)
+    @ApiModelProperty(name = "description", value = "Activities that", required = false)
     private String description;
 
     @PrimaryKeyField

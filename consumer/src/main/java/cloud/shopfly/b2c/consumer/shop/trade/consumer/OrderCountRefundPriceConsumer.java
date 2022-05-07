@@ -27,8 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 订单状态改变消费
- * 订单付款后修改订单项的可退款金额
+ * Order status changes consumption
+ * Modify the refundable amount of order items after order payment
  *
  * @author duanmingyu
  * @version v1.0
@@ -51,16 +51,16 @@ public class OrderCountRefundPriceConsumer implements OrderStatusChangeEvent {
             OrderDO order = orderStatusChangeMsg.getOrderDO();
             String paymentType = order.getPaymentType();
             OrderStatusEnum orderStatus = orderStatusChangeMsg.getNewStatus();
-            //在线支付&&订单已支付
+            // Online payment && Order paid
             boolean online = PaymentTypeEnum.ONLINE.value().equals(paymentType) && OrderStatusEnum.PAID_OFF.equals(orderStatus);
-            //货到付款&&订单已收货
+            // Cash on delivery && order received
             boolean cod = PaymentTypeEnum.COD.value().equals(paymentType) && OrderStatusEnum.ROG.equals(orderStatus);
-            //在线支付&&订单已支付 或者  货到付款&&订单已收货
+            // Online payment && Order paid or cod order received
             if (online || cod) {
                 this.orderClient.addOrderItemRefundPrice(orderStatusChangeMsg.getOrderDO());
             }
         } catch (Exception e) {
-            logger.error("订单变更消息异常:", e);
+            logger.error("The order change message is abnormal:", e);
             e.printStackTrace();
         }
     }

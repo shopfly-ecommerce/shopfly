@@ -38,7 +38,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 商品控制器
+ * Merchandise controller
  *
  * @author fk
  * @version v2.0
@@ -46,7 +46,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/goods")
-@Api(description = "商品相关API")
+@Api(description = "commodity-relatedAPI")
 @Validated
 @Scope("request")
 public class GoodsSellerController {
@@ -58,7 +58,7 @@ public class GoodsSellerController {
     private GoodsManager goodsManager;
 
 
-    @ApiOperation(value = "查询商品列表", response = GoodsDO.class)
+    @ApiOperation(value = "Querying commodity list", response = GoodsDO.class)
     @GetMapping
     public Page list(GoodsQueryParam param, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
 
@@ -68,11 +68,11 @@ public class GoodsSellerController {
         return this.goodsQueryManager.list(param);
     }
 
-    @ApiOperation(value = "查询预警商品列表", response = GoodsDO.class)
+    @ApiOperation(value = "Example Query the list of warning products", response = GoodsDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页数量", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "keyword", value = "查询关键字", required = false, dataType = "string", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Number each page", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "keyword", value = "Query keyword", required = false, dataType = "string", paramType = "query")
     })
     @GetMapping("/warning")
     public Page warningList(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, String keyword) {
@@ -81,8 +81,8 @@ public class GoodsSellerController {
 
     }
 
-    @ApiOperation(value = "添加商品", response = GoodsDO.class)
-    @ApiImplicitParam(name = "goods", value = "商品信息", required = true, dataType = "GoodsDTO", paramType = "body")
+    @ApiOperation(value = "Add the goods", response = GoodsDO.class)
+    @ApiImplicitParam(name = "goods", value = "Product information", required = true, dataType = "GoodsDTO", paramType = "body")
     @PostMapping
     public GoodsDO add(@ApiIgnore @Valid @RequestBody GoodsDTO goods) {
 
@@ -92,10 +92,10 @@ public class GoodsSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改商品", response = GoodsDO.class)
+    @ApiOperation(value = "Modify the goods", response = GoodsDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "goods", value = "商品信息", required = true, dataType = "GoodsDTO", paramType = "body")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "goods", value = "Product information", required = true, dataType = "GoodsDTO", paramType = "body")
     })
     public GoodsDO edit(@Valid @RequestBody GoodsDTO goods, @PathVariable Integer id) {
 
@@ -105,9 +105,9 @@ public class GoodsSellerController {
     }
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个商品,编辑时使用")
+    @ApiOperation(value = "Querying a product,Use in editing")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的商品主键", required = true, dataType = "int", paramType = "path")})
+            @ApiImplicitParam(name = "id", value = "Primary key of the item to query", required = true, dataType = "int", paramType = "path")})
     public GoodsVO get(@PathVariable Integer id) {
 
         GoodsVO goods = this.goodsQueryManager.queryGoods(id);
@@ -115,24 +115,24 @@ public class GoodsSellerController {
         return goods;
     }
 
-    @ApiOperation(value = "商家下架商品", notes = "商家下架商品时使用")
+    @ApiOperation(value = "Merchants took their goods off the shelves", notes = "Merchants took their goods off the shelves时使用")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_ids", value = "商品ID集合", required = true, paramType = "path", dataType = "int", allowMultiple = true)
+            @ApiImplicitParam(name = "goods_ids", value = "productIDA collection of", required = true, paramType = "path", dataType = "int", allowMultiple = true)
     })
     @PutMapping(value = "/{goods_ids}/under")
     public String underGoods(@PathVariable("goods_ids") Integer[] goodsIds, String reason) {
 
         if (StringUtil.isEmpty(reason)) {
-            reason = "自行下架，无原因";
+            reason = "Self-removal, no reason";
         }
         this.goodsManager.under(goodsIds, reason);
 
         return null;
     }
 
-    @ApiOperation(value = "商家将商品放入回收站", notes = "下架的商品才能放入回收站")
+    @ApiOperation(value = "Businesses put goods in the recycling bin", notes = "Only goods removed from the shelves can be put into the recycling bin")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_ids", value = "商品ID集合", required = true, paramType = "path", dataType = "int", allowMultiple = true)
+            @ApiImplicitParam(name = "goods_ids", value = "productIDA collection of", required = true, paramType = "path", dataType = "int", allowMultiple = true)
     })
     @PutMapping(value = "/{goods_ids}/recycle")
     public String deleteGoods(@PathVariable("goods_ids") Integer[] goodsIds) {
@@ -142,9 +142,9 @@ public class GoodsSellerController {
         return null;
     }
 
-    @ApiOperation(value = "商家还原商品", notes = "商家回收站回收商品时使用")
+    @ApiOperation(value = "Merchant restore goods", notes = "Used when recycling goods at the merchants recycling station")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_ids", value = "商品ID集合", required = true, paramType = "path", dataType = "int", allowMultiple = true)
+            @ApiImplicitParam(name = "goods_ids", value = "productIDA collection of", required = true, paramType = "path", dataType = "int", allowMultiple = true)
     })
     @PutMapping(value = "/{goods_ids}/revert")
     public String revertGoods(@PathVariable("goods_ids") Integer[] goodsIds) {
@@ -154,9 +154,9 @@ public class GoodsSellerController {
         return null;
     }
 
-    @ApiOperation(value = "商家彻底删除商品", notes = "商家回收站删除商品时使用")
+    @ApiOperation(value = "Merchants completely delete goods", notes = "Used when deleting an item from the merchants recycle bin")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_ids", value = "商品ID集合", required = true, paramType = "path", dataType = "int", allowMultiple = true)
+            @ApiImplicitParam(name = "goods_ids", value = "productIDA collection of", required = true, paramType = "path", dataType = "int", allowMultiple = true)
     })
     @DeleteMapping(value = "/{goods_ids}")
     public String cleanGoods(@PathVariable("goods_ids") Integer[] goodsIds) {
@@ -168,9 +168,9 @@ public class GoodsSellerController {
 
 
     @GetMapping(value = "/{goods_ids}/details")
-    @ApiOperation(value = "查询多个商品的基本信息")
+    @ApiOperation(value = "Example Query basic information about multiple commodities")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_ids", value = "要查询的商品主键", required = true, dataType = "int", paramType = "path", allowMultiple = true)})
+            @ApiImplicitParam(name = "goods_ids", value = "Primary key of the item to query", required = true, dataType = "int", paramType = "path", allowMultiple = true)})
     public List<GoodsSelectLine> getGoodsDetail(@PathVariable("goods_ids") Integer[] goodsIds) {
 
         return this.goodsQueryManager.query(goodsIds);

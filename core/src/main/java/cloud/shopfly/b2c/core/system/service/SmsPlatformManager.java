@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.system.model.vo.SmsPlatformVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 短信网关表业务层
+ * SMS gateway table service layer
  *
  * @author zh
  * @version v7.0.0
@@ -30,42 +30,42 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface SmsPlatformManager {
 
     /**
-     * 查询短信网关表列表
+     * Example Query the SMS gateway list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加短信网关表
+     * Example Add the SMS gateway table
      *
-     * @param smsPlatform 短信网关vo
+     * @param smsPlatform SMS gatewayvo
      * @return
      */
     SmsPlatformVO add(SmsPlatformVO smsPlatform);
 
     /**
-     * 添加短信网关表
+     * Example Add the SMS gateway table
      *
-     * @param smsPlatform 短信网关vo
+     * @param smsPlatform SMS gatewayvo
      * @return
      */
     SmsPlatformVO edit(SmsPlatformVO smsPlatform);
 
 
     /**
-     * 获取短信网关表
+     * Obtain the SMS gateway table
      *
-     * @param id 短信网关表主键
-     * @return Platform  短信网关表
+     * @param id Primary key of the SMS gateway table
+     * @return Platform  SMS Gateway Table
      */
     SmsPlatformDO getModel(Integer id);
 
 
     /**
-     * 根据beanid获取短信网关
+     * According to thebeanidObtaining the SMS Gateway
      *
      * @param bean beanid
      * @return
@@ -73,24 +73,24 @@ public interface SmsPlatformManager {
     SmsPlatformDO getSmsPlateform(String bean);
 
     /**
-     * 启用网关
+     * To enable the gateway
      *
-     * @param bean 短信网关beanid
+     * @param bean SMS gatewaybeanid
      */
     void openPlatform(String bean);
 
     /**
-     * 根据短信网关的beanid 获取短信网关的配置项
+     * According to the SMS gatewaybeanid Obtain the configuration items of the SMS gateway
      *
-     * @param bean 短信网关 beanid
-     * @return 短信网关VO
+     * @param bean SMS gatewaybeanid
+     * @return SMS gatewayVO
      */
     SmsPlatformVO getConfig(String bean);
 
     /**
-     * 获取开启的短信网关
+     * Obtain the enabled SMS gateway
      *
-     * @return 短信网关VO
+     * @return SMS gatewayVO
      */
     SmsPlatformVO getOpen();
 

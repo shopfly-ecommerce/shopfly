@@ -16,24 +16,24 @@
 package cloud.shopfly.b2c.core.aftersale.model.enums;
 
 /**
- * 退款(货)操作枚举类
+ * A refund(cargo)Operation enumeration class
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 下午4:54 2018/5/2
+ * @since v7.0 In the afternoon4:54 2018/5/2
  */
 public enum RefundOperateEnum {
 
-    //申请退(款)货
-    APPLY("申请退(款)货"),
-    //管理员审核
-    ADMIN_APPROVAL("管理员审核"),
-    //退货入库
-    STOCK_IN("退货入库"),
-    //取消
-    CANCEL("取消"),
-    //管理员退款
-    ADMIN_REFUND("管理员退款");
+    // Apply for a refund
+    APPLY("Apply for refund(paragraph)cargo"),
+    // Administrator audit
+    ADMIN_APPROVAL("Administrator audit"),
+    // Return of the Treasury
+    STOCK_IN("Return of the Treasury"),
+    // cancel
+    CANCEL("cancel"),
+    // Administrator refund
+    ADMIN_REFUND("Administrator refund");
 
     private String description;
 

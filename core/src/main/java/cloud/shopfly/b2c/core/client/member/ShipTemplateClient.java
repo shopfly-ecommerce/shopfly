@@ -19,15 +19,15 @@ import cloud.shopfly.b2c.core.system.model.vo.ShipTemplateVO;
 
 /**
  * @version v7.0
- * @Description: 店铺运费模版Client默认实现
+ * @Description: Shop freight templateClientThe default implementation
  * @Author: zjp
  * @Date: 2018/7/25 16:20
  */
 public interface ShipTemplateClient {
     /**
-     * 获取运费模版
-     * @param id 运费模版主键
-     * @return ShipTemplate  运费模版
+     * Get the shipping template
+     * @param id Freight template primary key
+     * @return ShipTemplate  The freight template
      */
     ShipTemplateVO get(Integer id);
 

@@ -24,16 +24,16 @@ import java.util.List;
 /**
  * @author zjp
  * @version v7.0
- * @Description 退货(款)单详细DTO
+ * @Description Return of the goods(paragraph)A single detailDTO
  * @ClassName RefundDetailDTO
- * @since v7.0 上午11:32 2018/5/8
+ * @since v7.0 In the morning11:32 2018/5/8
  */
 public class RefundDetailDTO implements Serializable {
 
-    @ApiModelProperty(value = "退货（款）单")
+    @ApiModelProperty(value = "Return of the goods（paragraph）single")
     private RefundDTO refund;
 
-    @ApiModelProperty(value = "退货商品")
+    @ApiModelProperty(value = "Return of the goods")
     private List<RefundGoodsDO> refundGoods;
 
     public RefundDTO getRefund() {

@@ -18,18 +18,18 @@ package cloud.shopfly.b2c.core.distribution.service;
 import cloud.shopfly.b2c.core.distribution.model.dos.ShortUrlDO;
 
 /**
- * 短链接Manager接口
+ * Short linkManagerinterface
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/23 上午8:37
+ * 2018/5/23 In the morning8:37
  */
 public interface ShortUrlManager {
 
     /**
-     * 生成一个短链接
+     * Generate a short link
      *
      * @param memberId
      * @param goodsId
@@ -38,10 +38,10 @@ public interface ShortUrlManager {
     ShortUrlDO createShortUrl(Integer memberId, Integer goodsId);
 
     /**
-     * 根据短链接获得长链接
+     * Get long links based on short links
      *
-     * @param shortUrl 短链接 （可带前缀 即：http:xxx/）
-     * @return 所对应的长链接
+     * @param shortUrl Short link（Can be prefixed namely：http:xxx/）
+     * @return The corresponding long link
      */
     ShortUrlDO getLongUrl(String shortUrl);
 

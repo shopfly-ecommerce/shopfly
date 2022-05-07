@@ -20,8 +20,8 @@ import java.sql.SQLException;
 import java.util.Map;
 
 /**
- * 数据库结果集过滤器
- * 可对RowMapper的结果某或多列进行过滤 
+ * Database result set filter
+ * But forRowMapperResults in one or more columns for filtering
  * @author kingapex
  *
  */
@@ -29,10 +29,10 @@ public interface IRowMapperColumnFilter {
 	
 	
 	/**
-	 * 对结果集的行进行过滤
-	 * @param colValues 结果集一行的map
-	 * @param rs 结果集
-	 * @throws  SQLException 可能的sql异常
+	 * Filter the rows of the result set
+	 * @param colValues Result set of one rowmap
+	 * @param rs The result set
+	 * @throws  SQLException possiblesqlabnormal
 	 */
     void filter(Map colValues, ResultSet rs) throws SQLException;
 	

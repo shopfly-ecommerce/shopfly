@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * spring 上下文件获取类
+ * spring Get the class from the file up and down
  * Created by kingapex on 2018/3/23.
  * @author kingapex
  * @version 1.0
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 public class ApplicationContextHolder implements ApplicationContextAware {
 
     /**
-     * 上下文对象实例
+     * Context object instance
      */
     private static ApplicationContext applicationContext;
 
@@ -43,7 +43,7 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     }
 
     /**
-     * 获取applicationContext
+     * To obtainapplicationContext
      * @return  spring applicationContext
      */
     public static ApplicationContext getApplicationContext() {
@@ -51,30 +51,30 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     }
 
     /**
-     * 通过name获取 Bean.
-     * @param name bean的名字
-     * @return bean实例
+     * throughnameTo obtainBean.
+     * @param name beanThe name of the
+     * @return beanThe instance
      */
     public static Object getBean(String name){
         return getApplicationContext().getBean(name);
     }
 
     /**
-     * 通过class获取Bean.
-     * @param clazz bean的类型
-     * @param <T> bean的类型
-     * @return bean实例
+     * throughclassTo obtainBean.
+     * @param clazz beanThe type of
+     * @param <T> beanThe type of
+     * @return beanThe instance
      */
     public static <T> T getBean(Class<T> clazz){
         return getApplicationContext().getBean(clazz);
     }
 
     /**
-     * 通过name,以及Clazz返回指定的Bean
-     * @param name bean的名字
-     * @param clazz bean的类型
-     * @param <T>  bean的类型
-     * @return bean实例
+     * throughname,As well asClazzReturns the specifiedBean
+     * @param name beanThe name of the
+     * @param clazz beanThe type of
+     * @param <T>  beanThe type of
+     * @return beanThe instance
      */
     public static <T> T getBean(String name,Class<T> clazz){
         return getApplicationContext().getBean(name, clazz);

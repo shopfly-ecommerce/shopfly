@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 调试控制器
+ * Debug controller
  *
  * @author kingapex
  * @version 1.0
@@ -45,7 +45,7 @@ public class DebuggerController {
 
 
     /**
-     * 获取debugger界面
+     * To obtaindebuggerinterface
      *
      * @param model
      * @param request
@@ -63,7 +63,7 @@ public class DebuggerController {
 
 
     /**
-     * 获取日志
+     * Access to the log
      *
      * @return
      */
@@ -75,7 +75,7 @@ public class DebuggerController {
 
 
     /**
-     * 清空日志
+     * Clear the log
      */
     @DeleteMapping(value = "/log")
     @ResponseBody

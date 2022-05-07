@@ -21,18 +21,18 @@ import cloud.shopfly.b2c.core.base.SearchCriteria;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 后台 行业分析
+ * Background Industry analysis
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/4/16 下午1:53
+ * 2018/4/16 In the afternoon1:53
  */
 public interface IndustryStatisticManager {
 
 
     /**
-     * 按分类统计下单量
+     * Order quantity is counted by classification
      *
      * @param searchCriteria
      * @return
@@ -40,7 +40,7 @@ public interface IndustryStatisticManager {
     SimpleChart getOrderQuantity(SearchCriteria searchCriteria);
 
     /**
-     * 按分类统计下单商品数量
+     * Count the quantity of goods ordered by category
      *
      * @param searchCriteria
      * @return
@@ -48,7 +48,7 @@ public interface IndustryStatisticManager {
     SimpleChart getGoodsNum(SearchCriteria searchCriteria);
 
     /**
-     * 按分类统计下单金额
+     * According to the classification statistics order amount
      *
      * @param searchCriteria
      * @return
@@ -56,7 +56,7 @@ public interface IndustryStatisticManager {
     SimpleChart getOrderMoney(SearchCriteria searchCriteria);
 
     /**
-     * 概括总览
+     * Summarize the overview
      *
      * @param searchCriteria
      * @return

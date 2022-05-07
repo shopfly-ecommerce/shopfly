@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author fk
  * @version v2.0
- * @Description: 调用支付使用参数
+ * @Description: Call payment using arguments
  * @date 2018/4/1616:54
  * @since v7.0.0
  */
@@ -31,19 +31,19 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PayParam {
 
-    @ApiModelProperty(value = "单号，订单号或者交易号", hidden = true)
+    @ApiModelProperty(value = "Order number, order number or transaction number", hidden = true)
     private String sn;
 
-    @ApiModelProperty(value = "支付插件id", name = "payment_plugin_id", required = true)
+    @ApiModelProperty(value = "Pay the plug-inid", name = "payment_plugin_id", required = true)
     private String paymentPluginId;
 
-    @ApiModelProperty(value = "支付模式，正常normal， 二维码 ar,枚举类型PaymentPatternEnum", name = "pay_mode", required = true)
+    @ApiModelProperty(value = "Payment mode, normalnormal， Qr codear,Enumerated typePaymentPatternEnum", name = "pay_mode", required = true)
     private String payMode;
 
-    @ApiModelProperty(value = "调用客户端PC,WAP,NATIVE,REACT", name = "client_type", required = true, allowableValues = "PC,WAP,NATIVE,REACT")
+    @ApiModelProperty(value = "Calling clientPC,WAP,NATIVE,REACT", name = "client_type", required = true, allowableValues = "PC,WAP,NATIVE,REACT")
     private String clientType;
 
-    @ApiModelProperty(value = "交易类型，trade，order", name = "trade_type", hidden = true)
+    @ApiModelProperty(value = "Type of transaction,trade，order", name = "trade_type", hidden = true)
     private String tradeType;
 
     public String getSn() {

@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 配送模板字幕版地区
+ * @Description: Deliver template subtitle version region
  * @date 2018/10/24 16:12
  * @since v7.0.0
  */

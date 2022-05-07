@@ -26,7 +26,7 @@ import java.io.Serializable;
 /**
  * @author fk
  * @version v1.0
- * @Description: 支付方式VO 简要
+ * @Description: Method of paymentVO A brief
  * @date 2018/4/2317:06
  * @since v7.0.0
  */
@@ -35,30 +35,30 @@ import java.io.Serializable;
 public class PaymentMethodVO implements Serializable {
 
     /**
-     * 支付方式名称
+     * Name of Payment Method
      */
     @Column(name = "method_name")
-    @ApiModelProperty(name = "method_name", value = "支付方式名称", required = false)
+    @ApiModelProperty(name = "method_name", value = "Name of Payment Method", required = false)
     private String methodName;
     /**
-     * 支付插件id
+     * Pay the plug-inid
      */
     @Column(name = "plugin_id")
-    @ApiModelProperty(name = "plugin_id", value = "支付插件名称", required = false)
+    @ApiModelProperty(name = "plugin_id", value = "Payment plug-in name", required = false)
     private String pluginId;
 
     /**
-     * 是否支持原路退回
+     * Whether to support the original way back
      */
     @Column(name = "is_retrace")
-    @ApiModelProperty(name = "is_retrace", value = "是否支持原路退回", required = false)
+    @ApiModelProperty(name = "is_retrace", value = "Whether to support the original way back", required = false)
     private Integer isRetrace;
 
     /**
-     * 支付方式图片
+     * Picture of payment method
      */
     @Column(name = "image")
-    @ApiModelProperty(name = "image", value = "支付方式图片", required = false)
+    @ApiModelProperty(name = "image", value = "Picture of payment method", required = false)
     private String image;
 
     public String getMethodName() {

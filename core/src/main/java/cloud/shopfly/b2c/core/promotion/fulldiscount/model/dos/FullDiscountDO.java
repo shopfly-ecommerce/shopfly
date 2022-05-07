@@ -31,8 +31,8 @@ import java.io.Serializable;
 
 
 /**
- * 满优惠活动实体<br/>
- * 默认1为选中，0为未选
+ * Full preferential activity entities<br/>
+ * default1For the selected,0For not choosing
  *
  * @author Snow
  * @version v7.0.0
@@ -48,158 +48,158 @@ public class FullDiscountDO implements Serializable {
     private static final long serialVersionUID = 5679579627685903L;
 
     /**
-     * 活动id
+     * activityid
      */
     @Id(name = "fd_id")
     @ApiModelProperty(hidden = true)
     private Integer fdId;
 
     /**
-     * 优惠门槛金额
+     * Preferential threshold amount
      */
     @Column(name = "full_money")
-    @NotNull(message = "请填写优惠门槛")
-    @DecimalMax(value = "99999999.00", message = "优惠券门槛金额超出限制")
-    @ApiModelProperty(name = "full_money", value = "优惠门槛金额", required = true)
+    @NotNull(message = "Please fill in the discount threshold")
+    @DecimalMax(value = "99999999.00", message = "The coupon threshold exceeds the limit")
+    @ApiModelProperty(name = "full_money", value = "Preferential threshold amount", required = true)
     private Double fullMoney;
 
     /**
-     * 活动是否减现金
+     * Whether the activity is less cash
      */
     @Column(name = "is_full_minus")
-    @Min(value = 0, message = "减现金参数有误")
-    @Max(value = 1, message = "减现金参数有误")
-    @ApiModelProperty(name = "is_full_minus", value = "活动是否减现金", required = false, example = "0为否,1为是")
+    @Min(value = 0, message = "The cash reduction parameter is wrong")
+    @Max(value = 1, message = "The cash reduction parameter is wrong")
+    @ApiModelProperty(name = "is_full_minus", value = "Whether the activity is less cash", required = false, example = "0For no,1As a")
     private Integer isFullMinus;
 
     /**
-     * 减现金
+     * Decrease in cash
      */
     @Column(name = "minus_value")
-    @ApiModelProperty(name = "minus_value", value = "减现金", required = false)
+    @ApiModelProperty(name = "minus_value", value = "Decrease in cash", required = false)
     private Double minusValue;
 
     /**
-     * 是否打折
+     * Whether the discount
      */
     @Column(name = "is_discount")
-    @Min(value = 0, message = "打折参数有误")
-    @Max(value = 1, message = "打折参数有误")
-    @ApiModelProperty(name = "is_discount", value = "是否打折", required = false, example = "0为否,1为是")
+    @Min(value = 0, message = "Wrong discount parameter")
+    @Max(value = 1, message = "Wrong discount parameter")
+    @ApiModelProperty(name = "is_discount", value = "Whether the discount", required = false, example = "0For no,1As a")
     private Integer isDiscount;
 
     /**
-     * 打多少折
+     * How much discount
      */
     @Column(name = "discount_value")
-    @ApiModelProperty(name = "discount_value", value = "打多少折", required = false)
+    @ApiModelProperty(name = "discount_value", value = "How much discount", required = false)
     private Double discountValue;
 
 
     /**
-     * 是否赠送
+     * Whether the present
      */
     @Column(name = "is_send_point")
-    @Min(value = 0, message = "赠送积分有误")
-    @Max(value = 1, message = "赠送积分有误")
-    @ApiModelProperty(name = "is_send_point", value = "是否赠送积分", required = false, example = "0为否,1为是")
+    @Min(value = 0, message = "Incorrect bonus points")
+    @Max(value = 1, message = "Incorrect bonus points")
+    @ApiModelProperty(name = "is_send_point", value = "Whether to give bonus points", required = false, example = "0For no,1As a")
     private Integer isSendPoint;
 
     /**
-     * 积分数据
+     * Integral data
      */
     @Column(name = "point_value")
-    @ApiModelProperty(name = "point_value", value = "赠送多少积分", required = false)
+    @ApiModelProperty(name = "point_value", value = "How many bonus points", required = false)
     private Integer pointValue;
 
     /**
-     * 是否免邮
+     * Whether free mail
      */
     @Column(name = "is_free_ship")
-    @Min(value = 0, message = "免邮费参数有误")
-    @Max(value = 1, message = "免邮费参数有误")
-    @ApiModelProperty(name = "is_free_ship", value = "是否邮费", required = false, example = "0为否,1为是")
+    @Min(value = 0, message = "Incorrect postage free parameters")
+    @Max(value = 1, message = "Incorrect postage free parameters")
+    @ApiModelProperty(name = "is_free_ship", value = "Whether the postage", required = false, example = "0For no,1As a")
     private Integer isFreeShip;
 
     /**
-     * 是否有赠品
+     * Are there any freebies
      */
     @Column(name = "is_send_gift")
-    @Min(value = 0, message = "送赠品参数有误")
-    @Max(value = 1, message = "送赠品参数有误")
-    @ApiModelProperty(name = "is_send_gift", value = "是否有赠品", required = false, example = "0为否,1为是")
+    @Min(value = 0, message = "Gift parameters are wrong")
+    @Max(value = 1, message = "Gift parameters are wrong")
+    @ApiModelProperty(name = "is_send_gift", value = "Are there any freebies", required = false, example = "0For no,1As a")
     private Integer isSendGift;
 
     /**
-     * 赠品id
+     * The giftsid
      */
     @Column(name = "gift_id")
-    @ApiModelProperty(name = "gift_id", value = "赠品id", required = false)
+    @ApiModelProperty(name = "gift_id", value = "The giftsid", required = false)
     private Integer giftId;
 
 
     /**
-     * 是否赠优惠券
+     * Do you give coupons?
      */
     @Column(name = "is_send_bonus")
-    @Min(value = 0, message = "送优惠券参数有误")
-    @Max(value = 1, message = "送优惠券参数有误")
-    @ApiModelProperty(name = "is_send_bonus", value = "是否增优惠券", required = false, example = "0为否,1为是")
+    @Min(value = 0, message = "Incorrect parameters for sending coupons")
+    @Max(value = 1, message = "Incorrect parameters for sending coupons")
+    @ApiModelProperty(name = "is_send_bonus", value = "Whether to add coupons", required = false, example = "0For no,1As a")
     private Integer isSendBonus;
 
     /**
-     * 优惠券id
+     * couponsid
      */
     @Column(name = "bonus_id")
-    @ApiModelProperty(name = "bonus_id", value = "优惠券id", required = false)
+    @ApiModelProperty(name = "bonus_id", value = "couponsid", required = false)
     private Integer bonusId;
 
     /**
-     * 活动开始时间
+     * Activity start time
      */
     @Column(name = "start_time")
-    @NotNull(message = "请填写活动起始时间")
-    @ApiModelProperty(name = "start_time", value = "活动起始时间", required = true)
+    @NotNull(message = "Please fill in the start time of the activity")
+    @ApiModelProperty(name = "start_time", value = "Activity start time", required = true)
     private Long startTime;
 
     /**
-     * 活动结束时间
+     * End time
      */
     @Column(name = "end_time")
-    @NotNull(message = "请填写活动截止时间")
-    @ApiModelProperty(name = "end_time", value = "活动截止时间", required = true)
+    @NotNull(message = "Please fill in the deadline")
+    @ApiModelProperty(name = "end_time", value = "Activity deadline", required = true)
     private Long endTime;
 
     /**
-     * 活动标题
+     * Activity title
      */
     @Column(name = "title")
-    @NotEmpty(message = "请填写活动标题")
-    @ApiModelProperty(name = "title", value = "活动标题", required = true)
+    @NotEmpty(message = "Please fill in the activity title")
+    @ApiModelProperty(name = "title", value = "Activity title", required = true)
     private String title;
 
     /**
-     * 商品参与方式
+     * Mode of Commodity participation
      */
     @Column(name = "range_type")
-    @NotNull(message = "请选择商品参与方式，全部商品：1，部分商品：2")
-    @Min(value = 1, message = "商品参与方式值不正确")
-    @Max(value = 2, message = "商品参与方式值不正确")
-    @ApiModelProperty(name = "range_type", value = "商品参与方式", required = true)
+    @NotNull(message = "Please select all commodities to participate in the way：1, some commodities：2")
+    @Min(value = 1, message = "Item participation mode value is incorrect")
+    @Max(value = 2, message = "Item participation mode value is incorrect")
+    @ApiModelProperty(name = "range_type", value = "Mode of Commodity participation", required = true)
     private Integer rangeType;
 
     /**
-     * 是否停用
+     * Whether discontinuation
      */
     @Column(name = "disabled")
-    @ApiModelProperty(name = "disabled", value = "是否停用", required = false)
+    @ApiModelProperty(name = "disabled", value = "Whether discontinuation", required = false)
     private Integer disabled;
 
     /**
-     * 活动说明
+     * Activities that
      */
     @Column(name = "description")
-    @ApiModelProperty(name = "description", value = "活动说明", required = false)
+    @ApiModelProperty(name = "description", value = "Activities that", required = false)
     private String description;
 
     @PrimaryKeyField

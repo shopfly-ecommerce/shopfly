@@ -26,20 +26,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 分类url生成工具
+ * CategoriesurlGeneration tool
  *
  * @author fk
  * @version v1.0
  * @since v7.0
- * 2018年3月16日 下午4:24:38
+ * 2018years3month16On the afternoon4:24:38
  */
 public class CatUrlUtils {
 
     /**
-     * 生成加入某个分类的url
+     * Generated to add to a categoryurl
      *
      * @param goodsCat
-     * @param onlyCat  只拼接分类 true/false
+     * @param onlyCat  Split-only classificationtrue/false
      * @return
      */
     public static String createCatUrl(CategoryVO goodsCat, boolean onlyCat) {
@@ -64,7 +64,7 @@ public class CatUrlUtils {
     }
 
     /**
-     * 根据树型结构的分类取出某个分类的名称
+     * Retrieves the name of a category based on the category in the tree structure
      *
      * @param allCatList
      * @param catid
@@ -89,7 +89,7 @@ public class CatUrlUtils {
     }
 
     /**
-     * 获取已经选择的分类维度
+     * Gets the selected classification dimension
      *
      * @return
      */
@@ -129,7 +129,7 @@ public class CatUrlUtils {
     }
 
     /**
-     * 生成此分类的同级别的selector
+     * Generates the siblings of this classificationselector
      *
      * @param allCatList
      * @param cat

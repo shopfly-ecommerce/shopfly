@@ -20,12 +20,12 @@ import cloud.shopfly.b2c.core.member.model.dos.Member;
 import java.io.Serializable;
 
 /**
- * 会员注册发送消息
+ * Members sign up to send messages
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:36:41
+ * 2018years3month23The morning of10:36:41
  */
 public class MemberRegisterMsg implements Serializable {
 

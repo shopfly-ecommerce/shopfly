@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 文章分类实体
+ * Article classification entity
  *
  * @author fk
  * @version v1.0
@@ -44,47 +44,47 @@ public class ArticleCategory implements Serializable {
     private static final long serialVersionUID = 5257682283507488L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 分类名称
+     * name
      */
     @Column(name = "name")
-    @ApiModelProperty(name = "name", value = "分类名称", required = true)
-    @NotEmpty(message = "分类名称不能为空")
+    @ApiModelProperty(name = "name", value = "name", required = true)
+    @NotEmpty(message = "The category name cannot be empty")
     private String name;
     /**
-     * 父分类id
+     * The parent categoryid
      */
     @Column(name = "parent_id")
-    @ApiModelProperty(name = "parent_id", value = "父分类id", required = true)
+    @ApiModelProperty(name = "parent_id", value = "The parent categoryid", required = true)
     private Integer parentId;
     /**
-     * 父子路径0|10|
+     * Father and son path0|10|
      */
     @Column(name = "path")
-    @ApiModelProperty(name = "path", value = "父子路径0|10|", hidden = true)
+    @ApiModelProperty(name = "path", value = "Father and son path0|10|", hidden = true)
     private String path;
     /**
-     * 是否允许删除1允许 0不允许
+     * Whether to delete1allow0不allow
      */
     @Column(name = "allow_delete")
-    @ApiModelProperty(name = "allow_delete", value = "是否允许删除1允许 0不允许", hidden = true)
+    @ApiModelProperty(name = "allow_delete", value = "Whether to delete1allow0不allow", hidden = true)
     private Integer allowDelete;
     /**
-     * 分类类型，枚举值
+     * Category type, enumeration value
      */
     @Column(name = "type")
-    @ApiModelProperty(name = "type", value = "分类类型，枚举值", hidden = true)
+    @ApiModelProperty(name = "type", value = "Category type, enumeration value", hidden = true)
     private String type;
     /**
-     * 排序，正序123
+     * Sort, positive order123
      */
     @Column(name = "sort")
-    @ApiModelProperty(name = "sort", value = "排序，正序123", required = false)
+    @ApiModelProperty(name = "sort", value = "Sort, positive order123", required = false)
     private Integer sort;
 
     @PrimaryKeyField

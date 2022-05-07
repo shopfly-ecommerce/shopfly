@@ -37,7 +37,7 @@ import java.io.IOException;
 
 
 /**
- * 存储方案控制器
+ * Storage scheme controller
  *
  * @author zh
  * @version v7.0.0
@@ -46,39 +46,39 @@ import java.io.IOException;
  */
 @RestController
 @RequestMapping("/uploaders")
-@Api(description = "上传图片api")
+@Api(description = "To upload picturesapi")
 public class FileBaseController {
 
     @Autowired
     private FileManager fileManager;
 
 
-    @ApiOperation(value = "文件上传", response = FileVO.class)
-    @ApiImplicitParam(name = "scene", value = "业务场景", allowableValues = "goods,shop,member,other", required = true, dataType = "String", paramType = "query")
+    @ApiOperation(value = "File upload", response = FileVO.class)
+    @ApiImplicitParam(name = "scene", value = "The business scenario", allowableValues = "goods,shop,member,other", required = true, dataType = "String", paramType = "query")
     @PostMapping
     public FileVO list(MultipartFile file, String scene) throws IOException {
         if (file != null && file.getOriginalFilename() != null) {
-            //文件类型
+            // The file type
             String contentType= file.getContentType();
-            //获取文件名称
+            // Get file name
             String ext = contentType.substring(contentType.lastIndexOf("/") + 1, contentType.length());
             if (!FileUtil.isAllowUpImg(ext)) {
-                throw new ServiceException(SystemErrorCode.E901.code(), "不允许上传的文件格式，请上传gif,jpg,png,jpeg,mp4,mov格式文件。");
+                throw new ServiceException(SystemErrorCode.E901.code(), "File format not allowed to upload, please uploadgif,jpg,png,jpeg,mp4,movFormat file.");
             }
             FileDTO input = new FileDTO();
             input.setSize(file.getSize());
             input.setName(file.getOriginalFilename());
             input.setStream(file.getInputStream());
-            //mov格式的contentType是video/quicktime
+            // The contentType in mov format is Video/QuickTime
             input.setExt(ext.equals("quicktime")?"mov":ext);
             return this.fileManager.upload(input, scene);
         } else {
-            throw new ResourceNotFoundException("没有文件");
+            throw new ResourceNotFoundException("No files");
         }
     }
 
-    @ApiOperation(value = "文件删除")
-    @ApiImplicitParam(name = "file_path", value = "文件路径", required = true, dataType = "String", paramType = "query")
+    @ApiOperation(value = "File deletion")
+    @ApiImplicitParam(name = "file_path", value = "The file path", required = true, dataType = "String", paramType = "query")
     @DeleteMapping
     public String delete(@ApiIgnore String filePath) {
         this.fileManager.deleteFile(filePath);

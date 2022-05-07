@@ -24,13 +24,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 会员数据收集消费
+ * Member data collection consumption
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/20 下午2:20
+ * 2018/6/20 In the afternoon2:20
  */
 @Service
 public class DataMemberConsumer implements MemberRegisterEvent {
@@ -41,7 +41,7 @@ public class DataMemberConsumer implements MemberRegisterEvent {
     private MemberDataClient memberDataClient;
 
     /**
-     * 会员注册
+     * Registered members
      *
      * @param memberRegisterMsg
      */
@@ -52,7 +52,7 @@ public class DataMemberConsumer implements MemberRegisterEvent {
             this.memberDataClient.register(memberRegisterMsg.getMember());
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("会员注册消息异常:",e);
+            logger.error("The member registration message is abnormal:",e);
         }
     }
 }

@@ -18,35 +18,35 @@ package cloud.shopfly.b2c.framework.trigger.rabbitmq.model;
 import java.io.Serializable;
 
 /**
- * 延时任务消息
+ * Delayed task message
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-12 下午5:46
+ * 2019-02-12 In the afternoon5:46
  */
 public class TimeTriggerMsg implements Serializable {
 
 
     private static final long serialVersionUID = 8897917127201859535L;
     /**
-     * 执行器beanid
+     * actuatorbeanid
      */
     private String triggerExecuter;
 
     /**
-     * 执行器 执行时间
+     * Execution time of the actuator
      */
     private Long triggerTime;
 
 
     /**
-     * 执行器参数
+     * Actuator parameter
      */
     private Object param;
 
     /**
-     * 唯一KEY
+     * The onlyKEY
      */
     private String uniqueKey;
 

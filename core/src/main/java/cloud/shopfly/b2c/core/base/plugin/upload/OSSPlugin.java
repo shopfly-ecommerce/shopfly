@@ -36,12 +36,12 @@ import java.util.*;
 
 
 /**
- * 阿里云oss文件上传插件
+ * Ali cloudossFile upload plug-in
  *
  * @author mengyuanming
  * @version v1.0
  * @since v6.4.0
- * @date 2017年8月14日下午8:03:16
+ * @date 2017years8month14On the afternoon8:03:16
  *
  */
 @SuppressWarnings("unchecked")
@@ -57,27 +57,27 @@ public class OSSPlugin implements Uploader {
 		ConfigItem endPoint = new ConfigItem();
 		endPoint.setType("text");
 		endPoint.setName("endpoint");
-		endPoint.setText("域名");
+		endPoint.setText("The domain name");
 
 		ConfigItem buketName = new ConfigItem();
 		buketName.setType("text");
 		buketName.setName("bucketName");
-		buketName.setText("储存空间");
+		buketName.setText("Storage space");
 
 		ConfigItem picLocation = new ConfigItem();
 		picLocation.setType("text");
 		picLocation.setName("picLocation");
-		picLocation.setText("二级路径");
+		picLocation.setText("The secondary path");
 
 		ConfigItem accessKeyId = new ConfigItem();
 		accessKeyId.setType("text");
 		accessKeyId.setName("accessKeyId");
-		accessKeyId.setText("密钥id");
+		accessKeyId.setText("The keyid");
 
 		ConfigItem accessKeySecret = new ConfigItem();
 		accessKeySecret.setType("text");
 		accessKeySecret.setName("accessKeySecret");
-		accessKeySecret.setText("密钥");
+		accessKeySecret.setText("The key");
 
 		list.add(endPoint);
 		list.add(buketName);
@@ -95,11 +95,11 @@ public class OSSPlugin implements Uploader {
 		String picLocation = StringUtil.toString(config.get("picLocation"));
 		String accessKeyId = StringUtil.toString(config.get("accessKeyId"));
 		String accessKeySecret = StringUtil.toString(config.get("accessKeySecret"));
-		// 获取文件后缀
+		// Get file suffixes
 		String ext = input.getExt();
-		//文件名称
+		// The file name
 		String picName = UUID.randomUUID().toString().toUpperCase().replace("-", "") + "." + ext;
-		// 文件名，根据UUID来
+		// File name, based on UUID
 		String fileName = picLocation + scene + "/" + picName;
 		FileVO file = new FileVO();
 		file.setName(picName);
@@ -112,7 +112,7 @@ public class OSSPlugin implements Uploader {
 
 	@Override
 	public void deleteFile(String filePath,Map config) {
-		//获取oss存储配置信息
+		// Obtain oss storage configuration information
 		String endpoint = StringUtil.toString(config.get("endpoint"));
 		String accessKeyId = StringUtil.toString(config.get("accessKeyId"));
 		String accessKeySecret = StringUtil.toString(config.get("accessKeySecret"));
@@ -127,9 +127,9 @@ public class OSSPlugin implements Uploader {
 
 	@Override
 	public String getThumbnailUrl(String url, Integer width, Integer height) {
-		// 缩略图全路径
+		// Thumbnail full path
 		String thumbnailPah = url + "_" + width + "x" + height;
-		// 返回缩略图全路径
+		// Returns the thumbnail full path
 		return thumbnailPah;
 	}
 
@@ -140,84 +140,84 @@ public class OSSPlugin implements Uploader {
 
 	@Override
 	public String getPluginName() {
-		return "阿里云oss存储";
+		return "Ali cloudossstorage";
 	}
 
 	/**
-	 * 上传图片
+	 * To upload pictures
 	 *
 	 * @param input
-	 *            上传图片文件的输入流
+	 *            Input stream for uploading image files
 	 * @param fileType
-	 *            文件类型，也就是后缀
+	 *            File type, that is, suffix
 	 * @param fileName
-	 *            文件名称
+	 *            The file name
 	 * @param endpoint
-	 *            域名
+	 *            The domain name
 	 * @param bucketName
-	 *            储存空间名称
+	 *            Storage space name
 	 * @param picLocation
-	 *            二级路径名称
+	 *            Secondary path Name
 	 * @param accessKeyId
-	 *            密钥id
+	 *            The keyid
 	 * @param accessKeySecret
-	 *            密钥
-	 * @return 访问图片的url路径
+	 *            The key
+	 * @return Access pictureurlThe path
 	 */
 	private String putObject(InputStream input, String fileType, String fileName, String endpoint, String bucketName,
 			String picLocation, String accessKeyId, String accessKeySecret,String scene) {
-		// 默认null
+		// The default null
 		String urls = null;
-		// 最终返回的路径
+		// The final return path
 		String saveUrl = null;
 		OSSClient ossClient = null;
 		try {
 			ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
-			// 创建上传Object的Metadata
+			// Create Metadata to upload Object
 			ObjectMetadata meta = new ObjectMetadata();
-			// 设置上传内容类型
+			// Set the content type to be uploaded
 			meta.setContentType(FileUtil.contentType(fileType));
-			// 被下载时网页的缓存行为
+			// Caching behavior of a web page when it is downloaded
 			meta.setCacheControl("no-cache");
 			PutObjectRequest request = new PutObjectRequest(bucketName, fileName, input, meta);
-			// 创建上传请求
+			// Creating an upload request
 			ossClient.putObject(request);
-			// 设置Object权限
+			// Setting Object Permission
 			boolean found = ossClient.doesObjectExist(bucketName, fileName);
 			if (found = true) {
 				ossClient.setObjectAcl(bucketName, fileName, CannedAccessControlList.PublicRead);
 			}
 			Date expiration = new Date(System.currentTimeMillis() + 3600L * 1000 * 24 * 365 * 10);
 			URL url = ossClient.generatePresignedUrl(bucketName, fileName, expiration);
-			// 对返回的签名url处理获取最终展示用的url
+			// Process the returned signature URL to get the final display URL
 			urls = url.toString();
 			String[] strs = urls.split("\\?");
 			for (int i = 0, len = strs.length; i < len; i++) {
 				saveUrl = strs[0].toString();
 			}
-			LOGER.info("OSS上传成功的地址" + saveUrl);
+			LOGER.info("OSSThe address that was uploaded successfully" + saveUrl);
 		} catch (OSSException oe) {
-			LOGER.error("OSSException异常");
+			LOGER.error("OSSExceptionabnormal");
 			oe.printStackTrace();
-			throw new ServiceException(SystemErrorCode.E902.code(), "上传文件失败！");
+			throw new ServiceException(SystemErrorCode.E902.code(), "Uploading files failed. Procedure！");
 		} catch (ClientException ce) {
-			LOGER.error("ClientException异常");
+			LOGER.error("ClientExceptionabnormal");
 			ce.printStackTrace();
-			throw new ServiceException(SystemErrorCode.E902.code(), "上传文件失败！");
+			throw new ServiceException(SystemErrorCode.E902.code(), "Uploading files failed. Procedure！");
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ServiceException(SystemErrorCode.E902.code(), "上传文件失败！");
+			throw new ServiceException(SystemErrorCode.E902.code(), "Uploading files failed. Procedure！");
 		} finally {
 			ossClient.shutdown();
 		}
 		return saveUrl;
 	}
 	/**
-	 * 根据url获取fileName
+	 * According to theurlTo obtainfileName
 	 *
 	 * @param fileUrl
-	 *            文件url
-	 * @return String fileName 文件名称
+	 *            fileurl
+	 * @return String fileName The file name
 	 */
 	private static String getFileName(String fileUrl) {
 		String str = "aliyuncs.com/";
@@ -230,11 +230,11 @@ public class OSSPlugin implements Uploader {
 	}
 
 	/**
-	 * 根据url获取bucketName
+	 * According to theurlTo obtainbucketName
 	 *
 	 * @param fileUrl
-	 *            文件url
-	 * @return String bucketName 域名
+	 *            fileurl
+	 * @return String bucketName The domain name
 	 */
 	private static String getBucketName(String fileUrl) {
 		String http = "http://";
@@ -256,22 +256,22 @@ public class OSSPlugin implements Uploader {
 	}
 
 	/**
-	 * 删除上传文件
+	 * Deleting uploaded Files
 	 *
 	 * @param filePath
-	 *            删除文件全路径
+	 *            Example Delete a full file path
 	 * @param endpoint
-	 *            储存空间名称
+	 *            Storage space name
 	 * @param accessKeyId
-	 *            密钥id
+	 *            The keyid
 	 * @param accessKeySecret
-	 *            密钥
+	 *            The key
 	 * @return
 	 */
 	public boolean delete(String filePath, String endpoint, String accessKeyId, String accessKeySecret) {
-		// 根据url获取bucketName
+		// Get bucketName based on the URL
 		String bucketNames = OSSPlugin.getBucketName(filePath);
-		// 根据url获取fileName
+		// Get fileName from the URL
 		String fileName = OSSPlugin.getFileName(filePath);
 		if (bucketNames == null || fileName == null) {
 			return false;
@@ -283,7 +283,7 @@ public class OSSPlugin implements Uploader {
 			ossClient.deleteObject(request);
 		} catch (Exception oe) {
 			oe.printStackTrace();
-			throw new ServiceException(SystemErrorCode.E903.code(), "删除文件失败！");
+			throw new ServiceException(SystemErrorCode.E903.code(), "Failed to delete a file！");
 		} finally {
 			ossClient.shutdown();
 		}

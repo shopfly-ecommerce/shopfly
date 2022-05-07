@@ -23,64 +23,64 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @version v7.0
- * @Description: 退款单导出excelVO
+ * @Description: Refund Receipt ExportexcelVO
  * @author: zjp
  * @Date: 2018/7/23 14:14
  */
 public class ExportRefundExcelVO {
 
     /**
-     * 退(货)款单id
+     * refund(cargo)A single paragraphid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 退货(款)单编号
+     * Return of the goods(paragraph)A single number
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "退货(款)单编号", required = false)
+    @ApiModelProperty(name = "sn", value = "Return of the goods(paragraph)A single number", required = false)
     private String sn;
     /**
-     * 会员名称
+     * Member name
      */
     @Column(name = "member_name")
-    @ApiModelProperty(value = "会员名称")
+    @ApiModelProperty(value = "Member name")
     private String memberName;
 
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
     /**
-     * 退(货)款状态
+     * refund(cargo)Kind of state
      */
     @Column(name = "refund_status")
-    @ApiModelProperty(name = "refund_status", value = "退(货)款状态", required = false)
+    @ApiModelProperty(name = "refund_status", value = "refund(cargo)Kind of state", required = false)
     private String refundStatus;
     /**
-     * 创建时间
+     * Last update
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Last update", required = false)
     private Long createTime;
     /**
-     * 退款金额
+     * The refund amount
      */
     @Column(name = "refund_price")
-    @ApiModelProperty(name = "refund_price", value = "退款金额", required = false)
+    @ApiModelProperty(name = "refund_price", value = "The refund amount", required = false)
     private Double refundPrice;
 
     /**
-     * 退款方式(原路退回，在线支付，线下支付)
+     * The refund way(The original way back, online payment, offline payment)
      */
     @Column(name = "refund_way")
-    @ApiModelProperty(name = "refund_way", value = "退款方式(原路退回，线下支付)", required = false)
+    @ApiModelProperty(name = "refund_way", value = "The refund way(The original way back, offline payment)", required = false)
     private String refundWay;
     @Column(name = "refund_time")
-    @ApiModelProperty(name = "refund_time", value = "退款时间", hidden = true)
+    @ApiModelProperty(name = "refund_time", value = "A refund of time", hidden = true)
     private Long refundTime;
 
     public Integer getId() {

@@ -22,49 +22,49 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 快递平台设置
+ * Express Platform Setting
  *
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2018年3月23日 下午3:07:05
+ * 2018years3month23On the afternoon3:07:05
  */
 public interface ExpressPlatform {
     /**
-     * 配置各个存储方案的参数
+     * Configure the parameters of each storage solution
      *
-     * @return 参数列表
+     * @return The list of parameters
      */
     List<ConfigItem> definitionConfigItem();
 
     /**
-     * 获取插件ID
+     * To get the pluginID
      *
-     * @return 插件beanId
+     * @return The plug-inbeanId
      */
     String getPluginId();
 
     /**
-     * 获取插件名称
+     * Get the plug-in name
      *
-     * @return 插件名称
+     * @return The plug-in name
      */
     String getPluginName();
 
     /**
-     * 快递平台是否开启
+     * Whether the express platform is enabled
      *
-     * @return 0 不开启  1 开启
+     * @return 0 Dont open1 open
      */
     Integer getIsOpen();
 
     /**
-     * 查询物流信息
+     * Query logistics Information
      *
-     * @param abbreviation 快递公司简称
-     * @param num          快递单号
-     * @param config       参数
-     * @return 物流详细
+     * @param abbreviation Abbreviation of Express Company
+     * @param num          Courier number
+     * @param config       parameter
+     * @return Logistics in detail
      */
     ExpressDetailVO getExpressDetail(String abbreviation, String num, Map config);
 }

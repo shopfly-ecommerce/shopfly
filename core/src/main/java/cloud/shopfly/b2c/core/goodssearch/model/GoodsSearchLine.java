@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.goodssearch.model;
 
 /**
- * 商品搜索
+ * Commodity search
  *
  * @author fk
  * @version v2.0
@@ -26,47 +26,47 @@ package cloud.shopfly.b2c.core.goodssearch.model;
 public class GoodsSearchLine {
 
     /**
-     * 商品id
+     * productid
      */
     private int goodsId;
 
     /**
-     * 商品名称
+     * Name
      */
     private String name;
 
     /**
-     * 缩略图
+     * The thumbnail
      */
     private String thumbnail;
 
     /**
-     * 小图
+     * insets
      */
     private String small;
 
     /**
-     * 商品优惠价格
+     * Preferential price
      */
     private Double discountPrice;
 
     /**
-     * 商品价格
+     * Price
      */
     private Double price;
 
     /**
-     * 购买数
+     * Buy a few
      */
     private Integer buyCount;
 
     /**
-     * 评论数
+     * comments
      */
     private Integer commentNum;
 
     /**
-     * 商品好評率
+     * Product praise rate
      */
     private Double grade;
 

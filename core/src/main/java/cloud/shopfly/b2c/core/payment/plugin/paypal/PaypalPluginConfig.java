@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class PaypalPluginConfig extends AbstractPaymentPlugin {
 
-    protected final String siteName = "shopfly商城";
+    protected final String siteName = "shopflymall";
 
     @Autowired
     private Debugger debugger;
@@ -29,7 +29,7 @@ public class PaypalPluginConfig extends AbstractPaymentPlugin {
 
 
     /**
-     * 构建alipay client
+     * buildalipay client
      * @param clientType
      * @return
      */
@@ -45,7 +45,7 @@ public class PaypalPluginConfig extends AbstractPaymentPlugin {
         String paypalClientId = config.get("PAYPAL_CLIENT_ID");
         String paypalClientSecret = config.get("PAYPAL_CLIENT_SECRET");
 
-        debugger.log("使用如下参数构建client:");
+        debugger.log("Build with the following parametersclient:");
         debugger.log(config.toString());
 
         PayPalEnvironment environment = new PayPalEnvironment.Sandbox(paypalClientId, paypalClientSecret );

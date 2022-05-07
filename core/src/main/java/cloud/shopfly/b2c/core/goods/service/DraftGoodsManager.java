@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.core.goods.model.vo.DraftGoodsVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 草稿商品业务层
+ * Draft commodity business layer
  *
  * @author fk
  * @version v2.0
@@ -32,10 +32,10 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface DraftGoodsManager {
 
     /**
-     * 查询草稿商品列表
+     * Query the draft commodity list
      *
-     * @param page        页码
-     * @param pageSize    每页数量
+     * @param page        The page number
+     * @param pageSize    Number each page
      * @param keyword
      * @param shopCatPath
      * @return Page
@@ -43,47 +43,47 @@ public interface DraftGoodsManager {
     Page list(int page, int pageSize, String keyword, String shopCatPath);
 
     /**
-     * 添加草稿商品
+     * Add draft goods
      *
-     * @param goodsVO 草稿商品
-     * @return DraftGoods 草稿商品
+     * @param goodsVO The draft of goods
+     * @return DraftGoods The draft of goods
      */
     DraftGoodsDO add(GoodsDTO goodsVO);
 
     /**
-     * 修改草稿商品
+     * Revised draft goods
      *
-     * @param goodsVo 草稿商品
-     * @param id      草稿商品主键
-     * @return DraftGoods 草稿商品
+     * @param goodsVo The draft of goods
+     * @param id      Draft commodity primary key
+     * @return DraftGoods The draft of goods
      */
     DraftGoodsDO edit(GoodsDTO goodsVo, Integer id);
 
     /**
-     * 删除草稿商品
+     * Delete draft goods
      *
-     * @param draftGoodsIds 草稿商品主键
+     * @param draftGoodsIds Draft commodity primary key
      */
     void delete(Integer[] draftGoodsIds);
 
     /**
-     * 获取草稿商品
+     * Get draft goods
      *
-     * @param id 草稿商品主键
-     * @return DraftGoods  草稿商品
+     * @param id Draft commodity primary key
+     * @return DraftGoods  The draft of goods
      */
     DraftGoodsDO getModel(Integer id);
 
     /**
-     * 获取草稿商品
+     * Get draft goods
      *
-     * @param id 草稿商品主键
-     * @return DraftGoods  草稿商品
+     * @param id Draft commodity primary key
+     * @return DraftGoods  The draft of goods
      */
     DraftGoodsVO getVO(Integer id);
 
     /**
-     * 草稿商品上架
+     * Draft goods on shelves
      *
      * @param goodsVO
      * @param draftGoodsId

@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 角色表实体
+ * Role table entities
  *
  * @author zh
  * @version v7.0.0
@@ -44,29 +44,29 @@ public class RoleDO implements Serializable {
     private static final long serialVersionUID = 7874065238889473L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "role_id")
     @ApiModelProperty(hidden = true)
     private Integer roleId;
     /**
-     * 角色名称
+     * Character name
      */
     @Column(name = "role_name")
-    @NotEmpty(message = "角色名称不能为空")
-    @ApiModelProperty(name = "role_name", value = "角色名称", required = true)
+    @NotEmpty(message = "The role name cannot be empty")
+    @ApiModelProperty(name = "role_name", value = "Character name", required = true)
     private String roleName;
     /**
-     * 角色介绍
+     * Character is introduced
      */
     @Column(name = "auth_ids")
-    @ApiModelProperty(name = "auth_ids", value = "角色介绍", required = false)
+    @ApiModelProperty(name = "auth_ids", value = "Character is introduced", required = false)
     private String authIds;
     /**
-     * 角色描述
+     * Role description
      */
     @Column(name = "role_describe")
-    @ApiModelProperty(name = "role_describe", value = "角色描述", required = false)
+    @ApiModelProperty(name = "role_describe", value = "Role description", required = false)
     private String roleDescribe;
 
     @PrimaryKeyField

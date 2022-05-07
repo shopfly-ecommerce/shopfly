@@ -29,17 +29,17 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 /**
- * Eop 参数校验处理类
+ * Eop Parameter verification processing class
  *
  * @author jianghongyan
  * @version v1.0
  * @since v6.2
- * 2016年12月9日 上午12:00:53
+ * 2016years12month9The morning of12:00:53
  */
 @ControllerAdvice
 public class ShopflyExceptionHandler {
     /**
-     * 处理单个参数校验
+     * Process single parameter verification
      *
      * @param e
      * @return
@@ -51,11 +51,11 @@ public class ShopflyExceptionHandler {
         for (ConstraintViolation<?> s : e.getConstraintViolations()) {
             return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, s.getMessage());
         }
-        return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "未知参数错误");
+        return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Unknown parameter error");
     }
 
     /**
-     * 处理参数异常
+     * Handling parameter exception
      *
      * @param e
      * @return
@@ -67,11 +67,11 @@ public class ShopflyExceptionHandler {
         for (ObjectError s : e.getBindingResult().getAllErrors()) {
             return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, s.getDefaultMessage());
         }
-        return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "未知参数错误");
+        return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Unknown parameter error");
     }
 
     /**
-     * 处理实体类校验
+     * Handles entity class validation
      *
      * @param e
      * @return
@@ -84,18 +84,18 @@ public class ShopflyExceptionHandler {
         for (ObjectError s : e.getAllErrors()) {
 
             String msg = s.getDefaultMessage();
-            //地区不合法formatter会进入该异常
+            // An invalid formatter for the region will enter this exception
             if(msg.contains("IllegalArgumentException")){
                 return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, msg.substring(msg.lastIndexOf(":")+1));
             }
 
             return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, s.getDefaultMessage());
         }
-        return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "未知参数错误");
+        return new ErrorMessage(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Unknown parameter error");
     }
 
     /**
-     * 处理ServiceExcepiton：业务类抛出来的异常
+     * To deal withServiceExcepiton：An exception thrown by the business class
      *
      * @param e
      * @return
@@ -114,7 +114,7 @@ public class ShopflyExceptionHandler {
     }
 
     /**
-     * 处理参数传递异常
+     * Handle parameter passing exception
      */
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody

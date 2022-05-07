@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 会员优惠券
+ * Membership coupon
  *
  * @author Snow create in 2018/5/24
  * @version v2.0
@@ -32,15 +32,15 @@ import java.util.List;
 public interface MemberCouponManager {
 
     /**
-     * 领取优惠券
+     * Get a coupon
      *
-     * @param memberId 会员id
-     * @param couponId 优惠券id
+     * @param memberId membersid
+     * @param couponId couponsid
      */
     void receiveBonus(Integer memberId, Integer couponId);
 
     /**
-     * 查询我的所有优惠券
+     * Check all my coupons
      *
      * @param param
      * @return
@@ -49,7 +49,7 @@ public interface MemberCouponManager {
 
 
     /**
-     * 读取我的优惠券
+     * Read my coupons
      *
      * @param memberId
      * @param mcId
@@ -58,7 +58,7 @@ public interface MemberCouponManager {
     MemberCoupon getModel(Integer memberId, Integer mcId);
 
     /**
-     * 将优惠券变为已使用
+     * Turn the coupon into used
      *
      * @param mcId
      */
@@ -66,22 +66,22 @@ public interface MemberCouponManager {
 
 
     /**
-     * 检测已领取数量
+     * Check the quantity received
      *
      * @param couponId
      */
     void checkLimitNum(Integer couponId);
 
     /**
-     * 结算页—查询会员优惠券
+     * The settlement page—Check membership coupons
      *
-     * @param memberId  会员id
+     * @param memberId  membersid
      * @return
      */
     List<MemberCoupon> listByCheckout(Integer memberId);
 
     /**
-     * 优惠券各个状态数量
+     * Number of coupons in each state
      *
      * @return
      */

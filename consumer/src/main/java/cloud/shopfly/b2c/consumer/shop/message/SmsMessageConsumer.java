@@ -22,12 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 发送短信
+ * Send a text message
  *
  * @author zjp
  * @version v7.0
  * @since v7.0
- * 2018年3月25日 下午3:15:01
+ * 2018years3month25On the afternoon3:15:01
  */
 @Component
 public class SmsMessageConsumer implements SmsSendMessageEvent {

@@ -16,22 +16,22 @@
 package cloud.shopfly.b2c.core.pagecreate.exception;
 
 /**
- * 系统异常
+ * A system exception
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-10 上午7:14
+ * 2018-05-10 In the morning7:14
  */
 public enum PageCreateErrorCode {
 
 
     //ERRORCODE
-    E901("服务器异常"),
-    E902("progressid 不能为空"),
-    E903("静态页面地址 不能为空"),
-    E904("生成静态页参数有误"),
-    E905("有静态页生成任务正在进行中，需等待本次任务完成后才能再次生成。");
+    E901("Server Exception"),
+    E902("progressid Cant be empty"),
+    E903("Static page addresses cannot be empty"),
+    E904("Error in generating static page parameters"),
+    E905("A static page generation task is in progress and can be generated only after the task is complete.");
     private String describe;
 
     PageCreateErrorCode(String des) {
@@ -39,7 +39,7 @@ public enum PageCreateErrorCode {
     }
 
     /**
-     * 获取统计的异常码
+     * Get the statistical exception code
      *
      * @return
      */
@@ -49,7 +49,7 @@ public enum PageCreateErrorCode {
 
 
     /**
-     * 获取统计的错误消息
+     * Get statistics error messages
      *
      * @return
      */

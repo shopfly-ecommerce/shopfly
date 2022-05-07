@@ -21,12 +21,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * 任务进度
+ * Task schedule
  *
  * @author kingapex
  * @version v1.0
  * @since v1.0
- * 2015年5月13日 下午5:54:43
+ * 2015years5month13On the afternoon5:54:43
  */
 public class TaskProgress implements Serializable {
 
@@ -38,39 +38,39 @@ public class TaskProgress implements Serializable {
      */
     private String id;
     /**
-     * 百分比
+     * The percentage
      */
     private double sumPer;
     /**
-     * 每步占比
+     * Each accounted for
      */
     private double stepPer;
     /**
-     * 正在生成的内容
+     * Content being generated
      */
     private String text;
     /**
-     * 生成状态
+     * Generate state
      */
     private String taskStatus;
     /**
-     * 任务总数
+     * The total number of tasks
      */
     private int taskTotal;
 
     /**
-     * 消息
+     * The message
      */
     private String message;
 
     /**
-     * 构造时要告诉任务总数，以便计算每步占比
+     * The total number of tasks is told during construction so that the proportion of each step can be calculated
      *
      * @param total
      */
     public TaskProgress(int total) {
 
-        /** 计算每步的百分比 */
+        /** Calculate the percentage of each step*/
         this.taskTotal = total;
         this.taskStatus = ProgressEnum.DOING.name();
         BigDecimal b1 = new BigDecimal("100");
@@ -80,7 +80,7 @@ public class TaskProgress implements Serializable {
     }
 
     /**
-     * 完成一步
+     * Complete the step
      */
     public void step(String text) {
 
@@ -89,16 +89,16 @@ public class TaskProgress implements Serializable {
     }
 
     /**
-     * 成功
+     * successful
      */
     public void success() {
         this.sumPer = 100;
-        this.text = "完成";
+        this.text = "complete";
         this.taskStatus = ProgressEnum.SUCCESS.name();
     }
 
     /**
-     * 失败
+     * failure
      *
      * @param text
      */

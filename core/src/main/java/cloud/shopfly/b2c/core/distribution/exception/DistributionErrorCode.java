@@ -16,28 +16,28 @@
 package cloud.shopfly.b2c.core.distribution.exception;
 
 /**
- * 分销错误码
+ * Distribution error code
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/23 上午8:53
+ * 2018/5/23 In the morning8:53
  */
 public enum DistributionErrorCode {
 
     //STATISTICS ERROR CODE
-    E1000("分销业务异常，请稍后重试。"),
-    E1001("用户未登录，请登录后重试"),
-    E1002("提现申请不可以重复操作。"),
-    E1003("申请金额超出可提现金额。"),
-    E1004("错误的提现申请。"),
-    E1005("错误的审核状态。"),
-    E1006("错误的申请金额。"),
-    E1010("默认模版不允许删除!"),
-    E1012("模版不允许删除，有分销商使用!"),
-    E1013("默认模版不允许修改!"),
-    E1011("参数不足!");
+    E1000("The distribution service is abnormal. Please try again later."),
+    E1001("The user has not logged in. Please log in and try again"),
+    E1002("The withdrawal application cannot be repeated."),
+    E1003("The amount applied exceeds the amount available for withdrawal."),
+    E1004("Incorrect withdrawal request."),
+    E1005("Wrong audit status."),
+    E1006("Incorrect application amount."),
+    E1010("Default templates cannot be deleted!"),
+    E1012("Template is not allowed to delete, distributor use!"),
+    E1013("Default templates cannot be modified!"),
+    E1011("Insufficient parameters!");
 
     private String describe;
 
@@ -46,7 +46,7 @@ public enum DistributionErrorCode {
     }
 
     /**
-     * 获取统计的异常码
+     * Get the statistical exception code
      *
      * @return
      */
@@ -56,7 +56,7 @@ public enum DistributionErrorCode {
 
 
     /**
-     * 获取统计的错误消息
+     * Get statistics error messages
      *
      * @return
      */

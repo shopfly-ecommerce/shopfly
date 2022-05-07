@@ -19,11 +19,11 @@ import cloud.shopfly.b2c.core.member.model.vo.SalesVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 会员销售记录
+ * Member sales Record
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/6/29 上午9:31
+ * 2018/6/29 In the morning9:31
  * @Description:
  *
  */
@@ -31,7 +31,7 @@ public interface MemberSalesManager {
 
 
     /**
-     * 商品销售记录
+     * Merchandise sales record
      * @param pageSize
      * @param pageNo
      * @param goodsId

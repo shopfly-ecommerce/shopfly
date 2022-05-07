@@ -41,17 +41,17 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * 电子面单生成API
+ * The electron surface is formedAPI
  *
  * @author zh
  * @version v7.0
- * @date 18/6/11 下午4:56
+ * @date 18/6/11 In the afternoon4:56
  * @since v7.0
  */
 
 @RestController
 @RequestMapping("/seller/waybill")
-@Api(description = "电子面单生成api")
+@Api(description = "The electron surface is formedapi")
 @Validated
 public class WayBillSellerController {
 
@@ -64,15 +64,15 @@ public class WayBillSellerController {
     private OrderQueryManager orderQueryManager;
 
 
-    @ApiOperation(value = "电子面单生成")
+    @ApiOperation(value = "The electron surface is formed")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "logistics_id", value = "物流公司id", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "logistics_id", value = "Logistics companyid", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
-    public String create(@RequestParam(value = "order_sn") @NotEmpty(message = "订单编号不能为空") String orderSn, @RequestParam(value = "logistics_id") @NotNull(message = "物流公司id不能为空") Integer logisticsId, @RequestParam(value = "logistics_name") String logisticsName) {
+    public String create(@RequestParam(value = "order_sn") @NotEmpty(message = "The order number cannot be blank") String orderSn, @RequestParam(value = "logistics_id") @NotNull(message = "Logistics companyidCant be empty") Integer logisticsId, @RequestParam(value = "logistics_name") String logisticsName) {
         String result = this.waybillManager.createPrintData(orderSn, logisticsId);
-        //获取电子面单的快递单号
+        // Obtain the tracking number of the electronic surface order
         JSONObject resultJson = JSONObject.fromObject(result);
         if (resultJson.get("Success").equals(false)) {
             throw new ServiceException(SystemErrorCode.E911.code(), resultJson.get("Reason").toString());

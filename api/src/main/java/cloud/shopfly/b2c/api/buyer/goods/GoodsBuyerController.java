@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 商品控制器
+ * Merchandise controller
  *
  * @author fk
  * @version v2.0
@@ -49,7 +49,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/goods")
-@Api(description = "商品相关API")
+@Api(description = "commodity-relatedAPI")
 public class GoodsBuyerController {
 
 	@Autowired
@@ -65,46 +65,46 @@ public class GoodsBuyerController {
 	private GoodsGalleryManager goodsGalleryManager;
 
 
-    @ApiOperation(value = "浏览商品的详情,静态部分使用")
-    @ApiImplicitParam(name = "goods_id", value = "分类id，顶级为0", required = true, dataType = "int", paramType = "path")
+    @ApiOperation(value = "For details of products,Static part use")
+    @ApiImplicitParam(name = "goods_id", value = "CategoriesidAnd the top of0", required = true, dataType = "int", paramType = "path")
     @GetMapping("/{goods_id}")
     public GoodsShowDetail getGoodsDetail(@PathVariable("goods_id") Integer goodsId) {
 
 		GoodsDO goods = goodsQueryManager.getModel(goodsId);
 		GoodsShowDetail detail = new GoodsShowDetail();
 		if (goods == null){
-			throw new ResourceNotFoundException("不存在此商品");
+			throw new ResourceNotFoundException("This item does not exist");
 		}
 		BeanUtils.copyProperties(goods,detail);
 		Integer goodsOff = 0;
-		//商品不存在，直接返回
+		// Item does not exist, return directly
 		if(goods == null){
 			detail.setGoodsOff(goodsOff);
 			return detail;
 		}
-		//分类
+		// Categories
 		CategoryDO category = categoryManager.getModel(goods.getCategoryId());
 		detail.setCategoryName(category == null ? "":category.getName());
-		//上架状态
+		// On state
 		if(goods.getMarketEnable()==1){
 			goodsOff = 1;
 		}
 		detail.setGoodsOff(goodsOff);
-		//参数
+		// parameter
 		List<GoodsParamsGroupVO> list = this.goodsParamsManager.queryGoodsParams(goods.getCategoryId(),goodsId);
 		detail.setParamList(list);
-		//相册
+		// Photo album
 		List<GoodsGalleryDO> galleryList = goodsGalleryManager.list(goodsId);
 		detail.setGalleryList(galleryList);
 
-		//商品好平率
+		// Goods have a good flat rate
 		detail.setGrade(goodsQueryManager.getGoodsGrade(goodsId));
 
 		return detail;
 	}
 
-    @ApiOperation(value = "获取sku信息，商品详情页动态部分")
-    @ApiImplicitParam(name = "goods_id", value = "商品id", required = true, dataType = "int", paramType = "path")
+    @ApiOperation(value = "To obtainskuInformation, dynamic section of product details page")
+    @ApiImplicitParam(name = "goods_id", value = "productid", required = true, dataType = "int", paramType = "path")
     @GetMapping("/{goods_id}/skus")
     public List<GoodsSkuVO> getGoodsSkus(@PathVariable("goods_id") Integer goodsId) {
 
@@ -113,10 +113,10 @@ public class GoodsBuyerController {
         return goods.getSkuList();
     }
 
-	@ApiOperation(value = "查看商品是否在配送区域 1 有货  0 无货", notes = "查看商品是否在配送区域")
+	@ApiOperation(value = "Check if the goods are in the distribution area1 In stock0 Is not available", notes = "Check if the goods are in the distribution area")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "goods_id", value = "商品ID", required = true, paramType = "path", dataType = "int"),
-			@ApiImplicitParam(name = "area_id", value = "地区ID", required = true, paramType = "path", dataType = "int")
+			@ApiImplicitParam(name = "goods_id", value = "productID", required = true, paramType = "path", dataType = "int"),
+			@ApiImplicitParam(name = "area_id", value = "regionID", required = true, paramType = "path", dataType = "int")
 	})
 	@GetMapping(value = "/{goods_id}/area/{area_id}")
 	public Integer checkGoodsArea(@PathVariable("goods_id") Integer goodsId,@PathVariable("area_id") Integer areaId) {

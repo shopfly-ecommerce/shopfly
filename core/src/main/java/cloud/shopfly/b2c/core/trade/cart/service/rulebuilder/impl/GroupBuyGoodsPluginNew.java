@@ -42,7 +42,7 @@ public class GroupBuyGoodsPluginNew implements SkuPromotionRuleBuilder {
     @Override
     public PromotionRule build(CartSkuVO skuVO, PromotionVO promotionVO) {
 
-        //建立一个应用在商品的规则
+        // Establish a rule that applies to merchandise
         PromotionRule rule = new PromotionRule(PromotionTarget.SKU);
         GroupbuyGoodsVO groupbuyGoodsDO = promotionVO.getGroupbuyGoodsVO();
         if (groupbuyGoodsDO == null) {
@@ -50,55 +50,55 @@ public class GroupBuyGoodsPluginNew implements SkuPromotionRuleBuilder {
         }
 
 
-        //开始时间和结束时间
+        // Start time and end time
         long startTime = groupbuyGoodsDO.getStartTime();
         long endTime = groupbuyGoodsDO.getEndTime();
 
-        //是否过期了
+        // Is it expired?
         boolean expired = !DateUtil.inRangeOf(startTime, endTime);
         if (expired) {
             rule.setInvalid(true);
-            rule.setInvalidReason("团购已过期,有效期为:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "至" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
+            rule.setInvalidReason("Group purchase has expired,Is valid for:[" + DateUtil.toString(startTime, "yyyy-MM-dd HH:mm:ss") + "to" + DateUtil.toString(endTime, "yyyy-MM-dd HH:mm:ss") + "]");
 
             return rule;
         }
 
 
-        //默认商品标签
-        String tag = "团购活动";
+        // Default product label
+        String tag = "Group-buying activities";
 
-        //售空数量
+        // The number sold out
         int soldQuantity = groupbuyGoodsDO.getGoodsNum();
 
-        //剩余可售数量 万一发生超卖，这里处理一下
+        // Surplus available quantity in case of oversold, here to deal with it
         int num = soldQuantity < 0 ? 0 : soldQuantity;
 
 
-        //如果0件享受促销
+        // If 0 pieces enjoy promotion
         if (num == 0) {
             return rule;
         }
 
 
-        //处理限购数量
+        // Deal with limit quantity
         if (groupbuyGoodsDO.getLimitNum() == 0 || groupbuyGoodsDO.getLimitNum() > num) {
             groupbuyGoodsDO.setLimitNum(num);
         }
 
-        //如果购买数量大雨限购数量，并且限购数量不等于0
+        // If the purchase quantity is heavy limit quantity, and the limit quantity is not equal to 0
         if (skuVO.getNum() > groupbuyGoodsDO.getLimitNum()) {
-            tag = "仅[" + groupbuyGoodsDO.getLimitNum() + "]件享团购活动";
+            tag = "only[" + groupbuyGoodsDO.getLimitNum() + "]Enjoy the group purchase activities";
             skuVO.setPurchaseNum(groupbuyGoodsDO.getLimitNum());
         } else {
             skuVO.setPurchaseNum(skuVO.getNum());
         }
 
-        //原价小计
+        // The original subtotal
         double subtotal = skuVO.getSubtotal();
 
-        //按团购价算 优惠小计
+        // Discount subtotal according to group purchase price
         double discountTotal = CurrencyUtil.mul(skuVO.getPurchaseNum(), groupbuyGoodsDO.getPrice());
-        //非团购部分价格
+        // Non-group purchase partial price
         double otherTotal = 0;
         if (!skuVO.getNum().equals(skuVO.getPurchaseNum())) {
             otherTotal = CurrencyUtil.mul((skuVO.getNum() - skuVO.getPurchaseNum()), skuVO.getOriginalPrice());
@@ -110,7 +110,7 @@ public class GroupBuyGoodsPluginNew implements SkuPromotionRuleBuilder {
         double reducedPrice = CurrencyUtil.sub(skuVO.getOriginalPrice(), groupbuyGoodsDO.getPrice());
         rule.setReducedTotalPrice(reducedTotalPrice);
         rule.setReducedPrice(reducedPrice);
-        rule.setTips("团购价[" + groupbuyGoodsDO.getPrice() + "]");
+        rule.setTips("group[" + groupbuyGoodsDO.getPrice() + "]");
         rule.setTag(tag);
 
         return rule;

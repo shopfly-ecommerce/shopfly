@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 商品标签实体
+ * Commodity label entity
  *
  * @author fk
  * @version v2.0
@@ -43,22 +43,22 @@ public class TagsDO implements Serializable {
     private static final long serialVersionUID = 1899720595535600L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "tag_id")
     @ApiModelProperty(hidden = true)
     private Integer tagId;
     /**
-     * 标签名字
+     * The tag name
      */
     @Column(name = "tag_name")
-    @ApiModelProperty(name = "tag_name", value = "标签名字", required = false)
+    @ApiModelProperty(name = "tag_name", value = "The tag name", required = false)
     private String tagName;
     /**
-     * 关键字
+     * keyword
      */
     @Column(name = "mark")
-    @ApiModelProperty(name = "mark", value = "关键字", required = false)
+    @ApiModelProperty(name = "mark", value = "keyword", required = false)
     private String mark;
 
 

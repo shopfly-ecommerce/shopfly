@@ -19,19 +19,19 @@ package cloud.shopfly.b2c.core.trade.cart.service;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.CartView;
 
 /**
- * 购物车只读操作业务接口<br>
- * 包含对购物车读取操作
+ * Shopping cart read-only operation business interface<br>
+ * Contains the shopping cart read operation
  *
  * @author Snow
  * @version v2.0
- * 2018年03月19日21:55:53
+ * 2018years03month19day21:55:53
  * @since v7.0.0
  */
 public interface CartReadManager {
 
 
     /**
-     * 读取购物车数据，并计算优惠和价格
+     * Read shopping cart data and calculate offers and prices
      *
      * @return
      */
@@ -39,7 +39,7 @@ public interface CartReadManager {
 
 
     /**
-     * 由缓存中取出已勾选的购物列表<br>
+     * Retrieves the checked shopping list from the cache<br>
      *
      * @return
      */

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品索引管理接口
+ * Commodity index management interface
  *
  * @author fk
  * @version v1.0
@@ -32,29 +32,29 @@ import java.util.Map;
 public interface GoodsIndexManager {
 	
 	/**
-	 * 将某个商品加入索引<br>
+	 * Adds an item to an index<br>
 	 * @param goods
 	 */
 	void addIndex(Map goods);
 	
 	/**
-	 * 更新某个商品的索引
+	 * Update an index for an item
 	 * @param goods
 	 */
 	void updateIndex(Map goods);
 
 	
 	/**
-	 * 更新
+	 * update
 	 * @param goods
 	 */
 	void deleteIndex(Map goods);
 	
 	/**
-	 * 初始化索引
+	 * Initializing indexes
 	 * @param list
 	 * @param index
-	 * @return  是否是生成成功
+	 * @return  Is the generation successful?
 	 */
 	boolean addAll(List<Map<String, Object>> list, int index);
 

@@ -56,7 +56,7 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
 /**
- * 限时抢购申请业务类
+ * Flash sale application business category
  *
  * @author Snow
  * @version v7.0.0
@@ -125,7 +125,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
 
 
         SeckillDO seckillVO = this.seckillManager.getModel(list.get(0).getSeckillId());
-        //查询申请表的活动id,用于删除使用
+        // Query the activity ID of the application form for deletion
         String sql = "select apply_id from es_seckill_apply where seckill_id = ?";
         List<Map> listApply = this.daoSupport.queryForList(sql,list.get(0).getSeckillId());
 
@@ -135,10 +135,10 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
                 Integer applyId = Integer.parseInt(listApply.get(i).get("apply_id").toString());
                 applyIds[i] = applyId;
             }
-            //删除原有的限时抢购申请
+            // Delete the original flash sale application
             sql = "delete from es_seckill_apply where seckill_id = ?";
             this.daoSupport.execute(sql, list.get(0).getSeckillId());
-            //删除原有的促销商品表活动
+            // Delete the original promotional list activity
             List<Object> term = new ArrayList<>();
             String sqlString = SqlUtil.getInSql(applyIds, term);
             term.add(PromotionTypeEnum.SECKILL.name());
@@ -146,31 +146,31 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
             sql = "delete from es_promotion_goods where activity_id in ("+sqlString+") and promotion_type = ? ";
             this.daoSupport.execute(sql,term.toArray());
         }
-        //循环添加限时抢购申请
+        // Loop to add flash sale applications
         for (SeckillApplyDO seckillApplyDO : list) {
             Integer goodsId = seckillApplyDO.getGoodsId();
-            //查询商品
+            // Query the goods
             CacheGoods goods = goodsClient.getFromCache(goodsId);
-            //判断参加活动的数量和库存数量
+            // Judge the number of activities and inventory
             if (seckillApplyDO.getSoldQuantity() > goods.getEnableQuantity()) {
-                throw new ServiceException(PromotionErrorCode.E402.code(), seckillApplyDO.getGoodsName() + ",此商品库存不足");
+                throw new ServiceException(PromotionErrorCode.E402.code(), seckillApplyDO.getGoodsName() + ",This article is out of stock");
             }
 
             /**
-             * *************两种情况：******************
-             * 团购时间段：      |________________|
-             * 秒杀时间段：  |_____|           |_______|
+             * *************Two cases：******************
+             * Group purchase period：      |________________|
+             * Seckill time：  |_____|           |_______|
              *
-             * ************第三种情况：******************
-             * 团购时间段：        |______|
-             * 秒杀时间段：   |________________|
+             * ************The third case：******************
+             * Group purchase period：        |______|
+             * Seckill time：   |________________|
              *
-             * ************第四种情况：******************
-             * 团购时间段：   |________________|
-             * 秒杀时间段：        |______|
+             * ************The fourth case：******************
+             * Group purchase period：   |________________|
+             * Seckill time：        |______|
              *
              */
-            //这个商品的开始时间计算要用他参与的时间段来计算，结束时间是当天晚上23：59：59
+            // The start time of this product shall be calculated according to the time segment he participates in, and the end time is 23:59:59 p.m. of the same day
             String date = DateUtil.toString(seckillVO.getStartDay(), "yyyy-MM-dd");
             long startTime = DateUtil.getDateline(date + " " + seckillApplyDO.getTimeLine() + ":00:00", "yyyy-MM-dd HH:mm:ss");
             long endTime = DateUtil.getDateline(date + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
@@ -187,25 +187,25 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
                     startTime, endTime
             );
             if (count > 0) {
-                throw new ServiceException(PromotionErrorCode.E400.code(), "商品[" + goods.getGoodsName() + "]已经在重叠的时间段参加了团购活动，不能参加限时抢购活动");
+                throw new ServiceException(PromotionErrorCode.E400.code(), "product[" + goods.getGoodsName() + "]You have participated in group purchase activities in overlapping periods and cannot participate in flash sale activities");
             }
 
 
-            //商品的原始价格
+            // The original price of a commodity
             seckillApplyDO.setOriginalPrice(goods.getPrice());
             seckillApplyDO.setSalesNum(0);
             this.daoSupport.insert(seckillApplyDO);
             int applyId = this.daoSupport.getLastId("es_seckill_apply");
             seckillApplyDO.setApplyId(applyId);
 
-            //促销商品表
+            // Promotional list
             PromotionGoodsDO promotion = new PromotionGoodsDO(seckillApplyDO, startTime, endTime);
 
             this.daoSupport.insert(promotion);
-            //设置延迟加载任务，到活动开始时间后将搜索引擎中的优惠价格设置为0
+            // Set the lazy load task and set the search engine discount to 0 after the start time of the activity
             PromotionPriceDTO promotionPriceDTO = new PromotionPriceDTO(seckillApplyDO.getGoodsId(),seckillApplyDO.getPrice());
             timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, startTime, null);
-            //此活动结束后将索引的优惠价格重置为0
+            // Reset the indexs discount price to 0 after this activity ends
             promotionPriceDTO.setPrice(0.0);
             timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, endTime, null);
 
@@ -218,17 +218,17 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     @Override
     public boolean addSoldNum(List<PromotionDTO> promotionDTOList) {
 
-        //遍历活动与商品关系的类
+        // Classes that traverse the relationship between activities and goods
         for (PromotionDTO promotionDTO : promotionDTOList) {
 
-            //加锁
+            // lock
             Lock lock = getGoodsQuantityLock(promotionDTO.getGoodsId());
             lock.lock();
             try {
 
                 Map<Integer, List<SeckillGoodsVO>> map = this.getSeckillGoodsList();
 
-                //记录此商品属于哪个时刻
+                // Record the moment at which the item belongs
 
                 for (Map.Entry<Integer, List<SeckillGoodsVO>> entry : map.entrySet()) {
 
@@ -236,29 +236,29 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
 
                     for (SeckillGoodsVO goodsVO : seckillGoodsDTOList) {
                         if (goodsVO.getGoodsId().equals(promotionDTO.getGoodsId())) {
-                            //用户购买的数量
+                            // The number of purchases by users
                             int num = promotionDTO.getNum();
 
-                            //已销售的数量
+                            // Quantity sold
                             int soldNum = goodsVO.getSoldNum();
 
-                            //售空数量
+                            // The number sold out
                             int soldQuantity = goodsVO.getSoldQuantity();
 
-                            //加上用户刚下单的购买数量
+                            // Plus the number of purchases the user just ordered
                             soldNum = soldNum + num;
 
-                            //如果已销售数量大于售空数量，则将已销售数量更改为售空数量，防止页面展示的已售百分比超过100%
+                            // If the number sold is greater than the number sold, change the number sold to the number sold to prevent the page from showing more than 100% of the percentage sold
                             if (soldNum >= soldQuantity) {
                                 soldNum = soldQuantity;
                             }
-                            //设置已销售数量
+                            // Set the quantity sold
                             goodsVO.setSoldNum(soldNum);
 
                             String sql = "update es_seckill_apply set sold_quantity = sold_quantity-?,sales_num = sales_num +? where goods_id = ? and seckill_id=? and sold_quantity>=?";
                             int rowNum = this.daoSupport.execute(sql, num, num, goodsVO.getGoodsId(), goodsVO.getSeckillId(), num);
 
-                            //库存不足
+                            // Insufficient inventory
                             if (rowNum <= 0) {
                                 return false;
                             }
@@ -285,37 +285,37 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     @Override
     public Map<Integer, List<SeckillGoodsVO>> getSeckillGoodsList() {
 
-        //读取今天的时间
+        // Read todays time
         long today = DateUtil.startOfTodDay();
-        //从缓存读取限时抢购的活动的商品
+        // Read flash sale active items from cache
         String redisKey = PromotionCacheKeys.getSeckillKey(DateUtil.toString(DateUtil.getDateline(), "yyyyMMdd"));
         Map<Integer, List<SeckillGoodsVO>> map = this.cache.getHash(redisKey);
 
-        //如果redis中没有则从数据取
+        // If not in Redis, fetch from the data
         if (map == null || map.isEmpty()) {
 
-            //读取当天正在进行的活限时抢购活动的商品
+            // Read items from live flash sales that are taking place that day
             String sql = "select * from es_seckill_apply where start_day = ? ";
             List<SeckillApplyDO> list = this.daoSupport.queryForList(sql, SeckillApplyDO.class, today);
 
-            //遍历所有的商品，并保存所有不同的时刻
+            // Walk through all the goods and save all the different moments
             for (SeckillApplyDO applyDO : list) {
                 map.put(applyDO.getTimeLine(), new ArrayList());
             }
 
-            //遍历所有的时刻，并为每个时刻赋值商品
+            // All moments are traversed and goods are assigned to each moment
             for (SeckillApplyDO applyDO : list) {
                 for (Map.Entry<Integer, List<SeckillGoodsVO>> entry : map.entrySet()) {
                     if (applyDO.getTimeLine().equals(entry.getKey())) {
 
-                        //活动开始日期（天）的时间戳
+                        // Time stamp of the activity start date (day)
                         long startDay = applyDO.getStartDay();
-                        //形成 2018090910 这样的串
+                        // Form 2018090910 string like this
                         String timeStr = DateUtil.toString(startDay, "yyyyMMdd") + applyDO.getTimeLine();
-                        //得到开始日期的时间戳
+                        // Get the timestamp of the start date
                         long startTime = DateUtil.getDateline(timeStr, "yyyyMMddHH");
 
-                        //查询商品
+                        // Query the goods
                         CacheGoods goods = goodsClient.getFromCache(applyDO.getGoodsId());
                         SeckillGoodsVO seckillGoods = new SeckillGoodsVO();
                         seckillGoods.setGoodsId(goods.getGoodsId());
@@ -337,7 +337,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
                 }
             }
 
-            //压入缓存
+            // Pressure into the cache
             for (Map.Entry<Integer, List<SeckillGoodsVO>> entry : map.entrySet()) {
                 this.cache.putHash(redisKey, entry.getKey(), entry.getValue());
             }
@@ -347,11 +347,11 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     }
 
     public static void main(String[] args) {
-        //活动开始日期（天）的时间戳
+        // Time stamp of the activity start date (day)
         long startDay = DateUtil.getDateline("20180101000000", "yyyyMMddHHMMss");
-        //形成 2018090910 这样的串
+        // Form 2018090910 string like this
         String timeStr = DateUtil.toString(startDay, "yyyyMMdd") + 10;
-        //得到开始日期的时间戳
+        // Get the timestamp of the start date
         long startTime = DateUtil.getDateline(timeStr, "yyyyMMddHH");
 
         String str = DateUtil.toString(startTime, "yyyyMMddHH");
@@ -363,11 +363,11 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     @Override
     public List getSeckillGoodsList(Integer rangeTime, Integer pageNo, Integer pageSize) {
 
-        //读取限时抢购活动商品
+        // Read flash sale active items
         Map<Integer, List<SeckillGoodsVO>> map = this.getSeckillGoodsList();
         List<SeckillGoodsVO> totalList = new ArrayList();
 
-        //遍历活动商品
+        // Walk through live goods
         for (Map.Entry<Integer, List<SeckillGoodsVO>> entry : map.entrySet()) {
             if (rangeTime.intValue() == entry.getKey().intValue()) {
                 totalList = entry.getValue();
@@ -375,7 +375,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
             }
         }
 
-        //redis不能分页 手动根据分页读取数据
+        // Redis cannot page manually read data based on pages
         List<SeckillGoodsVO> list = new ArrayList<SeckillGoodsVO>();
         int currIdx = (pageNo > 1 ? (pageNo - 1) * pageSize : 0);
         for (int i = 0; i < pageSize && i < totalList.size() - currIdx; i++) {
@@ -398,7 +398,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
 
         List<SeckillGoodsVO> lockedList = new ArrayList<>();
 
-        //遍历活动与商品关系的类
+        // Classes that traverse the relationship between activities and goods
         for (PromotionDTO promotionDTO : promotionDTOList) {
 
             Map<Integer, List<SeckillGoodsVO>> map = this.getSeckillGoodsList();
@@ -409,7 +409,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
                 for (SeckillGoodsVO goodsVO : seckillGoodsDTOList) {
 
                     if (goodsVO.getGoodsId().equals(promotionDTO.getGoodsId())) {
-                        //用户购买的数量
+                        // The number of purchases by users
                         int num = promotionDTO.getNum();
                         goodsVO.setSoldNum(num);
                         lockedList.add(goodsVO);
@@ -437,10 +437,10 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class, ServiceException.class})
     public void deleteSeckillGoods(Integer goodsId) {
 
-        //删除限时抢购已经开始和未开始的商品
+        // Delete flash sales already started and not yet
         this.daoSupport.execute("delete from es_seckill_apply where goods_id = ? and start_day >= ? ",goodsId,DateUtil.startOfTodDay());
 
-        //移除缓存中的数据
+        // Removes data from the cache
         String redisKey = getRedisKey(DateUtil.getDateline());
 
         this.cache.remove(redisKey);
@@ -449,7 +449,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
 
 
     /**
-     * 回滚秒杀库存
+     * Roll back snapkill inventory
      *
      * @param goodsList
      */
@@ -463,7 +463,7 @@ public class SeckillGoodsManagerImpl extends AbstractPromotionRuleManagerImpl im
     }
 
     /**
-     * 获取限时抢购key
+     * Get a flash salekey
      * @param dateline
      * @return
      */

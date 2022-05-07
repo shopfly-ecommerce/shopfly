@@ -59,7 +59,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 评论业务类
+ * Comment business class
  *
  * @author fk
  * @version v1.0
@@ -139,21 +139,21 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
             List<Integer> commentIds = new ArrayList<>();
             List<Integer> commentReplyIds = new ArrayList<>();
             List<Integer> addCommentIds = new ArrayList<>();
-            // 找出有图片和回复过的评论id
+            // Find the id of the comment with the picture and the reply
             for (CommentVO comment : list) {
-                //找出初评含有图片的评论id
+                // Find the comment ID with the image in the initial comment
                 if (comment.getHaveImage() == 1) {
                     commentIds.add(comment.getCommentId());
                 }
                 if (comment.getReplyStatus() == 1) {
                     commentReplyIds.add(comment.getCommentId());
                 }
-                //找出追评含有图片的评论id
+                // Find the comment ID that contains the image
                 if (comment.getAdditionalStatus()!=null && comment.getAdditionalStatus() == 1 && comment.getAdditionalHaveImage()!=null && comment.getAdditionalHaveImage() == 1) {
                     addCommentIds.add(comment.getCommentId());
                 }
             }
-            // 查询相应的初评相册
+            // Query the corresponding initial comment album
             if (StringUtil.isNotEmpty(commentIds)) {
                 Map<Integer, List<String>> map = this.commentGalleryManager.getGalleryByCommentIds(commentIds, 0);
                 for (CommentVO comment : list) {
@@ -163,7 +163,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
                 }
             }
 
-            // 查询相应的追评相册
+            // Query the corresponding follow-up comment album
             if (StringUtil.isNotEmpty(addCommentIds)) {
                 Map<Integer, List<String>> map = this.commentGalleryManager.getGalleryByCommentIds(addCommentIds, 1);
                 for (CommentVO comment : list) {
@@ -173,7 +173,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
                 }
             }
 
-            // 查询回复
+            // Query reply
             if (StringUtil.isNotEmpty(commentReplyIds)) {
                 Map<Integer, CommentReply> map = this.commentReplyManager.getReply(commentReplyIds);
                 for (CommentVO comment : list) {
@@ -193,21 +193,21 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
     public MemberComment add(CommentScoreDTO comment, Permission permission) {
 
         OrderDetailDTO orderDetail = orderClient.getModel(comment.getOrderSn());
-        // 不存在的订单/不是我的订单
+        // Non-existent order/not my order
         if (Permission.BUYER.equals(permission)) {
             Buyer member = UserContext.getBuyer();
             if (orderDetail == null || !member.getUid().equals(orderDetail.getMemberId())) {
-                throw new ServiceException(MemberErrorCode.E200.code(), "没有权限");
+                throw new ServiceException(MemberErrorCode.E200.code(), "Have no legal power");
             }
         }
 
         if (!orderDetail.getOrderOperateAllowableVO().getAllowComment()) {
-            throw new ServiceException(MemberErrorCode.E200.code(), "没有权限");
+            throw new ServiceException(MemberErrorCode.E200.code(), "Have no legal power");
         }
-        // 添加评论
+        // Add comments
         this.add(comment.getComments(), orderDetail);
 
-        // 更改订单的评论状态，同步更改 ，避免重复评论
+        // Change the comment status of the order to synchronize the changes and avoid duplicate comments
         orderClient.updateOrderCommentStatus(comment.getOrderSn(), CommentStatusEnum.FINISHED.name());
 
         return null;
@@ -253,13 +253,13 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
     @Override
     public void autoGoodComments(List<OrderDetailDTO> detailDTOList) {
 
-        // 查询过期没有评论订单
+        // Query expired without comment order
         List<OrderDetailDTO> list = detailDTOList;
 
-        // 循环订单的商品自动给好评
+        // Circular order items automatically give favorable comments
         if (StringUtil.isNotEmpty(list)) {
             for (OrderDetailDTO orderDetail : list) {
-                //  添加商品评分
+                // Add an item score
                 List<OrderSkuDTO> skuList = orderDetail.getOrderSkuList();
                 List<CommentDTO> commentList = new ArrayList<>();
 
@@ -267,7 +267,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
                     CommentDTO comment = new CommentDTO();
                     comment.setSkuId(sku.getSkuId());
                     comment.setGrade(CommentGrade.good.name());
-                    comment.setContent("此商品默认好评");
+                    comment.setContent("This product is praised by default");
                     comment.setImages(null);
                     commentList.add(comment);
                 }
@@ -306,7 +306,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
                     default:
                         break;
                 }
-                //图片评论的数量
+                // Number of comments on images
                 Integer haveImage = (Integer) map.get("have_image");
                 if (haveImage == 1) {
                     imageCount += count;
@@ -329,21 +329,21 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
         for (AdditionalCommentDTO commentDTO : comments) {
             MemberComment memberComment = this.getModel(commentDTO.getCommentId());
 
-            //如果会员评论为空或者评论已删除或者已经添加过追评，则不允许添加追评
+            // If a members comment is empty or the comment has been deleted or has been added, the following comment is not allowed to be added
             if (memberComment == null || memberComment.getStatus().intValue() == 0 || memberComment.getAdditionalStatus().intValue() == 1) {
-                throw new ServiceException(MemberErrorCode.E200.code(), "没有权限");
+                throw new ServiceException(MemberErrorCode.E200.code(), "Have no legal power");
             }
 
-            // 验证权限
+            // Verify permissions
             if (Permission.BUYER.equals(permission)) {
                 Buyer member = UserContext.getBuyer();
                 if (!member.getUid().equals(memberComment.getMemberId())) {
-                    throw new ServiceException(MemberErrorCode.E200.code(), "没有权限");
+                    throw new ServiceException(MemberErrorCode.E200.code(), "Have no legal power");
                 }
             }
 
             if (StringUtil.isEmpty(commentDTO.getContent())) {
-                throw new ServiceException(MemberErrorCode.E201.code(), "追加的评论内容不能为空");
+                throw new ServiceException(MemberErrorCode.E201.code(), "The appended comment content cannot be empty");
             }
 
             memberComment.setAdditionalStatus(1);
@@ -358,7 +358,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
             this.daoSupport.update(memberComment, memberComment.getCommentId());
 
             if (commentDTO.getImages() != null && commentDTO.getImages().size() != 0) {
-                //添加图片
+                // Add images
                 this.commentGalleryManager.add(memberComment.getCommentId(), commentDTO.getImages(), 1);
             }
         }
@@ -366,15 +366,15 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
     }
 
     /**
-     * 添加评论
+     * Add comments
      *
-     * @param commentList 发起的评论
-     * @param orderDetail 订单
+     * @param commentList Initiated comments
+     * @param orderDetail The order
      */
     private void add(List<CommentDTO> commentList, OrderDetailDTO orderDetail) {
 
         Map<Integer, Object> skuMap = new HashMap<Integer, Object>(orderDetail.getOrderSkuList().size());
-        // 将product循环放入map
+        // Put the product loop into the map
         for (OrderSkuDTO sku : orderDetail.getOrderSkuList()) {
             skuMap.put(sku.getSkuId(), sku);
         }
@@ -382,7 +382,7 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
         for (CommentDTO comment : commentList) {
             OrderSkuDTO product = (OrderSkuDTO) skuMap.get(comment.getSkuId());
             if (product == null) {
-                throw new ServiceException(MemberErrorCode.E200.code(), "没有权限");
+                throw new ServiceException(MemberErrorCode.E200.code(), "Have no legal power");
             }
             MemberComment memberComment = new MemberComment();
             BeanUtils.copyProperties(comment, memberComment);
@@ -397,27 +397,27 @@ public class MemberCommentManagerImpl implements MemberCommentManager {
             memberComment.setMemberName(member.getUname());
             memberComment.setOrderSn(orderDetail.getSn());
 
-            // 是否有图片
+            // Is there a picture
             memberComment.setHaveImage(StringUtil.isNotEmpty(comment.getImages()) ? 1 : 0);
 
             if (CommentGrade.good.name().equals(comment.getGrade()) && StringUtil.isEmpty(memberComment.getContent())) {
 
-                memberComment.setContent("此评论默认好评！！");
+                memberComment.setContent("This review defaults to favorable reviews！！");
             }
 
             if (!CommentGrade.good.name().equals(comment.getGrade()) && StringUtil.isEmpty(memberComment.getContent())) {
 
-                throw new ServiceException(MemberErrorCode.E201.code(), "非好评评论必填");
+                throw new ServiceException(MemberErrorCode.E201.code(), "Mandatory for non-favorable comments");
             }
 
             this.daoSupport.insert(memberComment);
 
             int commentId = this.daoSupport.getLastId("es_member_comment");
 
-            //添加图片
+            // Add images
             this.commentGalleryManager.add(commentId, comment.getImages(), 0);
 
-            // 发消息
+            // Send a message
             memberComment.setCommentId(commentId);
             GoodsCommentMsg goodsCommentMsg = new GoodsCommentMsg();
             goodsCommentMsg.setComment(memberComment);

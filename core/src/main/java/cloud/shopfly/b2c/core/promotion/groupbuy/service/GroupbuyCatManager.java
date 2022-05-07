@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 团购分类业务层
+ * Group purchase classification business layer
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -30,7 +30,7 @@ import java.util.List;
 public interface GroupbuyCatManager {
 
 	/**
-	 * 读取团购分类——分页
+	 * Read the group purchase category——paging
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
@@ -38,37 +38,37 @@ public interface GroupbuyCatManager {
 	Page list(Integer pageNo, Integer pageSize);
 
 	/**
-	 * 查询团购分类列表
-	 * @param parentId 分类父id
+	 * Query the group purchase category list
+	 * @param parentId Classification of the fatherid
 	 * @return Page
 	 */
 	List<GroupbuyCatDO>  getList(Integer parentId);
 
 	/**
-	 * 添加团购分类
-	 * @param groupbuyCat 团购分类
-	 * @return GroupbuyCat 团购分类
+	 * Add group Purchase category
+	 * @param groupbuyCat Group classification
+	 * @return GroupbuyCat Group classification
 	 */
 	GroupbuyCatDO add(GroupbuyCatDO groupbuyCat);
 
 	/**
-	* 修改团购分类
-	* @param groupbuyCat 团购分类
-	* @param id 团购分类主键
-	* @return GroupbuyCat 团购分类
+	* Modify group purchase classification
+	* @param groupbuyCat Group classification
+	* @param id Group purchase classification key
+	* @return GroupbuyCat Group classification
 	*/
 	GroupbuyCatDO edit(GroupbuyCatDO groupbuyCat, Integer id);
 
 	/**
-	 * 删除团购分类
-	 * @param id 团购分类主键
+	 * Delete group purchase category
+	 * @param id Group purchase classification key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取团购分类
-	 * @param id 团购分类主键
-	 * @return GroupbuyCat  团购分类
+	 * Get group-buying categories
+	 * @param id Group purchase classification key
+	 * @return GroupbuyCat  Group classification
 	 */
 	GroupbuyCatDO getModel(Integer id);
 

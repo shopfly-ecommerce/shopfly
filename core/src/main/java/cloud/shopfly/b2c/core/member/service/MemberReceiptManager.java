@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.member.model.vo.MemberReceiptVO;
 import java.util.List;
 
 /**
- * 会员发票业务层
+ * Member invoice business layer
  *
  * @author zh
  * @version v7.0.0
@@ -31,51 +31,51 @@ import java.util.List;
 public interface MemberReceiptManager {
 
     /**
-     * 根据发票类型查询当前会员发票列表
+     * Query current member invoice list by invoice type
      *
-     * @param receiptType 发票类型
+     * @param receiptType Invoice type
      * @return
      */
     List<MemberReceipt> list(String receiptType);
 
 
     /**
-     * 添加会员发票
+     * Add membership invoice
      *
-     * @param memberReceiptVO 会员发票
-     * @return MemberReceipt 会员发票
+     * @param memberReceiptVO Member of the invoice
+     * @return MemberReceipt Member of the invoice
      */
     MemberReceipt add(MemberReceiptVO memberReceiptVO);
 
     /**
-     * 修改会员发票
+     * Revision of member invoice
      *
-     * @param memberReceiptVO 会员发票
-     * @param id              会员发票主键
-     * @return MemberReceipt 会员发票
+     * @param memberReceiptVO Member of the invoice
+     * @param id              Member invoice master key
+     * @return MemberReceipt Member of the invoice
      */
     MemberReceipt edit(MemberReceiptVO memberReceiptVO, Integer id);
 
     /**
-     * 删除会员发票
+     * Delete member invoice
      *
-     * @param id 会员发票主键
+     * @param id Member invoice master key
      */
     void delete(Integer id);
 
     /**
-     * 获取会员发票
+     * Get membership invoice
      *
-     * @param id 会员发票主键
-     * @return MemberReceipt  会员发票
+     * @param id Member invoice master key
+     * @return MemberReceipt  Member of the invoice
      */
     MemberReceipt getModel(Integer id);
 
     /**
-     * 设置默认发票，如果发票是个人则发票id为0
+     * Set the default invoice, or if the invoice is a personidfor0
      *
-     * @param receiptType 发票类型
-     * @param id          发票id
+     * @param receiptType Invoice type
+     * @param id          invoiceid
      */
     void setDefaultReceipt(String receiptType, Integer id);
 

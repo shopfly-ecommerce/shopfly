@@ -31,7 +31,7 @@ import java.io.Serializable;
 
 
 /**
- * 团购分类实体
+ * Group purchase classification entity
  *
  * @author Snow
  * @version v7.0.0
@@ -46,38 +46,38 @@ public class GroupbuyCatDO implements Serializable {
     private static final long serialVersionUID = 9105318699704423L;
 
     /**
-     * 分类id
+     * Categoriesid
      */
     @Id(name = "cat_id")
     @ApiModelProperty(hidden = true)
     private Integer catId;
     /**
-     * 父类id
+     * The parent classid
      */
     @Column(name = "parent_id")
-    @ApiModelProperty(name = "parent_id", value = "父类id", required = false)
+    @ApiModelProperty(name = "parent_id", value = "The parent classid", required = false)
     private Integer parentId;
 
     /**
-     * 分类名称
+     * name
      */
     @Column(name = "cat_name")
-    @NotEmpty(message = "请填写分类名称")
-    @ApiModelProperty(name = "cat_name", value = "分类名称", required = false)
+    @NotEmpty(message = "Please fill in the category name")
+    @ApiModelProperty(name = "cat_name", value = "name", required = false)
     private String catName;
 
     /**
-     * 分类结构目录
+     * Classification structure directory
      */
     @Column(name = "cat_path")
-    @ApiModelProperty(name = "cat_path", value = "分类结构目录", required = false)
+    @ApiModelProperty(name = "cat_path", value = "Classification structure directory", required = false)
     private String catPath;
 
     /**
-     * 分类排序
+     * sort
      */
     @Column(name = "cat_order")
-    @ApiModelProperty(name = "cat_order", value = "分类排序", required = false)
+    @ApiModelProperty(name = "cat_order", value = "sort", required = false)
     private Integer catOrder;
 
     @PrimaryKeyField

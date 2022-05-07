@@ -16,15 +16,15 @@
 package cloud.shopfly.b2c.core.system.enums;
 
 /**
- * 支付客户端类型
+ * Payment client type
  *
  * @author fk
  * @version v6.4
- * @since v6.4 2017年10月17日 上午10:49:25
+ * @since v6.4 2017years10month17The morning of10:49:25
  */
 public enum ClientType {
 
-    // pc端，移动wap端，移动app端
+    // PC end, mobile WAP end, mobile APP end
     PC("pc_enable", "PC"), WAP("wap_enable", "WAP"), APP("app_enable", "APP");
 
     private String description;

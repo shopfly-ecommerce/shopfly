@@ -18,81 +18,81 @@ package cloud.shopfly.b2c.core.base.plugin.waybill.vo;
 import java.util.List;
 
 /**
- * 快递鸟电子面板封装参数实体
+ * Express bird electronic panel encapsulates parameter entities
  *
  * @author zh
  * @version v1.0
  * @since v7.0
- * 2018年6月10日 上午10:51:10
+ * 2018years6month10The morning of10:51:10
  */
 public class WayBillJson {
 
     /**
-     * 订单编号
+     * Order no.
      */
     private String orderCode;
     /**
-     * 快递公司编码
+     * Express Company Code
      */
     private String shipperCode;
     /**
-     * 邮费支付方式:1-现付，2-到付，3-月结，4-第三方支付
+     * Payment method of postage:1-Now pay,2-To pay,3-Monthly statement.4-Third-party payment
      */
     private Integer payType;
     /**
-     * 快递类型：1-标准快件
+     * Express type：1-Standard express
      */
     private String expType;
     /**
-     * 是否通知快递员上门揽件：0-通知；1-不通知；不填则默认为1
+     * Whether to inform the Courier to collect pieces：0-notice；1-不notice；If this parameter is not specified, the default value is1
      */
     private Integer isNotice;
     /**
-     * 电子面单客户账号（与快递网点申请或通过快递鸟官网申请或通过申请电子面单客户号申请）
+     * E-face single customer account（Apply with express outlets or through express bird official website or through the application of electronic list customer number application）
      */
     private String customerName;
     /**
-     * 电子面单密码
+     * Electronic surface single cipher
      */
     private String customerPwd;
     /**
-     * 寄件费（运费）
+     * Send a fee（freight）
      */
     private Double cost;
     /**
-     * 其他费用
+     * Other fees
      */
     private Double otherCost;
     /**
-     * 发件人的信息
+     * Senders information
      */
     private Information sender;
     /**
-     * 收件人的信息
+     * Recipient information
      */
     private Information receiver;
     /**
-     * 寄送商品信息
+     * Sending commodity information
      */
     private List<Commodity> commodity;
     /**
-     * 物品总重量kg
+     * Gross weightkg
      */
     private Double weight;
     /**
-     * 件数/包裹数
+     * number/The parcel number
      */
     private Integer quantity;
     /**
-     * 物品总体积m3
+     * Total volume of articlesm3
      */
     private Double volume;
     /**
-     * 备注
+     * note
      */
     private String remark;
     /**
-     * 返回电子面单模板：0-不需要；1-需要
+     * Returns the electronic surface single template：0-Dont need；1-Need to be
      */
     private String isReturnPrintTemplate;
 

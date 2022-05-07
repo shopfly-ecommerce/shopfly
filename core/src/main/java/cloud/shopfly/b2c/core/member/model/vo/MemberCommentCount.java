@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author fk
  * @version v2.0
- * @Description: 评论数量
+ * @Description: Comment number
  * @date 2018/9/12 11:10
  * @since v7.0.0
  */
@@ -32,33 +32,33 @@ import io.swagger.annotations.ApiModelProperty;
 public class MemberCommentCount {
 
     /**
-     * 全部评论数量
+     * Total number of comments
      */
-    @ApiModelProperty(name = "all_count", value = "全部评论数量")
+    @ApiModelProperty(name = "all_count", value = "Total number of comments")
     private Integer allCount;
 
     /**
-     * 好评数量
+     * Number of favorable comments
      */
-    @ApiModelProperty(name = "good_count", value = "好评数量")
+    @ApiModelProperty(name = "good_count", value = "Number of favorable comments")
     private Integer goodCount;
 
     /**
-     * 中评数量
+     * In the evaluation of the number
      */
-    @ApiModelProperty(name = "neutral_count", value = "中评数量")
+    @ApiModelProperty(name = "neutral_count", value = "In the evaluation of the number")
     private Integer neutralCount;
 
     /**
-     * 差评数量
+     * Number of bad review
      */
-    @ApiModelProperty(name = "bad_count", value = "差评数量")
+    @ApiModelProperty(name = "bad_count", value = "Number of bad review")
     private Integer badCount;
 
     /**
-     * 带有图片的评论数量
+     * Number of comments with images
      */
-    @ApiModelProperty(name = "image_count", value = "带有图片的评论数量")
+    @ApiModelProperty(name = "image_count", value = "Number of comments with images")
     private Integer imageCount;
 
     public Integer getAllCount() {

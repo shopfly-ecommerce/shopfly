@@ -34,11 +34,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * showapi 快递实现
+ * showapi Express implementation
  *
  * @author zh
  * @version v7.0
- * @date 18/7/11 下午3:52
+ * @date 18/7/11 In the afternoon3:52
  * @since v7.0
  */
 @Component
@@ -54,7 +54,7 @@ public class Kuaidi100Plugin implements ExpressPlatform {
         List<ConfigItem> list = new ArrayList<>();
         ConfigItem codeItem = new ConfigItem();
         codeItem.setName("code");
-        codeItem.setText("公司代码");
+        codeItem.setText("Company code");
         codeItem.setType("text");
 
         ConfigItem secretItem = new ConfigItem();
@@ -64,16 +64,16 @@ public class Kuaidi100Plugin implements ExpressPlatform {
 
         ConfigItem typeItem = new ConfigItem();
         typeItem.setName("user");
-        typeItem.setText("用户类型");
+        typeItem.setText("The user types");
         typeItem.setType("radio");
-        //组织用户类型可选项
+        // Organization user type Optional
         List<RadioOption> options = new ArrayList<>();
         RadioOption radioOption = new RadioOption();
-        radioOption.setLabel("普通用户");
+        radioOption.setLabel("The average user");
         radioOption.setValue(0);
         options.add(radioOption);
         radioOption = new RadioOption();
-        radioOption.setLabel("企业用户");
+        radioOption.setLabel("Enterprise customers");
         radioOption.setValue(1);
         options.add(radioOption);
         typeItem.setOptions(options);
@@ -91,7 +91,7 @@ public class Kuaidi100Plugin implements ExpressPlatform {
 
     @Override
     public String getPluginName() {
-        return "快递100";
+        return "Courier100";
     }
 
     @Override
@@ -102,12 +102,12 @@ public class Kuaidi100Plugin implements ExpressPlatform {
     @Override
     public ExpressDetailVO getExpressDetail(String abbreviation, String num, Map config) {
         String url = "";
-        //获取快递平台参数
+        // Obtain express platform parameters
         Integer user = new Double(StringUtil.toDouble(config.get("user"), false)).intValue();
         String code = StringUtil.toString(config.get("code"));
         String id = StringUtil.toString(config.get("id"));
         HashMap<String, String> parms = new HashMap<String, String>(16);
-        //根据不同的用户类型调取不同的查询接口
+        // Select different query interfaces according to different user types
         if (user.equals(1)) {
             url = "http://poll.kuaidi100.com/poll/query.do";
             String param = "{\"com\":\"" + abbreviation + "\",\"num\":\"" + num + "\"}";
@@ -127,7 +127,7 @@ public class Kuaidi100Plugin implements ExpressPlatform {
             expressDetailVO.setName(logiCompanyClient.getLogiByCode(map.get("com").toString()).getName());
             return expressDetailVO;
         } catch (Exception e) {
-            logger.error("快递查询错误" + e);
+            logger.error("Express query error" + e);
             e.printStackTrace();
         }
         return null;

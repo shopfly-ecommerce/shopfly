@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.core.client.distribution.impl;
 
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午1:39
+ * 2018-08-14 In the afternoon1:39
  */
 @Service
 @ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
@@ -30,9 +30,9 @@ public class DistributionOrderClientDefaultImpl implements DistributionOrderClie
     private DistributionOrderManager distributionOrderManager;
 
     /**
-     * 根据sn获得分销商订单详情
+     * According to thesnGet distributor order details
      *
-     * @param orderSn 订单编号
+     * @param orderSn Order no.
      * @return FxOrderDO
      */
     @Override
@@ -41,7 +41,7 @@ public class DistributionOrderClientDefaultImpl implements DistributionOrderClie
     }
 
     /**
-     * 保存一条数据
+     * Save a piece of data
      *
      * @param distributionOrderDO
      * @return
@@ -52,10 +52,10 @@ public class DistributionOrderClientDefaultImpl implements DistributionOrderClie
     }
 
     /**
-     * 通过订单id，计算出各个级别的返利金额并保存到数据库
+     * Through the orderid, calculate the rebate amount of each level and save it in the database
      *
-     * @param orderSn 订单编号
-     * @return 计算结果 true 成功， false 失败
+     * @param orderSn Order no.
+     * @return The calculation resultstrue Success, false failure
      */
     @Override
     public boolean calCommission(String orderSn) {
@@ -63,9 +63,9 @@ public class DistributionOrderClientDefaultImpl implements DistributionOrderClie
     }
 
     /**
-     * 根据购买人增加上级人员订单数量
+     * Increase order quantity of superior staff according to buyer
      *
-     * @param buyMemberId 购买人会员id
+     * @param buyMemberId Buyer membershipid
      */
     @Override
     public void addOrderNum(int buyMemberId) {
@@ -73,9 +73,9 @@ public class DistributionOrderClientDefaultImpl implements DistributionOrderClie
     }
 
     /**
-     * 计算退款时需要退的返利金额
+     * Calculate the amount of rebate to be refunded
      *
-     * @param refundDO 退款金额
+     * @param refundDO The refund amount
      */
     @Override
     public void calReturnCommission(RefundDO refundDO) {
@@ -83,7 +83,7 @@ public class DistributionOrderClientDefaultImpl implements DistributionOrderClie
     }
 
     /**
-     * 结算订单
+     * To settle the order
      *
      * @param order
      */

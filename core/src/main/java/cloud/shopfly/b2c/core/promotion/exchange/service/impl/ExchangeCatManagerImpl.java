@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 积分兑换分类业务类
+ * Points exchange classification business class
  *
  * @author Snow
  * @version v7.0.0
@@ -62,7 +62,7 @@ public class ExchangeCatManagerImpl implements ExchangeCatManager {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ExchangeCat add(ExchangeCat exchangeCat) {
 
-        //检测名称是否重复
+        // Check whether the name is duplicated
         this.check(exchangeCat,null);
 
         this.daoSupport.insert(exchangeCat);
@@ -74,7 +74,7 @@ public class ExchangeCatManagerImpl implements ExchangeCatManager {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ExchangeCat edit(ExchangeCat exchangeCat, Integer id) {
 
-        //检测名称是否重复
+        // Check whether the name is duplicated
         this.check(exchangeCat,id);
 
         this.daoSupport.update(exchangeCat, id);
@@ -85,10 +85,10 @@ public class ExchangeCatManagerImpl implements ExchangeCatManager {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
 
-        //删除积分分类，需要判断分类下是否有积分商品
+        // To delete the integral classification, it is necessary to determine whether there are integral commodities under the classification
         List<ExchangeDO> list = exchangeGoodsManager.getModelByCategoryId(id);
         if (StringUtil.isNotEmpty(list)) {
-            throw new ServiceException(GoodsErrorCode.E300.code(), "此类别下存在商品不能删除");
+            throw new ServiceException(GoodsErrorCode.E300.code(), "Items in this category cannot be deleted");
         }
 
         this.daoSupport.delete(ExchangeCat.class, id);
@@ -102,7 +102,7 @@ public class ExchangeCatManagerImpl implements ExchangeCatManager {
     }
 
     /**
-     * 检查添加编辑的合法性
+     * Check the validity of the added edit
      *
      * @param exchangeCat
      * @param id
@@ -119,7 +119,7 @@ public class ExchangeCatManagerImpl implements ExchangeCatManager {
 
         List list = this.daoSupport.queryForList(sql, term.toArray());
         if (list.size() > 0) {
-            throw new ServiceException(PromotionErrorCode.E407.code(), "积分分类名称重复");
+            throw new ServiceException(PromotionErrorCode.E407.code(), "The integral classification name is repeated");
         }
 
         if (exchangeCat.getParentId() == null) {

@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 转化后的货品vo
+ * Converted goodsvo
  *
  * @author Snow create in 2018/3/20
  * @version v2.0
@@ -33,61 +33,61 @@ import java.util.List;
 public class TradeConvertGoodsSkuVO implements Serializable {
 
 
-    @ApiModelProperty(value = "可用库存")
+    @ApiModelProperty(value = "Available")
     private Integer enableQuantity;
 
-    @ApiModelProperty(value = "货号")
+    @ApiModelProperty(value = "SN")
     private Integer skuId;
 
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "productid")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     private String goodsName;
 
-    @ApiModelProperty(value = "商品编号")
+    @ApiModelProperty(value = "SN")
     private String sn;
 
-    @ApiModelProperty(value = "库存")
+    @ApiModelProperty(value = "Inventory")
     private Integer quantity;
 
-    @ApiModelProperty(value = "价格")
+    @ApiModelProperty(value = "Price")
     private Double price;
 
-    @ApiModelProperty(value = "规格信息json")
+    @ApiModelProperty(value = "Specification informationjson")
     private String specs;
 
-    @ApiModelProperty(value = "成本价格")
+    @ApiModelProperty(value = "Cost price")
     private Double cost;
 
-    @ApiModelProperty(value = "重量")
+    @ApiModelProperty(value = "Weight")
     private Double weight;
 
-    @ApiModelProperty(value = "分类id")
+    @ApiModelProperty(value = "Categoriesid")
     private Integer categoryId;
 
-    @ApiModelProperty(value = "缩略图")
+    @ApiModelProperty(value = "The thumbnail")
     private String thumbnail;
 
-    @ApiModelProperty(value = "卖家名称")
+    @ApiModelProperty(value = "The seller name")
     private String sellerName;
 
-    @ApiModelProperty(value = "卖家id")
+    @ApiModelProperty(value = "The sellerid")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "商品价格")
+    @ApiModelProperty(value = "Price")
     private String goodsPrice;
 
-    @ApiModelProperty(value = "规格列表")
+    @ApiModelProperty(value = "Specification list")
     private List<SpecValueVO> specList;
 
-    @ApiModelProperty(value = "谁承担运费0：买家承担，1：卖家承担")
+    @ApiModelProperty(value = "Who bears the freight0：The buyer bears,1：The seller bear")
     private Integer goodsTransfeeCharge;
 
-    @ApiModelProperty(value = "上架状态 1上架  0下架")
+    @ApiModelProperty(value = "On state1save0off")
     private Integer marketEnable;
 
-    @ApiModelProperty(value = "是否被删除0 删除 1未删除")
+    @ApiModelProperty(value = "Deleted or not0 delete1未delete")
     private Integer disabled;
 
 

@@ -18,27 +18,27 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
 * @author liuyulei
  * @version 1.0
- * @Description: 审核状态
+ * @Description: Review the status
  * @date 2019/6/25 9:42
  * @since v7.0
  */
 public enum AuditEnum {
 
     /**
-     * 待审核状态
+     * Status to be reviewed
      */
-    WAIT_AUDIT("待审核"),
+    WAIT_AUDIT("To audit"),
 
 
     /**
-     * 审核通过状态
+     * Approval status
      */
-    PASS_AUDIT("审核通过"),
+    PASS_AUDIT("approved"),
 
     /**
-     * 审核拒绝状态
+     * Audit rejection status
      */
-    REFUSE_AUDIT("审核拒绝");
+    REFUSE_AUDIT("Audit refused to");
 
     private String description;
 

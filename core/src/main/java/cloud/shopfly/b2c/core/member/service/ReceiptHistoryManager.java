@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.member.model.vo.ReceiptHistoryVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 发票历史业务层
+ * Invoice history business layer
  *
  * @author zh
  * @version v7.0.0
@@ -30,36 +30,36 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface ReceiptHistoryManager {
 
     /**
-     * 查询发票历史列表
+     * Query the invoice history list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加发票历史
+     * Add invoice history
      *
-     * @param receiptHistory 发票历史
-     * @return ReceiptHistory 发票历史
+     * @param receiptHistory Invoice history
+     * @return ReceiptHistory Invoice history
      */
     ReceiptHistory add(ReceiptHistory receiptHistory);
 
     /**
-     * 根据订单sn查询历史发票信息
+     * According to the ordersnExample Query historical invoice information
      *
-     * @param orderSn 订单sn
-     * @return 历史发票信息
+     * @param orderSn The ordersn
+     * @return Historical invoice Information
      */
     ReceiptHistory getReceiptHistory(String orderSn);
 
 
     /**
-     * 获取发票历史详细信息，包括收货地址已经商品sku相关信息
+     * Get invoice history details, including the shipping address for the goodsskuThe relevant information
      *
-     * @param historyId 发票历史的id
-     * @return 发票详细VO
+     * @param historyId Invoice historicalid
+     * @return Detailed invoiceVO
      */
     ReceiptHistoryVO getReceiptDetail(Integer historyId);
 

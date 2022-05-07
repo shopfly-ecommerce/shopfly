@@ -19,61 +19,61 @@ import cloud.shopfly.b2c.core.promotion.minus.model.vo.MinusVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 单品立减接口
+ * Single product vertical reduction interface
  * @author mengyuanming
  * @version v1.0
  * @since v6.4.0
- * @date 2017年8月18日下午9:20:46
+ * @date 2017years8month18On the afternoon9:20:46
  *
  */
 public interface MinusManager {
 
 
 	/**
-	 * 根据id获取单品立减商品
-	 * @param minusId 单品立减活动Id
+	 * According to theidObtain a single item of instant reduction goods
+	 * @param minusId Single product reduction activityId
 	 * @return MinusVO
 	 */
 	MinusVO getFromDB(Integer minusId);
 
 	/**
-	 * 查询单品立减列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
-	 * @param keywords 关键字
+	 * Query the list of items
+	 * @param page The page number
+	 * @param pageSize Number each page
+	 * @param keywords keyword
 	 * @return Page
 	 */
 	Page list(int page, int pageSize, String keywords);
 
 	/**
-	 * 添加单品立减
-	 * @param minus 单品立减
-	 * @return Minus 单品立减
+	 * Add a single item for immediate reduction
+	 * @param minus Item set
+	 * @return Minus Item set
 	 */
 	MinusVO add(MinusVO minus);
 
 	/**
-	 * 修改单品立减
-	 * @param minus 单品立减
-	 * @param id 单品立减主键
-	 * @return Minus 单品立减
+	 * Modify the immediate reduction of single products
+	 * @param minus Item set
+	 * @param id Single product minus primary key
+	 * @return Minus Item set
 	 */
 	MinusVO edit(MinusVO minus, Integer id);
 
 	/**
-	 * 根据id删除单品立减商品
-	 * @param minusId 单品立减活动对象id
-	 * 1.根据活动id删除esMinus中的数据
-	 * 2.调用promotionGoodsManager中的删除方法，删除esPromotionGoods表中的数据
-	 * 3.删除Redis中的活动实例对象
+	 * According to theidDelete a single product immediately reduced goods
+	 * @param minusId Single product immediately reduce activity objectid
+	 * 1.According to the activityiddeleteesMinusThe data in the
+	 * 2.callpromotionGoodsManagerDelete method, deleteesPromotionGoodsData in a table
+	 * 3.deleteRedisThe active instance object in
 	 *
 	 */
 	void delete(Integer minusId);
 
 
 	/**
-	 * 验证操作权限<br/>
-	 * 如有问题直接抛出权限异常
+	 * Verifying operation rights<br/>
+	 * Throw a permission exception if there is a problem
 	 * @param minusId
 	 */
 	void verifyAuth(Integer minusId);

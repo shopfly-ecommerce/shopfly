@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 运费模板VO
+ * @Description: The freight templateVO
  * @date 2018/8/22 15:16
  * @since v7.0.0
  */
@@ -35,7 +35,7 @@ import java.util.List;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ShipTemplateVO extends ShipTemplateDO implements Serializable {
 
-    @ApiModelProperty(name = "items", value = "指定配送区域", required = true)
+    @ApiModelProperty(name = "items", value = "Designated distribution area", required = true)
     private List<ShipTemplateSettingVO> items;
 
     public List<ShipTemplateSettingVO> getItems() {

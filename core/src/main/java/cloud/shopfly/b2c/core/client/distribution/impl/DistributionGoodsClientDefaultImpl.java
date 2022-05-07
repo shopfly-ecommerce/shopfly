@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午1:32
+ * 2018-08-14 In the afternoon1:32
  */
 @Service
 @ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
@@ -39,7 +39,7 @@ public class DistributionGoodsClientDefaultImpl implements DistributionGoodsClie
 
 
     /**
-     * 获取某商品设置
+     * Gets an item setting
      *
      * @param goodsId
      * @return
@@ -50,7 +50,7 @@ public class DistributionGoodsClientDefaultImpl implements DistributionGoodsClie
     }
 
     /**
-     * 修改分销商品提现设置
+     * Modify withdrawal Settings of distributed goods
      *
      * @param distributionGoods
      * @return
@@ -61,7 +61,7 @@ public class DistributionGoodsClientDefaultImpl implements DistributionGoodsClie
     }
 
     /**
-     * 删除
+     * delete
      *
      * @param id
      */

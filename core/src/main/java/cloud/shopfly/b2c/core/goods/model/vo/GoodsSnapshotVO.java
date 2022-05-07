@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品快照vo
+ * @Description: Commodity snapshotvo
  * @date 2018/8/1 15:57
  * @since v7.0.0
  */

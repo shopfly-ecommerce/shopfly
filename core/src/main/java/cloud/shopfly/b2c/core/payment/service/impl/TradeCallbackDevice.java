@@ -50,21 +50,21 @@ public class TradeCallbackDevice implements PaymentCallbackDevice {
 
     @Override
     public void paySuccess(String outTradeNo, String returnTradeNo, double payPrice) {
-        //交易支付
-        //修改订单交易号
+        // Payment transaction
+        // Modify the order transaction number
         String sql = "update es_order set pay_order_no = ? where trade_sn = ? ";
         this.daoSupport.execute(sql,returnTradeNo, outTradeNo);
 
-        //更新订单的支付状态
+        // Update the payment status of the order
         List<OrderDetailDTO> orderList = orderClient.getOrderByTradeSn(outTradeNo);
-        //判断交易的金额是否正确
+        // Determine if the transaction amount is correct
         Double  totalPrice = 0d;
         for(OrderDetailDTO orderDetailDTO : orderList){
             totalPrice = CurrencyUtil.add(totalPrice,orderDetailDTO.getOrderPrice());
         }
 
         if(!totalPrice.equals(payPrice)){
-            throw new ServiceException(PaymentErrorCode.E503.code(),"金额不一致");
+            throw new ServiceException(PaymentErrorCode.E503.code(),"Inconsistent amounts");
         }
 
         for(OrderDetailDTO orderDetailDTO : orderList){

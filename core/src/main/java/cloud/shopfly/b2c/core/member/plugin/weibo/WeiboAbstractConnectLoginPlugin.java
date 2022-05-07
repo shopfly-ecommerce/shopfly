@@ -40,9 +40,9 @@ import java.util.Map;
 /**
  * @author zjp
  * @version v7.0
- * @Description 微博信任登录插件类
+ * @Description Micro-blog trust login plug-in class
  * @ClassName WeiboAbstractConnectLoginPlugin
- * @since v7.0 上午11:37 2018/6/5
+ * @since v7.0 In the morning11:37 2018/6/5
  */
 @Component
 public class WeiboAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin {
@@ -54,10 +54,10 @@ public class WeiboAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin 
     @Override
     public String getLoginUrl() {
 
-        //获取参数
+        // To obtain parameters
         Map map =  initConnectSetting();
 
-        //将回调地址存入redis中
+        // Store the callback address in Redis
         String callBack = this.getCallBackUrl(ConnectTypeEnum.WEIBO.value());
         return "https://api.weibo.com/oauth2/authorize?" +
                 "client_id=" + StringUtil.toString(map.get("weibo_pc_app_key")) +
@@ -68,15 +68,15 @@ public class WeiboAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin 
     @Override
     public Auth2Token loginCallback() {
 
-        debugger.log("进入 WeiboAbstractConnectLoginPlugin 回调");
+        debugger.log("Enter theWeiboAbstractConnectLoginPlugin The callback");
 
-        //获取参数
+        // To obtain parameters
         Map map =  initConnectSetting();
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
-        //获取code
+        // Access code
         String code = request.getParameter("code");
-        //通过code获取access_token及openid
+        // Obtain the access_token and OpenID by code
         String callBack = this.getCallBackUrl(ConnectTypeEnum.WEIBO.value());
         String url = "https://api.weibo.com/oauth2/access_token";
 
@@ -87,13 +87,13 @@ public class WeiboAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin 
         newMap.put("code", code);
         newMap.put("redirect_uri", callBack);
 
-        debugger.log("向weibo发出请求，请求地址为：",url);
+        debugger.log("toweiboMake a request, request address is：",url);
 
         String content = HttpUtils.doPost(url, newMap, "UTF-8", 1000, 1000);
 
-        debugger.log("返回结果为:",content);
+        debugger.log("The return result is:",content);
 
-        //获取openid
+        // To obtain the openid
         JSONObject json = JSONObject.fromObject(content);
 
         String openid = json.getString("uid");
@@ -108,14 +108,14 @@ public class WeiboAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin 
 
     @Override
     public Member fillInformation(Auth2Token auth2Token, Member member) {
-        //获取参数
+        // To obtain parameters
         Map map =  initConnectSetting();
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
         String url = "https://api.weibo.com/2/users/show.json?" +
                 "access_token=" + auth2Token.getAccessToken() +
                 "&uid=" + auth2Token.getUnionid();
-        //通过openid获取userinfo
+        // Obtain userInfo from openID
         String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
         JSONObject jsonObject = JSONObject.fromObject(content);
         member.setNickname(jsonObject.getString("screen_name"));
@@ -146,7 +146,7 @@ public class WeiboAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin 
             connectSettingParametersVO.setName(weiboConnectConfigGroupEnum.getText());
             list.add(connectSettingParametersVO);
         }
-        connectSetting.setName("微博参数配置");
+        connectSetting.setName("Configure weibo parameters");
         connectSetting.setType(ConnectTypeEnum.WEIBO.value());
         connectSetting.setConfig(JsonUtil.objectToJson(list));
         return connectSetting;

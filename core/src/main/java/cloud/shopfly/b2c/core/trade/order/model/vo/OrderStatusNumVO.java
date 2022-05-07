@@ -21,8 +21,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * 订单各个状态的订单数
- * <br/>所有状态查看 OrderTagEnum
+ * Order number in each state of the order
+ * <br/>All Status ViewOrderTagEnum
  *
  * @author Snow create in 2018/6/14
  * @version v2.0
@@ -31,28 +31,28 @@ import java.util.Objects;
 public class OrderStatusNumVO implements Serializable {
 
 
-    @ApiModelProperty(value = "所有订单数")
+    @ApiModelProperty(value = "All orders")
     private Integer allNum;
 
-    @ApiModelProperty(value = "待付款订单数")
+    @ApiModelProperty(value = "Order number to be paid")
     private Integer waitPayNum;
 
-    @ApiModelProperty(value = "待发货订单数")
+    @ApiModelProperty(value = "Order number of goods to be delivered")
     private Integer waitShipNum;
 
-    @ApiModelProperty(value = "待收货订单数")
+    @ApiModelProperty(value = "Backlog order number")
     private Integer waitRogNum;
 
-    @ApiModelProperty(value = "已取消订单数")
+    @ApiModelProperty(value = "The order has been cancelled")
     private Integer cancelNum;
 
-    @ApiModelProperty(value = "已完成订单数")
+    @ApiModelProperty(value = "Orders have been completed")
     private Integer completeNum;
 
-    @ApiModelProperty(value = "待评论订单数")
+    @ApiModelProperty(value = "Order number for comment")
     private Integer waitCommentNum;
 
-    @ApiModelProperty(value = "售后中订单数")
+    @ApiModelProperty(value = "Number of orders after sale")
     private Integer refundNum;
 
     public Integer getAllNum() {

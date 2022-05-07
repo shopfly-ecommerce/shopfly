@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 退款接口实现
+ * Realization of refund interface
  *
  * @author kingapex
  * @version 1.0
@@ -62,19 +62,19 @@ public class RefundManagerImpl implements RefundManager {
     @Override
     public Map originRefund(String returnTradeNo, String refundSn, Double refundPrice) {
 
-        debugger.log("发起退款");
-        //查询对应的支付流水，找到对应的支付参数
+        debugger.log("Initiate a refund");
+        // Query the corresponding payment flow and find the corresponding payment parameters
         PaymentBillDO payBill = this.paymentBillManager.getBillByReturnTradeNo(returnTradeNo);
 
         if (payBill == null) {
-            debugger.log("第三方[" + returnTradeNo + "]支付账单找不到");
-            throw new ServiceException(PaymentErrorCode.E504.code(), "支付账单不存在");
+            debugger.log("The third party[" + returnTradeNo + "]Payment bill cant be found");
+            throw new ServiceException(PaymentErrorCode.E504.code(), "Paying bills does not exist");
         }
         PaymentPluginManager plugin = findPlugin(payBill.getPaymentPluginId());
 
 
         RefundBill refundBill = new RefundBill();
-        //支付参数
+        // Pay parameters
         Map map = JsonUtil.jsonToObject(payBill.getPayConfig(), Map.class);
 
         List<Map> list = (List<Map>) map.get("config_list");
@@ -90,9 +90,9 @@ public class RefundManagerImpl implements RefundManager {
         refundBill.setReturnTradeNo(returnTradeNo);
         refundBill.setTradePrice(payBill.getTradePrice());
 
-        debugger.log("调起[" + plugin + "]");
+        debugger.log("Tuned up[" + plugin + "]");
         boolean refundResult = plugin.onTradeRefund(refundBill);
-        debugger.log("退款结果：" + refundResult);
+        debugger.log("Results the refund：" + refundResult);
 
         Map hashMap = new HashMap(2);
         if (refundResult) {
@@ -108,10 +108,10 @@ public class RefundManagerImpl implements RefundManager {
 
     @Override
     public String queryRefundStatus(String returnTradeNo, String refundSn) {
-        //查询对应的支付流水，找到对应的支付参数
+        // Query the corresponding payment flow and find the corresponding payment parameters
         PaymentBillDO payBill = this.paymentBillManager.getBillByReturnTradeNo(returnTradeNo);
         RefundBill refundBill = new RefundBill();
-        //支付参数
+        // Pay parameters
         Map map = JsonUtil.jsonToObject(payBill.getPayConfig(), Map.class);
         List<Map> list = (List<Map>) map.get("config_list");
         Map<String, String> result = new HashMap<>(list.size());
@@ -130,7 +130,7 @@ public class RefundManagerImpl implements RefundManager {
     }
 
     /**
-     * 查找支付插件
+     * Find payment plug-ins
      *
      * @param pluginId
      * @return

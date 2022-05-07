@@ -17,7 +17,7 @@ public class ImageUtil {
         File ThF = new File(targetFilePath);
         BufferedImage buffer = ImageIO.read(F);
         /*
-         * 核心算法，计算图片的压缩比
+         * Core algorithm, calculate the compression ratio of the picture
          */
         int w = buffer.getWidth();
         int h = buffer.getHeight();
@@ -49,12 +49,12 @@ public class ImageUtil {
             }
         }
         /*
-         * 对于图片的放大或缩小倍数计算完成，ratiox大于1，则表示放大，否则表示缩小
+         * After the calculation of the magnification or reduction of the picture is completed,ratioxIs greater than1, indicates magnification, otherwise indicates narrowing
          */
         AffineTransformOp op = new AffineTransformOp(AffineTransform
                 .getScaleInstance(ratiox, ratiox), null);
         buffer = op.filter(buffer, null);
-        //从放大的图像中心截图
+        // Screenshot from enlarged image center
         buffer = buffer.getSubimage((buffer.getWidth() - width) / 2, (buffer.getHeight() - height) / 2, width, height);
 
         String format = FileUtil.getFileExt(sourceFilePath);

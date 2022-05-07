@@ -27,7 +27,7 @@ import java.io.IOException;
 
 /**
  * Created by kingapex on 2018/3/10.
- * Token 验权filter
+ * Token Inspection rightsfilter
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -43,7 +43,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
 
 
     /**
-     * 拦截客户端发过来的token，进行鉴权
+     * Intercept the message sent by the clienttokenTo authenticate
      * @param request
      * @param response
      * @param filterChain

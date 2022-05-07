@@ -30,11 +30,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 站内消息
+ * Messages
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:31:13
+ * @since v7.0.0 2018years3month23The morning of10:31:13
  */
 @Component
 public class MemberMessageReceiver {
@@ -45,7 +45,7 @@ public class MemberMessageReceiver {
 	private List<MemberMessageEvent> events;
 
 	/**
-	 * 站内消息
+	 * Messages
 	 * @param messageid
 	 */
 	@RabbitListener(bindings = @QueueBinding(
@@ -59,7 +59,7 @@ public class MemberMessageReceiver {
 				try {
 					event.memberMessage(messageid);
 				} catch (Exception e) {
-					logger.error("站内消息发送出错", e);
+					logger.error("Error sending intra-station message", e);
 				}
 			}
 		}

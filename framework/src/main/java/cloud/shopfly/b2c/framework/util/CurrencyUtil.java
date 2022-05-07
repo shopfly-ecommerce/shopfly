@@ -18,32 +18,32 @@ package cloud.shopfly.b2c.framework.util;
 import java.math.BigDecimal;
 
 /**
- * 由于Java的简单类型不能够精确的对浮点数进行运算， 这个工具类提供精确的浮点数运算，包括加减乘除和四舍五入。
+ * Due to theJavaCant operate on floating point numbers exactly, This utility class provides precise floating-point operations, including addition, subtraction, multiplication, division, and rounding.
  * @author fk
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 public final class CurrencyUtil {
 	/**
-	 * 默认除法运算精度
+	 * Default division accuracy
 	 */
 	private static final int DEF_DIV_SCALE = 2;
 
 	/**
-	 * 这个类不能实例化
+	 * This class cannot be instantiated
 	 */
 	private CurrencyUtil() {
 	}
 
 	/**
-	 * 提供精确的加法运算。
+	 * Provides accurate addition operations.
 	 * 
 	 * @param v1
-	 *            被加数
+	 *            augend
 	 * @param v2
-	 *            加数
-	 * @return 两个参数的和
+	 *            addend
+	 * @return The sum of two parameters
 	 */
 	public static Double add(double v1, double v2) {
 		BigDecimal b1 = new BigDecimal(Double.toString(v1));
@@ -52,13 +52,13 @@ public final class CurrencyUtil {
 	}
 	
 	/**
-	 * 提供精确的减法运算。
+	 * Provides accurate subtraction operations.
 	 * 
 	 * @param v1
-	 *            被减数
+	 *            minuend
 	 * @param v2
-	 *            减数
-	 * @return 两个参数的差
+	 *            reduction
+	 * @return The difference between two parameters
 	 */
 	public static double sub(double v1, double v2) {
 		BigDecimal b1 = new BigDecimal(Double.toString(v1));
@@ -67,13 +67,13 @@ public final class CurrencyUtil {
 	}
 	
 	/**
-	 * 提供精确的乘法运算。
+	 * Provides accurate multiplication.
 	 * 
 	 * @param v1
-	 *            被乘数
+	 *            multiplicand
 	 * @param v2
-	 *            乘数
-	 * @return 两个参数的积
+	 *            The multiplier
+	 * @return The product of two parameters
 	 */
 	public static Double mul(double v1, double v2) {
 		BigDecimal b1 = new BigDecimal(Double.toString(v1));
@@ -82,28 +82,28 @@ public final class CurrencyUtil {
 	}
 
 	/**
-	 * 提供（相对）精确的除法运算，当发生除不尽的情况时， 精确到小数点以后10位，以后的数字四舍五入。
+	 * provide（The relative）Accurate division, and in the event that you cant divide enough, Accurate to the decimal point10Bit, the next number is rounded.
 	 * 
 	 * @param v1
-	 *            被除数
+	 *            dividend
 	 * @param v2
-	 *            除数
-	 * @return 两个参数的商
+	 *            divisor
+	 * @return The quotient of two parameters
 	 */
 	public static double div(double v1, double v2) {
 		return div(v1, v2, DEF_DIV_SCALE);
 	}
 
 	/**
-	 * 提供（相对）精确的除法运算。 当发生除不尽的情况时，由scale参数指定精度，以后的数字四舍五入。
+	 * provide（The relative）An accurate division operation. When there is an inexhaustible situation, byscaleParameter specifies precision, and subsequent numbers are rounded.
 	 * 
 	 * @param v1
-	 *            被除数
+	 *            dividend
 	 * @param v2
-	 *            除数
+	 *            divisor
 	 * @param scale
-	 *            表示表示需要精确到小数点以后几位。
-	 * @return 两个参数的商
+	 *            Indicates to be accurate to several decimal places.
+	 * @return The quotient of two parameters
 	 */
 	public static double div(double v1, double v2, int scale) {
 		if (scale < 0) {
@@ -116,13 +116,13 @@ public final class CurrencyUtil {
 	}
 
 	/**
-	 * 提供精确的小数位四舍五入处理。
+	 * Provides accurate rounding of decimal places.
 	 * 
 	 * @param v
-	 *            需要四舍五入的数字
+	 *            Numbers that need to be rounded
 	 * @param scale
-	 *            小数点后保留几位
-	 * @return 四舍五入后的结果
+	 *            Let me keep a few decimal places
+	 * @return The rounded result
 	 */
 	public static double round(double v, int scale) {
 		if (scale < 0) {

@@ -30,11 +30,11 @@ import java.util.List;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录设置
+ * @Description Trusted Login Settings
  * @ClassName ConnectController
- * @since v7.0 下午4:23 2018/6/15
+ * @since v7.0 In the afternoon4:23 2018/6/15
  */
-@Api(description="信任登录设置api")
+@Api(description="Trusted Login Settingsapi")
 @RestController
 @RequestMapping("/seller/members/connect")
 public class MemberConnectSellerController {
@@ -45,14 +45,14 @@ public class MemberConnectSellerController {
 
 
     @GetMapping()
-    @ApiOperation(value = "获取信任登录配置参数",response = ConnectSettingDO.class)
+    @ApiOperation(value = "Get trusted login configuration parameters",response = ConnectSettingDO.class)
     public List<ConnectSettingVO> list(){
         return  connectManager.list();
     }
 
     @PutMapping(value = "/{type}")
-    @ApiOperation(value = "修改信任登录参数", response = ConnectSettingDTO.class)
-    @ApiImplicitParam(name = "type", value = "用户名", required = true, dataType = "String", paramType = "path",allowableValues = "QQ,ALIPAY,WEIBO,WECHAT")
+    @ApiOperation(value = "Modify the trust login parameter", response = ConnectSettingDTO.class)
+    @ApiImplicitParam(name = "type", value = "Username", required = true, dataType = "String", paramType = "path",allowableValues = "QQ,ALIPAY,WEIBO,WECHAT")
     public ConnectSettingDTO editConnectSetting(@RequestBody ConnectSettingDTO connectSettingDTO, @PathVariable("type")  String type) {
         connectManager.save(connectSettingDTO);
         return connectSettingDTO;

@@ -28,16 +28,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 联系方式设置api
+ * Contact Settingsapi
  *
  * @author zh
  * @version v7.0
- * @date 18/5/18 下午6:55
+ * @date 18/5/18 In the afternoon6:55
  * @since v7.0
  */
 @RestController
 @RequestMapping("/settings")
-@Api(description = "联系方式设置")
+@Api(description = "Contact Settings")
 @Validated
 public class InfoSettingBaseController {
     @Autowired
@@ -45,7 +45,7 @@ public class InfoSettingBaseController {
 
 
     @GetMapping(value = "/info")
-    @ApiOperation(value = "获取联系方式设置", response = InformationSetting.class)
+    @ApiOperation(value = "Gets contact Settings", response = InformationSetting.class)
     public InformationSetting getInfoSetting() {
         String infoSettingJson = settingManager.get(SettingGroup.INFO);
 

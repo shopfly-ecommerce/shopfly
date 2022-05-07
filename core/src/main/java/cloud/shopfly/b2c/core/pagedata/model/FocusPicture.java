@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 焦点图实体
+ * Focus map entity
  *
  * @author fk
  * @version v1.0
@@ -45,42 +45,42 @@ public class FocusPicture implements Serializable {
     private static final long serialVersionUID = 9393604588909990L;
 
     /**
-     * 主键id
+     * A primary keyid
      */
     @Id(name = "id")
-    @ApiModelProperty(name = "id", value = "主键id", hidden = true)
+    @ApiModelProperty(name = "id", value = "A primary keyid", hidden = true)
     private Integer id;
     /**
-     * 图片地址
+     * Picture address
      */
     @Column(name = "pic_url")
-    @ApiModelProperty(name = "pic_url", value = "图片地址", required = true)
-    @NotEmpty(message = "图片地址不能为空")
+    @ApiModelProperty(name = "pic_url", value = "Picture address", required = true)
+    @NotEmpty(message = "The image address cannot be empty")
     private String picUrl;
     /**
-     * 操作类型
+     * Operation type
      */
     @Column(name = "operation_type")
-    @ApiModelProperty(name = "operation_type", value = "操作类型", required = true)
+    @ApiModelProperty(name = "operation_type", value = "Operation type", required = true)
     @OperationType
     private String operationType;
     /**
-     * 操作参数
+     * Operating parameters
      */
     @Column(name = "operation_param")
-    @ApiModelProperty(name = "operation_param", value = "操作参数", required = true)
+    @ApiModelProperty(name = "operation_param", value = "Operating parameters", required = true)
     private String operationParam;
     /**
-     * 操作地址
+     * The operating address
      */
     @Column(name = "operation_url")
-    @ApiModelProperty(name = "operation_url", value = "操作地址", hidden = true)
+    @ApiModelProperty(name = "operation_url", value = "The operating address", hidden = true)
     private String operationUrl;
     /**
-     * 客户端类型 APP/WAP/PC
+     * Client typeAPP/WAP/PC
      */
     @Column(name = "client_type")
-    @ApiModelProperty(name = "client_type", value = "客户端类型 APP/WAP/PC", required = true)
+    @ApiModelProperty(name = "client_type", value = "Client typeAPP/WAP/PC", required = true)
     @ClientAppType
     private String clientType;
 

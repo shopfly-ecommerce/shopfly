@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.util.StringUtil;
 import java.util.List;
 
 /**
- * sku 名称生成工具
+ * sku Name generation tool
  * @author kingapex
  * @version 1.0
  * @since 7.1.0

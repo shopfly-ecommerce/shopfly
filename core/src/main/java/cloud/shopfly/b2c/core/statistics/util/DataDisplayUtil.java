@@ -21,22 +21,22 @@ import cloud.shopfly.b2c.core.statistics.model.enums.QueryDateType;
 import cloud.shopfly.b2c.framework.util.DateUtil;
 
 /**
- * 统计日期工具
+ * Statistical date tool
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018/4/28 下午5:09
+ * 2018/4/28 In the afternoon5:09
  */
 public class DataDisplayUtil {
 
     private final static String DATA_SEPARATOR = "-";
 
     /**
-     * 获取月份的天数
+     * Gets the days of the month
      *
-     * @param searchCriteria 参数类
-     * @return 天数
+     * @param searchCriteria Parameters of the class
+     * @return Number of days
      */
     public static int getResultSize(SearchCriteria searchCriteria) {
 
@@ -50,12 +50,12 @@ public class DataDisplayUtil {
 
 
     /**
-     * 获取月份的天数
+     * Gets the days of the month
      *
-     * @param cycleType 日期类型
-     * @param year      年份
-     * @param month     月份
-     * @return 天数
+     * @param cycleType The date type
+     * @param year      year
+     * @param month     in
+     * @return Number of days
      */
     public static int getResultSize(String cycleType, Integer year, Integer month) {
 
@@ -68,11 +68,11 @@ public class DataDisplayUtil {
     }
 
     /**
-     * 获取月份的天数
+     * Gets the days of the month
      *
-     * @param month 月份
-     * @param year  年
-     * @return 天数
+     * @param month in
+     * @param year  years
+     * @return Number of days
      */
     public static int getMonthDayNum(Integer month, Integer year) {
         switch (month) {
@@ -102,10 +102,10 @@ public class DataDisplayUtil {
     }
 
     /**
-     * 根据vo获取当前开始和结束条件时间戳
+     * According to thevoGets the current start and end condition timestamps
      *
-     * @param searchCriteria 时间参数
-     * @return 时间戳
+     * @param searchCriteria The time parameter
+     * @return The time stamp
      */
     public static long[] getStartTimeAndEndTime(SearchCriteria searchCriteria) {
         long[] timestamp = new long[2];
@@ -124,10 +124,10 @@ public class DataDisplayUtil {
     }
 
     /**
-     * 根据vo获取上一周期开始和结束条件时间戳
+     * According to thevoGets the start and end condition timestamps of the previous cycle
      *
-     * @param searchCriteria 时间参数
-     * @return 时间戳
+     * @param searchCriteria The time parameter
+     * @return The time stamp
      */
     public static long[] getLastStartTimeAndEndTime(SearchCriteria searchCriteria) {
         long[] lastTimestamp = new long[2];
@@ -147,13 +147,13 @@ public class DataDisplayUtil {
     }
 
     /**
-     * 格式日期
+     * Date format
      *
-     * @param date 日期
-     * @return 格式化日期
+     * @param date The date of
+     * @return Formatted date
      */
     public static String formatDate(Integer date) {
-        // 个位数前加0
+        // Add 0 in front of the units digit
         int isSingle = 10;
         if (date < isSingle) {
             return "0" + date;

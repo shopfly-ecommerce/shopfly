@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.api.config;
 
@@ -21,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Created by kingapex on 2018/3/10.
- * Swagger2配置
+ * Swagger2configuration
  *
  * @author kingapex
  * @version 1.0
@@ -37,7 +37,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket wechat() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-微信")
+                .groupName("Buyer side-WeChat")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -48,7 +48,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket distributionApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-分销")
+                .groupName("Buyer side-distribution")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -60,7 +60,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket pintuanApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-拼团")
+                .groupName("Buyer side-Spell group")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -72,7 +72,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket afterSaleApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-售后")
+                .groupName("Buyer side-after-sales")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -82,7 +82,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sssApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-流量")
+                .groupName("Buyer side-traffic")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -93,7 +93,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket goodsApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-商品")
+                .groupName("Buyer side-product")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -105,7 +105,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket passportApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-会员认证中心")
+                .groupName("Buyer side-Member Certification Center")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -116,7 +116,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket memberApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-会员")
+                .groupName("Buyer side-members")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -127,7 +127,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket pageDataApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-楼层")
+                .groupName("Buyer side-floor")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -138,7 +138,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket paymentApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-支付")
+                .groupName("Buyer side-pay")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -149,7 +149,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket shopApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-店铺")
+                .groupName("Buyer side-The store")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -160,7 +160,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket tradeApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-交易")
+                .groupName("Buyer side-trading")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -171,7 +171,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket promotionApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("买家端-促销")
+                .groupName("Buyer side-Sales promotion")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.buyer"))
@@ -181,8 +181,8 @@ public class Swagger2Config extends AbstractSwagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("买家Api文档")
-                .description("买家中心API接口")
+                .title("buyersApiThe document")
+                .description("The buyer centerAPIinterface")
                 .version("7.0")
                 .contact(new Contact("shopfly", "https://www.shopfly.dev", "service@shopfly.dev"))
                 .build();
@@ -190,8 +190,8 @@ public class Swagger2Config extends AbstractSwagger2 {
 
     private ApiInfo sellerApiInfo() {
         return new ApiInfoBuilder()
-                .title("商家Api文档")
-                .description("商家中心API接口")
+                .title("merchantsApiThe document")
+                .description("Business centerAPIinterface")
                 .version("7.0")
                 .contact(new Contact("shopfly", "https://www.shopfly.dev", "service@shopfly.dev"))
                 .build();
@@ -200,7 +200,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerAfterSaleApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-售后")
+                .groupName("The management end-after-sales")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
@@ -211,10 +211,10 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerPaymentApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-支付")
+                .groupName("The management end-pay")
                 .apiInfo(sellerApiInfo())
                 .select()
-                // 自行修改为自己的包路径
+                // Change to your own package path
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/payment/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
@@ -223,7 +223,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerGoodsApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-商品")
+                .groupName("The management end-product")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
@@ -234,7 +234,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerMemberApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-会员")
+                .groupName("The management end-members")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
@@ -245,10 +245,10 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerPageDataApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-楼层")
+                .groupName("The management end-floor")
                 .apiInfo(sellerApiInfo())
                 .select()
-                // 自行修改为自己的包路径
+                // Change to your own package path
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.regex("(/seller/focus-pictures.*)|(/seller/pages.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
@@ -257,10 +257,10 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerPageCreateApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-静态页")
+                .groupName("The management end-A static page")
                 .apiInfo(sellerApiInfo())
                 .select()
-                // 自行修改为自己的包路径
+                // Change to your own package path
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.ant("/seller/page-create/**"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
@@ -269,7 +269,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerPromotionApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-促销")
+                .groupName("The management end-Sales promotion")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
@@ -281,7 +281,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerPassportApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-商家认证中心")
+                .groupName("The management end-Merchant Certification Center")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
@@ -292,7 +292,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerTradeApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-交易")
+                .groupName("The management end-trading")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
@@ -303,10 +303,10 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerSystemApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-系统设置")
+                .groupName("The management end-System Settings")
                 .apiInfo(sellerApiInfo())
                 .select()
-                // 自行修改为自己的包路径
+                // Change to your own package path
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
                 .paths(PathSelectors.regex("(/seller/task.*)|(/seller/systems.*)|(/seller/settings.*)|(/seller/sensitive-words.*)"))
                 .build().globalOperationParameters(this.buildParameter()).directModelSubstitute(Region.class, Integer.class);
@@ -315,7 +315,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerStatisticsApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-统计")
+                .groupName("The management end-statistical")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))
@@ -326,7 +326,7 @@ public class Swagger2Config extends AbstractSwagger2 {
     @Bean
     public Docket sellerDistributionApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端-分销")
+                .groupName("The management end-distribution")
                 .apiInfo(sellerApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cloud.shopfly.b2c.api.seller"))

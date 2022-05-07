@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade.order.support;
 
 /**
- * 注释
+ * annotation
  *
  * @author Snow create in 2018/4/8
  * @version v2.0
@@ -25,36 +25,36 @@ package cloud.shopfly.b2c.core.trade.order.support;
 public class CheckoutParamName {
 
     /**
-     * 配送时间
+     * The delivery time
      */
     public static String RECEIVE_TIME = "receiveTime";
 
 
     /**
-     * 收货地址ID
+     * Shipping addressID
      */
     public static String ADDRESS_ID = "addressId";
 
 
     /**
-     * 支付类型
+     * Payment type
      */
     public static String PAYMENT_TYPE = "paymentType";
 
 
     /**
-     * 发票
+     * invoice
      */
     public static String RECEIPT = "receipt";
 
 
     /**
-     * 备注
+     * note
      */
     public static String REMARK = "remark";
 
     /**
-     * 客户端类型
+     * Client type
      */
     public static String CLIENT_TYPE = "clientType";
 }

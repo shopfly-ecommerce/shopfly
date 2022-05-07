@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartVO;
 import java.util.List;
 
 /**
- * 运费计算业务层接口
+ * Freight calculation business layer interface
  *
  * @author Snow create in 2018/4/8
  * @version v2.0
@@ -30,27 +30,27 @@ import java.util.List;
 public interface ShippingManager {
 
     /**
-     * 获取购物车价格
+     * Get shopping cart price
      *
-     * @param cartVO 购物车
+     * @param cartVO The shopping cart
      * @return
      */
     Double getShipPrice(CartVO cartVO);
 
     /**
-     * 设置运费
+     * Set up the freight
      *
-     * @param cartList 购物车集合
+     * @param cartList Shopping cart collection
      */
     void setShippingPrice(List<CartVO> cartList);
 
 
     /**
-     * 校验地区
+     * Check area
      *
-     * @param cartList 购物车
-     * @param countryCode   国家code
-     * @param stateCode      洲code
+     * @param cartList The shopping cart
+     * @param countryCode   countriescode
+     * @param stateCode      chaucode
      * @return
      */
     List<CacheGoods> checkArea(List<CartVO> cartList, String countryCode,String stateCode);

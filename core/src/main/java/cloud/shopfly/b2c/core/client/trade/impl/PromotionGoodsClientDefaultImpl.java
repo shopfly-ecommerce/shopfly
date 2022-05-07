@@ -23,11 +23,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 促销商品客户端实现
+ * Promotional goods client implementation
  *
  * @author zh
  * @version v7.0
- * @date 19/3/28 上午11:30
+ * @date 19/3/28 In the morning11:30
  * @since v7.0
  */
 @Service
@@ -43,9 +43,9 @@ public class PromotionGoodsClientDefaultImpl implements PromotionGoodsClient {
 
     @Override
     public void delPromotionGoods(Integer goodsId) {
-        //删除促销商品
+        // Delete promotional items
         promotionGoodsManager.delete(goodsId);
-        //删除限时抢购商品
+        // Delete flash sale items
         seckillGoodsManager.deleteSeckillGoods(goodsId);
 
     }

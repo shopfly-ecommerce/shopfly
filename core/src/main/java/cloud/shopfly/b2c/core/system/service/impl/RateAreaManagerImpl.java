@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 区域服务
+ * Regional service
  * @author cs
  * @version v7.0.0
  * @since v7.0.0
@@ -93,7 +93,7 @@ public class RateAreaManagerImpl implements RateAreaManager {
         rateAreaDO.setName(rateAreaVO.getName());
         rateAreaDO.setCreateTime(DateUtil.getDateline());
 
-        //获取地区id
+        // Obtaining the region ID
         List<AreaVO> areas = rateAreaVO.getAreas();
         rateAreaDO.setAreaJson(JSON.toJSONString(areas));
 

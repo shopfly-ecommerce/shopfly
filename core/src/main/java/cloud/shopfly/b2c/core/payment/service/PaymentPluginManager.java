@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 支付插件
+ * Pay the plug-in
  *
  * @author fk
  * @version v2.0
@@ -36,28 +36,28 @@ public interface PaymentPluginManager {
 
 
     /**
-     * 获取支付插件id
+     * Get payment plug-inid
      *
      * @return
      */
     String getPluginId();
 
     /**
-     * 支付名称
+     * Pay the name
      *
      * @return
      */
     String getPluginName();
 
     /**
-     * 自定义客户端配置文件
+     * Customize the client configuration file
      *
      * @return
      */
     List<ClientConfig> definitionClientConfig();
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return
@@ -65,14 +65,14 @@ public interface PaymentPluginManager {
     Map pay(PayBill bill);
 
     /**
-     * 同步回调
+     * Synchronous callback
      *
      * @param tradeType
      */
     void onReturn(TradeType tradeType);
 
     /**
-     * 异步回调
+     * An asynchronous callback
      *
      * @param tradeType
      * @param clientType
@@ -81,7 +81,7 @@ public interface PaymentPluginManager {
     String onCallback(TradeType tradeType, ClientType clientType);
 
     /**
-     * 主动查询支付结果
+     * Proactively query payment results
      *
      * @param bill
      * @return
@@ -90,7 +90,7 @@ public interface PaymentPluginManager {
 
 
     /**
-     * 退款，原路退回
+     * Refund, return the original way
      *
      * @param bill
      * @return
@@ -98,7 +98,7 @@ public interface PaymentPluginManager {
     boolean onTradeRefund(RefundBill bill);
 
     /**
-     * 查询退款状态
+     * Querying refund Status
      *
      * @param bill
      * @return
@@ -106,7 +106,7 @@ public interface PaymentPluginManager {
     String queryRefundStatus(RefundBill bill);
 
     /**
-     * 是否支持原路退回   0 不支持  1支持
+     * Whether to support the original way back0 Does not support1support
      *
      * @return
      */

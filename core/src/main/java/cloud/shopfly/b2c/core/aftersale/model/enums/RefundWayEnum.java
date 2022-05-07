@@ -16,18 +16,18 @@
 package cloud.shopfly.b2c.core.aftersale.model.enums;
 
 /**
- * 退款方式
+ * The refund way
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午9:47 2018/5/3
+ * @since v7.0 In the morning9:47 2018/5/3
  */
 public enum RefundWayEnum {
 
-    //原路退回
-    ORIGINAL("原路退回"),
-    //线下支付
-    OFFLINE("线下支付");
+    // The way back
+    ORIGINAL("The way back"),
+    // Offline payment
+    OFFLINE("Offline payment");
 
     private String description;
 

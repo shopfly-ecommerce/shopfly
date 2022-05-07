@@ -21,23 +21,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 用于select标签使用
+ * Used forselectLabel use
  *
  * @author fk
  * @version v1.0
- * 2017年5月10日 下午7:37:32
+ * 2017years5month10On the afternoon7:37:32
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SelectVO {
 
-    @ApiModelProperty("选择器id")
+    @ApiModelProperty("The selectorid")
     private Integer id;
 
-    @ApiModelProperty("选择器文本")
+    @ApiModelProperty("Selector text")
     private String text;
 
-    @ApiModelProperty("是否选中，选中true，未选中false")
+    @ApiModelProperty("If yes, yestrue, was not selectedfalse")
     private Boolean selected;
 
     public Integer getId() {

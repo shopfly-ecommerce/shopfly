@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 
 /**
  * Created by kingapex on 2018/3/6.
- * 数据源配置
+ * Data Source Configuration
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -38,12 +38,12 @@ import javax.sql.DataSource;
 public class DataSourceConfig {
 
     /*----------------------------------------------------------------------------*/
-    /*                           DaoSupport配置                                    */
+    /*                           DaoSupportconfiguration*/
     /*----------------------------------------------------------------------------*/
 
     /**
-     * 商品daoSupport
-     * @param jdbcTemplate 商品jdbcTemplate
+     * productdaoSupport
+     * @param jdbcTemplate productjdbcTemplate
      * @return
      */
     @Bean
@@ -54,12 +54,12 @@ public class DataSourceConfig {
 
 
     /*----------------------------------------------------------------------------*/
-    /*                           JdbcTemplate 配置                                */
+    /*                           JdbcTemplate configuration*/
     /*----------------------------------------------------------------------------*/
 
     /**
-     * 商品jdbcTemplate
-     * @param dataSource 数据源
+     * productjdbcTemplate
+     * @param dataSource The data source
      * @return
      */
     @Bean
@@ -71,11 +71,11 @@ public class DataSourceConfig {
 
 
     /*----------------------------------------------------------------------------*/
-    /*                           事务配置                                         */
+    /*                           Transaction configuration*/
     /*----------------------------------------------------------------------------*/
 
     /**
-     * 会员事务
+     * Members of the transaction
      * @param dataSource
      * @return
      */

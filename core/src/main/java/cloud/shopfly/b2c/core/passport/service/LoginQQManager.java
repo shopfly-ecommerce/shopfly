@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.core.member.model.dto.QQUserDTO;
 import java.util.Map;
 
 /**
- * QQ统一登陆服务
+ * QQUnified Login service
  * @author cs
  * @since v1.0
  * @version 7.2.2
@@ -35,21 +35,21 @@ public interface LoginQQManager {
 
 
     /**
-     * 获取unionid
-     * @param accessToken QQh5授权返回的code
+     * To obtainunionid
+     * @param accessToken QQh5Authorized to returncode
      * @return
      */
     Map qqWapLogin(String accessToken, String uuid);
 
     /**
-     * QQ app登陆
+     * QQ applanding
      * @param qqUserDTO
      * @return
      */
     Map qqAppLogin(String uuid, QQUserDTO qqUserDTO);
 
     /**
-     * 获取wap端appid
+     * To obtainwapendappid
      * @return
      */
     String getAppid();

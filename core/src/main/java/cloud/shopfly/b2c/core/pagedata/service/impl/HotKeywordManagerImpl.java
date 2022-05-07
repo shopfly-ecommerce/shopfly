@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 热门关键字业务类
+ * Hot keyword business class
  *
  * @author fk
  * @version v1.0
@@ -79,7 +79,7 @@ public class HotKeywordManagerImpl implements HotKeywordManager {
 
         HotKeyword keyword = this.getModel(id);
         if (keyword == null) {
-            throw new ServiceException(SystemErrorCode.E954.code(), "该记录不存在，请正确操作");
+            throw new ServiceException(SystemErrorCode.E954.code(), "The record does not exist. Please do it correctly");
         }
         this.daoSupport.update(hotKeyword, id);
 
@@ -118,11 +118,11 @@ public class HotKeywordManagerImpl implements HotKeywordManager {
     }
 
     /**
-     * 发送首页变化消息
+     * Send home page change messages
      */
     private void sendMessage() {
 
-        //使用模糊删除
+        // Use fuzzy delete
         this.cache.vagueDel(CachePrefix.HOT_KEYWORD.getPrefix());
 
         CmsManageMsg cmsManageMsg = new CmsManageMsg();

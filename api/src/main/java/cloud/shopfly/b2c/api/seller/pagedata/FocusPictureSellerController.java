@@ -29,7 +29,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 焦点图控制器
+ * Focus graph controller
  *
  * @author fk
  * @version v1.0
@@ -38,16 +38,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/focus-pictures")
-@Api(description = "焦点图相关API")
+@Api(description = "Focal graph correlationAPI")
 public class FocusPictureSellerController {
 
     @Autowired
     private FocusPictureManager focusPictureManager;
 
 
-    @ApiOperation(value = "查询焦点图列表", response = FocusPicture.class)
+    @ApiOperation(value = "Query the list of focus graphs", response = FocusPicture.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "client_type", value = "客户端类型APP/WAP/PC", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "client_type", value = "Client typeAPP/WAP/PC", dataType = "string", paramType = "query"),
     })
     @GetMapping
     public List list(@ApiIgnore String clientType) {
@@ -56,7 +56,7 @@ public class FocusPictureSellerController {
     }
 
 
-    @ApiOperation(value = "添加焦点图", response = FocusPicture.class)
+    @ApiOperation(value = "Add focus diagram", response = FocusPicture.class)
     @PostMapping
     public FocusPicture add(@Valid FocusPicture cmsFocusPicture) {
 
@@ -66,9 +66,9 @@ public class FocusPictureSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改焦点图", response = FocusPicture.class)
+    @ApiOperation(value = "Modify focus diagram", response = FocusPicture.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public FocusPicture edit(@Valid FocusPicture cmsFocusPicture, @PathVariable Integer id) {
 
@@ -79,9 +79,9 @@ public class FocusPictureSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除焦点图")
+    @ApiOperation(value = "Delete focus diagram")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的焦点图主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The focus graph primary key to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -92,9 +92,9 @@ public class FocusPictureSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个焦点图")
+    @ApiOperation(value = "Query a focus graph")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的焦点图主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the focus graph to be queried", required = true, dataType = "int", paramType = "path")
     })
     public FocusPicture get(@PathVariable Integer id) {
 

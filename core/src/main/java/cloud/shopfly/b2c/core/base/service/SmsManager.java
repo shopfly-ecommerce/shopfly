@@ -19,46 +19,46 @@ import cloud.shopfly.b2c.core.base.SceneType;
 import cloud.shopfly.b2c.core.base.model.vo.SmsSendVO;
 
 /**
- * 手机短信接口
+ * SMS interface of mobile phone
  *
  * @author zh
  * @version v2.0
  * @since v7.0.0
- * 2018年3月19日 下午4:02:40
+ * 2018years3month19On the afternoon4:02:40
  */
 public interface SmsManager {
     /**
-     * 发送手机短信
+     * Sending text messages
      *
      * @param smsSendVO
      */
     void send(SmsSendVO smsSendVO);
 
     /**
-     * 验证手机验证码
+     * Verify the mobile phone verification code
      *
-     * @param scene  业务场景
-     * @param mobile 手机号码
-     * @param code   手机验证码
-     * @return 是否通过校验 true通过，false不通过
+     * @param scene  The business scenario
+     * @param mobile Mobile phone number
+     * @param code   Mobile verification code
+     * @return Whether it passes the verificationtrueThrough the,falseNot through
      */
     boolean valid(String scene, String mobile, String code);
 
     /**
-     * 在缓存中记录验证码
+     * Record the captcha in the cache
      *
-     * @param scene  业务场景
-     * @param mobile 手机号码
-     * @param code   手机验证码
+     * @param scene  The business scenario
+     * @param mobile Mobile phone number
+     * @param code   Mobile verification code
      */
     void record(String scene, String mobile, String code);
 
     /**
-     * 发送(发送手机短信)消息
+     * send(send手机短信)The message
      *
-     * @param byName    操作，替换内容
-     * @param mobile    手机号码
-     * @param sceneType 操作类型
+     * @param byName    Action, replace content
+     * @param mobile    Mobile phone number
+     * @param sceneType Operation type
      */
     void sendSmsMessage(String byName, String mobile, SceneType sceneType);
 

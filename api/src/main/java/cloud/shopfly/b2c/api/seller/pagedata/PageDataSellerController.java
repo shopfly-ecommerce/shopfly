@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * 楼层控制器
+ * Floor controller
  *
  * @author fk
  * @version v1.0
@@ -39,7 +39,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/pages")
-@Api(description = "楼层相关API")
+@Api(description = "Floor relatedAPI")
 @Validated
 public class PageDataSellerController {
 
@@ -48,9 +48,9 @@ public class PageDataSellerController {
 
 
     @PutMapping(value = "/{page_id}")
-    @ApiOperation(value = "修改楼层", response = PageData.class)
+    @ApiOperation(value = "Modify the floor", response = PageData.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "page_id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public PageData edit(@Valid PageData page, @PathVariable("page_id") Integer pageId) {
 
@@ -60,9 +60,9 @@ public class PageDataSellerController {
     }
 
     @GetMapping(value = "/{page_id}")
-    @ApiOperation(value = "查询一个楼层")
+    @ApiOperation(value = "Querying a floor")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_id", value = "要查询的楼层主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "page_id", value = "Primary key of the floor to be queried", required = true, dataType = "int", paramType = "path")
     })
     public PageData get(@PathVariable("page_id") Integer pageId) {
 
@@ -73,10 +73,10 @@ public class PageDataSellerController {
 
 
     @PutMapping(value = "/{client_type}/{page_type}")
-    @ApiOperation(value = "使用客户端类型和页面类型修改楼层", response = PageData.class)
+    @ApiOperation(value = "Modify floors using client type and page type", response = PageData.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "client_type", value = "要查询的客户端类型 APP/WAP/PC", required = true, dataType = "string", paramType = "path"),
-            @ApiImplicitParam(name = "page_type", value = "要查询的页面类型 INDEX 首页/SPECIAL 专题", required = true, dataType = "string", paramType = "path")
+            @ApiImplicitParam(name = "client_type", value = "Type of the client to be queriedAPP/WAP/PC", required = true, dataType = "string", paramType = "path"),
+            @ApiImplicitParam(name = "page_type", value = "Type of page to queryINDEX Home/SPECIAL project", required = true, dataType = "string", paramType = "path")
     })
     public PageData editByType(@Valid PageData pageData, @ClientAppType @PathVariable("client_type") String clientType, @PageType @PathVariable("page_type") String pageType) {
 
@@ -88,10 +88,10 @@ public class PageDataSellerController {
     }
 
     @GetMapping(value = "/{client_type}/{page_type}")
-    @ApiOperation(value = "使用客户端类型和页面类型查询一个楼层")
+    @ApiOperation(value = "Query a floor using client type and page type")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "client_type", value = "要查询的客户端类型 APP/WAP/PC", required = true, dataType = "string", paramType = "path"),
-            @ApiImplicitParam(name = "page_type", value = "要查询的页面类型 INDEX 首页/SPECIAL 专题", required = true, dataType = "string", paramType = "path")
+            @ApiImplicitParam(name = "client_type", value = "Type of the client to be queriedAPP/WAP/PC", required = true, dataType = "string", paramType = "path"),
+            @ApiImplicitParam(name = "page_type", value = "Type of page to queryINDEX Home/SPECIAL project", required = true, dataType = "string", paramType = "path")
     })
     public PageData getByType(@ClientAppType @PathVariable("client_type") String clientType, @PageType @PathVariable("page_type") String pageType) {
 

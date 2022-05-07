@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 短信网关表业务类
+ * SMS gateway table service class
  *
  * @author zh
  * @version v7.0.0
@@ -67,10 +67,10 @@ public class SmsPlatformManagerImpl implements SmsPlatformManager {
     }
 
     /**
-     * 添加短信网关
+     * Adding an SMS Gateway
      *
-     * @param smsPlatform 短信网关参数
-     * @return 短信网关对象
+     * @param smsPlatform SMS gateway parameters
+     * @return SMS Gateway Object
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -79,11 +79,11 @@ public class SmsPlatformManagerImpl implements SmsPlatformManager {
         if (smsPlatformDO.getId() == null || smsPlatformDO.getId() == 0) {
             SmsPlatformDO platformDO = this.getSmsPlateform(smsPlatformDO.getBean());
             if (platformDO != null) {
-                throw new ServiceException(SystemErrorCode.E900.code(), "该存储方案已经存在");
+                throw new ServiceException(SystemErrorCode.E900.code(), "The storage scheme already exists");
             }
             this.systemDaoSupport.insert("es_sms_platform", smsPlatformDO);
         }
-        // 更新缓存
+        // Update the cache
         cache.remove(CachePrefix.SPlATFORM.getPrefix());
         return smsPlatform;
     }
@@ -101,20 +101,20 @@ public class SmsPlatformManagerImpl implements SmsPlatformManager {
         }
         SmsPlatformDO smsPlatformDO = this.getSmsPlateform(bean);
         if (smsPlatformDO == null) {
-            throw new ResourceNotFoundException("该短信方案不存在");
+            throw new ResourceNotFoundException("The SMS scheme does not exist");
         }
         this.systemDaoSupport.execute("update es_sms_platform set open=0");
         this.systemDaoSupport.execute("update es_sms_platform set open=1 where bean=?", bean);
-        // 更新缓存
+        // Update the cache
         cache.remove(CachePrefix.SPlATFORM.getPrefix());
 
     }
 
 
     /**
-     * 获取所有的短信方案
+     * Get all SMS schemes
      *
-     * @return 所有的短信方案
+     * @return All SMS schemes
      */
     private List<SmsPlatformVO> getPlatform() {
         List<SmsPlatformVO> resultList = new ArrayList<>();
@@ -151,7 +151,7 @@ public class SmsPlatformManagerImpl implements SmsPlatformManager {
         }
         SmsPlatformDO smsPlatformDO = this.getSmsPlateform(bean);
         if (smsPlatformDO == null) {
-            throw new ResourceNotFoundException("该短信网关方案不存在");
+            throw new ResourceNotFoundException("The SMS gateway scheme does not exist");
         }
         return new SmsPlatformVO(smsPlatformDO);
     }
@@ -163,7 +163,7 @@ public class SmsPlatformManagerImpl implements SmsPlatformManager {
             String sql = "select * from es_sms_platform where open = 1";
             SmsPlatformDO smsPlatformDO = this.systemDaoSupport.queryForObject(sql, SmsPlatformDO.class);
             if (smsPlatformDO == null) {
-                throw new ResourceNotFoundException("未找到可用的短信网关");
+                throw new ResourceNotFoundException("No available SMS gateway was found");
             }
             smsPlatformVO = new SmsPlatformVO();
             smsPlatformVO.setConfig(smsPlatformDO.getConfig());
@@ -188,7 +188,7 @@ public class SmsPlatformManagerImpl implements SmsPlatformManager {
         }
         SmsPlatformDO up = this.getSmsPlateform(smsPlatform.getBean());
         if (up == null) {
-            throw new ResourceNotFoundException("该短信方案不存在");
+            throw new ResourceNotFoundException("The SMS scheme does not exist");
         }
         smsPlatform.setId(up.getId());
         this.systemDaoSupport.update(new SmsPlatformDO(smsPlatform), up.getId());

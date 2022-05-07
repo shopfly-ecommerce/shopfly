@@ -27,13 +27,13 @@ public class Token {
 
 
     /**
-     * token令牌
+     * tokenThe token
      */
     private String accessToken;
 
 
     /**
-     * 刷新token
+     * The refreshtoken
      */
     private String refreshToken;
 

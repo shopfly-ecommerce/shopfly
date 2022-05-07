@@ -26,25 +26,25 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 单品立减VO
+ * Item setVO
  * @author mengyuanming
  * @version v1.0
  * @since v6.4.0
- * @date 2017年8月18日下午8:39:27
+ * @date 2017years8month18On the afternoon8:39:27
  *
  */
-@ApiModel(description = "单品立减VO")
+@ApiModel(description = "Item setVO")
 public class MinusVO extends MinusDO implements Serializable {
 
 	private static final long serialVersionUID = 2262185663510143477L;
 
-	@ApiModelProperty(name = "goods_list",value = "促销商品列表")
+	@ApiModelProperty(name = "goods_list",value = "List of promotional items")
 	private List<PromotionGoodsDTO> goodsList;
 
-	@ApiModelProperty(name = "status_text",value = "活动状态")
+	@ApiModelProperty(name = "status_text",value = "Active state")
 	private String statusText;
 
-	@ApiModelProperty(name = "status",value = "活动状态标识,expired表示已失效")
+	@ApiModelProperty(name = "status",value = "Activity status identification,expiredIndicates invalid")
 	private String status;
 
 	public List<PromotionGoodsDTO> getGoodsList() {

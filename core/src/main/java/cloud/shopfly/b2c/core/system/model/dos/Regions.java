@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 
 /**
- * 地区实体
+ * Regional entities
  *
  * @author zh
  * @version v7.0.0
@@ -46,47 +46,47 @@ public class Regions implements Serializable {
     private static final long serialVersionUID = 8051779001011335L;
 
     /**
-     * 地区id
+     * regionid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 父地区id
+     * The parent regionid
      */
     @Column(name = "parent_id")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "parent_id", value = "父地区id", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "parent_id", value = "The parent regionid", required = false)
     private Integer parentId;
     /**
-     * 路径
+     * The path
      */
     @Column(name = "region_path")
-    @ApiModelProperty(name = "region_path", value = "路径", required = false)
+    @ApiModelProperty(name = "region_path", value = "The path", required = false)
     private String regionPath;
     /**
-     * 级别
+     * level
      */
     @Column(name = "region_grade")
-    @ApiModelProperty(name = "region_grade", value = "级别", required = false)
+    @ApiModelProperty(name = "region_grade", value = "level", required = false)
     private Integer regionGrade;
     /**
-     * 名称
+     * The name of the
      */
     @Column(name = "local_name")
-    @ApiModelProperty(name = "local_name", value = "名称", required = false)
+    @ApiModelProperty(name = "local_name", value = "The name of the", required = false)
     private String localName;
     /**
-     * 邮编
+     * Zip code
      */
     @Column(name = "zipcode")
-    @ApiModelProperty(name = "zipcode", value = "邮编", required = false)
+    @ApiModelProperty(name = "zipcode", value = "Zip code", required = false)
     private String zipcode;
     /**
-     * 是否支持货到付款
+     * Do you support CASH on delivery
      */
     @Column(name = "cod")
-    @ApiModelProperty(name = "cod", value = "是否支持货到付款,1支持，0不支持", required = false)
+    @ApiModelProperty(name = "cod", value = "Do you support CASH on delivery,1Support,0Does not support", required = false)
     private Integer cod;
 
     @PrimaryKeyField
@@ -204,7 +204,7 @@ public class Regions implements Serializable {
     }
 
     /**
-     * region转vo
+     * regionturnvo
      *
      * @return
      */

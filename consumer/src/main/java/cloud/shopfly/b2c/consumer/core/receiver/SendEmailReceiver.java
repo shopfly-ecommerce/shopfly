@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 发送邮件
+ * Send E-mail
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:31:58
+ * @since v7.0.0 2018years3month23The morning of10:31:58
  */
 @Component
 public class SendEmailReceiver {
@@ -46,7 +46,7 @@ public class SendEmailReceiver {
 	private List<SendEmailEvent> events;
 
 	/**
-	 * 发送邮件
+	 * Send E-mail
 	 * 
 	 * @param emailVO
 	 */
@@ -60,7 +60,7 @@ public class SendEmailReceiver {
 				try {
 					event.sendEmail(emailVO);
 				} catch (Exception e) {
-					logger.error("发送邮件出错", e);
+					logger.error("Error sending email", e);
 				}
 			}
 		}

@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 交易记录表业务类
+ * Transaction record sheet business class
  *
  * @author Snow
  * @version v7.0.0

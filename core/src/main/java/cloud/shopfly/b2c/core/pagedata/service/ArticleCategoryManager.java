@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 文章分类业务层
+ * This paper classifies the business layer
  *
  * @author fk
  * @version v1.0
@@ -32,49 +32,49 @@ import java.util.List;
 public interface ArticleCategoryManager {
 
     /**
-     * 查询文章分类列表
+     * Query the article category list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
-     * @param name     分类名称
+     * @param page     The page number
+     * @param pageSize Number each page
+     * @param name     name
      * @return Page
      */
     Page list(int page, int pageSize, String name);
 
     /**
-     * 添加文章分类
+     * Add article categories
      *
-     * @param articleCategory 文章分类
-     * @return ArticleCategory 文章分类
+     * @param articleCategory The article classification
+     * @return ArticleCategory The article classification
      */
     ArticleCategory add(ArticleCategory articleCategory);
 
     /**
-     * 修改文章分类
+     * Modify article categories
      *
-     * @param articleCategory 文章分类
-     * @param id              文章分类主键
-     * @return ArticleCategory 文章分类
+     * @param articleCategory The article classification
+     * @param id              Article category primary key
+     * @return ArticleCategory The article classification
      */
     ArticleCategory edit(ArticleCategory articleCategory, Integer id);
 
     /**
-     * 删除文章分类
+     * Delete article categories
      *
-     * @param id 文章分类主键
+     * @param id Article category primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取文章分类
+     * Get article classification
      *
-     * @param id 文章分类主键
-     * @return ArticleCategory  文章分类
+     * @param id Article category primary key
+     * @return ArticleCategory  The article classification
      */
     ArticleCategory getModel(Integer id);
 
     /**
-     * 查询某分类的子分类
+     * Example Query the subcategories of a category
      *
      * @param id
      * @return
@@ -82,7 +82,7 @@ public interface ArticleCategoryManager {
     List<ArticleCategory> listChildren(Integer id);
 
     /**
-     * 查询某个分类及相应的文章
+     * Query a category and corresponding articles
      *
      * @param categoryType
      * @return
@@ -90,7 +90,7 @@ public interface ArticleCategoryManager {
     ArticleCategoryVO getCategoryAndArticle(String categoryType);
 
     /**
-     * 查询某个分类
+     * Querying a category
      *
      * @param categoryType
      * @return
@@ -98,9 +98,9 @@ public interface ArticleCategoryManager {
     ArticleCategory getCategoryByCategoryType(String categoryType);
 
     /**
-     * 获取文章分类树
+     * Gets the article classification tree
      *
-     * @return 文章分类树
+     * @return Article classification tree
      */
     List<ArticleCategoryVO> getCategoryTree();
 

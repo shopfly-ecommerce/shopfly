@@ -28,16 +28,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 延时任务生产 rabbitmq实现
+ * Delayed task productionrabbitmqimplementation
  *
  * @author Chopper
  * @version v1.0
- * @Description: 原理：利用amqp的死信队列的超时属性，将超时的任务转到普通队列交给消费者执行。<br/>
- * 添加任务，将任务执行标识、beanid、执行时间，hash值存入redis，标识任务需要执行<p/>
- * 任务编辑，将之前的标识删除，重新添加任务<br/>
- * 添加删除，删除redis中的任务标识，消费者执行时获取不到 redis中的标识，则不会执行延时任务
+ * @Description: The principle of：usingamqpThe timeout attribute of the dead letter queue, which transfers the timed out task to the normal queue for the consumer to execute.<br/>
+ * Add a task and identify the task execution、beanid、Execution time,hashThe value stored inredis, indicating that a task needs to be executed<p/>
+ * Task edit, delete the previous identity, add the task again<br/>
+ * Add delete, deleteredisThe task id is not available to the consumer at execution timeredis, the delay task will not be executed
  * <p>
- * 2019-02-01 下午4:01
+ * 2019-02-01 In the afternoon4:01
  * @since v7.0
  */
 @Component
@@ -45,7 +45,7 @@ public class RabbitmqTimeTrigger implements TimeTrigger {
 
 
     /**
-     * 引入rabbit的操作模板
+     * The introduction ofrabbitOperation template of
      */
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -58,15 +58,15 @@ public class RabbitmqTimeTrigger implements TimeTrigger {
 
 
     /**
-     * 添加延时任务
+     * Adding a Delayed Task
      *
-     * @param executerName 执行器
-     * @param param        执行参数
-     * @param triggerTime  执行时间
-     * @param uniqueKey    如果是一个 需要有 修改/取消 延时任务功能的延时任务，<br/>
-     *                     请填写此参数，作为后续删除，修改做为唯一凭证 <br/>
-     *                     建议参数为：PINTUAZN_{ACTIVITY_ID} 例如 pintuan_123<br/>
-     *                     业务内全局唯一
+     * @param executerName actuator
+     * @param param        Perform parameter
+     * @param triggerTime  The execution time
+     * @param uniqueKey    If it is a need to have a modification/Cancel the delayed task of the delayed task function,<br/>
+     *                     Please fill in this parameter for subsequent deletion and modification as the unique certificate<br/>
+     *                     Recommended parameters are：PINTUAZN_{ACTIVITY_ID} For example,pintuan_123<br/>
+     *                     Globally unique within a service
      */
     @Override
     public void add(String executerName, Object param, Long triggerTime, String uniqueKey) {
@@ -74,23 +74,23 @@ public class RabbitmqTimeTrigger implements TimeTrigger {
         if (StringUtil.isEmpty(uniqueKey)) {
             uniqueKey = StringUtil.getRandStr(10);
         }
-        //标识任务需要执行
+        // Indicates that a task needs to be executed
         cache.put(RabbitmqTriggerUtil.generate(executerName, triggerTime, uniqueKey), 1);
 
         TimeTriggerMsg timeTriggerMsg = new TimeTriggerMsg(executerName, param, triggerTime, uniqueKey);
         if (logger.isDebugEnabled()) {
-            logger.debug("定时执行在【" + DateUtil.toString(triggerTime, "yyyy-MM-dd HH:mm:ss") + "】，消费【" + param.toString() + "】");
+            logger.debug("Timed execution【" + DateUtil.toString(triggerTime, "yyyy-MM-dd HH:mm:ss") + "】Consumption,【" + param.toString() + "】");
         }
         rabbitTemplate.convertAndSend(TimeTriggerConfig.DELAYED_EXCHANGE_XDELAY, TimeTriggerConfig.DELAY_ROUTING_KEY_XDELAY, timeTriggerMsg, message -> {
 
-            //如果执行的延时任务应该是在现在日期之前执行的，那么补救一下，要求系统一秒钟后执行
+            // If the delayed task is supposed to be executed before the current date, remedy this by requiring the system to execute it one second later
             if (triggerTime < DateUtil.getDateline()) {
                 message.getMessageProperties().setDelay(1000);
             } else {
                 message.getMessageProperties().setDelay((int) (triggerTime - DateUtil.getDateline()) * 1000);
             }
             if (logger.isDebugEnabled()) {
-                logger.debug("还有【" + message.getMessageProperties().getExpiration() + "】执行任务");
+                logger.debug("There are【" + message.getMessageProperties().getExpiration() + "】Perform a task");
             }
 
             return message;
@@ -98,28 +98,28 @@ public class RabbitmqTimeTrigger implements TimeTrigger {
     }
 
     /**
-     * 修改延时任务
+     * Modifying a Delayed Task
      *
-     * @param executerName 执行器
-     * @param param        执行参数
-     * @param triggerTime  执行时间
-     * @param uniqueKey    添加任务时的唯一凭证
+     * @param executerName actuator
+     * @param param        Perform parameter
+     * @param triggerTime  The execution time
+     * @param uniqueKey    Unique credentials when adding tasks
      */
     @Override
     public void edit(String executerName, Object param, Long oldTriggerTime, Long triggerTime, String uniqueKey) {
 
-        //标识任务放弃
+        // Identification task abandonment
         cache.remove(RabbitmqTriggerUtil.generate(executerName, oldTriggerTime, uniqueKey));
-        //重新添加任务
+        // Re-add a Task
         this.add(executerName, param, triggerTime, uniqueKey);
     }
 
     /**
-     * 删除延时任务
+     * Deleting a Delayed Task
      *
-     * @param executerName 执行器
-     * @param triggerTime  执行时间
-     * @param uniqueKey    添加任务时的唯一凭证
+     * @param executerName actuator
+     * @param triggerTime  The execution time
+     * @param uniqueKey    Unique credentials when adding tasks
      */
     @Override
     public void delete(String executerName, Long triggerTime, String uniqueKey) {

@@ -39,21 +39,21 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品库存接口
+ * Commodity inventory interface
  *
  * @author fk
  * @author kingapex
- * @version v1.0 2017年4月1日 下午12:03:08
- * @version v2.0 written by kingapex  2019年2月27日
- * 采用lua脚本执行redis中的库存扣减<br/>
- * 数据库的更新采用非时时同步<br/>
- * 而是建立了一个缓冲池，当达到一定条件时再同步数据库<br/>
- * 这样条件有：缓冲区大小，缓冲次数，缓冲时间<br/>
- * 上述条件在配置中心可以配置，如果没有配置采用 ${@link UpdatePool} 默认值<br/>
- * 在配置项说明：<br/>
- * <li>缓冲区大小：shopfly.pool.stock.max-pool-size</li>
- * <li>缓冲次数：shopfly.pool.stock.max-update-time</li>
- * <li>缓冲时间（秒数）：shopfly.pool.stock.max-lazy-second</li>
+ * @version v1.0 2017years4month1On the afternoon12:03:08
+ * @version v2.0 written by kingapex  2019years2month27day
+ * usingluaScript executionredisInventory deduction in<br/>
+ * Database updates are asynchronously synchronized<br/>
+ * Instead, a buffer pool is set up to synchronize the database when a certain condition is reached<br/>
+ * The conditions are：Buffer size, buffer times, buffer time<br/>
+ * The preceding conditions can be configured in the configuration center${@link UpdatePool} The default value<br/>
+ * In the configuration item description：<br/>
+ * <li>Buffer size：shopfly.pool.stock.max-pool-size</li>
+ * <li>Number of buffer：shopfly.pool.stock.max-update-time</li>
+ * <li>Buffer time（Number of seconds）：shopfly.pool.stock.max-lazy-second</li>
  *
  * @see ShopflyConfig
  */
@@ -71,11 +71,11 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
 
 
     /**
-     * sku库存更新缓冲池
+     * skuThe inventory update buffer pool
      */
     private static UpdatePool skuUpdatePool ;
     /**
-     * goods库存更新缓冲池
+     * goodsThe inventory update buffer pool
      */
     private static UpdatePool goodsUpdatePool ;
 
@@ -112,7 +112,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
             Assert.notNull(quantity.getQuantityType(), "Type must not be null");
 
 
-            //sku库存
+            // Sku inventories
             if (QuantityType.enable.equals(quantity.getQuantityType())){
                 keys.add(StockCacheKeyUtil.skuEnableKey(quantity.getSkuId()) );
             }else if (QuantityType.actual.equals(quantity.getQuantityType())){
@@ -120,7 +120,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
             }
             values.add("" + quantity.getQuantity());
 
-            //goods库存key
+            // Goods inventory key
             if (QuantityType.enable.equals(quantity.getQuantityType())){
                 keys.add(StockCacheKeyUtil.goodsEnableKey(quantity.getGoodsId()) );
             }else if (QuantityType.actual.equals(quantity.getQuantityType())){
@@ -137,32 +137,32 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
         Boolean result = stringRedisTemplate.execute(redisScript, keys, values.toArray());
 
         if (logger.isDebugEnabled()) {
-            logger.debug("更新库存：");
+            logger.debug("Update the inventory：");
             logger.debug(goodsQuantityList.toString());
-            logger.debug("更新结果：" + result);
+            logger.debug("Update the results：" + result);
         }
 
-        //如果lua脚本执行成功则记录缓冲区
+        // If the Lua script executes successfully, the buffer is logged
         if (result) {
 
-            //判断配置文件中设置的商品库存缓冲池是否开启
+            // Check whether the commodity inventory buffer pool set in the configuration file is enabled
             if (shopflyConfig.isStock()) {
 
-                //是否需要同步数据库
+                // Whether to synchronize the database
                 boolean needSync = getSkuPool().oneTime(skuIdList);
                 getGoodsPool().oneTime(goodsIdList);
 
                 if (logger.isDebugEnabled()) {
-                    logger.debug("是否需要同步数据库:" + needSync);
+                    logger.debug("Whether to synchronize the database:" + needSync);
                     logger.debug(getSkuPool().toString());
                 }
 
-                //如果开启了缓冲池，并且缓冲区已经饱和，则同步数据库
+                // If the buffer pool is enabled and the buffer is saturated, synchronize the database
                 if (needSync) {
                     syncDataBase();
                 }
             } else {
-                //如果未开启缓冲池，则实时同步商品数据库中的库存数据
+                // If the buffer pool is not enabled, the inventory data in the goods database is synchronized in real time
                 syncDataBase(skuIdList, goodsIdList);
             }
 
@@ -174,7 +174,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
 
     @Override
     public void syncDataBase() {
-        //获取同步的skuid 和goodsid
+        // Get the synchronized SKUID and goodSID
         List<Integer>  skuIdList = getSkuPool().getTargetList();
         List<Integer>  goodsIdList = getGoodsPool().getTargetList();
 
@@ -183,37 +183,37 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
             logger.debug(goodsIdList.toString());
         }
 
-        //判断要同步的goods和sku集合是否有值
+        // Determines whether the goods and SKU sets to be synchronized have values
         if (skuIdList.size() != 0 && goodsIdList.size() != 0) {
-            //同步数据库
+            // Synchronizing databases
             syncDataBase(skuIdList, goodsIdList);
         }
 
-        //重置缓冲池
+        // Resetting the buffer pool
         getSkuPool().reset();
         getGoodsPool().reset();
     }
 
     /**
-     * 同步数据库中的库存
+     * Synchronize inventory in the database
      *
-     * @param skuIdList   需要同步的skuid
-     * @param goodsIdList 需要同步的goodsid
+     * @param skuIdList   To be synchronizedskuid
+     * @param goodsIdList To be synchronizedgoodsid
      */
     private void syncDataBase(List<Integer> skuIdList, List<Integer> goodsIdList) {
 
-        //要形成的指更新sql
+        // To form refers to update SQL
         List<String> sqlList = new ArrayList<String>();
 
 
-        //批量获取sku的库存
+        // Get the INVENTORY of SKUs in bulk
         List skuKeys = StockCacheKeyUtil.skuKeys(skuIdList);
         List<String> skuQuantityList = stringRedisTemplate.opsForValue().multiGet(skuKeys);
 
 
         int i = 0;
 
-        //形成批量更新sku的list
+        // Form a batch update LIST of SKUs
         for (Integer skuId : skuIdList) {
             String sql = "";
             if (skuQuantityList.get(i + 1) == null ) {
@@ -225,13 +225,13 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
             i=i+2;
         }
 
-        //批量获取商品的库存
+        // Acquire inventory of goods in bulk
         List goodsKeys = createGoodsKeys(goodsIdList);
         List<String> goodsQuantityList =  stringRedisTemplate.opsForValue().multiGet(goodsKeys);
 
         i = 0;
 
-        //形成批量更新goods的list
+        // Form a batch update goods list
         for (Integer goodsId : goodsIdList) {
             String sql = "update es_goods set enable_quantity=" + goodsQuantityList.get(i) + ", quantity=" + goodsQuantityList.get(i + 1) + " where goods_id=" + goodsId;
             sqlList.add(sql);
@@ -239,7 +239,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
         }
 
         if (logger.isDebugEnabled()) {
-            logger.debug("批量更新的sql为：");
+            logger.debug("Batch updatedsqlfor：");
             logger.debug(sqlList.toString());
 
         }
@@ -267,7 +267,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
     }
 
     /**
-     * 单例获取goods pool ，初始化时设置参数
+     * Singleton accessgoods pool , set parameters during initialization
      * @return
      */
     private UpdatePool getGoodsPool() {
@@ -281,7 +281,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
     }
 
     /**
-     * 单例获取sku pool ，初始化时设置参数
+     * Singleton accesssku pool , set parameters during initialization
      * @return
      */
     private UpdatePool getSkuPool() {
@@ -289,7 +289,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
             skuUpdatePool = new UpdatePool(shopflyConfig.getMaxUpdateTime(),shopflyConfig.getMaxPoolSize(),shopflyConfig.getMaxLazySecond());
 
             if (logger.isDebugEnabled()) {
-                logger.debug("初始化sku pool:");
+                logger.debug("Initialize thesku pool:");
                 logger.debug(skuUpdatePool.toString());
 
             }
@@ -299,7 +299,7 @@ public class GoodsQuantityManagerImpl implements GoodsQuantityManager {
     }
 
     /**
-     * 生成批量获取goods库存的keys
+     * Generate batch fetchgoodsinventorykeys
      * @param goodsIdList
      * @return
      */

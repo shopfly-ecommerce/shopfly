@@ -82,40 +82,40 @@ public abstract class BaseTest {
     static final String HEADER_STRING = "Authorization";
 
     /**
-     * 卖家1 sellerId = 3
+     * The seller1 sellerId = 3
      */
     protected String seller1 = "eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInVpZCI6MSwic3ViIjoiQ0xFUksiLCJzZWxsZXJJZCI6Mywicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuWwj-W6lyIsImNsZXJrSWQiOjEsImNsZXJrTmFtZSI6Iua1i-ivleW6l-WRmCIsInVzZXJuYW1lIjoi5rWL6K-V6LSm5oi3In0.CEYCkpz0TW4VNFqVIH5nGlbwbDXme9-aUo3k05P0VrKKvlibof1IUqfPDN_jvt1o8PtLRZchkzkup2TSvZOivw";
     /**
-     * 卖家2 sellerId = 4
+     * The seller2 sellerId = 4
      */
     protected String seller2 = "eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInVpZCI6MSwic3ViIjoiQ0xFUksiLCJzZWxsZXJJZCI6NCwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuWwj-W6lyIsImNsZXJrSWQiOjEsImNsZXJrTmFtZSI6Iua1i-ivleW6l-WRmCIsInVzZXJuYW1lIjoi5rWL6K-V6LSm5oi3In0.a97FcMUqhzzR3dD1OUsYc4YBMsCSaM30_uKM952F3hTiw1VIuzaYibT9dUvnMYSE6rrsRR2HF4V6XGrCL0Fgww";
 
     /**
-     * 买家1 uid = 1
+     * buyers1 uid = 1
      */
     protected String buyer1 = "eyJhbGciOiJIUzUxMiJ9.eyJ1aWQiOjEsInN1YiI6IkJVWUVSIiwicm9sZXMiOlsiQlVZRVIiXSwiZXhwIjoxNTU2NTA2NDU0LCJ1c2VybmFtZSI6IndhbmdmZW5nIn0.wdJxhrq0coEp4KpoXTdWZ0V59hmOpnFlyTUCIVkwyDVsq2ZjTIDf8l0EYmwRDRi-dgDUhC6Nb9C-_WOl51UNlw";
 
     /**
-     * 买家2 uid = 2
+     * buyers2 uid = 2
      */
     protected String buyer2 = "eyJhbGciOiJIUzUxMiJ9.eyJ1aWQiOjIsInN1YiI6IkJVWUVSIiwicm9sZXMiOlsiQlVZRVIiXSwiZXhwIjoxNTU2NTA2OTAxLCJ1c2VybmFtZSI6IndhbmdmZW5nMSJ9.zUIknjpdLPOfr5N2_c4OTZw_a5aqsipGTUoz2AmH_CsvjnMGnZwrS4FfPo6IAdtJgXcz3HVYDVXbiNszffxwLQ";
 
     /**
-     * 超级管理员的token uid =1
+     * Super administratorstoken uid =1
      */
     protected String superAdmin = "eyJhbGciOiJIUzUxMiJ9.eyJ1aWQiOjEsInN1YiI6IkFETUlOIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiZm91bmRlciI6bnVsbCwidXVpZCI6bnVsbCwidXNlcm5hbWUiOiLmtYvor5XotKbmiLcifQ.Ozpotzn7rK21q1JupTob-qDAP_qda6iNT2Sqk9sCrHjmDL3d8EM2C-yg4AvaRKLmWsC-guSdMZfikxs4SHUhFQ";
 
     /**
-     * 封装传递参数
+     * Encapsulating transfer parameter
      *
-     * @param names  参数名
-     * @param values 参数值数组
-     * @return 组装好的参数map 列表
+     * @param names  Parameter names
+     * @param values Parameter value array
+     * @return Assembled parametersmap The list of
      */
     protected static List<MultiValueMap<String, String>> toMultiValueMaps(String[] names, String[]... values) {
 
         List<MultiValueMap<String, String>> stringMultiValueMapList = new ArrayList<>();
-        //values.length组数组
+        // Values. The array length group
 
         for (String[] value : values) {
 
@@ -136,10 +136,10 @@ public abstract class BaseTest {
 
 
     /**
-     * 对象比较matcher
+     * Object to comparematcher
      *
-     * @param expect 要比较的对象
-     * @return 象比较 ResultMatcher
+     * @param expect The object to compare
+     * @return Like to compareResultMatcher
      */
     protected ResultMatcher objectEquals(Object expect) {
         ObjectResultMatchers matchers = new ObjectResultMatchers();
@@ -147,9 +147,9 @@ public abstract class BaseTest {
     }
 
     /**
-     * 将对象转换为可当做参数传递的map
+     * Converts an object to one that can be passed as a parametermap
      *
-     * @param obj 对象
+     * @param obj object
      * @return
      * @throws IllegalAccessException
      */
@@ -168,10 +168,10 @@ public abstract class BaseTest {
     }
 
     /**
-     * 对象比较matcher
+     * Object to comparematcher
      *
-     * @param expect 要比较的对象
-     * @return 象比较 ResultMatcher
+     * @param expect The object to compare
+     * @return Like to compareResultMatcher
      */
     protected ResultMatcher stringEquals(String expect) {
         ObjectResultMatchers matchers = new ObjectResultMatchers();
@@ -179,10 +179,10 @@ public abstract class BaseTest {
     }
 
     /**
-     * 生成买家token
+     * Generate the buyerstoken
      *
-     * @param uid      会员id
-     * @param username 会员名称
+     * @param uid      membersid
+     * @param username Member name
      * @return
      */
 
@@ -204,12 +204,12 @@ public abstract class BaseTest {
     }
 
     /**
-     * 生成卖家token
+     * Generate the sellerstoken
      *
-     * @param uid        会员名称
-     * @param sellerId   店铺ID
-     * @param userName   会员名称
-     * @param sellerName 店铺名称
+     * @param uid        Member name
+     * @param sellerId   The storeID
+     * @param userName   Member name
+     * @param sellerName Shop name
      * @return
      */
     protected String createSellerToken(Integer uid, Integer sellerId, String userName, String sellerName) {
@@ -232,7 +232,7 @@ public abstract class BaseTest {
     }
 
     /**
-     * 将MultiValueMap 转换成Map
+     * willMultiValueMap Converted toMap
      *
      * @return
      */
@@ -246,7 +246,7 @@ public abstract class BaseTest {
     }
 
     /**
-     * 将Map转换成Map<String,String>
+     * willMapConverted toMap<String,String>
      *
      * @param map
      * @return
@@ -262,9 +262,9 @@ public abstract class BaseTest {
     }
 
     /**
-     * 删除文件夹下文件
+     * Delete the files in the folder
      *
-     * @param path 文件路径
+     * @param path The file path
      * @return
      */
     public boolean delAllFile(String path) {
@@ -288,9 +288,9 @@ public abstract class BaseTest {
                 temp.delete();
             }
             if (temp.isDirectory()) {
-                //先删除文件夹里面的文件
+                // Delete the files in the folder first
                 delAllFile(path + "/" + tempList[i]);
-                //再删除空文件夹
+                // Then delete the empty folder
                 delFolder(path + "/" + tempList[i]);
                 flag = true;
             }
@@ -299,25 +299,25 @@ public abstract class BaseTest {
     }
 
     /**
-     * 删除文件夹
+     * Delete folders
      *
-     * @param folderPath 文件夹路径
+     * @param folderPath Folder path
      */
     public void delFolder(String folderPath) {
         try {
-            //删除完里面所有内容
+            // Delete everything on it
             delAllFile(folderPath);
             String filePath = folderPath;
             filePath = filePath.toString();
             java.io.File myFilePath = new java.io.File(filePath);
-            myFilePath.delete(); //删除空文件夹
+            myFilePath.delete(); //Delete empty folders
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * 登录
+     * Sign in
      *
      * @param username
      * @param password
@@ -337,10 +337,10 @@ public abstract class BaseTest {
     }
 
     /**
-     * 登录
+     * Sign in
      *
-     * @param username 用户名
-     * @param passpord 密码
+     * @param username Username
+     * @param passpord Password
      * @return
      * @throws Exception
      */

@@ -37,7 +37,7 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 /**
- * 支付宝登陆相关接口
+ * Pay treasure to land relevant interface
  * @author cs
  * @version v1.0
  * @since v7.2.2
@@ -108,7 +108,7 @@ public class LoginAlipayManagerImpl  implements LoginAlipayManager {
             System.out.println(oauthTokenResponse.getAccessToken());
             System.out.println(oauthTokenResponse.getUserId());
         } catch (AlipayApiException e) {
-            //处理异常
+            // Handle exceptions
             e.printStackTrace();
         }
         return oauthTokenResponse;

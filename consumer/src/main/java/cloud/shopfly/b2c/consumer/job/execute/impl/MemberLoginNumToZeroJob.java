@@ -23,12 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 会员登录数量归零
+ * The number of member login returns to zero
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-19 下午2:40
+ * 2018-07-19 In the afternoon2:40
  */
 @Component
 public class MemberLoginNumToZeroJob implements EveryMonthExecute {
@@ -39,14 +39,14 @@ public class MemberLoginNumToZeroJob implements EveryMonthExecute {
     private MemberClient memberClient;
 
     /**
-     * 每月执行
+     * Perform a month
      */
     @Override
     public void everyMonth() {
         try {
             memberClient.loginNumToZero();
         } catch (Exception e) {
-            this.logger.error("会员登陆次数归零异常：", e);
+            this.logger.error("The login times of member return to zero abnormal：", e);
         }
     }
 }

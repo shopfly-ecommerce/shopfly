@@ -31,19 +31,19 @@ import java.io.Serializable;
 public class WechatDTO implements Serializable {
 
     /**
-     * 需要跳转地址
+     * Redirect address required
      */
     private String redirectUrl;
 
 
     /**
-     * 是否需要重定向，前端跳转重新获取accesstoken（包含openid）
+     * If redirection is required, the front-end redirect is used to obtain the data againaccesstoken（containsopenid）
      */
     private boolean needRedirect;
 
 
     /**
-     * 存储用户信息与微信之间沟通的token
+     * Store user information and communication between wechattoken
      */
     private Auth2Token auth2Token;
 

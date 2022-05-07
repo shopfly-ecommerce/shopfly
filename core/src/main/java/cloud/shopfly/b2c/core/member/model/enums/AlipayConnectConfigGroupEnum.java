@@ -18,19 +18,19 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 支付宝信任登录参数组枚举类
+ * @Description Alipay trusted login parameter group enumeration class
  * @ClassName AlipayConnectConfigGroupEnum
- * @since v7.0 下午8:05 2018/6/28
+ * @since v7.0 In the afternoon8:05 2018/6/28
  */
 public enum AlipayConnectConfigGroupEnum {
     /**
-     * 网页端参数 （PC，WAP）参数
+     * Webpage parameters（PC，WAP）parameter
      */
-    pc("网页端参数 （PC，WAP）参数"),
+    pc("Webpage parameters（PC，WAP）parameter"),
     /**
-     * app端参数
+     * appThe parameter
      */
-    app("app端参数");
+    app("appThe parameter");
 
     private String text;
 

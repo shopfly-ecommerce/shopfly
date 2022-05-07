@@ -24,59 +24,59 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
- * 商品查询条件
+ * Commodity inquiry conditions
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月21日 下午3:46:04
+ * 2018years3month21On the afternoon3:46:04
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GoodsQueryParam {
     /**
-     * 页码
+     * The page number
      */
-    @ApiModelProperty(name = "page_no", value = "页码", required = false)
+    @ApiModelProperty(name = "page_no", value = "The page number", required = false)
     private Integer pageNo;
     /**
-     * 分页数
+     * Number of pages
      */
-    @ApiModelProperty(name = "page_size", value = "分页数", required = false)
+    @ApiModelProperty(name = "page_size", value = "Number of pages", required = false)
     private Integer pageSize;
     /**
-     * 是否上架 0代表已下架，1代表已上架
+     * Whether the shelf0The representative has been removed from the shelves,1Representative is on the shelf
      */
-    @ApiModelProperty(name = "market_enable", value = "是否上架 0代表已下架，1代表已上架")
-    @Min(value = 0 , message = "审核状态不正确")
-    @Max(value = 2 , message = "审核状态不正确")
+    @ApiModelProperty(name = "market_enable", value = "Whether the shelf0The representative has been removed from the shelves,1Representative is on the shelf")
+    @Min(value = 0 , message = "The audit status is incorrect")
+    @Max(value = 2 , message = "The audit status is incorrect")
     private Integer marketEnable;
 
     /**
-     * 关键字
+     * keyword
      */
-    @ApiModelProperty(name = "keyword", value = "关键字")
+    @ApiModelProperty(name = "keyword", value = "keyword")
     private String keyword;
     /**
-     * 商品名称
+     * Name
      */
-    @ApiModelProperty(name = "goods_name", value = "商品名称")
+    @ApiModelProperty(name = "goods_name", value = "Name")
     private String goodsName;
     /**
-     * 商品编号
+     * SN
      */
-    @ApiModelProperty(name = "goods_sn", value = "商品编号")
+    @ApiModelProperty(name = "goods_sn", value = "SN")
     private String goodsSn;
 
-    @ApiModelProperty(name = "category_path", value = "商品分类路径，例如0|10|")
+    @ApiModelProperty(name = "category_path", value = "Commodity classification path, for example0|10|")
     private String categoryPath;
 
-    @ApiModelProperty(name = "disabled", value = "0 查询回收站商品")
-    @Min(value = 0 , message = "值不正确")
-    @Max(value = 0 , message = "值不正确")
+    @ApiModelProperty(name = "disabled", value = "0 Inquire about recycle bin goods")
+    @Min(value = 0 , message = "Values are not correct")
+    @Max(value = 0 , message = "Values are not correct")
     private Integer disabled;
 
-    @ApiModelProperty(name = "goods_type", value = "商品类型 NORMAL 正常商品  POINT 积分商品")
+    @ApiModelProperty(name = "goods_type", value = "TypeNORMAL Normal goodsPOINT Integral goods")
     private String  goodsType;
 
 

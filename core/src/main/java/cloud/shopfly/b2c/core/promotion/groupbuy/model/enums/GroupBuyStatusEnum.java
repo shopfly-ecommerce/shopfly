@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.promotion.groupbuy.model.enums;
 
 /**
- * 团购状态美剧
+ * Group purchase status American TV series
  *
  * @author Snow create in 2018/6/13
  * @version v2.0
@@ -25,19 +25,19 @@ package cloud.shopfly.b2c.core.promotion.groupbuy.model.enums;
 public enum GroupBuyStatusEnum {
 
     /**
-     * 已结束
+     * Has ended
      */
-    OVERDUE("已结束"),
+    OVERDUE("Has ended"),
 
     /**
-     * 进行中
+     * ongoing
      */
-    CONDUCT("进行中"),
+    CONDUCT("ongoing"),
 
     /**
-     * 未开始
+     * Not at the
      */
-    NOT_BEGIN("未开始");
+    NOT_BEGIN("Not at the");
 
     private String status;
 

@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 订单日志表业务层
+ * Order log table business layer
  *
  * @author Snow
  * @version v7.0.0
@@ -31,53 +31,53 @@ import java.util.List;
 public interface OrderLogManager {
 
     /**
-     * 查询订单日志表列表
+     * Example Query the order log list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
 
     /**
-     * 查询订单日志表列表
+     * Example Query the order log list
      *
-     * @param orderSn 订单编号
+     * @param orderSn Order no.
      * @return List
      */
     List listAll(String orderSn);
 
 
     /**
-     * 添加订单日志表
+     * Add order log table
      *
-     * @param orderLog 订单日志表
-     * @return OrderLog 订单日志表
+     * @param orderLog Order log table
+     * @return OrderLog Order log table
      */
     OrderLogDO add(OrderLogDO orderLog);
 
     /**
-     * 修改订单日志表
+     * Modify the order log table
      *
-     * @param orderLog 订单日志表
-     * @param id       订单日志表主键
-     * @return OrderLog 订单日志表
+     * @param orderLog Order log table
+     * @param id       Order log table primary key
+     * @return OrderLog Order log table
      */
     OrderLogDO edit(OrderLogDO orderLog, Integer id);
 
     /**
-     * 删除订单日志表
+     * Delete the order log table
      *
-     * @param id 订单日志表主键
+     * @param id Order log table primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取订单日志表
+     * Get the order log table
      *
-     * @param id 订单日志表主键
-     * @return OrderLog  订单日志表
+     * @param id Order log table primary key
+     * @return OrderLog  Order log table
      */
     OrderLogDO getModel(Integer id);
 

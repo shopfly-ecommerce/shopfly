@@ -24,24 +24,24 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 分类获取的插件返回的vo
+ * Returned by plug-ins obtained by categoryvo
  *
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月16日 下午4:53:39
+ * @since v7.0.0 2018years3month16On the afternoon4:53:39
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CategoryPluginVO extends CategoryDO implements Serializable {
 
     /**
-     * 分类获取的插件返回的vo
+     * Returned by plug-ins obtained by categoryvo
      */
     private static final long serialVersionUID = -8428052730649034814L;
 
-    @ApiModelProperty("分类id")
+    @ApiModelProperty("Categoriesid")
     private Integer id;
-    @ApiModelProperty("分类名称")
+    @ApiModelProperty("name")
     private String text;
 
     public CategoryPluginVO() {

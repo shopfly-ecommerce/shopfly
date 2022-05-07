@@ -25,7 +25,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 团购商品查询参数对象
+ * Group purchase commodity query parameter object
  *
  * @author Snow create in 2018/5/28
  * @version v2.0
@@ -35,31 +35,31 @@ import java.io.Serializable;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GroupbuyQueryParam implements Serializable {
 
-    @ApiModelProperty(value = "团购活动ID")
+    @ApiModelProperty(value = "Group-buying activitiesID")
     private Integer actId;
 
-    @ApiModelProperty(value = "关键字")
+    @ApiModelProperty(value = "keyword")
     private String keywords;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "Name")
     private String goodsName;
 
-    @ApiModelProperty(value = "会员ID")
+    @ApiModelProperty(value = "membersID")
     private Integer memberId;
 
-    @ApiModelProperty(value = "开始时间")
+    @ApiModelProperty(value = "The start time")
     private Long startTime;
 
-    @ApiModelProperty(value = "结束时间")
+    @ApiModelProperty(value = "The end of time")
     private Long endTime;
 
-    @ApiModelProperty(value = "分类ID")
+    @ApiModelProperty(value = "CategoriesID")
     private Integer catId;
 
-    @ApiModelProperty(value = "第几页")
+    @ApiModelProperty(value = "What page")
     private Integer page;
 
-    @ApiModelProperty(value = "每页条数")
+    @ApiModelProperty(value = "Number each page")
     private Integer pageSize;
 
     public Integer getActId() {

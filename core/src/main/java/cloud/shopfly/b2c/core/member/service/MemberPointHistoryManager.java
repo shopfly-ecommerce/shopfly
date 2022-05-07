@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.member.model.dos.MemberPointHistory;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 会员积分表业务层
+ * Member points sheet business layer
  *
  * @author zh
  * @version v7.0.0
@@ -29,20 +29,20 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface MemberPointHistoryManager {
 
     /**
-     * 查询会员积分表列表
+     * Query the list of member points
      *
-     * @param page     页码
-     * @param pageSize 每页数量
-     * @param memberId 会员id
+     * @param page     The page number
+     * @param pageSize Number each page
+     * @param memberId membersid
      * @return Page
      */
     Page list(int page, int pageSize, Integer memberId);
 
     /**
-     * 添加会员积分表
+     * Add membership points table
      *
-     * @param memberPointHistory 会员积分表
-     * @return MemberPointHistory 会员积分表
+     * @param memberPointHistory Member points sheet
+     * @return MemberPointHistory Member points sheet
      */
     MemberPointHistory add(MemberPointHistory memberPointHistory);
 

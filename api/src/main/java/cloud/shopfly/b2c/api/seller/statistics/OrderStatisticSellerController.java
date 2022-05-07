@@ -34,18 +34,18 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 订单统计
+ * Order statistics
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/8 下午6:47
+ * 2018/5/8 In the afternoon6:47
  */
 
 
 @RestController
-@Api(description = "后台统计=》其他统计")
+@Api(description = "The background of statistical=》Other statistics")
 @RequestMapping("/seller/statistics/order")
 public class OrderStatisticSellerController {
 
@@ -53,60 +53,60 @@ public class OrderStatisticSellerController {
     private OrderStatisticManager orderAnalysisManager;
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "order_status", value = "订单状态", required = false, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "order_status", value = "Status", required = false, dataType = "String", paramType = "query")
     })
-    @ApiOperation("其他统计=》订单统计=》下单金额")
+    @ApiOperation("Other statistics=》Order statistics=》Place the order amount")
     @GetMapping(value = "/order/money")
     public MultipleChart getOrderMoney(@ApiIgnore SearchCriteria searchCriteria, @ApiIgnore String orderStatus) {
         return this.orderAnalysisManager.getOrderMoney(searchCriteria, orderStatus);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "order_status", value = "订单状态", required = false, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "order_status", value = "Status", required = false, dataType = "String", paramType = "query")
     })
-    @ApiOperation("其他统计=》订单统计=》下单数量")
+    @ApiOperation("Other statistics=》Order statistics=》Order quantity")
     @GetMapping(value = "/order/num")
     public MultipleChart getOrderNum(@ApiIgnore SearchCriteria searchCriteria, @ApiIgnore String orderStatus) {
         return this.orderAnalysisManager.getOrderNum(searchCriteria, orderStatus);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "order_status", value = "订单状态", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "分页大小", required = false, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "order_status", value = "Status", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Page size", required = false, dataType = "int", paramType = "query")
     })
-    @ApiOperation("其他统计=》订单统计=》下单数量")
+    @ApiOperation("Other statistics=》Order statistics=》Order quantity")
     @GetMapping(value = "/order/page")
     public Page getOrderPage(@ApiIgnore SearchCriteria searchCriteria, @ApiIgnore String orderStatus, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
         return this.orderAnalysisManager.getOrderPage(searchCriteria, orderStatus, pageNo, pageSize);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
-    @ApiOperation("其他统计=》销售收入统计 page")
+    @ApiOperation("Other statistics=》Sales revenue statisticspage")
     @GetMapping(value = "/sales/money")
     public Page getSalesMoney(@ApiIgnore SearchCriteria searchCriteria, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
         return this.orderAnalysisManager.getSalesMoney(searchCriteria,  pageNo,  pageSize);
     }
 
 
-    @ApiOperation("其他统计=》销售收入 退款统计 page")
+    @ApiOperation("Other statistics=》Sales revenue refund statisticspage")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
     @GetMapping(value = "/aftersales/money")
     public Page getAfterSalesMoney(@ApiIgnore SearchCriteria searchCriteria, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -114,96 +114,96 @@ public class OrderStatisticSellerController {
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
-    @ApiOperation("其他统计=》销售收入总览")
+    @ApiOperation("Other statistics=》An overview of sales revenue")
     @GetMapping(value = "/sales/total")
     public SalesTotal getSalesMoneyTotal(@ApiIgnore SearchCriteria searchCriteria) {
         return this.orderAnalysisManager.getSalesMoneyTotal(searchCriteria);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
-    @ApiOperation("区域分析=>下单会员数")
+    @ApiOperation("Regional analysis=>Number of single members")
     @GetMapping(value = "/region/member")
     public MapChartData getOrderRegionMember(@ApiIgnore SearchCriteria searchCriteria) {
         return this.orderAnalysisManager.getOrderRegionMember(searchCriteria);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
-    @ApiOperation("区域分析=>下单量")
+    @ApiOperation("Regional analysis=>Order quantity")
     @GetMapping(value = "/region/num")
     public MapChartData getOrderRegionNum(@ApiIgnore SearchCriteria searchCriteria) {
         return this.orderAnalysisManager.getOrderRegionNum(searchCriteria);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
-    @ApiOperation("区域分析=>下单金额")
+    @ApiOperation("Regional analysis=>Place the order amount")
     @GetMapping(value = "/region/money")
     public MapChartData getOrderRegionMoney(@ApiIgnore SearchCriteria searchCriteria) {
         return this.orderAnalysisManager.getOrderRegionMoney(searchCriteria);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
-    @ApiOperation("区域分析表格=>page")
+    @ApiOperation("Area analysis table=>page")
     @GetMapping(value = "/region/form")
     public Page getOrderRegionForm(@ApiIgnore SearchCriteria searchCriteria) {
         return this.orderAnalysisManager.getOrderRegionForm(searchCriteria);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "prices", value = "价格区间", required = false, paramType = "query", dataType = "int", allowMultiple = true)
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "prices", value = "A price range", required = false, paramType = "query", dataType = "int", allowMultiple = true)
     })
-    @ApiOperation("客单价分布=>客单价分布")
+    @ApiOperation("Customer unit price distribution=>Customer unit price distribution")
     @GetMapping(value = "/unit/price")
     public SimpleChart getUnitPrice(@ApiIgnore SearchCriteria searchCriteria, @RequestParam(required = false) Integer[] prices) {
         return this.orderAnalysisManager.getUnitPrice(searchCriteria, prices);
     }
 
-    @ApiOperation("客单价分布=>购买频次分析")
+    @ApiOperation("Customer unit price distribution=>Purchase frequency analysis")
     @GetMapping(value = "/unit/num")
     public Page getUnitNum() {
         return this.orderAnalysisManager.getUnitNum();
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "prices", value = "价格区间", required = false, paramType = "query", dataType = "int", allowMultiple = true)
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "prices", value = "A price range", required = false, paramType = "query", dataType = "int", allowMultiple = true)
     })
-    @ApiOperation("客单价分布=>购买时段分析")
+    @ApiOperation("Customer unit price distribution=>Purchase period analysis")
     @GetMapping(value = "/unit/time")
     public SimpleChart getUnitTime(@ApiIgnore SearchCriteria searchCriteria) {
         return this.orderAnalysisManager.getUnitTime(searchCriteria);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "日期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份", dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "month", value = "月份", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "cycle_type", value = "The date type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "year", dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "month", value = "in", dataType = "int", paramType = "query"),
     })
-    @ApiOperation("退款统计")
+    @ApiOperation("Refund statistics")
     @GetMapping(value = "/return/money")
     public SimpleChart getReturnMoney(@ApiIgnore SearchCriteria searchCriteria) {
         return this.orderAnalysisManager.getReturnMoney(searchCriteria);

@@ -16,40 +16,40 @@
 package cloud.shopfly.b2c.core.base.plugin.waybill.vo;
 
 /**
- * 发送商品实体
+ * Sending commodity entity
  *
  * @author dongxin
  * @version v1.0
  * @since v6.4.0
- * 2017年8月12日 下午7:03:45
+ * 2017years8month12On the afternoon7:03:45
  */
 public class Commodity {
     /**
-     * 商品名称
+     * Name
      */
     private String goodsName;
     /**
-     * 件数
+     * number
      */
     private Integer goodsquantity;
     /**
-     * 商品重量kg
+     * Weightkg
      */
     private Double goodsWeight;
     /**
-     * 商品编码
+     * Commodity code
      */
     private String goodsCode;
     /**
-     * 商品描述
+     * Commodity description
      */
     private String goodsDesc;
     /**
-     * 商品体积m3
+     * Volume of goodsm3
      */
     private Double goodsVol;
     /**
-     * 商品价格
+     * Price
      */
     private Double goodsPrice;
 

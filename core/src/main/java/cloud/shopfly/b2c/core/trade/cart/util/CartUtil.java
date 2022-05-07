@@ -24,22 +24,22 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 购物车快捷操作工具
+ * Shopping cart quick operation tool
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-12-01 下午7:53
+ * 2018-12-01 In the afternoon7:53
  */
 public class CartUtil {
 
 
     /**
-     * 根据属主id 从一个集合中查找cart
+     * According to the ownerid Look it up from a collectioncart
      *
-     * @param ownerId  属主id
-     * @param itemList 购物车列表
-     * @return 购物车
+     * @param ownerId  ownerid
+     * @param itemList Shopping cart list
+     * @return The shopping cart
      */
     public static CartVO findCart(int ownerId, List<CartVO> itemList) {
         if (itemList == null) {
@@ -55,7 +55,7 @@ public class CartUtil {
 
 
     /**
-     * 设置购物车优惠券的参数
+     * Set the shopping cart coupon parameters
      *
      * @return
      */
@@ -65,17 +65,17 @@ public class CartUtil {
         coupon.setMemberCouponId(memberCoupon.getMcId());
         coupon.setEndTime(memberCoupon.getEndTime());
         coupon.setCouponThresholdPrice(memberCoupon.getCouponThresholdPrice());
-        coupon.setUseTerm("满" + new BigDecimal(memberCoupon.getCouponThresholdPrice() + "") + "可用");
+        coupon.setUseTerm("full" + new BigDecimal(memberCoupon.getCouponThresholdPrice() + "") + "available");
         return coupon;
     }
 
 
     /**
-     * 由一个产品列表中找到产品
+     * Find products from a list of products
      *
-     * @param skuId       产品id
-     * @param productList 产品列表
-     * @return 找到的产品
+     * @param skuId       productid
+     * @param productList Product list
+     * @return Products found
      */
     public static CartSkuVO findProduct(Integer skuId, List<CartSkuVO> productList) {
         for (CartSkuVO skuVO : productList) {
@@ -88,10 +88,10 @@ public class CartUtil {
 
 
     /**
-     * 查找选中的优惠券
+     * Find the selected coupon
      *
      * @param cartCouponList
-     * @return 如果为空则无选中的优惠劵
+     * @return If blank, no coupon is selected
      */
     public static CouponVO findUsedCounpon(List<CouponVO> cartCouponList) {
         if (cartCouponList == null) {

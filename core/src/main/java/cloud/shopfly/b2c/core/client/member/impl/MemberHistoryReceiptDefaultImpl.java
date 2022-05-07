@@ -23,11 +23,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 会员历史默认发票实现
+ * Member history default invoice implementation
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 下午2:57
+ * @date 18/7/27 In the afternoon2:57
  * @since v7.0
  */
 

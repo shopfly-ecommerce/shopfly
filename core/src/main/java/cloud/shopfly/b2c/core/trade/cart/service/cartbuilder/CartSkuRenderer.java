@@ -23,10 +23,10 @@ import cloud.shopfly.b2c.core.trade.cart.service.cartbuilder.impl.CartSkuFilter;
 import java.util.List;
 
 /**
- * 购物车sku渲染器，负责生产一个全新的cartList<br/>
- * 此步生产的物料是{@link CartSkuOriginVo}
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >购物车架构</a>
+ * The shopping cartskuRenderer, responsible for producing a brand new onecartList<br/>
+ * The material produced in this step is{@link CartSkuOriginVo}
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >Shopping cart architecture</a>
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -35,14 +35,14 @@ import java.util.List;
 public interface CartSkuRenderer {
 
     /**
-     * 渲染sku数据
+     * Apply colours to a drawingskudata
      * @param cartList
      * @param cartType
      */
     void renderSku(List<CartVO> cartList, CartType cartType);
 
     /**
-     * 渲染sku数据 带过滤器式的
+     * Apply colours to a drawingskuData with filters
      * @param cartList
      * @param cartFilter
      * @param cartType

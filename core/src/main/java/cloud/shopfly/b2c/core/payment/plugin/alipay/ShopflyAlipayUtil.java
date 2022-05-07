@@ -25,18 +25,18 @@ import java.util.Map;
 
 
 /**
- * 支付宝工具
- * 提供验证方法
+ * Alipay tool
+ * Provide validation methods
  *
  * @author kingapex
  * @version 1.0
- * 2015年9月24日下午1:47:42
+ * 2015years9month24On the afternoon1:47:42
  */
 public class ShopflyAlipayUtil {
 
     /**
-     * 新版验证  2017年8月1日15:27:48
-     * @param  alipayPublicKey 公钥
+     * The new validation2017years8month1day15:27:48
+     * @param  alipayPublicKey The public key
      * @return
      */
     public static boolean verify(String alipayPublicKey) {
@@ -55,7 +55,7 @@ public class ShopflyAlipayUtil {
                 }
                 params.put(name, valueStr);
             }
-            //调用SDK验证签名
+            // Invoke the SDK to verify the signature
             boolean signVerified = AlipaySignature.rsaCheckV1(params,  alipayPublicKey, AlipayConfig.charset, AlipayConfig.signType);
 
             return signVerified;

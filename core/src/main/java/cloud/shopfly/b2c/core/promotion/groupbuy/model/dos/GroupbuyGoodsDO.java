@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 团购商品实体
+ * Group purchase commodity entity
  *
  * @author Snow
  * @version v7.0.0
@@ -43,169 +43,169 @@ public class GroupbuyGoodsDO implements Serializable {
     private static final long serialVersionUID = 870913884116003L;
 
     /**
-     * 团购商品Id
+     * A bulk goodsId
      */
     @Id(name = "gb_id")
     @ApiModelProperty(hidden = true)
     private Integer gbId;
 
     /**
-     * 货品Id
+     * goodsId
      */
     @Column(name = "sku_id")
-    @ApiModelProperty(name = "sku_id", value = "货品Id", required = false)
+    @ApiModelProperty(name = "sku_id", value = "goodsId", required = false)
     private Integer skuId;
 
     /**
-     * 活动Id
+     * activityId
      */
     @Column(name = "act_id")
-    @NotNull(message = "请选择要参与的团购活动")
-    @ApiModelProperty(name = "act_id", value = "活动Id", required = false)
+    @NotNull(message = "Please select the group purchase activity to participate in")
+    @ApiModelProperty(name = "act_id", value = "activityId", required = false)
     private Integer actId;
 
     /**
      * cat_id
      */
     @Column(name = "cat_id")
-    @NotNull(message = "请选择团购分类")
-    @ApiModelProperty(name = "cat_id", value = "分类id")
+    @NotNull(message = "Please select group purchase category")
+    @ApiModelProperty(name = "cat_id", value = "Categoriesid")
     private Integer catId;
 
     /**
-     * 团购名称
+     * Group name
      */
     @Column(name = "gb_name")
-    @NotEmpty(message = "请填写团购名称")
-    @ApiModelProperty(name = "gb_name", value = "团购名称", required = false)
+    @NotEmpty(message = "Please fill in the name of the group purchase")
+    @ApiModelProperty(name = "gb_name", value = "Group name", required = false)
     private String gbName;
 
     /**
-     * 副标题
+     * subtitle
      */
     @Column(name = "gb_title")
-    @ApiModelProperty(name = "gb_title", value = "副标题", required = false)
+    @ApiModelProperty(name = "gb_title", value = "subtitle", required = false)
     private String gbTitle;
 
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @NotEmpty(message = "请选择商品")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = false)
+    @NotEmpty(message = "Please select goods")
+    @ApiModelProperty(name = "goods_name", value = "Name", required = false)
     private String goodsName;
 
     /**
-     * 商品Id
+     * productId
      */
     @Column(name = "goods_id")
-    @NotNull(message = "请选择商品")
-    @ApiModelProperty(name = "goods_id", value = "商品Id", required = false)
+    @NotNull(message = "Please select goods")
+    @ApiModelProperty(name = "goods_id", value = "productId", required = false)
     private Integer goodsId;
 
     /**
-     * 原始价格
+     * The original price
      */
     @Column(name = "original_price")
-    @NotNull(message = "请选择商品")
-    @ApiModelProperty(name = "original_price", value = "原始价格", required = false)
+    @NotNull(message = "Please select goods")
+    @ApiModelProperty(name = "original_price", value = "The original price", required = false)
     private Double originalPrice;
 
     /**
-     * 团购价格
+     * Group purchase price
      */
     @Column(name = "price")
-    @NotNull(message = "请输入团购价格")
-    @ApiModelProperty(name = "price", value = "团购价格", required = false)
+    @NotNull(message = "Please enter group purchase price")
+    @ApiModelProperty(name = "price", value = "Group purchase price", required = false)
     private Double price;
 
     /**
-     * 图片地址
+     * Picture address
      */
     @Column(name = "img_url")
-    @NotEmpty(message = "请上传团购图片")
-    @ApiModelProperty(name = "img_url", value = "图片地址", required = false)
+    @NotEmpty(message = "Please upload pictures of group purchase")
+    @ApiModelProperty(name = "img_url", value = "Picture address", required = false)
     private String imgUrl;
 
     /**
-     * 商品总数
+     * The total number of goods
      */
     @Column(name = "goods_num")
-    @NotNull(message = "请输入商品总数")
-    @ApiModelProperty(name = "goods_num", value = "商品总数", required = false)
+    @NotNull(message = "Please enter the total number of goods")
+    @ApiModelProperty(name = "goods_num", value = "The total number of goods", required = false)
     private Integer goodsNum;
 
     /**
-     * 虚拟数量
+     * Number of virtual
      */
     @Column(name = "visual_num")
-    @NotNull(message = "请输入虚拟数量")
-    @ApiModelProperty(name = "visual_num", value = "虚拟数量", required = false)
+    @NotNull(message = "Please enter the virtual number")
+    @ApiModelProperty(name = "visual_num", value = "Number of virtual", required = false)
     private Integer visualNum;
 
     /**
-     * 限购数量
+     * The amount for purchasing
      */
     @Column(name = "limit_num")
-    @NotNull(message = "请输入限购数量")
-    @ApiModelProperty(name = "limit_num", value = "限购数量", required = false)
+    @NotNull(message = "Please enter the limit quantity")
+    @ApiModelProperty(name = "limit_num", value = "The amount for purchasing", required = false)
     private Integer limitNum;
 
     /**
-     * 已团购数量
+     * Number of Group purchases
      */
     @Column(name = "buy_num")
-    @ApiModelProperty(name = "buy_num", value = "已团购数量", required = false)
+    @ApiModelProperty(name = "buy_num", value = "Number of Group purchases", required = false)
     private Integer buyNum;
 
     /**
-     * 浏览数量
+     * Browse the number
      */
     @Column(name = "view_num")
-    @ApiModelProperty(name = "view_num", value = "浏览数量", required = false)
+    @ApiModelProperty(name = "view_num", value = "Browse the number", required = false)
     private Integer viewNum;
 
     /**
-     * 介绍
+     * introduce
      */
     @Column(name = "remark")
-    @ApiModelProperty(name = "remark", value = "介绍", required = false)
+    @ApiModelProperty(name = "remark", value = "introduce", required = false)
     private String remark;
 
     /**
-     * 状态
+     * Status
      */
     @Column(name = "gb_status")
-    @ApiModelProperty(name = "gb_status", value = "状态", required = false)
+    @ApiModelProperty(name = "gb_status", value = "Status", required = false)
     private Integer gbStatus;
 
     /**
-     * 添加时间
+     * Add the time
      */
     @Column(name = "add_time")
-    @ApiModelProperty(name = "add_time", value = "添加时间", required = false)
+    @ApiModelProperty(name = "add_time", value = "Add the time", required = false)
     private Long addTime;
 
     /**
-     * wap缩略图
+     * wapThe thumbnail
      */
     @Column(name = "wap_thumbnail")
-    @ApiModelProperty(name = "wap_thumbnail", value = "wap缩略图", required = false)
+    @ApiModelProperty(name = "wap_thumbnail", value = "wapThe thumbnail", required = false)
     private String wapThumbnail;
 
     /**
-     * pc缩略图
+     * pcThe thumbnail
      */
     @Column(name = "thumbnail")
-    @ApiModelProperty(name = "thumbnail", value = "pc缩略图", required = false)
+    @ApiModelProperty(name = "thumbnail", value = "pcThe thumbnail", required = false)
     private String thumbnail;
 
 
     /**
-     * 地区Id
+     * regionId
      */
     @Column(name = "area_id")
-    @ApiModelProperty(name = "area_id", value = "地区Id", required = false)
+    @ApiModelProperty(name = "area_id", value = "regionId", required = false)
     private Integer areaId;
 
     @PrimaryKeyField
@@ -337,7 +337,7 @@ public class GroupbuyGoodsDO implements Serializable {
     }
 
     /**
-     * 获取显示对购买数量=真实购买数量+虚拟购买数量
+     * Get the display on the purchase quantity=Actual purchase quantity+Virtual purchase quantity
      *
      * @return
      */

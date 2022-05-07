@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 订单状态改变消费者
+ * Order status changes to the consumer
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:31:42
+ * @since v7.0.0 2018years3month23The morning of10:31:42
  */
 @Component
 public class OrderStatusChangeReceiver {
@@ -46,7 +46,7 @@ public class OrderStatusChangeReceiver {
 	private List<OrderStatusChangeEvent> events;
 
 	/**
-	 * 订单状态改变
+	 * Order status change
 	 * @param orderMessage
 	 */
 	@RabbitListener(bindings = @QueueBinding(
@@ -59,7 +59,7 @@ public class OrderStatusChangeReceiver {
 				try {
 					event.orderChange(orderMessage);
 				} catch (Exception e) {
-					logger.error("订单状态改变消息出错", e);
+					logger.error("The order status change message failed", e);
 				}
 			}
 		}

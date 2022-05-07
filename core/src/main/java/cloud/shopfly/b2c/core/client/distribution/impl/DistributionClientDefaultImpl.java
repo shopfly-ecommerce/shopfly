@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午1:32
+ * 2018-08-14 In the afternoon1:32
  */
 @Service
 @ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
@@ -38,7 +38,7 @@ public class DistributionClientDefaultImpl implements DistributionClient {
     private DistributionManager distributionManager;
 
     /**
-     * 新增分销商
+     * New distributor
      *
      * @param distributor
      * @return
@@ -49,7 +49,7 @@ public class DistributionClientDefaultImpl implements DistributionClient {
     }
 
     /**
-     * 更新Distributor信息
+     * updateDistributorinformation
      *
      * @param distributor
      * @return
@@ -60,7 +60,7 @@ public class DistributionClientDefaultImpl implements DistributionClient {
     }
 
     /**
-     * 获取分销商
+     * Acquiring distributors
      *
      * @param memberId
      * @return
@@ -71,11 +71,11 @@ public class DistributionClientDefaultImpl implements DistributionClient {
     }
 
     /**
-     * 根据会员id设置其上级分销商（两级）
+     * According to the membershipidSet up its superior distributor（Two levels of）
      *
-     * @param memberId 会员id
-     * @param parentId 上级会员的id
-     * @return 设置结果， trun=成功 false=失败
+     * @param memberId membersid
+     * @param parentId Superior membersid
+     * @return Set the result, trun=successfulfalse=failure
      */
     @Override
     public boolean setParentDistributorId(Integer memberId, Integer parentId) {

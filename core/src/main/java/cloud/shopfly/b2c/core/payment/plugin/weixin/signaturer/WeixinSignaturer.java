@@ -39,14 +39,14 @@ import java.util.Map;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-21 上午11:04
+ * 2019-02-21 In the morning11:04
  */
 @Component
 public class WeixinSignaturer {
 
 
     /**
-     * 微信访问 签名内容
+     * Wechat access signature content
      */
     public static final String SIGNATURE_PARAMS = "singnature_params_";
 
@@ -59,7 +59,7 @@ public class WeixinSignaturer {
     private Cache<SignatureParams> cache;
 
     /**
-     * 获取微信签名
+     * Get wechat signature
      *
      * @param type 1:wap  /  2:mini   /  3:naapp   /  4 :Reactt app
      * @return
@@ -77,11 +77,11 @@ public class WeixinSignaturer {
                 Map<String, String> config = getConfig(type);
 
                 signatureParams = new SignatureParams();
-                //获取access
+                // To obtain access
                 signatureParams.setWechatAccessToken(this.getAccessToken(config.get("app_id"), config.get("app_key")));
                 signatureParams.setWechatJsapiTicket(getJsapiTicket(signatureParams.getWechatAccessToken().getAccessToken()));
                 signatureParams.setAppId(config.get("app_id"));
-                //这个方法调用，其实前端主要使用到的ticket 所以这里暂时用ticket的有效时间，并且做10秒缓冲。
+                // This method call, in fact, the front end is mainly using ticket so were going to temporarily use the valid time of ticket, and were going to buffer it for 10 seconds.
                 cache.put(SIGNATURE_PARAMS + type, signatureParams, signatureParams.getWechatJsapiTicket().getExpires() - 10);
             }
             StringBuffer stringBuffer = new StringBuffer("jsapi_ticket=");
@@ -93,30 +93,30 @@ public class WeixinSignaturer {
             stringBuffer.append("url=");
             stringBuffer.append(url.replaceAll("&amp;", "&"));
             if (logger.isDebugEnabled()) {
-                logger.debug("签名参数：" + stringBuffer.toString());
+                logger.debug("Signature parameters：" + stringBuffer.toString());
             }
             map.put("timestamp", timestamp);
             map.put("nonceStr", nonceStr);
             map.put("signature", SHA1.encode(stringBuffer.toString()));
             map.put("appid", signatureParams.getAppId());
             if (logger.isDebugEnabled()) {
-                logger.debug("map参数：" + map);
+                logger.debug("mapparameter：" + map);
             }
         } catch (WeixinSignatrueExceprion e) {
-            logger.debug("未开启签名配置2");
+            logger.debug("Signature configuration is not enabled2");
             e.printStackTrace();
             throw e;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new WeixinSignatrueExceprion("微信签名异常错误");
+            throw new WeixinSignatrueExceprion("The wechat signature is abnormal");
         }
         return map;
     }
 
     /**
-     * 获取微信配置参数
+     * Get wechat configuration parameters
      *
-     * @param type 枚举之详情见  WechatTypeEnmu
+     * @param type See enumeration for detailsWechatTypeEnmu
      * @return
      */
     public Map<String, String> getConfig(String type) {
@@ -139,8 +139,8 @@ public class WeixinSignaturer {
             appId = map.get("wechat_rn_app_id");
             appKey = map.get("wechat_rn_app_key");
         } else {
-            logger.debug("未开启签名配置2");
-            throw new WeixinSignatrueExceprion("未开启签名配置");
+            logger.debug("Signature configuration is not enabled2");
+            throw new WeixinSignatrueExceprion("Signature configuration is not enabled");
         }
         Map result = new HashMap();
         result.put("app_id", appId);
@@ -151,7 +151,7 @@ public class WeixinSignaturer {
 
 
     /**
-     * 生成access token
+     * generateaccess token
      *
      * @param appid
      * @param secret
@@ -162,7 +162,7 @@ public class WeixinSignaturer {
         try {
             String content = HttpUtils.doGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + secret + "&code=CODE&grant_type=authorization_code");
             if (logger.isDebugEnabled()) {
-                logger.debug("获取access_token响应:" + content);
+                logger.debug("To obtainaccess_tokenThe response:" + content);
             }
             JSONObject object = JSONObject.fromObject(content);
             String accessToken = object.get("access_token").toString();
@@ -175,12 +175,12 @@ public class WeixinSignaturer {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new WeixinSignatrueExceprion("微信签名access_token异常，请检查");
+            throw new WeixinSignatrueExceprion("WeChat signatureaccess_tokenIf no, check it");
         }
     }
 
     /**
-     * 生成jsapi ticket
+     * generatejsapi ticket
      *
      * @param accessToken
      * @return
@@ -190,7 +190,7 @@ public class WeixinSignaturer {
         try {
             String content = HttpUtils.doGet("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken + "&type=jsapi");
             if (logger.isDebugEnabled()) {
-                logger.debug("获取ticket响应:" + content);
+                logger.debug("To obtainticketThe response:" + content);
             }
             JSONObject object = JSONObject.fromObject(content);
             String ticket = object.get("ticket").toString();
@@ -201,7 +201,7 @@ public class WeixinSignaturer {
             return wechatJsapiTicket;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new WeixinSignatrueExceprion("微信签名：jsapi ticket获取失败");
+            throw new WeixinSignatrueExceprion("WeChat signature：jsapi ticketFor failure");
         }
 
 
@@ -221,7 +221,7 @@ public class WeixinSignaturer {
 //
 //
 //        SignatureParams signatureParams = new SignatureParams();
-//        //获取access
+//        //To obtainaccess
 //        signatureParams.setWechatJsapiTicket(wechatJsapiTicket);
 //        signatureParams.setAppId("wxdb95bb2d5b8621a3");
 //

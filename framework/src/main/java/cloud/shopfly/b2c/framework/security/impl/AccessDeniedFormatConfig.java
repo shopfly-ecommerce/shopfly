@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 验权失败的异常格式定义
+ * Exception format definition for validation failure
  * Created by kingapex on 2018/4/18.
  * @author kingapex
  * @version 1.0
@@ -42,7 +42,7 @@ public class AccessDeniedFormatConfig {
 
 
     /**
-     * 定义认证失败的格式
+     * Defines the format for an authentication failure
      * @return
      */
     @Bean
@@ -53,14 +53,14 @@ public class AccessDeniedFormatConfig {
             public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
                 httpServletResponse.setStatus(403);
                 httpServletResponse.setHeader("Content-Type", "application/json;charset=utf-8");
-                httpServletResponse.getWriter().print("{\"code\":\"403\",\"message\":\"登录状态已失效\"}");
+                httpServletResponse.getWriter().print("{\"code\":\"403\",\"message\":\"The login status is invalid\"}");
                 httpServletResponse.getWriter().flush();
             }
         };
     }
 
     /**
-     * 定义认证失败的格式
+     * Defines the format for an authentication failure
      * @return
      */
 
@@ -72,7 +72,7 @@ public class AccessDeniedFormatConfig {
                     throws IOException, ServletException {
                 httpServletResponse.setStatus(403);
                 httpServletResponse.setHeader("Content-Type", "application/json;charset=utf-8");
-                httpServletResponse.getWriter().print("{\"code\":\"403\",\"message\":\"登录状态已失效\"}");
+                httpServletResponse.getWriter().print("{\"code\":\"403\",\"message\":\"The login status is invalid\"}");
                 httpServletResponse.getWriter().flush();
             }
         };

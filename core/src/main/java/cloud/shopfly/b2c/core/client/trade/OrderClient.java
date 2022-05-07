@@ -25,7 +25,7 @@ import cloud.shopfly.b2c.core.trade.sdk.model.OrderDetailDTO;
 import java.util.List;
 
 /**
- * 订单查询SDK
+ * Order querySDK
  *
  * @author Snow create in 2018/5/28
  * @version v2.0
@@ -33,15 +33,15 @@ import java.util.List;
  */
 public interface OrderClient {
     /**
-     * 读取订单状态的订单数
+     * Read the order number of the order status
      *
-     * @param memberId 会员id
+     * @param memberId membersid
      * @return
      */
     OrderStatusNumVO getOrderStatusNum(Integer memberId);
 
     /**
-     * 根据交易编号查询订单项
+     * Query order items by transaction number
      *
      * @param tradeSn
      * @return
@@ -49,65 +49,65 @@ public interface OrderClient {
     List<OrderDetailDTO> getOrderByTradeSn(String tradeSn);
 
     /**
-     * 根据会员id读取我的所有订单数量
+     * According to the membershipidRead all my order quantities
      *
-     * @param memberId 会员id
+     * @param memberId membersid
      * @return
      */
     Integer getOrderNumByMemberId(Integer memberId);
 
     /**
-     * 根据会员id读取我的(评论状态)订单数量
+     * According to the membershipidRead my(Review status)The order number
      *
      * @param memberId
-     * @param commentStatus 评论状态
+     * @param commentStatus Review status
      * @return
      */
     Integer getOrderCommentNumByMemberId(Integer memberId, String commentStatus);
 
     /**
-     * 读取一个订单详细<br/>
+     * Read an order detail<br/>
      *
-     * @param orderSn 订单编号 必传
+     * @param orderSn Order number must be uploaded
      * @return
      */
     OrderDetailDTO getModel(String orderSn);
 
     /**
-     * 更新订单状态
+     * Update order Status
      *
-     * @param sn          订单号
-     * @param orderStatus 订单状态
-     * @return 是否更新成功
+     * @param sn          The order number
+     * @param orderStatus Status
+     * @return Check whether the update succeeds.
      */
     boolean updateOrderStatus(String sn, OrderStatusEnum orderStatus);
 
     /**
-     * 更新交易状态
+     * Update transaction Status
      *
-     * @param sn          交易sn
-     * @param orderStatus 交易状态
-     * @return 是否更新成功
+     * @param sn          tradingsn
+     * @param orderStatus Transaction status
+     * @return Check whether the update succeeds.
      */
     boolean updateTradeStatus(String sn, OrderStatusEnum orderStatus);
 
     /**
-     * 更新订单项可退款金额
+     * Update order item refundable amount
      *
      * @param orderDO
      */
     void addOrderItemRefundPrice(OrderDO orderDO);
 
     /**
-     * 读取一个订单详细<br/>
+     * Read an order detail<br/>
      *
-     * @param orderSn 订单编号 必传
+     * @param orderSn Order number must be uploaded
      * @return
      */
     OrderDetailVO getOrderVO(String orderSn);
 
     /**
-     * 更改订单评论状态
+     * Change order comment status
      *
      * @param orderSn
      * @param statusEnum
@@ -116,18 +116,18 @@ public interface OrderClient {
 
 
     /**
-     * 为某个订单的付款
+     * Payment for an order
      *
-     * @param orderSn       订单编号
-     * @param price         支付价格
-     * @param returnTradeNo 第三方平台回传的支付单号
-     * @param permission    权限 {@link OrderPermission}
+     * @param orderSn       Order no.
+     * @param price         Pay the price
+     * @param returnTradeNo The payment order number returned by the third-party platform
+     * @param permission    permissions{@link OrderPermission}
      */
     void payOrder(String orderSn, Double price, String returnTradeNo, String permission);
 
 
     /**
-     * 根据订单号修改第三方支付流水号
+     * Modify the third-party payment serial number according to the order number
      * @param payOrderNo
      * @param sn
      */

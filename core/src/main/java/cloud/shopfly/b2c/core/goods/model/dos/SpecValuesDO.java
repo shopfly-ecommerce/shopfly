@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 规格值实体
+ * Specification value entity
  *
  * @author fk
  * @version v2.0
@@ -44,30 +44,30 @@ public class SpecValuesDO implements Serializable {
     private static final long serialVersionUID = 5356147177823233L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "spec_value_id")
-    @ApiModelProperty(name = "spec_value_id", value = "规格值id", required = false)
+    @ApiModelProperty(name = "spec_value_id", value = "valuesid", required = false)
     @JsonProperty(value = "spec_value_id")
     private Integer specValueId;
     /**
-     * 规格项id
+     * Specification itemsid
      */
     @Column(name = "spec_id")
-    @ApiModelProperty(value = "规格项id", required = false)
+    @ApiModelProperty(value = "Specification itemsid", required = false)
     private Integer specId;
     /**
-     * 规格值名字
+     * Specification value name
      */
     @Column(name = "spec_value")
-    @ApiModelProperty(value = "规格值名字", required = false)
+    @ApiModelProperty(value = "Specification value name", required = false)
     private String specValue;
 
     /**
-     * 规格名称
+     * Name
      */
     @Column(name = "spec_name")
-    @ApiModelProperty(value = "规格名称")
+    @ApiModelProperty(value = "Name")
     private String specName;
 
     public SpecValuesDO() {

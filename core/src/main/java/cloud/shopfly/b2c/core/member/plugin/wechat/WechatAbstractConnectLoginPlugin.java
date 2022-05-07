@@ -42,9 +42,9 @@ import java.util.UUID;
 /**
  * @author zjp
  * @version v7.0
- * @Description 微信信任登录插件类
+ * @Description Wechat trust login plug-in class
  * @ClassName WechatAbstractConnectLoginPlugin
- * @since v7.0 上午11:18 2018/6/5
+ * @since v7.0 In the morning11:18 2018/6/5
  */
 @Component
 public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin {
@@ -60,7 +60,7 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
     @Override
     public String getLoginUrl() {
 
-        //获取参数
+        // To obtain parameters
         Map map = initConnectSetting();
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
@@ -68,7 +68,7 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
         String uuid = UUID.randomUUID().toString();
         String ua = request.getHeader("user-agent").toLowerCase();
 
-        //微信浏览器
+        // Wechat browser
         if (ua.indexOf("micromessenger") > -1) {
             String callBack = domainHelper.getCallback() + "/passport/connect/wechat/auth/back";
 
@@ -79,11 +79,11 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
                     "&scope=snsapi_userinfo" +
                     "&state=123#wechat_redirect";
 
-            debugger.log("确定是微信浏览器,生成跳转地址为：");
+            debugger.log("Make sure its wechat browser,The forward address is generated：");
             debugger.log(url);
 
             return url;
-            //非微信浏览器
+            // Non-wechat browser
         } else {
 
             String callBack = this.getCallBackUrl(ConnectTypeEnum.WECHAT.value());
@@ -96,7 +96,7 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
                     "&state=" + uuid +
                     "&connect_redirect=1#wechat_redirect";
 
-            debugger.log("非微信浏览器,生成跳转地址为：");
+            debugger.log("Non-wechat browser,The forward address is generated：");
             debugger.log(url);
 
             return url;
@@ -108,50 +108,50 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
         Map map = initConnectSetting();
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
-        //获取code
+        // Access code
         String code = request.getParameter("code");
 
-        //pc使用的是开放平台，微信端使用的是公众平台，参数是不一致
+        // The PC uses an open platform, while the wechat terminal uses a public platform, and the parameters are inconsistent
         String appId = StringUtil.toString(map.get("wechat_pc_app_id"));
         String key = StringUtil.toString(map.get("wechat_pc_app_key"));
         String ua = request.getHeader("user-agent").toLowerCase();
 
-        //如果是微信浏览器则获取 微信网页端参数
+        // If it is wechat browser, get the parameters of wechat web page
         if (ua.indexOf("micromessenger") > 0) {
-            debugger.log("是微信浏览器");
+            debugger.log("Its wechat browser");
             appId = StringUtil.toString(map.get("wechat_wechat_app_id"));
             key = StringUtil.toString(map.get("wechat_wechat_app_key"));
         }
 
-        //通过code获取access_token及openid
+        // Obtain the access_token and OpenID by code
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
                 "appid=" + appId +
                 "&secret=" + key +
                 "&code=" + code +
                 "&grant_type=authorization_code";
 
-        debugger.log("生成获取access_token url: ");
+        debugger.log("For gettingaccess_token url: ");
         debugger.log(url);
-        debugger.log("向微信发起请求");
+        debugger.log("Send a request to wechat");
         String content = HttpUtils.doGet(url, "UTF-8", 100, 1000);
-        debugger.log("微信返回内容为：");
+        debugger.log("Wechat returns the content as：");
         debugger.log(content);
 
 
-        //获取openid
+        // To obtain the openid
         JSONObject json = JSONObject.fromObject(content);
         String openid = json.getString("openid");
         String accessToken = json.getString("access_token");
         String unionId = json.getString("unionid");
 
-        //将信息封装到对象当中
+        // Encapsulate information into objects
         Auth2Token auth2Token = new Auth2Token();
         auth2Token.setUnionid(unionId);
         auth2Token.setOpneId(openid);
         auth2Token.setAccessToken(accessToken);
         auth2Token.setType(ConnectTypeEnum.WECHAT.value());
 
-        debugger.log("生成accessToken:");
+        debugger.log("generateaccessToken:");
         debugger.log(accessToken);
 
         return auth2Token;
@@ -193,14 +193,14 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
             connectSettingParametersVO.setName(wechatConnectConfigGroupEnum.getText());
             list.add(connectSettingParametersVO);
         }
-        connectSetting.setName("微信参数配置");
+        connectSetting.setName("Configure wechat parameters");
         connectSetting.setType(ConnectTypeEnum.WECHAT.value());
         connectSetting.setConfig(JsonUtil.objectToJson(list));
         return connectSetting;
     }
 
     /**
-     * 获取微信用户信息
+     * Obtain wechat user information
      *
      * @param accessToken token
      * @param openId      opneid
@@ -210,14 +210,14 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
         String url = "https://api.weixin.qq.com/sns/userinfo?" +
                 "access_token=" + accessToken +
                 "&openid=" + openId;
-        //通过openid获取userinfo
+        // Obtain userInfo from openID
         String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
         JSONObject jsonObject = JSONObject.fromObject(content);
         return jsonObject;
     }
 
     /**
-     * 小程序自动登录
+     * Applet automatic login
      *
      * @return
      */
@@ -236,7 +236,7 @@ public class WechatAbstractConnectLoginPlugin extends AbstractConnectLoginPlugin
     }
 
     /**
-     * 获取accesstocken
+     * To obtainaccesstocken
      *
      * @return
      */

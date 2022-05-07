@@ -38,7 +38,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 优惠券控制器
+ * Coupon controller
  *
  * @author Snow
  * @version v2.0
@@ -47,7 +47,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/promotion/coupons")
-@Api(description = "优惠券相关API")
+@Api(description = "Coupon relatedAPI")
 @Validated
 public class CouponSellerController {
 
@@ -55,13 +55,13 @@ public class CouponSellerController {
     private CouponManager couponManager;
 
 
-    @ApiOperation(value = "查询优惠券列表", response = CouponDO.class)
+    @ApiOperation(value = "Check coupon list", response = CouponDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "start_time", value = "开始时间", dataType = "Long", paramType = "query"),
-            @ApiImplicitParam(name = "end_time", value = "截止时间", dataType = "Long", paramType = "query"),
-            @ApiImplicitParam(name = "keyword", value = "关键字", dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "start_time", value = "The start time", dataType = "Long", paramType = "query"),
+            @ApiImplicitParam(name = "end_time", value = "By the time", dataType = "Long", paramType = "query"),
+            @ApiImplicitParam(name = "keyword", value = "keyword", dataType = "String", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize,
@@ -71,35 +71,35 @@ public class CouponSellerController {
     }
 
 
-    @ApiOperation(value = "添加优惠券", response = CouponDO.class)
+    @ApiOperation(value = "Add coupons", response = CouponDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "title", value = "优惠券名称", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "coupon_price", value = "优惠券面额", required = true, dataType = "double", paramType = "query"),
-            @ApiImplicitParam(name = "coupon_threshold_price", value = "优惠券门槛价格", required = true, dataType = "double", paramType = "query"),
-            @ApiImplicitParam(name = "start_time", value = "使用起始时间", required = true, dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "end_time", value = "使用截止时间", required = true, dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "create_num", value = "发行量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "limit_num", value = "每人限领数量", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "title", value = "Coupon name", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "coupon_price", value = "Coupon face value", required = true, dataType = "double", paramType = "query"),
+            @ApiImplicitParam(name = "coupon_threshold_price", value = "Coupon threshold price", required = true, dataType = "double", paramType = "query"),
+            @ApiImplicitParam(name = "start_time", value = "Start time of use", required = true, dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "end_time", value = "Use deadline", required = true, dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "create_num", value = "circulation", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "limit_num", value = "Limit the amount per person", required = true, dataType = "int", paramType = "query"),
 
     })
     @PostMapping
-    public CouponDO add(@ApiIgnore @NotEmpty(message = "请填写优惠券名称") String title,
-                        @ApiIgnore @NotNull(message = "请填写优惠券面额") @Max(value = 99999999, message = "优惠券面额不能超过99999999") Double couponPrice,
-                        @ApiIgnore @NotNull(message = "请填写优惠券门槛价格") @Max(value = 99999999, message = "优惠券门槛价格不能超过99999999") Double couponThresholdPrice,
-                        @ApiIgnore @NotNull(message = "请填写起始时间") Long startTime,
-                        @ApiIgnore @NotNull(message = "请填写截止时间") Long endTime,
-                        @ApiIgnore @NotNull(message = "请填写发行量") Integer createNum,
-                        @ApiIgnore @NotNull(message = "请填写每人限领数量") Integer limitNum) {
+    public CouponDO add(@ApiIgnore @NotEmpty(message = "Please fill in the name of coupon") String title,
+                        @ApiIgnore @NotNull(message = "Please fill in the coupon value") @Max(value = 99999999, message = "The coupon value cannot exceed99999999") Double couponPrice,
+                        @ApiIgnore @NotNull(message = "Please fill in the coupon threshold price") @Max(value = 99999999, message = "The coupon threshold price cannot be exceeded99999999") Double couponThresholdPrice,
+                        @ApiIgnore @NotNull(message = "Please fill in the start time") Long startTime,
+                        @ApiIgnore @NotNull(message = "Please fill in the deadline") Long endTime,
+                        @ApiIgnore @NotNull(message = "Please fill in the circulation") Integer createNum,
+                        @ApiIgnore @NotNull(message = "Please fill in the limit per person") Integer limitNum) {
         if (limitNum < 0) {
-            throw new ServiceException(PromotionErrorCode.E406.code(), "限领数量不能为负数");
+            throw new ServiceException(PromotionErrorCode.E406.code(), "The limit quantity cannot be negative");
         }
-        //校验每人限领数是都大于发行量
+        // Check each person limit is greater than the circulation
         if (limitNum > createNum) {
-            throw new ServiceException(PromotionErrorCode.E405.code(), "限领数量超出发行量");
+            throw new ServiceException(PromotionErrorCode.E405.code(), "The quantity limit exceeds the circulation");
         }
-        //校验优惠券面额是否小于门槛价格
+        // Verify the coupon face value is less than the threshold price
         if (couponPrice >= couponThresholdPrice) {
-            throw new ServiceException(PromotionErrorCode.E409.code(), "优惠券面额必须小于优惠券门槛价格");
+            throw new ServiceException(PromotionErrorCode.E409.code(), "The coupon face value must be less than the coupon threshold price");
         }
 
         CouponDO couponDO = new CouponDO();
@@ -110,7 +110,7 @@ public class CouponSellerController {
         couponDO.setLimitNum(limitNum);
 
 
-        //开始时间取前段+00:00:00 结束时间取前段+23:59:59
+        // Start time Start time +00:00:00 End time Start time +23:59:59
         String startStr = DateUtil.toString(startTime, "yyyy-MM-dd");
         String endStr = DateUtil.toString(endTime, "yyyy-MM-dd");
 
@@ -127,36 +127,36 @@ public class CouponSellerController {
     }
 
     @PutMapping(value = "/{coupon_id}")
-    @ApiOperation(value = "修改优惠券", response = CouponDO.class)
+    @ApiOperation(value = "Modify coupons", response = CouponDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coupon_id", value = "优惠券id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "title", value = "优惠券名称", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "coupon_price", value = "优惠券面额", required = true, dataType = "double", paramType = "query"),
-            @ApiImplicitParam(name = "coupon_threshold_price", value = "优惠券门槛价格", required = true, dataType = "double", paramType = "query"),
-            @ApiImplicitParam(name = "start_time", value = "使用起始时间", required = true, dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "end_time", value = "使用截止时间", required = true, dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "create_num", value = "发行量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "limit_num", value = "每人限领数量", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "coupon_id", value = "couponsid", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "title", value = "Coupon name", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "coupon_price", value = "Coupon face value", required = true, dataType = "double", paramType = "query"),
+            @ApiImplicitParam(name = "coupon_threshold_price", value = "Coupon threshold price", required = true, dataType = "double", paramType = "query"),
+            @ApiImplicitParam(name = "start_time", value = "Start time of use", required = true, dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "end_time", value = "Use deadline", required = true, dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "create_num", value = "circulation", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "limit_num", value = "Limit the amount per person", required = true, dataType = "int", paramType = "query"),
 
     })
     @PostMapping
-    public CouponDO add(@ApiIgnore @PathVariable("coupon_id") @NotNull(message = "请填写优惠券id") Integer couponId,
-                        @ApiIgnore @NotEmpty(message = "请填写优惠券名称") String title,
-                        @ApiIgnore @NotNull(message = "请填写优惠券面额") Double couponPrice,
-                        @ApiIgnore @NotNull(message = "请填写优惠券门槛价格") Double couponThresholdPrice,
-                        @ApiIgnore @NotNull(message = "请填写起始时间") Long startTime,
-                        @ApiIgnore @NotNull(message = "请填写截止时间") Long endTime,
-                        @ApiIgnore @NotNull(message = "请填写发行量") Integer createNum,
-                        @ApiIgnore @NotNull(message = "请填写每人限领数量") Integer limitNum) {
-        //校验每人限领数是都大于发行量
+    public CouponDO add(@ApiIgnore @PathVariable("coupon_id") @NotNull(message = "Please fill in the couponid") Integer couponId,
+                        @ApiIgnore @NotEmpty(message = "Please fill in the name of coupon") String title,
+                        @ApiIgnore @NotNull(message = "Please fill in the coupon value") Double couponPrice,
+                        @ApiIgnore @NotNull(message = "Please fill in the coupon threshold price") Double couponThresholdPrice,
+                        @ApiIgnore @NotNull(message = "Please fill in the start time") Long startTime,
+                        @ApiIgnore @NotNull(message = "Please fill in the deadline") Long endTime,
+                        @ApiIgnore @NotNull(message = "Please fill in the circulation") Integer createNum,
+                        @ApiIgnore @NotNull(message = "Please fill in the limit per person") Integer limitNum) {
+        // Check each person limit is greater than the circulation
         if (limitNum > createNum) {
-            throw new ServiceException(PromotionErrorCode.E405.code(), "限领数量超出发行量");
+            throw new ServiceException(PromotionErrorCode.E405.code(), "The quantity limit exceeds the circulation");
         }
 
         CouponDO oldCoupon = this.couponManager.getModel(couponId);
         long currTime = DateUtil.getDateline();
         if (oldCoupon.getStartTime() <= currTime && oldCoupon.getEndTime() >= currTime) {
-            throw new ServiceException(PromotionErrorCode.E405.code(), "优惠券已生效，不可进行编辑操作");
+            throw new ServiceException(PromotionErrorCode.E405.code(), "The coupon is valid and cannot be edited");
         }
 
         CouponDO couponDO = new CouponDO();
@@ -177,9 +177,9 @@ public class CouponSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除优惠券")
+    @ApiOperation(value = "Delete coupons")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的优惠券主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The coupon primary key to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -191,24 +191,24 @@ public class CouponSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个优惠券")
+    @ApiOperation(value = "Query a coupon")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的优惠券主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The coupon primary key to query", required = true, dataType = "int", paramType = "path")
     })
     public CouponDO get(@PathVariable Integer id) {
 
         CouponDO coupon = this.couponManager.getModel(id);
         if (coupon == null) {
-            throw new NoPermissionException("数据不存在");
+            throw new NoPermissionException("Data does not exist");
         }
 
         return coupon;
     }
 
     @GetMapping(value = "/{status}/list")
-    @ApiOperation(value = "根据状态获取优惠券数据集合")
+    @ApiOperation(value = "Get the coupon data set based on the state")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "status", value = "优惠券状态 0：全部，1：有效，2：失效", required = true, dataType = "int", paramType = "path", allowableValues = "0,1,2", example = "0：全部，1：有效，2：失效")
+            @ApiImplicitParam(name = "status", value = "Coupon status0：All,1：Effective,2：failure", required = true, dataType = "int", paramType = "path", allowableValues = "0,1,2", example = "0：All,1：Effective,2：failure")
     })
     public List<CouponDO> getByStatus(@PathVariable Integer status) {
 
@@ -216,7 +216,7 @@ public class CouponSellerController {
     }
 
     /**
-     * 参数验证
+     * Parameter validation
      *
      * @param startTime
      * @param endTime
@@ -225,14 +225,14 @@ public class CouponSellerController {
 
         long nowTime = DateUtil.getDateline();
 
-        //如果活动起始时间小于现在时间
+        // If the activity start time is less than the present time
         if (startTime.longValue() < nowTime) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "活动起始时间必须大于当前时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The start time of the activity must be greater than the current time");
         }
 
-        // 开始时间不能大于结束时间
+        // The start time cannot be later than the end time
         if (startTime.longValue() > endTime.longValue()) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "活动起始时间不能大于活动结束时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The start time cannot be later than the end time");
         }
     }
 

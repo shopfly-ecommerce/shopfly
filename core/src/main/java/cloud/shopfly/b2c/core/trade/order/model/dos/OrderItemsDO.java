@@ -34,7 +34,7 @@ import java.util.List;
 
 
 /**
- * 订单货物表实体
+ * Order goods list entity
  *
  * @author Snow
  * @version v7.0.0
@@ -49,106 +49,106 @@ public class OrderItemsDO implements Serializable {
     private static final long serialVersionUID = 5055400562756190L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "item_id")
     @ApiModelProperty(hidden = true)
     private Integer itemId;
     /**
-     * 商品ID
+     * productID
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品ID", required = false)
+    @ApiModelProperty(name = "goods_id", value = "productID", required = false)
     private Integer goodsId;
     /**
-     * 货品ID
+     * goodsID
      */
     @Column(name = "product_id")
-    @ApiModelProperty(name = "product_id", value = "货品ID", required = false)
+    @ApiModelProperty(name = "product_id", value = "goodsID", required = false)
     private Integer productId;
     /**
-     * 销售量
+     * sales
      */
     @Column(name = "num")
-    @ApiModelProperty(name = "num", value = "销售量", required = false)
+    @ApiModelProperty(name = "num", value = "sales", required = false)
     private Integer num;
     /**
-     * 发货量
+     * shipments
      */
     @Column(name = "ship_num")
-    @ApiModelProperty(name = "ship_num", value = "发货量", required = false)
+    @ApiModelProperty(name = "ship_num", value = "shipments", required = false)
     private Integer shipNum;
     /**
-     * 交易编号
+     * Transaction number
      */
     @Column(name = "trade_sn")
-    @ApiModelProperty(name = "trade_sn", value = "交易编号", required = false)
+    @ApiModelProperty(name = "trade_sn", value = "Transaction number", required = false)
     private String tradeSn;
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
     /**
-     * 图片
+     * Image
      */
     @Column(name = "image")
-    @ApiModelProperty(name = "image", value = "图片", required = false)
+    @ApiModelProperty(name = "image", value = "Image", required = false)
     private String image;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "name")
-    @ApiModelProperty(name = "name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "name", value = "Name", required = false)
     private String name;
     /**
-     * 销售金额
+     * The sales amount
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "销售金额", required = false)
+    @ApiModelProperty(name = "price", value = "The sales amount", required = false)
     private Double price;
     /**
-     * 分类ID
+     * CategoriesID
      */
     @Column(name = "cat_id")
-    @ApiModelProperty(name = "cat_id", value = "分类ID", required = false)
+    @ApiModelProperty(name = "cat_id", value = "CategoriesID", required = false)
     private Integer catId;
     /**
-     * 状态
+     * Status
      */
     @Column(name = "state")
-    @ApiModelProperty(name = "state", value = "状态", required = false)
+    @ApiModelProperty(name = "state", value = "Status", required = false)
     private Integer state;
     /**
-     * 快照id
+     * The snapshotid
      */
     @Column(name = "snapshot_id")
-    @ApiModelProperty(name = "snapshot_id", value = "快照id", required = false)
+    @ApiModelProperty(name = "snapshot_id", value = "The snapshotid", required = false)
     private Integer snapshotId;
     /**
-     * 规格json
+     * specificationsjson
      */
     @Column(name = "spec_json")
-    @ApiModelProperty(name = "spec_json", value = "规格json", required = false)
+    @ApiModelProperty(name = "spec_json", value = "specificationsjson", required = false)
     private String specJson;
     /**
-     * 促销类型
+     * Promotion type
      */
     @Column(name = "promotion_type")
-    @ApiModelProperty(name = "promotion_type", value = "促销类型", required = false)
+    @ApiModelProperty(name = "promotion_type", value = "Promotion type", required = false)
     private String promotionType;
     /**
-     * 促销id
+     * Sales promotionid
      */
     @Column(name = "promotion_id")
-    @ApiModelProperty(name = "promotion_id", value = "促销id", required = false)
+    @ApiModelProperty(name = "promotion_id", value = "Sales promotionid", required = false)
     private Integer promotionId;
     /**
-     * 可退款金额
+     * Refundable amount
      */
     @Column(name = "refund_price")
-    @ApiModelProperty(name = "refund_price", value = "可退款金额", required = false)
+    @ApiModelProperty(name = "refund_price", value = "Refundable amount", required = false)
     private Double refundPrice;
 
     @PrimaryKeyField
@@ -372,7 +372,7 @@ public class OrderItemsDO implements Serializable {
     }
 
     /**
-     * 订单货物构造器
+     * Order goods constructor
      *
      * @param skuVO
      */

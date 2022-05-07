@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * nothing impl
  * @version v1.0
- * @Description: 每十分钟执行定时任务
+ * @Description: Perform scheduled tasks every 10 minutes
  * @Author: gy
  * @Date: 2020/6/10 0010 9:50
  */
@@ -39,7 +39,7 @@ public class EveryTenMinutesExecuteJobHandler {
                 logger.debug("EveryTenMinutes job end");
             }
         } catch (Exception e) {
-            this.logger.error("每月任务异常：", e);
+            this.logger.error("Abnormal Monthly Tasks：", e);
         }
     }
 

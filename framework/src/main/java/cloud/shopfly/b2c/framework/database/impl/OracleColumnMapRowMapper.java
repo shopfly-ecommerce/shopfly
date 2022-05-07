@@ -24,10 +24,10 @@ import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
 
 /**
- * 小写key的columnrowmapper
- *  本类覆写了spring 的ColumnMapRowMapper，将字段名全部小写
+ * lowercasekeythecolumnrowmapper
+ *  This class is overriddenspring theColumnMapRowMapper, all lowercase field names
  * @author kingapex
- * 2010-6-13上午11:01:34
+ * 2010-6-13In the morning11:01:34
  */
 public class OracleColumnMapRowMapper extends ColumnMapRowMapper {
 

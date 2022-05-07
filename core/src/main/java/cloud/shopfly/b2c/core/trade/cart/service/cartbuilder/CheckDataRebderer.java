@@ -20,18 +20,18 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartVO;
 import java.util.List;
 
 /**
- * 数据正确性校验器
+ * Data correctness validator
  *
  * @author zh
  * @version v7.0
- * @date 18/12/27 上午10:05
+ * @date 18/12/27 In the morning10:05
  * @since v7.0
  */
 public interface CheckDataRebderer {
     /**
-     * 数据正确性校验
+     * Data correctness check
      *
-     * @param cartList 购物车数据
+     * @param cartList Shopping cart data
      */
     void checkData(List<CartVO> cartList);
 }

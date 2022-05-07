@@ -22,20 +22,20 @@ import cloud.shopfly.b2c.framework.context.ApplicationContextHolder;
 import cloud.shopfly.b2c.framework.util.JsonUtil;
 
 /**
- * 随机验证码生成
+ * Random verification code generation
  *
  * @author zh
  * @version v7.0
- * @date 18/4/24 下午8:06
+ * @date 18/4/24 In the afternoon8:06
  * @since v7.0
  */
 
 public class RandomCreate {
 
     public static String getRandomCode() {
-        // 随机生成的动态码
+        // Randomly generated dynamic code
         String dynamicCode = "" + (int) ((Math.random() * 9 + 1) * 100000);
-        //如果是测试模式，验证码为1111
+        // In test mode, the verification code is 1111
         SettingManager settingManager = (SettingManager) ApplicationContextHolder.getBean("settingManagerImpl");
         String siteSettingJson = settingManager.get(SettingGroup.SITE);
 

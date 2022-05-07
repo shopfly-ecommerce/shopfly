@@ -38,7 +38,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 评论控制器
+ * Comment controller
  *
  * @author fk
  * @version v1.0
@@ -47,14 +47,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/members/comments")
-@Api(description = "评论相关API")
+@Api(description = "Review relatedAPI")
 public class MemberCommentBuyerController {
 
     @Autowired
     private MemberCommentManager memberCommentManager;
 
 
-    @ApiOperation(value = "查询我的评论列表", response = CommentVO.class)
+    @ApiOperation(value = "Check my list of comments", response = CommentVO.class)
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, CommentQueryParam param) {
 
@@ -67,18 +67,18 @@ public class MemberCommentBuyerController {
     }
 
 
-    @ApiOperation(value = "提交评论")
+    @ApiOperation(value = "Submit comments")
     @PostMapping
     public MemberComment addComments(@Valid @RequestBody CommentScoreDTO comment) {
 
         return memberCommentManager.add(comment, Permission.BUYER);
     }
 
-    @ApiOperation(value = "查询某商品的评论", response = CommentVO.class)
+    @ApiOperation(value = "Query a review of an item", response = CommentVO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "goods_id", value = "商品ID", required = true, paramType = "path", dataType = "int")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "goods_id", value = "productID", required = true, paramType = "path", dataType = "int")
     })
     @GetMapping("/goods/{goods_id}")
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @PathVariable("goods_id") Integer goodsId, CommentQueryParam param) {
@@ -90,9 +90,9 @@ public class MemberCommentBuyerController {
         return this.memberCommentManager.list(param);
     }
 
-    @ApiOperation(value = "查询某商品的评论数量", response = MemberCommentCount.class)
+    @ApiOperation(value = "Query the number of reviews for an item", response = MemberCommentCount.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_id", value = "商品ID", required = true, paramType = "path", dataType = "int")
+            @ApiImplicitParam(name = "goods_id", value = "productID", required = true, paramType = "path", dataType = "int")
     })
     @GetMapping("/goods/{goods_id}/count")
     public MemberCommentCount count(@PathVariable("goods_id") Integer goodsId) {
@@ -100,7 +100,7 @@ public class MemberCommentBuyerController {
         return this.memberCommentManager.count(goodsId);
     }
 
-    @ApiOperation(value = "会员追加评论", response = AdditionalCommentDTO.class)
+    @ApiOperation(value = "Additional comments from members", response = AdditionalCommentDTO.class)
     @PostMapping("/additional")
     public List<AdditionalCommentDTO> additionalComments(@Valid @RequestBody List<AdditionalCommentDTO> comments) {
 

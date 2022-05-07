@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * sql解析器
+ * sqlThe parser
  * @author kingapex
  *
  */
@@ -33,7 +33,7 @@ public class SqlPaser {
 	
 	
 	/**
-	 * 从一个sql语句中找到order by 子句
+	 * From asqlStatementorder by clause
 	 * @param sql
 	 * @return
 	 */

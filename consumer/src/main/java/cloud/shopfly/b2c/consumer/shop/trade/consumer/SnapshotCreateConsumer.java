@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 生成商品交易快照
+ * Generate a commodity trading snapshot
  *
  * @author Snow create in 2018/5/22
  * @version v2.0

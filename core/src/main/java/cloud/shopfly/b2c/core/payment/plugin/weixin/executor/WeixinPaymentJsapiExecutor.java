@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.core.payment.plugin.weixin.executor;
 
@@ -32,7 +32,7 @@ import java.util.TreeMap;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信wap端
+ * @Description: WeChatwapend
  * @date 2018/4/1810:12
  * @since v7.0.0
  */
@@ -43,7 +43,7 @@ public class WeixinPaymentJsapiExecutor extends WeixinPuginConfig {
     private Cache cache;
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return
@@ -57,13 +57,13 @@ public class WeixinPaymentJsapiExecutor extends WeixinPuginConfig {
         String openid=null;
         Buyer buyer = UserContext.getBuyer();
         Auth2Token token = (Auth2Token) cache.get(CachePrefix.CONNECT_LOGIN.getPrefix() + buyer.getUuid());
-        //获取openid
+        // To obtain the openid
 
         if (token != null) {
             openid = token.getOpneId();
         }
 
-        //如果没有得到，试着由request中获取
+        // If not, try to get it from Request
         if (StringUtil.isEmpty(openid)) {
             openid = ThreadContextHolder.getHttpRequest().getParameter("openid");
         }
@@ -80,17 +80,17 @@ public class WeixinPaymentJsapiExecutor extends WeixinPuginConfig {
 
             Map<String,String> map = super.createUnifiedOrder(bill,params);
 
-            // 返回结果
+            // Returns the result
             String returnCode = map.get("return_code");
-            logger.debug("微信支付返回结果："+returnCode);
+            logger.debug("Wechat Pay returns results："+returnCode);
             if (SUCCESS.equals(returnCode)) {
-                // 业务码
+                // The business code
                 String resultCode = map.get("result_code");
 
                 if (SUCCESS.equals(resultCode)) {
-                    // 预支付订单id
+                    // Pre-paid order ID
                     String prepayId = map.get("prepay_id");
-                    logger.debug("微信支付id："+prepayId);
+                    logger.debug("WeChat payid："+prepayId);
                     Map<String, String> weixinparams = new TreeMap();
                     weixinparams.put("appId", map.get("appid"));
                     weixinparams.put("nonceStr", StringUtil.getRandStr(10));
@@ -101,28 +101,28 @@ public class WeixinPaymentJsapiExecutor extends WeixinPuginConfig {
                     weixinparams.put("paySign", sign);
                     resultMap = weixinparams;
                     String outTradeNo = bill.getBillSn();
-                    logger.debug("微信返回map："+weixinparams);
+                    logger.debug("WeChat returnmap："+weixinparams);
                     result = this.getPayScript(prepayId, map.get("appid"), map.get("key"), outTradeNo, bill.getTradeType());
-                    logger.debug("微信返回结果："+result);
+                    logger.debug("Wechat returns the result："+result);
                 } else {
 
                     String errCode = map.get("err_code");
                     String errCodeDes = map.get("err_code_des");
-                    result = "<script>alert('支付意外错误，请联系技术人员:"
+                    result = "<script>alert('Payment unexpected error, please contact technical personnel:"
                             + errCode + "【" + errCodeDes + "】')</script>";
                     logger.error(result);
                 }
             } else {
-                result = "<script>alert('支付意外错误，请联系技术人员:" + returnCode + "')</script>";
+                result = "<script>alert('Payment unexpected error, please contact technical personnel:" + returnCode + "')</script>";
                 if ("FAIL".equals(returnCode)) {
-                    // 错误信息
+                    // The error message
                     String returnMsg = map.get("return_msg");
-                    this.logger.error("微信端返回错误" + returnCode + "["
+                    this.logger.error("Error returned from wechat" + returnCode + "["
                             + returnMsg + "]");
                 }
             }
         } catch (Exception e) {
-            this.logger.error("微信生成支付二维码错误", e);
+            this.logger.error("Wechat generated payment QR code error", e);
             return null;
         }
 
@@ -149,7 +149,7 @@ public class WeixinPaymentJsapiExecutor extends WeixinPuginConfig {
 
 
     /**
-     * 获取支付成功调取页面
+     * Obtain the page of successful payment retrieval
      *
      * @param tradeType
      * @param outTradeNo
@@ -166,13 +166,13 @@ public class WeixinPaymentJsapiExecutor extends WeixinPuginConfig {
         }
         String contextPath = request.getContextPath();
         if (logger.isDebugEnabled()) {
-            logger.info("支付成功页面跳转：" + "http://" + serverName + portstr + contextPath + "/" + tradeType + "_" + outTradeNo + "_payment-wap-result.html");
+            logger.info("The payment success page is displayed：" + "http://" + serverName + portstr + contextPath + "/" + tradeType + "_" + outTradeNo + "_payment-wap-result.html");
         }
         return "http://" + serverName + portstr + contextPath + "/" + tradeType + "_" + outTradeNo + "_payment-wap-result.html";
     }
 
     /**
-     * 生成支付的脚本
+     * Generate payment scripts
      *
      * @param prepayId
      * @param appid
@@ -212,9 +212,9 @@ public class WeixinPaymentJsapiExecutor extends WeixinPuginConfig {
         payStr.append("}");
 
         payStr.append(",function(res){  if( 'get_brand_wcpay_request:ok'==res.err_msg ) { "
-                + "alert('支付成功'); "
+                + "alert('Pay for success'); "
                 + "location.href='" + getPayWapSuccessUrl(tradeType.name(), outTradeNo) + "?operation=success';"
-                + "}else{ alert('支付失败'); "
+                + "}else{ alert('Pay for failure'); "
                 + "location.href='" + getPayWapSuccessUrl(tradeType.name(), outTradeNo) + "?operation=fail';"
                 + "} "
                 + "}");

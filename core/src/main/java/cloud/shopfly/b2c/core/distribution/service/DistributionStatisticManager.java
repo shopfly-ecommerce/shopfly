@@ -19,19 +19,19 @@ import cloud.shopfly.b2c.core.statistics.model.vo.SimpleChart;
 
 
 /**
- * 分销商统计
+ * Distributor statistics
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/13 上午8:36
+ * 2018/6/13 In the morning8:36
  */
 public interface DistributionStatisticManager {
 
 
     /**
-     * 营业额
+     * turnover
      *
      * @param circle
      * @param memberId
@@ -42,7 +42,7 @@ public interface DistributionStatisticManager {
     SimpleChart getOrderMoney(String circle, Integer memberId, Integer year, Integer month);
 
     /**
-     * 利润
+     * profits
      *
      * @param circle
      * @param memberId
@@ -53,7 +53,7 @@ public interface DistributionStatisticManager {
     SimpleChart getPushMoney(String circle, Integer memberId, Integer year, Integer month);
 
     /**
-     * 订单数
+     * orders
      *
      * @param circle
      * @param memberId

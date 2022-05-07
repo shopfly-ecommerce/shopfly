@@ -24,28 +24,28 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 销售记录VO
+ * Sales recordVO
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-06-29 上午9:32
+ * 2018-06-29 In the morning9:32
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SalesVO implements Serializable {
-    @ApiModelProperty(name="buyer_name",value="买家",required=false)
+    @ApiModelProperty(name="buyer_name",value="buyers",required=false)
     @Column(name = "buyer_name")
     private String buyerName;
 
-    @ApiModelProperty(name="price",value="价格",required=false)
+    @ApiModelProperty(name="price",value="Price",required=false)
     @Column(name = "price")
     private Double price;
 
-    @ApiModelProperty(name="num",value="数量",required=false)
+    @ApiModelProperty(name="num",value="Quantity",required=false)
     @Column(name = "num")
     private Integer num;
 
-    @ApiModelProperty(name="pay_time",value="付款日期",required=false)
+    @ApiModelProperty(name="pay_time",value="Date of payment",required=false)
     @Column(name = "pay_time")
     private Integer payTime;
 

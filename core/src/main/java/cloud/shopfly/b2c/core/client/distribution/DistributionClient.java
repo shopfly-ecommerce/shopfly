@@ -23,12 +23,12 @@ import cloud.shopfly.b2c.core.distribution.model.dos.DistributionDO;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午1:54
+ * 2018-08-14 In the afternoon1:54
  */
 public interface DistributionClient {
 
     /**
-     * 新增分销商
+     * New distributor
      *
      * @param distributor
      * @return
@@ -36,7 +36,7 @@ public interface DistributionClient {
     DistributionDO add(DistributionDO distributor);
 
     /**
-     * 更新Distributor信息
+     * updateDistributorinformation
      *
      * @param distributor
      * @return
@@ -44,7 +44,7 @@ public interface DistributionClient {
     DistributionDO edit(DistributionDO distributor);
 
     /**
-     * 获取分销商
+     * Acquiring distributors
      *
      * @param memberId
      * @return
@@ -52,11 +52,11 @@ public interface DistributionClient {
     DistributionDO getDistributorByMemberId(Integer memberId);
 
     /**
-     * 根据会员id设置其上级分销商（两级）
+     * According to the membershipidSet up its superior distributor（Two levels of）
      *
-     * @param memberId 会员id
-     * @param parentId 上级会员的id
-     * @return 设置结果， trun=成功 false=失败
+     * @param memberId membersid
+     * @param parentId Superior membersid
+     * @return Set the result, trun=successfulfalse=failure
      */
     boolean setParentDistributorId(Integer memberId, Integer parentId);
 }

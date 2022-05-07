@@ -29,7 +29,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * 入参转换器
+ * Input converter
  *
  * @author fk
  * @version v2.0
@@ -39,7 +39,7 @@ import java.util.Map.Entry;
 public class EmojiEncodeRequestWrapper extends HttpServletRequestWrapper {
 
     /**
-     * 保存处理后的参数
+     * Save the processed parameters
      */
     private Map<String, String[]> params = new HashMap<String, String[]>();
 
@@ -49,20 +49,20 @@ public class EmojiEncodeRequestWrapper extends HttpServletRequestWrapper {
         super(request);
         this.params.putAll(request.getParameterMap());
         this.modifyParameterValues();
-        //自定义方法，用于参数去重
+        // Custom method for parameter deduplication
         if (ContentType.APPLICATION_JSON.getMimeType().equals(request.getContentType())) {
-            //对application/json数据格式的数据进行处理
-            //获取文本数据;
+            // Process data in application/ JSON data format
+            // Get text data;
             this.content = IOUtils.toByteArray(request.getInputStream());
         }
 
     }
 
     /**
-     * 修改query传入的参数值
+     * editqueryThe parameter value passed in
      */
     public void modifyParameterValues() {
-        //将parameter的值表情转码后重写回去
+        // Transcode the value of parameter and rewrite it back
         Set<Entry<String, String[]>> entrys = params.entrySet();
         for (Entry<String, String[]> entry : entrys) {
             String[] values = entry.getValue();
@@ -74,13 +74,13 @@ public class EmojiEncodeRequestWrapper extends HttpServletRequestWrapper {
     }
 
     @Override
-    public Enumeration<String> getParameterNames() {//重写getParameterNames()
+    public Enumeration<String> getParameterNames() {//rewritegetParameterNames()
         return new Vector<String>(params.keySet()).elements();
     }
 
 
     @Override
-    public String getParameter(String name) {//重写getParameter()
+    public String getParameter(String name) {//rewritegetParameter()
         String[] values = params.get(name);
         if (values == null || values.length == 0) {
             return null;
@@ -89,25 +89,25 @@ public class EmojiEncodeRequestWrapper extends HttpServletRequestWrapper {
     }
 
     @Override
-    public String[] getParameterValues(String name) {//重写getParameterValues()
+    public String[] getParameterValues(String name) {//rewritegetParameterValues()
         return params.get(name);
     }
 
     @Override
-    public Map<String, String[]> getParameterMap() { //重写getParameterMap()
+    public Map<String, String[]> getParameterMap() { //rewritegetParameterMap()
         return this.params;
     }
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        //  这种获取的参数的方式针对于内容类型为文本类型，比如Content-Type:text/plain,application/json,text/html等
-        //在springmvc中可以使用@RequestBody 来获取 json数据类型
-        //其他文本类型不做处理，重点处理json数据格式
+        // This to obtain the parameters of the way for the Content Type to text types, such as the content-type: text/plain, application/json, text/HTML, etc
+        // In SpringMVC you can use @requestBody to get json data types
+        // Other text types are not processed, focusing on THE JSON data format
         String contentType = super.getHeader("Content-Type");
         if (contentType == null || !contentType.equalsIgnoreCase("application/json")) {
             return super.getInputStream();
         } else {
-            //根据自己的需要重新指定方法
+            // Respecify methods according to your needs
             String s = new String(this.content);
             ByteArrayInputStream in = new ByteArrayInputStream(EmojiCharacterUtil.encode(s).getBytes());
             return new ServletInputStream() {

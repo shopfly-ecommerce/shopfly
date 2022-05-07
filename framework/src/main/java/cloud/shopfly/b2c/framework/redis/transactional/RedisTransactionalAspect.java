@@ -35,11 +35,11 @@ import org.springframework.stereotype.Component;
  
 
 /***
- * Redis事务切面控制
+ * RedisTransaction aspect control
  * @author kingapex
- * @version 2.0:使用 Redisson
+ * @version 2.0:useRedisson
  * @since 6.4.1
- * 2017年6月9日上午10:13:27
+ * 2017years6month9The morning of10:13:27
  */
 @Aspect
 @Component
@@ -52,11 +52,11 @@ public class RedisTransactionalAspect {
 
 
 	/**
-	 * 对事务注解进行切面
-	 * @param pjd 切点
-	 * @param transactional 事务注解
-	 * @return 原方法返回值
-	 * @throws Throwable 可能存在的异常
+	 * Facets the transaction annotations
+	 * @param pjd Point of tangency
+	 * @param transactional Transaction annotations
+	 * @return The value returned by the original method
+	 * @throws Throwable Possible exceptions
 	 */
 	@Around(value = "@annotation(transactional)")
 	public Object aroundMethod(ProceedingJoinPoint pjd,  RedisTransactional transactional) throws Throwable {
@@ -64,58 +64,58 @@ public class RedisTransactionalAspect {
 		String lockName  = transactional.lockName();
 
 		if(StringUtil.isEmpty(lockName)) {
-			//生成 lock key name
+			// Generate lock key name
 			CodeSignature signature = (CodeSignature) pjd.getSignature();
 			lockName = signature.toLongString();
 		}
 
-		//获取锁
+		// Acquiring a lock
 		RLock lock = redissonClient.getLock(lockName);
 		String tname  = Thread.currentThread().getName();
 		try {
-			//上锁
+			// locked
 
-			//获取锁的最长时间
+			// The maximum time to obtain the lock
 			int acquireTimeout = transactional.acquireTimeout();
 
-			//锁的超时间
+			// Timeout of the lock
 			int lockTime  = transactional.lockTimeout();
 
-			//如果没指定超时时间则直接上锁
+			// If no timeout period is specified, the lock is directly performed
 			if(lockTime == 0 && acquireTimeout ==0 ) {
 				lock.lock();
 
 			}
 
-			//如果指定了超时间则尝试上锁
+			// If timeout is specified, a lock is attempted
 			if(acquireTimeout!=0  && lockTime!=0){
 				boolean lockResult     = lock.tryLock(acquireTimeout,lockTime, TimeUnit.SECONDS);
 
 				if(!lockResult ) {
-					throw new RuntimeException(lockName + " 获取锁失败");
+					throw new RuntimeException(lockName + " Failed to obtain the lock");
 				}
 
 
 			}
 
-			//如果指定了 锁的超时间，但没有指定获取锁的时间
+			// If the elapsed time of the lock is specified, but the time to acquire the lock is not specified
 			if(acquireTimeout==0  && lockTime!=0){
 				lock.lock(lockTime, TimeUnit.SECONDS);
 
 			}
 
 
-			//执行切面方法
+			// Perform the section method
 			Object result = pjd.proceed();
 			return result;
 
 		} catch (Throwable e) {
 			if( logger.isErrorEnabled()){
-				this.logger.error("redis事务失败",e);
+				this.logger.error("redisTransaction failure",e);
 			}
 			throw e;
 		} finally {
-			//解锁
+			// unlock
 			lock.unlock();
 		}
 	}

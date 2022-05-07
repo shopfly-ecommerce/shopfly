@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 订单支付后，修改付款单
+ * Revise the payment order after the order is paid
  *
  * @author Snow create in 2018/7/23
  * @version v2.0
@@ -46,17 +46,17 @@ public class OrderPayLogConsumer implements OrderStatusChangeEvent {
     @Override
     public void orderChange(OrderStatusChangeMsg orderMessage) {
 
-        //订单已付款
+        // Order paid
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.PAID_OFF.name())) {
 
             OrderDO orderDO = orderMessage.getOrderDO();
             PayLog payLog = this.payLogManager.getModel(orderDO.getSn());
 
-            // 查询支付方式
+            // Check payment method
             PaymentMethodDO paymentMethod = this.paymentMethodManager.getByPluginId(orderDO.getPaymentPluginId());
             if (paymentMethod == null) {
                 paymentMethod = new PaymentMethodDO();
-                paymentMethod.setMethodName("管理员确认收款");
+                paymentMethod.setMethodName("Administrator confirmation of collection");
             }
 
             payLog.setPayType(paymentMethod.getMethodName());

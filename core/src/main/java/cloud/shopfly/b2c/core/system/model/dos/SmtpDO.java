@@ -35,7 +35,7 @@ import javax.validation.constraints.NotEmpty;
 
 
 /**
- * 邮件实体
+ * Mail entity
  * @author zh
  * @version v7.0.0
  * @since v7.0.0
@@ -48,52 +48,52 @@ public class SmtpDO implements Serializable {
 
 	private static final long serialVersionUID = 9787156257241506L;
 
-	/**主键ID*/
+	/**A primary keyID*/
 	@Id(name = "id")
 	@ApiModelProperty(hidden=true)
 	private Integer id;
-	/**主机*/
+	/**The host*/
 	@Column(name = "host")
-	@ApiModelProperty(name="host",value="主机",required=false)
+	@ApiModelProperty(name="host",value="The host",required=false)
 	private String host;
-	/**用户名*/
+	/**Username*/
 	@Column(name = "username")
-	@NotEmpty(message="用户名不能为空")
-	@ApiModelProperty(name="username",value="用户名",required=true)
+	@NotEmpty(message="The user name cannot be empty")
+	@ApiModelProperty(name="username",value="Username",required=true)
 	private String username;
-	/**密码*/
+	/**Password*/
 	@Column(name = "password")
-	@ApiModelProperty(name="password",value="密码",required=false)
+	@ApiModelProperty(name="password",value="Password",required=false)
 	@JsonIgnore
 	private String password;
-	/**最后发信时间*/
+	/**Last mailing time*/
 	@Column(name = "last_send_time")
-	@ApiModelProperty(name="last_send_time",value="最后发信时间",required=false,hidden=true)
+	@ApiModelProperty(name="last_send_time",value="Last mailing time",required=false,hidden=true)
 	private Long lastSendTime;
-	/**已发数*/
+	/**Number of issued*/
 	@Column(name = "send_count")
-	@Min(message="必须为数字", value = 0)
-	@ApiModelProperty(name="send_count",value="已发数",required=false,hidden=true)
+	@Min(message="Must be a number", value = 0)
+	@ApiModelProperty(name="send_count",value="Number of issued",required=false,hidden=true)
 	private Integer sendCount;
-	/**最大发信数*/
+	/**Maximum number of messages sent*/
 	@Column(name = "max_count")
-	@ApiModelProperty(name="max_count",value="最大发信数",required=false)
+	@ApiModelProperty(name="max_count",value="Maximum number of messages sent",required=false)
 	private Integer maxCount;
-	/**发信邮箱*/
+	/**Sender email*/
 	@Column(name = "mail_from")
-	@NotEmpty(message="邮箱不能为空")
-	@Email(message="邮箱格式不正确")
-	@ApiModelProperty(name="mail_from",value="发信邮箱",required=false)
+	@NotEmpty(message="The mailbox cannot be empty")
+	@Email(message="The mailbox format is incorrect")
+	@ApiModelProperty(name="mail_from",value="Sender email",required=false)
 	private String mailFrom;
-	/**端口*/
+	/**port*/
 	@Column(name = "port")
-	@Min(message="必须为数字", value = 0)
-	@ApiModelProperty(name="port",value="端口",required=false)
+	@Min(message="Must be a number", value = 0)
+	@ApiModelProperty(name="port",value="port",required=false)
 	private Integer port;
-	/**ssl是否开启*/
+	/**sslWhether open*/
 	@Column(name = "open_ssl")
-	@Min(message="必须为数字", value = 0)
-	@ApiModelProperty(name="open_ssl",value="ssl是否开启",required=false)
+	@Min(message="Must be a number", value = 0)
+	@ApiModelProperty(name="open_ssl",value="sslWhether open",required=false)
 	private Integer openSsl;
 
 

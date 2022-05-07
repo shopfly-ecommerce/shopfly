@@ -35,7 +35,7 @@ import java.util.TreeMap;
 /**
  * @author fk
  * @version v1.0
- * @Description: 微信退款
+ * @Description: WeChat refund
  * @date 2018/4/17 14:55
  * @since v7.0.0
  */
@@ -46,14 +46,14 @@ public class WeixinRefundExecutor extends WeixinPuginConfig {
     private Cache cache;
 
     /**
-     * 原路退回
+     * The way back
      *
      * @param bill
      * @return
      */
     public boolean returnPay(RefundBill bill) {
 
-        // 支付参数
+        // Pay parameters
         WeixinPayConfig config = this.getConfig(bill.getConfigMap());
 
         Map params = new TreeMap();
@@ -71,27 +71,27 @@ public class WeixinRefundExecutor extends WeixinPuginConfig {
             String xml = WeixinUtil.mapToXml(params);
             File file = new File(config.getP12Path());
             if (!file.exists()) {
-                this.cache.put(AbstractPaymentPlugin.REFUND_ERROR_MESSAGE + "_" + bill.getRefundSn(), "找不到证书路径" + config.getP12Path() + "，请联系管理员正确配置");
+                this.cache.put(AbstractPaymentPlugin.REFUND_ERROR_MESSAGE + "_" + bill.getRefundSn(), "The certificate path could not be found" + config.getP12Path() + "Contact the administrator to correctly configure the configuration");
                 return false;
             }
 
             Document resultDoc = WeixinUtil.verifyCertPost("https://api.mch.weixin.qq.com/secapi/pay/refund", xml, config.getMchId(), config.getP12Path());
             Element rootEl = resultDoc.getRootElement();
-            // 返回结果
+            // Returns the result
             String returnCode = rootEl.element("return_code").getText();
             if (AbstractPaymentPlugin.SUCCESS.equals(returnCode)) {
 
-                //此时也不能表示退款成功
+                // At this time, it cannot be said that the refund is successful
                 String resultCode = rootEl.element("result_code").getText();
                 if (AbstractPaymentPlugin.SUCCESS.equals(resultCode)) {
                     return true;
                 } else {
-                    //错误码
+                    // Error code
                     String errCode = rootEl.element("err_code").getText();
-                    //错误代码描述
+                    // Error code description
                     String errCodeDes = rootEl.element("err_code_des").getText();
 
-                    String failReason = "请联系管理员并提供退款错误信息：" + errCode + "," + errCodeDes;
+                    String failReason = "Please contact the administrator with refund error information：" + errCode + "," + errCodeDes;
 
                     this.cache.put(AbstractPaymentPlugin.REFUND_ERROR_MESSAGE + "_" + bill.getRefundSn(), failReason);
 
@@ -99,41 +99,41 @@ public class WeixinRefundExecutor extends WeixinPuginConfig {
                 }
 
             } else {
-                String failReason = "原路退回失败，请联系管理员检查参数配置";
+                String failReason = "The original route fails to be returned. Contact the administrator to check parameter Settings";
                 Element returnMsg = rootEl.element("return_msg");
                 if (returnMsg != null) {
-                    failReason = "请联系管理员并提供退款错误信息：" + returnMsg.getText();
+                    failReason = "Please contact the administrator with refund error information：" + returnMsg.getText();
                 }
                 this.cache.put(AbstractPaymentPlugin.REFUND_ERROR_MESSAGE + "_" + bill.getRefundSn(), failReason);
                 return false;
             }
 
         } catch (Exception e) {
-            this.logger.error("微信退款失败", e);
-            this.cache.put(AbstractPaymentPlugin.REFUND_ERROR_MESSAGE + "_" + bill.getRefundSn(), "异常");
+            this.logger.error("Wechat refund failed", e);
+            this.cache.put(AbstractPaymentPlugin.REFUND_ERROR_MESSAGE + "_" + bill.getRefundSn(), "abnormal");
             e.printStackTrace();
             return false;
         }
     }
 
     /**
-     * 查询退款状态
+     * Querying refund Status
      *
      * @param bill
      * @return
      */
     public String queryRefundStatus(RefundBill bill) {
 
-        // 支付参数
+        // Pay parameters
         WeixinPayConfig config = this.getConfig(bill.getConfigMap());
 
         Map params = new TreeMap();
         params.put("appid", config.getAppId());
         params.put("mch_id", config.getMchId());
         params.put("nonce_str", StringUtil.getRandStr(10));
-        // 商户系统内部订单号
+        // Internal order number of merchant system
         params.put("out_refund_no", bill.getRefundSn());
-        // 签名
+        // The signature
         String sign = WeixinUtil.createSign(params, config.getKey());
         params.put("sign", sign);
         try {
@@ -143,17 +143,17 @@ public class WeixinRefundExecutor extends WeixinPuginConfig {
             Map<String, String> resultMap = WeixinUtil.xmlToMap(resultDoc);
 
             if (AbstractPaymentPlugin.SUCCESS.equals(resultMap.get("return_code"))) {
-                // 实际退款状态
+                // Actual refund status
                 String status = resultMap.get("refund_status_0");
-//				退款状态： SUCCESS—退款成功  REFUNDCLOSE—退款关闭。  PROCESSING—退款处理中 CHANGE—退款异常
+//				The refund status： SUCCESS—Refund successREFUNDCLOSE—Refund closed.  PROCESSING—Refund processingCHANGE—Refund abnormal
                 if (AbstractPaymentPlugin.SUCCESS.equals(status)) {
-                    //退款成功
+                    // Refund success
                     return RefundStatusEnum.COMPLETED.value();
                 } else if ("PROCESSING".equals(status)) {
-                    //退款中
+                    // A refund of
                     return RefundStatusEnum.REFUNDING.value();
                 } else {
-                    //退款失败
+                    // Refund failure
                     return RefundStatusEnum.REFUNDFAIL.value();
                 }
 
@@ -167,7 +167,7 @@ public class WeixinRefundExecutor extends WeixinPuginConfig {
     }
 
     /**
-     * 设置支付宝参数
+     * Set alipay parameters
      *
      * @param config
      */

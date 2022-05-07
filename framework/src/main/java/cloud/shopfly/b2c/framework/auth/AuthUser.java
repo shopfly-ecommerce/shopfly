@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.framework.auth;
 import java.util.List;
 
 /**
- * 认证用户接口
+ * Authentication User Interface
  * @author kingapex
  * @version 1.0
  * @since 7.1.0

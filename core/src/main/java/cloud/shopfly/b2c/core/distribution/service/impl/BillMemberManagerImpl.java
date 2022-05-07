@@ -39,13 +39,13 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 用户结算单 实现
+ * User statement implementation
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 上午8:52
+ * 2018/5/22 In the morning8:52
  */
 
 @SuppressWarnings("ALL")
@@ -147,13 +147,13 @@ public class BillMemberManagerImpl implements BillMemberManager {
     public BillMemberVO getCurrentBillMember(Integer memberId, Integer billId) {
         Long[] time = DateUtil.getCurrentMonth();
         BillTotalDO billTotal = billTotalManager.getTotalByStart(time[0]);
-        // 如果没有创建 总结算单
+        // If a master statement is not created
 
         if (null == billTotal) {
             billTotal = this.createTotal();
         }
         BillMemberDO bm = this.getBillByStart(time[0], memberId, billId);
-        // 如果没有创建 总结算单
+        // If a master statement is not created
         if (null == bm) {
             bm = this.createBill(memberId,
                     billTotal.getId());
@@ -166,32 +166,32 @@ public class BillMemberManagerImpl implements BillMemberManager {
 
         Long[] time = DateUtil.getCurrentMonth();
         BillTotalDO billTotal = billTotalManager.getTotalByStart(time[0]);
-        // 如果没有创建 总结算单
+        // If a master statement is not created
         if (null == billTotal) {
             billTotal = this.createTotal();
         }
-        // 修改总结算单
+        // Revise the general statement
         this.daoSupport.execute("update es_bill_total set  order_count = order_count + 1 , order_money = order_money + ?  where id = ? ",
                 order.getOrderPrice(), billTotal.getId());
         this.daoSupport.execute("update es_distribution_order set bill_id = ? where order_id = ?", billTotal.getId(), order.getOrderId());
 
-        // 如果没有一级运营商
+        // If there is no tier 1 carrier
         if (null != order.getMemberIdLv1() && order.getMemberIdLv1() != 0) {
             BillMemberDO billMemberLv1 = this.getBillByStart(time[0],
                     order.getMemberIdLv1());
-            //如果为空
+            // If it is empty
             if (null == billMemberLv1) {
                 billMemberLv1 = this.createBill(order.getMemberIdLv1(),
                         billTotal.getId());
 
             }
-            // 修改分销商结算单
+            // Revise distributor statements
             this.daoSupport
                     .execute(
                             "update es_bill_member set push_money = push_money + ? , final_money = final_money + ? , order_count = order_count + 1 , order_money = order_money + ? where id = ?",
                             order.getGrade1Rebate(), order.getGrade1Rebate(),
                             order.getOrderPrice(), billMemberLv1.getId());
-            // 修改总结算单
+            // Revise the general statement
             this.daoSupport
                     .execute(
                             "update es_bill_total set push_money = push_money + ? ,final_money = final_money + ? where id = ? ",
@@ -199,11 +199,11 @@ public class BillMemberManagerImpl implements BillMemberManager {
                             billTotal.getId());
 
         }
-        // 如果没有二级运营商
+        // If there is no secondary carrier
         if (null != order.getMemberIdLv2() && order.getMemberIdLv2() != 0) {
             BillMemberDO billMemberLv2 = this.getBillByStart(time[0],
                     order.getMemberIdLv2());
-            //如果为空
+            // If it is empty
             if (null == billMemberLv2) {
                 billMemberLv2 = this.createBill(order.getMemberIdLv2(),
                         billTotal.getId());
@@ -214,7 +214,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
                             "update es_bill_member set push_money = push_money + ? , final_money = final_money + ? , order_count = order_count + 1 , order_money = order_money + ?   where id = ?",
                             order.getGrade2Rebate(), order.getGrade2Rebate(),
                             order.getOrderPrice(), billMemberLv2.getId());
-            // 修改总结算单
+            // Revise the general statement
             this.daoSupport
                     .execute(
                             "update es_bill_total set push_money = push_money + ? , final_money = final_money + ? where id = ? ",
@@ -226,31 +226,31 @@ public class BillMemberManagerImpl implements BillMemberManager {
 
     @Override
     public void returnShop(DistributionOrderDO order, DistributionRefundDTO distributionRefundDTO) {
-        //修改 is_return
+        // Modify is_return
         this.daoSupport.execute("update es_distribution_order set is_return = 1 where order_id = ?", order.getOrderId());
         Long[] time = DateUtil.getCurrentMonth();
         BillTotalDO billTotal = billTotalManager.getTotalByStart(time[0]);
-        // 如果没有创建 总结算单
+        // If a master statement is not created
         if (null == billTotal) {
             billTotal = this.createTotal();
         }
-        // 修改总结算单
+        // Revise the general statement
         this.daoSupport
                 .execute(
                         "update es_bill_total set return_order_count = return_order_count + 1 , return_order_money = return_order_money + ?  where id = ? ",
                         distributionRefundDTO.getRefundMoney(), billTotal.getId());
 
 
-        // 如果没有一级运营商
+        // If there is no tier 1 carrier
         if (null != order.getMemberIdLv1() && 0 != order.getMemberIdLv1()) {
             BillMemberDO billMemberLv1 = this.getBillByStart(time[0],
                     order.getMemberIdLv1());
-            //如果为空
+            // If it is empty
             if (null == billMemberLv1) {
                 billMemberLv1 = this.createBill(order.getMemberIdLv1(),
                         billTotal.getId());
             }
-            // 修改分销商结算单
+            // Revise distributor statements
             this.daoSupport
                     .execute(
                             "update es_bill_member set return_push_money = return_push_money + ? , final_money = final_money - ? , return_order_count = return_order_count + 1 , return_order_money = return_order_money + ? where id = ?  ",
@@ -258,7 +258,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
                             distributionRefundDTO.getRefundLv1() == null ? 0 : distributionRefundDTO.getRefundLv1(),
                             distributionRefundDTO.getRefundMoney(), billMemberLv1.getId());
 
-            // 修改总结算单
+            // Revise the general statement
             this.daoSupport
                     .execute(
                             "update es_bill_total set return_push_money = return_push_money + ? ,final_money = final_money - ?,return_order_count=return_order_count+1 where id = ? ",
@@ -267,7 +267,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
                             billTotal.getId());
 
         }
-        // 如果没有二级运营商
+        // If there is no secondary carrier
         if (null != order.getMemberIdLv2() && 0 != order.getMemberIdLv2()) {
             BillMemberDO billMemberLv2 = this.getBillByStart(time[0],
                     order.getMemberIdLv2());
@@ -275,14 +275,14 @@ public class BillMemberManagerImpl implements BillMemberManager {
                 billMemberLv2 = this.createBill(order.getMemberIdLv2(),
                         billTotal.getId());
             }
-            // 修改分销商结算单
+            // Revise distributor statements
             this.daoSupport
                     .execute(
                             "update es_bill_member set return_push_money = return_push_money + ? , final_money = final_money - ? , return_order_count = return_order_count + 1 , return_order_money = return_order_money + ? where id = ? ",
                             distributionRefundDTO.getRefundLv2() == null ? 0 : distributionRefundDTO.getRefundLv2(),
                             distributionRefundDTO.getRefundLv2() == null ? 0 : distributionRefundDTO.getRefundLv2(),
                             distributionRefundDTO.getRefundMoney(), billMemberLv2.getId());
-            // 修改总结算单
+            // Revise the general statement
             this.daoSupport
                     .execute(
                             "update es_bill_total set return_push_money = return_push_money + ? ,final_money = final_money - ? where id = ? ",
@@ -295,7 +295,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 创建分销商结算单
+     * Create distributor statements
      *
      * @return
      */
@@ -322,7 +322,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 获取 分销商结算单
+     * Obtain distributor statements
      *
      * @param startTime
      * @param memberId
@@ -336,7 +336,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 获取 分销商结算单
+     * Obtain distributor statements
      *
      * @param startTime
      * @param memberId
@@ -356,7 +356,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 创建总结算单
+     * Create a master statement
      */
     private BillTotalDO createTotal() {
         Long[] time = DateUtil.getCurrentMonth();
@@ -377,7 +377,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 创建结算单号（日期+两位随机数）
+     * Create the statement number（The date of+Two digit random number）
      */
     public String createSn() {
         Random random = new Random();
@@ -389,14 +389,14 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 获取随机数
+     * Get random number
      *
      * @return
      */
     public int getRandom() {
         Random random = new Random();
         int num = Math.abs(random.nextInt()) % 100;
-        //如果num小于10
+        // If num is less than 10
         if (num < 10) {
             num = getRandom();
         }
@@ -405,25 +405,25 @@ public class BillMemberManagerImpl implements BillMemberManager {
 
 
     /**
-     * 获取某个会员的下线业绩
+     * Get a members referral performance
      *
      * @param memberId
      * @return
      */
     @Override
     public List<BillMemberVO> allDown(Integer memberId, Integer billId) {
-        //获取所有下线的分销业绩
+        // Obtain distribution performance of all referral lines
         String sql = "select * from es_bill_member where member_id in " +
                 "(select member_id from es_distribution where member_id_lv1 =? or member_id_lv2 = ?)" +
                 "and total_id = (select total_id from es_bill_member where id = ?)";
         List<BillMemberDO> billMemberDOS = this.daoSupport.queryForList(sql, BillMemberDO.class, memberId, memberId, billId);
 
-        //获取下级 分销商集合
+        // Get a collection of sub-distributors
         List<DistributionVO> distributionVOS = this.distributionManager.getLowerDistributorTree(memberId);
 
         /*
-         * 返回所有分销商集合  及分销商订单
-         * 下级分销商没有下单,则返回分销商信息   分销业绩默认为0
+         * Returns all reseller collections and reseller orders
+         * Sub-distributors did not place orders,Return distributor information Distribution performance default is0
          * add by liuyulei 2019-08-01
          */
         distributionVOS = this.convertDistribution(distributionVOS,billMemberDOS);
@@ -436,7 +436,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 写入第二层数据
+     * Write layer 2 data
      *
      * @param dvo
      * @param billMemberDOS
@@ -484,7 +484,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 整合分销商集合与分销业绩集合
+     * Integrate distributor collection and distribution performance collection
      * @param distributionVOS
      * @param billMemberDOS
      * @return
@@ -509,7 +509,7 @@ public class BillMemberManagerImpl implements BillMemberManager {
     }
 
     /**
-     * 递归遍历所有分销商的业绩列表
+     * Recursively traverses the performance list of all distributors
      * @param distributionVOS
      * @param result
      * @return

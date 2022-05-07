@@ -25,11 +25,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 扩展用于与商品相关的属性
+ * Extensions are used for attributes associated with goods
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018年8月23日 下午4:02:52
+ * 2018years8month23On the afternoon4:02:52
  *
  */
 @ApiModel
@@ -41,14 +41,14 @@ public class ShipTemplateSettingDTO  implements Serializable {
 
 
 
-    @ApiModelProperty(name = "items", value = "价格条件设置", required = false)
+    @ApiModelProperty(name = "items", value = "Price condition setting", required = false)
     private List<ShipTemplateSettingDO> priceSettings;
 
 
-    @ApiModelProperty(name = "items", value = "重量条件设置", required = false)
+    @ApiModelProperty(name = "items", value = "Weight conditioning", required = false)
     private List<ShipTemplateSettingDO> weightSettings;
 
-    @ApiModelProperty(name = "items", value = "数量条件设置", required = false)
+    @ApiModelProperty(name = "items", value = "Quantitative conditional setting", required = false)
     private List<ShipTemplateSettingDO> itemsSettings;
 
 

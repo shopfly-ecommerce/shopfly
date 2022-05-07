@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.member.model.dos.MemberCollectionGoods;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 会员商品收藏表业务层
+ * Member commodity collection table business layer
  *
  * @author zh
  * @version v7.0.0
@@ -29,46 +29,46 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface MemberCollectionGoodsManager {
 
     /**
-     * 查询会员商品收藏表列表
+     * Query the list of member merchandise collection list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加会员商品收藏表
+     * Add member merchandise collection list
      *
-     * @param memberCollectionGoods 收藏商品对象
+     * @param memberCollectionGoods Collectible commodity object
      * @return
      */
     MemberCollectionGoods add(MemberCollectionGoods memberCollectionGoods);
 
     /**
-     * 删除会员商品收藏
+     * Delete member merchandise collection
      *
-     * @param goodsId 商品id
+     * @param goodsId productid
      */
     void delete(Integer goodsId);
 
     /**
-     * 获取会员商品收藏
+     * Obtain member merchandise collection
      *
-     * @param id 会员商品收藏表主键
-     * @return MemberCollectionGoods  会员商品收藏表
+     * @param id Member commodity collection table primary key
+     * @return MemberCollectionGoods  Member merchandise Collection list
      */
     MemberCollectionGoods getModel(Integer id);
 
     /**
-     * 获取会员收藏商品数
+     * Obtain the number of items collected by members
      *
-     * @return 收藏商品数
+     * @return Number of goods collected
      */
     Integer getMemberCollectCount();
 
     /**
-     * 某商品收藏数量
+     * Quantity of a collection
      *
      * @param goodsId
      * @return
@@ -76,9 +76,9 @@ public interface MemberCollectionGoodsManager {
     Integer getGoodsCollectCount(Integer goodsId);
 
     /**
-     * 是否收藏某商品
+     * Whether to collect an item
      *
-     * @param id 商品id
+     * @param id productid
      * @return
      */
     boolean isCollection(Integer id);

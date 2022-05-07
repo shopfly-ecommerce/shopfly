@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.goods;
 
 /**
- * 商品异常码 Created by kingapex on 2018/3/13.
+ * Commodity exception codeCreated by kingapex on 2018/3/13.
  *
  * @author kingapex
  * @version 1.0
@@ -25,45 +25,45 @@ package cloud.shopfly.b2c.core.goods;
 public enum GoodsErrorCode {
 
     /**
-     * 分类相关异常
+     * Classification correlation anomaly
      */
-    E300("分类相关异常"),
+    E300("Classification correlation anomaly"),
     /**
-     * 商品相关异常
+     * Commodity related anomaly
      */
-    E301("商品相关异常"),
+    E301("Commodity related anomaly"),
     /**
-     * 品牌相关异常
+     * Brand related exception
      */
-    E302("品牌相关异常"),
+    E302("Brand related exception"),
     /**
-     * 参数相关异常
+     * Parameter dependent anomaly
      */
-    E303("参数相关异常"),
+    E303("Parameter dependent anomaly"),
     /**
-     * 参数组相关异常
+     * Parameter groups are abnormal
      */
-    E304("参数组相关异常"),
+    E304("Parameter groups are abnormal"),
     /**
-     * 规格相关异常
+     * Specification related exception
      */
-    E305("规格相关异常"),
+    E305("Specification related exception"),
     /**
-     * 规格值相关异常
+     * The specification value is abnormal
      */
-    E306("规格值相关异常"),
+    E306("The specification value is abnormal"),
     /**
-     * 商品库存相关异常
+     * Exception related to commodity inventory
      */
-    E307("商品库存相关异常"),
+    E307("Exception related to commodity inventory"),
     /**
-     * 草稿商品相关异常
+     * Draft item related exception
      */
-    E308("草稿商品相关异常"),
+    E308("Draft item related exception"),
     /**
-     * 标签相关异常
+     * Label related exception
      */
-    E309("标签相关异常");
+    E309("Label related exception");
 
     private String describe;
 
@@ -72,7 +72,7 @@ public enum GoodsErrorCode {
     }
 
     /**
-     * 获取商品的异常码
+     * Gets the exception code for the item
      *
      * @return
      */

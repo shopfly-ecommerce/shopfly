@@ -16,33 +16,33 @@
 package cloud.shopfly.b2c.core.promotion.seckill.model.enums;
 
 /**
- * 限时活动状态
+ * Limited time activity state
  *
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年12月15日 下午3:32:43
+ * 2017years12month15On the afternoon3:32:43
  */
 public enum SeckillStatusEnum {
 
     /**
-     * 编辑中
+     * In the editor
      */
-    EDITING("编辑中"),
+    EDITING("In the editor"),
 
     /**
-     * 已发布
+     * The published
      */
-    RELEASE("已发布"),
+    RELEASE("The published"),
 
     /**
-     * 已关闭
+     * closed
      */
-    CLOSED("已关闭"),
+    CLOSED("closed"),
     /**
-     * 已结束
+     * Has ended
      */
-    OVER("已结束");
+    OVER("Has ended");
 
     private String description;
 

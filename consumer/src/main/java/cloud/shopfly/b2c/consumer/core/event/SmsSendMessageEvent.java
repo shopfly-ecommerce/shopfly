@@ -19,17 +19,17 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.base.model.vo.SmsSendVO;
 
 /**
- * 发送短信
+ * Send a text message
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 public interface SmsSendMessageEvent {
 
 	/**
-	 * 发送短信
-	 * @param smsSendVO	短信发送vo
+	 * Send a text message
+	 * @param smsSendVO	Text messagingvo
 	 */
 	void send(SmsSendVO smsSendVO);
 }

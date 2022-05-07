@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 交易快照实体
+ * Transaction snapshot entity
  *
  * @author fk
  * @version v1.0
@@ -43,121 +43,121 @@ public class GoodsSnapshot implements Serializable {
     private static final long serialVersionUID = 8525261256312385L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "snapshot_id")
     @ApiModelProperty(hidden = true)
     private Integer snapshotId;
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", required = false)
+    @ApiModelProperty(name = "goods_id", value = "productid", required = false)
     private Integer goodsId;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "name")
-    @ApiModelProperty(name = "name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "name", value = "Name", required = false)
     private String name;
     /**
-     * 商品编号
+     * SN
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "商品编号", required = false)
+    @ApiModelProperty(name = "sn", value = "SN", required = false)
     private String sn;
     /**
-     * 品牌名称
+     *  name
      */
     @Column(name = "brand_name")
-    @ApiModelProperty(name = "brand_name", value = "品牌名称", required = false)
+    @ApiModelProperty(name = "brand_name", value = " name", required = false)
     private String brandName;
     /**
-     * 分类名称
+     * name
      */
     @Column(name = "category_name")
-    @ApiModelProperty(name = "category_name", value = "分类名称", required = false)
+    @ApiModelProperty(name = "category_name", value = "name", required = false)
     private String categoryName;
     /**
-     * 商品类型
+     * Type
      */
     @Column(name = "goods_type")
-    @ApiModelProperty(name = "goods_type", value = "商品类型", required = false)
+    @ApiModelProperty(name = "goods_type", value = "Type", required = false)
     private String goodsType;
     /**
-     * 重量
+     * Weight
      */
     @Column(name = "weight")
-    @ApiModelProperty(name = "weight", value = "重量", required = false)
+    @ApiModelProperty(name = "weight", value = "Weight", required = false)
     private Double weight;
     /**
-     * 商品详情
+     * Product details
      */
     @Column(name = "intro")
-    @ApiModelProperty(name = "intro", value = "商品详情", required = false)
+    @ApiModelProperty(name = "intro", value = "Product details", required = false)
     private String intro;
     /**
-     * 商品价格
+     * Price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "商品价格", required = false)
+    @ApiModelProperty(name = "price", value = "Price", required = false)
     private Double price;
     /**
-     * 商品成本价
+     * The cost of goods
      */
     @Column(name = "cost")
-    @ApiModelProperty(name = "cost", value = "商品成本价", required = false)
+    @ApiModelProperty(name = "cost", value = "The cost of goods", required = false)
     private Double cost;
     /**
-     * 商品市场价
+     * Commodity market price
      */
     @Column(name = "mktprice")
-    @ApiModelProperty(name = "mktprice", value = "商品市场价", required = false)
+    @ApiModelProperty(name = "mktprice", value = "Commodity market price", required = false)
     private Double mktprice;
     /**
-     * 商品是否开启规格1 开启 0 未开启
+     * Whether the specification of the product is enabled1 open0 未open
      */
     @Column(name = "have_spec")
-    @ApiModelProperty(name = "have_spec", value = "商品是否开启规格1 开启 0 未开启", required = false)
+    @ApiModelProperty(name = "have_spec", value = "Whether the specification of the product is enabled1 open0 未open", required = false)
     private Integer haveSpec;
     /**
-     * 参数json
+     * parameterjson
      */
     @Column(name = "params_json")
-    @ApiModelProperty(name = "params_json", value = "参数json", required = false)
+    @ApiModelProperty(name = "params_json", value = "parameterjson", required = false)
     private String paramsJson;
 
     /**
-     * 促销json
+     * Sales promotionjson
      */
     @Column(name = "promotion_json")
-    @ApiModelProperty(name = "promotion_json", value = "促销json", required = false)
+    @ApiModelProperty(name = "promotion_json", value = "Sales promotionjson", required = false)
     private String promotionJson;
 
     /**
-     * 优惠券json
+     * couponsjson
      */
     @Column(name = "coupon_json")
-    @ApiModelProperty(name = "coupon_json", value = "优惠券json", required = false)
+    @ApiModelProperty(name = "coupon_json", value = "couponsjson", required = false)
     private String couponJson;
 
     /**
-     * 图片json
+     * Imagejson
      */
     @Column(name = "img_json")
-    @ApiModelProperty(name = "img_json", value = "图片json", required = false)
+    @ApiModelProperty(name = "img_json", value = "Imagejson", required = false)
     private String imgJson;
     /**
-     * 快照时间
+     * A snapshot of time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "快照时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "A snapshot of time", required = false)
     private Long createTime;
     /**
-     * 商品使用积分
+     * Credits for Merchandise use
      */
     @Column(name = "point")
-    @ApiModelProperty(name = "point", value = "商品使用积分", required = false)
+    @ApiModelProperty(name = "point", value = "Credits for Merchandise use", required = false)
     private Integer point;
 
 

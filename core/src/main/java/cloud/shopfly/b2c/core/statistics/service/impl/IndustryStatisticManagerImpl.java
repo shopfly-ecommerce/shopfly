@@ -43,13 +43,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 行业分析实现类
+ * Industry analysis implementation class
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/4/28 下午5:11
+ * 2018/4/28 In the afternoon5:11
  */
 @Service
 public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
@@ -74,12 +74,12 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
 
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -111,7 +111,7 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
                 index++;
             }
 
-            ChartSeries chartSeries = new ChartSeries("行业下单统计", data, name);
+            ChartSeries chartSeries = new ChartSeries("Industry order statistics", data, name);
             return new SimpleChart(chartSeries, new String[0], name);
 
         } catch (Exception e) {
@@ -129,12 +129,12 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
         try {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
 
@@ -167,7 +167,7 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
                 index++;
             }
 
-            ChartSeries chartSeries = new ChartSeries("行业下单商品数", data, name);
+            ChartSeries chartSeries = new ChartSeries("Number of goods ordered by industry", data, name);
             return new SimpleChart(chartSeries, new String[0], name);
         } catch (Exception e) {
             logger.error(e);
@@ -182,12 +182,12 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
         try {
             long[] timestamp = DataDisplayUtil.getStartTimeAndEndTime(searchCriteria);
             /*
-             * 参数
+             * parameter
              */
             List<Object> params = new ArrayList<>();
 
             /*
-             * 查询sql
+             * The querysql
              */
             StringBuffer sql = new StringBuffer();
             List<CategoryVO> categoryList = this.categoryManager.listAllChildren(0);
@@ -218,7 +218,7 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
                 }
                 index++;
             }
-            ChartSeries chartSeries = new ChartSeries("行业下单金额", data, name);
+            ChartSeries chartSeries = new ChartSeries("Industry order amount", data, name);
             return new SimpleChart(chartSeries, new String[0], name);
         } catch (Exception e) {
             logger.error(e);
@@ -239,7 +239,7 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
                 Map<String, Object> m = new HashMap<>(16);
                 m.put("category_name", category.getName());
                 m.put("industry_id", category.getCategoryId());
-                //平均价格
+                // The average price
                 List<Object> avgParams = new ArrayList<>();
                 StringBuffer avgSql = new StringBuffer("select AVG(gd.price) as avg from es_sss_goods_data gd where category_path like ? ");
                 avgParams.add("%|" + category.getCategoryId() + "|%");
@@ -247,7 +247,7 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
                 m.put("avg_price", StringUtil.toDouble(this.daoSupport.queryForMap(avgSql.toString(), avgParams.toArray()).get("avg"), false));
 
 
-                //有销量商品数
+                // The number of goods sold
                 List<Object> salesGoodsParams = new ArrayList<>();
                 StringBuffer salesGoodsSql = new StringBuffer("select count(0) from (select oi.goods_id from es_sss_goods_data g inner join " +
                         " es_sss_order_goods_data oi on g.goods_id = oi.goods_id " +
@@ -261,14 +261,14 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
                 m.put("sold_goods_num", soldGoodsNum);
 
 
-                //总览
+                // The overview
                 List<Object> totalParams = new ArrayList<>();
                 StringBuffer totalSql = new StringBuffer("select count(0) from es_sss_goods_data gd where gd.category_path  like ? ");
                 totalParams.add("%|" + category.getCategoryId() + "|%");
                 Integer totalGoodsNum = this.daoSupport.queryForInt(totalSql.toString(), totalParams.toArray());
                 m.put("goods_total_num", totalGoodsNum);
                 m.put("nosales_goods_num", totalGoodsNum - soldGoodsNum);
-                //未销售
+                // No sales
                 List<Object> soldParams = new ArrayList<>();
                 StringBuffer soldSql = new StringBuffer("select count(oi.goods_num)as num,sum(oi.goods_num*oi.price) as price from es_sss_order_goods_data oi "
                         + " inner join es_sss_order_data od on oi.order_sn = od.sn "
@@ -288,7 +288,7 @@ public class IndustryStatisticManagerImpl implements IndustryStatisticManager {
 
             return new Page(1, (long) result.size(), 10, result);
         } catch(BadSqlGrammarException e) {
-            //某个年份的统计表不存在，则返回空数据
+            // If the statistics table for a certain year does not exist, null data is returned
             if (e.getMessage().endsWith("doesn't exist")) {
                 return new Page(1, 0L, 10, new ArrayList());
             }

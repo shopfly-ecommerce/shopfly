@@ -29,7 +29,7 @@ import java.time.LocalDate;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 上午9:59
+ * 2018-08-14 In the morning9:59
  */
 @Service
 public class SyncopateTableManagerImpl implements SyncopateTableManager {
@@ -39,7 +39,7 @@ public class SyncopateTableManagerImpl implements SyncopateTableManager {
     private DaoSupport daoSupport;
 
     /**
-     * 每日填充数据
+     * Daily filling data
      */
     @Override
     public void everyDay() {

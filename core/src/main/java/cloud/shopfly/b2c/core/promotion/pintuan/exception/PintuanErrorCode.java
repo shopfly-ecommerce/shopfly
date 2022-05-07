@@ -21,22 +21,22 @@ package cloud.shopfly.b2c.core.promotion.pintuan.exception;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-02-19 下午1:31
+ * 2019-02-19 In the afternoon1:31
  */
 public enum PintuanErrorCode {
 
     /**
      * PintuanErrorCode
      */
-    E5011("活动时间内，无法编辑活动，请前往商家端进行停止"),
-    E5012("非活动时间，无法开启/关闭活动"),
-    E5013("非法操作"),
+    E5011("During the activity time, you cannot edit the activity, please go to the merchant side to stop"),
+    E5012("Inactive time, cannot be opened/Close the activity"),
+    E5013("Illegal operation"),
 
-    E5014("积分商品无法参加"),
-    E5015("活动商品无法参加"),
-    E5016("拼团商品无法参与"),
-    E5017("活动正在进行，无法操作，如要操作请联系管理员"),
-    E5018("超出限购数量");
+    E5014("Bonus items cannot be entered"),
+    E5015("Event merchandise cannot participate"),
+    E5016("Group goods cannot participate"),
+    E5017("The activity cannot be performed because it is in progress. Contact your administrator if you want to perform the operation"),
+    E5018("Exceed the purchase limit");
 
     private String describe;
 
@@ -45,7 +45,7 @@ public enum PintuanErrorCode {
     }
 
     /**
-     * 获取商品的异常码
+     * Gets the exception code for the item
      *
      * @return
      */
@@ -54,7 +54,7 @@ public enum PintuanErrorCode {
     }
 
     /**
-     * 获取错误提示
+     * Get error message
      *
      * @return
      */

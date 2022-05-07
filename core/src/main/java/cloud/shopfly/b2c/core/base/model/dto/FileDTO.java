@@ -22,28 +22,28 @@ import javax.validation.constraints.NotEmpty;
 import java.io.InputStream;
 
 /**
- * 文件上传入参
+ * The parameter is passed to the file
  *
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月19日 下午4:42:51
+ * 2018years3month19On the afternoon4:42:51
  */
 @ApiModel
 public class FileDTO {
     /**
-     * 文件流
+     * File stream
      */
-    @ApiModelProperty(name = "stream", value = "文件流", required = true)
+    @ApiModelProperty(name = "stream", value = "File stream", required = true)
     private InputStream stream;
     /**
-     * 文件名称
+     * The file name
      */
-    @NotEmpty(message = "文件名称不能为空")
-    @ApiModelProperty(name = "name", value = "文件名称", required = true)
+    @NotEmpty(message = "The file name cannot be empty")
+    @ApiModelProperty(name = "name", value = "The file name", required = true)
     private String name;
     /**
-     * 文件后缀
+     * The file suffix
      */
     private String ext;
 

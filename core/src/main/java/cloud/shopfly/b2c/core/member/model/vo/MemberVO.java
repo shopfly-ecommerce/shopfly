@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiModel;
 
 
 /**
- * 会员实体
+ * The member entity
  *
  * @author zh
  * @version v7.0.0
@@ -32,28 +32,28 @@ import io.swagger.annotations.ApiModel;
 public class MemberVO {
 
     /**
-     * 会员ID
+     * membersID
      */
     private Integer uid;
     /**
-     * 会员登陆用户名
+     * Member login user name
      */
     private String username;
     /**
-     * 真实姓名
+     * Real name
      */
     private String nickname;
     /**
-     * token令牌
+     * tokenThe token
      */
     private String accessToken;
     /**
-     * 刷新token
+     * The refreshtoken
      */
     private String refreshToken;
 
     /**
-     * 会员头像
+     * Member of the head
      */
     private String face;
 

@@ -34,11 +34,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
- * 交易业务类
+ * Transaction business class
  *
  * @author Snow create in 2018/4/8
  * @version 2.1
- * 使用TradeCreator来创建交易
+ * useTradeCreatorTo create a transaction
  * @since v7.0.0
  */
 @Service
@@ -83,10 +83,10 @@ public class TradeManagerImpl implements TradeManager {
 
         TradeCreator tradeCreator = new DefaultTradeCreator(param, cartView, memberAddress).setTradeSnCreator(tradeSnCreator).setGoodsClient(goodsClient).setMemberClient(memberClient).setShippingManager(shippingManager);
 
-        //检测配置范围-> 检测商品合法性 -> 检测促销活动合法性 -> 创建交易
+        // Detection configuration range -> Detect the validity of goods -> Detect the validity of promotional activities -> Create a transaction
         TradeVO tradeVO = tradeCreator.checkShipRange().checkGoods().checkPromotion().createTrade();
 
-        //订单入库
+        // Order is put in storage
         this.tradeIntodbManager.intoDB(tradeVO);
 
         return tradeVO;
@@ -94,7 +94,7 @@ public class TradeManagerImpl implements TradeManager {
 
 
     /**
-     * 设置client type
+     * Set up theclient type
      *
      * @param client
      */

@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.system.model.dos.NoticeLogDO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 店铺站内消息业务层
+ * Message business layer in store station
  *
  * @author zjp
  * @version v7.0.0
@@ -29,35 +29,35 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface NoticeLogManager {
 
     /**
-     * 查询店铺站内消息列表
+     * Query the message list in the store
      *
-     * @param page     页码
-     * @param pageSize 每页数量
-     * @param type     类型
-     * @param isRead   1 已读，0 未读
+     * @param page     The page number
+     * @param pageSize Number each page
+     * @param type     type
+     * @param isRead   1 Have read,0 unread
      * @return Page
      */
     Page list(int page, int pageSize, String type, Integer isRead);
 
     /**
-     * 添加店铺站内消息
+     * Add store site messages
      *
-     * @param shopNoticeLog 店铺站内消息
-     * @return ShopNoticeLog 店铺站内消息
+     * @param shopNoticeLog Store station message
+     * @return ShopNoticeLog Store station message
      */
     NoticeLogDO add(NoticeLogDO shopNoticeLog);
 
     /**
-     * 删除历史消息
+     * Deleting Historical Messages
      *
      * @param ids
      */
     void delete(Integer[] ids);
 
     /**
-     * 设置已读
+     * Setup has been read
      *
-     * @param ids 消息id
+     * @param ids The messageid
      */
     void read(Integer[] ids);
 

@@ -50,7 +50,7 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
 
 
     /**
-     * 支付
+     * pay
      * @param bill
      * @return
      */
@@ -86,7 +86,7 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
 
 
     /**
-     * 异步回调
+     * An asynchronous callback
      * @param tradeType
      * @param clientType
      * @return
@@ -98,19 +98,19 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
             System.out.println(resultStr);
             JSONObject obj = JSONUtil.toBean(resultStr, JSONObject.class);
 
-            //第三方流水号
+            // Third party serial number
             String returnOrderNo = obj.get("id")+"";
 
-            //批准交易
+            // Approve a deal
             if("CHECKOUT.ORDER.APPROVED".equals(obj.get("event_type")+"")){
                 JSONObject resource = obj.get("resource", JSONObject.class);
                 List<JSONObject> list = resource.get("purchase_units", ArrayList.class);
                 JSONObject purchase = list.get(0);
                 JSONObject amount = purchase.get("amount", JSONObject.class);
 
-                //支付金额
+                // Pay the amount
                 String value = amount.get("value")+"";
-                //订单/交易 SN
+                // Order/transaction SN
                 String customId = purchase.get("custom_id")+"";
 
                 String type = customId.split("-")[0];
@@ -127,13 +127,13 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
 
 
     /**
-     * 查询支付结果
+     * Query payment result
      *
      * @param bill
      * @return
      */
     public String onQuery(PayBill bill) {
-        System.out.println("主动查询接口");
+        System.out.println("Active query interface");
         PaymentBillDO billDO = this.paymentBillManager.getBillByBillSn(bill.getSn());
 
         try {
@@ -148,7 +148,7 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
                 this.paySuccess(bill.getBillSn(), orderResponse.result().id(), bill.getTradeType(), bill.getOrderPrice());
 
             } else {
-                throw new ServiceException("500", "未完成支付");
+                throw new ServiceException("500", "Outstanding payment");
             }
         } catch (IOException e) {
 //            e.printStackTrace();
@@ -165,57 +165,57 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
     private OrderRequest buildRequestBody(PayBill bill, OrderDetailVO orderDetailVO) {
 
         OrderRequest orderRequest = new OrderRequest();
-        // 在客户付款后立即扣款
+        // Deduct the money immediately after the customer pays
         orderRequest.checkoutPaymentIntent("CAPTURE");
 
         ApplicationContext applicationContext = new ApplicationContext()
-                //覆盖 PayPal 网站上 PayPal 帐户中公司名称的标签。
+                // The label that covers the company name in the PayPal account on the PayPal website.
                 .brandName(domainSettings.getName())
 
-                //要在 PayPal 网站上显示以供客户结帐的登录页面类型。
+                // The type of login page to display on the PayPal site for the customer to check out.
                 .landingPage("BILLING")
 
-                //客户取消付款后重定向客户的URL。
+                // Redirect the customers URL after the customer cancels the payment.
                 .cancelUrl("http://buyer-api-paypal.vaiwan.com/order/pay/callback/trade/paypalPlugin/PC")
 
-                //客户批准付款后重定向客户的 URL。
+                // Redirects the customers URL after the customer approves the payment.
                 .returnUrl("http://buyer-api-paypal.vaiwan.com/order/pay/callback/trade/paypalPlugin/PC")
 
-                //配置继续或立即付款结帐流程。
-                //CONTINUE. 将客户重定向到 PayPal 付款页面后，会出现一个继续按钮。如果在启动结账流程时不知道最终金额并且您希望将客户重定向到商家页面而不处理付款，请使用此选项。
-                //PAY_NOW. 将客户重定向到 PayPal 付款页面后，会出现“立即付款”按钮。如果在启动结账时知道最终金额并且您希望在客户单击立即付款时立即处理付款，请使用此选项。
+                // Configure the continue or pay now checkout process.
+                // After redirecting the customer to the PayPal payment page, a CONTINUE button appears. Use this option if you do not know the final amount when you start the checkout process and you want to redirect the customer to the merchant page without processing the payment.
+                // PAY_NOW. After redirecting the customer to the PayPal payment page, the "Pay Now" button appears. Use this option if you know the final amount when you initiate checkout and you want the payment to be processed immediately when the customer clicks Pay Now.
                 .userAction("CONTINUE")
 
-                //GET_FROM_FILE. 使用 PayPal 网站上客户提供的送货地址。
-                //NO_SHIPPING. 从 PayPal 网站编辑收货地址。推荐用于数字商品。
-                //SET_PROVIDED_ADDRESS. 使用商家提供的地址。客户无法在 PayPal 网站上更改此地址。
+                // GET_FROM_FILE. Use the shipping address provided by the customer on the PayPal website.
+                // NO_SHIPPING. Edit the shipping address from PayPal. Recommended for digital goods.
+                // SET_PROVIDED_ADDRESS. Use the address provided by the merchant. Customers cannot change this address on the PayPal website.
                 .shippingPreference("SET_PROVIDED_ADDRESS");
         orderRequest.applicationContext(applicationContext);
 
         List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest()
-                // API 调用方为采购单位提供的外部 ID。当您必须通过 更新订单时，多个采购单位需要PATCH。如果您忽略此值且订单仅包含一个购买单位，PayPal 会将此值设置为default。
+                // The external ID provided by the API caller to the purchasing unit. Multiple purchasing units require patches when you have to update orders. If you ignore this value and the order contains only one purchase unit, PayPal sets this value to default.
                 .referenceId("PUHF")
-                // 购买说明
+                // Purchase specification
                 //.description("Sporting Goods")
-                // API 调用者提供的外部 ID。用于协调客户交易与 PayPal 交易。出现在交易和结算报告中，但对付款人不可见。
+                // The external ID provided by the API caller. Used to coordinate customer transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer.
                 .customId(bill.getTradeType().name() + "-" + bill.getBillSn())
-                // 软描述符是用于构造出现在付款人卡对帐单上的对帐单描述符的动态文本。
+                // The soft descriptor is the dynamic text used to construct the statement descriptor that appears on the payer card statement.
                 //.softDescriptor("HighFashions")
 
-                //订单金额明细。必需
+                // Details of order amount. necessary
                 .amountWithBreakdown(
                         new AmountWithBreakdown()
-                                //货币代码  必需
+                                // Currency code required
                                 .currencyCode("USD")
-                                //总金额   必需
+                                // Total amount required
                                 .value(bill.getOrderPrice()+""))
 
-                //物流明细 必需
+                // Logistics details required
                 .shippingDetail(new ShippingDetail().name(
-                        //收货人姓名
+                        // Name of consignee
                         new Name().fullName(orderDetailVO.getShipName()))
-                        //地址
+                        // address
                         .addressPortable(new AddressPortable()
                                 .addressLine1(orderDetailVO.getShipAddr())
                                 .adminArea2(orderDetailVO.getShipCity())
@@ -224,14 +224,14 @@ public class PaypalPaymentExecutor extends PaypalPluginConfig {
                                 .countryCode(orderDetailVO.getShipCountryCode())));
 
         purchaseUnitRequests.add(purchaseUnitRequest);
-        //订单明细
+        // The order details
         orderRequest.purchaseUnits(purchaseUnitRequests);
         return orderRequest;
     }
 
 
     /**
-     * 读取body参数
+     * readbodyparameter
      * @param request
      * @return
      */

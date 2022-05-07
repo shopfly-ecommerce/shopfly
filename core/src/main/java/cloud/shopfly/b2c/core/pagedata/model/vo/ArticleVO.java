@@ -27,7 +27,7 @@ import java.io.Serializable;
 
 
 /**
- * 文章实体
+ * The article entity
  *
  * @author fk
  * @version v1.0
@@ -42,23 +42,23 @@ public class ArticleVO implements Serializable {
     private static final long serialVersionUID = 5105404520203401L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "article_id")
     @ApiModelProperty(hidden = true)
     private Integer articleId;
     /**
-     * 文章名称
+     * The article name
      */
     @Column(name = "article_name")
-    @ApiModelProperty(name = "article_name", value = "文章名称")
+    @ApiModelProperty(name = "article_name", value = "The article name")
     private String articleName;
 
     /**
-     * 分类id
+     * Categoriesid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "category_id", value = "分类id", required = false)
+    @ApiModelProperty(name = "category_id", value = "Categoriesid", required = false)
     private Integer categoryId;
 
     public Integer getArticleId() {

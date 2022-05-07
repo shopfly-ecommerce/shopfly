@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 商品关联参数值实体
+ * Item association parameter value entity
  *
  * @author fk
  * @version v2.0
@@ -45,35 +45,35 @@ public class GoodsParamsDO implements Serializable {
     private static final long serialVersionUID = 4134870721776090L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", hidden = true)
+    @ApiModelProperty(name = "goods_id", value = "productid", hidden = true)
     private Integer goodsId;
     /**
-     * 参数id
+     * parameterid
      */
     @Column(name = "param_id")
-    @ApiModelProperty(name = "param_id", value = "参数id", required = true)
+    @ApiModelProperty(name = "param_id", value = "parameterid", required = true)
     private Integer paramId;
     /**
-     * 参数名字
+     * Parameter name
      */
     @Column(name = "param_name")
-    @ApiModelProperty(name = "param_name", value = "参数名字", required = true)
+    @ApiModelProperty(name = "param_name", value = "Parameter name", required = true)
     private String paramName;
     /**
-     * 参数值
+     * The parameter value
      */
     @Column(name = "param_value")
-    @ApiModelProperty(name = "param_value", value = "参数值", required = true)
-    @Length(max = 100, message = "参数值字符不能大于120")
+    @ApiModelProperty(name = "param_value", value = "The parameter value", required = true)
+    @Length(max = 100, message = "Parameter value Cannot be greater than or equal to120")
     private String paramValue;
 
     @PrimaryKeyField

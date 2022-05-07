@@ -16,11 +16,11 @@
 package cloud.shopfly.b2c.core.client.member;
 
 /**
- * 会员上产品收藏
+ * Members on the product collection
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 下午4:42
+ * @date 18/7/27 In the afternoon4:42
  * @since v7.0
  */
 
@@ -28,10 +28,10 @@ public interface MemberCollectionGoodsClient {
 
 
     /**
-     * 某商品收藏数量
+     * Quantity of a collection
      *
-     * @param goodsId 商品id
-     * @return 收藏数量
+     * @param goodsId productid
+     * @return Collect the number
      */
     Integer getGoodsCollectCount(Integer goodsId);
 

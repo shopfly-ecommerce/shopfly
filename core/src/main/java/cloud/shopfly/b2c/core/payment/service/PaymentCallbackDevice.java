@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.payment.service;
 import cloud.shopfly.b2c.core.payment.model.enums.TradeType;
 
 /**
- * 支付回调器
+ * Payment callback
  *
  * @author kingapex
  * @version 1.0
@@ -30,7 +30,7 @@ public interface PaymentCallbackDevice {
 
 
     /**
-     * 第三方平台支付成功后回调的方法
+     * Third party platform payment after successful callback method
      *
      * @param outTradeNo
      * @param returnTradeNo
@@ -40,7 +40,7 @@ public interface PaymentCallbackDevice {
 
 
     /**
-     * 定义此回调器支持的交易类型
+     * Defines the types of transactions supported by this callback
      *
      * @return
      */

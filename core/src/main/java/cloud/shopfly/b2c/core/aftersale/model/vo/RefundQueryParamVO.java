@@ -20,40 +20,40 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author zjp
  * @version v7.0
- * @since v7.0 上午11:19 2018/5/2
+ * @since v7.0 In the morning11:19 2018/5/2
  */
 public class RefundQueryParamVO {
-    @ApiModelProperty(value = "页码", name = "page_no", hidden = true)
+    @ApiModelProperty(value = "The page number", name = "page_no", hidden = true)
     private Integer pageNo;
 
-    @ApiModelProperty(value = "分页大小", name = "page_size", hidden = true)
+    @ApiModelProperty(value = "Page size", name = "page_size", hidden = true)
     private Integer pageSize;
 
-    @ApiModelProperty(allowableValues = "APPLY,PASS,REFUSE,STOCK_IN,WAIT_FOR_MANUAL,CANCEL,REFUNDING,REFUNDFAIL,COMPLETED", value = "退货(款)单状态: APPLY/申请中,PASS/申请通过,REFUSE/审核拒绝,STOCK_IN/退货入库,WAIT_FOR_MANUAL/待人工处理,CANCEL/申请取消,REFUNDING/退款中,REFUNDFAIL/退款失败,COMPLETED/完成", name = "refund_status", required = false)
+    @ApiModelProperty(allowableValues = "APPLY,PASS,REFUSE,STOCK_IN,WAIT_FOR_MANUAL,CANCEL,REFUNDING,REFUNDFAIL,COMPLETED", value = "Return of the goods(paragraph)Single state: APPLY/In the application,PASS/Apply for through,REFUSE/Audit refused to,STOCK_IN/Return of the goods入库,WAIT_FOR_MANUAL/To be handled manually,CANCEL/To apply for cancellation,REFUNDING/退paragraph中,REFUNDFAIL/退paragraph失败,COMPLETED/complete", name = "refund_status", required = false)
     private String refundStatus;
 
-    @ApiModelProperty(value = "售后类型: CANCEL_ORDER 取消订单,AFTER_SALE 申请售后", name = "refund_type", allowableValues = "CANCEL_ORDER,AFTER_SALE", required = false)
+    @ApiModelProperty(value = "After type: CANCEL_ORDER Cancel the order,AFTER_SALE Apply for after sales", name = "refund_type", allowableValues = "CANCEL_ORDER,AFTER_SALE", required = false)
     private String refundType;
 
-    @ApiModelProperty(value = "退货(款)单编号", name = "sn", required = false)
+    @ApiModelProperty(value = "Return of the goods(paragraph)A single number", name = "sn", required = false)
     private String sn;
 
-    @ApiModelProperty(hidden = true, value = "会员id")
+    @ApiModelProperty(hidden = true, value = "membersid")
     private Integer memberId;
 
-    @ApiModelProperty(value = "订单编号", name = "order_sn", required = false)
+    @ApiModelProperty(value = "Order no.", name = "order_sn", required = false)
     private String orderSn;
 
-    @ApiModelProperty(name = "refuse_type", value = "类型:退款 RETURN_MONEY,退货 RETURN_GOODS", allowableValues = "RETURN_MONEY,RETURN_GOODS", required = false)
+    @ApiModelProperty(name = "refuse_type", value = "type:A refundRETURN_MONEY,Return of the goodsRETURN_GOODS", allowableValues = "RETURN_MONEY,RETURN_GOODS", required = false)
     private String refuseType;
 
-    @ApiModelProperty(value = "起始时间", name = "start_time", required = false)
+    @ApiModelProperty(value = "Starting time", name = "start_time", required = false)
     private String startTime;
 
-    @ApiModelProperty(value = "结束时间", name = "end_time", required = false)
+    @ApiModelProperty(value = "The end of time", name = "end_time", required = false)
     private String endTime;
 
-    @ApiModelProperty(value = "退款方式 OFFLINE 线下支付，ORIGINAL 原路退回", name = "refund_way", allowableValues = "OFFLINE,ORIGINAL")
+    @ApiModelProperty(value = "The refund wayOFFLINE Offline payment,ORIGINAL The way back", name = "refund_way", allowableValues = "OFFLINE,ORIGINAL")
     private String refundWay;
 
 

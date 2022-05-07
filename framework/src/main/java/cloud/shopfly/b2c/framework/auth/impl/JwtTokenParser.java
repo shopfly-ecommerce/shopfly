@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
- * jwt token解析器
+ * jwt tokenThe parser
  *
  * @author kingapex
  * @version 1.0
@@ -65,7 +65,7 @@ public class JwtTokenParser implements TokenParser {
     }
 
     /**
-     * 获取过期时间
+     * Get expiration time
      *
      * @return
      */

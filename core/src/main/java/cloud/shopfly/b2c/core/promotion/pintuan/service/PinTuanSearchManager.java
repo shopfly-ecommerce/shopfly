@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2019-01-21.
- * 拼团搜索业务接口
+ * Group search service interface
  *
  * @author kingapex
  * @version 1.0
@@ -32,7 +32,7 @@ import java.util.List;
 public interface PinTuanSearchManager {
 
     /**
-     * 搜索拼团商品
+     * Search for group products
      *
      * @param categoryId
      * @param pageNo
@@ -43,22 +43,22 @@ public interface PinTuanSearchManager {
 
 
     /**
-     * 向es写入索引
+     * toesWrite the index
      *
      * @param goodsDoc
      */
     void addIndex(PtGoodsDoc goodsDoc);
 
     /**
-     * 向es写入索引
+     * toesWrite the index
      *
      * @param pintuanGoods
-     * @return 是否生成成功
+     * @return Check whether the file is generated successfully.
      */
     boolean addIndex(PinTuanGoodsVO pintuanGoods);
 
     /**
-     * 删除一个sku的索引
+     * To delete askuThe index of the
      *
      * @param skuId
      */
@@ -66,7 +66,7 @@ public interface PinTuanSearchManager {
 
 
     /**
-     * 删除某个商品的所有的索引
+     * Deletes all indexes for an item
      *
      * @param goodsId
      */
@@ -74,24 +74,24 @@ public interface PinTuanSearchManager {
 
 
     /**
-     * 删除某个拼团的所有索引
+     * Deletes all indexes of a group
      *
-     * @param pinTuanId 拼团id
+     * @param pinTuanId Spell groupid
      */
     void deleteByPintuanId(Integer pinTuanId);
 
     /**
-     * 根据拼团id同步es中的拼团商品<br/>
-     * 当拼团活动商品发生变化时调用此方法
+     * According to spellidsynchronousesIn the group of goods<br/>
+     * This method is called when a group activity item changes
      *
      * @param pinTuanId
      */
     void syncIndexByPinTuanId(Integer pinTuanId);
 
     /**
-     * 根据商品id同步es中的拼团商品<br>
+     * According to the goodsidsynchronousesIn the group of goods<br>
      *
-     * @param goodsId 商品id
+     * @param goodsId productid
      */
     void syncIndexByGoodsId(Integer goodsId);
 }

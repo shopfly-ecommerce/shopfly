@@ -25,11 +25,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 库存操作实现
+ * Inventory operation realization
  *
  * @author zh
  * @version v7.0
- * @date 18/9/20 下午7:33
+ * @date 18/9/20 In the afternoon7:33
  * @since v7.0
  */
 @Service

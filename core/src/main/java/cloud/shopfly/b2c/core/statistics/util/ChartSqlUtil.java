@@ -21,20 +21,20 @@ import cloud.shopfly.b2c.framework.util.StringUtil;
 import java.util.List;
 
 /**
- * chart sql工具
+ * chart sqltool
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-27 下午3:14
+ * 2018-04-27 In the afternoon3:14
  */
 public class ChartSqlUtil {
 
 
     /**
-     * 价格参数sql 获取
+     * The price parameterssql To obtain
      *
-     * @param prices 价格参数
+     * @param prices The price parameters
      */
     public static void appendPriceSql(Integer[] prices, StringBuffer stringBuffer, List<Object> params) {
         for (int i = 1; i < prices.length; i++) {
@@ -47,9 +47,9 @@ public class ChartSqlUtil {
     }
 
     /**
-     * 价格参数sql group获取
+     * The price parameterssql groupTo obtain
      *
-     * @param prices 价格参数
+     * @param prices The price parameters
      * @return sql
      */
     public static String priceGroupSql(Integer[] prices) {
@@ -63,7 +63,7 @@ public class ChartSqlUtil {
 
 
     /**
-     * 订单商品 分类参数sql获取
+     * Order item classification parameterssqlTo obtain
      *
      * @return
      */
@@ -73,11 +73,11 @@ public class ChartSqlUtil {
 
 
     /**
-     * 订单商品 分类参数sql拼接
+     * Order item classification parameterssqlJoining together
      *
-     * @param searchCriteria 搜索参数
+     * @param searchCriteria The search parameters
      * @param stringBuffer   sql
-     * @param params         sql参数
+     * @param params         sqlparameter
      */
     public static void appendOrderGoodsCategorySql(SearchCriteria searchCriteria, StringBuffer stringBuffer, List<Object> params) {
         if (searchCriteria.getCategoryId() != 0) {
@@ -87,11 +87,11 @@ public class ChartSqlUtil {
     }
 
     /**
-     * 订单状态条件 sql拼接
+     * Order status conditionsqlJoining together
      *
-     * @param orderStatus  订单状态
+     * @param orderStatus  Status
      * @param stringBuffer sql
-     * @param params       sql参数
+     * @param params       sqlparameter
      */
     public static void appendOrderStatusSql(String orderStatus, StringBuffer stringBuffer, List<Object> params) {
         if (!StringUtil.isEmpty(orderStatus)) {
@@ -101,9 +101,9 @@ public class ChartSqlUtil {
     }
 
     /**
-     * like 参数
+     * like parameter
      *
-     * @param like 参数
+     * @param like parameter
      * @return
      */
     public static String categoryLikeParams(Integer like) {

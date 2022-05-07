@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午2:40
+ * 2018-08-14 In the afternoon2:40
  */
 @Service
 @ConditionalOnProperty(value="shopfly.product", havingValue="stand")
@@ -37,8 +37,8 @@ public class MemberDataClientDefaultImpl implements MemberDataClient {
     @Autowired
     private MemberDataManager memberDataManager;
     /**
-     * 会员注册
-     * @param member 会员
+     * Registered members
+     * @param member members
      */
     @Override
     public void register(Member member) {

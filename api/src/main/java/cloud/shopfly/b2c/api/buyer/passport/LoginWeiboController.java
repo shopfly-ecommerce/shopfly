@@ -30,14 +30,14 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 /**
- * 微博统一登陆
+ * Unified microblog login
  *
  * @author cs
  * @version v1.0
  * @since v7.2.2
  * 2020-10-30
  */
-@Api(description = "微博统一登陆")
+@Api(description = "Unified microblog login")
 @RestController
 @RequestMapping("/weibo")
 @Validated
@@ -47,25 +47,25 @@ public class LoginWeiboController {
     @Autowired
     private LoginWeiboManager loginWeiboManager;
 
-    @ApiOperation(value = "获取授权页地址")
-    @ApiImplicitParam(name	= "redirectUri",	value =	"授权成功跳转地址(需要urlEncode整体加密)",	required = true, dataType = "string",	paramType =	"query")
+    @ApiOperation(value = "Gets the authorization page address")
+    @ApiImplicitParam(name	= "redirectUri",	value =	"The redirect address is successfully authorized(Need to beurlEncodeThe whole encryption)",	required = true, dataType = "string",	paramType =	"query")
     @GetMapping("/wap/getLoginUrl")
     public String getLoginUrl(@RequestParam("redirectUri") String  redirectUri){
         return  loginWeiboManager.getLoginUrl(redirectUri);
     }
 
-    @ApiOperation(value = "网页登陆")
+    @ApiOperation(value = "Landing page")
     @ApiImplicitParams({
-            @ApiImplicitParam(name	= "code",	value =	"授权登陆返回的code",	required = true, dataType = "string",	paramType =	"query"),
-            @ApiImplicitParam(name	= "uuid",	value =	"此次登陆的随机数",	required = true, dataType = "string",	paramType =	"query"),
-            @ApiImplicitParam(name	= "redirect_uri",	value =	"授权成功跳转地址(需要urlEncode整体加密)",	required = true, dataType = "string",	paramType =	"query")
+            @ApiImplicitParam(name	= "code",	value =	"Authorized to log in and returncode",	required = true, dataType = "string",	paramType =	"query"),
+            @ApiImplicitParam(name	= "uuid",	value =	"The random number of the login",	required = true, dataType = "string",	paramType =	"query"),
+            @ApiImplicitParam(name	= "redirect_uri",	value =	"The redirect address is successfully authorized(Need to beurlEncodeThe whole encryption)",	required = true, dataType = "string",	paramType =	"query")
     })
     @PostMapping("/wap/login")
-    public Map h5Login(@NotEmpty(message = "code不能为空")String code,@NotEmpty(message = "uuid不能为空") String uuid,@NotEmpty(message = "redirect_uri不能为空")String redirect_uri){
+    public Map h5Login(@NotEmpty(message = "codeCant be empty")String code,@NotEmpty(message = "uuidCant be empty") String uuid,@NotEmpty(message = "redirect_uriCant be empty")String redirect_uri){
         return loginWeiboManager.wapLogin(code,uuid,redirect_uri);
     }
 
-    @ApiOperation(value = "app登陆")
+    @ApiOperation(value = "applanding")
     @PostMapping("/app/login")
     public Map appLogin(LoginAppDTO loginAppDTO){
         return loginWeiboManager.appLogin(loginAppDTO);

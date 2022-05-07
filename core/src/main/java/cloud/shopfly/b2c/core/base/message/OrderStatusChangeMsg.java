@@ -22,29 +22,29 @@ import java.io.Serializable;
 
 
 /**
- * 订单变化消息
+ * Order Change message
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午9:52:13
+ * 2018years3month23The morning of9:52:13
  */
 public class OrderStatusChangeMsg implements Serializable {
 
     private static final long serialVersionUID = 8915428082431868648L;
 
     /**
-     * 变化的订单
+     * Variable order
      */
     private OrderDO orderDO;
 
     /**
-     * 原状态
+     * The original state
      */
     private OrderStatusEnum oldStatus;
 
     /**
-     * 新状态
+     * A new state
      */
     private OrderStatusEnum newStatus;
 

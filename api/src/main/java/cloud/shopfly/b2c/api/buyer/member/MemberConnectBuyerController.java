@@ -34,11 +34,11 @@ import java.util.Map;
 /**
  * @author zjp
  * @version v7.0
- * @Description 会员信任登录API
+ * @Description Member Trust LoginAPI
  * @ClassName MemberConnectController
- * @since v7.0 上午10:26 2018/6/14
+ * @since v7.0 In the morning10:26 2018/6/14
  */
-@Api(description = "会员信任登录API")
+@Api(description = "Member Trust LoginAPI")
 @RestController
 @RequestMapping("/account-binder")
 public class MemberConnectBuyerController {
@@ -48,9 +48,9 @@ public class MemberConnectBuyerController {
 
 
     @GetMapping("/pc/{type}")
-    @ApiOperation(value = "发起账号绑定")
+    @ApiOperation(value = "Initiating account binding")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "登录方式:QQ,微博,微信,支付宝", allowableValues = "QQ,WEIBO,WECHAT,ALIPAY", paramType = "path")
+            @ApiImplicitParam(name = "type", value = "Log on to way:QQ,weibo,WeChat,Alipay", allowableValues = "QQ,WEIBO,WECHAT,ALIPAY", paramType = "path")
     })
     public String initiate(@PathVariable("type") @ApiIgnore String type) throws IOException {
         ConnectTypeEnum connectTypeEnum = ConnectTypeEnum.valueOf(type);
@@ -58,35 +58,35 @@ public class MemberConnectBuyerController {
         return connectionLogin.getLoginUrl();
     }
 
-    @ApiOperation(value = "会员解绑操作")
+    @ApiOperation(value = "Member unbinding operation")
     @PostMapping("/unbind/{type}")
-    @ApiImplicitParam(name = "type", value = "登录方式:QQ,微博,微信,支付宝", allowableValues = "QQ,WEIBO,WECHAT,ALIPAY", paramType = "path")
+    @ApiImplicitParam(name = "type", value = "Log on to way:QQ,weibo,WeChat,Alipay", allowableValues = "QQ,WEIBO,WECHAT,ALIPAY", paramType = "path")
     public void unbind(@PathVariable("type") String type) {
         connectManager.unbind(type);
     }
 
-    @ApiOperation(value = "微信退出解绑操作")
+    @ApiOperation(value = "Wechat exited the unbinding operation")
     @PostMapping("/unbind/out")
     public void wechatOut() {
         connectManager.wechatOut();
     }
 
 
-    @ApiOperation(value = "登录绑定openid")
+    @ApiOperation(value = "Log on to the bindingopenid")
     @PostMapping("/login/{uuid}")
-    @ApiImplicitParam(name = "uuid", value = "客户端唯一标识", required = true, dataType = "String", paramType = "path")
+    @ApiImplicitParam(name = "uuid", value = "Unique identifier of the client", required = true, dataType = "String", paramType = "path")
     public Map openidBind(@PathVariable("uuid") @ApiIgnore String uuid) {
         return connectManager.openidBind(uuid);
     }
 
-    @ApiOperation(value = "注册绑定openid")
+    @ApiOperation(value = "Registered bindingopenid")
     @PostMapping("/register/{uuid}")
-    @ApiImplicitParam(name = "uuid", value = "客户端唯一标识", required = true, dataType = "String", paramType = "path")
+    @ApiImplicitParam(name = "uuid", value = "Unique identifier of the client", required = true, dataType = "String", paramType = "path")
     public void registerBind(@PathVariable("uuid") @ApiIgnore String uuid) {
         connectManager.registerBind(uuid);
     }
 
-    @ApiOperation(value = "获取绑定列表API")
+    @ApiOperation(value = "Getting the binding listAPI")
     @GetMapping("/list")
     public List<ConnectVO> get() {
         return connectManager.get();

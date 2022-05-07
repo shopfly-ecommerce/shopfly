@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 更新次数池<br/>
- * 条件有：缓冲区大小，缓冲次数，缓冲时间<br/>
+ * Update count pool<br/>
+ * Conditions have：Buffer size, buffer times, buffer time<br/>
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -34,37 +34,37 @@ import java.util.List;
 public class UpdatePool {
 
     /**
-     * 最后的更新时间
+     * Last update time
      */
     private int updateTime;
 
     /**
-     * 缓冲对象
+     * The buffer object
      */
     private List targetList;
 
     /**
-     * 初始时间
+     * Initial time
      */
     private long startTime;
 
     /**
-     * 缓冲次数
+     * Number of buffer
      */
     private int maxUpdateTime;
 
     /**
-     * 缓冲区大小
+     * Buffer size
      */
     private int maxPoolSize;
 
     /**
-     * 缓冲时间（秒数）
+     * Buffer time（Number of seconds）
      */
     private int maxLazySecond;
 
     /**
-     * 默认值
+     * The default value
      */
     private final int defaultMaxUpdateTime =100;
     private final int defaultMaxPoolSize =100;
@@ -83,8 +83,8 @@ public class UpdatePool {
     }
 
     /**
-     * 更新一次
-     * @param list 更新对象列表
+     * Updated once
+     * @param list Update object list
      * @return
      */
     public boolean oneTime(List list) {
@@ -96,8 +96,8 @@ public class UpdatePool {
     }
 
     /**
-     * 更新一次
-     * @param target 更新对象
+     * Updated once
+     * @param target Update the object
      * @return
      */
     public boolean oneTime(Object target) {
@@ -108,7 +108,7 @@ public class UpdatePool {
 
     private boolean oneTime() {
 
-        //第一次更新记录开始时间
+        // The start time of the first record update
         if (updateTime == 0) {
             startTime = DateUtil.getDateline();
         }
@@ -155,7 +155,7 @@ public class UpdatePool {
 
     private void putTarget(Object target) {
 
-        //如果不存在存入，否则跳过
+        // If no save exists, skip otherwise
         for (Object o : targetList) {
             if (o.equals(target)) {
                 return;

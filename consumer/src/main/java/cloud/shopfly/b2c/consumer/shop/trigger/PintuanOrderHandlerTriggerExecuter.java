@@ -21,12 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 评团订单延时处理
+ * Review group order delay processing
  *
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-03-07 下午5:38
+ * 2019-03-07 In the afternoon5:38
  */
 @Component("pintuanOrderHandlerTriggerExecuter")
 public class PintuanOrderHandlerTriggerExecuter implements TimeTriggerExecuter {
@@ -37,9 +37,9 @@ public class PintuanOrderHandlerTriggerExecuter implements TimeTriggerExecuter {
 
 
     /**
-     * 执行任务
+     * Perform a task
      *
-     * @param object 任务参数
+     * @param object The task parameters
      */
     @Override
     public void execute(Object object) {

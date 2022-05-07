@@ -21,7 +21,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 /**
- * mq的publisher
+ * mqthepublisher
  *
  * @author fk
  * @version v7.2.0

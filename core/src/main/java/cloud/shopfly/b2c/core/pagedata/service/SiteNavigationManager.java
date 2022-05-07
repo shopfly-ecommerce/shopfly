@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 导航栏业务层
+ * Navigation bar business layer
  *
  * @author fk
  * @version v1.0
@@ -31,57 +31,57 @@ import java.util.List;
 public interface SiteNavigationManager {
 
     /**
-     * 查询导航栏列表
+     * Query the navigation bar list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @param clientType
      * @return Page
      */
     Page list(int page, int pageSize, String clientType);
 
     /**
-     * 添加导航栏
+     * Add navigation
      *
-     * @param siteNavigation 导航栏
-     * @return SiteNavigation 导航栏
+     * @param siteNavigation The navigation bar
+     * @return SiteNavigation The navigation bar
      */
     SiteNavigation add(SiteNavigation siteNavigation);
 
     /**
-     * 修改导航栏
+     * Modify navigation bar
      *
-     * @param siteNavigation 导航栏
-     * @param id             导航栏主键
-     * @return SiteNavigation 导航栏
+     * @param siteNavigation The navigation bar
+     * @param id             Navigation bar primary key
+     * @return SiteNavigation The navigation bar
      */
     SiteNavigation edit(SiteNavigation siteNavigation, Integer id);
 
     /**
-     * 删除导航栏
+     * Delete navigation bar
      *
-     * @param id 导航栏主键
+     * @param id Navigation bar primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取导航栏
+     * Get navigation
      *
-     * @param id 导航栏主键
-     * @return SiteNavigation  导航栏
+     * @param id Navigation bar primary key
+     * @return SiteNavigation  The navigation bar
      */
     SiteNavigation getModel(Integer id);
 
     /**
-     * 更新排序
-     * @param id 菜单id
-     * @param sort	上移和下移
-     * @return 导航菜单
+     * Update the sorting
+     * @param id The menuid
+     * @param sort	Up and down
+     * @return Navigation menu
      */
     SiteNavigation updateSort(Integer id, String sort);
 
     /**
-     * 客户端查询列表
+     * Client query list
      * @param clientType
      * @return
      */

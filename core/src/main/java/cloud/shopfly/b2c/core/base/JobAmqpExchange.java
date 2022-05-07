@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.base;
 
 /**
- * 定时任务AMQP消息定义
+ * Timing taskAMQPThe message definition
  *
  * @author kingapex
  * @version 1.0
@@ -27,27 +27,27 @@ public class JobAmqpExchange {
 
 
     /**
-     * 每小时执行
+     * Hourly execution
      */
     public final static String EVERY_HOUR_EXECUTE = "EVERY_HOUR_EXECUTE";
 
     /**
-     * 每日执行
+     * Perform daily
      */
     public final static String EVERY_DAY_EXECUTE = "EVERY_DAY_EXECUTE";
 
     /**
-     * 每月执行
+     * Perform a month
      */
     public final static String EVERY_MONTH_EXECUTE = "EVERY_MONTH_EXECUTE";
 
     /**
-     * 每年执行
+     * Execute each year
      */
     public final static String EVERY_YEAR_EXECUTE = "EVERY_YEAR_EXECUTE";
 
     /**
-     * 每10分钟执行
+     * every10Minutes to perform
      */
     public final static String EVERY_TEN_MINUTES_EXECUTE = "EVERY_TEN_MINUTES_EXECUTE";
 

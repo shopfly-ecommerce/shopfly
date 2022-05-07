@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 网店工具类
+ * Online shop tools
  * 
  * @author apexking
  * 
@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 public   class UrlUtils {
 
 	/**
-	 * 用于搜索的字段名字
+	 * The name of the field used for the search
 	 */
 	private static String[] searchFields = new String[]{"cat","brand","price","sort","prop","nattr","page","tag","keyword"};
 	
@@ -45,7 +45,7 @@ public   class UrlUtils {
 	}
 	
 	/**
-	 * 组合排列搜索条件，并组合成链接地址返回
+	 * Combination arranges search terms and combines them into link addresses to return
 	 * @param url
 	 * @param name
 	 * @param value
@@ -66,7 +66,7 @@ public   class UrlUtils {
 			return url;
 		}
 		str = getExParamUrl(str, "page");
-		//组合新的URL
+		// Composing new urls
 		String newUrl = "";
 		String temp = null;
 		for(String field : searchFields){
@@ -83,12 +83,12 @@ public   class UrlUtils {
 	
 	
 	/**
-	 * 解析一个搜索地址字串（在网店搜索页面中），根据传递的参数字串解析出参数值如：<br/>
-	 * 有参数字串：cat{5}keyword{测试}<br/>
-	 * 则cat参数值为:5,keyword参数值为:测试<br/>
+	 * Parse a search address string（In the online search page）, parses the parameter value according to the passed parameter number string as：<br/>
+	 * Parameter number string：cat{5}keyword{test}<br/>
+	 * thecatParameter values for:5,keywordParameter values for:test<br/>
 	 * 
-	 * @param param 搜索地址字串
-	 * @param name 参数名称
+	 * @param param Search for an address string
+	 * @param name name
 	 * @return
 	 */
 	public static String getParamStringValue(String param, String name) {
@@ -115,9 +115,9 @@ public   class UrlUtils {
 	}
 	
 	/**
-	 * 解析一个搜索地址字串（在网店搜索页面中），得到排除某个参数后的字串
-	 * @param url 搜索字串
-	 * @param name 要排除的字串
+	 * Parse a search address string（In the online search page）To get a string that excludes an argument
+	 * @param url The search string
+	 * @param name The string to exclude
 	 * @return
 	 */
 	public static String getExParamUrl(String url,String name){
@@ -148,8 +148,8 @@ public   class UrlUtils {
 	
 	
 	/**
-	 * 操作一个搜索字串：向字串中添加参数值。<br/>
-	 * 在原有参数值的基础上加入新的参数值，用“,”号隔开。
+	 * Operates on a search string：Adds parameter values to the string.<br/>
+	 * Add a new parameter value on the basis of the original parameter value“,"Separated.
 	 * @param url
 	 * @param name
 	 * @param value
@@ -161,7 +161,7 @@ public   class UrlUtils {
 		String newUrl =  getExParamUrl(url,name);
 		
 		if(oldValue!=null){
-			//对于属性字串的特殊处理
+			// Special handling of attribute strings
 			if("prop".equals(name)){ 
 				oldValue= oldValue.replaceAll( value.split("_")[0] +"_(\\d+)", "");
 				oldValue=oldValue.replace(",,", ",");
@@ -191,10 +191,10 @@ public   class UrlUtils {
 	
 	
 	/**
-	 * 解析一个伪静态url字串<br/>
-	 * 得到这个伪静脉url字串的前缀<br/>
-	 * 如：/goods_list_tag-tag_id{3}.html 得到goods_list_tag<br/>
-	 * /search-cat_id{3}page{1}.html 得到search
+	 * Resolves a pseudo static stateurlstring<br/>
+	 * You get this pseudo-veinurlThe prefix of a string<br/>
+	 * Such as：/goods_list_tag-tag_id{3}.html getgoods_list_tag<br/>
+	 * /search-cat_id{3}page{1}.html getsearch
 	 * @param url
 	 * @return
 	 */
@@ -215,7 +215,7 @@ public   class UrlUtils {
 	
 	
 	/**
-	 * 获取排除某个属性后的属性字串
+	 * Gets the attribute string after an attribute has been excluded
 	 * @param index
 	 * @param url
 	 * @return
@@ -232,7 +232,7 @@ public   class UrlUtils {
 		String[] propar = propstr.split(",");
 		for(String prop:propar){
 			String[] ar =prop.split("_");
-			// 剔除掉这个属性
+			// Get rid of this property
 			if( !ar[0].equals(""+index )){ 
 				if(!"".equals(newprostr)) {
 					newprostr += ",";

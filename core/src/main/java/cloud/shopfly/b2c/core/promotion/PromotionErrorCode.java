@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.promotion;
 
 /**
- * 交易异常码
+ * Transaction exception code
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -27,53 +27,53 @@ package cloud.shopfly.b2c.core.promotion;
 public enum PromotionErrorCode {
 
     /**
-     * 参数错误
+     * Parameter error
      */
-    E400("参数错误"),
+    E400("Parameter error"),
 
     /**
-     * 活动商品发生冲突
+     * Activity goods conflict
      */
-    E401("活动商品发生冲突"),
+    E401("Activity goods conflict"),
 
     /**
-     * 活动发生冲突
+     * Conflict of activities
      */
-    E402("活动发生冲突"),
+    E402("Conflict of activities"),
 
     /**
-     * 活动商品库存不足
+     * The stock of active goods is insufficient
      */
-    E403("活动商品库存不足"),
+    E403("The stock of active goods is insufficient"),
 
     /**
-     * 超出团购商品限购
+     * Exceed the group purchase limit
      */
-    E404("超出团购商品限购"),
+    E404("Exceed the group purchase limit"),
 
     /**
-     * 限领数大于发行量
+     * The limit is greater than the circulation
      */
-    E405("限领数超出发行量"),
+    E405("The limit exceeds the circulation"),
 
     /**
-     * 限领数量不合规
+     * The quantity limit is not in compliance
      */
-    E406("限领数量不合规"),
+    E406("The quantity limit is not in compliance"),
 
     /**
-     * 积分分类重复
+     * Integral classification repetition
      */
-    E407("积分分类重复"),
+    E407("Integral classification repetition"),
     /**
-     * 团购活动相关错误
+     * Errors related to group buying activities
      */
-    E408("团购活动相关错误"),
+    E408("Errors related to group buying activities"),
 
     /**
-     * 促销金额错误
+     * Promotion amount error
      */
-    E409("促销金额错误")
+    E409("Promotion amount error")
     ;
 
     private String describe;
@@ -83,7 +83,7 @@ public enum PromotionErrorCode {
     }
 
     /**
-     * 获取异常码
+     * Get exception code
      *
      * @return
      */
@@ -92,7 +92,7 @@ public enum PromotionErrorCode {
     }
 
     /**
-     * 异常消息
+     * The exception message
      *
      * @return
      */

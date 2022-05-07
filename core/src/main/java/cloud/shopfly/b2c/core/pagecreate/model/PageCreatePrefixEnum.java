@@ -21,20 +21,20 @@ package cloud.shopfly.b2c.core.pagecreate.model;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-17 下午2:15
+ * 2018-07-17 In the afternoon2:15
  */
 public enum PageCreatePrefixEnum {
 
     /**
-     * 首页
+     * Home
      */
     INDEX("/"),
     /**
-     * 商品页面
+     * Commodity page
      */
     GOODS("/goods/{goods_id}"),
     /**
-     * 帮助页面
+     * Help page
      */
     HELP("/help/{article_id}");
 

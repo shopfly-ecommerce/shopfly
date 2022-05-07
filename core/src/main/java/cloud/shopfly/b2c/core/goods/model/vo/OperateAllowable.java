@@ -20,41 +20,41 @@ import java.io.Serializable;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品的操作权限
+ * @Description: Operation rights of goods
  * @date 2018/4/916:06
  * @since v7.0.0
  */
 public class OperateAllowable implements Serializable {
 
     /**
-     * 上架状态1上架  0下架
+     * On state1save0off
      */
     private Integer marketEnable;
 
     /**
-     * 删除状态0 删除 1未删除
+     * Delete the state0 delete1未delete
      */
     private Integer disabled;
 
     /**
-     * 是否允许下架
+     * Whether to allow removal
      */
     private Boolean allowUnder;
     /**
-     * 是否允许放入回收站
+     * Whether it is allowed in the recycle bin
      */
     private Boolean allowRecycle;
     /**
-     * 是否允许回收站还原
+     * Whether to allow recycle bin restore
      */
     private Boolean allowRevert;
     /**
-     * 是否允许彻底删除
+     * Whether to allow complete deletion
      */
     private Boolean allowDelete;
 
     /**
-     * 是否允许上架
+     * Is it allowed to be on shelves?
      */
     private Boolean allowMarket;
 
@@ -68,28 +68,28 @@ public class OperateAllowable implements Serializable {
     }
 
     public Boolean getAllowUnder() {
-        //上架并且没有删除的可以下架
+        // Shelves and not deleted can be removed
         return marketEnable == 1 && disabled == 1;
     }
 
     public Boolean getAllowRecycle() {
-        //下架的商品才能放入回收站
+        // Only goods removed from the shelves can be put into the recycling bin
 
         return marketEnable == 0 && disabled == 1;
     }
 
     public Boolean getAllowRevert() {
-        //下架的删除了的才能还原
+        // Deleted from the shelves to restore
         return marketEnable == 0 && disabled == 0;
     }
 
     public Boolean getAllowDelete() {
-        //下架的删除了的才能还原
+        // Deleted from the shelves to restore
         return marketEnable == 0 && disabled == 0;
     }
 
     public Boolean getAllowMarket() {
-        //下架未删除才能上架
+        // It can only be put on the shelves if it is not deleted
         return marketEnable == 0 && disabled == 1;
     }
 }

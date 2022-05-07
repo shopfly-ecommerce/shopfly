@@ -21,7 +21,7 @@ import javax.validation.constraints.*;
 
 
 /**
- * 平台管理员实体VO
+ * Platform Administrator EntityVO
  *
  * @author zh
  * @version v7.0
@@ -31,52 +31,52 @@ import javax.validation.constraints.*;
 public class AdminUserVO {
 
     /**
-     * 管理员名称
+     * Administrator name
      */
-    @Pattern(regexp = "^(?![0-9]+$)[\\u4e00-\\u9fa5_0-9A-Za-z]{2,20}$", message = "名称不能为纯数字和特殊字符，并且长度为2-20个字符")
-    @ApiModelProperty(name = "username", value = "管理员名称", required = false)
+    @Pattern(regexp = "^(?![0-9]+$)[\\u4e00-\\u9fa5_0-9A-Za-z]{2,20}$", message = "The name cannot contain only digits or special characters, and contains2-20A character")
+    @ApiModelProperty(name = "username", value = "Administrator name", required = false)
     private String username;
     /**
-     * 管理员密码
+     * Administrator password
      */
-    @ApiModelProperty(name = "password", value = "管理员密码", required = false)
+    @ApiModelProperty(name = "password", value = "Administrator password", required = false)
     private String password;
     /**
-     * 部门
+     * department
      */
-    @ApiModelProperty(name = "department", value = "部门", required = false)
+    @ApiModelProperty(name = "department", value = "department", required = false)
     private String department;
     /**
-     * 权限id
+     * permissionsid
      */
-    @Min(message = "权限id必须为数字", value = 0)
-    @NotNull(message = "权限不能为空")
-    @ApiModelProperty(name = "role_id", value = "权限id", required = false)
+    @Min(message = "permissionsidMust be a number", value = 0)
+    @NotNull(message = "Permissions cannot be empty")
+    @ApiModelProperty(name = "role_id", value = "permissionsid", required = false)
     private Integer roleId;
     /**
-     * 备注
+     * note
      */
-    @Size(max = 90, message = "备注最大为90个字符")
-    @ApiModelProperty(name = "remark", value = "备注", required = false)
+    @Size(max = 90, message = "Maximum remarks90A character")
+    @ApiModelProperty(name = "remark", value = "note", required = false)
     private String remark;
     /**
-     * 管理员真实姓名
+     * Real name of administrator
      */
-    @Pattern(regexp = "^(?![0-9]+$)[\\u4e00-\\u9fa5_0-9A-Za-z]{2,20}$", message = "真实姓名不能为纯数字和特殊字符，并且长度为2-20个字符")
-    @ApiModelProperty(name = "real_name", value = "管理员真实姓名", required = false)
+    @Pattern(regexp = "^(?![0-9]+$)[\\u4e00-\\u9fa5_0-9A-Za-z]{2,20}$", message = "The real name cannot contain only digits or special characters2-20A character")
+    @ApiModelProperty(name = "real_name", value = "Real name of administrator", required = false)
     private String realName;
     /**
-     * 头像
+     * Head portrait
      */
-    @ApiModelProperty(name = "face", value = "头像", required = false)
+    @ApiModelProperty(name = "face", value = "Head portrait", required = false)
     private String face;
     /**
-     * 是否为超级管理员
+     * Whether to be a super administrator
      */
-    @Min(message = "必须为数字且,1为超级管理员,0为其他", value = 0)
-    @Max(message = "必须为数字且,1为超级管理员,0为其他", value = 1)
-    @NotNull(message = "是否为超级管理员不能为空")
-    @ApiModelProperty(name = "founder", value = "是否为超级管理员,1为超级管理员,0为其他", required = false)
+    @Min(message = "The value must be a number and,1As the super administrator,0For other", value = 0)
+    @Max(message = "The value must be a number and,1As the super administrator,0For other", value = 1)
+    @NotNull(message = "Super administrator Or not The value cannot be empty")
+    @ApiModelProperty(name = "founder", value = "Whether to be a super administrator,1As the super administrator,0For other", required = false)
     private Integer founder;
 
 

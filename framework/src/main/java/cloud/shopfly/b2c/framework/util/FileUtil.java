@@ -29,13 +29,13 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
- * 文件工具类
+ * File utility class
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/28 下午5:10
+ * 2018/6/28 In the afternoon5:10
  */
 public class FileUtil {
 
@@ -130,9 +130,9 @@ public class FileUtil {
     }
 
     /**
-     * 是否是允许上传文件
+     * Whether files can be uploaded
      *
-     * @param logoFileName 文件名称
+     * @param logoFileName The file name
      * @return
      */
     public static boolean isAllowUp(String logoFileName) {
@@ -142,8 +142,8 @@ public class FileUtil {
             String ex = logoFileName.substring(logoFileName.lastIndexOf(".") + 1, logoFileName.length());
             //			return allowTYpe.toString().indexOf(ex) >= 0;
             //lzf edit 20110717
-            //解决只认小写问题
-            //同时加入jpeg扩展名/png扩展名
+            // Solve the case only problem
+            // Add the JPEG/PNG extension as well
             return allowType.toUpperCase().indexOf(ex.toUpperCase()) >= 0;
         } else {
             return false;
@@ -151,9 +151,9 @@ public class FileUtil {
     }
 
     /**
-     * 是否是允许上传的图片
+     * Whether the image is allowed to upload
      *
-     * @param ex 文件后缀
+     * @param ex The file suffix
      * @return
      */
     public static boolean isAllowUpImg(String ex) {
@@ -167,7 +167,7 @@ public class FileUtil {
 
 
     /**
-     * 把内容写入文件
+     * Write content to a file
      *
      * @param filePath
      * @param fileContent
@@ -189,7 +189,7 @@ public class FileUtil {
     }
 
     /**
-     * 将inputStream写入文件
+     * willinputStreamWritten to the file
      *
      * @param file
      * @param path
@@ -204,22 +204,22 @@ public class FileUtil {
     }
 
     /**
-     * 将inputstream写入文件
+     * willinputstreamWritten to the file
      *
-     * @param stream 文件流
-     * @param path   要写入的文件路径
+     * @param stream File stream
+     * @param path   Path to the file to write to
      */
     public static void write(InputStream stream, String path) {
         try {
             FileUtils.copyInputStreamToFile(stream, new File(path));
         } catch (IOException e) {
-            logger.error("文件写入异常：", e);
+            logger.error("File write exception：", e);
         }
 
     }
 
     /**
-     * 读取文件内容 默认是UTF-8编码
+     * The default value for reading file contents isUTF-8coding
      *
      * @param filePath
      * @return
@@ -250,7 +250,7 @@ public class FileUtil {
     }
 
     /**
-     * 删除文件或文件夹
+     * Delete files or folders
      *
      * @param filePath
      */
@@ -265,7 +265,7 @@ public class FileUtil {
                 }
             }
         } catch (Exception ex) {
-            logger.error("删除文件异常：", ex);
+            logger.error("File Deletion exception：", ex);
         }
     }
 
@@ -276,7 +276,7 @@ public class FileUtil {
     }
 
     /**
-     * 创建文件夹
+     * Creating a folder
      *
      * @param filePath
      */
@@ -287,12 +287,12 @@ public class FileUtil {
                 file.mkdirs();
             }
         } catch (Exception ex) {
-            logger.error("创建文件目录异常：", ex);
+            logger.error("Description Failed to create a file directory：", ex);
         }
     }
 
     /**
-     * 重命名文件、文件夹
+     * Rename file、folder
      *
      * @param from
      * @param to
@@ -309,7 +309,7 @@ public class FileUtil {
     }
 
     /**
-     * 得到文件的扩展名
+     * Gets the extension of the file
      *
      * @param fileName
      * @return
@@ -322,7 +322,7 @@ public class FileUtil {
     }
 
     /**
-     * 通过File对象创建文件
+     * throughFileObject creation file
      *
      * @param file
      * @param filePath
@@ -345,7 +345,7 @@ public class FileUtil {
 
             fileInputStream.close();
         } catch (IOException e) {
-            logger.error("创建件文件异常", e);
+            logger.error("Description Creating a file is abnormal", e);
         }
     }
 
@@ -418,7 +418,7 @@ public class FileUtil {
                 FileUtils.copyFile(new File(srcFile), new File(destFile));
             }
         } catch (IOException e) {
-            logger.error("复制文件异常", e);
+            logger.error("File replication exception", e);
         }
     }
 
@@ -439,8 +439,8 @@ public class FileUtil {
 
 
     /**
-     * 拷贝源文件夹至目标文件夹
-     * 只拷贝新文件
+     * Copy the source folder to the destination folder
+     * Copy only new files
      *
      * @param sourceFolder
      * @param targetFolder
@@ -459,7 +459,7 @@ public class FileUtil {
                     File targetFile = new File(targetFolder + f.getName());
 
                     if (f.isFile()) {
-                        //如果目标文件比较新，或源文件比较新，则拷贝，否则跳过
+                        // If the destination file is new or the source file is new, copy it, otherwise skip it
                         if (!targetFile.exists() || FileUtils.isFileNewer(f, targetFile)) {
                             FileUtils.copyFileToDirectory(f, new File(targetFolder));
                             ////System.out.println("copy "+ f.getName());
@@ -490,7 +490,7 @@ public class FileUtil {
         expand.execute();
 
         if (cleanZip) {
-            //清除zip包
+            // Remove the zip package
             Delete delete = new Delete();
             delete.setProject(prj);
             delete.setDir(zipFile);
@@ -500,9 +500,9 @@ public class FileUtil {
 
 
     /**
-     * 获取文件类型
+     * Get the file type
      *
-     * @param fileType 文件后缀
+     * @param fileType The file suffix
      * @return
      */
     public static String contentType(String fileType) {

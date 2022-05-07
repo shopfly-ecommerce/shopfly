@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.member;
 
 /**
- * 会员异常码
+ * Member exception code
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -26,57 +26,57 @@ package cloud.shopfly.b2c.core.member;
  */
 public enum MemberErrorCode {
 
-    //会员error code
-    E100("会员地址已达上限！"),
-    E101("无法更改当前默认地址为非默认地址！"),
-    E102("无法收藏自己的店铺！"),
-    E103("此店铺已经添加为收藏！"),
-    E104("无法收藏自己店铺的商品！"),
-    E105("此商品已经添加为收藏！"),
-    E106("参数不完整！"),
-    E107("参数不正确！"),
-    E108("当前用户名已经被使用"),
-    E109("当前token已经失效"),
-    E110("会员已经退出"),
-    E111("当前手机号已经绑定其他用户"),
-    E112("密码长度为4-20个字符"),
-    E113("两次密码不一致"),
-    E114("当前会员未绑定手机号"),
-    E115("请先对手机进行验证"),
-    E116("用户名称已经被占用"),
-    E117("邮箱已经被占用"),
-    E118("当前手机号已经被使用"),
-    E119("请先对用户进行身份验证"),
-    E120("税号不能为空"),
-    E121("发票数已达上限"),
-    E122("请指定发送会员"),
-    E123("当前会员不存在"),
-    E124("当前会员已禁用"),
+    // Member of the error code
+    E100("The number of member addresses reached the upper limit！"),
+    E101("You cannot change the current default address to a non-default address！"),
+    E102("Unable to collect their own shops！"),
+    E103("This shop has been added to the collection！"),
+    E104("Unable to collect goods from their own shops！"),
+    E105("This item has been added to the collection！"),
+    E106("Parameter incomplete！"),
+    E107("Incorrect parameter！"),
+    E108("The current user name is already in use"),
+    E109("The currenttokenHave failed"),
+    E110("Member has quit"),
+    E111("The current mobile number has been bound to another user"),
+    E112("Password length:4-20A character"),
+    E113("The passwords are inconsistent"),
+    E114("Current member does not bind mobile phone number"),
+    E115("Please verify the phone first"),
+    E116("The user name has been occupied"),
+    E117("The mailbox is occupied"),
+    E118("The current mobile phone number has been used"),
+    E119("Please authenticate the user first"),
+    E120("The tax code cannot be blank"),
+    E121("The invoice amount has reached the upper limit"),
+    E122("Please specify sending member"),
+    E123("Current member does not exist"),
+    E124("Current membership is disabled"),
 
-    E130("不支持的登录方式"),
-    E131("联合登录失败"),
-    E132("当前会员已绑定其他账号"),
-    E133("授权超时"),
-    E134("会员未绑定相关账号"),
-    E135("30天内不可重复解绑"),
+    E130("The login mode is not supported"),
+    E131("Joint login failure"),
+    E132("The current member is bound to another account"),
+    E133("Authorized overtime"),
+    E134("Members are not bound to relevant accounts"),
+    E135("30Do not repeatedly unbind within a day"),
 
-    E200("评论无权限"),
-    E201("评论传参错误"),
-    E202("咨询参数错误"),
-    E203("优惠券超领"),
+    E200("No Comment permission"),
+    E201("Comment error uploading a reference"),
+    E202("Consultation parameter error"),
+    E203("Coupon overclaim"),
 
-    E136("权限操作错误"),
-    E137("当前会员已经失效"),
-    E138("无法删除超级管理员"),
-    E139("无法添加超级管理员"),
-    E140("登录失败"),
-    E141("地区不合法"),
-    E142("您还没有为成为店主"),
-    E143("当前账号已经绑定其他用户"),
-    E144("此账号已经拥有店铺"),
-    E145("此会员已经成为其他店铺店员"),
-    E146("此会员已经是本店店员"),
-    E147("参数错误");
+    E136("Permission manipulation error"),
+    E137("Current membership has expired"),
+    E138("The super administrator cannot be deleted"),
+    E139("The super administrator cannot be added"),
+    E140("Login failed"),
+    E141("District illegal"),
+    E142("You are not yet a shopkeeper"),
+    E143("The current account has been bound to another user"),
+    E144("This account already has a store"),
+    E145("This member has become a clerk in another store"),
+    E146("This member is already a clerk in our store"),
+    E147("Parameter error");
 
     private String describe;
 
@@ -85,7 +85,7 @@ public enum MemberErrorCode {
     }
 
     /**
-     * 获取异常码
+     * Get exception code
      *
      * @return
      */

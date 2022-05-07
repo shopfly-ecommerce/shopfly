@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 站内消息实体
+ * Intra-site message entity
  *
  * @author zh
  * @version v7.0.0
@@ -43,52 +43,52 @@ public class Message implements Serializable {
     private static final long serialVersionUID = 8197127057448115L;
 
     /**
-     * 站内消息主键
+     * Primary key for intra-site messages
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 标题
+     *  title
      */
     @Column(name = "title")
-    @ApiModelProperty(name = "title", value = "标题", required = false)
+    @ApiModelProperty(name = "title", value = " title", required = false)
     private String title;
     /**
-     * 消息内容
+     * The message content
      */
     @Column(name = "content")
-    @ApiModelProperty(name = "content", value = "消息内容", required = false)
+    @ApiModelProperty(name = "content", value = "The message content", required = false)
     private String content;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_ids")
-    @ApiModelProperty(name = "member_ids", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_ids", value = "membersid", required = false)
     private String memberIds;
     /**
-     * 管理员id
+     * The administratorid
      */
     @Column(name = "admin_id")
-    @ApiModelProperty(name = "admin_id", value = "管理员id", required = false)
+    @ApiModelProperty(name = "admin_id", value = "The administratorid", required = false)
     private Integer adminId;
     /**
-     * 管理员名称
+     * Administrator name
      */
     @Column(name = "admin_name")
-    @ApiModelProperty(name = "admin_name", value = "管理员名称", required = false)
+    @ApiModelProperty(name = "admin_name", value = "Administrator name", required = false)
     private String adminName;
     /**
-     * 发送时间
+     * Send time
      */
     @Column(name = "send_time")
-    @ApiModelProperty(name = "send_time", value = "发送时间", required = false)
+    @ApiModelProperty(name = "send_time", value = "Send time", required = false)
     private Long sendTime;
     /**
-     * 发送类型
+     * Send type
      */
     @Column(name = "send_type")
-    @ApiModelProperty(name = "send_type", value = "发送类型,0全站，1指定会员", required = false)
+    @ApiModelProperty(name = "send_type", value = "Send type,0Total station,1The specified member", required = false)
     private Integer sendType;
 
     @PrimaryKeyField

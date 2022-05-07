@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 首页生成
+ * Home page generated
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:30:51
+ * @since v7.0.0 2018years3month23The morning of10:30:51
  */
 @Component
 public class IndexChangeReceiver {
@@ -46,7 +46,7 @@ public class IndexChangeReceiver {
 	private List<IndexChangeEvent> events;
 
 	/**
-	 * 生成首页
+	 * Generated home page
 	 * @param operation
 	 */
 	@RabbitListener(bindings = @QueueBinding(
@@ -60,7 +60,7 @@ public class IndexChangeReceiver {
 				try {
 					event.createIndexPage(operation);
 				} catch (Exception e) {
-					logger.error("首页生成", e);
+					logger.error("Home page generated", e);
 				}
 			}
 		}

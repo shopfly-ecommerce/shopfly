@@ -23,38 +23,38 @@ import java.util.List;
 /**
  * @author fk
  * @version v1.0
- * @Description: 会员评论对外接口
+ * @Description: Member comment external interface
  * @date 2018/7/26 11:34
  * @since v7.0.0
  */
 public interface MemberCommentClient {
 
     /**
-     * 查询商品的好评比例
+     * Query the percentage of good reviews
      *
      * @return
      */
     List<GoodsGrade> queryGoodsGrade();
 
     /**
-     * 根据商品id获取评论数
+     * According to the goodsidGet number of comments
      *
-     * @param goodsId 商品id
-     * @return 评论数
+     * @param goodsId productid
+     * @return comments
      */
     Integer getGoodsCommentCount(Integer goodsId);
 
     /**
-     * 自动好评
+     * Automatic high praise
      * @param detailDTOList
      */
     void autoGoodComments(List<OrderDetailDTO> detailDTOList);
 
     /**
-     * 根据会员id修改头像信息
+     * According to the membershipidModifying profile Picture Information
      *
-     * @param memberId 会员id
-     * @param face     头像
+     * @param memberId membersid
+     * @param face     Head portrait
      */
     void editComment(Integer memberId, String face);
 }

@@ -41,7 +41,7 @@ public class EsConfig {
     private String nodes;
 
     /**
-     * 索引名称
+     * The index name
      */
     @Value("${spring.data.elasticsearch.index-name}")
     private String indexName;

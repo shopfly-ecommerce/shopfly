@@ -18,63 +18,63 @@ package cloud.shopfly.b2c.core.base.message;
 import java.io.Serializable;
 
 /**
- * 商品变化消息
+ * Commodity change message
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月22日 上午10:05:19
+ * 2018years3month22The morning of10:05:19
  */
 public class GoodsChangeMsg implements Serializable{
 
 	private static final long serialVersionUID = 3352769927238407770L;
 
 	/**
-	 * 变更资源，商品id集合
+	 * Change resources, goodsidA collection of
 	 */
 	private Integer[] goodsIds;
 
 	/**
-	 * 操作类型
+	 * Operation type
 	 */
 	private Integer operationType;
 
 	/**
-	 * 添加
+	 * add
 	 */
 	public final static int ADD_OPERATION = 1;
 
 	/**
-	 * 手动修改
+	 * Manually modify
 	 */
 	public final static int MANUAL_UPDATE_OPERATION = 2;
 
 	/**
-	 * 自动修改
+	 * Automatically change
 	 */
 	public final static int AUTO_UPDATE_OPERATION = 9;
 
 	/**
-	 * 删除
+	 * delete
 	 */
 	public final static int DEL_OPERATION = 3;
 
 	/**
-	 * 下架
+	 * off
 	 */
 	public final static int UNDER_OPERATION = 4;
 
 	/**
-	 * 还原
+	 * reduction
 	 */
 	public final static int REVERT_OPERATION = 5;
 
 	/**
-	 * 放入回收站
+	 * Put it in the recycling bin
 	 */
 	public final static int INRECYCLE_OPERATION = 6;
 
 	/**
-	 * 消息
+	 * The message
 	 */
 	private String message;
 

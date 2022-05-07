@@ -26,14 +26,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 商家中心统计，店铺概况
+ * Business center statistics, shop profile
  *
  * @author mengyuanming
  * @version 2.0
  * @since 7.0
- * 2018年4月18日上午11:30:50
+ * 2018years4month18The morning of11:30:50
  */
-@Api(description = "商家统计 店铺概况")
+@Api(description = "Merchants collect store profiles")
 @RestController
 @RequestMapping("/seller/statistics/shop_profile")
 public class ShopProfileStatisticsSellerController {
@@ -41,13 +41,13 @@ public class ShopProfileStatisticsSellerController {
     @Autowired
     private ShopProfileStatisticsManager shopProfileStatisticsManager;
 
-    @ApiOperation(value = "获取30天店铺概况展示数据", response = ShopProfileVO.class)
+    @ApiOperation(value = "To obtain30Day store overview display data", response = ShopProfileVO.class)
     @GetMapping("/data")
     public ShopProfileVO getLast30dayStatus() {
         return this.shopProfileStatisticsManager.data();
     }
 
-    @ApiOperation(value = "获取30天店铺下单金额统计图数据", response = SimpleChart.class)
+    @ApiOperation(value = "To obtain30Day shop order amount statistics chart data", response = SimpleChart.class)
     @GetMapping("/chart")
     public SimpleChart getLast30dayLineChart() {
         return this.shopProfileStatisticsManager.chart();

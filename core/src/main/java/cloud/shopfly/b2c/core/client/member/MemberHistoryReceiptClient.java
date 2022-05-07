@@ -18,29 +18,29 @@ package cloud.shopfly.b2c.core.client.member;
 import cloud.shopfly.b2c.core.member.model.dos.ReceiptHistory;
 
 /**
- * 会员发票历史查询客户端
+ * Member invoice history query client
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 下午2:55
+ * @date 18/7/27 In the afternoon2:55
  * @since v7.0
  */
 
 public interface MemberHistoryReceiptClient {
 
     /**
-     * 根据订单sn查询历史发票信息
+     * According to the ordersnExample Query historical invoice information
      *
-     * @param orderSn 订单sn
-     * @return 历史发票信息
+     * @param orderSn The ordersn
+     * @return Historical invoice Information
      */
     ReceiptHistory getReceiptHistory(String orderSn);
 
     /**
-     * 添加发票历史
+     * Add invoice history
      *
-     * @param receiptHistory 发票历史
-     * @return ReceiptHistory 发票历史
+     * @param receiptHistory Invoice history
+     * @return ReceiptHistory Invoice history
      */
     ReceiptHistory add(ReceiptHistory receiptHistory);
 

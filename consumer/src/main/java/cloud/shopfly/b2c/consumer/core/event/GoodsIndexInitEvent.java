@@ -16,16 +16,16 @@
 package cloud.shopfly.b2c.consumer.core.event;
 
 /**
- * 商品索引生成事件
+ * Item index generates events
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:24:59
+ * 2018years3month23The morning of10:24:59
  */
 public interface GoodsIndexInitEvent {
 
 	/**
-	 * 创建商品索引
+	 * Creating a commodity index
 	 */
     void createGoodsIndex();
 }

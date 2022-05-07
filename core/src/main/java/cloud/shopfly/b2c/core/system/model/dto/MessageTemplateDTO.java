@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 消息模版实体
+ * Message template entity
  *
  * @author zjp
  * @version v7.0.0
@@ -44,66 +44,66 @@ public class MessageTemplateDTO implements Serializable {
     private static final long serialVersionUID = 2098633720936223L;
 
     /**
-     * 模版ID
+     * templateID
      */
     @Id(name = "id")
     @ApiModelProperty(required = true)
     private Integer id;
     /**
-     * 模板名称
+     * Template name
      */
     @Column(name = "tpl_name")
-    @ApiModelProperty(name = "tpl_name", value = "模板名称", required = true)
-    @NotEmpty(message = "模板名称必填")
+    @ApiModelProperty(name = "tpl_name", value = "Template name", required = true)
+    @NotEmpty(message = "Template name This parameter is mandatory")
     private String tplName;
     /**
-     * 邮件标题
+     * Email title
      */
     @Column(name = "email_title")
-    @ApiModelProperty(name = "email_title", value = "邮件标题", required = true)
-    @NotEmpty(message = "邮件标题必填")
+    @ApiModelProperty(name = "email_title", value = "Email title", required = true)
+    @NotEmpty(message = "Email title Mandatory")
     private String emailTitle;
     /**
-     * 短信提醒是否开启
+     * Whether SMS notification is enabled
      */
     @Column(name = "sms_state")
-    @ApiModelProperty(name = "sms_state", value = "短信提醒是否开启", required = true, allowableValues = "OPEN,CLOSED")
-    @NotEmpty(message = "短信提醒是否开启必填")
+    @ApiModelProperty(name = "sms_state", value = "Whether SMS notification is enabled", required = true, allowableValues = "OPEN,CLOSED")
+    @NotEmpty(message = "SMS notification Specifies whether to enable SMS notification")
     private String smsState;
     /**
-     * 站内信提醒是否开启
+     * Whether the in-station letter reminder is enabled
      */
     @Column(name = "notice_state")
-    @ApiModelProperty(name = "notice_state", value = "站内信提醒是否开启", required = true, allowableValues = "OPEN,CLOSED")
-    @NotEmpty(message = "站内信提醒是否开启必填")
+    @ApiModelProperty(name = "notice_state", value = "Whether the in-station letter reminder is enabled", required = true, allowableValues = "OPEN,CLOSED")
+    @NotEmpty(message = "Station letter reminder whether to open mandatory")
     private String noticeState;
     /**
-     * 邮件提醒是否开启
+     * Whether to enable email notification
      */
     @Column(name = "email_state")
-    @ApiModelProperty(name = "email_state", value = "邮件提醒是否开启", required = true, allowableValues = "OPEN,CLOSED")
-    @NotEmpty(message = "邮件提醒是否开启必填")
+    @ApiModelProperty(name = "email_state", value = "Whether to enable email notification", required = true, allowableValues = "OPEN,CLOSED")
+    @NotEmpty(message = "Whether to enable email notification Mandatory")
     private String emailState;
     /**
-     * 站内信内容
+     * Station message content
      */
     @Column(name = "content")
-    @ApiModelProperty(name = "content", value = "站内信内容", required = true)
-    @NotEmpty(message = "站内信内容必填")
+    @ApiModelProperty(name = "content", value = "Station message content", required = true)
+    @NotEmpty(message = "Station letter content must be filled in")
     private String content;
     /**
-     * 短信内容
+     * Message content
      */
     @Column(name = "sms_content")
-    @ApiModelProperty(name = "sms_content", value = "短信内容", required = true)
-    @NotEmpty(message = "短信内容必填")
+    @ApiModelProperty(name = "sms_content", value = "Message content", required = true)
+    @NotEmpty(message = "This parameter is mandatory")
     private String smsContent;
     /**
-     * 邮件内容
+     * Email content
      */
     @Column(name = "email_content")
-    @ApiModelProperty(name = "email_content", value = "邮件内容", required = true)
-    @NotEmpty(message = "邮件内容必填")
+    @ApiModelProperty(name = "email_content", value = "Email content", required = true)
+    @NotEmpty(message = "Email Content Mandatory")
     private String emailContent;
 
     @PrimaryKeyField

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 店铺站内消息业务类
+ * In-store message business class
  *
  * @author zjp
  * @version v7.0.0

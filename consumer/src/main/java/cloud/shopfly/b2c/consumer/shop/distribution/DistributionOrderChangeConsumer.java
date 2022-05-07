@@ -26,13 +26,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 分销商订单处理
+ * Distributor Order processing
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/14 上午7:13
+ * 2018/6/14 In the morning7:13
  */
 
 @Component
@@ -52,7 +52,7 @@ public class DistributionOrderChangeConsumer implements OrderStatusChangeEvent {
                 distributionOrderClient.confirm(order);
             }
         } catch (Exception e) {
-            logger.error("订单收款分销计算返利异常：", e);
+            logger.error("Order collection distribution calculation rebate is abnormal：", e);
         }
     }
 

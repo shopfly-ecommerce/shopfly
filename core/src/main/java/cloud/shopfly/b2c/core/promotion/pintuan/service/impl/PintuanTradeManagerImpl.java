@@ -38,11 +38,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by kingapex on 2019-01-24.
- * 拼团交易业务类<br/>
- * 继承默认的交易业务类<br/>
- * 其中不同的是:<br/>
- * 1、使用 {@link PintuanCartManager} 获取购物车内容<br/>
- * 2、不检测优惠活动的合法性，因为拼团不存在其它活动的重叠
+ * Group trading business class<br/>
+ * Inherit the default transaction business class<br/>
+ * The difference is:<br/>
+ * 1、use{@link PintuanCartManager} Get shopping cart contents<br/>
+ * 2、Do not test the legitimacy of preferential activities, because there is no overlap of other activities
  *
  * @author kingapex
  * @version 1.0
@@ -61,7 +61,7 @@ public class PintuanTradeManagerImpl extends TradeManagerImpl {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     /**
-     * 创建订单并创建拼团订单
+     * Create an order and create a group order
      *
      * @param client
      * @param pinTuanOrderId
@@ -69,18 +69,18 @@ public class PintuanTradeManagerImpl extends TradeManagerImpl {
      */
     public TradeVO createTrade(String client, Integer pinTuanOrderId) {
 
-        //自己参与自己拼团的判定
+        // Participate in the decision of their own group
         if (pinTuanOrderId != null) {
             Buyer buyer = UserContext.getBuyer();
             this.pintuanOrderManager.getModel(pinTuanOrderId).getParticipants().forEach(participant -> {
                 if (participant.getId().equals(buyer.getUid())) {
-                    throw new ServiceException(PintuanErrorCode.E5013.code(), "不能参加自己创建的拼团");
+                    throw new ServiceException(PintuanErrorCode.E5013.code(), "You cannot join a group created by yourself");
                 }
             });
         }
 
 
-        //设置客户的类型
+        // Set the customer type
         super.setClientType(client);
 
         CheckoutParamVO param = checkoutParamManager.getParam();
@@ -90,7 +90,7 @@ public class PintuanTradeManagerImpl extends TradeManagerImpl {
         MemberAddress memberAddress = this.memberAddressClient.getModel(param.getAddressId());
 
         if (logger.isDebugEnabled()) {
-            logger.debug("准备创建拼团订单");
+            logger.debug("Ready to create a group order");
             logger.debug("param:" + param);
             logger.debug("cartView:" + cartView);
             logger.debug("memberAddress:" + memberAddress);
@@ -98,21 +98,21 @@ public class PintuanTradeManagerImpl extends TradeManagerImpl {
 
         TradeCreator tradeCreator = new DefaultTradeCreator(param, cartView, memberAddress).setTradeSnCreator(tradeSnCreator).setGoodsClient(goodsClient).setMemberClient(memberClient).setShippingManager(shippingManager);
 
-        //和普通的交易不同，不用检测活动的合法性，因为拼团不会存在活动的重叠
-        //检测配置范围-> 检测商品合法性 -> 创建交易
+        // Unlike ordinary transactions, there is no need to test the legality of activities because there is no overlap of activities
+        // Check configuration range -> Check item validity -> Create transaction
         TradeVO tradeVO = tradeCreator.checkShipRange().checkGoods().createTrade();
         OrderDTO orderDTO = tradeVO.getOrderList().get(0);
         orderDTO.setOrderType(OrderTypeEnum.pintuan.name());
 
         if (logger.isDebugEnabled()) {
-            logger.debug("生成交易：" + tradeVO);
+            logger.debug("Generate trading：" + tradeVO);
         }
 
-        //订单入库
+        // Order is put in storage
         this.tradeIntodbManager.intoDB(tradeVO);
 
 
-        //创建拼团订单
+        // Create a group order
         OrderDTO order = tradeVO.getOrderList().get(0);
         CartSkuVO skuVO = cartView.getCartList().get(0).getSkuList().get(0);
 

@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Mq 延时队列配置
+ * Mq Delay queue configuration
  * @author liushuai(liushuai711@gmail.com)
  * @version v1.0
  * @since v7.0
- * 2019/3/4 下午9:12
+ * 2019/3/4 In the afternoon9:12
  * @Description:
  *
  */
@@ -40,7 +40,7 @@ import java.util.Map;
 public class XdelayConfig {
 
     /**
-     * 创建一个立即消费队列
+     * Create an immediate consumption queue
      * @return
      */
     @Bean

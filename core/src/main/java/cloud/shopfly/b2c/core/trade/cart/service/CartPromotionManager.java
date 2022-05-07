@@ -23,10 +23,10 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.SelectedPromotionVo;
 import java.util.List;
 
 /**
- * 购物车优惠信息处理接口<br/>
- * 负责促销的使用、取消、读取。
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >购物车架构</a>
+ * Shopping cart discount information processing interface<br/>
+ * Responsible for the use of promotions、cancel、Read.
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >Shopping cart architecture</a>
  *
  * @author kingapex
  * @version 1.0
@@ -37,20 +37,20 @@ public interface CartPromotionManager {
 
 
     /**
-     * 获取选中的促销活动
+     * Get the selected promotion
      * @return
      */
     SelectedPromotionVo getSelectedPromotion();
 
     /**
-     * 获取所有有效的满优惠活动
+     * Get all valid full offers
      * @param cartList
      * @return
      */
     List<FullDiscountVO> getFullDiscounPromotion(List<CartVO> cartList);
 
     /**
-     * 使用一个促销活动
+     * Use a promotion
      *
      * @param skuId
      * @param activityId
@@ -60,26 +60,26 @@ public interface CartPromotionManager {
 
 
     /**
-     * 使用一个优惠券
+     * Use a coupon
      * @param mcId
      * @param totalPrice
      */
     void useCoupon(Integer mcId, double totalPrice);
 
     /**
-     * 清除所有的优惠券
+     * Clear all coupons
      */
     void cleanCoupon();
 
     /**
-     * 批量删除sku对应的优惠活动
+     * Batch deleteskuCorresponding preferential activities
      *
      * @param skuIds
      */
     void delete(Integer[] skuIds);
 
     /**
-     * 清空当前用户的所有优惠活动
+     * Clear all offers for the current user
      */
     void clean();
 }

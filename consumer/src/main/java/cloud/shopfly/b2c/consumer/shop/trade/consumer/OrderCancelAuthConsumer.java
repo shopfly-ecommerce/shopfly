@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 订单取消后审核消费者
+ * @Description: Review customer after order cancellation
  * @date 2018/9/415:18
  * @since v7.0.0
  */
@@ -57,11 +57,11 @@ public class OrderCancelAuthConsumer implements RefundStatusChangeEvent {
 
     @Override
     public void refund(RefundChangeMsg refundChangeMsg) {
-        //判断售后单是否是取消单
+        // Judge whether the after sale order is cancelled
         RefundDO refund = refundChangeMsg.getRefund();
         if (RefundTypeEnum.CANCEL_ORDER.name().equals(refund.getRefundType())
                 && RefundStatusEnum.PASS.equals(refundChangeMsg.getRefundStatusEnum())) {
-            //更改订单的状态为已取消
+            // Change the status of the order to Cancelled
             CancelVO cancelVO = new CancelVO();
             cancelVO.setOperator(refund.getMemberName());
             cancelVO.setOrderSn(refund.getOrderSn());
@@ -77,7 +77,7 @@ public class OrderCancelAuthConsumer implements RefundStatusChangeEvent {
             for (OrderSkuDTO sku : skuList) {
                 sku.setServiceStatus(ServiceStatusEnum.NOT_APPLY.value());
             }
-            //更改订单的状态为已取消
+            // Change the status of the order to Cancelled
             String sql = "update es_order set service_status  = ?,items_json = ? where sn =? ";
             this.daoSupport.execute(sql, ServiceStatusEnum.EXPIRED.name(), JsonUtil.objectToJson(skuList), refund.getOrderSn());
         }

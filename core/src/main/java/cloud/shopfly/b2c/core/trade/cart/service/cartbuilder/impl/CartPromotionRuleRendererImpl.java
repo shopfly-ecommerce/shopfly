@@ -38,7 +38,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2018/12/10.
- * 购物促销信息渲染实现
+ * Shopping promotion information rendering implementation
  *
  * @author kingapex
  * @version 1.0
@@ -60,7 +60,7 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
     private List<SkuPromotionRuleBuilder> skuPromotionRuleBuilderList;
 
     /**
-     * 目前只有一种满减是购物车级别促销活动
+     * At present, only one kind of discount is shopping cart level promotion
      */
     @Autowired
     private CartPromotionRuleBuilder cartPromotionRuleBuilder;
@@ -72,11 +72,11 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
     @Override
     public void render(List<CartVO> cartList, boolean includeCoupon) {
 
-        //渲染规则
+        // Rendering rules
         this.renderRule(cartList, includeCoupon);
 
         if(logger.isDebugEnabled()){
-            logger.debug("购物车处理完促销规则结果为：");
+            logger.debug("The result of shopping cart processing promotion rule is：");
             logger.debug(cartList.toString());
         }
 
@@ -84,26 +84,26 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
 
 
     /**
-     * 规则渲染
+     * The rules apply colours to a drawing
      *
      * @param cartList
      */
     private void renderRule(List<CartVO> cartList, boolean includeCoupon) {
 
-        //获取正在进行的满优惠活动列表
+        // Get a list of ongoing full offers
         List<FullDiscountVO> fullDiscountVoList = cartPromotionManager.getFullDiscounPromotion(cartList);
 
         SelectedPromotionVo selectedPromotionVo = cartPromotionManager.getSelectedPromotion();
 
-        //用户选择的单品活动
+        // User selected single product activity
         List<PromotionVO> skuPromotionList = selectedPromotionVo.getSinglePromotionList();
 
         for (CartVO cart : cartList) {
 
             if (includeCoupon) {
-                //用户选择使用的优惠券
+                // The coupons the user chooses to use
                 CouponVO coupon = selectedPromotionVo.getCoupon();
-                //如果有使用的优惠券，则build rule
+                // Build rule if there are coupons to use
                 if (coupon != null) {
                     PromotionRule couponRule = cartCouponRuleBuilder.build(cart, coupon);
                     cart.getRuleList().add(couponRule);
@@ -112,20 +112,20 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
             }
 
 
-            //渲染单品活动
-            //空过滤
+            // Render single product activity
+            // Empty filter
             if (skuPromotionList != null) {
-                //循环处理购物车的促销规则
+                // Loop through shopping cart promotion rules
                 for (CartSkuVO cartSku : cart.getSkuList()) {
 
-                    //如果是结算页，则跳过未选中的  update by liuyulei 2019-05-07
+                    // If it is a settlement page, skip the unchecked update by LIUyulei 2019-05-07
                     if (CartType.CHECKOUT.equals(cart.getCartType()) && cartSku.getChecked() == 0) {
-                        //如果未选中，则将选择的促销活动删除
+                        // If not selected, the selected promotion is deleted
                         cartPromotionManager.delete(new Integer[]{cartSku.getSkuId()});
                         continue;
                     }
 
-                    //计算促销规则，形成list，并压入统一的rule list 中
+                    // Calculate promotion rules, form a list, and press it into a unified rule list
                     PromotionRule skuRule = oneSku(cartSku, skuPromotionList);
                     cartSku.setRule(skuRule);
 
@@ -133,7 +133,7 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
             }
 
 
-            //渲染满减的优惠
+            // Render full minus offers
             PromotionRule cartRule = this.onCart(cart, fullDiscountVoList);
             cart.getRuleList().add(cartRule);
 
@@ -144,26 +144,26 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
 
 
     /**
-     * 构建满减的购物车级别的规则
+     * Build a fully subtracted shopping cart level rule
      *
      * @param cart
      * @param fullDiscountVoList
-     * @return 如果没有合适的规则返回null
+     * @return Returns if there is no suitable rulenull
      */
     private PromotionRule onCart(CartVO cart, List<FullDiscountVO> fullDiscountVoList) {
 
 
         for (FullDiscountVO fullDiscountVO : fullDiscountVoList) {
-            //生成优惠规则
+            // Generate preference rules
             PromotionVO promotionVO = new PromotionVO();
             promotionVO.setPromotionType(PromotionTypeEnum.FULL_DISCOUNT.name());
             promotionVO.setFullDiscountVO(fullDiscountVO);
             PromotionRule rule = cartPromotionRuleBuilder.build(cart, promotionVO);
 
-            //如果达到了满减门槛或者是在购物车页面，则显示活动提示
-            //同时意谓着：如果在结算页没有达到门槛，则不显示活动提示
+            // If the full reduction threshold is reached or is on the shopping cart page, an activity prompt is displayed
+            // It also means that if the threshold is not reached on the settlement page, no active prompt will be displayed
             if (!rule.isInvalid() || cart.getCartType().equals(CartType.CART)) {
-                //满减提示
+                // With prompt reduction
                 String notice = this.createNotice(fullDiscountVO);
                 cart.setPromotionNotice(notice);
             }
@@ -177,9 +177,9 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
 
 
     /**
-     * 根据促销类型找到相应的builder
+     * Find the corresponding promotion according to the type of promotionbuilder
      *
-     * @param promotionType 促销类型
+     * @param promotionType Promotion type
      * @return
      */
     private SkuPromotionRuleBuilder getSkuRuleBuilder(String promotionType) {
@@ -202,20 +202,20 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
         for (PromotionVO promotionVo : skuPromotionList) {
 
             if (promotionVo.getSkuId().intValue() == cartSku.getSkuId().intValue()) {
-                //sku优惠规则构建器
+                // Sku preference rule builder
                 SkuPromotionRuleBuilder skuRuleBuilder = this.getSkuRuleBuilder(promotionVo.getPromotionType());
 
                 if (skuRuleBuilder == null) {
                    if (logger.isDebugEnabled()){
-                       logger.debug(cartSku.getSkuId() + "的活动类型[" + promotionVo.getPromotionType() + "]没有找到builder");
+                       logger.debug(cartSku.getSkuId() + "Types of activities[" + promotionVo.getPromotionType() + "]Could not findbuilder");
                    }
                     continue;
                 }
 
-                //设置单品活动的选择中情况
+                // Set the situation in the selection of single product activities
                 selectedPromotion(cartSku, promotionVo);
 
-                //构建促销规则
+                // Build promotion rules
                 return skuRuleBuilder.build(cartSku, promotionVo);
             }
 
@@ -237,71 +237,71 @@ public class CartPromotionRuleRendererImpl implements CartPromotionRuleRenderer 
 
 
     /**
-     * 根据满减活动，生成促销提示
+     * Generate promotional prompts based on full reduction activities
      *
-     * @param fullDiscountVO 满减活动vo
+     * @param fullDiscountVO With reduced activityvo
      * @return
      */
     private String createNotice(FullDiscountVO fullDiscountVO) {
 
         DecimalFormat df = new DecimalFormat("#.00");
-        //促销文字提示
+        // Promotional text prompt
         StringBuilder promotionNotice = new StringBuilder();
 
-        //优惠门槛
+        // Preferential threshold
         Double fullMoney = fullDiscountVO.getFullMoney();
-        promotionNotice.append("满").append(df.format(fullMoney));
+        promotionNotice.append("full").append(df.format(fullMoney));
 
-        //是否减现金
+        // Whether to reduce cash or not
         Integer isFullMinus = fullDiscountVO.getIsFullMinus();
-        //减现金的金额
+        // Reduce the amount of cash
         Double minusValue = fullDiscountVO.getMinusValue();
         if (isFullMinus == 1) {
-            promotionNotice.append("减").append(minusValue).append("元");
+            promotionNotice.append("Reduction of").append(minusValue).append("USD");
         }
 
 
-        //是否打折
+        // Whether the discount
         Integer isDiscount = fullDiscountVO.getIsDiscount();
-        //折扣
+        // discount
         Double discountValue = fullDiscountVO.getDiscountValue();
 
         if (isDiscount == 1) {
-            promotionNotice.append("打").append(discountValue).append("折");
+            promotionNotice.append("play").append(discountValue).append("fold");
         }
 
 
-        //是否赠送积分
+        // Whether to give bonus points
         Integer isSendPoint = fullDiscountVO.getIsSendPoint();
 
-        //赠品积分值
+        // Bonus points
         Integer pointValue = fullDiscountVO.getPointValue();
 
         if (isSendPoint == 1) {
-            promotionNotice.append("赠").append(pointValue).append("积分");
+            promotionNotice.append("A gift").append(pointValue).append("point");
         }
 
-        //是否免邮
+        // Whether free mail
         Integer isFreeShip = fullDiscountVO.getIsFreeShip();
         if (isFreeShip == 1) {
-            promotionNotice.append("免邮费");
+            promotionNotice.append("Exempt postage");
         }
 
 
-        //是否有赠品
+        // Are there any freebies
         Integer isSendGift = fullDiscountVO.getIsSendGift();
 
         if (isSendGift == 1) {
-            promotionNotice.append("送赠品");
+            promotionNotice.append("To send gift");
         }
 
 
-        //是否赠优惠券
+        // Do you give coupons?
         Integer isSendBonus = fullDiscountVO.getIsSendBonus();
         if (isSendBonus == 1) {
             CouponDO couponDO = fullDiscountVO.getCouponDO();
             if (couponDO != null) {
-                promotionNotice.append("送优惠券");
+                promotionNotice.append("To send a coupon");
             }
 
 

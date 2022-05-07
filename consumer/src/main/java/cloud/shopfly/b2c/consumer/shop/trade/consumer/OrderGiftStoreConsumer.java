@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 订单取消时增加订单赠品的可用库存
+ * Increases the available inventory of order giveaways when an order is canceled
  *
  * @author Snow create in 2018/5/21
  * @version v2.0
@@ -48,21 +48,21 @@ public class OrderGiftStoreConsumer implements OrderStatusChangeEvent {
     @Override
     public void orderChange(OrderStatusChangeMsg orderMessage) {
 
-        //已确认状态减少赠品可用库存
+        // Confirmed status reduces available inventory of giveaways
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.CONFIRM.name())) {
 
             List<FullDiscountGiftDO> giftList = this.getList(orderMessage);
             this.fullDiscountGiftManager.reduceGiftQuantity(giftList, QuantityType.enable);
         }
 
-        // 发货减少赠品真实库存
+        // Shipping reduces freebies real inventory
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.SHIPPED.name())) {
 
             List<FullDiscountGiftDO> giftList = this.getList(orderMessage);
             this.fullDiscountGiftManager.reduceGiftQuantity(giftList, QuantityType.actual);
         }
 
-        //取消状态增加赠品可用库存
+        // Cancel status to increase available inventory of giveaways
         if(orderMessage.getNewStatus().name().equals(OrderStatusEnum.CANCELLED.name())){
 
             List<FullDiscountGiftDO> giftList = this.getList(orderMessage);
@@ -72,7 +72,7 @@ public class OrderGiftStoreConsumer implements OrderStatusChangeEvent {
     }
 
     /**
-     * 查询赠品信息
+     * Search for giveaway information
      *
      * @param orderMessage
      * @return

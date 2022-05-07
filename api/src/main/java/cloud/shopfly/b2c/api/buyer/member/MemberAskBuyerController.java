@@ -35,7 +35,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * 咨询控制器
+ * Consulting controller
  *
  * @author fk
  * @version v1.0
@@ -44,7 +44,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/members/asks")
-@Api(description = "咨询相关API")
+@Api(description = "Consulting the relevantAPI")
 @Validated
 public class MemberAskBuyerController {
 
@@ -52,10 +52,10 @@ public class MemberAskBuyerController {
     private MemberAskManager memberAskManager;
 
 
-    @ApiOperation(value = "查询我的咨询列表", response = MemberAsk.class)
+    @ApiOperation(value = "Check my list of inquiries", response = MemberAsk.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, CommentQueryParam param) {
@@ -69,24 +69,24 @@ public class MemberAskBuyerController {
     }
 
 
-    @ApiOperation(value = "添加咨询", response = MemberAsk.class)
+    @ApiOperation(value = "Add consulting", response = MemberAsk.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ask_content", value = "咨询内容", dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "goods_id", value = "咨询商品id", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "ask_content", value = "Consulting content", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "goods_id", value = "Consultation goodsid", dataType = "int", paramType = "query")
     })
     @PostMapping
-    public MemberAsk add(@NotEmpty(message = "请输入咨询内容")@ApiIgnore String askContent,@NotNull(message = "咨询商品不能为空") @ApiIgnore Integer goodsId) {
+    public MemberAsk add(@NotEmpty(message = "Please enter the consultation content")@ApiIgnore String askContent,@NotNull(message = "Consulting goods cannot be empty") @ApiIgnore Integer goodsId) {
 
         MemberAsk memberAsk = this.memberAskManager.add(askContent,goodsId);
 
         return memberAsk;
     }
 
-    @ApiOperation(value	= "查询某商品的咨询", response = CommentVO.class)
+    @ApiOperation(value	= "An inquiry about a product", response = CommentVO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name="goods_id",value="商品ID",required=true,paramType="path",dataType="int")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name="goods_id",value="productID",required=true,paramType="path",dataType="int")
     })
     @GetMapping("/goods/{goods_id}")
     public Page listAsks(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @PathVariable("goods_id") Integer goodsId)	{

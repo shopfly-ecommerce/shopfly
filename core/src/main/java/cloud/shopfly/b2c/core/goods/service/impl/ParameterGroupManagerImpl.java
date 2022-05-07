@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 参数组业务类
+ * Parameter group business class
  *
  * @author fk
  * @version v2.0
@@ -67,10 +67,10 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public ParameterGroupDO add(ParameterGroupDO parameterGroup) {
 
-        // 查看分类是否存在
+        // Check whether categories exist
         CategoryDO category = categoryManager.getModel(parameterGroup.getCategoryId());
         if (category == null) {
-            throw new ServiceException(GoodsErrorCode.E304.code(), "关联分类不存在");
+            throw new ServiceException(GoodsErrorCode.E304.code(), "The association classification does not exist");
         }
         String sql = "select * from es_parameter_group where category_id = ? order by sort desc limit 0,1";
         ParameterGroupDO grouptmp = this.daoSupport.queryForObject(sql, ParameterGroupDO.class,
@@ -91,10 +91,10 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     public ParameterGroupDO edit(String groupName, Integer id) {
         ParameterGroupDO group = this.getModel(id);
         if (group == null) {
-            throw new ServiceException(GoodsErrorCode.E304.code(), "参数组不存在");
+            throw new ServiceException(GoodsErrorCode.E304.code(), "The parameter group does not exist");
         }
         group.setGroupName(groupName);
-        // 更新
+        // update
         this.daoSupport.update(group, id);
         return group;
     }
@@ -103,7 +103,7 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(ParameterGroupDO.class, id);
-        // 删除参数组，需要将参数组下的参数同时删除
+        // To delete a parameter group, delete all parameters in the parameter group
         parametersManager.deleteByGroup(id);
     }
 
@@ -115,7 +115,7 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     @Override
     public List<ParameterGroupVO> getParamsByCategory(Integer categoryId) {
 
-		//查询参数组
+		// Querying parameter Groups
         String sql = "select * from es_parameter_group where category_id = ? order by sort asc";
         List<ParameterGroupDO> groupList = this.daoSupport.queryForList(sql, ParameterGroupDO.class, categoryId);
 
@@ -130,7 +130,7 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
     }
 
     /**
-     * 拼装参数组和参数的返回值
+     * Assembles the parameter group and the return value of the parameter
      *
      * @param groupList
      * @param paramList
@@ -164,7 +164,7 @@ public class ParameterGroupManagerImpl implements ParameterGroupManager {
         String sql = "";
         ParameterGroupDO curGroup = this.daoSupport.queryForObject(ParameterGroupDO.class, groupId);
         if (curGroup == null) {
-            throw new ServiceException(GoodsErrorCode.E304.code(), "参数组不存在");
+            throw new ServiceException(GoodsErrorCode.E304.code(), "The parameter group does not exist");
         }
 
         if ("up".equals(sortType)) {

@@ -21,29 +21,29 @@ package cloud.shopfly.b2c.core.distribution.model.dto;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2019-06-04 下午7:03
+ * 2019-06-04 In the afternoon7:03
  */
 public class DistributionRefundDTO {
 
     /**
-     * lv1 会员id
+     * lv1 membersid
      */
     private Integer memberIdLv1;
     /**
-     * lv2 会员id
+     * lv2 membersid
      */
     private Integer memberIdLv2;
     /**
-     * lv1 会员返利
+     * lv1 Member of the rebate
      */
     private Double refundLv1;
     /**
-     * lv2 会员返利
+     * lv2 Member of the rebate
      */
     private Double RefundLv2;
 
     /**
-     * 退款金额
+     * The refund amount
      */
     private Double refundMoney;
 

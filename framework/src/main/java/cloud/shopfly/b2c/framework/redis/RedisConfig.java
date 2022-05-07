@@ -40,11 +40,11 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import java.util.Set;
 
 /**
- * Redis配置
+ * Redisconfiguration
  * @author kingapex
- * 2017年8月2日上午11:52:50
+ * 2017years8month2The morning of11:52:50
  *
- * 修改文件位置,增加RedissonClinet的配置
+ * Modifying file Location,increaseRedissonClinetThe configuration of the
  * @version 2.0
  * @since 6.4
  */
@@ -89,7 +89,7 @@ public class RedisConfig {
 		String type  = config.getType();
 
 
-		//独立模式
+		// Stand-alone mode
 		if( RedisType.standalone.name().equals(type) ){
 			rconfig = new Config();
 			RedisStandaloneConfiguration standaloneConfiguration = lettuceConnectionFactory.getStandaloneConfiguration();
@@ -104,7 +104,7 @@ public class RedisConfig {
 		}
 
 
-		//哨兵模式
+		// The guard mode
 		if( RedisType.sentinel.name().equals(type) ){
 			rconfig = new Config();
 			RedisSentinelConfiguration sentinelConfiguration =  lettuceConnectionFactory.getSentinelConfiguration();
@@ -118,7 +118,7 @@ public class RedisConfig {
 			}
 		}
 
-		//集群模式
+		// Cluster pattern
 		if( RedisType.cluster.name().equals(type) ){
 			rconfig = new Config();
 			RedisClusterConfiguration clusterConfiguration =  lettuceConnectionFactory.getClusterConfiguration();
@@ -130,7 +130,7 @@ public class RedisConfig {
 		}
 
 		if(  rconfig == null){
-			throw  new RuntimeException("错误的redis 类型，请检查 redis.type参数");
+			throw  new RuntimeException("The wrongredis Type, please checkredis.typeparameter");
 		}
 		RedissonClient redisson = Redisson.create(rconfig);
 		return  redisson;

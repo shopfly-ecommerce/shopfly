@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 发票历史实体
+ * Historical entity of invoice
  *
  * @author zh
  * @version v7.0.0
@@ -45,88 +45,88 @@ public class ReceiptHistory implements Serializable {
     private static final long serialVersionUID = 7024661438767317L;
 
     /**
-     * 发票历史idreceipt_amount
+     * Invoice historyidreceipt_amount
      */
     @Id(name = "history_id")
     @ApiModelProperty(hidden = true)
     private Integer historyId;
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersid", required = false)
     private Integer memberId;
     /**
-     * 发票类型
+     * Invoice type
      */
     @Column(name = "receipt_type")
-    @ApiModelProperty(name = "receipt_type", value = "发票类型", required = false)
+    @ApiModelProperty(name = "receipt_type", value = "Invoice type", required = false)
     private String receiptType;
     /**
-     * 发票抬头
+     * The invoice looked up
      */
     @Column(name = "receipt_title")
-    @ApiModelProperty(name = "receipt_title", value = "发票抬头", required = false)
+    @ApiModelProperty(name = "receipt_title", value = "The invoice looked up", required = false)
     private String receiptTitle;
     /**
-     * 发票金额
+     * The invoice amount
      */
     @Column(name = "receipt_amount")
-    @ApiModelProperty(name = "receipt_amount", value = "发票金额", required = false)
+    @ApiModelProperty(name = "receipt_amount", value = "The invoice amount", required = false)
     private Double receiptAmount;
     /**
-     * 发票内容
+     * The invoice content
      */
     @Column(name = "receipt_content")
-    @ApiModelProperty(name = "receipt_content", value = "发票内容", required = false)
+    @ApiModelProperty(name = "receipt_content", value = "The invoice content", required = false)
     private String receiptContent;
     /**
-     * 税号
+     * ein
      */
     @Column(name = "tax_no")
-    @ApiModelProperty(name = "tax_no", value = "税号", required = false)
+    @ApiModelProperty(name = "tax_no", value = "ein", required = false)
     private String taxNo;
     /**
-     * 注册地址
+     * The registered address
      */
     @Column(name = "reg_addr")
-    @ApiModelProperty(name = "reg_addr", value = "注册地址", required = false)
+    @ApiModelProperty(name = "reg_addr", value = "The registered address", required = false)
     private String regAddr;
     /**
-     * 注册电话
+     * Registered telephone
      */
     @Column(name = "reg_tel")
-    @ApiModelProperty(name = "reg_tel", value = "注册电话", required = false)
+    @ApiModelProperty(name = "reg_tel", value = "Registered telephone", required = false)
     private String regTel;
     /**
-     * 开户银行
+     * bank
      */
     @Column(name = "bank_name")
-    @ApiModelProperty(name = "bank_name", value = "开户银行", required = false)
+    @ApiModelProperty(name = "bank_name", value = "bank", required = false)
     private String bankName;
     /**
-     * 银行账户
+     * The bank account
      */
     @Column(name = "bank_account")
-    @ApiModelProperty(name = "bank_account", value = "银行账户", required = false)
+    @ApiModelProperty(name = "bank_account", value = "The bank account", required = false)
     private String bankAccount;
     /**
-     * 开票时间
+     * The time of make out an invoice
      */
     @Column(name = "add_time")
-    @ApiModelProperty(name = "add_time", value = "开票时间", required = false)
+    @ApiModelProperty(name = "add_time", value = "The time of make out an invoice", required = false)
     private Long addTime;
     /**
-     * 会员名称
+     * Member name
      */
     @Column(name = "member_name")
-    @ApiModelProperty(name = "member_name", value = "会员名称", required = false)
+    @ApiModelProperty(name = "member_name", value = "Member name", required = false)
     private String memberName;
 
     @PrimaryKeyField
@@ -157,13 +157,13 @@ public class ReceiptHistory implements Serializable {
     public String getReceiptType() {
         if (!StringUtil.isEmpty(receiptType)) {
             if (receiptType.equals(ReceiptTypeEnum.VATORDINARY.name())) {
-                return "增值税普通发票";
+                return "VAT general invoice";
             }
             if (receiptType.equals(ReceiptTypeEnum.VATOSPECIAL.name())) {
-                return "增值税专用发票";
+                return "VAT special invoice";
             }
             if (receiptType.equals(ReceiptTypeEnum.ELECTRO.name())) {
-                return "电子发票";
+                return "Electronic invoice";
             }
         }
         return receiptType;

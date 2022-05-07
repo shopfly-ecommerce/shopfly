@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 订单日志表业务类
+ * Order log table business class
  *
  * @author Snow
  * @version v7.0.0

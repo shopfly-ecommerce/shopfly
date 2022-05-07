@@ -21,7 +21,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 积分商品搜索参数
+ * Integral product search parameters
  * @author Snow create in 2018/5/29
  * @version v2.0
  * @since v7.0.0
@@ -30,26 +30,26 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class ExchangeQueryParam {
 
 
-    @ApiModelProperty(name="name",value="商品名称",required=false)
+    @ApiModelProperty(name="name",value="Name",required=false)
     private String name;
 
-    @ApiModelProperty(name="cat_id",value="积分分类ID",required=false)
+    @ApiModelProperty(name="cat_id",value="Integral classificationID",required=false)
     private Integer catId;
 
-    @ApiModelProperty(name="sn",value="商品编号",required=false)
+    @ApiModelProperty(name="sn",value="SN",required=false)
     private String sn;
 
 
-    @ApiModelProperty(name="page_no",value="第几页",required=false)
+    @ApiModelProperty(name="page_no",value="What page",required=false)
     private Integer pageNo;
 
-    @ApiModelProperty(name="page_size",value="每页条数",required=false)
+    @ApiModelProperty(name="page_size",value="Number each page",required=false)
     private Integer pageSize;
 
-    @ApiModelProperty(value = "开始时间")
+    @ApiModelProperty(value = "The start time")
     private Long startTime;
 
-    @ApiModelProperty(value = "结束时间")
+    @ApiModelProperty(value = "The end of time")
     private Long endTime;
 
 

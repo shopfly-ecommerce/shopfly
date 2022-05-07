@@ -26,7 +26,7 @@ import java.io.Serializable;
 
 
 /**
- * 分类品牌关联表实体
+ * Category brand association table entities
  *
  * @author fk
  * @version v2.0
@@ -41,16 +41,16 @@ public class CategoryBrandDO implements Serializable {
     private static final long serialVersionUID = 3315719881926878L;
 
     /**
-     * 分类id
+     * Categoriesid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(value = "分类id", required = false)
+    @ApiModelProperty(value = "Categoriesid", required = false)
     private Integer categoryId;
     /**
-     * 品牌id
+     * brandid
      */
     @Column(name = "brand_id")
-    @ApiModelProperty(value = "品牌id", required = false)
+    @ApiModelProperty(value = "brandid", required = false)
     private Integer brandId;
 
     public CategoryBrandDO() {

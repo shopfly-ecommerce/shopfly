@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.payment.model.enums;
 
 /**
- * 支付模式枚举
+ * Payment mode enumeration
  *
  * @author zh create in 2018/4/8
  * @version v2.0
@@ -25,14 +25,14 @@ package cloud.shopfly.b2c.core.payment.model.enums;
 public enum PayMode {
 
     /**
-     * 正常
+     * normal
      */
-    normal("正常"),
+    normal("normal"),
 
     /**
-     * 二维码
+     * Qr code
      */
-    qr("二维码");
+    qr("Qr code");
 
     private String description;
 

@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.Map;
 
 /**
- * 消息模版业务层
+ * Message template business layer
  * @author zjp
  * @version v7.0.0
  * @since v7.0.0
@@ -32,39 +32,39 @@ import java.util.Map;
 public interface MessageTemplateManager {
 
 	/**
-	 * 查询消息模版列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
-	 * @param type 模版类型
+	 * Example Query the message template list
+	 * @param page The page number
+	 * @param pageSize Number each page
+	 * @param type Template type
 	 * @return Page 
 	 */
 	Page list(int page, int pageSize, String type);
 
 	/**
-	* 修改消息模版
-	* @param messageTemplate 消息模版
-	* @param id 消息模版主键
-	* @return MessageTemplateDO 消息模版
+	* Modify the message template
+	* @param messageTemplate The message template
+	* @param id Message template primary key
+	* @return MessageTemplateDO The message template
 	*/
 	MessageTemplateDO edit(MessageTemplateDTO messageTemplate, Integer id);
 
 	/**
-	 * 获取消息模版
-	 * @param messageCodeEnum 消息模版编码
-	 * @return MessageTemplateDO  消息模版
+	 * Get the message template
+	 * @param messageCodeEnum Message template encoding
+	 * @return MessageTemplateDO  The message template
 	 */
 	MessageTemplateDO getModel(MessageCodeEnum messageCodeEnum);
 
 	/**
-	 * 替换文本内容
-	 * @param content 文本
-	 * @param valuesMap 要替换的文字
+	 * Replace text content
+	 * @param content The text
+	 * @param valuesMap The text to be replaced
 	 * @return
 	 */
 	String replaceContent(String content, Map<String, Object> valuesMap);
 
 	/**
-	 * 通过id获取模版
+	 * throughidAccess to the template
 	 * @param id
 	 * @return
 	 */

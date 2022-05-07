@@ -24,25 +24,25 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Arrays;
 
 /**
- * 草稿箱商品vo
+ * Draft goodsvo
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/7/6 上午3:00
+ * 2018/7/6 In the morning3:00
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DraftGoodsVO extends DraftGoodsDO {
 
     /**
-     * 商品分类名称
+     * Classification name
      */
-    @ApiModelProperty(name = "category_name", value = "商品分类名称", required = false)
+    @ApiModelProperty(name = "category_name", value = "Classification name", required = false)
     private String categoryName;
 
-    @ApiModelProperty(name = "category_ids", value = "分类id数组")
+    @ApiModelProperty(name = "category_ids", value = "CategoriesidAn array of")
     private Integer[] categoryIds;
 
     public String getCategoryName() {

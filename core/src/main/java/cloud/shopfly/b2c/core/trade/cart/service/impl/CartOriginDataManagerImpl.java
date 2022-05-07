@@ -47,9 +47,9 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * 购物车原始数据业务类实现<br>
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >购物车架构</a>
+ * Shopping cart raw data business class implementation<br>
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >Shopping cart architecture</a>
  *
  * @author kingapex
  * @version 1.0
@@ -76,7 +76,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
     private CartPromotionManager cartPromotionManager;
 
     /**
-     * 由缓存中读取购物原始数据
+     * Read the raw shopping data from the cache
      *
      * @return
      */
@@ -95,55 +95,55 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
     public CartSkuOriginVo add(int skuId, int num, Integer activityId) {
         GoodsSkuVO sku = this.goodsClient.getSkuFromCache(skuId);
         if (sku == null) {
-            throw new ServiceException(TradeErrorCode.E451.code(), "商品已失效，请刷新购物车");
+            throw new ServiceException(TradeErrorCode.E451.code(), "Item no longer valid, please refresh cart");
         }
 
-        //读取sku的可用库存
+        // Read the available inventory of the SKU
         Integer enableQuantity = sku.getEnableQuantity();
 
-        //如果sku的可用库存小于等于0或者小于用户购买的数量，则不允许购买
+        // If the available stock of the SKU is less than or equal to zero or less than the amount purchased by the user, purchases are not allowed
         if (enableQuantity <= 0 || enableQuantity < num) {
-            throw new ServiceException(TradeErrorCode.E451.code(), "商品库存已不足，不能购买。");
+            throw new ServiceException(TradeErrorCode.E451.code(), "The goods are out of stock and cannot be purchased.");
         }
         List<CartSkuOriginVo> originList = this.read();
 
-        //先看看购物车中是否存在此sku
+        // First check to see if the SKU exists in the shopping cart
         CartSkuOriginVo skuVo = this.findSku(skuId, originList);
 
-        //购物车中已经存在，试着更新数量
+        // Cart already exists, try to update the quantity
         if (skuVo != null && sku.getLastModify().equals(skuVo.getLastModify())) {
 
-            //判断是商品否被修改
+            // Determine whether the item has been modified
             int oldNum = skuVo.getNum();
             int newNum = oldNum + num;
 
-            //增加数量的话库存已经不足，则最多为可用库存
+            // If the quantity is increased, the inventory is insufficient, and at most, the available inventory
             if (newNum > enableQuantity) {
                 newNum = enableQuantity;
             }
             skuVo.setNum(newNum);
 
         } else {
-            //先清理一下 如果商品无效的话
+            // Clean up first if the goods are invalid
             originList.remove(skuVo);
-            //购物车中不存在此商品，则新建立一个
+            // If this item does not exist in the shopping cart, create a new one
             skuVo = new CartSkuOriginVo();
-            //将相同的属性copy
+            // Copy the same attributes
             BeanUtils.copyProperties(sku, skuVo);
-            //再设置加入购物车的数量
+            // Then set the number to add to the shopping cart
             skuVo.setNum(num);
             originList.add(skuVo);
         }
 
 
-        //新加入的商品都是选中的
+        // New items are selected
         skuVo.setChecked(1);
 
-        //填充可用的促销数据
+        // Populate available promotional data
         this.fillPromotion(skuVo, activityId);
 
 
-        //重新压入缓存
+        // Reload the cache
         String originKey = this.getOriginKey();
         cache.put(originKey, originList);
 
@@ -161,25 +161,25 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
     @Override
     public CartSkuOriginVo updateNum(int skuId, int num) {
 
-        Assert.notNull(skuId, "参数skuId不能为空");
-        Assert.notNull(num, "参数num不能为空");
+        Assert.notNull(skuId, "parameterskuIdCant be empty");
+        Assert.notNull(num, "parameternumCant be empty");
 
         GoodsSkuVO sku = this.goodsClient.getSkuFromCache(skuId);
         if (sku == null) {
-            throw new ServiceException(TradeErrorCode.E451.code(), "商品已失效，请刷新购物车");
+            throw new ServiceException(TradeErrorCode.E451.code(), "Item no longer valid, please refresh cart");
         }
 
-        //读取sku的可用库存
+        // Read the available inventory of the SKU
         Integer enableQuantity = sku.getEnableQuantity();
         List<CartSkuOriginVo> originList = this.read();
 
-        //先看看购物车中是否存在此sku
+        // First check to see if the SKU exists in the shopping cart
         CartSkuOriginVo skuVo = this.findSku(skuId, originList);
 
         if (skuVo != null) {
-            //话库存已经不足
+            // Telephone stock is running low
             if (num > enableQuantity) {
-                throw new ServiceException(TradeErrorCode.E451.code(), "此商品已经超出库存，库存为[" + enableQuantity + "]");
+                throw new ServiceException(TradeErrorCode.E451.code(), "This item is out of stock, stock is[" + enableQuantity + "]");
             } else {
                 skuVo.setNum(num);
             }
@@ -195,16 +195,16 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
     @Override
     public CartSkuOriginVo checked(int skuId, int checked) {
-        //不合法的参数，忽略掉
+        // Invalid arguments are ignored
         if (checked != 1 && checked != 0) {
             return new CartSkuOriginVo();
         }
 
 
-        Assert.notNull(skuId, "参数skuId不能为空");
+        Assert.notNull(skuId, "parameterskuIdCant be empty");
         String originKey = this.getOriginKey();
 
-        //这是本次要返回的sku
+        // This is the SKU to return this time
         AtomicReference<CartSkuOriginVo> skuOriginVo = new AtomicReference<>();
         List<CartSkuOriginVo> originList = this.read();
         originList.forEach(cartSku -> {
@@ -222,7 +222,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
     @Override
     public void checkedSeller(int sellerId, int checked) {
-        //不合法的参数，忽略掉
+        // Invalid arguments are ignored
         if (checked != 1 && checked != 0) {
             return;
         }
@@ -240,14 +240,14 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
     @Override
     public void checkedAll(int checked) {
-        //不合法的参数，忽略掉
+        // Invalid arguments are ignored
         if (checked != 1 && checked != 0) {
             return;
         }
 
         String originKey = this.getOriginKey();
 
-        //这是本次要返回的sku
+        // This is the SKU to return this time
         List<CartSkuOriginVo> originList = this.read();
         originList.forEach(cartSku -> {
             cartSku.setChecked(checked);
@@ -260,18 +260,18 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
     @Override
     public void delete(Integer[] skuIds) {
-        Assert.notNull(skuIds, "参数skuIds不能为空");
+        Assert.notNull(skuIds, "parameterskuIdsCant be empty");
         String originKey = this.getOriginKey();
 
-        //删除相关促销活动
+        // Delete related promotions
         cartPromotionManager.delete(skuIds);
-        //这是本次要返回的sku
+        // This is the SKU to return this time
         List<CartSkuOriginVo> originList = this.read();
         List<CartSkuOriginVo> newList = new ArrayList<>();
         originList.forEach(cartSku -> {
             System.out.println(skuIds[0]);
-            //查找是否要删除
-            //如果不删除压入到新的list中
+            // Find whether to delete
+            // If you dont delete it, press it into the new list
             if (!ArrayUtils.contains(skuIds, cartSku.getSkuId())) {
                 newList.add(cartSku);
             }
@@ -284,7 +284,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
     @Override
     public void clean() {
-        //清空此用户所有选择的促销活动
+        // Clear all selected promotions for this user
         cartPromotionManager.clean();
         String originKey = this.getOriginKey();
         cache.remove(originKey);
@@ -294,17 +294,17 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
     public void cleanChecked() {
         String originKey = this.getOriginKey();
 
-        //这是本次要返回的sku
+        // This is the SKU to return this time
         List<CartSkuOriginVo> originList = this.read();
         List<CartSkuOriginVo> newList = new ArrayList<>();
         List<Integer> skuIds = new ArrayList<>();
         for (CartSkuOriginVo cartSku : originList) {
             GoodsSkuVO fromCache = goodsClient.getSkuFromCache(cartSku.getSkuId());
-            //如果是选中的则要删除（也就是未选中的才压入list）
+            // If it is selected, it will be deleted.
             if (cartSku.getChecked() == 0) {
                 newList.add(cartSku);
             } else if (fromCache == null || fromCache.getLastModify() > cartSku.getLastModify()) {
-                //设置购物车未选中
+                // Set shopping cart is not selected
                 cartSku.setChecked(0);
                 newList.add(cartSku);
             } else {
@@ -312,10 +312,10 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
             }
         }
 
-        //清除相关sku的优惠活动
+        // Clear the relevant SKUs promotional activities
         cartPromotionManager.delete(skuIds.toArray(new Integer[skuIds.size()]));
 
-        //清除用户选择的所有的优惠券
+        // Clear all coupons selected by the user
         cartPromotionManager.cleanCoupon();
         cache.put(originKey, newList);
 
@@ -323,14 +323,14 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
 
     /**
-     * 读取当前会员购物车原始数据key
+     * Read the current member shopping cart raw datakey
      *
      * @return
      */
     protected String getOriginKey() {
 
         String cacheKey = "";
-        //如果会员登陆了，则要以会员id为key
+        // If the member logs in, the member ID is the key
         Buyer buyer = UserContext.getBuyer();
         if (buyer != null) {
             cacheKey = CachePrefix.CART_ORIGIN_DATA_PREFIX.getPrefix() + buyer.getUid();
@@ -340,11 +340,11 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
     }
 
     /**
-     * 根据skuid 查找某个sku
+     * According to theskuid To find asku
      *
-     * @param skuId      要查找的skuid
+     * @param skuId      Youre looking forskuid
      * @param originList sku list
-     * @return 找到返回sku，找不到返回Null
+     * @return Find backskuUnable to find returnNull
      */
     private CartSkuOriginVo findSku(int skuId, List<CartSkuOriginVo> originList) {
         for (CartSkuOriginVo cartSkuOriginVo : originList) {
@@ -358,19 +358,19 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
 
     /**
-     * 为某个cart sku 填充促销信息
+     * For acart sku Fill in promotional information
      *
      * @param cartSkuVo
      */
     private void fillPromotion(CartSkuOriginVo cartSkuVo, Integer activityId) {
 
-        //找到当前要使用活动的类型
+        // Find the current type of activity to use
         PromotionTypeEnum usedType = null;
 
-        //单品活动集合^
+        // Single product activity collection ^
         List<CartPromotionVo> singleList = new ArrayList<>();
 
-        //组合活动集合
+        // Combined activity set
         List<CartPromotionVo> groupList = new ArrayList<>();
 
         List<PromotionGoodsDO> doList = this.getGoodsEnablePromotion(cartSkuVo.getGoodsId());
@@ -380,11 +380,11 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
             PromotionVO promotionVO = new PromotionVO();
             BeanUtils.copyProperties(promotionGoodsDO, promotionVO);
             CartPromotionVo promotionGoodsVO = TradePromotionConverter.promotionGoodsVOConverter(promotionVO);
-            //目前只有满减是组合活动
+            // Currently only full minus is a combination activity
             if (PromotionTypeEnum.FULL_DISCOUNT.name().equals(promotionVO.getPromotionType())) {
                 groupList.add(promotionGoodsVO);
             } else {
-                //找到要参加的活动
+                // Find activities to attend
                 if (promotionGoodsDO.getActivityId().equals(activityId)) {
                     usedType = PromotionTypeEnum.myValueOf(promotionGoodsDO.getPromotionType());
                 }
@@ -396,7 +396,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
         cartSkuVo.setSingleList(singleList);
 
 
-        //如果没有指定使用的活动，试着使用第一个
+        // If no activity is specified to use, try using the first one
         if (activityId == null && doList.size() > 0) {
             PromotionGoodsDO promotionGoodsDO = doList.get(0);
             activityId = promotionGoodsDO.getActivityId();
@@ -404,7 +404,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
         }
 
         if (usedType != null && activityId != null) {
-            //使用要使用的活动
+            // Use the activity to be used
             cartPromotionManager.usePromotion(cartSkuVo.getSkuId(), activityId, usedType);
         }
 
@@ -413,7 +413,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
 
     /**
-     * 读取某个商品参与的所有活动
+     * Reads all activities that an item participates in
      *
      * @param goodsId
      * @return
@@ -422,7 +422,7 @@ public class CartOriginDataManagerImpl implements CartOriginDataManager {
 
         long currTime = DateUtil.getDateline();
 
-        //读取此商品参加的活动
+        // Read the activity that this commodity participates in
         String sql = "select   goods_id, start_time, end_time, activity_id, promotion_type,title,num,price " +
                 "from es_promotion_goods where ( goods_id=? or goods_id=-1)  and start_time<=? and end_time>=? ";
         List<PromotionGoodsDO> resultList = this.daoSupport.queryForList(sql, PromotionGoodsDO.class, goodsId, currTime, currTime);

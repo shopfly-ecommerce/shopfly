@@ -20,11 +20,11 @@ import cloud.shopfly.b2c.core.member.model.dos.MemberComment;
 import java.io.Serializable;
 
 /**
- * 商品评论消息
+ * Product Review messages
  * @author fk
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:37:41
+ * 2018years3month23The morning of10:37:41
  */
 public class GoodsCommentMsg implements Serializable{
 

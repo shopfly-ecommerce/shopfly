@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * 删除促销活动商品
+ * Delete promotional items
  *
  * @author liuyulei
  * @version v1.0
@@ -42,10 +42,10 @@ public class PromotionGoodsChangeConsumer implements GoodsChangeEvent {
     @Override
     public void goodsChange(GoodsChangeMsg goodsChangeMsg) {
 
-        //修改商品,则删除此商品参与的所有促销活动
+        // To modify a product, delete all promotional activities that the product participates in
         if(goodsChangeMsg.getOperationType().equals(GoodsChangeMsg.MANUAL_UPDATE_OPERATION)){
             if (logger.isDebugEnabled()) {
-                logger.debug("删除促销活动商品");
+                logger.debug("Delete promotional items");
             }
             this.promotionGoodsClient.delPromotionGoods(goodsChangeMsg.getGoodsIds()[0]);
         }

@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 优惠券促销规则构建器实现
+ * Coupon promotion rule builder implementation
  *
  * @author kingapex
  * @version 1.0
@@ -47,17 +47,17 @@ public class CartCouponRuleBuilderImpl implements CartCouponRuleBuilder {
 
     @Override
     public PromotionRule build(CartVO cartVO, CouponVO couponVO) {
-        //建立一个应用在购物车的规则
+        // Create a rule that applies to the shopping cart
         PromotionRule rule = new PromotionRule(PromotionTarget.CART);
 
         double totalPrice = this.countTotalPrice(cartVO);
 
-        //没有达到门槛，移除掉正在使用的优惠券
+        // If the threshold is not reached, remove coupons that are in use
         if (totalPrice < couponVO.getCouponThresholdPrice()) {
             cartPromotionManager.cleanCoupon();
             return rule;
         }
-        //设置减价为优惠券金额
+        // Set the discount to the coupon amount
         rule.setUseCoupon(couponVO);
 
         return rule;
@@ -65,10 +65,10 @@ public class CartCouponRuleBuilderImpl implements CartCouponRuleBuilder {
 
 
     /**
-     * 合计购物车的总价
+     * Add up the total price of the shopping cart
      *
-     * @param cart 某个购物车
-     * @return 购物车的总价
+     * @param cart A shopping cart
+     * @return Total price of shopping cart
      */
     private double countTotalPrice(CartDO cart) {
 
@@ -80,14 +80,14 @@ public class CartCouponRuleBuilderImpl implements CartCouponRuleBuilder {
             if (skuVO.getChecked() == 0) {
                 continue;
             }
-            //选中，但是是积分商品，不累计
+            // Selected, but is integral goods, not cumulative
             if (!this.checkEnableCoupon()) {
 
                 continue;
             }
 
-            //合计小计，就是总价
-            //最原始的总价，不能用成交价来计算门槛，因为可能被别的活动改变了
+            // The total is the total price
+            // The most primitive total price, cannot clinch a deal with valence will calculate threshold, because the likelihood was changed by other activity
             double subTotal = skuVO.getSubtotal();
 
             totalPrice = CurrencyUtil.add(subTotal, totalPrice);
@@ -98,7 +98,7 @@ public class CartCouponRuleBuilderImpl implements CartCouponRuleBuilder {
     }
 
     /**
-     * 积分商品不能使用优惠券
+     * You cant use coupons for points
      *
      * @return add by liuyulei 2019-05-14
      */

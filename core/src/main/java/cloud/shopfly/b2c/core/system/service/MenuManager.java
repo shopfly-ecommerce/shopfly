@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 菜单管理业务层
+ * Menu management business layer
  *
  * @author zh
  * @version v7.0
@@ -33,59 +33,59 @@ import java.util.List;
 public interface MenuManager {
 
     /**
-     * 查询菜单管理列表
+     * Query the menu management list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加菜单管理
+     * Add Menu Management
      *
-     * @param menu 菜单管理
-     * @return Menu 菜单管理
+     * @param menu Menu management
+     * @return Menu Menu management
      */
     Menu add(MenuVO menu);
 
     /**
-     * 修改菜单管理
+     * Modifying Menu Management
      *
-     * @param menu 菜单管理
-     * @param id   菜单管理主键
-     * @return Menu 菜单管理
+     * @param menu Menu management
+     * @param id   Menu manages primary keys
+     * @return Menu Menu management
      */
     Menu edit(Menu menu, Integer id);
 
     /**
-     * 删除菜单管理
+     * Deleting menu Management
      *
-     * @param id 菜单管理主键
+     * @param id Menu manages primary keys
      */
     void delete(Integer id);
 
     /**
-     * 获取菜单管理
+     * Get Menu Management
      *
-     * @param id 菜单管理主键
-     * @return MenuVO  菜单管理
+     * @param id Menu manages primary keys
+     * @return MenuVO  Menu management
      */
     Menu getModel(Integer id);
 
     /**
-     * 根据id获取菜单集合
+     * According to theidGet menu collection
      *
-     * @param id 菜单的id
+     * @param id The menuid
      * @return
      */
     List<MenusVO> getMenuTree(Integer id);
 
     /**
-     * 获取菜单管理
+     * Get Menu Management
      *
-     * @param identifier 菜单的唯一标识
-     * @return MenuVO  菜单管理
+     * @param identifier A unique identifier for a menu
+     * @return MenuVO  Menu management
      */
     Menu getMenuByIdentifier(String identifier);
 

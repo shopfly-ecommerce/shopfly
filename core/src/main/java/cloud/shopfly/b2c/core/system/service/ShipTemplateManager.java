@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.core.system.model.vo.ShipTemplateVO;
 import java.util.List;
 
 /**
- * 运费模版业务层
+ * Freight template business layer
  * @author zjp
  * @version v7.0.0
  * @since v7.0.0
@@ -32,14 +32,14 @@ public interface ShipTemplateManager {
 
 
 	/**
-	 * 新增
+	 * new
 	 * @param tamplate
 	 * @return
 	 */
 	ShipTemplateDO save(ShipTemplateSellerVO tamplate);
 
 	/**
-	 * 修改
+	 * edit
 	 * @param template
 	 * @return
 	 */
@@ -47,41 +47,41 @@ public interface ShipTemplateManager {
 
 
 	/**
-	 * 获取商家运送方式
+	 * Get merchant shipping method
 	 * @return
 	 */
 	List<ShipTemplateSellerVO> getStoreTemplate();
 
 
 	/**
-	 * 获取商家运送方式
+	 * Get merchant shipping method
 	 * @param templateId
 	 * @return
 	 */
 	ShipTemplateVO getFromCache(Integer templateId);
 
 	/**
-	 * 删除
+	 * delete
 	 * @param templateId
 	 */
 	void delete(Integer templateId);
 
 	/**
-	 * 数据库中查询一个运费模板VO
+	 * Query a freight template in the databaseVO
 	 * @param templateId
 	 * @return
 	 */
 	ShipTemplateSellerVO getFromDB(Integer templateId);
 
 	/**
-	 * 根据区域id查询区域被使用数量
+	 * According to the areaidQuery the number of areas used
 	 * @param rateAreaId
 	 * @return
 	 */
     Integer getCountByAreaId(Integer rateAreaId);
 
 	/**
-	 * 根据区域id移除运费模板
+	 * According to the areaidRemove shipping template
 	 * @param rateAreaId
 	 */
 	void removeCache(Integer rateAreaId);

@@ -16,26 +16,26 @@
 package cloud.shopfly.b2c.core.base.service;
 
 /**
- * 图片验证码业务层
+ * Image captcha business layer
  *
  * @author zh
  * @version v2.0
  * @since v7.0.0
- * 2018年3月19日 上午9:55:04
+ * 2018years3month19The morning of9:55:04
  */
 public interface CaptchaManager {
     /**
-     * 图片验证
+     * Image authentication
      *
      * @param uuid  uid
-     * @param code  验证码
-     * @param scene 业务类型
+     * @param code  captcha
+     * @param scene Business types
      * @return
      */
     boolean valid(String uuid, String code, String scene);
 
     /**
-     * 清除图片验证码
+     * Clear the image verification code
      *
      * @param uuid
      * @param code
@@ -44,10 +44,10 @@ public interface CaptchaManager {
     void deleteCode(String uuid, String code, String scene);
 
     /**
-     * 图片生成
+     * Images generated
      *
      * @param uuid  uid
-     * @param scene 业务类型
+     * @param scene Business types
      */
     void writeCode(String uuid, String scene);
 

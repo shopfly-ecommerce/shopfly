@@ -18,23 +18,23 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 微博信任登录参数组枚举类
+ * @Description Microblogging trusted login parameter group enumeration class
  * @ClassName WeiboConnectConfigGroupEnum
- * @since v7.0 下午8:05 2018/6/28
+ * @since v7.0 In the afternoon8:05 2018/6/28
  */
 public enum WeiboConnectConfigGroupEnum {
     /**
-     * 网页端参数 （PC，WAP，微信网页端）
+     * Webpage parameters（PC，WAP, wechat web terminal）
      */
-    pc("网页端参数 （PC，WAP，微信网页端）"),
+    pc("Webpage parameters（PC，WAP, wechat web terminal）"),
     /**
-     * 原生-APP参数
+     * native-APPparameter
      */
-    app("原生-APP参数"),
+    app("native-APPparameter"),
     /**
-     * RN-APP参数
+     * RN-APPparameter
      */
-    rn("RN-APP参数");
+    rn("RN-APPparameter");
 
 
     private String text;

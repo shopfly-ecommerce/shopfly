@@ -32,9 +32,9 @@ import java.util.Map;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录插件基类
+ * @Description Trust the login plug-in base class
  * @ClassName AbstractConnectLoginPlugin
- * @since v7.0 上午10:46 2018/6/5
+ * @since v7.0 In the morning10:46 2018/6/5
  */
 
 @Component
@@ -55,7 +55,7 @@ public abstract class AbstractConnectLoginPlugin {
 
 
     /**
-     * 初始化信息登录的参数
+     * Initialization information Login parameters
      */
     protected Map initConnectSetting() {
 
@@ -63,21 +63,21 @@ public abstract class AbstractConnectLoginPlugin {
     }
 
     /**
-     * 获取授权登录的url
+     * Obtained authorized loginurl
      *
      * @return
      */
     public abstract String getLoginUrl();
 
     /**
-     * 登录成功后的回调方法
+     * Callback method after successful login
      *
      * @return
      */
     public abstract Auth2Token loginCallback();
 
     /**
-     * 填充会员信息
+     * Fill in membership information
      *
      * @param auth2Token
      * @param member
@@ -86,16 +86,16 @@ public abstract class AbstractConnectLoginPlugin {
     public abstract Member fillInformation(Auth2Token auth2Token, Member member);
 
     /**
-     * 存储中间页信息及拼接回调地址
+     * Store intermediate page information and concatenate callback address
      *
-     * @param type 登录类型
+     * @param type Login type
      * @return
      */
     protected String getCallBackUrl(String type) {
-        //拼接回调域名
+        // Concatenate the callback domain name
         String domain = domainHelper.getCallback();
         String calback;
-        //如果是会员中心进行绑定,回调地址为会员中心回调地址
+        // If the member center is bound, the callback address is the callback address of the member center
         if (UserContext.getBuyer() != null ) {
 
             if(!"QQ".equals(type)){
@@ -114,23 +114,23 @@ public abstract class AbstractConnectLoginPlugin {
                 calback = domain + "/passport/connect/pc/" + type + "/callback";
             }
         }
-        debugger.log("生成callback：", calback);
+        debugger.log("generatecallback：", calback);
 
         return calback;
 
     }
 
     /**
-     * 拼装配置参数
+     * Assemble configuration parameters
      *
      * @return
      */
     public abstract ConnectSettingVO assembleConfig();
 
     /**
-     * 判断是否是wap访问
+     * Determine whether or notwapaccess
      *
-     * @return 是否是wap
+     * @return Whether it iswap
      */
     private boolean isWap() {
         boolean flag = false;

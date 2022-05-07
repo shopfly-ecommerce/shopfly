@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 会员发票业务类
+ * Member invoice business category
  *
  * @author zh
  * @version v7.0.0
@@ -62,34 +62,34 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public MemberReceipt add(MemberReceiptVO memberReceiptVO) {
-        //校验当前会员是否存在
+        // Check whether the current member exists
         Integer memberId = UserContext.getBuyer().getUid();
         Member member = this.memberManager.getModel(memberId);
         boolean bool = (member == null) || (member != null && !member.getDisabled().equals(0));
         if (bool) {
-            throw new ResourceNotFoundException("当前会员不存在");
+            throw new ResourceNotFoundException("Current member does not exist");
         }
 
         if (this.checkTitle(memberReceiptVO.getReceiptTitle(), null, memberId)) {
-            throw new ServiceException(MemberErrorCode.E121.code(), "发票抬头不能重复");
+            throw new ServiceException(MemberErrorCode.E121.code(), "Invoice title must not be repeated");
         }
 
-        //抬头为非个人时，校验税号不能为空
-        if(!"个人".equals(memberReceiptVO.getReceiptTitle())){
+        // If the header is not personal, the verification tax number cannot be empty
+        if(!"personal".equals(memberReceiptVO.getReceiptTitle())){
             if(memberReceiptVO.getTaxNo()==null){
-                throw new ServiceException(MemberErrorCode.E121.code(), "发票税号不能为空");
+                throw new ServiceException(MemberErrorCode.E121.code(), "Invoice tax number cannot be blank");
             }
         }
 
         List<MemberReceipt> list = this.list(memberReceiptVO.getReceiptType());
-        //如果是增值税普通发票和电子发票需要校验发票个数不能不能超过十个
+        // If it is VAT ordinary invoice and electronic invoice, the number of verification invoices should not exceed 10
         if (memberReceiptVO.getReceiptType().equals(ReceiptTypeEnum.VATORDINARY.name()) || memberReceiptVO.getReceiptType().equals(ReceiptTypeEnum.ELECTRO.name())) {
             if (list.size() >= 10) {
-                throw new ServiceException(MemberErrorCode.E121.code(), "发票数已达上限10个");
+                throw new ServiceException(MemberErrorCode.E121.code(), "The invoice amount has reached the upper limit10a");
             }
         } else {
             if (list.size() > 1) {
-                throw new ServiceException(MemberErrorCode.E121.code(), "发票数已达上限1个");
+                throw new ServiceException(MemberErrorCode.E121.code(), "The invoice amount has reached the upper limit1a");
             }
         }
         MemberReceipt memberReceipt = new MemberReceipt();
@@ -99,7 +99,7 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
         memberDaoSupport.insert(memberReceipt);
         Integer receiptId = memberDaoSupport.getLastId("es_member_receipt");
         memberReceipt.setReceiptId(receiptId);
-        //将此发票设置为默认
+        // Set this invoice as the default
         this.setDefaultReceipt(memberReceiptVO.getReceiptType(), receiptId);
         return memberReceipt;
     }
@@ -109,11 +109,11 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     public MemberReceipt edit(MemberReceiptVO memberReceiptVO, Integer id) {
         MemberReceipt memberReceipt = this.getModel(id);
         if (memberReceipt == null || !memberReceipt.getMemberId().equals(UserContext.getBuyer().getUid())) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
 
         if (this.checkTitle(memberReceiptVO.getReceiptTitle(), id, memberReceipt.getMemberId())) {
-            throw new ServiceException(MemberErrorCode.E121.code(), "发票抬头不能重复");
+            throw new ServiceException(MemberErrorCode.E121.code(), "Invoice title must not be repeated");
         }
 
         BeanUtil.copyProperties(memberReceiptVO, memberReceipt);
@@ -126,7 +126,7 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     public void delete(Integer id) {
         MemberReceipt memberReceipt = this.getModel(id);
         if (memberReceipt == null || !memberReceipt.getMemberId().equals(UserContext.getBuyer().getUid())) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
         this.memberDaoSupport.delete(MemberReceipt.class, id);
     }
@@ -140,19 +140,19 @@ public class MemberReceiptManagerImpl implements MemberReceiptManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void setDefaultReceipt(String receiptType, Integer id) {
-        //如果发票id为0，则说明默认发票为个人，需要将其他发票是否为默认修改为否
+        // If the invoice ID is 0, it indicates that the default invoice is personal. You need to change the default value of other invoices to no
         this.memberDaoSupport.execute("update es_member_receipt set is_default = 0 where member_id = ? and receipt_type = ?", UserContext.getBuyer().getUid(), receiptType);
         if (id != 0) {
             MemberReceipt memberReceipt = this.getModel(id);
             if (memberReceipt == null || !memberReceipt.getMemberId().equals(UserContext.getBuyer().getUid())) {
-                throw new NoPermissionException("无权操作");
+                throw new NoPermissionException("Have the right to operate");
             }
             this.memberDaoSupport.execute("update es_member_receipt set is_default = 1 where member_id = ? and receipt_type = ? and receipt_id = ?", UserContext.getBuyer().getUid(), receiptType, id);
         }
     }
 
     /**
-     * 检测发票抬头是否重复
+     * Check invoice title for duplicate
      * @param title
      * @param id
      * @param memberId

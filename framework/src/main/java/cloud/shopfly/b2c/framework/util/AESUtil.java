@@ -22,14 +22,14 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * @author zjp
  * @version v7.0
- * @Description AES加密工具
+ * @Description AESEncryption tools
  * @ClassName AESUtil
- * @since v7.0 下午10:53 2018/6/26
+ * @since v7.0 In the afternoon10:53 2018/6/26
  */
 public class AESUtil {
 
     /**
-     * 加密
+     * encryption
      *
      * @param sSrc
      * @param sKey
@@ -38,27 +38,27 @@ public class AESUtil {
      */
     public static String encrypt(String sSrc, String sKey) throws Exception {
         if (sKey == null) {
-            System.out.print("Key为空null");
+            System.out.print("KeyIs emptynull");
             return null;
         }
-        // 判断Key是否为16位
+        // Check whether the Key is 16 bits
         if (sKey.length() != 16) {
-            System.out.print("Key长度不是16位");
+            System.out.print("KeyThe length is not16position");
             return null;
         }
         byte[] raw = sKey.getBytes("utf-8");
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-        //"算法/模式/补码方式"
+        // "Algorithm/mode/complement mode"
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
 
-        //此处使用BASE64做转码功能，同时能起到2次加密的作用。
+        // BASE64 is used as the transcoding function, which can also play the role of two-time encryption.
         return Base64.encode(encrypted);
     }
 
     /**
-     * 解密
+     * decryption
      *
      * @param sSrc
      * @param sKey
@@ -67,21 +67,21 @@ public class AESUtil {
      */
     public static String decrypt(String sSrc, String sKey) throws Exception {
         try {
-            // 判断Key是否正确
+            // Check whether the Key is correct
             if (sKey == null) {
-                System.out.print("Key为空null");
+                System.out.print("KeyIs emptynull");
                 return null;
             }
-            // 判断Key是否为16位
+            // Check whether the Key is 16 bits
             if (sKey.length() != 16) {
-                System.out.print("Key长度不是16位");
+                System.out.print("KeyThe length is not16position");
                 return null;
             }
             byte[] raw = sKey.getBytes("utf-8");
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
-            //先用base64解密
+            // Decrypt it in Base64 first
             byte[] encrypted1 = Base64.decode(sSrc);
             try {
                 byte[] original = cipher.doFinal(encrypted1);

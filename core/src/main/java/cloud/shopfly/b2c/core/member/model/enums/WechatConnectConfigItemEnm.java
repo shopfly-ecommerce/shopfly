@@ -18,9 +18,9 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 微信信任登录参数项枚举类
+ * @Description Wechat trusted login parameter enumeration class
  * @ClassName WechatConnectConfigItemEnm
- * @since v7.0 下午5:48 2018/6/28
+ * @since v7.0 In the afternoon5:48 2018/6/28
  */
 public enum WechatConnectConfigItemEnm {
     /**

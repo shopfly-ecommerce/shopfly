@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.system.model.vo.UploaderVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 存储方案业务层
+ * Storage solution service layer
  *
  * @author zh
  * @version v7.0.0
@@ -30,59 +30,59 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface UploaderManager {
 
     /**
-     * 查询存储方案列表
+     * Example Query the storage scheme list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加存储方案
+     * Adding a Storage Solution
      *
-     * @param uploader 存储方案
-     * @return Uploader 存储方案
+     * @param uploader Storage solution
+     * @return Uploader Storage solution
      */
     UploaderDO add(UploaderVO uploader);
 
     /**
-     * 修改存储方案
+     * Modifying a Storage Scheme
      *
-     * @param uploader 存储方案
-     * @return Uploader 存储方案
+     * @param uploader Storage solution
+     * @return Uploader Storage solution
      */
     UploaderVO edit(UploaderVO uploader);
 
     /**
-     * 获取存储方案
+     * Obtaining a Storage Solution
      *
-     * @param id 存储方案主键
-     * @return Uploader  存储方案
+     * @param id Primary key of the storage scheme
+     * @return Uploader  Storage solution
      */
     UploaderDO getUploader(Integer id);
 
     /**
-     * 获取存储方案
+     * Obtaining a Storage Solution
      *
-     * @param bean 存储方案beanid
-     * @return Uploader  存储方案
+     * @param bean Storage solutionbeanid
+     * @return Uploader  Storage solution
      */
     UploaderDO getUploader(String bean);
 
     /**
-     * 开启某个存储方案
+     * Enable a storage scheme
      *
-     * @param bean 存储方案bean
-     * @return Uploader  存储方案
+     * @param bean Storage solutionbean
+     * @return Uploader  Storage solution
      */
     void openUploader(String bean);
 
     /**
-     * 根据存储方案的beanid 获取存储方案的配置项
+     * According to the storage schemebeanid Obtain the configuration items of the storage solution
      *
-     * @param bean 存储方案beanid
-     * @return 存储方案
+     * @param bean Storage solutionbeanid
+     * @return Storage solution
      */
     UploaderVO getUploadConfig(String bean);
 

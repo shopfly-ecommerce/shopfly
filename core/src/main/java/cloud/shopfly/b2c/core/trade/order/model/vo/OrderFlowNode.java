@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 订单流程图对象
+ * Order flow chart object
  *
  * @author Snow create in 2018/6/25
  * @version v2.0
@@ -29,13 +29,13 @@ import java.io.Serializable;
  */
 public class OrderFlowNode implements Serializable {
 
-    @ApiModelProperty(value = "文字")
+    @ApiModelProperty(value = "The text")
     private String text;
 
-    @ApiModelProperty(value = "订单状态")
+    @ApiModelProperty(value = "Status")
     private String orderStatus;
 
-    @ApiModelProperty(value = "展示效果", allowableValues = "0,1,2,3", example = "0:灰色,1:普通显示,2:结束显示,3:取消显示")
+    @ApiModelProperty(value = "Display effect", allowableValues = "0,1,2,3", example = "0:gray,1:Ordinary display,2:End show,3:Cancel the show")
     private Integer showStatus;
 
     public String getText() {

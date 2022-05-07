@@ -31,7 +31,7 @@ import java.io.Serializable;
 
 
 /**
- * 导航栏实体
+ * Navigation bar entity
  *
  * @author fk
  * @version v1.0
@@ -46,45 +46,45 @@ public class SiteNavigation implements Serializable {
     private static final long serialVersionUID = 964913498755358L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "navigation_id")
     @ApiModelProperty(hidden = true)
     private Integer navigationId;
     /**
-     * 导航名称
+     * The name of the navigation
      */
     @Column(name = "navigation_name")
-    @ApiModelProperty(name = "navigation_name", value = "导航名称", required = true)
-    @Size(max=15,message = "导航名称字符长度校验，不可超过15个字符")
-    @NotEmpty(message = "导航名称不能为空")
+    @ApiModelProperty(name = "navigation_name", value = "The name of the navigation", required = true)
+    @Size(max=15,message = "Navigation name character length verification, cannot exceed15A character")
+    @NotEmpty(message = "The navigation name cannot be empty")
     private String navigationName;
     /**
-     * 导航地址
+     * Navigation address
      */
     @Column(name = "url")
-    @ApiModelProperty(name = "url", value = "导航地址", required = true)
-    @Size(max=255,message = "导航地址长度校验，不可超过255个字符")
-    @NotEmpty(message = "导航地址不能为空")
+    @ApiModelProperty(name = "url", value = "Navigation address", required = true)
+    @Size(max=255,message = "Navigation address length verification, cannot exceed255A character")
+    @NotEmpty(message = "The navigation address cannot be empty")
     private String url;
     /**
-     * 客户端类型
+     * Client type
      */
     @Column(name = "client_type")
-    @ApiModelProperty(name = "client_type", value = "客户端类型 PC/MOBILE", required = true)
+    @ApiModelProperty(name = "client_type", value = "Client typePC/MOBILE", required = true)
     @ClientMobileType
     private String clientType;
     /**
-     * 图片
+     * Image
      */
     @Column(name = "image")
-    @ApiModelProperty(name = "image", value = "图片", required = false)
+    @ApiModelProperty(name = "image", value = "Image", required = false)
     private String image;
     /**
-     * 排序
+     * sort
      */
     @Column(name = "sort")
-    @ApiModelProperty(name = "sort", value = "排序",hidden = true)
+    @ApiModelProperty(name = "sort", value = "sort",hidden = true)
     private Integer sort;
 
     @PrimaryKeyField

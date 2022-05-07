@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.core.passport.service;
 
 
 /**
- * 账号管理
+ * Account management
  *
  * @author zh
  * @version v7.0
@@ -26,21 +26,21 @@ package cloud.shopfly.b2c.core.passport.service;
  */
 public interface PassportManager {
     /**
-     * 发送注册短信验证码
+     * Send the registration SMS verification code
      *
-     * @param mobile 手机号码
+     * @param mobile Mobile phone number
      */
     void sendRegisterSmsCode(String mobile);
 
     /**
-     * 发送找回密码短信验证码
+     * Send an SMS verification code to retrieve the password
      *
      * @param mobile
      */
     void sendFindPasswordCode(String mobile);
 
     /**
-     * 发送登录短信验证码
+     * Send the verification code for login SMS
      *
      * @param mobile
      */
@@ -48,7 +48,7 @@ public interface PassportManager {
 
 
     /**
-     * 通过refreshToken 获取 accessToken
+     * throughrefreshToken To obtainaccessToken
      *
      * @param refreshToken
      * @returna ccessToken
@@ -56,10 +56,10 @@ public interface PassportManager {
     String exchangeToken(String refreshToken);
 
     /**
-     * 清除标记缓存
+     * Clear tag cache
      *
-     * @param mobile 手机号码
-     * @param scene  业务场景
+     * @param mobile Mobile phone number
+     * @param scene  The business scenario
      */
     void clearSign(String mobile, String scene);
 

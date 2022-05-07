@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 评论vo
+ * @Description: commentsvo
  * @date 2018/5/31 5:03
  * @since v7.0.0
  */
@@ -35,13 +35,13 @@ import java.util.List;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CommentVO extends MemberComment {
 
-    @ApiModelProperty(name = "images", value = "评论图片", required = false)
+    @ApiModelProperty(name = "images", value = "Review images", required = false)
     private List<String> images;
 
-    @ApiModelProperty(name = "reply", value = "评论回复", required = false)
+    @ApiModelProperty(name = "reply", value = "Comment back", required = false)
     private CommentReply reply;
 
-    @ApiModelProperty(name = "add_images", value = "追加评论图片", required = false)
+    @ApiModelProperty(name = "add_images", value = "Append comment images", required = false)
     private List<String> addImages;
 
     public List<String> getImages() {

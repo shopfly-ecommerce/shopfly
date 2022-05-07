@@ -24,11 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 商品数据收集消费者
+ * Commodity data collection for consumers
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/6/20 下午2:19
+ * 2018/6/20 In the afternoon2:19
  * @Description:
  *
  */
@@ -47,17 +47,17 @@ public class DataGoodsConsumer implements GoodsChangeEvent {
 			if (goodsChangeMsg.getGoodsIds() == null || goodsChangeMsg.getGoodsIds().length == 0) {
                 return;
             }
-			// 添加商品
+			// Add the goods
 			if (goodsChangeMsg.getOperationType().equals(GoodsChangeMsg.ADD_OPERATION)) {
                 this.goodsDataClient.addGoods(goodsChangeMsg.getGoodsIds());
             }
-			// 修改商品
+			// Modify the goods
 			if (goodsChangeMsg.getOperationType().equals(GoodsChangeMsg.MANUAL_UPDATE_OPERATION)
 					||goodsChangeMsg.getOperationType().equals(GoodsChangeMsg.AUTO_UPDATE_OPERATION)) {
                 this.goodsDataClient.updateGoods(goodsChangeMsg.getGoodsIds());
             }
 		} catch (Exception e) {
-			logger.error("商品消息监听异常：",e);
+			logger.error("Abnormal commodity message listening：",e);
 			e.printStackTrace();
 		}
 	}

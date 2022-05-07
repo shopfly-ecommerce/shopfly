@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 会员地址业务类
+ * Member address business class
  *
  * @author zh
  * @version v2.0

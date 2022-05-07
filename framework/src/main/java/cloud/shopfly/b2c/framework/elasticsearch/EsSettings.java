@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.framework.elasticsearch;
 
 /**
  *
- * es索引设置
+ * esThe index set
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -27,23 +27,23 @@ package cloud.shopfly.b2c.framework.elasticsearch;
 public class EsSettings {
 
     /**
-     * 商品索引后缀
+     * Commodity index suffix
      */
     public static final String GOODS_INDEX_NAME="goods";
 
     /**
-     * 商品type名字
+     * producttypeThe name
      */
     public static final String GOODS_TYPE_NAME="goods";
 
     /**
-     * 拼团索引后缀
+     * Group index suffix
      */
     public static final String PINTUAN_INDEX_NAME="pt";
 
 
     /**
-     * 拼团类型名字
+     * Spell group type name
      */
     public static final String PINTUAN_TYPE_NAME="pintuan_goods";
 

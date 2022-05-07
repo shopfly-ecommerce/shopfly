@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 咨询实体
+ * Consulting entities
  *
  * @author fk
  * @version v1.0
@@ -43,85 +43,85 @@ public class MemberAsk implements Serializable {
     private static final long serialVersionUID = 1642694855238993L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "ask_id")
     @ApiModelProperty(hidden = true)
     private Integer askId;
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", required = false)
+    @ApiModelProperty(name = "goods_id", value = "productid", required = false)
     private Integer goodsId;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersid", required = false)
     private Integer memberId;
     /**
-     * 咨询内容
+     * Consulting content
      */
     @Column(name = "content")
-    @ApiModelProperty(name = "content", value = "咨询内容", required = false)
+    @ApiModelProperty(name = "content", value = "Consulting content", required = false)
     private String content;
     /**
-     * 咨询时间
+     * Consultation time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "咨询时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Consultation time", required = false)
     private Long createTime;
     /**
-     * 回复内容
+     * Reply content
      */
     @Column(name = "reply")
-    @ApiModelProperty(name = "reply", value = "回复内容", required = false)
+    @ApiModelProperty(name = "reply", value = "Reply content", required = false)
     private String reply;
     /**
-     * 回复时间
+     * Recovery time
      */
     @Column(name = "reply_time")
-    @ApiModelProperty(name = "reply_time", value = "回复时间", required = false)
+    @ApiModelProperty(name = "reply_time", value = "Recovery time", required = false)
     private Long replyTime;
     /**
-     * 回复状态 1 已回复 0未回复
+     * Reply to state1 Have to reply0Did not return
      */
     @Column(name = "reply_status")
-    @ApiModelProperty(name = "reply_status", value = "回复状态 1 已回复 0 未回复", required = false)
+    @ApiModelProperty(name = "reply_status", value = "Reply to state1 Have to reply0 Did not return", required = false)
     private Integer replyStatus;
     /**
-     * 状态
+     * Status
      */
     @Column(name = "status")
-    @ApiModelProperty(name = "status", value = "状态 ", required = false)
+    @ApiModelProperty(name = "status", value = "Status", required = false)
     private Integer status;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "goods_name", value = "Name", required = false)
     private String goodsName;
 
     /**
-     * 买家名称
+     * Name of the buyer
      */
     @Column(name = "member_name")
-    @ApiModelProperty(name = "member_name", value = "买家名称", required = false)
+    @ApiModelProperty(name = "member_name", value = "Name of the buyer", required = false)
     private String memberName;
 
     /**
-     * 会员头像
+     * Member of the head
      */
     @Column(name = "member_face")
-    @ApiModelProperty(name = "member_face", value = "会员头像", required = false)
+    @ApiModelProperty(name = "member_face", value = "Member of the head", required = false)
     private String memberFace;
 
     /**
-     * 审核状态
+     * Review the status
      */
     @Column(name = "auth_status")
-    @ApiModelProperty(name = "auth_status", value = "审核状态", required = false)
+    @ApiModelProperty(name = "auth_status", value = "Review the status", required = false)
     private String authStatus;
 
     @PrimaryKeyField

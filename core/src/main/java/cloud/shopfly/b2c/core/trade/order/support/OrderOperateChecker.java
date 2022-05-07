@@ -24,11 +24,11 @@ import java.util.Map;
 
 
 /**
- * 订单操作检验
+ * Order operation inspection
  *
  * @author Snow create in 2018/5/16
  * @version 3.0
- * 流程外部化， written by kingapex  in  2019/1/28
+ * Process externalization, written by kingapex  in  2019/1/28
  * @since v7.0.0
  */
 public class OrderOperateChecker {
@@ -38,7 +38,7 @@ public class OrderOperateChecker {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     /**
-     * 检测程序必须初始化流程
+     * The monitor must initialize the process
      *
      * @param flow
      */
@@ -47,7 +47,7 @@ public class OrderOperateChecker {
     }
 
     /**
-     * 校验操作是否被允许
+     * Verify whether the operation is allowed
      *
      * @param status
      * @param operate
@@ -56,7 +56,7 @@ public class OrderOperateChecker {
     public boolean checkAllowable(OrderStatusEnum status, OrderOperateEnum operate) {
 
         if (flow == null) {
-            logger.error("status[" + status + "] and operate[" + operate + "] 没找到flow,flow发生为空，强制返回false");
+            logger.error("status[" + status + "] and operate[" + operate + "] Did not findflow,flowNull, force returnfalse");
 
             return false;
         }
@@ -65,7 +65,7 @@ public class OrderOperateChecker {
 
         if (step == null) {
 
-            logger.error("status[" + status + "] and operate[" + operate + "] 没找到step,step发生为空，强制返回false");
+            logger.error("status[" + status + "] and operate[" + operate + "] Did not findstep,stepNull, force returnfalse");
 
             return false;
         }

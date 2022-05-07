@@ -26,11 +26,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 数据正确性校验实现
+ * Data correctness verification implementation
  *
  * @author zh
  * @version v7.0
- * @date 18/12/27 上午10:05
+ * @date 18/12/27 In the morning10:05
  * @since v7.0
  */
 
@@ -48,12 +48,12 @@ public class CheckDataRendererImpl implements CheckDataRebderer {
             for (CartSkuVO cartSkuVO : cartVO.getSkuList()) {
                 GoodsSkuVO goodsSkuVO = goodsClient.getSkuFromCache(cartSkuVO.getSkuId());
                 if (goodsSkuVO == null || goodsSkuVO.getLastModify() > cartSkuVO.getLastModify()) {
-                    //设置购物车未选中
+                    // Set shopping cart is not selected
                     cartSkuVO.setChecked(0);
-                    //设置购物车此sku商品已失效
+                    // Set up shopping cart This SKU item is invalid
                     cartSkuVO.setInvalid(1);
-                    //设置失效消息
-                    cartSkuVO.setErrorMessage("商品信息发生变化,已失效");
+                    // Setting failure messages
+                    cartSkuVO.setErrorMessage("Product information changes,Has the failure");
                 }
             }
         }

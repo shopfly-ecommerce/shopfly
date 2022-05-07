@@ -30,16 +30,16 @@ import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
 import java.util.*;
 
 /**
- * 选择器工具类
+ * The selector utility class
  *
  * @author fk
  * @version v1.0
- * 2017年4月25日 下午4:59:31
+ * 2017years4month25On the afternoon4:59:31
  */
 public class SelectorUtil {
 
     /**
-     * 创建分类选择器
+     * Create a category selector
      *
      * @param categoryBuckets
      * @param allCatList
@@ -58,7 +58,7 @@ public class SelectorUtil {
                 String categoryId = bucket.getKey().toString();
                 String catname = "";
                 CategoryVO findcat = CatUrlUtils.findCat(allCatList, StringUtil.toInt(categoryId, 0));
-                //没有传递cat参数
+                // The CAT argument is not passed
                 if (catPid == null) {
                     String[] path = findcat.getCategoryPath().replace('|', Separator.SEPARATOR_PROP_VLAUE.charAt(0)).split(Separator.SEPARATOR_PROP_VLAUE);
                     if (map.get(path[1]) != null) {
@@ -68,7 +68,7 @@ public class SelectorUtil {
                     map.put(path[1], path[1]);
                     catname = parentCat.getName();
                     findcat = parentCat;
-                } else {//有参数
+                } else {//A parameter
                     int index = findcat.getCategoryPath().indexOf(catPid);
                     if (index == -1) {
                         continue;
@@ -99,7 +99,7 @@ public class SelectorUtil {
     }
 
     /**
-     * 创建品牌选择器
+     * Create a brand selector
      *
      * @param brandBuckets
      * @param brandList
@@ -131,11 +131,11 @@ public class SelectorUtil {
     }
 
     /**
-     * 检测某个维度是否已经选择
+     * Checks whether a dimension is already selected
      *
      * @param dim
      * @param props
-     * @return 如果没有选择返回null，如果选择了返回属性值
+     * @return Return if no selection is madenullIf the property value is selected
      */
     private static String checkSelected(String dim, String[] props) {
         for (int i = 0; i < props.length; i++) {
@@ -149,7 +149,7 @@ public class SelectorUtil {
     }
 
     /**
-     * 创建参数选择器
+     * Create a parameter selector
      *
      * @param paramBucketIt
      * @return
@@ -186,7 +186,7 @@ public class SelectorUtil {
     }
 
     /**
-     * 排序方式
+     * The sorting way
      *
      * @return
      */

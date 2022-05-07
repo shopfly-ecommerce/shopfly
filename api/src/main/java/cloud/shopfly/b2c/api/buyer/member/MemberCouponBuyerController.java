@@ -36,7 +36,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 会员优惠券
+ * Membership coupon
  *
  * @author Snow create in 2018/6/13
  * @version v2.0
@@ -44,7 +44,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/members/coupon")
-@Api(description = "会员优惠券相关API")
+@Api(description = "Membership coupon relatedAPI")
 @Validated
 public class MemberCouponBuyerController {
 
@@ -55,11 +55,11 @@ public class MemberCouponBuyerController {
     private MemberCouponClient memberCouponClient;
 
 
-    @ApiOperation(value = "查询我的优惠券列表", response = MemberCoupon.class)
+    @ApiOperation(value = "Check my coupon list", response = MemberCoupon.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "status", value = "优惠券状态 0为全部，1为未使用且可用，2为已使用，3为已过期, 4为不可用优惠券（已使用和已过期）", dataType = "int", paramType = "query", allowableValues = "0,1,2,3,4"),
-            @ApiImplicitParam(name = "page_no", value = "页数", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "条数", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "status", value = "Coupon status0For all,1Is not used and available,2Is used,3Overdue for, 4Coupons are not available（Used and expired）", dataType = "int", paramType = "query", allowableValues = "0,1,2,3,4"),
+            @ApiImplicitParam(name = "page_no", value = "Number of pages", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "A number of", dataType = "int", paramType = "query"),
     })
     @GetMapping
     public Page<MemberCoupon> list(@ApiIgnore Integer status, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -71,13 +71,13 @@ public class MemberCouponBuyerController {
     }
 
 
-    @ApiOperation(value = "用户领取优惠券")
+    @ApiOperation(value = "Users receive coupons")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coupon_id", value = "优惠券id", required = true, dataType = "String", paramType = "path")
+            @ApiImplicitParam(name = "coupon_id", value = "couponsid", required = true, dataType = "String", paramType = "path")
     })
     @PostMapping(value = "/{coupon_id}/receive")
     public String receiveBonus(@ApiIgnore @PathVariable("coupon_id") Integer couponId) {
-        //限领检测
+        // Limit get detection
         this.memberCouponManager.checkLimitNum(couponId);
         Buyer buyer = UserContext.getBuyer();
         this.memberCouponClient.receiveBonus(buyer.getUid(), couponId);
@@ -85,17 +85,17 @@ public class MemberCouponBuyerController {
     }
 
 
-    @ApiOperation(value = "结算页—读取可用的优惠券列表", response = MemberCoupon.class)
+    @ApiOperation(value = "The settlement page—Read the list of coupons available", response = MemberCoupon.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "seller_ids", value = "商家ID集合", required = true, dataType = "int", paramType = "path", allowMultiple = true),
+            @ApiImplicitParam(name = "seller_ids", value = "merchantsIDA collection of", required = true, dataType = "int", paramType = "path", allowMultiple = true),
     })
     @GetMapping("/{seller_ids}")
-    public List<MemberCoupon> listByCheckout(@ApiIgnore @PathVariable("seller_ids") @NotNull(message = "商家ID不能为空") Integer[] sellerIds) {
+    public List<MemberCoupon> listByCheckout(@ApiIgnore @PathVariable("seller_ids") @NotNull(message = "merchantsIDCant be empty") Integer[] sellerIds) {
         return this.memberCouponManager.listByCheckout(UserContext.getBuyer().getUid());
     }
 
 
-    @ApiOperation(value = "优惠券—未使用,已使用,已过期状态总数量")
+    @ApiOperation(value = "coupons—Dont use,Has been used,Total number of expired states")
     @GetMapping("/num")
     public MemberCouponNumVO getStatusNum() {
         return this.memberCouponManager.statusNum();

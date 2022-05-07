@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.framework.util.StringUtil;
 import java.util.List;
 
 /**
- * 选器实体
+ * Choose device entity
  * @author fk
  * @version v2.0
  * @since v7.0.0

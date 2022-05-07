@@ -38,7 +38,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
- * 草稿商品控制器
+ * Draft commodity controller
  *
  * @author fk
  * @version v2.0
@@ -47,7 +47,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/goods/draft-goods")
-@Api(description = "草稿商品相关API")
+@Api(description = "Draft commodity correlationAPI")
 public class DraftGoodsSellerController {
 
     @Autowired
@@ -58,23 +58,23 @@ public class DraftGoodsSellerController {
     private DraftGoodsSkuManager draftGoodsSkuManager;
 
 
-    @ApiOperation(value = "查询草稿商品列表", response = DraftGoodsDO.class)
+    @ApiOperation(value = "Query the draft commodity list", response = DraftGoodsDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "keyword", value = "关键字查询", required = false, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "shop_cat_path", value = "店铺分类path，如0|10|", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "keyword", value = "Keyword query", required = false, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "shop_cat_path", value = "Store classificationpath, such as0|10|", required = false, dataType = "int", paramType = "query"),
     })
     @GetMapping
-    public Page list(@ApiIgnore @NotEmpty(message = "页码不能为空") Integer pageNo,
-                     @ApiIgnore @NotEmpty(message = "每页数量不能为空") Integer pageSize,
+    public Page list(@ApiIgnore @NotEmpty(message = "The page number cannot be blank") Integer pageNo,
+                     @ApiIgnore @NotEmpty(message = "The number of pages cannot be empty") Integer pageSize,
                      String keyword, @ApiIgnore String shopCatPath) {
 
         return this.draftGoodsManager.list(pageNo, pageSize, keyword, shopCatPath);
     }
 
-    @ApiOperation(value = "添加商品", response = DraftGoodsDO.class)
-    @ApiImplicitParam(name = "goods", value = "商品信息", required = true, dataType = "GoodsDTO", paramType = "body")
+    @ApiOperation(value = "Add the goods", response = DraftGoodsDO.class)
+    @ApiImplicitParam(name = "goods", value = "Product information", required = true, dataType = "GoodsDTO", paramType = "body")
     @PostMapping
     public DraftGoodsDO add(@ApiIgnore @RequestBody GoodsDTO goods) {
 
@@ -84,10 +84,10 @@ public class DraftGoodsSellerController {
     }
 
     @PutMapping(value = "/{draft_goods_id}")
-    @ApiOperation(value = "修改草稿商品", response = DraftGoodsDO.class)
+    @ApiOperation(value = "Revised draft goods", response = DraftGoodsDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "draft_goods_id", value = "主键", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "goods", value = "商品信息", required = true, dataType = "GoodsDTO", paramType = "body")
+            @ApiImplicitParam(name = "draft_goods_id", value = "A primary key", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "goods", value = "Product information", required = true, dataType = "GoodsDTO", paramType = "body")
     })
     public DraftGoodsDO edit(@RequestBody GoodsDTO goods, @PathVariable("draft_goods_id") Integer draftGoodsId) {
 
@@ -98,9 +98,9 @@ public class DraftGoodsSellerController {
 
 
     @DeleteMapping(value = "/{draft_goods_ids}")
-    @ApiOperation(value = "删除草稿商品")
+    @ApiOperation(value = "Delete draft goods")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "draft_goods_ids", value = "要删除的草稿商品主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "draft_goods_ids", value = "Primary key to delete draft goods", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable("draft_goods_ids") Integer[] draftGoodsIds) {
 
@@ -111,18 +111,18 @@ public class DraftGoodsSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个草稿商品,商家编辑草稿商品使用")
+    @ApiOperation(value = "Query a draft item,Merchants edit draft goods for use")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的草稿商品主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of draft goods to query", required = true, dataType = "int", paramType = "path")
     })
     public DraftGoodsVO get(@PathVariable Integer id) {
         return this.draftGoodsManager.getVO(id);
     }
 
     @GetMapping(value = "/{draft_goods_id}/params")
-    @ApiOperation(value = "查询草稿商品关联的参数，包括没有添加的参数")
+    @ApiOperation(value = "Query parameters associated with a draft commodity, including parameters not added")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "draft_goods_id", value = "要删除的草稿商品主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "draft_goods_id", value = "Primary key to delete draft goods", required = true, dataType = "int", paramType = "path")
     })
     public List<GoodsParamsGroupVO> queryDraftParam(@PathVariable("draft_goods_id") Integer draftGoodsId) {
 
@@ -134,8 +134,8 @@ public class DraftGoodsSellerController {
 
     }
 
-    @ApiOperation(value = "查询草稿箱商品sku信息", notes = "商家中心编辑草稿箱商品时获得sku信息")
-    @ApiImplicitParam(name = "draft_goods_id", value = "草稿商品id", required = true, dataType = "int", paramType = "path")
+    @ApiOperation(value = "Query draft box merchandiseskuinformation", notes = "Obtained when the merchant center edits the draft box itemskuinformation")
+    @ApiImplicitParam(name = "draft_goods_id", value = "The draft of goodsid", required = true, dataType = "int", paramType = "path")
     @GetMapping(value = "/{draft_goods_id}/skus")
     public List<GoodsSkuVO> queryByDraftGoodsid(@PathVariable("draft_goods_id") Integer draftGoodsId) throws Exception {
 
@@ -144,10 +144,10 @@ public class DraftGoodsSellerController {
         return list;
     }
 
-    @ApiOperation(value = "草稿箱商品上架接口", notes = "草稿箱商品上架时使用")
+    @ApiOperation(value = "Draft box goods shelf interface", notes = "Draft box is used when goods are put on shelves")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "draft_goods_id", value = "草稿商品id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "goods", value = "商品信息", required = true, dataType = "GoodsDTO", paramType = "body")
+            @ApiImplicitParam(name = "draft_goods_id", value = "The draft of goodsid", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "goods", value = "Product information", required = true, dataType = "GoodsDTO", paramType = "body")
     })
     @PutMapping(value = "/{draft_goods_id}/market")
     public GoodsDO addMarket(@ApiIgnore @Valid @RequestBody GoodsDTO goodsVO, @PathVariable("draft_goods_id") Integer draftGoodsId) {

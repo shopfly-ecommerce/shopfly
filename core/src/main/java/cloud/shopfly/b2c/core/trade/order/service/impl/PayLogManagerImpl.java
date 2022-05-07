@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 收款单业务类
+ * Receipt business class
  *
  * @author xlp
  * @version v2.0
@@ -49,7 +49,7 @@ public class PayLogManagerImpl implements PayLogManager {
     private DaoSupport daoSupport;
 
     /**
-     * 日志记录
+     * logging
      */
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -60,13 +60,13 @@ public class PayLogManagerImpl implements PayLogManager {
         List<String> sqlList = new ArrayList<>();
         List paramList = new ArrayList();
 
-        //付款方式
+        // Payment method
         if (!StringUtil.isEmpty(queryParam.getPaymentType())) {
             sqlList.add(" pay_way = ? ");
             paramList.add(queryParam.getPaymentType());
         }
 
-        //支付状态
+        // Payment status
         if (!StringUtil.isEmpty(queryParam.getPayStatus())) {
             sqlList.add(" pay_status = ? ");
             paramList.add(queryParam.getPayStatus());
@@ -93,9 +93,9 @@ public class PayLogManagerImpl implements PayLogManager {
             String payWay = queryParam.getPayWay();
             String value = "";
             if ("alipay".equals(payWay)) {
-                value = "%支付宝%";
+                value = "%Alipay%";
             } else if ("wechat".equals(payWay)) {
-                value = "%微信%";
+                value = "%WeChat%";
             }
             paramList.add(value);
         }

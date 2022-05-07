@@ -59,7 +59,7 @@ import java.util.*;
 import java.util.concurrent.locks.Lock;
 
 /**
- * 团购商品业务类
+ * Group purchase commodity business class
  *
  * @author Snow
  * @version v7.0.0
@@ -167,39 +167,39 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class, RuntimeException.class})
     public GroupbuyGoodsDO add(GroupbuyGoodsDO goodsDO) {
 
-        //活动id
+        // Activity id
         Integer actId = goodsDO.getActId();
 
         GroupbuyActiveDO activeDO = groupbuyActiveManager.getModel(actId);
         if (activeDO == null) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "参与的活动不存在");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The participating activity does not exist");
         }
-        //如果团购价格 大于等于商品原价，则抛出异常
+        // If the group purchase price is greater than or equal to the original price of the item, an exception is thrown
         if (goodsDO.getPrice() >= goodsDO.getOriginalPrice()) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "参与活动的商品促销价格不得大于或等于商品原价");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The promotional price of the commodities participating in the activities shall not be greater than or equal to the original price of the commodities");
         }
-        //校验限购数量是否超过商品总数
+        // Verify whether the purchase limit exceeds the total number of goods
         if (goodsDO.getLimitNum() > goodsDO.getGoodsNum()) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "商品限购数量不能大于商品总数");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The limited quantity of goods should not be greater than the total number of goods");
         }
-        //校验团购是否已经失效
+        // Verify whether group purchase has expired
         long datetime = DateUtil.getDateline();
         if (datetime >= activeDO.getStartTime()) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "团购活动已开始，不能添加活动商品");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Group purchase activity has started, cannot add active goods");
         }
 
         /**
-         * *************两种情况：******************
-         * 秒杀时间段：      |________________|
-         * 团购时间段：  |_____|           |_______|
+         * *************Two cases：******************
+         * Seckill time：      |________________|
+         * Group purchase period：  |_____|           |_______|
          *
-         * ************第三种情况：******************
-         * 秒杀时间段：        |______|
-         * 团购时间段：   |________________|
+         * ************The third case：******************
+         * Seckill time：        |______|
+         * Group purchase period：   |________________|
          *
-         * ************第四种情况：******************
-         * 秒杀时间段：   |________________|
-         * 团购时间段：        |______|
+         * ************The fourth case：******************
+         * Seckill time：   |________________|
+         * Group purchase period：        |______|
          */
 
 
@@ -216,7 +216,7 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
         );
 
         if (count > 0) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "该商品已经在重叠的时间段参加了限时抢购活动，不能参加团购活动");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "This product has participated in the flash sale activity in the overlapping time period, and cannot participate in the group purchase activity");
         }
 
         goodsDO.setGbStatus(GroupBuyGoodsStatusEnum.APPROVED.status());
@@ -225,20 +225,20 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
         int id = this.daoSupport.getLastId("es_groupbuy_goods");
         goodsDO.setGbId(id);
 
-        //修改已参与团购活动的商品数量
+        // Modify the number of commodities that have participated in the group purchase activity
         this.daoSupport.execute("update es_groupbuy_active set goods_num=goods_num+1 where act_id=?", actId);
 
-        //活动信息DTO
+        // Activity information DTO
         PromotionDetailDTO detailDTO = new PromotionDetailDTO(activeDO);
-        //入库到活动商品对照表
+        // Inventory to activity commodity comparison table
         this.promotionGoodsManager.addModel(goodsDO.getGoodsId(), detailDTO);
-        //插入缓存
+        // Inserted into the cache
         this.cache.put(PromotionCacheKeys.getGroupbuyKey(actId), goodsDO);
-        //将此商品加入延迟加载队列，到指定的时间将索引价格变成最新的优惠价格
+        // Add the item to the lazy load queue and turn the index price into the latest offer price at the specified time
         PromotionPriceDTO promotionPriceDTO = new PromotionPriceDTO(goodsDO.getGoodsId(),goodsDO.getPrice());
 
         timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, activeDO.getStartTime(), null);
-        //此活动结束后将索引的优惠价格重置为0
+        // Reset the indexs discount price to 0 after this activity ends
         promotionPriceDTO.setPrice(0.0);
         timeTrigger.add(TimeExecute.PROMOTION_EXECUTER, promotionPriceDTO, activeDO.getEndTime(), null);
 
@@ -248,24 +248,24 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
     @Override
     public GroupbuyGoodsDO edit(GroupbuyGoodsDO goodsDO, Integer id) {
 
-        //校验团购是否已经开始
+        // Verify that the group purchase has started
         GroupbuyActiveDO activeDO = groupbuyActiveManager.getModel(goodsDO.getActId());
         long datetime = DateUtil.getDateline();
         if (activeDO == null || datetime >= activeDO.getStartTime()) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "团购活动已开始，不能修改活动商品");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Group purchase activity has started, can not modify the activity of goods");
         }
-        //如果团购价格 大于等于商品原价，则抛出异常
+        // If the group purchase price is greater than or equal to the original price of the item, an exception is thrown
         if (goodsDO.getPrice() >= goodsDO.getOriginalPrice()) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "参与活动的商品促销价格不得大于或等于商品原价");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The promotional price of the commodities participating in the activities shall not be greater than or equal to the original price of the commodities");
         }
-        //校验限购数量是否超过商品总数
+        // Verify whether the purchase limit exceeds the total number of goods
         if (goodsDO.getLimitNum() > goodsDO.getGoodsNum()) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "商品限购数量不能大于商品总数");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The limited quantity of goods should not be greater than the total number of goods");
         }
-        // 将团购商品状态重置为已通过
+        // Reset group purchase status to Approved
         goodsDO.setGbStatus(GroupBuyGoodsStatusEnum.APPROVED.status());
         this.daoSupport.update(goodsDO, id);
-        //删除原有的延时任务
+        // Delete the original delayed task
         timeTrigger.delete(TimeExecute.PROMOTION_EXECUTER,activeDO.getStartTime(),null);
 
         PromotionPriceDTO promotionPriceDTO = new PromotionPriceDTO(goodsDO.getGoodsId(),goodsDO.getPrice());
@@ -278,7 +278,7 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
     @Override
     public void delete(Integer id) {
 
-        //删除活动商品表中的团购信息
+        // Delete the group purchase information from the active product list
         GroupbuyGoodsVO groupbuyGoods = this.getModel(id);
         Integer goodsId = groupbuyGoods.getGoodsId();
         this.promotionGoodsManager.delete(goodsId, groupbuyGoods.getActId(), PromotionTypeEnum.GROUPBUY.name());
@@ -309,7 +309,7 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
     public void verifyAuth(Integer id) {
         GroupbuyGoodsDO groupbuyGoodsDO = this.getModel(id);
         if (groupbuyGoodsDO == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
 
     }
@@ -336,11 +336,11 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
             lock.lock();
             try {
                 GroupbuyGoodsDO goodsDO = this.getModel(actId, goodsId);
-                //可购数量
+                // Can purchase quantity
                 int canBuyNum = goodsDO.getGoodsNum() < 0 ? 0 : goodsDO.getGoodsNum();
-                //可购买数量 小于等于0 && 要扣减的数量大于库存数量
+                // Quantity available for purchase is less than or equal to 0 && Quantity to be deducted is greater than quantity in stock
                 if (canBuyNum <= 0 || promotionDTO.getNum() > canBuyNum) {
-                    throw new ServiceException(PromotionErrorCode.E400.code(), "团购商品库存不足");
+                    throw new ServiceException(PromotionErrorCode.E400.code(), "Group purchase goods are not in stock");
                 }
                 String sql = "update es_groupbuy_goods set buy_num=buy_num+?,goods_num=goods_num-? where goods_id=? and act_id=? and goods_num >=?";
                 int rowNum = this.daoSupport.execute(sql, num, num, goodsId, actId, num);
@@ -436,7 +436,7 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
     }
 
     /**
-     * 记录日志并清空缓存
+     * Log and clear the cache
      *
      * @param promotionDTO
      * @param orderSn
@@ -445,7 +445,7 @@ public class GroupbuyGoodsManagerImpl extends AbstractPromotionRuleManagerImpl i
         GroupbuyQuantityLog groupbuyQuantityLog = new GroupbuyQuantityLog();
         groupbuyQuantityLog.setOpTime(DateUtil.getDateline());
         groupbuyQuantityLog.setQuantity(promotionDTO.getNum());
-        groupbuyQuantityLog.setReason("团购销售");
+        groupbuyQuantityLog.setReason("A bulk sales");
         groupbuyQuantityLog.setGbId(promotionDTO.getActId());
         groupbuyQuantityLog.setLogType(GroupbuyQuantityLogEnum.BUY.name());
         groupbuyQuantityLog.setOrderSn(orderSn);

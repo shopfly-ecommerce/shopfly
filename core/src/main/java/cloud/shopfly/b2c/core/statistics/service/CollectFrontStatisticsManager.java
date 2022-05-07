@@ -19,27 +19,27 @@ import cloud.shopfly.b2c.core.statistics.model.vo.SimpleChart;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
-* 商家中心，商品收藏统计
+* Business center, commodity collection statistics
 *
 * @author mengyuanming
 * @version 2.0
 * @since 7.0 
-* 2018年4月20日下午4:23:58
+* 2018years4month20On the afternoon4:23:58
 */
 public interface CollectFrontStatisticsManager {
 	
 	/**
-	 * 商品收藏图表数据
+	 * Commodity collection chart data
 	 *
-	 * @return SimpleChart，简单图表数据
+	 * @return SimpleChart, simple chart data
 	 */
 	SimpleChart getChart();
 	
 	/**
-	 * 商品收藏列表数据
-	 * @param pageNo，页码
-	 * @param pageSize，页面数据量
-	 * @return Page，分页数据
+	 * Commodity collection list data
+	 * @param pageNoThe page number,
+	 * @param pageSize, page data volume
+	 * @return Page, paging data
 	 */
 	Page getPage(Integer pageNo, Integer pageSize);
 

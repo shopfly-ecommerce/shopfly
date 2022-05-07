@@ -19,16 +19,16 @@ import org.apache.commons.codec.binary.Hex;
 
 /**
  * 
- * 对字符串进行hex
+ * On a stringhex
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2017年4月19日 下午5:41:32
+ * 2017years4month19On the afternoon5:41:32
  */
 public class HexUtil {
 	
 	/**
-	 * 将字符串进行hex
+	 * Take the stringhex
 	 * @param str
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public class HexUtil {
 	}
 	
 	/**
-	 * 将hex后的字符串解密
+	 * willhexDecrypt the string after
 	 * @param encodedStr
 	 * @return
 	 */

@@ -24,59 +24,59 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Map;
 
 /**
- * 统计订单数据
+ * Statistical order data
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/3/22 下午11:50
+ * 2018/3/22 In the afternoon11:50
  * @Description:
  */
 
 @Table(name="es_sss_order_data")
 public class OrderData {
-	@ApiModelProperty(value = "主键id")
+	@ApiModelProperty(value = "A primary keyid")
 	@Id
 	private Integer id;
 
 
-	@ApiModelProperty(value = "会员id")
+	@ApiModelProperty(value = "membersid")
 	@Column(name = "buyer_id")
 	private Integer buyerId;
 
-	@ApiModelProperty(value = "购买人")
+	@ApiModelProperty(value = "buyer")
 	@Column(name = "buyer_name")
 	private String buyerName;
 
-	@ApiModelProperty(value = "订单编号")
+	@ApiModelProperty(value = "Order no.")
 	@Column(name = "sn")
 	private String sn;
 
 
-	@ApiModelProperty(value = "订单状态")
+	@ApiModelProperty(value = "Status")
 	@Column(name = "order_status")
 	private String orderStatus;
 
-	@ApiModelProperty(value = "付款状态")
+	@ApiModelProperty(value = "Payment status")
 	@Column(name = "pay_status")
 	private String payStatus;
 
-	@ApiModelProperty(value = "订单金额")
+	@ApiModelProperty(value = "Amount")
 	@Column(name = "order_price")
 	private Double orderPrice;
 
-	@ApiModelProperty(value = "商品数量")
+	@ApiModelProperty(value = "The number")
 	@Column(name = "goods_num")
 	private Integer goodsNum;
 
-	@ApiModelProperty(value = "国家编码")
+	@ApiModelProperty(value = "Country code")
 	@Column(name = "ship_country_code")
 	private String shipCountryCode;
 	
-	@ApiModelProperty(value = "州/省编码")
+	@ApiModelProperty(value = "state/Province code")
 	@Column(name = "ship_state_code")
 	private String shipStateCode;
 
-	@ApiModelProperty(value = "创建时间")
+	@ApiModelProperty(value = "Last update")
 	@Column(name = "create_time")
 	private Long createTime;
 

@@ -19,18 +19,18 @@ import cloud.shopfly.b2c.core.trade.sdk.model.OrderSkuDTO;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 商品skuVo 新增每个sku优惠了多少钱
+ * productskuVo Each newskuHow much is the discount
  *
  * @author zh
  * @version v7.0
- * @date 18/7/24 下午4:57
+ * @date 18/7/24 In the afternoon4:57
  * @since v7.0
  */
 public class ReceiptGoodsSkuVO  extends OrderSkuDTO {
     /**
-     * 每一个sku优惠金额
+     * eachskuDiscount amount
      */
-    @ApiModelProperty(value = "优惠金额")
+    @ApiModelProperty(value = "Discount amount")
     private Double discount;
 
 

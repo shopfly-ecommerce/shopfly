@@ -50,11 +50,11 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 订单支付
+ * @Description: Order payment
  * @date 2018/4/1616:44
  * @since v7.0.0
  */
-@Api(description = "订单支付API")
+@Api(description = "Order paymentAPI")
 @RestController
 @RequestMapping("/order/pay")
 @Validated
@@ -79,7 +79,7 @@ public class OrderPayBuyerController {
     private Debugger debugger;
 
 
-    @ApiOperation(value = "订单检查 是否需要支付 为false代表不需要支付，出现支付金额为0，或者已经支付，为true代表需要支付")
+    @ApiOperation(value = "Order check whether payment is required forfalseThe representative does not need to pay, and the payment amount is0, or already paid fortrueThe representative needs to pay")
     @GetMapping(value = "/needpay/{sn}")
     public boolean check(@PathVariable(name = "sn") String sn) {
         OrderDetailVO order = this.orderQueryManager.getModel(sn, null);
@@ -87,9 +87,9 @@ public class OrderPayBuyerController {
     }
 
 
-    @ApiOperation(value = "查询支持的支付方式")
+    @ApiOperation(value = "Query the supported payment methods")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "client_type", value = "调用客户端PC,WAP,NATIVE,REACT", required = true, dataType = "String", paramType = "path", allowableValues = "PC,WAP,NATIVE,REACT")
+            @ApiImplicitParam(name = "client_type", value = "Calling clientPC,WAP,NATIVE,REACT", required = true, dataType = "String", paramType = "path", allowableValues = "PC,WAP,NATIVE,REACT")
     })
     @GetMapping(value = "/{client_type}")
     public List<PaymentMethodVO> queryPayments(@PathVariable(name = "client_type") String clientType) {
@@ -100,10 +100,10 @@ public class OrderPayBuyerController {
     }
 
 
-    @ApiOperation(value = "对一个交易发起支付")
+    @ApiOperation(value = "Initiate payment for a transaction")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sn", value = "要支付的交易sn", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "trade_type", value = "交易类型", required = true, dataType = "String", paramType = "path", allowableValues = "trade,order")
+            @ApiImplicitParam(name = "sn", value = "To pay for the transactionsn", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "trade_type", value = "Transaction type", required = true, dataType = "String", paramType = "path", allowableValues = "trade,order")
     })
     @GetMapping(value = "/{trade_type}/{sn}")
     public Map payTrade(@PathVariable(name = "sn") String sn, @PathVariable(name = "trade_type") String tradeType, @Valid PayParam param) {
@@ -114,7 +114,7 @@ public class OrderPayBuyerController {
     }
 
     @ApiIgnore
-    @ApiOperation(value = "接收支付同步回调")
+    @ApiOperation(value = "Receive payment synchronization callback")
     @GetMapping(value = "/return/{trade_type}/{pay_mode}/{client}/{sub_sn}/{plugin_id}", produces = MediaType.TEXT_HTML_VALUE)
     public String payReturn(@PathVariable(name = "trade_type") String tradeType, @PathVariable(name = "plugin_id") String paymentPluginId,
                             @PathVariable(name = "pay_mode") String payMode,@PathVariable(name = "client") String client,
@@ -141,9 +141,9 @@ public class OrderPayBuyerController {
         }
 
         String jumpHtml = "<script>";
-        //扫码支付
+        // scan to pay
         if (PayMode.qr.name().equals(payMode)) {
-            //二维码模式嵌在的iframe中的，要设置此相应允许被buyer域名的frame嵌套
+            // The QR code mode is embedded in the iframe, which should be set to be nested by the frame of the buyer domain name accordingly
             jumpHtml += "window.parent.location.href='" + url + "'";
         } else {
             jumpHtml += "location.href='" + url + "'";
@@ -155,12 +155,12 @@ public class OrderPayBuyerController {
     }
 
     @ApiIgnore
-    @ApiOperation(value = "接收支付异步回调")
+    @ApiOperation(value = "Receive payment asynchronous callback")
     @RequestMapping(value = "/callback/{trade_type}/{plugin_id}/{client_type}")
     public String payCallback(@PathVariable(name = "trade_type") String tradeType, @PathVariable(name = "plugin_id") String paymentPluginId,
                               @PathVariable(name = "client_type") String clientType) {
 
-        debugger.log("接收到回调消息");
+        debugger.log("A callback message was received");
         debugger.log("tradeType:[" + tradeType + "],paymentPluginId:[" + paymentPluginId + "],clientType:[" + clientType + "]");
 
 
@@ -170,7 +170,7 @@ public class OrderPayBuyerController {
     }
 
 
-    @ApiOperation(value = "主动查询支付结果")
+    @ApiOperation(value = "Proactively query payment results")
     @GetMapping(value = "/order/pay/query/{trade_type}/{sn}")
     public String query(@PathVariable(name = "trade_type") String tradeType, @Valid PayParam param,
                         @PathVariable(name = "sn") String sn) {
@@ -183,10 +183,10 @@ public class OrderPayBuyerController {
         return result;
     }
 
-    @ApiOperation(value = "APP对一个交易发起支付")
+    @ApiOperation(value = "APPInitiate payment for a transaction")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sn", value = "要支付的交易sn", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "trade_type", value = "交易类型", required = true, dataType = "String", paramType = "path", allowableValues = "trade,order")
+            @ApiImplicitParam(name = "sn", value = "To pay for the transactionsn", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "trade_type", value = "Transaction type", required = true, dataType = "String", paramType = "path", allowableValues = "trade,order")
     })
     @GetMapping(value = "/app/{trade_type}/{sn}")
     public String appPayTrade(@PathVariable(name = "sn") String sn, @PathVariable(name = "trade_type") String tradeType, @Valid PayParam param) {

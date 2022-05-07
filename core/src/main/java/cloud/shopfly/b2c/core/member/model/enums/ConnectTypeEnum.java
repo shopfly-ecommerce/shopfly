@@ -18,31 +18,31 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录类型枚举类
+ * @Description Trusted login type enumeration class
  * @ClassName ConnectUserGenderEnum
- * @since v7.0 上午10:35 2018/6/6
+ * @since v7.0 In the morning10:35 2018/6/6
  */
 public enum ConnectTypeEnum {
-    //QQ联合登录
+    // QQ joint login
     QQ("QQ"),
-    //QQ H5 登陆openid
-    QQ_OPENID("QQ H5 登陆openid"),
-    //QQ APP 登陆openid
-    QQ_APP("QQ APP 登陆openid"),
-    //微博联合登录
-    WEIBO("微博联合登录"),
-    //微信联合登录
-    WECHAT("微信联合登录"),
-    // 微信小程序联合登录
-    WECHAT_MINI("微信小程序联合登录"),
-    //微信H5登录openid
-    WECHAT_OPENID("微信H5登录 openid"),
-    //微信APP登录openid
-    WECHAT_APP("微信APP登录 openid"),
-    //支付宝登录
-    ALIPAY("支付宝登录"),
-    //支付宝登录
-    APPLEID("IOS苹果登录登录");
+    // QQ H5 login openID
+    QQ_OPENID("QQ H5 landingopenid"),
+    // QQ APP login openID
+    QQ_APP("QQ APP landingopenid"),
+    // Weibo joint login
+    WEIBO("Weibo joint login"),
+    // Wechat joint login
+    WECHAT("Wechat joint login"),
+    // Wechat mini program joint login
+    WECHAT_MINI("Wechat mini program joint login"),
+    // Wechat H5 Log in to OpenID
+    WECHAT_OPENID("WeChatH5Sign inopenid"),
+    // Log in to OpenID using wechat APP
+    WECHAT_APP("WeChatAPPSign inopenid"),
+    // Alipay login
+    ALIPAY("Alipay login"),
+    // Alipay login
+    APPLEID("IOSApple login Login");
 
     private String description;
 

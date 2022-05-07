@@ -23,12 +23,12 @@ import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**
- * 商品sku库存
+ * productskuInventory
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午11:26:49
+ * 2018years3month23The morning of11:26:49
  */
 @ApiIgnore
 public class GoodsSkuQuantityDTO implements Serializable {
@@ -39,17 +39,17 @@ public class GoodsSkuQuantityDTO implements Serializable {
     private static final long serialVersionUID = 2050291085109943997L;
 
     /**
-     * 库存数量
+     * Inventory quantity
      */
-    @ApiModelProperty(name = "quantity_count", value = "库存数量")
-    @Max(value = 99999999, message = "库存数量不正确")
-    @Min(value = 0, message = "库存数量不正确")
+    @ApiModelProperty(name = "quantity_count", value = "Inventory quantity")
+    @Max(value = 99999999, message = "The inventory quantity is incorrect")
+    @Min(value = 0, message = "The inventory quantity is incorrect")
     private Integer quantityCount;
 
     /**
      * skuid
      */
-    @ApiModelProperty(name = "sku_id", value = "sku值")
+    @ApiModelProperty(name = "sku_id", value = "skuvalue")
     private Integer skuId;
 
     public Integer getQuantityCount() {

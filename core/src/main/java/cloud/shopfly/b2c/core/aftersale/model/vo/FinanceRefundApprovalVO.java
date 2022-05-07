@@ -24,25 +24,25 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * 退款VO
+ * A refundVO
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 下午2:15 2018/5/2
+ * @since v7.0 In the afternoon2:15 2018/5/2
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class FinanceRefundApprovalVO {
 
-    @ApiModelProperty(value = "退货(款)单编号", name = "sn", required = true)
-    @NotBlank(message = "退款单号必填")
+    @ApiModelProperty(value = "Return of the goods(paragraph)A single number", name = "sn", required = true)
+    @NotBlank(message = "Refund receipt number Mandatory")
     private String sn;
 
-    @ApiModelProperty(value = "退款金额", name = "refund_price", required = true)
-    @NotNull(message = "退款金额必填")
+    @ApiModelProperty(value = "The refund amount", name = "refund_price", required = true)
+    @NotNull(message = "Refund amount mandatory")
     private Double refundPrice;
 
-    @ApiModelProperty(value = "退款备注", name = "remark", required = false)
+    @ApiModelProperty(value = "The refund note", name = "remark", required = false)
     private String remark;
 
     public String getSn() {

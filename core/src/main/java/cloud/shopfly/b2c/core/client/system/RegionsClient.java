@@ -22,32 +22,32 @@ import java.util.List;
 
 /**
  * @version v7.0
- * @Description: 地区Client
+ * @Description: regionClient
  * @Author: zjp
  * @Date: 2018/7/27 11:14
  */
 public interface RegionsClient {
     /**
-     * 根据地区id获取其子地区
+     * According to the regionidObtain subregion
      *
-     * @param regionId 地区id
-     * @return 地区集合
+     * @param regionId regionid
+     * @return In the collection
      */
     List<Regions> getRegionsChildren(Integer regionId);
 
     /**
-     * 获取地区
+     * Access to areas
      *
-     * @param id 地区主键
-     * @return Regions  地区
+     * @param id In the primary key
+     * @return Regions  region
      */
     Regions getModel(Integer id);
 
     /**
-     * 根据深度获取组织地区数据结构的数据
+     * Obtain data from the data structure of the organization area based on depth
      *
-     * @param depth 地区深度
-     * @return 地区集合
+     * @param depth In the depth of the
+     * @return In the collection
      */
     List<RegionVO> getRegionByDepth(Integer depth);
 

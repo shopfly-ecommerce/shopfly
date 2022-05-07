@@ -42,7 +42,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 订单支付
+ * @Description: Order payment
  * @date 2018/4/1617:10
  * @since v7.0.0
  */
@@ -72,20 +72,20 @@ public class OrderPayManagerImpl implements OrderPayManager {
 
     @Override
     public Map pay(PayParam param) {
-        //对订单状态进行检测，只有已确认的订单才可以进行支付
+        // Order status is detected and only confirmed orders can be paid
         boolean isLegitimate = true;
         if (param.getTradeType().equals(TradeType.order.name())) {
             isLegitimate = this.checkStatus(param.getSn(), TradeType.order, 0);
         } else {
             isLegitimate = this.checkStatus(param.getSn(), TradeType.trade, 0);
         }
-        //判断订单状态是否已确认可以订单支付，否抛出异常
+        // Check whether the order status has been confirmed to order payment, or throw an exception
         if (!isLegitimate) {
-            throw new ServiceException(PaymentErrorCode.E506.code(), "该交易状态不正确，无法支付");
+            throw new ServiceException(PaymentErrorCode.E506.code(), "The transaction status is incorrect and cannot be paid");
         }
         String sql = "";
         String updateSql = "";
-        // 交易
+        // trading
         if (TradeType.trade.name().equals(param.getTradeType())) {
             sql = "select total_price as order_price from es_trade  where trade_sn = ?";
             updateSql = "update es_order set payment_plugin_id = ?,payment_method_name = ? where trade_sn = ?";
@@ -105,7 +105,7 @@ public class OrderPayManagerImpl implements OrderPayManager {
         bill.setSn(param.getSn());
         PaymentMethodDO paymentMethod = this.paymentMethodManager.getByPluginId(param.getPaymentPluginId());
 
-        //修改订单的支付方式
+        // Modify the payment method of the order
         this.daoSupport.execute(updateSql, paymentMethod.getPluginId(), paymentMethod.getMethodName(), param.getSn());
 
         return paymentManager.pay(bill);
@@ -114,39 +114,39 @@ public class OrderPayManagerImpl implements OrderPayManager {
 
 
     /**
-     * 检测交易（订单）是否可以被支付
+     * Detection of trading（The order）Whether it can be paid
      *
-     * @param sn        订单（交易）号
-     * @param tradeType 交易类型
-     * @param times     次数
-     * @return 是否可以被支付
+     * @param sn        The order（trading）No.
+     * @param tradeType Transaction type
+     * @param times     The number of
+     * @return Whether it can be paid
      */
     private boolean checkStatus(String sn, TradeType tradeType, Integer times) {
         try {
-            //如果超过三次则直接返回false，不能支付
+            // If more than three times it returns false and cannot be paid
             if (times >= 3) {
                 return false;
             }
-            //订单或者交易状态
+            // Order or transaction status
             String status;
             if (tradeType.equals(TradeType.order)) {
-                //获取订单详情，判断订单是否是已确认状态
+                // Get the details of the order to determine whether the order is confirmed
                 OrderDetailVO orderDetailVO = orderQueryManager.getModel(sn, null);
                 if (orderDetailVO != null) {
                     status = orderDetailVO.getOrderStatus();
                 } else {
-                    throw new ServiceException(TradeErrorCode.E459.code(), "此订单不存在");
+                    throw new ServiceException(TradeErrorCode.E459.code(), "This order does not exist");
                 }
             } else {
-                //获取交易详情，判断交易是否是已确认状态
+                // Obtain transaction details to determine whether the transaction is confirmed
                 TradeDO tradeDO = tradeQueryManager.getModel(sn);
                 if (tradeDO != null) {
                     status = tradeDO.getTradeStatus();
                 } else {
-                    throw new ServiceException(TradeErrorCode.E458.code(), "此交易不存在");
+                    throw new ServiceException(TradeErrorCode.E458.code(), "This transaction does not exist");
                 }
             }
-            //检验交易或者订单状态是否是已确认可被支付
+            // Verify that the transaction or order status is confirmed to be payable
             if (!status.equals(OrderStatusEnum.CONFIRM.value())) {
                 Thread.sleep(1000);
                 return this.checkStatus(sn, tradeType, ++times);
@@ -154,7 +154,7 @@ public class OrderPayManagerImpl implements OrderPayManager {
                 return true;
             }
         } catch (Exception e) {
-            logger.error("检测订单是否可被支付,订单不可被支付，重试检测" + times + ",次，消息" + e.getMessage());
+            logger.error("Check whether the order can be paid,Order could not be paid, retry detection" + times + ",Time, message" + e.getMessage());
             this.checkStatus(sn, tradeType, ++times);
         }
         return false;

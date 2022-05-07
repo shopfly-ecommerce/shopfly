@@ -30,13 +30,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 注册后添加分销商
+ * Add resellers after registration
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/13 下午11:33
+ * 2018/6/13 In the afternoon11:33
  */
 @Component
 public class DistributionRegisterConsumer implements MemberRegisterEvent {
@@ -53,11 +53,11 @@ public class DistributionRegisterConsumer implements MemberRegisterEvent {
     @Transactional( rollbackFor = Exception.class)
     @Override
     public void memberRegister(MemberRegisterMsg memberRegisterMsg) {
-        // 注册完毕后 在分销商表中添加会员信息
+        // Add membership information to the distributor table after registration
         DistributionDO distributor = new DistributionDO();
         try {
             distributor.setMemberId(memberRegisterMsg.getMember().getMemberId());
-            //默认模版设置
+            // Default template Settings
             CommissionTpl commissionTpl = commissionTplClient.getDefaultCommission();
             distributor.setCurrentTplId(commissionTpl.getId());
             distributor.setCurrentTplName(commissionTpl.getTplName());
@@ -69,19 +69,19 @@ public class DistributionRegisterConsumer implements MemberRegisterEvent {
             logger.error(e);
         }
 
-        //注册完毕后，给注册会员添加他的上级分销商id
+        // After registration, add the registered members parent reseller ID
         Object upMemberId = cache.get(CachePrefix.DISTRIBUTION_UP.getPrefix() + memberRegisterMsg.getUuid());
 
         try {
-            //如果推广的会员id存在
+            // If the promoted member ID exists
             if (upMemberId != null) {
                 int lv1MemberId = Integer.parseInt(upMemberId.toString());
                 DistributionDO parentDistributor = this.distributionClient.getDistributorByMemberId(lv1MemberId);
                 distributor.setPath(parentDistributor.getPath() + distributor.getMemberId() + "|");
 
-                //先更新 path
+                // To update the path
                 this.distributionClient.edit(distributor);
-                // 再更新parentId
+                // To update the parentId
                 this.distributionClient.setParentDistributorId(memberRegisterMsg.getMember().getMemberId(), lv1MemberId);
 
             } else {

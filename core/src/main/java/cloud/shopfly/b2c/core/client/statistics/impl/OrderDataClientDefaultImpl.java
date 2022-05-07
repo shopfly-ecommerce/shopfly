@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午2:41
+ * 2018-08-14 In the afternoon2:41
  */
 
 @Service
@@ -38,7 +38,7 @@ public class OrderDataClientDefaultImpl implements OrderDataClient {
     @Autowired
     private OrderDataManager orderDataManager;
     /**
-     * 订单新增
+     * Orders for new
      *
      * @param order
      */
@@ -48,7 +48,7 @@ public class OrderDataClientDefaultImpl implements OrderDataClient {
     }
 
     /**
-     * 订单修改
+     * Order to modify
      *
      * @param order
      */

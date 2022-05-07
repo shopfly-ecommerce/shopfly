@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 快递平台业务类
+ * Express platform business class
  *
  * @author zh
  * @version v7.0.0
@@ -100,11 +100,11 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
         }
         ExpressPlatformDO expressPlatformDO = this.getExpressPlatform(expressPlatformVO.getBean());
         if (expressPlatformDO == null) {
-            throw new ResourceNotFoundException("该快递方案不存在");
+            throw new ResourceNotFoundException("The Courier scheme does not exist");
         }
-        //校验之前开启状态是未开启，改为开启
+        // Before the verification, the status is disabled
         if (expressPlatformDO.getOpen().equals(0) && expressPlatformVO.getOpen().equals(1)) {
-            //修改开启状态
+            // Changing the Status of the Switch
             this.open(expressPlatformDO.getBean());
         }
         expressPlatformVO.setId(expressPlatformDO.getId());
@@ -121,9 +121,9 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
 
 
     /**
-     * 获取所有的快递查询方案
+     * Get all express query schemes
      *
-     * @return 所有的快递方案
+     * @return All delivery options
      */
     private List<ExpressPlatformVO> getPlatform() {
         List<ExpressPlatformVO> resultList = new ArrayList<>();
@@ -156,7 +156,7 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
         }
         ExpressPlatformDO expressPlatformDO = this.getExpressPlatform(bean);
         if (expressPlatformDO == null) {
-            throw new ResourceNotFoundException("该快递平台不存在");
+            throw new ResourceNotFoundException("The delivery platform does not exist");
         }
         return new ExpressPlatformVO(expressPlatformDO);
     }
@@ -169,37 +169,37 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
         }
         ExpressPlatformDO expressPlatformDO = this.getExpressPlatform(bean);
         if (expressPlatformDO == null) {
-            throw new ResourceNotFoundException("该快递平台不存在");
+            throw new ResourceNotFoundException("The delivery platform does not exist");
         }
         this.systemDaoSupport.execute("UPDATE es_express_platform SET open=0");
         this.systemDaoSupport.execute("UPDATE es_express_platform SET open=1 WHERE bean = ?", bean);
-        // 更新缓存
+        // Update the cache
         cache.remove(CachePrefix.EXPRESS.getPrefix());
     }
 
     @Override
     public ExpressDetailVO getExpressDetail(Integer id, String nu) {
-        //获取物流公司
+        // Acquisition logistics company
         LogiCompanyDO logiCompanyDO = logiCompanyClient.getModel(id);
         if (logiCompanyDO == null || StringUtil.isEmpty(logiCompanyDO.getCode())) {
             logiCompanyDO.setCode("shunfeng");
         }
-        //从缓存中获取开启的快递平台
+        // Retrieves the enabled express platform from the cache
         ExpressPlatformVO expressPlatformVO = (ExpressPlatformVO) cache.get(CachePrefix.EXPRESS.getPrefix());
-        //如果没有找到则从数据库查询，将查询到的开启的快递平台放入缓存
+        // If not, query from the database, and put the open express platform found in the cache
         if (expressPlatformVO == null) {
             ExpressPlatformDO expressPlatformDO = this.systemDaoSupport.queryForObject("select * from es_express_platform where open = 1", ExpressPlatformDO.class);
             if (expressPlatformDO == null) {
-                throw new ResourceNotFoundException("未找到开启的快递平台");
+                throw new ResourceNotFoundException("No open express platform found");
             }
             expressPlatformVO = new ExpressPlatformVO();
             expressPlatformVO.setConfig(expressPlatformDO.getConfig());
             expressPlatformVO.setBean(expressPlatformDO.getBean());
             cache.put(CachePrefix.EXPRESS.getPrefix(), expressPlatformVO);
         }
-        //得到开启的快递平台方案
+        // Get the open express platform solution
         ExpressPlatform expressPlatform = this.findByBeanid(expressPlatformVO.getBean());
-        //调用查询接口返回查询到的物流信息
+        // Call the query interface to return the queried logistics information
         ExpressDetailVO expressDetailVO = expressPlatform.getExpressDetail(logiCompanyDO.getCode(), nu, this.getConfig());
         if(expressDetailVO == null ){
             expressDetailVO = new ExpressDetailVO();
@@ -210,7 +210,7 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
     }
 
     /**
-     * 获取开启的快递平台方案
+     * Get the open express platform solution
      *
      * @return
      */
@@ -232,7 +232,7 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
     }
 
     /**
-     * 根据bean查询出可用的快递平台
+     * According to thebeanQuery available delivery platforms
      *
      * @param beanId
      * @return
@@ -243,8 +243,8 @@ public class ExpressPlatformManagerImpl implements ExpressPlatformManager {
                 return expressPlatform;
             }
         }
-        //如果走到这里，说明找不到可用的快递平台
-        throw new ResourceNotFoundException("未找到可用的快递平台");
+        // If you come here, you cannot find an available delivery platform
+        throw new ResourceNotFoundException("No available delivery platform was found");
     }
 
 }

@@ -52,7 +52,7 @@ import java.util.*;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信支付使用工具
+ * @Description: Wechat pay using tools
  * @date 2018/4/12 10:25
  * @since v7.0.0
  */
@@ -60,10 +60,10 @@ public class WeixinUtil {
 
 
     /**
-     * 生成签名
+     * To generate the signature
      *
-     * @param params 参数map
-     * @param key    支付key(API密钥)
+     * @param params parametermap
+     * @param key    paykey(APIThe key)
      * @return
      */
     public static String createSign(Map params, String key) {
@@ -76,7 +76,7 @@ public class WeixinUtil {
 
 
     /**
-     * 生成签名，没有key
+     * Generate a signature, nonekey
      *
      * @param params
      * @return
@@ -89,10 +89,10 @@ public class WeixinUtil {
     }
 
     /**
-     * 将Map转换为XML格式的字符串
+     * willMapconvertXMLFormatted string
      *
-     * @param data Map类型数据
-     * @return XML格式的字符串
+     * @param data MapType data
+     * @return XMLFormatted string
      * @throws Exception
      */
     public static String mapToXml(Map<String, String> data) throws Exception {
@@ -127,7 +127,7 @@ public class WeixinUtil {
 
 
     /**
-     * 将一个xml转为map
+     * Will axmltomap
      *
      * @param document
      * @return
@@ -149,9 +149,9 @@ public class WeixinUtil {
     public static String doc2String(Document document) {
         String s = "";
         try {
-            // 使用输出流来进行转化
+            // Use the output stream for transformation
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            // 使用UTF-8编码
+            // Use UTF-8 encoding
 
             OutputFormat format = new OutputFormat("   ", true, "UTF-8");
             XMLWriter writer = new XMLWriter(out, format);
@@ -194,11 +194,11 @@ public class WeixinUtil {
                 return doc;
             } else {
                 throw new RuntimeException("post uri[" + wsPart
-                        + "]发生错误:[stream 返回Null]");
+                        + "]An error occurred:[stream returnNull]");
             }
         } catch (Throwable e) {
 
-            throw new RuntimeException("post uri [" + wsPart + "]发生错误", e);
+            throw new RuntimeException("post uri [" + wsPart + "]An error occurred", e);
 
         }
     }
@@ -218,7 +218,7 @@ public class WeixinUtil {
             if ("sign".equals(key)) {
                 continue;
             }
-            // 拼接时，不包括最后一个&字符
+            // Concatenation does not include the last ampersand character
             if ("".equals(prestr.toString())) {
                 prestr.append(key + "=" + value);
             } else {
@@ -231,17 +231,17 @@ public class WeixinUtil {
     public static Document verifyCertPost(String wsPart, String docStr, String mchid, String p12Path) {
 
         try {
-            // 证书
+            // certificate
             char[] password = mchid.toCharArray();
             KeyStore ks = KeyStore.getInstance("PKCS12");
             FileInputStream certStream = new FileInputStream(new File(p12Path));
             ks.load(certStream, password);
 
-            // 实例化密钥库 & 初始化密钥工厂
+            // Instantiate key stores & initialize key factories
             KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
             kmf.init(ks, password);
 
-            // 创建 SSLContext
+            // Create the SSLContext
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(kmf.getKeyManagers(), null, new SecureRandom());
 
@@ -283,16 +283,16 @@ public class WeixinUtil {
                 Document doc = reader.read(in);
                 return doc;
             } else {
-                throw new RuntimeException("post uri[" + wsPart + "]发生错误:[stream 返回Null]");
+                throw new RuntimeException("post uri[" + wsPart + "]An error occurred:[stream returnNull]");
             }
         } catch (Throwable e) {
-            throw new RuntimeException("post uri [" + wsPart + "]发生错误", e);
+            throw new RuntimeException("post uri [" + wsPart + "]An error occurred", e);
 
         }
     }
 
     /**
-     * 是否是微信打开
+     * Whether wechat is open
      *
      * @return
      */
@@ -306,8 +306,8 @@ public class WeixinUtil {
 
 
     /**
-     * 获取session中的openId
-     * 这个方法不会主动去获取openId，需要页面中去获取，放到session当中
+     * To obtainsessionIn theopenId
+     * This method is not actively acquiredopenId, need to page to get, putsessionamong
      *
      * @return
      * @throws IOException
@@ -317,15 +317,15 @@ public class WeixinUtil {
         if (!StringUtil.isEmpty(unionId)) {
             return unionId;
         } else {
-            //kingapex 注释于2016年9月22日，解决微信注册时，没有正确的配置微信时，会报404的错误
-            return "程序错误";
+            // Kingapex annotation was made on September 22, 2016. It was resolved that a 404 error would be reported if wechat was not configured correctly during registration
+            return "Program error";
         }
 
     }
 
     /**
-     * 获取session中的openId
-     * 这个方法不会主动去获取openId，需要页面中去获取，放到session当中
+     * To obtainsessionIn theopenId
+     * This method is not actively acquiredopenId, need to page to get, putsessionamong
      *
      * @return
      * @throws IOException
@@ -335,8 +335,8 @@ public class WeixinUtil {
         if (!StringUtil.isEmpty(openid)) {
             return openid;
         } else {
-            //kingapex 注释于2016年9月22日，解决微信注册时，没有正确的配置微信时，会报404的错误
-            return "程序错误";
+            // Kingapex annotation was made on September 22, 2016. It was resolved that a 404 error would be reported if wechat was not configured correctly during registration
+            return "Program error";
         }
 
     }

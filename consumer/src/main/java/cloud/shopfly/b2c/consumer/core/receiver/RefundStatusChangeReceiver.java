@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 退货退款
+ * refunds
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:23:22
+ * @since v7.0.0 2018years3month23The morning of10:23:22
  */
 @Component
 public class RefundStatusChangeReceiver {
@@ -46,7 +46,7 @@ public class RefundStatusChangeReceiver {
 	private List<RefundStatusChangeEvent> events;
 
 	/**
-	 * 退货退款
+	 * refunds
 	 * @param refundPartVo
 	 */
 	@RabbitListener(bindings = @QueueBinding(
@@ -60,7 +60,7 @@ public class RefundStatusChangeReceiver {
 				try {
 					event.refund(refundPartVo);
 				} catch (Exception e) {
-					logger.error("处理退货退款消息出错", e);
+					logger.error("Error processing return refund message", e);
 				}
 			}
 		}

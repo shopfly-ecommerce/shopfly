@@ -22,9 +22,9 @@ import cloud.shopfly.b2c.framework.database.annotation.NotDbField;
 
 
 /**
- * 动态字段
+ * Dynamic field
  * @author kingapex
- *2012-5-5下午12:46:37
+ *2012-5-5In the afternoon12:46:37
  */
 public class DynamicField {
 	

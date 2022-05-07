@@ -19,20 +19,20 @@ import cloud.shopfly.b2c.core.statistics.model.vo.SimpleChart;
 import cloud.shopfly.b2c.core.base.SearchCriteria;
 
 /**
- * 商家中心与平台后台，流量分析
+ * Business center and platform background, traffic analysis
  * 
  * @author mengyuanming
  * @version 2.0
  * @since 7.0 
- * 2018年3月19日上午8:36:28
+ * 2018years3month19The morning of8:36:28
  */
 public interface PageViewStatisticManager {
 
 	/**
-	 * 平台后台 查询商品访问量
+	 * Platform background query volume of goods
 	 * 
-	 * @param searchCriteria，流量参数类
-	 * @return 访问流量前30的商品名及流量数据
+	 * @param searchCriteria, flow parameter class
+	 * @return Before accessing traffic30Product name and traffic data
 	 */
 	SimpleChart countGoods(SearchCriteria searchCriteria);
 

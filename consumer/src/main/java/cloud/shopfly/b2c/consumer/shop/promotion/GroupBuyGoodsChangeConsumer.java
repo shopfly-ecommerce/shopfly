@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 /**
 * @author liuyulei
  * @version 1.0
- * @Description:  修改团购商品信息
+ * @Description:  Modify group purchase commodity information
  * @date 2019/5/15 9:50
  * @since v7.0
  */

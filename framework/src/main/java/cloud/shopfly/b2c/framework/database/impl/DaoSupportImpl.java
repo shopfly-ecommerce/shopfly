@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
 
 
 /**
- * jdbc数据库操作支撑实现类
+ * jdbcDatabase operations support implementation classes
  * @author Snow create in 2018/3/21
  * @version v2.0
  * @since v7.0.0
@@ -50,17 +50,17 @@ public class DaoSupportImpl implements DaoSupport {
 	private SqlMetaBuilder sqlMetaBuilder;
 
     /**
-     * 日志记录
+     * logging
      */
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * order by 语句正则
+     * order by Statements regular
      */
     private  static final Pattern ORDER_PATTERN = Pattern.compile("order\\s*by[\\w|\\W|\\s|\\S]*", Pattern.CASE_INSENSITIVE);
 
     /**
-     * 删除select正则
+     * deleteselectregular
      */
     private  static final Pattern REMOVE_SELECT_PATTERN  = Pattern.compile("\\(.*\\)", Pattern.CASE_INSENSITIVE);
 
@@ -68,7 +68,7 @@ public class DaoSupportImpl implements DaoSupport {
 	}
 
     /**
-     * 实例化jdbcTemplate
+     * instantiationjdbcTemplate
      */
 	public DaoSupportImpl(JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate= jdbcTemplate;
@@ -98,8 +98,8 @@ public class DaoSupportImpl implements DaoSupport {
 
 		try {
 
-			Assert.hasText(table, "表名不能为空");
-			Assert.notEmpty(fields, "字段不能为空");
+			Assert.hasText(table, "Table names cannot be empty");
+			Assert.notEmpty(fields, "Fields cannot be empty");
 			table = quoteCol(table);
 
 			Object[] cols = fields.keySet().toArray();
@@ -199,7 +199,7 @@ public class DaoSupportImpl implements DaoSupport {
 			return "";
 		}catch (RuntimeException e) {
 			if(logger.isDebugEnabled()){
-				logger.debug("查询sql:["+sql+"]出错",e);
+				logger.debug("The querysql:["+sql+"]error",e);
 			}
 
 		}
@@ -229,8 +229,8 @@ public class DaoSupportImpl implements DaoSupport {
 	public List queryForListPage(String sql, int pageNo, int pageSize, Object... args) {
 
 		try {
-			Assert.hasText(sql, "SQL语句不能为空");
-			Assert.isTrue(pageNo >= 1, "pageNo 必须大于等于1");
+			Assert.hasText(sql, "SQLStatements cannot be null");
+			Assert.isTrue(pageNo >= 1, "pageNo Must be greater than or equal to1");
 			String listSql = this.buildPageSql(sql, pageNo, pageSize);
 			return queryForList(listSql, args);
 		} catch (Exception ex) {
@@ -259,8 +259,8 @@ public class DaoSupportImpl implements DaoSupport {
 
 	@Override
 	public Page queryForPage(String sql, String countSql, int pageNo, int pageSize, Object... args) {
-		Assert.hasText(sql, "SQL语句不能为空");
-		Assert.isTrue(pageNo >= 1, "pageNo 必须大于等于1");
+		Assert.hasText(sql, "SQLStatements cannot be null");
+		Assert.isTrue(pageNo >= 1, "pageNo Must be greater than or equal to1");
 		String listSql = buildPageSql(sql, pageNo, pageSize);
 
 		List list = queryForList(listSql, args);
@@ -271,8 +271,8 @@ public class DaoSupportImpl implements DaoSupport {
 	@Override
 	public <T> Page queryForPage(String sql, int pageNo, int pageSize, Class<T> clazz, Object... args) {
 
-		Assert.hasText(sql, "SQL语句不能为空");
-		Assert.isTrue(pageNo >= 1, "pageNo 必须大于等于1");
+		Assert.hasText(sql, "SQLStatements cannot be null");
+		Assert.isTrue(pageNo >= 1, "pageNo Must be greater than or equal to1");
 		String listSql = buildPageSql(sql, pageNo, pageSize);
 		String countSql = "SELECT COUNT(*) " + removeSelect(removeOrders(sql));
 		List<T> list = this.queryForList(listSql, clazz, args);
@@ -284,13 +284,13 @@ public class DaoSupportImpl implements DaoSupport {
 	@Override
 	public int update(String table, Map fields, Map<String,?> where) {
 
-		Assert.hasText(table, "表名不能为空");
-		Assert.notEmpty(fields, "字段不能为空");
-		Assert.notEmpty(where, "where条件不能为空");
+		Assert.hasText(table, "Table names cannot be empty");
+		Assert.notEmpty(fields, "Fields cannot be empty");
+		Assert.notEmpty(where, "whereConditions cannot be empty");
 
 		String whereSql = this.createWhereSql(where);
 
-		// 字段名
+		// The field name
 		Object[] cols = fields.keySet().toArray();
 		String fieldSql = "";
 
@@ -302,7 +302,7 @@ public class DaoSupportImpl implements DaoSupport {
 			 }
 		}
 
-		// 字段值
+		// The field values
 		Object[] values  = ArrayUtils.addAll(fields.values().toArray(),where.values().toArray());
 
 		String sql = "UPDATE " + table + " SET " +fieldSql  + " WHERE " + whereSql;
@@ -335,7 +335,7 @@ public class DaoSupportImpl implements DaoSupport {
 
 		String dbType =  "mysql";
 
-		//防止魔法值
+		// Prevent mana
 		String mysqlStr = "mysql";
 		String sqlserverStr = "sqlserver";
         String oracleStr = "oracle";
@@ -352,22 +352,22 @@ public class DaoSupportImpl implements DaoSupport {
 			sqlStr = localSql.toString();
 		} else if (sqlserverStr.equals(dbType)) {
 			StringBuffer localSql = new StringBuffer();
-			// 找到order by 子句
+			// Find the Order by clause
 			String order = SqlPaser.findOrderStr(sql);
 
-			// 剔除order by 子句
+			// Discard the order by clause
 			if (order != null) {
 				sql = removeOrders(sql);
 			}
 			else {
-				// SQLServer分页必需有order by
-				// 子句，如果默认语句不包含order by，
-				// 自动以id降序，如果没有id字段会报错
+				// SQLServer pages must have an order by
+				// If the default statement does not contain order by,
+				// Automatically descending by ID. If there is no ID field, an error will be reported
 				order = "order by id desc";
 
 			}
 
-			// 拼装分页sql
+			// Assemble paging SQL
 			localSql.append("select * from (");
 			localSql.append(SqlPaser.insertSelectField("ROW_NUMBER() Over(" + order + ") as rowNum", sql));
 			localSql.append(") tb where rowNum between ");
@@ -384,7 +384,7 @@ public class DaoSupportImpl implements DaoSupport {
 	}
 
 	/**
-	 * 格式化列名 只适用于Mysql
+	 * Formatting column names only appliesMysql
 	 *
 	 * @param col
 	 * @return
@@ -404,7 +404,7 @@ public class DaoSupportImpl implements DaoSupport {
 	}
 
 	/**
-	 * 格式化值 只适用于Mysql
+	 * Formatted values only applyMysql
 	 *
 	 * @param value
 	 * @return
@@ -479,7 +479,7 @@ public class DaoSupportImpl implements DaoSupport {
 
 
     /**
-     * 去除hql的order by 子句，用于pagedQuery.
+     * Get rid ofhqltheorder by Clause, forpagedQuery.
      *
      */
     private String removeOrders(String hql) {
@@ -495,7 +495,7 @@ public class DaoSupportImpl implements DaoSupport {
     }
 
     /**
-     * 去除sql的select 子句，未考虑union的情况,用于pagedQuery.
+     * Get rid ofsqltheselect Clause, not consideredunionthe情况,Used forpagedQuery.
      */
     private String removeSelect(String sql) {
 
@@ -505,7 +505,7 @@ public class DaoSupportImpl implements DaoSupport {
             return " from (" + sql + ") temp_table";
         }
 
-        // FIXME 当查询中含有函数，比如SUM(),替换SQL出错
+        // FIXME failed to replace SQL when the query contains functions such as SUM()
         Matcher m = REMOVE_SELECT_PATTERN.matcher(sql);
         StringBuffer sb = new StringBuffer();
         while (m.find()) {
@@ -518,7 +518,7 @@ public class DaoSupportImpl implements DaoSupport {
 
         int index = replacedSql.indexOf("from");
 
-        // 如果不存在
+        // If it doesnt exist
         if (index == -1) {
             index = replacedSql.indexOf("FROM");
         }
@@ -526,9 +526,9 @@ public class DaoSupportImpl implements DaoSupport {
     }
 
     /**
-     * 根据一个Map的条件，生成where 语句
-     * @param where  key为条件，value为条件值
-     * @return where 语句
+     * According to aMapCondition of generationwhere statements
+     * @param where  keyAs the condition,valueConditional value
+     * @return where statements
      */
     private String createWhereSql(Map<String,?> where){
 

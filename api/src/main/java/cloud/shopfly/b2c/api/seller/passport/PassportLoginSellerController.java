@@ -38,16 +38,16 @@ import javax.validation.constraints.NotEmpty;
 
 
 /**
- * 商家登录API
+ * Merchant loginAPI
  *
  * @author zh
  * @version v7.0
  * @since v7.0
- * 2018年3月23日 上午10:12:12
+ * 2018years3month23The morning of10:12:12
  */
 @RestController
 @RequestMapping("/seller")
-@Api(description = "商家登录API")
+@Api(description = "Merchant loginAPI")
 @Validated
 public class PassportLoginSellerController {
 
@@ -60,31 +60,31 @@ public class PassportLoginSellerController {
 
 
     @GetMapping("/login")
-    @ApiOperation(value = "用户名（手机号）/密码登录API")
+    @ApiOperation(value = "Username（Mobile phone no.）/Password to loginAPI")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "captcha", value = "验证码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "uuid", value = "客户端唯一标识", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "username", value = "Username", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "Password", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "captcha", value = "captcha", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "uuid", value = "Unique identifier of the client", required = true, dataType = "String", paramType = "query"),
     })
-    public AdminLoginVO login(@NotEmpty(message = "用户名不能为空") String username, @NotEmpty(message = "密码不能为空") String password, @NotEmpty(message = "图片验证码不能为空") String captcha, @NotEmpty(message = "uuid不能为空") String uuid) {
-        //验证图片验证码是否正确
+    public AdminLoginVO login(@NotEmpty(message = "The user name cannot be empty") String username, @NotEmpty(message = "The password cannot be empty") String password, @NotEmpty(message = "The image verification code cannot be empty") String captcha, @NotEmpty(message = "uuidCant be empty") String uuid) {
+        // Verify that the image verification code is correct
         boolean isPass = captchaClient.valid(uuid, captcha, SceneType.LOGIN.name());
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "图片验证码错误");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The image verification code is incorrect");
         }
         return adminUserManager.login(username, password);
 
     }
 
-    @ApiOperation(value = "刷新token")
+    @ApiOperation(value = "The refreshtoken")
     @PostMapping("/check/token")
-    @ApiImplicitParam(name = "refresh_token", value = "刷新token", required = true, dataType = "String", paramType = "query")
-    public String refreshToken(@ApiIgnore @NotEmpty(message = "刷新token不能为空") String refreshToken) {
+    @ApiImplicitParam(name = "refresh_token", value = "The refreshtoken", required = true, dataType = "String", paramType = "query")
+    public String refreshToken(@ApiIgnore @NotEmpty(message = "The refreshtokenCant be empty") String refreshToken) {
         try {
             return adminUserManager.exchangeToken(refreshToken);
         } catch (ExpiredJwtException e) {
-            throw new ServiceException(MemberErrorCode.E109.code(), "当前token已经失效");
+            throw new ServiceException(MemberErrorCode.E109.code(), "The currenttokenHave failed");
         }
     }
 }

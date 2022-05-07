@@ -28,13 +28,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 模版管理实现类
+ * Templates manage implementation classes
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 上午11:00
+ * 2018/5/22 In the morning11:00
  */
 
 @Service("commissionTplManager")
@@ -56,7 +56,7 @@ public class CommissionTplManagerImpl implements CommissionTplManager {
     @Override
     public CommissionTpl getCommissionTplByMember(int memberid) {
 
-        // 如果是个正确的模板id
+        // If its the correct template ID
         String sql = "SELECT * FROM es_commission_tpl where id in (select current_id from es_distribution WHERE member_id = ?)";
         CommissionTpl commissionTpl = this.daoSupport.queryForObject(sql,
                 CommissionTpl.class, memberid);

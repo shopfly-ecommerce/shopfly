@@ -38,7 +38,7 @@ import java.util.List;
 
 
 /**
- * 团购相关API
+ * Group relatedAPI
  *
  * @author Snow create in 2018/5/28
  * @version v2.0
@@ -46,7 +46,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/promotions/group-buy")
-@Api(description = "团购相关API")
+@Api(description = "Group relatedAPI")
 public class GroupbuyBuyerController {
 
     @Autowired
@@ -59,7 +59,7 @@ public class GroupbuyBuyerController {
     private GroupbuyActiveManager groupbuyActiveManager;
 
 
-    @ApiOperation(value = "查询团购分类的所有标签")
+    @ApiOperation(value = "Query all tags in the group purchase category")
     @GetMapping("/cats")
     public List<GroupbuyCatDO> getCat() {
         List<GroupbuyCatDO> groupbuyCatDOList = this.groupbuyCatManager.getList(0);
@@ -67,9 +67,9 @@ public class GroupbuyBuyerController {
     }
 
 
-    @ApiOperation(value = "查询团购活动的信息")
+    @ApiOperation(value = "Query information about group buying activities")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "active_id", value = "团购活动主键", required = false, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "active_id", value = "Group purchase activity key", required = false, dataType = "int", paramType = "query")
     })
     @GetMapping("/active")
     public GroupbuyActiveDO getActive(@ApiIgnore Integer activeId) {
@@ -78,11 +78,11 @@ public class GroupbuyBuyerController {
     }
 
 
-    @ApiOperation(value = "查询团购商品")
+    @ApiOperation(value = "Enquire about group purchase products")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cat_id", value = "团购分类id", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "条数", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "cat_id", value = "Group classificationid", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "A number of", dataType = "int", paramType = "query")
     })
     @GetMapping("/goods")
     public Page<GroupbuyGoodsVO> list(@ApiIgnore Integer catId, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {

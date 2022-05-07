@@ -16,17 +16,17 @@
 package cloud.shopfly.b2c.core.pagecreate.model;
 
 /**
- * 场景枚举
+ * Scenario enumeration
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-02 下午3:40
+ * 2018-05-02 In the afternoon3:40
  */
 public enum PageCreateEnum {
 
     //PAGE CREATE ENUM
-    INDEX("首页"), GOODS("商品页"),HELP("帮助页面");
+    INDEX("Home"), GOODS("Commodity page"),HELP("Help page");
 
     String scene;
 

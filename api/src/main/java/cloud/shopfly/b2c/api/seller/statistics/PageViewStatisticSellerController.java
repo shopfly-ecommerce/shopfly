@@ -31,15 +31,15 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 商家中心 流量分析
+ * Business center traffic analysis
  *
  * @author mengyuanming
  * @version 2.0
  * @since 7.0
- * 2018年3月19日上午8:35:47
+ * 2018years3month19The morning of8:35:47
  */
 
-@Api(description = "商家统计 流量分析")
+@Api(description = "Merchant statistics traffic analysis")
 @RestController
 @RequestMapping("/seller/statistics/page_view")
 public class PageViewStatisticSellerController {
@@ -47,12 +47,12 @@ public class PageViewStatisticSellerController {
     @Autowired
     private PageViewStatisticManager pageViewStatisticManager;
 
-    @ApiOperation(value = "获取商品访问量数据，只取前30", response = SimpleChart.class)
+    @ApiOperation(value = "To obtain product access data, only take the first30", response = SimpleChart.class)
     @GetMapping("/goods")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cycle_type", value = "周期类型", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
-            @ApiImplicitParam(name = "year", value = "年份，默认当前年份", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "month", value = "月份，默认当前月份", dataType = "int", paramType = "query")})
+            @ApiImplicitParam(name = "cycle_type", value = "Cycle type", dataType = "String", paramType = "query", required = true, allowableValues = "YEAR,MONTH"),
+            @ApiImplicitParam(name = "year", value = "Year, default current year", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "month", value = "Month, default current month", dataType = "int", paramType = "query")})
     public SimpleChart getGoods(@Valid @ApiIgnore SearchCriteria searchCriteria) {
         return this.pageViewStatisticManager.countGoods(searchCriteria);
     }

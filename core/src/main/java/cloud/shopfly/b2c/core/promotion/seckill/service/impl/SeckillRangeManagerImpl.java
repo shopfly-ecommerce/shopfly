@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * 限时抢购时刻业务类
+ * Flash sale time business class
  *
  * @author Snow
  * @version v2.0.0
@@ -123,26 +123,26 @@ public class SeckillRangeManagerImpl implements SeckillRangeManager {
             }
         }
 
-        //读取系统时间的时刻
+        // The time when the system time is read
         Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
 
         List<TimeLineVO> list = new ArrayList<>();
 
-        //距离时刻的集合
+        // Set of distance moments
         List<Long> distanceTimeList = new ArrayList<>();
 
-        //未开始的活动
+        // Uninitiated activities
         for (Map.Entry<Integer, List> entry : map.entrySet()) {
-            //大于当前的小时数
+            // Greater than the current hour
             if (entry.getKey() > hour) {
 
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String date = format.format(new Date());
 
-                //当前时间的秒数
+                // Number of seconds of the current time
                 long currentTime = DateUtil.getDateline();
-                //限时抢购的时刻
+                // Flash sale time
                 long timeLine = DateUtil.getDateline(date + " " + entry.getKey(), "yyyy-MM-dd HH");
                 long distanceTime = timeLine - currentTime < 0 ? 0 : timeLine - currentTime;
                 distanceTimeList.add(distanceTime);
@@ -154,32 +154,32 @@ public class SeckillRangeManagerImpl implements SeckillRangeManager {
             }
         }
 
-        //正在进行中的活动的时刻
+        // A moment of ongoing activity
         int currentTime = -1;
 
-        //正在进行的活动读取
+        // Active read in progress
         for (Map.Entry<Integer, List> entry : map.entrySet()) {
-            //如果有时间相等的则直接将当前时间，设为正在进行中活动的时刻
+            // If the time is equal, set the current time to the time when the activity is in progress
             if (entry.getKey() == hour) {
                 currentTime = hour;
                 break;
             }
 
-            //大于循环前面的时间,小于当前的时间
+            // Greater than the time before the loop and less than the current time
             if (entry.getKey() > currentTime && entry.getKey() <= hour) {
                 currentTime = entry.getKey();
             }
         }
 
-        //距离时刻的数据
+        // Distance time data
         Long[] distanceTimes = new Long[distanceTimeList.size()];
-        //排序
+        // sort
         distanceTimeList.toArray(distanceTimes);
         long distanceTime = distanceTimes.length > 1 ? distanceTimes[0] : 0;
 
-        //如果当前时间大于等于0
+        // If the current time is greater than or equal to 0
         if (currentTime >= 0) {
-            //正在进行中的活动
+            // Ongoing activities
             TimeLineVO timeLine = new TimeLineVO();
             timeLine.setTimeText(currentTime + "");
             timeLine.setDistanceTime(0L);

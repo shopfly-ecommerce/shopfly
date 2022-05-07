@@ -19,27 +19,27 @@ import cloud.shopfly.b2c.core.distribution.model.dos.BillTotalDO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 用户结算单
+ * Customer statement
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 上午9:30
+ * 2018/5/22 In the morning9:30
  */
 
 public interface BillTotalManager {
     /**
-     * 获取结算page
+     * For settlementpage
      *
-     * @param page     页码
-     * @param pageSize 分页大小
+     * @param page     The page number
+     * @param pageSize Page size
      * @return
      */
     Page page(int page, int pageSize);
 
     /**
-     * 新增一个总结算单
+     * Add a master statement
      *
      * @param billTotal
      * @return
@@ -47,7 +47,7 @@ public interface BillTotalManager {
     BillTotalDO add(BillTotalDO billTotal);
 
     /**
-     * 获取
+     * To obtain
      *
      * @param startTime
      * @return

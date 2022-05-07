@@ -19,22 +19,22 @@ import cloud.shopfly.b2c.core.system.model.dos.AdminUser;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 管理员对象 用于管理员列表显示
+ * The administrator object is used to display the administrator list
  *
  * @author zh
  * @version v7.0
- * @date 18/6/27 下午2:42
+ * @date 18/6/27 In the afternoon2:42
  * @since v7.0
  */
 
 public class AdminUserDTO extends AdminUser {
 
-    @ApiModelProperty(name = "role_name", value = "角色名称", required = false)
+    @ApiModelProperty(name = "role_name", value = "Character name", required = false)
     private String roleName;
 
     public String getRoleName() {
         if (this.getFounder().equals(1)) {
-            roleName = "超级管理员";
+            roleName = "Super administrator";
         }
         return roleName;
     }

@@ -26,16 +26,16 @@ import java.io.Serializable;
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-11 上午11:12
+ * 2018-04-11 In the morning11:12
  */
 public class BaseChart extends PropertyNamingStrategy implements Serializable {
 
 
-    @ApiModelProperty(value = "x轴 刻度")
+    @ApiModelProperty(value = "xAxis calibration")
     protected String[] xAxis;
 
 
-    @ApiModelProperty(value = "y轴 刻度")
+    @ApiModelProperty(value = "yAxis calibration")
     protected String[] yAxis;
 
     public String[] getxAxis() {

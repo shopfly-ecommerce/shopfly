@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 微信小程序登陆传参
+ * Wechat small program login and transfer
  *
  * @author cs
  * @version v1.0
@@ -47,7 +47,7 @@ public class WeChatMiniLoginDTO implements Serializable {
     @ApiModelProperty(name = "code", value = "code", required = true)
     private String code;
 
-    @ApiModelProperty(name = "uuid", value = "随机数", required = true)
+    @ApiModelProperty(name = "uuid", value = "The random number", required = true)
     private String uuid;
 
     public String getEdata() {

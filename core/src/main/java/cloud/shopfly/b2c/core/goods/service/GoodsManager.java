@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.goods.model.dos.GoodsDO;
 import cloud.shopfly.b2c.core.goods.model.dto.GoodsDTO;
 
 /**
- * 商品业务层
+ * Commodity business layer
  *
  * @author fk
  * @version v2.0
@@ -28,7 +28,7 @@ import cloud.shopfly.b2c.core.goods.model.dto.GoodsDTO;
 public interface GoodsManager {
 
     /**
-     * 添加商品
+     * Add the goods
      *
      * @param goodsVo
      * @return
@@ -36,16 +36,16 @@ public interface GoodsManager {
     GoodsDO add(GoodsDTO goodsVo);
 
     /**
-     * 修改商品
+     * Modify the goods
      *
-     * @param goodsDTO 商品
-     * @param id       商品主键
-     * @return Goods 商品
+     * @param goodsDTO product
+     * @param id       Commodity primary key
+     * @return Goods product
      */
     GoodsDO edit(GoodsDTO goodsDTO, Integer id);
 
     /**
-     * 商品下架
+     * Goods from the shelves
      *
      * @param goodsIds
      * @param reason
@@ -53,43 +53,43 @@ public interface GoodsManager {
     void under(Integer[] goodsIds, String reason);
 
     /**
-     * 商品放入回收站
+     * Goods go into the recycling bin
      *
      * @param goodsIds
      */
     void inRecycle(Integer[] goodsIds);
 
     /**
-     * 商品删除
+     * Goods to delete
      *
      * @param goodsIds
      */
     void delete(Integer[] goodsIds);
 
     /**
-     * 回收站还原商品
+     * Recycle bin restores goods
      *
      * @param goodsIds
      */
     void revert(Integer[] goodsIds);
 
     /**
-     * 上架商品
+     * Goods shelves
      *
      * @param goodsId
      */
     void up(Integer goodsId);
 
     /**
-     * 获取商品是否使用检测的模版
+     * Gets whether an item uses a template for detection
      *
      * @param templateId
-     * @return 商品
+     * @return product
      */
     GoodsDO checkShipTemplate(Integer templateId);
 
     /**
-     * 更新商品好平率
+     * Update the good leveling rate of goods
      */
     void updateGoodsGrade();
 

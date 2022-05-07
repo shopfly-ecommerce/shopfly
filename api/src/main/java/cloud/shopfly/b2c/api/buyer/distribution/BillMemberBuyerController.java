@@ -36,16 +36,16 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 分销总结算
+ * Distribution summary
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/23 上午8:32
+ * 2018/5/23 In the morning8:32
  */
 @RestController
-@Api(description = "分销总结算")
+@Api(description = "Distribution summary")
 @RequestMapping("/distribution/bill")
 public class BillMemberBuyerController {
 
@@ -57,11 +57,11 @@ public class BillMemberBuyerController {
     private DistributionOrderManager distributionOrderManager;
 
 
-    @ApiOperation("获取某会员当前月份结算单")
+    @ApiOperation("Obtain a members current month statement")
     @GetMapping("/member")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bill_id", value = "总结算单id", required = true, paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "member_id", value = "会员id 为空时获取当前登录会员的结算单", required = false, paramType = "query", dataType = "int")
+            @ApiImplicitParam(name = "bill_id", value = "General statementid", required = true, paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "member_id", value = "membersid 为空时获取当前登录members的结算单", required = false, paramType = "query", dataType = "int")
     })
     public BillMemberVO billMemberVO(@ApiIgnore Integer billId, @ApiIgnore Integer memberId) {
         Buyer buyer = UserContext.getBuyer();
@@ -74,13 +74,13 @@ public class BillMemberBuyerController {
         return billMemberManager.getCurrentBillMember(memberId, billId);
     }
 
-    @ApiOperation("根据结算单获取订单信息")
+    @ApiOperation("Obtain order information according to the statement")
     @GetMapping(value = "/order-list")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_size", value = "分页大小", required = false, paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "bill_id", value = "总结算单id", required = true, paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "member_id", value = "会员id 为0代表查看当前会员业绩", required = false, paramType = "query", dataType = "int")
+            @ApiImplicitParam(name = "page_size", value = "Page size", required = false, paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "bill_id", value = "General statementid", required = true, paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "member_id", value = "membersid for0代表查看当前members业绩", required = false, paramType = "query", dataType = "int")
     })
     public Page<DistributionOrderVO> orderList(@ApiIgnore Integer memberId, @ApiIgnore Integer billId, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
         Buyer buyer = UserContext.getBuyer();
@@ -93,13 +93,13 @@ public class BillMemberBuyerController {
         return distributionOrderManager.pageDistributionTotalBillOrder(pageSize, pageNo, memberId, billId);
     }
 
-    @ApiOperation("根据结算单获取退款订单信息")
+    @ApiOperation("Obtain refund order information according to the statement")
     @GetMapping(value = "/sellback-order-list")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_size", value = "分页大小", paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "page_no", value = "页码", paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "bill_id", value = "结算单id", required = true, paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "member_id", value = "会员id 为0代表查看当前会员业绩", paramType = "query", dataType = "int")
+            @ApiImplicitParam(name = "page_size", value = "Page size", paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "bill_id", value = "statementsid", required = true, paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "member_id", value = "membersid for0代表查看当前members业绩", paramType = "query", dataType = "int")
     })
     public Page<DistributionSellbackOrderVO> sellbackOrderList(@ApiIgnore Integer memberId, @ApiIgnore Integer billId, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
         Buyer buyer = UserContext.getBuyer();
@@ -113,11 +113,11 @@ public class BillMemberBuyerController {
     }
 
 
-    @ApiOperation("历史业绩")
+    @ApiOperation("Historical performance")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "page_size", value = "分页大小", paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "member_id", value = "会员id 为0或空代表查看当前会员业绩", paramType = "query", dataType = "int")
+            @ApiImplicitParam(name = "page_no", value = "The page number", paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "page_size", value = "Page size", paramType = "query", dataType = "int"),
+            @ApiImplicitParam(name = "member_id", value = "membersid for0或空代表查看当前members业绩", paramType = "query", dataType = "int")
     })
     @GetMapping(value = "/history")
     public Page<BillMemberVO> historyBill(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @ApiIgnore Integer memberId) {

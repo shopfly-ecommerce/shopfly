@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.core.statistics.model.vo.ShopProfileVO;
 import cloud.shopfly.b2c.core.statistics.model.vo.SimpleChart;
 
 /**
- * 自营店概况
+ * Self-owned Store Profile
  *
  * @author mengyuanming
  * @version 2.0
@@ -29,16 +29,16 @@ import cloud.shopfly.b2c.core.statistics.model.vo.SimpleChart;
 public interface ShopProfileStatisticsManager {
 
     /**
-     * 店铺近30天概况
+     * Shops close30Day summary
      *
-     * @return ShopProfileVO 店铺概况数据
+     * @return ShopProfileVO Store Profile data
      */
     ShopProfileVO data();
 
     /**
-     * 店铺近30天销售额
+     * Shops close30Days sales
      *
-     * @return SimpleChart 简单图表数据
+     * @return SimpleChart Simple chart data
      */
     SimpleChart chart();
 

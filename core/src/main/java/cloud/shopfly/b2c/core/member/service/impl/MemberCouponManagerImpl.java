@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 会员优惠券
+ * Membership coupon
  *
  * @author Snow create in 2018/5/24
  * @version v2.0
@@ -62,7 +62,7 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
 
         if (memberId != null) {
 
-            //添加会员优惠券表
+            // Add membership coupon table
             MemberCoupon memberCoupon = new MemberCoupon();
             memberCoupon.setCouponId(couponId);
             memberCoupon.setTitle(couponDO.getTitle());
@@ -75,7 +75,7 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
             memberCoupon.setUsedStatus(0);
             this.daoSupport.insert(memberCoupon);
 
-            // 修改优惠券已被领取的数量
+            // Modify the number of coupons that have been claimed
             this.couponClient.addReceivedNum(couponId);
         }
     }
@@ -84,23 +84,23 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
     @Override
     public Page<MemberCoupon> list(MemberCouponQueryParam param) {
 
-        //当前登录的会员
+        // Current logged-in members
         Buyer buyer = UserContext.getBuyer();
-        //当前服务器时间
+        // Current server time
         long nowTime = DateUtil.getDateline();
-        //sql 参数
+        // SQL parameters
         List where = new ArrayList();
         //sql
         StringBuffer sql = new StringBuffer();
         sql.append("select * from es_member_coupon where member_id = ?");
         where.add(buyer.getUid());
 
-        // 判断读取可用或者不可用优惠券 1:未使用 2：已使用，3已过期,4为不可用优惠券（已使用和已过期）
+        // 1: unused 2: Used, 3 expired,4 is not available coupon (used and expired)
         if (param.getStatus() != null && param.getStatus().intValue() == 1) {
 
-            // 可用优惠券读取条件 当前时间大于等于生效时间 并且 当前时间小于等于失效时间且使用状态是未使用
+            // Available coupon reading conditions The current time is greater than or equal to the validity time and the current time is less than or equal to the validity time and the use status is unused
             sql.append(" and start_time <= ? and end_time >= ? and used_status = 0 ");
-            // 并且 大于等于优惠券使用金额条件
+            // And is greater than or equal to the coupon use amount conditions
             where.add(nowTime);
             where.add(nowTime);
             if (param.getOrderPrice() != null) {
@@ -109,17 +109,17 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
             }
         } else if (param.getStatus() != null && param.getStatus().intValue() == 2) {
 
-            //已使用优惠券
+            // Used coupon
             sql.append(" and used_status = 1");
 
         } else if (param.getStatus() != null && param.getStatus().intValue() == 3) {
 
-            // 已过期优惠券读取条件 当前时间小于生效时间 或者 当前时间大于失效时间
+            // The current time of reading conditions of expired coupons is less than the validity time or longer than the validity time
             sql.append(" and end_time <?  and used_status = 0  ");
             where.add(nowTime);
         } else if (param.getStatus() != null && param.getStatus().intValue() == 4) {
 
-            // 查询已使用和已过期的优惠券
+            // Query used and expired coupons
             sql.append(" and ((end_time <?  and used_status = 0 ) or used_status = 1)  ");
             where.add(nowTime);
         }
@@ -169,17 +169,17 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
         int num = this.daoSupport.queryForInt(sql, buyer.getUid(), couponId);
 
         if (couponDO.getReceivedNum() >= couponDO.getCreateNum()) {
-            throw new ServiceException(MemberErrorCode.E203.code(), "优惠券已被领完");
+            throw new ServiceException(MemberErrorCode.E203.code(), "Coupons have been collected");
         }
         if (limitNum != 0 && num >= limitNum) {
-            throw new ServiceException(MemberErrorCode.E203.code(), "优惠券限领" + limitNum + "个");
+            throw new ServiceException(MemberErrorCode.E203.code(), "Coupon limit" + limitNum + "a");
         }
 
     }
 
     @Override
     public List<MemberCoupon> listByCheckout(Integer memberId) {
-        //sql 参数
+        // SQL parameters
         List where = new ArrayList();
         //sql
         StringBuffer sql = new StringBuffer("select DISTINCT coupon_id,coupon_threshold_price,coupon_price," +
@@ -190,7 +190,7 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
         where.add(DateUtil.getDateline());
 
         sql.append(" order by coupon_price desc");
-        //查询的所有优惠券
+        // Query all coupons
         List<MemberCoupon> couponList = this.daoSupport.queryForList(sql.toString(), MemberCoupon.class, where.toArray());
 
         return couponList;
@@ -200,22 +200,22 @@ public class MemberCouponManagerImpl implements MemberCouponManager {
     @Override
     public MemberCouponNumVO statusNum() {
 
-        //当前登录的会员
+        // Current logged-in members
         Buyer buyer = UserContext.getBuyer();
-        //当前服务器时间
+        // Current server time
         long nowTime = DateUtil.getDateline();
 
-        //未使用的数量
+        // The number of unused
         String unUsedSql = "select count(0) from es_member_coupon where member_id = ? " +
                 "and start_time <= ? and end_time >= ? ";
         int unUsedNum = this.daoSupport.queryForInt(unUsedSql, buyer.getUid(), nowTime, nowTime);
 
-        //已使用的数量
+        // Quantity used
         String usedSql = "select count(0) from es_member_coupon where member_id = ? " +
                 " and used_status = 1";
         int usedNum = this.daoSupport.queryForInt(usedSql, buyer.getUid());
 
-        //已过期
+        // expired
         String expiredSql = "select count(0) from es_member_coupon where member_id = ? " +
                 "  and end_time <?  ";
         int expiredNum = this.daoSupport.queryForInt(expiredSql, buyer.getUid(), nowTime);

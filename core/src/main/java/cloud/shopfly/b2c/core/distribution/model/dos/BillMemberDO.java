@@ -25,13 +25,13 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 /**
- * 会员结算单
+ * Member statement
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 上午10:51
+ * 2018/5/21 In the morning10:51
  */
 
 @Table(name = "es_bill_member")
@@ -48,80 +48,80 @@ public class BillMemberDO {
      * id
      */
     @Column(name = "total_id")
-    @ApiModelProperty(value = "总结算单id", required = true)
+    @ApiModelProperty(value = "General statementid", required = true)
     private Integer totalId;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(value = "会员id", required = true)
+    @ApiModelProperty(value = "membersid", required = true)
     private Integer memberId;
 
     /**
-     * 开始时间
+     * The start time
      */
     @Column(name = "start_time")
-    @ApiModelProperty(value = "开始时间")
+    @ApiModelProperty(value = "The start time")
     private Long startTime;
     /**
-     * 结束时间
+     * The end of time
      */
     @Column(name = "end_time")
-    @ApiModelProperty(value = "结束时间")
+    @ApiModelProperty(value = "The end of time")
     private Long endTime;
     /**
-     * 最终结算金额
+     * Final settlement amount
      */
     @Column(name = "final_money")
-    @ApiModelProperty(value = "最终结算金额")
+    @ApiModelProperty(value = "Final settlement amount")
     private Double finalMoney;
     /**
-     * 提成金额
+     * Commission amount
      */
     @Column(name = "push_money")
-    @ApiModelProperty(value = "提成金额")
+    @ApiModelProperty(value = "Commission amount")
     private Double pushMoney;
     /**
-     * 订单数量
+     * The order number
      */
     @Column(name = "order_count")
-    @ApiModelProperty(value = "订单数")
+    @ApiModelProperty(value = "orders")
     private Integer orderCount;
     /**
-     * 订单金额
+     * Amount
      */
     @Column(name = "order_money")
-    @ApiModelProperty(value = "订单金额")
+    @ApiModelProperty(value = "Amount")
     private Double orderMoney;
     /**
-     * 返还订单金额
+     * Return order amount
      */
     @Column(name = "return_order_money")
-    @ApiModelProperty(value = "返还订单金额")
+    @ApiModelProperty(value = "Return order amount")
     private Double returnOrderMoney;
     /**
-     * 返还订单数
+     * Return order number
      */
     @Column(name = "return_order_count")
-    @ApiModelProperty(value = "返还订单数")
+    @ApiModelProperty(value = "Return order number")
     private Integer returnOrderCount;
     /**
-     * 返还订单金额
+     * Return order amount
      */
     @Column(name = "return_push_money")
-    @ApiModelProperty(value = "返还订单金额")
+    @ApiModelProperty(value = "Return order amount")
     private Double returnPushMoney;
     /**
-     * 会员名称
+     * Member name
      */
     @Column(name = "member_name")
-    @ApiModelProperty(value = "会员名称")
+    @ApiModelProperty(value = "Member name")
     private String memberName;
     /**
-     * 编号
+     * Serial number
      */
     @Column()
-    @ApiModelProperty(value = "编号")
+    @ApiModelProperty(value = "Serial number")
     private String sn;
 
     public Integer getId() {

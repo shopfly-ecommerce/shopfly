@@ -26,23 +26,23 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 第二件半价活动vo实体
+ * The second half price eventvoentity
  * @author dongxin
  * @version v1.0
  * @since v6.4.0
- * 2017年8月21日 下午7:40:13
+ * 2017years8month21On the afternoon7:40:13
  */
-@ApiModel(value="HalfPriceVO", description = "第二件半价活动VO实体")
+@ApiModel(value="HalfPriceVO", description = "The second half price eventVOentity")
 public class HalfPriceVO extends HalfPriceDO implements Serializable {
 
 
-	@ApiModelProperty(name = "goods_list",value = "促销商品列表")
+	@ApiModelProperty(name = "goods_list",value = "List of promotional items")
 	private List<PromotionGoodsDTO> goodsList;
 
-	@ApiModelProperty(name = "status_text",value = "活动状态")
+	@ApiModelProperty(name = "status_text",value = "Active state")
 	private String statusText;
 
-	@ApiModelProperty(name = "status",value = "活动状态标识,expired表示已失效")
+	@ApiModelProperty(name = "status",value = "Activity status identification,expiredIndicates invalid")
 	private String status;
 
 	public List<PromotionGoodsDTO> getGoodsList() {

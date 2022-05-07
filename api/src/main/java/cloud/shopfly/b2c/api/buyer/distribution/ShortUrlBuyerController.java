@@ -38,17 +38,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 短链接识别
+ * Short link recognition
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/23 上午8:35
+ * 2018/5/23 In the morning8:35
  */
 @RestController
 @RequestMapping("/distribution/su")
-@Api(description = "短链接api")
+@Api(description = "Short linkapi")
 public class ShortUrlBuyerController {
 
 
@@ -60,13 +60,13 @@ public class ShortUrlBuyerController {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     /**
-     * 访问短链接 把会员id加入session中，并跳转页面
+     * Access the short link to take the membershipidjoinsession, and jump to the page
      *
      * @return
      */
     @GetMapping(value = "/visit")
-    @ApiOperation("访问短链接 把会员id加入session中，并跳转页面")
-    @ApiImplicitParam(name = "su", value = "短链接", required = true, paramType = "query", dataType = "String")
+    @ApiOperation("Access the short link to take the membershipidjoinsession, and jump to the page")
+    @ApiImplicitParam(name = "su", value = "Short link", required = true, paramType = "query", dataType = "String")
     public SuccessMessage visit(String su, @RequestHeader(required = false) String uuid) throws Exception {
         try {
             ShortUrlDO shortUrlDO = shortUrlManager.getLongUrl(su);
@@ -78,7 +78,7 @@ public class ShortUrlBuyerController {
             }
             return new SuccessMessage(shortUrlDO.getUrl());
         } catch (Exception e) {
-            logger.error("短连接验证出错", e);
+            logger.error("Short connection validation error", e);
             throw new DistributionException(DistributionErrorCode.E1000.code(), DistributionErrorCode.E1000.des());
 
         }
@@ -87,16 +87,16 @@ public class ShortUrlBuyerController {
 
 
     /**
-     * url中提取member id
+     * urlTo extractmember id
      *
      * @param url
      * @return
      */
     private Integer getMemberId(String url) {
         String pattern = "(member_id=)(\\d+)";
-        // 创建 Pattern 对象
+        // Create Pattern object
         Pattern r = Pattern.compile(pattern);
-        // 现在创建 matcher 对象
+        // Now create the Matcher object
         Matcher m = r.matcher(url);
         if (m.find()) {
             return new Integer(m.group(2));
@@ -105,13 +105,13 @@ public class ShortUrlBuyerController {
     }
 
 
-    @ApiOperation("生成短链接， 必须登录")
+    @ApiOperation("Generate short links, Must be logged in")
     @PostMapping(value = "/get-short-url")
-    @ApiImplicitParam(name = "goods_id", value = "商品id", required = false, paramType = "query", dataType = "int")
+    @ApiImplicitParam(name = "goods_id", value = "productid", required = false, paramType = "query", dataType = "int")
     public SuccessMessage getShortUrl(@ApiIgnore Integer goodsId) {
 
         Buyer buyer = UserContext.getBuyer();
-        // 没登录不能生成短链接
+        // Cannot generate short links without login
         if (buyer == null) {
             throw new DistributionException(DistributionErrorCode.E1001.code(), DistributionErrorCode.E1001.des());
         }
@@ -122,7 +122,7 @@ public class ShortUrlBuyerController {
             successMessage.setMessage("/distribution/su/visit?su=" + shortUrlDO.getSu());
             return successMessage;
         } catch (Exception e) {
-            logger.error("生成短连接出错", e);
+            logger.error("Error generating short connection", e);
             throw new DistributionException(DistributionErrorCode.E1000.code(), DistributionErrorCode.E1000.des());
         }
     }

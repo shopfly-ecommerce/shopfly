@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 支付方式表业务层
+ * Payment mode table business layer
  *
  * @author fk
  * @version v2.0
@@ -33,41 +33,41 @@ import java.util.List;
 public interface PaymentMethodManager {
 
     /**
-     * 查询支付方式表列表
+     * Query the payment mode table list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加支付方式表
+     * Add payment method table
      *
-     * @param paymentMethod   支付方式表
-     * @param paymentPluginId 插件id
-     * @return PaymentMethod 支付方式表
+     * @param paymentMethod   Form of payment
+     * @param paymentPluginId The plug-inid
+     * @return PaymentMethod Form of payment
      */
     PaymentMethodDO add(PaymentPluginVO paymentMethod, String paymentPluginId);
 
     /**
-     * 修改支付方式表
+     * Modify the payment form
      *
-     * @param paymentMethod 支付方式表
-     * @param id            支付方式表主键
-     * @return PaymentMethod 支付方式表
+     * @param paymentMethod Form of payment
+     * @param id            Primary key of payment mode table
+     * @return PaymentMethod Form of payment
      */
     PaymentMethodDO edit(PaymentMethodDO paymentMethod, Integer id);
 
     /**
-     * 删除支付方式表
+     * Delete the payment method table
      *
-     * @param id 支付方式表主键
+     * @param id Primary key of payment mode table
      */
     void delete(Integer id);
 
     /**
-     * 根据支付插件id获取支付方式详细
+     * According to the payment plug-inidGet payment method details
      *
      * @param pluginId
      * @return
@@ -75,7 +75,7 @@ public interface PaymentMethodManager {
     PaymentMethodDO getByPluginId(String pluginId);
 
     /**
-     * 查询某客户端支持的支付方式
+     * Query the payment mode supported by a client
      *
      * @param clientType
      * @return
@@ -83,7 +83,7 @@ public interface PaymentMethodManager {
     List<PaymentMethodVO> queryMethodByClient(String clientType);
 
     /**
-     * 根据插件id获取VO对象
+     * According to the plug-inidTo obtainVOobject
      *
      * @param pluginId
      * @return

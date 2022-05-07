@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 请求微信https://api.weixin.qq.com/sns/userinfo返回的实体
+ * Request WeChathttps://api.weixin.qq.com/sns/userinfoReturned entity
  *
  * @author cs
  * @version v1.0
@@ -43,19 +43,19 @@ public class WeChatUserDTO implements Serializable {
     @ApiModelProperty(name = "unionid", value = "unionid", required = true)
     private String unionid;
 
-    @ApiModelProperty(name = "headimgurl", value = "头像", required = false,hidden = true)
+    @ApiModelProperty(name = "headimgurl", value = "Head portrait", required = false,hidden = true)
     private String headimgurl;
 
-    @ApiModelProperty(name = "accessToken", value = "app端登陆传入access_token", required = true)
+    @ApiModelProperty(name = "accessToken", value = "appEnd login incomingaccess_token", required = true)
     private String accessToken;
 
-    @ApiModelProperty(name = "nickName", value = "用户昵称", required = false)
+    @ApiModelProperty(name = "nickName", value = "The user nickname", required = false)
     private String nickName;
 
-    @ApiModelProperty(name = "sex", value = "性别：1:男;0:女", required = false)
+    @ApiModelProperty(name = "sex", value = "gender：1:male;0:female", required = false)
     private Integer sex;
 
-    @ApiModelProperty(name = "refreshToken", value = "app授权登陆时需要传入refreshToken", required = false)
+    @ApiModelProperty(name = "refreshToken", value = "appTo authorize login, you need to pass inrefreshToken", required = false)
     private String refreshToken;
 
     public Integer getSex() {

@@ -43,7 +43,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * 商家中心，运营报告实现类
+ * Business center, operational report implementation class
  *
  * @author mengyuanming
  * @version 2.0
@@ -63,10 +63,10 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
     private RegionsClient regionsClient;
 
     /**
-     * 销售统计 下单金额
+     * Sales statistics order amount
      *
-     * @param searchCriteria 统计参数，时间
-     * @return MultipleChart 复杂图表数据
+     * @param searchCriteria Statistical parameters, time
+     * @return MultipleChart Complex chart data
      */
     @Override
     public MultipleChart getSalesMoney(SearchCriteria searchCriteria) {
@@ -76,28 +76,28 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
         int month = null == searchCriteria.getMonth() ? 0 : searchCriteria.getMonth();
         SearchCriteria.checkDataParams(cycleType, year, month);
         try {
-            // 参数集合
+            // Parameter collection
             List<Object> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.value());
             paramList.add(PayStatusEnum.PAY_YES.value());
 
             /*
-             * start: 拼接sql语句并查询当前周期数据
+             * start: Joining togethersqlStatement and query the current period data
              */
-            // 时间范围sql
+            // Time range SQL
             String conditionSql = StatisticsUtil.getInstance().createSql(cycleType, year, month);
             String sql = "select SUM(order_price) as t_money, case " + conditionSql + " as time " +
                     " from es_sss_order_data o where order_status = ? AND pay_status = ? ";
 
-            // 根据时间分组
+            // Grouping by time
             sql += " group by time ";
             List<Map<String, Object>> currentList = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
             /*
-             * end:查询当前周期数据结束
+             * end:The period data query is complete
              */
 
             /*
-             * start:拼接sql并查询上一周期数据
+             * start:Joining togethersqlQuery the data of the last period
              */
             if (QueryDateType.YEAR.value().equals(cycleType)) {
                 year = year - 1;
@@ -110,15 +110,15 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             sql += " group by time ";
             List<Map<String, Object>> lastList = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
             /*
-             * end:查询上一周期数据结束
+             * end:The data query of the last period is complete
              */
 
-            // 判断按年查询还是按月查询，获取刻度长度
+            // Determine whether to query by year or by month to obtain the scale length
             int time;
             if (QueryDateType.YEAR.value().equals(cycleType)) {
                 time = 12;
             } else {
-                // 本月与上月对比，按天数多的为准，month在查询上月数据时减了1，所以要再加1
+                // When comparing the current month with the previous month, the number of days is more. The month decreases by 1 when querying the data of the previous month, so you need to add another 1
                 int currentMonth = DataDisplayUtil.getMonthDayNum(month + 1, year);
                 int lastMonth = DataDisplayUtil.getMonthDayNum(month, year);
                 if (currentMonth > lastMonth) {
@@ -128,9 +128,9 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
                 }
             }
 
-            // 填充x轴刻度
+            // Fill the x scale
             String[] xAxis = new String[time];
-            // 数据名称
+            // The name of the data
             String[] localName = new String[time];
             for (int i = 0; i < time; i++) {
                 xAxis[i] = i + 1 + "";
@@ -140,32 +140,32 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             String[] data = new String[time];
             String[] lastData = new String[time];
 
-            // 向数组填充数据
+            // Populate the array with data
             this.dataSet(currentList, data, time, "t_money");
             this.dataSet(lastList, lastData, time, "t_money");
 
-            ChartSeries currentSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "本年" : "本月"), data, localName);
-            ChartSeries lastSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "去年" : "上月"), lastData, localName);
+            ChartSeries currentSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "This year," : "This month,"), data, localName);
+            ChartSeries lastSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "Last year," : "Last month,"), lastData, localName);
 
             List<ChartSeries> series = new ArrayList<>();
             series.add(currentSeries);
             series.add(lastSeries);
 
-            // 多数据复杂图表对象
+            // Multi-data complex chart object
             return new MultipleChart(series, xAxis, new String[0]);
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
 
     }
 
 
     /**
-     * 销售统计 下单量
+     * Sales statistics order quantity
      *
-     * @param searchCriteria 统计参数，时间
-     * @return MultipleChart 复杂图表数据
+     * @param searchCriteria Statistical parameters, time
+     * @return MultipleChart Complex chart data
      */
     @Override
     public MultipleChart getSalesNum(SearchCriteria searchCriteria) {
@@ -178,13 +178,13 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
 
         try {
 
-            // 参数集合
+            // Parameter collection
             List<String> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.value());
             paramList.add(PayStatusEnum.PAY_YES.value());
 
             /*
-             * start:开始拼接sql并查询当前周期数据
+             * start:Start stitchingsqlAnd query the current period data
              */
             String conditionSql = StatisticsUtil.getInstance().createSql(cycleType, year, month);
             String sql = "select count(0) as t_num, case " + conditionSql + " as time " +
@@ -192,11 +192,11 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             sql += " group by time ";
             List<Map<String, Object>> currentList = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
             /*
-             * end:当前周期数据查询结束
+             * end:The data query of the current period is complete
              */
 
             /*
-             * start:开始拼接sql并查询上一周期数据
+             * start:Start stitchingsqlQuery the data of the last period
              */
             if (QueryDateType.YEAR.value().equals(cycleType)) {
                 year = year - 1;
@@ -210,15 +210,15 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             sql += " group by time ";
             List<Map<String, Object>> lastList = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
             /*
-             * end:上一周期数据查询结束
+             * end:The data query of the last period is complete
              */
 
-            // x轴刻度长度
+            // X axis scale length
             int time;
             if (QueryDateType.YEAR.value().equals(cycleType)) {
                 time = 12;
             } else {
-                // 本月与上月对比，按天数多的为准，month在查询上月数据时减了1，所以要再加1
+                // When comparing the current month with the previous month, the number of days is more. The month decreases by 1 when querying the data of the previous month, so you need to add another 1
                 int currentMonth = DataDisplayUtil.getMonthDayNum(month + 1, year);
                 int lastMonth = DataDisplayUtil.getMonthDayNum(month, year);
                 if (currentMonth > lastMonth) {
@@ -228,9 +228,9 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
                 }
             }
 
-            // x轴刻度
+            // The x axis calibration
             String[] xAxis = new String[time];
-            // 数据名称
+            // The name of the data
             String[] localName = new String[time];
             for (int i = 0; i < time; i++) {
                 xAxis[i] = i + 1 + "";
@@ -240,33 +240,33 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             String[] data = new String[time];
             String[] lastData = new String[time];
 
-            // 填充data和lastData数组
+            // Populate the Data and lastData arrays
             this.dataSet(currentList, data, time, "t_num");
             this.dataSet(lastList, lastData, time, "t_num");
 
-            ChartSeries currentSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "本年" : "本月"), data, localName);
-            ChartSeries lastSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "去年" : "上月"), lastData, localName);
+            ChartSeries currentSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "This year," : "This month,"), data, localName);
+            ChartSeries lastSeries = new ChartSeries((QueryDateType.YEAR.value().equals(cycleType) ? "Last year," : "Last month,"), lastData, localName);
 
             List<ChartSeries> series = new ArrayList<>();
             series.add(currentSeries);
             series.add(lastSeries);
 
-            // 复杂图表数据
+            // Complex chart data
             return new MultipleChart(series, xAxis, new String[0]);
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
 
     /**
-     * 销售统计 分页数据
+     * Sales statistics paging data
      *
-     * @param searchCriteria 统计参数，时间
-     * @param pageNo         查询页码
-     * @param pageSize       分页数据长度
-     * @return Page 分页数据
+     * @param searchCriteria Statistical parameters, time
+     * @param pageNo         The query page
+     * @param pageSize       Paging data length
+     * @return Page Paging data
      */
     @Override
     public Page getSalesPage(SearchCriteria searchCriteria, int pageNo, int pageSize) {
@@ -284,7 +284,7 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             long startTime = times[0];
             long endTime = times[1];
 
-            // 添加订单状态（已完成），支付状态（已支付），时间，店铺id等参数
+            // Add order status (completed), payment status (paid), time, store ID and other parameters
             List<Object> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.value());
             paramList.add(PayStatusEnum.PAY_YES.value());
@@ -298,35 +298,35 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             List<Map<String, Object>> list = page.getData();
 
             for (Map<String, Object> map : list) {
-                // 获取当前时间戳，数据库中时间戳是Integer型的
+                // Gets the current timestamp, which is of type Integer in the database
                 Integer timestamp = (Integer) map.get("create_time");
                 map.replace("create_time", timestamp);
 
-                // 获取订单状态，并将值改为文字，因为只查询已完成订单，所以直接填入已完成
-                String status = "已完成";
+                // Gets the order status and changes the value to text, because only completed orders are queried, so it is directly completed
+                String status = "Has been completed";
                 map.replace("order_status", status);
 
             }
 
             return new Page(page.getPageNo(), page.getDataTotal(), page.getPageSize(), list);
         } catch (BadSqlGrammarException e) {
-            //某个年份的统计表不存在，则返回空数据
+            // If the statistics table for a certain year does not exist, null data is returned
             if(e.getMessage().endsWith("doesn't exist")){
                 return new Page(pageNo,0L,pageSize,new ArrayList());
             }
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 销售分析，数据小结
+     * Sales analysis, data summary
      *
-     * @param searchCriteria 统计参数，时间
-     * @return 查询时间内下单金额之和与下单量之和
+     * @param searchCriteria Statistical parameters, time
+     * @return The sum of the order amount and the order quantity within the query time
      */
     @Override
     public Map getSalesSummary(SearchCriteria searchCriteria) {
@@ -344,7 +344,7 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             long startTime = times[0];
             long endTime = times[1];
 
-            // 添加订单状态（已完成），支付状态（已支付），时间，店铺id等参数
+            // Add order status (completed), payment status (paid), time, store ID and other parameters
             List<Object> paramList = new ArrayList<>();
             paramList.add(OrderStatusEnum.COMPLETE.value());
             paramList.add(PayStatusEnum.PAY_YES.value());
@@ -364,18 +364,18 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             return map;
         }  catch (Exception e) {
             logger.error(e);
-            //某个年份的统计表不存在，则返回空数据
+            // If the statistics table for a certain year does not exist, null data is returned
             return new HashMap();
 
         }
     }
 
     /**
-     * 区域分析，地图数据
+     * Area analysis, map data
      *
-     * @param searchCriteria 时间相关参数
-     * @param type           获取的数据类型
-     * @return MapChartData 地图图表数据
+     * @param searchCriteria Time dependent parameter
+     * @param type           The type of data to get
+     * @return MapChartData Map and chart data
      */
     @Override
     public List regionsMap(SearchCriteria searchCriteria, String type) {
@@ -387,37 +387,37 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
 
         try {
 
-            // 获取国内各省份
+            // Get all provinces in the country
             List<Regions> provinceList = this.regionsClient.getRegionsChildren(0);
 
-            // 参数集合，包括订单状态，支付状态，查询时间，店铺id
+            // Parameter set, including order status, payment status, query time, store ID
             List<Object> paramList = new ArrayList<>();
 
-            // 查询出的数据不包含哪些订单状态
+            // The queried data does not contain any order status
             paramList.add(OrderStatusEnum.COMPLETE.value());
 
-            // 查询出的数据支付状态应是已支付
+            // The queried data payment status should be paid
             paramList.add(PayStatusEnum.PAY_YES.value());
 
-            // 获取查询时间的时间戳
+            // Gets the timestamp of the query time
             long[] times = StatisticsUtil.getInstance().getStartTimeAndEndTime(cycleType, year, month);
             long startTime = times[0];
             long endTime = times[1];
             paramList.add(startTime);
             paramList.add(endTime);
 
-            // 区分出区域分析的三种数据，拼接不同的sql字符串，获取不同的字段名
+            // Distinguish the three types of data for area analysis, concatenate different SQL strings, and obtain different field names
             String[] needDataType = this.mapDataType(type);
             String sqlDifference = needDataType[0];
             String dataDifference = needDataType[1];
 
 
-            // 获取某一时间段内下单的会员数及其所在省份id
+            // Get the number of members who placed orders within a certain period of time and the ID of their province
             String sql = "SELECT " + sqlDifference + ", ship_province_id FROM es_sss_order_data " +
                     "WHERE order_status = ? AND pay_status = ? AND create_time > ? " +
                     " AND create_time < ? GROUP BY ship_province_id";
 
-            // 获取所有地区的下单量的统计值
+            // Gets order statistics for all regions
             List<Map<String, Object>> list = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
 
             List<Map<String, Object>> result = new ArrayList<>();
@@ -442,16 +442,16 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             return result;
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 购买分析，客单价分布（价格区间内下单量统计）
+     * Purchase analysis, customer unit price distribution（Order quantity statistics within price range）
      *
-     * @param searchCriteria 时间相关参数
-     * @param ranges         价格区间，只接受整数
-     * @return SimpleChart 简单图表数据
+     * @param searchCriteria Time dependent parameter
+     * @param ranges         Price range. Only round numbers are accepted
+     * @return SimpleChart Simple chart data
      */
     @Override
     public SimpleChart orderDistribution(SearchCriteria searchCriteria, Integer[] ranges) {
@@ -464,13 +464,13 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
 
         try {
 
-            // 价格区间升序排序
+            // Sort the price range in ascending order
             Arrays.sort(ranges);
 
-            // 参数集合
+            // Parameter collection
             List<Object> paramList = new ArrayList<>();
 
-            // 价格区间sql
+            // Price range SQL
             StringBuilder intervalSql = new StringBuilder();
             for (int i = 1; i < ranges.length; i++) {
                 intervalSql.append(" WHEN o.order_price >= ? AND o.order_price <= ? THEN ? ");
@@ -483,13 +483,13 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             paramList.add(ranges.length);
             intervalSql.append(" ELSE 0 END ");
 
-            // 获取时间戳
+            // Get timestamp
             long[] times = StatisticsUtil.getInstance().getStartTimeAndEndTime(cycleType, year, month);
 
             long startTime = times[0];
             long endTime = times[1];
 
-            // 添加时间，订单状态（已完成），支付状态（已支付），店铺id等参数
+            // Add time, order status (completed), payment status (paid), store ID and other parameters
             paramList.add(startTime);
             paramList.add(endTime);
             paramList.add(OrderStatusEnum.COMPLETE.value());
@@ -499,13 +499,13 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
                     "AND o.order_status = ? AND o.pay_status = ? GROUP BY distribution ";
             List<Map<String, Object>> list = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
 
-            // x轴刻度，数据名称，数据
+            // X scale, data name, data
             String[] xAxis = new String[ranges.length];
             String[] localName = new String[ranges.length];
             String[] data = new String[ranges.length];
 
             /*
-            x轴数组下标   刻度名称   价格区间数组下标   变量变化
+            xAxis array subscript scale name price range array subscript variable change
             0            0~100      0 1               i i+1
             1            100~200    1 2               i i+1
             2            200~300    2 3               i i+1
@@ -533,22 +533,22 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
                 data[ranges.length-1] = "0";
             }
 
-            ChartSeries chartSeries = new ChartSeries("下单量", data, localName);
+            ChartSeries chartSeries = new ChartSeries("Order quantity", data, localName);
 
             return new SimpleChart(chartSeries, xAxis, new String[0]);
 
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
 
     }
 
     /**
-     * 购买分析，购买时段分布
+     * Purchase analysis, purchase period distribution
      *
-     * @param searchCriteria 时间相关参数
-     * @return SimpleChart 简单图表数据
+     * @param searchCriteria Time dependent parameter
+     * @return SimpleChart Simple chart data
      */
     @Override
     public SimpleChart purchasePeriod(SearchCriteria searchCriteria) {
@@ -573,7 +573,7 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
             paramList.add(startTime);
             paramList.add(endTime);
 
-            //转换时区为CST
+            // Change the time zone to CST
             String sqlTimezoneConvert = "CONVERT(DATE_FORMAT(CONVERT_TZ(FROM_UNIXTIME(o.create_time), @@session.time_zone,'+8:00'), '%k'), SIGNED)";
 
             String sql = "SELECT count(o.sn) AS num, "+sqlTimezoneConvert+" AS hour_num" +
@@ -582,7 +582,7 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
 
             List<Map<String, Object>> list = StatisticsUtil.getDataList(this.daoSupport, searchCriteria.getYear(), sql, paramList.toArray());
 
-            // 小时数
+            // Number of hours
             int hours = 24;
 
             String[] xAxis = new String[hours];
@@ -602,22 +602,22 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
                 }
             }
 
-            ChartSeries chartSeries = new ChartSeries("下单量", data, localName);
+            ChartSeries chartSeries = new ChartSeries("Order quantity", data, localName);
 
             return new SimpleChart(chartSeries, xAxis, new String[0]);
         } catch (Exception e) {
             logger.error(e);
-            throw new StatisticsException(StatisticsErrorCode.E810.code(), "业务异常");
+            throw new StatisticsException(StatisticsErrorCode.E810.code(), "Business exceptions");
         }
     }
 
     /**
-     * 销售统计，填充数据
+     * Sales statistics, filling data
      *
-     * @param list  数据库数据
-     * @param data  x轴数据
-     * @param time  x轴刻度长度
-     * @param title 获取数据的类型
+     * @param list  Database data
+     * @param data  xAxis data
+     * @param time  xAxis scale length
+     * @param title Gets the type of data
      */
     private void dataSet(List<Map<String, Object>> list, String[] data, int time, String title) {
 
@@ -641,18 +641,18 @@ public class ReportsStatisticsManagerImpl implements ReportsStatisticsManager {
     }
 
     /**
-     * 区域分析，所需数据类型判断
+     * Area analysis, determination of required data types
      *
-     * @param type 所需类型
-     * @return String[] sql语句和作为Map的key值的字段名
+     * @param type The required type
+     * @return String[] sqlStatement and actionMapthekey值the字段名
      */
     private String[] mapDataType(String type) {
 
-        // 区分出区域分析的三种数据，拼接不同的sql字符串，获取不同的字段名
+        // Distinguish the three types of data for area analysis, concatenate different SQL strings, and obtain different field names
         String sqlDifference = "";
         String dataDifference = "";
 
-        // 1.下单会员数 2.下单金额 3.下单量
+        // 1. Number of ordering members 2. Amount of ordering 3
         if (RegionsDataType.ORDER_MEMBER_NUM.value().equals(type)) {
             sqlDifference = " COUNT(DISTINCT buyer_id) member ";
             dataDifference = "member";

@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-06-29 上午9:41
+ * 2018-06-29 In the morning9:41
  */
 @Service
 public class MemberSalesManagerImpl implements MemberSalesManager {
@@ -39,7 +39,7 @@ public class MemberSalesManagerImpl implements MemberSalesManager {
     private DaoSupport daoSupport;
 
     /**
-     * 商品销售记录
+     * Merchandise sales record
      *
      * @param pageSize
      * @param pageNo

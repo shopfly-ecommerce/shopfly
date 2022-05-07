@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 文章分类业务类
+ * Article classification business class
  *
  * @author fk
  * @version v1.0
@@ -75,27 +75,27 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
         if (articleCategory.getParentId() == null) {
             articleCategory.setParentId(0);
         }
-        // 非顶级分类
+        // Non-top-level classification
         ArticleCategory parent = null;
         if (articleCategory.getParentId() != 0) {
             parent = this.getModel(articleCategory.getParentId());
             if (parent == null) {
-                throw new ServiceException(SystemErrorCode.E951.code(), "父分类不存在");
+                throw new ServiceException(SystemErrorCode.E951.code(), "The parent category does not exist");
             }
-            // 替换catPath 根据path规则来匹配级别
+            // Replace catPath to match levels according to the PATH rule
             String catPath = parent.getPath().replace("|", ",");
             String[] str = catPath.split(",");
             if (str.length >= 3) {
-                throw new ServiceException(SystemErrorCode.E951.code(), "最多为二级分类,添加失败");
+                throw new ServiceException(SystemErrorCode.E951.code(), "Secondary classification at most,Add failure");
             }
         }
         articleCategory.setAllowDelete(1);
         articleCategory.setType(ArticleCategoryType.OTHER.name());
-        //验证分类名称是否重复
+        // Verify that category names are duplicated
         String sql = "select * from es_article_category where name = ? ";
         List list = this.daoSupport.queryForList(sql, articleCategory.getName());
         if (list.size() > 0) {
-            throw new ServiceException(SystemErrorCode.E951.code(), "分类名称重复");
+            throw new ServiceException(SystemErrorCode.E951.code(), "Classification name duplication");
         }
 
         this.daoSupport.insert(articleCategory);
@@ -105,7 +105,7 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
 
         if (parent != null) {
             articleCategory.setPath(parent.getPath() + categoryId + "|");
-        } else {// 是顶级类别
+        } else {// Is the top-level category
             articleCategory.setPath("0|" + categoryId + "|");
         }
 
@@ -120,9 +120,9 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
     public ArticleCategory edit(ArticleCategory articleCategory, Integer id) {
 
         ArticleCategory cat = this.getModel(id);
-        //只有类型为other的,才可以修改
+        // Only the value of the type is other can be modified
         if (!ArticleCategoryType.OTHER.name().equals(cat.getType())) {
-            throw new ServiceException(SystemErrorCode.E950.code(), "特殊的文章分类，不可修改");
+            throw new ServiceException(SystemErrorCode.E950.code(), "Special article classification, cannot be modified");
         }
 
         if (articleCategory.getParentId() == null) {
@@ -131,17 +131,17 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
 
         articleCategory.setPath(0 + "|" + cat.getId() + "|");
 
-        // 非顶级分类
+        // Non-top-level classification
         if (articleCategory.getParentId() != 0) {
             ArticleCategory parent = this.getModel(articleCategory.getParentId());
             if (parent == null) {
-                throw new ServiceException(SystemErrorCode.E951.code(), "父分类不存在");
+                throw new ServiceException(SystemErrorCode.E951.code(), "The parent category does not exist");
             }
-            // 替换catPath 根据path规则来匹配级别
+            // Replace catPath to match levels according to the PATH rule
             String catPath = parent.getPath().replace("|", ",");
             String[] str = catPath.split(",");
             if (str.length >= 3) {
-                throw new ServiceException(SystemErrorCode.E951.code(), "最多为二级分类,修改失败");
+                throw new ServiceException(SystemErrorCode.E951.code(), "Secondary classification at most,Modify the failure");
             }
 
             articleCategory.setPath(parent.getPath() + cat.getId() + "|");
@@ -150,11 +150,11 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
         articleCategory.setAllowDelete(1);
         articleCategory.setType(ArticleCategoryType.OTHER.name());
 
-        //验证分类名称是否重复
+        // Verify that category names are duplicated
         String sql = "select * from es_article_category where name = ? and id != ?";
         List list = this.daoSupport.queryForList(sql,articleCategory.getName(), id);
         if (list.size() > 0) {
-            throw new ServiceException(SystemErrorCode.E951.code(), "分类名称重复");
+            throw new ServiceException(SystemErrorCode.E951.code(), "Classification name duplication");
         }
 
         this.daoSupport.update(articleCategory, id);
@@ -166,21 +166,21 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         ArticleCategory cat = this.getModel(id);
-        //只有类型为other的,才可以删除
+        // Only the value whose type is other can be deleted
         if (cat == null || !ArticleCategoryType.OTHER.name().equals(cat.getType())) {
-            throw new ServiceException(SystemErrorCode.E950.code(), "特殊的文章分类，不可删除");
+            throw new ServiceException(SystemErrorCode.E950.code(), "Special article categories cannot be deleted");
         }
-        //查看文章分类下是否有分类
+        // See if there is a category under the article category
         List<ArticleCategory> children = this.listChildren(id);
         if (children.size() > 0) {
-            throw new ServiceException(SystemErrorCode.E950.code(), "该文章分类下存在子分类，不能删除");
+            throw new ServiceException(SystemErrorCode.E950.code(), "There are subcategories under the classification of this article, which cannot be deleted");
         }
 
-        //查看文章分类下是否有文章，如果有文章存在则不能删除该分类
+        // Check whether there are articles under the article category. If there are articles, the category cannot be deleted
         String sql = "select * from es_article where category_id = ?";
         List list = this.daoSupport.queryForList(sql, id);
         if (list.size() > 0) {
-            throw new ServiceException(SystemErrorCode.E950.code(), "该文章分类下存在文章，不能删除");
+            throw new ServiceException(SystemErrorCode.E950.code(), "There are articles under this article category and cannot be deleted");
         }
         this.daoSupport.delete(ArticleCategory.class, id);
     }
@@ -203,10 +203,10 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
     public ArticleCategoryVO getCategoryAndArticle(String categoryType) {
 
         String sql = "select * from es_article_category  where type = ?";
-        //顶级分类
+        // Top classification
         ArticleCategoryVO articleCategory = this.daoSupport.queryForObject(sql, ArticleCategoryVO.class, categoryType);
         List<ArticleCategory> list = this.listChildren(articleCategory.getId());
-        //子分类
+        // A subclass
         List<ArticleCategoryVO> children = new ArrayList<>();
         Integer[] catIds = null;
         if (StringUtil.isNotEmpty(list)) {
@@ -220,7 +220,7 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
                 i++;
             }
         }
-        //分类下的文章
+        // Articles under the classification
         if (catIds != null) {
 
             List<Object> terms = new ArrayList<>();
@@ -279,11 +279,11 @@ public class ArticleCategoryManagerImpl implements ArticleCategoryManager {
     }
 
     /**
-     * 在一个集合中查找子
+     * Find children in a collection
      *
-     * @param categoryList 所有分类集合
-     * @param parentid     父id
-     * @return 找到的子集合
+     * @param categoryList All classification set
+     * @param parentid     The fatherid
+     * @return Subset found
      */
     private List<ArticleCategoryVO> getChildren(List<ArticleCategoryVO> categoryList, Integer parentid) {
         List<ArticleCategoryVO> children = new ArrayList<ArticleCategoryVO>();

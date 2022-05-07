@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 活动DTO
+ * activityDTO
  *
  * @author Snow create in 2018/7/9
  * @version v2.0
@@ -28,13 +28,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class PromotionDTO {
 
-    @ApiModelProperty(value="参与的活动ID")
+    @ApiModelProperty(value="Activities to participate inID")
     private Integer actId;
 
-    @ApiModelProperty(value="商品商品")
+    @ApiModelProperty(value="commodity")
     private Integer goodsId;
 
-    @ApiModelProperty(value="购买的数量")
+    @ApiModelProperty(value="Quantity purchased")
     private Integer num;
 
     public Integer getActId() {

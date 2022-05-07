@@ -33,11 +33,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * string类型的redis创建者
+ * stringThe type ofredisThe creator
  * @author kingapex
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 @Component
 public class StringRedisTemplateBuilder {
@@ -50,7 +50,7 @@ public class StringRedisTemplateBuilder {
 	private RedisConnectionConfig config;
 
 	/**
-	 * 构建锁
+	 * Build the lock
 	 */
 	private static final Lock LOCK = new ReentrantLock();
 
@@ -67,21 +67,21 @@ public class StringRedisTemplateBuilder {
 
 					IRedisBuilder redisBuilder = this.getRedisBuilder();
 					LettuceConnectionFactory lettuceConnectionFactory = (LettuceConnectionFactory) redisBuilder.buildConnectionFactory( config);
-					// 初始化连接pool
+					// Initialize the connection pool
 					lettuceConnectionFactory.afterPropertiesSet();
 					redisTemplate = new StringRedisTemplate();
 					redisTemplate.setConnectionFactory(lettuceConnectionFactory);
 					return redisTemplate;
 				}
 			} catch (Exception e) {
-				// 容错
+				// Fault tolerance
 				logger.error(e.getMessage(), e);
 				break;
 			} finally {
 				LOCK.unlock();
 			}
 			try {
-				// 活锁
+				// Live lock
 				TimeUnit.MILLISECONDS.sleep(200 + new Random().nextInt(1000));
 			} catch (InterruptedException e) {
 				logger.error(e.getMessage(), e);
@@ -96,6 +96,6 @@ public class StringRedisTemplateBuilder {
 				return builder;
 			}
 		}
-		throw new RuntimeException(  "没有找到对应的配置方式");
+		throw new RuntimeException(  "The corresponding configuration mode is not found");
 	}
 }

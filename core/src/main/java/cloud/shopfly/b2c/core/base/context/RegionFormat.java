@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 
 /**
  * Created by kingapex on 2018/5/2.
- * 地区注解
+ * Region annotations
  *
  * @author kingapex
  * @version 1.0

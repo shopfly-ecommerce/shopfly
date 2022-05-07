@@ -16,27 +16,27 @@
 package cloud.shopfly.b2c.core.goods.model.enums;
 
 /**
- * 商品操作枚举
+ * Enumeration of commodity operations
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月22日 下午2:04:37
+ * 2018years3month22On the afternoon2:04:37
  */
 public enum GoodsOperate {
 	/**
-	 * 下架
+	 * off
 	 */
 	UNDER,
 	/**
-	 * 还原
+	 * reduction
 	 */
 	REVRET,
 	/**
-	 * 放入回收站
+	 * Put it in the recycling bin
 	 */
 	RECYCLE,
 	/**
-	 * 删除
+	 * delete
 	 */
 	DELETE
 

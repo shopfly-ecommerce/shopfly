@@ -55,9 +55,9 @@ public class EmailRegisterController {
         member.setSex(1);
         member.setRegisterIp(ThreadContextHolder.getHttpRequest().getRemoteAddr());
 
-        //注册
+        // Register
         memberManager.register(member);
-        //登录
+        // Sign in
         return memberManager.login(member.getUname(),password);
     }
 }

@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 积分商品定时任务
+ * @Description: Point goods timed task
  * @date 2018/11/7 9:32
  * @since v7.0.0
  */
@@ -42,7 +42,7 @@ public class PointGoodsJob implements EveryDayExecute {
 
     @Override
     public void everyDay() {
-        //现在添加的积分商品默认是一年的有效期，所以每天检查积分商品是否到了有效期，过了有效期后，将积分商品的时间增加一年
+        // The default validity period of the bonus product added now is one year, so check every day whether the bonus product has reached the expiration date, and increase the time of the bonus product by one year after the expiration date
 
         String sql = "select * from es_promotion_goods where promotion_type = ? and (end_time - ?)/86400<1  ";
 

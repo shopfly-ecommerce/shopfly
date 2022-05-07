@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.framework.rabbitmq;
 
 /**
- * mq的publisher
+ * mqthepublisher
  *
  * @author fk
  * @version v7.2.0
@@ -27,7 +27,7 @@ public interface MessageSender {
 
 
     /**
-     * 发布
+     * release
      * @param message
      */
     void send(MqMessage message);

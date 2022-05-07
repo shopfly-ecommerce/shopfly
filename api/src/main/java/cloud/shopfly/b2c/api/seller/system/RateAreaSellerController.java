@@ -32,7 +32,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * 运费模版控制器
+ * Freight template controller
  *
  * @author zjp
  * @version v7.0.0
@@ -41,7 +41,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/seller/shops/rate-area")
-@Api(description = "区域相关API")
+@Api(description = "Areas related toAPI")
 @Validated
 public class RateAreaSellerController {
 
@@ -49,19 +49,19 @@ public class RateAreaSellerController {
     private RateAreaManager rateAreaManager;
 
 
-    @ApiOperation(value = "查询区域列表", response = RateAreaDO.class)
+    @ApiOperation(value = "Querying the Region List", response = RateAreaDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "name", value = "区域名称", required = true, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "name", required = true, dataType = "String", paramType = "query")
     })
     @GetMapping
-    public Page list(@ApiIgnore @NotNull(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotNull(message = "每页数量不能为空") Integer pageSize, String name){
+    public Page list(@ApiIgnore @NotNull(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotNull(message = "The number of pages cannot be empty") Integer pageSize, String name){
         return this.rateAreaManager.list(name,pageNo,pageSize);
     }
 
 
-    @ApiOperation(value = "添加区域", response = RateAreaDO.class)
+    @ApiOperation(value = "Add area", response = RateAreaDO.class)
     @PostMapping
     public void add(@Valid @RequestBody RateAreaVO rateAreaVO) {
 
@@ -69,8 +69,8 @@ public class RateAreaSellerController {
     }
 
     @PutMapping(value = "/{rate_area_id}")
-    @ApiOperation(value = "修改区域", response = RateAreaDO.class)
-    @ApiImplicitParam(name = "rate_area_id", value = "区域id", required = true, dataType = "int", paramType = "path")
+    @ApiOperation(value = "Modify the area", response = RateAreaDO.class)
+    @ApiImplicitParam(name = "rate_area_id", value = "areaid", required = true, dataType = "int", paramType = "path")
     public void edit(@Valid @RequestBody RateAreaVO rateAreaVO, @ApiIgnore @PathVariable("rate_area_id") Integer rateAreaId) {
         rateAreaVO.setId(rateAreaId);
         this.rateAreaManager.edit(rateAreaVO);
@@ -78,9 +78,9 @@ public class RateAreaSellerController {
 
 
     @DeleteMapping(value = "/{rate_area_id}")
-    @ApiOperation(value = "删除区域")
+    @ApiOperation(value = "Delete the area")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "rate_area_id", value = "要删除的区域主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "rate_area_id", value = "Primary key of the region to be deleted", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@ApiIgnore @PathVariable("rate_area_id") Integer rateAreaId) {
         this.rateAreaManager.delete(rateAreaId);
@@ -88,9 +88,9 @@ public class RateAreaSellerController {
     }
 
     @GetMapping(value = "/{rate_area_id}")
-    @ApiOperation(value = "查询一个区域")
+    @ApiOperation(value = "Querying a region")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "rate_area_id", value = "要查询的区域主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "rate_area_id", value = "Primary key of the region to be queried", required = true, dataType = "int", paramType = "path")
     })
     public RateAreaVO get(@ApiIgnore @PathVariable("rate_area_id") Integer rateAreaId) {
 

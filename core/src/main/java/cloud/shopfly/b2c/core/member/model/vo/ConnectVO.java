@@ -24,9 +24,9 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录VO
+ * @Description Trust the loginVO
  * @ClassName ConnectDO
- * @since v7.0 下午2:43 2018/6/20
+ * @since v7.0 In the afternoon2:43 2018/6/20
  */
 @Table(name = "es_connect")
 @ApiModel
@@ -34,14 +34,14 @@ import io.swagger.annotations.ApiModelProperty;
 public class ConnectVO {
 
     /**
-     * 信任登录类型
+     * Trusted Login type
      */
-    @ApiModelProperty(name = "union_type", value = "信任登录类型")
+    @ApiModelProperty(name = "union_type", value = "Trusted Login type")
     private String unionType;
     /**
-     * 是否绑定
+     * Whether the binding
      */
-    @ApiModelProperty(name = "is_bind", value = "是否绑定 ：true 已绑定，false 未绑定")
+    @ApiModelProperty(name = "is_bind", value = "Whether the binding：true Is binding,false unbounded")
     private Boolean isBind;
 
     public String getUnionType() {

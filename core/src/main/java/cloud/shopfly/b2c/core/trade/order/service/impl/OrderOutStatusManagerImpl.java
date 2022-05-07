@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 订单出库状态业务类
+ * Order outbound status business class
  *
  * @author xlp
  * @version v2.0

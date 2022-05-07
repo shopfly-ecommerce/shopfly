@@ -18,19 +18,19 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.base.model.vo.EmailVO;
 
 /**
- * 发送邮件事件
+ * Sending mail Event
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午9:55:27
+ * 2018years3month23The morning of9:55:27
  */
 public interface SendEmailEvent {
 
     /**
-     * 发送邮件
+     * Send E-mail
      *
-     * @param emailVO 邮件
+     * @param emailVO mail
      */
     void sendEmail(EmailVO emailVO);
 }

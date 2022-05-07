@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 存储方案实体
+ * Storage scheme entity
  *
  * @author zh
  * @version v7.0.0
@@ -43,33 +43,33 @@ public class UploaderVO implements Serializable {
 
     private static final long serialVersionUID = -5402918566675345349L;
     /**
-     * 储存id
+     * storageid
      */
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 存储名称
+     * Store name
      */
-    @NotEmpty(message = "存储名称不能为空")
-    @ApiModelProperty(name = "name", value = "存储名称", required = true)
+    @NotEmpty(message = "The storage name cannot be empty")
+    @ApiModelProperty(name = "name", value = "Store name", required = true)
     private String name;
     /**
-     * 是否开启
+     * Whether open
      */
-    @ApiModelProperty(name = "open", value = "是否开启", required = true, hidden = true)
+    @ApiModelProperty(name = "open", value = "Whether open", required = true, hidden = true)
     private Integer open;
     /**
-     * 存储配置
+     * Storage configuration
      */
-    @ApiModelProperty(name = "config", value = "存储配置", required = true)
+    @ApiModelProperty(name = "config", value = "Storage configuration", required = true)
     private String config;
     /**
-     * 存储插件id
+     * Memory cardid
      */
-    @ApiModelProperty(name = "bean", value = "存储插件id", required = true)
-    @NotEmpty(message = "存储插件id不能为空")
+    @ApiModelProperty(name = "bean", value = "Memory cardid", required = true)
+    @NotEmpty(message = "Memory cardidCant be empty")
     private String bean;
-    @ApiModelProperty(name = "configItems", value = "存储方案配置项", required = true)
+    @ApiModelProperty(name = "configItems", value = "Storage solution configuration item", required = true)
     private List<ConfigItem> configItems;
 
 

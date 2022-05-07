@@ -31,15 +31,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 满优惠活动VO
+ * Full discountVO
  *
  * @author Snow
  * @version v1.0
  * @since v7.0.0
- * 2018年4月17日 下午2:46:27
+ * 2018years4month17On the afternoon2:46:27
  */
 @SuppressWarnings("AlibabaPojoMustOverrideToString")
-@ApiModel(description = "满优惠活动VO")
+@ApiModel(description = "Full discountVO")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class FullDiscountVO extends FullDiscountDO implements Serializable {
 
@@ -49,28 +49,28 @@ public class FullDiscountVO extends FullDiscountDO implements Serializable {
 
     private static final long serialVersionUID = -5509785605653051033L;
 
-    @ApiModelProperty(name = "goods_list", value = "促销商品列表")
+    @ApiModelProperty(name = "goods_list", value = "List of promotional items")
     private List<PromotionGoodsDTO> goodsList;
 
     /**
-     * 商品id列表
+     * productidThe list of
      */
     private List<Integer> goodsIdList;
 
-    @ApiModelProperty(name = "status_text", value = "活动状态")
+    @ApiModelProperty(name = "status_text", value = "Active state")
     private String statusText;
 
-    @ApiModelProperty(value = "赠品")
+    @ApiModelProperty(value = "The gifts")
     private FullDiscountGiftDO fullDiscountGiftDO;
 
-    @ApiModelProperty(value = "赠优惠券")
+    @ApiModelProperty(value = "A gift coupon")
     private CouponDO couponDO;
 
 
-    @ApiModelProperty(value = "赠优积分")
+    @ApiModelProperty(value = "Give optimal integral")
     private Integer point;
 
-    @ApiModelProperty(name = "status", value = "活动状态标识,expired表示已失效")
+    @ApiModelProperty(name = "status", value = "Activity status identification,expiredIndicates invalid")
     private String status;
 
 

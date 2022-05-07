@@ -25,7 +25,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * Created by kingapex on 2019-01-21.
- * 拼团商品在索引中的文档
+ * Grouping goods documents in the index
  *
  * @author kingapex
  * @version 1.0

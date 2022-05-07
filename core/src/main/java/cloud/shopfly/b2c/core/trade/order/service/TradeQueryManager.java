@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.trade.order.service;
 import cloud.shopfly.b2c.core.trade.order.model.dos.TradeDO;
 
 /**
- * 交易查询接口
+ * Transaction query interface
  *
  * @author Snow create in 2018/5/21
  * @version v2.0
@@ -27,7 +27,7 @@ import cloud.shopfly.b2c.core.trade.order.model.dos.TradeDO;
 public interface TradeQueryManager {
 
     /**
-     * 根据交易单号查询交易对象
+     * Query the transaction object based on the transaction order number
      *
      * @param tradeSn
      * @return

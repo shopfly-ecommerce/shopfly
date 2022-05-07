@@ -28,28 +28,28 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.TradeVO;
 public interface TradeCreator {
 
     /**
-     * 检测配送范围
+     * Detection and distribution scope
      *
      * @return
      */
     TradeCreator checkShipRange();
 
     /**
-     * 检测商品合法性
+     * Check the validity of goods
      *
      * @return
      */
     TradeCreator checkGoods();
 
     /**
-     * 检测促销活动合法性
+     * Check the validity of promotional activities
      *
      * @return
      */
     TradeCreator checkPromotion();
 
     /**
-     * 创建交易
+     * Create a trading
      *
      * @return
      */

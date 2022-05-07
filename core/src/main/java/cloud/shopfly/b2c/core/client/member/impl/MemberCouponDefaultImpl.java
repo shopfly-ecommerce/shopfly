@@ -25,11 +25,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 会员优惠券默认实现
+ * Member coupons are implemented by default
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 下午3:54
+ * @date 18/7/27 In the afternoon3:54
  * @since v7.0
  */
 @Service

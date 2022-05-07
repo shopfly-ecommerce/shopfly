@@ -23,7 +23,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 订单详细查询参数
+ * Order details query parameters
  *
  * @author Snow create in 2018/7/18
  * @version v2.0
@@ -34,10 +34,10 @@ import springfox.documentation.annotations.ApiIgnore;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OrderDetailQueryParam {
 
-    @ApiModelProperty(value = "会员ID")
+    @ApiModelProperty(value = "membersID")
     private Integer buyerId;
 
-    @ApiModelProperty(value = "商家ID")
+    @ApiModelProperty(value = "merchantsID")
     private Integer sellerId;
 
 

@@ -27,21 +27,21 @@ import java.util.List;
  */
 public interface LogiCompanyClient {
     /**
-     * 通过code获取物流公司
-     * @param code 物流公司code
-     * @return 物流公司
+     * throughcodeAcquisition logistics company
+     * @param code Logistics companycode
+     * @return Logistics company
      */
     LogiCompanyDO getLogiByCode(String code);
 
     /**
-     * 获取物流公司
-     * @param id 物流公司主键
-     * @return Logi  物流公司
+     * Acquisition logistics company
+     * @param id Logistics company primary key
+     * @return Logi  Logistics company
      */
     LogiCompanyDO getModel(Integer id);
 
     /**
-     * 查询物流公司列表(不分页)
+     * Query the list of logistics companies(No paging)
      * @return Page
      */
     List<LogiCompanyDO> list();

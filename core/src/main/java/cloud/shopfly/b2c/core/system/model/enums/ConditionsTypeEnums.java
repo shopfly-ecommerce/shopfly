@@ -4,25 +4,25 @@ package cloud.shopfly.b2c.core.system.model.enums;
 /**
  * @author cs
  * @version v7.0
- * @Description 运费条件类型
+ * @Description Freight terms type
  *
- * @since v7.0 下午5:03 2022/4/24
+ * @since v7.0 In the afternoon5:03 2022/4/24
  */
 public enum ConditionsTypeEnums {
 
 
     /**
-     * 价格
+     * Price
      */
     PRICE,
 
     /**
-     * 重量
+     * Weight
      */
     WEIGHT,
 
     /**
-     * 数量
+     * Quantity
      */
     ITEMS;
 

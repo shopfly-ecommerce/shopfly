@@ -34,7 +34,7 @@ import java.util.Objects;
 
 
 /**
- * 会员表实体
+ * Membership form entity
  *
  * @author zh
  * @version v7.0.0
@@ -48,49 +48,49 @@ public class Member implements Serializable {
 
     private static final long serialVersionUID = 3227466962489949L;
     /**
-     * 会员ID
+     * membersID
      */
     @Id(name = "member_id")
     @ApiModelProperty(hidden = true)
     private Integer memberId;
     /**
-     * 会员登陆用户名
+     * Member login user name
      */
     @Column(name = "uname")
-    @NotEmpty(message = "会员登陆用户名不能为空")
-    @ApiModelProperty(name = "uname", value = "会员登陆用户名", required = true)
+    @NotEmpty(message = "Member login user name cannot be empty")
+    @ApiModelProperty(name = "uname", value = "Member login user name", required = true)
     private String uname;
     /**
-     * 邮箱
+     * email
      */
     @Column(name = "email")
-    @Email(message = "格式不正确")
-    @ApiModelProperty(name = "email", value = "邮箱", required = false)
+    @Email(message = "Malformed")
+    @ApiModelProperty(name = "email", value = "email", required = false)
     private String email;
     /**
-     * 会员登陆密码
+     * Member login password
      */
     @Column(name = "password")
-    @ApiModelProperty(name = "password", value = "会员登陆密码", required = false)
+    @ApiModelProperty(name = "password", value = "Member login password", required = false)
     private String password;
     /**
-     * 会员注册时间
+     * Membership registration Time
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "createTime", value = "会员注册时间", required = false)
+    @ApiModelProperty(name = "createTime", value = "Membership registration Time", required = false)
     private Long createTime;
     /**
-     * 会员性别
+     * Member of the gender
      */
     @Column(name = "sex")
-    @Min(message = "必须为数字,1", value = 0)
-    @ApiModelProperty(name = "sex", value = "会员性别,1为男，0为女", required = false)
+    @Min(message = "Must be a number,1", value = 0)
+    @ApiModelProperty(name = "sex", value = "Member of the gender,1For men,0For female", required = false)
     private Integer sex;
     /**
-     * 会员生日
+     * Members birthday
      */
     @Column(name = "birthday")
-    @ApiModelProperty(name = "birthday", value = "会员生日", required = false)
+    @ApiModelProperty(name = "birthday", value = "Members birthday", required = false)
     private Long birthday;
     /**
      * Country name
@@ -117,98 +117,98 @@ public class Member implements Serializable {
     @ApiModelProperty(name = "state_code", value = "State code")
     private String stateCode;
     /**
-     * 所属城市名称
+     * Name of City
      */
     @Column(name = "city")
-    @ApiModelProperty(name = "city", value = "所属城市名称", required = false)
+    @ApiModelProperty(name = "city", value = "Name of City", required = false)
     private String city;
     /**
-     * 详细地址
+     * Detailed address
      */
     @Column(name = "address")
-    @ApiModelProperty(name = "address", value = "详细地址", required = false)
+    @ApiModelProperty(name = "address", value = "Detailed address", required = false)
     private String address;
     /**
-     * 手机号码
+     * Mobile phone number
      */
     @Column(name = "mobile")
-    @NotEmpty(message = "手机号码不能为空")
+    @NotEmpty(message = "The mobile phone number cannot be empty")
     @Mobile
-    @ApiModelProperty(name = "mobile", value = "手机号码", required = true)
+    @ApiModelProperty(name = "mobile", value = "Mobile phone number", required = true)
     private String mobile;
     /**
-     * 座机号码
+     * Machine number
      */
     @Column(name = "tel")
-    @ApiModelProperty(name = "tel", value = "座机号码", required = false)
+    @ApiModelProperty(name = "tel", value = "Machine number", required = false)
     private String tel;
     /**
-     * 等级积分
+     * Level score
      */
     @Column(name = "grade_point")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "grade_point", value = "等级积分", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "grade_point", value = "Level score", required = false)
     private Integer gradePoint;
 
     /**
-     * 消费积分
+     * consumption score
      */
     @Column(name = "consum_point")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "consum_point", value = "消费积分", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "consum_point", value = "consumption score", required = false)
     private Integer consumPoint;
     /**
-     * 会员MSN
+     * membersMSN
      */
     @Column(name = "msn")
-    @ApiModelProperty(name = "msn", value = "会员MSN", required = false)
+    @ApiModelProperty(name = "msn", value = "membersMSN", required = false)
     private String msn;
     /**
-     * 会员备注
+     * Member of the note
      */
     @Column(name = "remark")
-    @ApiModelProperty(name = "remark", value = "会员备注", required = false)
+    @ApiModelProperty(name = "remark", value = "Member of the note", required = false)
     private String remark;
     /**
-     * 上次登陆时间
+     * Last landing time
      */
     @Column(name = "last_login")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "last_login", value = "上次登陆时间", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "last_login", value = "Last landing time", required = false)
     private Long lastLogin;
     /**
-     * 登陆次数
+     * Log in number
      */
     @Column(name = "login_count")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "login_count", value = "登陆次数", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "login_count", value = "Log in number", required = false)
     private Integer loginCount;
     /**
-     * 邮件是否已验证
+     * Whether the message is validated
      */
     @Column(name = "is_cheked")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "is_cheked", value = "邮件是否已验证", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "is_cheked", value = "Whether the message is validated", required = false)
     private Integer isCheked;
     /**
-     * 注册IP地址
+     * RegisterIPaddress
      */
     @Column(name = "register_ip")
-    @ApiModelProperty(name = "register_ip", value = "注册IP地址", required = false)
+    @ApiModelProperty(name = "register_ip", value = "RegisterIPaddress", required = false)
     private String registerIp;
     /**
-     * 是否已经完成了推荐积分
+     * Whether the recommended points have been completed
      */
     @Column(name = "recommend_point_state")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "recommend_point_state", value = "是否已经完成了推荐积分", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "recommend_point_state", value = "Whether the recommended points have been completed", required = false)
     private Integer recommendPointState;
     /**
-     * 会员信息是否完善
+     * Whether the member information is perfect
      */
     @Column(name = "info_full")
-    @Min(message = "必须为数字", value = 0)
-    @ApiModelProperty(name = "info_full", value = "会员信息是否完善，0为未完善", required = false)
+    @Min(message = "Must be a number", value = 0)
+    @ApiModelProperty(name = "info_full", value = "Whether the member information is perfect,0Is not perfect", required = false)
     private Integer infoFull;
     /**
      * find_code
@@ -217,28 +217,28 @@ public class Member implements Serializable {
     @ApiModelProperty(name = "find_code", value = "find_code", required = false)
     private String findCode;
     /**
-     * 会员头像
+     * Member of the head
      */
     @Column(name = "face")
-    @ApiModelProperty(name = "face", value = "会员头像", required = false)
+    @ApiModelProperty(name = "face", value = "Member of the head", required = false)
     private String face;
     /**
-     * 身份证号
+     * Id number
      */
     @Column(name = "midentity")
-    @ApiModelProperty(name = "midentity", value = "身份证号", required = false)
+    @ApiModelProperty(name = "midentity", value = "Id number", required = false)
     private Integer midentity;
     /**
-     * 会员状态
+     * The member state
      */
     @Column(name = "disabled")
-    @ApiModelProperty(name = "disabled", value = "会员状态,0为正常 -1为在回收站中", required = false)
+    @ApiModelProperty(name = "disabled", value = "The member state,0For the normal-1Is in the recycle bin", required = false)
     private Integer disabled;
     /**
-     * 昵称
+     * nickname
      */
     @Column(name = "nickname")
-    @ApiModelProperty(name = "nickname", value = "昵称", required = false)
+    @ApiModelProperty(name = "nickname", value = "nickname", required = false)
     private String nickname;
 
     public static long getSerialVersionUID() {

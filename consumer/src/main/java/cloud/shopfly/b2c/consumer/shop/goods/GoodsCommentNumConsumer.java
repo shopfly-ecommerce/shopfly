@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author fk
  * @version v1.0
- * @Description: 更改商品的评论数量
+ * @Description: Change the number of reviews for an item
  * @date 2018/6/25 10:23
  * @since v7.0.0
  */

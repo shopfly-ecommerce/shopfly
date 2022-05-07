@@ -18,16 +18,16 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.base.message.CmsManageMsg;
 
 /**
- * 移动端首页变化
+ * The mobile home page has changed
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午9:50:40
+ * 2018years3month23The morning of9:50:40
  */
 public interface MobileIndexChangeEvent {
 
 	/**
-	 * 创建首页
+	 * Create a page
 	 * @param operation
 	 */
     void mobileIndexChange(CmsManageMsg operation);

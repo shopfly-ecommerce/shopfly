@@ -27,11 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 演示站点是否可以被操作切面类
+ * Demonstrates whether the site can be manipulated by the aspect class
  *
  * @author zh
  * @version v7.0
- * @date 19/2/25 上午8:58
+ * @date 19/2/25 In the morning8:58
  * @since v7.0
  */
 @Component
@@ -47,9 +47,9 @@ public class OperationAspect {
     public void doAfter(Operation operation) throws Exception {
         if (shopflyConfig.getIsDemoSite()) {
             if (logger.isDebugEnabled()) {
-                logger.debug("演示站点禁止此操作");
+                logger.debug("The demo site disallows this operation");
             }
-            throw new ServiceException(SystemErrorCodeV1.NO_PERMISSION, "演示站点禁止此操作");
+            throw new ServiceException(SystemErrorCodeV1.NO_PERMISSION, "The demo site disallows this operation");
         }
     }
 

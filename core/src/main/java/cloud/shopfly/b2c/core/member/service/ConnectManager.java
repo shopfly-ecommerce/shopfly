@@ -32,52 +32,52 @@ import java.util.Map;
 /**
  * @author zjp
  * @version v7.0
- * @Description 信任登录业务类
+ * @Description Trusted login business class
  * @ClassName ConnectManager
- * @since v7.0 下午8:54 2018/6/6
+ * @since v7.0 In the afternoon8:54 2018/6/6
  */
 public interface ConnectManager {
 
     /**
-     * 微信授权
+     * WeChat authorization
      */
     void wechatAuth();
 
     /**
-     * 微信授权回调
+     * Wechat authorization callback
      */
     void wechatAuthCallBack();
 
     /**
-     * 微信绑定登录
+     * Wechat binding login
      *
-     * @param uuid 客户端唯一标示
+     * @param uuid Unique identifier of the client
      * @return
      */
     Map bindLogin(String uuid);
 
     /**
-     * 绑定账号
+     * Binding account
      *
-     * @param name        用户名
-     * @param password    密码
-     * @param connectUuid 联合登录uuid
+     * @param name        Username
+     * @param password    Password
+     * @param connectUuid Joint loginuuid
      * @param uuid        uuid
      * @return
      */
     Map bind(String name, String password, String connectUuid, String uuid);
 
     /**
-     * 会员中心绑定账号
+     * Member center binding account
      *
-     * @param uuid 唯一号
-     * @param uid  用户id
+     * @param uuid The only no.
+     * @param uid  The userid
      * @return
      */
     Map bind(String uuid, Integer uid);
 
     /**
-     * 发起信任登录
+     * Initiating a trusted login
      *
      * @param type
      * @param port
@@ -86,7 +86,7 @@ public interface ConnectManager {
     void initiate(String type, String port, String member);
 
     /**
-     * 信任登录回调
+     * Trusted login callback
      *
      * @param type
      * @param member
@@ -96,21 +96,21 @@ public interface ConnectManager {
     MemberVO callBack(String type, String member, String uuid);
 
     /**
-     * 注册会员并绑定
+     * Register member and bind
      *
      * @param uuid
      */
     void registerBind(String uuid);
 
     /**
-     * 会员解除绑定
+     * Member unbinding
      *
-     * @param type 登录类型
+     * @param type Login type
      */
     void unbind(String type);
 
     /**
-     * 会员绑定openid
+     * Member of the bindingopenid
      *
      * @param uuid
      * @return
@@ -119,7 +119,7 @@ public interface ConnectManager {
 
 
     /**
-     * 获取app联合登录所需参数
+     * To obtainappParameters required for federated login
      *
      * @param type
      * @return
@@ -127,7 +127,7 @@ public interface ConnectManager {
     String getParam(String type);
 
     /**
-     * 检测openid是否绑定
+     * detectionopenidWhether the binding
      *
      * @param type
      * @param openid
@@ -136,14 +136,14 @@ public interface ConnectManager {
     Map checkOpenid(String type, String openid);
 
     /**
-     * 发送手机校验验证码
+     * Send the mobile phone verification code
      *
      * @param mobile
      */
     void sendCheckMobileSmsCode(String mobile);
 
     /**
-     * WAP手机号绑定
+     * WAPBinding of mobile phone number
      *
      * @param mobile
      * @param uuid
@@ -153,21 +153,21 @@ public interface ConnectManager {
 
 
     /**
-     * 获取会员绑定列表
+     * Get a list of member bindings
      *
      * @return
      */
     List<ConnectVO> get();
 
     /**
-     * 获取后台信任登录参数
+     * Get background trust login parameters
      *
      * @return
      */
     List<ConnectSettingVO> list();
 
     /**
-     * 保存信任登录信息
+     * Save trusted login information
      *
      * @param connectSettingDTO
      * @return
@@ -175,15 +175,15 @@ public interface ConnectManager {
     ConnectSettingDTO save(ConnectSettingDTO connectSettingDTO);
 
     /**
-     * 获取授权登录参数
+     * Gets authorized login parameters
      *
-     * @param type 授权登录类型
+     * @param type Authorized Login Type
      * @return
      */
     ConnectSettingDO get(String type);
 
     /**
-     * 根据type获取相应的插件类
+     * According to thetypeGets the corresponding plug-in class
      *
      * @param type
      * @return
@@ -191,12 +191,12 @@ public interface ConnectManager {
     AbstractConnectLoginPlugin getConnectionLogin(ConnectTypeEnum type);
 
     /**
-     * 微信退出解绑操作
+     * Wechat exited the unbinding operation
      */
     void wechatOut();
 
     /**
-     * ios APP 第三方登录获取授权url
+     * ios APP Third-party login to obtain authorizationurl
      *
      * @return
      */
@@ -204,7 +204,7 @@ public interface ConnectManager {
 
 
     /**
-     * app用户绑定
+     * appUsers binding
      *
      * @param member
      * @param openid
@@ -215,14 +215,14 @@ public interface ConnectManager {
     Map appBind(Member member, String openid, String type, String uuid);
 
     /**
-     * 初始化配置参数
+     * Initialize configuration parameters
      *
      * @return
      */
     Map initConnectSetting();
 
     /**
-     * 小程序登录
+     * Applets login
      *
      * @param content
      * @param uuid
@@ -231,7 +231,7 @@ public interface ConnectManager {
     Map miniProgramLogin(String content, String uuid);
 
     /**
-     * 解密
+     * decryption
      *
      * @param code
      * @param encryptedData
@@ -242,7 +242,7 @@ public interface ConnectManager {
     Map decrypt(String code, String encryptedData, String uuid, String iv);
 
     /**
-     * 获取微信小程序码
+     * Get wechat small program code
      *
      * @param accessTocken
      * @return
@@ -250,16 +250,16 @@ public interface ConnectManager {
     String getWXACodeUnlimit(String accessTocken, int goodsId);
 
     /**
-     * 获取 联合登录对象
+     * Gets the federated login object
      *
-     * @param memberId  会员id
-     * @param unionType 类型
+     * @param memberId  membersid
+     * @param unionType type
      * @return ConnectDO
      */
     ConnectDO getConnect(Integer memberId, String unionType);
 
     /**
-     * 解密，获取信息
+     * Decryption, access to information
      *
      * @param encryptedData
      * @param sessionKey

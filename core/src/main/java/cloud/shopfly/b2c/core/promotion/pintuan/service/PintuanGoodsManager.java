@@ -24,7 +24,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 拼团商品业务层
+ * Group commodity business layer
  *
  * @author admin
  * @version vv1.0.0
@@ -34,58 +34,58 @@ import java.util.List;
 public interface PintuanGoodsManager {
 
     /**
-     * 查询拼团商品列表
+     * Query the list of group items
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
 
     /**
-     * 添加拼团商品
+     * Add group goods
      *
-     * @param pintuanGoods 拼团商品
-     * @return PintuanGoods 拼团商品
+     * @param pintuanGoods Spell mass goods
+     * @return PintuanGoods Spell mass goods
      */
     PintuanGoodsDO add(PintuanGoodsDO pintuanGoods);
 
 
     /**
-     * 批量保存拼团商品数据
+     * Batch save group commodity data
      *
-     * @param pintuanId        拼团id
-     * @param pintuanGoodsList 要批量添加的拼团商品
+     * @param pintuanId        Spell groupid
+     * @param pintuanGoodsList Group goods to be added in bulk
      */
     void save(Integer pintuanId, List<PintuanGoodsDO> pintuanGoodsList);
 
     /**
-     * 修改拼团商品
+     * Modify group goods
      *
-     * @param pintuanGoods 拼团商品
-     * @param id           拼团商品主键
-     * @return PintuanGoods 拼团商品
+     * @param pintuanGoods Spell mass goods
+     * @param id           Group commodities primary key
+     * @return PintuanGoods Spell mass goods
      */
     PintuanGoodsDO edit(PintuanGoodsDO pintuanGoods, Integer id);
 
     /**
-     * 删除拼团商品
+     * Delete group items
      *
-     * @param id 拼团商品主键
+     * @param id Group commodities primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取拼团商品
+     * Get group goods
      *
-     * @param id 拼团商品主键
-     * @return PintuanGoods  拼团商品
+     * @param id Group commodities primary key
+     * @return PintuanGoods  Spell mass goods
      */
     PintuanGoodsDO getModel(Integer id);
 
     /**
-     * 获取拼团商品
+     * Get group goods
      *
      * @param pintuanId
      * @param skuId
@@ -94,16 +94,16 @@ public interface PintuanGoodsManager {
     PintuanGoodsDO getModel(Integer pintuanId, Integer skuId);
 
     /**
-     * 获取拼团商品详细，包括拼团本身的信息
+     * Get detailed information about the group products, including the group itself
      *
      * @param skuId skuid
-     * @return 商品详细vo
+     * @return Goods in detailvo
      */
     PinTuanGoodsVO getDetail(Integer skuId);
 
 
     /**
-     * 获取某商品参加拼团的sku
+     * Obtain a commodity to participate in the groupsku
      *
      * @param goodsId
      * @param pintuanId
@@ -112,15 +112,15 @@ public interface PintuanGoodsManager {
     List<GoodsSkuVO> skus(Integer goodsId, Integer pintuanId);
 
     /**
-     * 更新已团数量
+     * Update the number of groups
      *
-     * @param id  拼团商品id
-     * @param num 数量
+     * @param id  Spell mass goodsid
+     * @param num Quantity
      */
     void addQuantity(Integer id, Integer num);
 
     /**
-     * 获取某活动所有商品
+     * Get all goods for an event
      *
      * @param promotionId
      * @return
@@ -129,14 +129,14 @@ public interface PintuanGoodsManager {
 
 
     /**
-     * 关闭一个活动的促销商品索引
+     * Close the promotional items index for an event
      *
      * @param promotionId
      */
     void delIndex(Integer promotionId);
 
     /**
-     * 开启一个活动的促销商品索引
+     * Open an index of promotional items for an event
      *
      * @param promotionId
      * @return
@@ -145,23 +145,23 @@ public interface PintuanGoodsManager {
 
 
     /**
-     * 商品查询
+     * Goods query
      *
-     * @param page        页码
-     * @param pageSize    分页大小
-     * @param promotionId 促销id
-     * @param name        商品名称
+     * @param page        The page number
+     * @param pageSize    Page size
+     * @param promotionId Sales promotionid
+     * @param name        Name
      * @return
      */
     Page page(Integer page, Integer pageSize, Integer promotionId, String name);
 
     /**
-     * 查询指定时间范围，是否有参与其他活动
+     * Queries whether you have participated in other activities within the specified time range
      *
-     * @param skuIds      商品id集合
-     * @param startTime   开始时间
-     * @param endTime     结束时间
-     * @param promotionID 促销id
+     * @param skuIds      productidA collection of
+     * @param startTime   The start time
+     * @param endTime     The end of time
+     * @param promotionID Sales promotionid
      * @return
      */
     List<PromotionAbnormalGoods> checkPromotion(Integer[] skuIds, Long startTime, Long endTime, Integer promotionID);

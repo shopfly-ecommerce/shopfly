@@ -16,16 +16,16 @@
 package cloud.shopfly.b2c.core.payment.model.enums;
 
 /**
- * 支付客户端类型
+ * Payment client type
  *
  * @author fk
  * @version v6.4
- * @since v6.4 2017年10月17日 上午10:49:25
+ * @since v6.4 2017years10month17The morning of10:49:25
  */
 public enum ClientType {
 
     /**
-     * pc客户端
+     * pcThe client
      */
     PC("pc_config", "PC"),
     /**
@@ -33,7 +33,7 @@ public enum ClientType {
      */
     WAP("wap_config", "WAP"),
     /**
-     * 原生
+     * native
      */
     NATIVE("app_native_config", "APP"),
     /**
@@ -41,7 +41,7 @@ public enum ClientType {
      */
     REACT("app_react_config", "APP"),
     /**
-     * 微信小程序
+     * Wechat applets
      */
     MINI("mini_config", "MINI");
 

@@ -17,62 +17,62 @@ package cloud.shopfly.b2c.core.system;
 
 
 /**
- * 系统设置异常
+ * Abnormal system Settings
  *
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2018年3月22日 上午10:40:05
+ * 2018years3month22The morning of10:40:05
  */
 public enum SystemErrorCode {
 
-    //上传方案异常编码
-    E800("此上传方案已经存在"),
-    E801("不允许上传的图片格式"),
-    E802("上传图片失败"),
-    E803("删除图片失败"),
-    E804("发送邮件失败"),
-    E805("地区不合法"),
-    E806("楼层找不到"),
-    //上传方案异常编码
-    E900("此上传方案已经存在"),
-    E901("不允许上传的图片格式"),
-    E902("上传图片失败"),
-    E903("删除图片失败"),
-    E904("发送邮件失败"),
-    E905("地区不合法"),
-    E906("发票内容超出限制，最多为6个"),
-    E907("发票内容重复"),
-    //文章使用异常编码
-    E950("特殊的文章分类，不可修改"),
-    E951("分类添加失败"),
-    E952("特殊的文章，不能删除"),
-    E953("站点导航，参数不合法"),
-    E954("热门关键字，参数不合法"),
-    E955("文章，参数不合法"),
-    E956("焦点图参数不合法，参数不合法"),
-    E908("推送参数为空"),
-    E909("推送失败"),
-    E910("电子面单方案已经存在"),
-    E911("电子面单生成失败"),
-    E912("电子面单参数错误"),
-    E913("菜单唯一标识重复"),
-    E914("菜单级别最多为3级"),
-    E915("管理员名称已经存在"),
-    E916("必须保留一个超级管理员"),
-    E917("管理员密码不能为空"),
-    E918("管理员账号或密码错误"),
-    E919("短信平台方案已经存在"),
-    E920("必须保留一个开启状态的短信平台"),
-    E921("原密码错误"),
-    E922("原始密码不能为空"),
-    E923("新密码不能为空"),
-    E924("角色不能删除"),
-    E925("菜单名称重复"),
-    E926("演示站点禁止此操作"),
+    // Abnormal code of the upload scheme
+    E800("This upload scheme already exists"),
+    E801("Image format not allowed to upload"),
+    E802("Uploading picture failed"),
+    E803("Failed to delete image"),
+    E804("Failed to send email."),
+    E805("District illegal"),
+    E806("Floor not found"),
+    // Abnormal code of the upload scheme
+    E900("This upload scheme already exists"),
+    E901("Image format not allowed to upload"),
+    E902("Uploading picture failed"),
+    E903("Failed to delete image"),
+    E904("Failed to send email."),
+    E905("District illegal"),
+    E906("The invoice content exceeds the limit, up to6a"),
+    E907("Duplicate invoice content"),
+    // The article uses exception encoding
+    E950("Special article classification, cannot be modified"),
+    E951("Description Failed to add a category."),
+    E952("Special articles cannot be deleted"),
+    E953("Site navigation, parameter invalid"),
+    E954("Invalid parameter for hot keyword"),
+    E955("The argument is invalid"),
+    E956("The focus graph parameter is invalid. The parameter is invalid"),
+    E908("The push parameter is empty"),
+    E909("Failed to push"),
+    E910("Single electron plane schemes already exist"),
+    E911("Failed to generate electron face order"),
+    E912("Single parameter error of electron surface"),
+    E913("The menu uniquely identifies duplication"),
+    E914("The maximum menu level is3level"),
+    E915("The administrator name already exists"),
+    E916("You must retain a super administrator"),
+    E917("The administrator password cannot be empty"),
+    E918("The administrator account or password is incorrect"),
+    E919("SMS platform solutions already exist"),
+    E920("You must keep an open SMS platform"),
+    E921("Old password incorrect"),
+    E922("The original password cannot be empty"),
+    E923("The new password cannot be empty"),
+    E924("Roles cannot be deleted"),
+    E925("Duplicate menu names"),
+    E926("The demo site disallows this operation"),
 
-    E214("物流公司有误"),
-    E226("运费模版被使用")
+    E214("Logistics company error"),
+    E226("Freight templates are used")
     ;
 
     private String describe;
@@ -82,7 +82,7 @@ public enum SystemErrorCode {
     }
 
     /**
-     * 获取异常码
+     * Get exception code
      *
      * @return
      */

@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.trade.order.service;
 import cloud.shopfly.b2c.core.trade.order.model.vo.TradeVO;
 
 /**
- * 交易入库业务接口
+ * Transaction entry business interface
  *
  * @author Snow create in 2018/5/9
  * @version v2.0
@@ -27,7 +27,7 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.TradeVO;
 public interface TradeIntodbManager {
 
     /**
-     * 入库处理
+     * Inbound processing
      *
      * @param tradeVO
      */

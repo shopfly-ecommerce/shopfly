@@ -35,7 +35,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 会员积分表控制器
+ * Member points table controller
  *
  * @author zh
  * @version v7.0.0
@@ -44,7 +44,7 @@ import javax.validation.constraints.NotEmpty;
  */
 @RestController
 @RequestMapping("/members")
-@Api(description = "会员积分相关API")
+@Api(description = "Member point correlationAPI")
 public class MemberPointHistoryBuyerController {
 
     @Autowired
@@ -53,19 +53,19 @@ public class MemberPointHistoryBuyerController {
     private MemberManager memberManager;
 
 
-    @ApiOperation(value = "查询会员积分列表", response = MemberPointHistory.class)
+    @ApiOperation(value = "Query membership points list", response = MemberPointHistory.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping("/points")
-    public Page list(@ApiIgnore @NotEmpty(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotEmpty(message = "每页数量不能为空") Integer pageSize) {
+    public Page list(@ApiIgnore @NotEmpty(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotEmpty(message = "The number of pages cannot be empty") Integer pageSize) {
         Buyer buyer = UserContext.getBuyer();
         return this.memberPointHistoryManager.list(pageNo, pageSize, buyer.getUid());
     }
 
 
-    @ApiOperation(value = "查询当前会员的积分")
+    @ApiOperation(value = "Query current members points")
     @GetMapping("/points/current")
     public MemberPointVO getPoint() {
         return memberManager.getMemberPoint();

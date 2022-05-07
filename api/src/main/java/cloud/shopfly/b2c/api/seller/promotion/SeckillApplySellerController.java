@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 限时抢购申请控制器
+ * Flash sale application controller
  *
  * @author Snow
  * @version v7.0.0
@@ -56,7 +56,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/seller/promotion/seckill-applys")
-@Api(description = "限时抢购申请相关API")
+@Api(description = "Flash sale application relatedAPI")
 @Validated
 public class SeckillApplySellerController {
 
@@ -70,15 +70,15 @@ public class SeckillApplySellerController {
     private SeckillManager seckillManager;
 
 
-    @ApiOperation(value = "查询限时抢购申请商品列表", response = SeckillApplyDO.class)
+    @ApiOperation(value = "Query the flash sale application list", response = SeckillApplyDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "seckill_id", value = "限时抢购活动id", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "seckill_id", value = "Flash salesid", dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page<SeckillVO> list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize,
-                                @ApiIgnore @NotNull(message = "限时抢购活动参数为空") Integer seckillId) {
+                                @ApiIgnore @NotNull(message = "Flash sale parameter is empty") Integer seckillId) {
 
         SeckillQueryParam queryParam = new SeckillQueryParam();
         queryParam.setPageNo(pageNo);
@@ -88,9 +88,9 @@ public class SeckillApplySellerController {
     }
 
 
-    @ApiOperation(value = "添加限时抢购申请", response = SeckillApplyDO.class)
+    @ApiOperation(value = "Add flash sale application", response = SeckillApplyDO.class)
     @PostMapping
-    public List<SeckillApplyDO> add(@Valid @RequestBody @NotEmpty(message = "申请参数为空") List<SeckillApplyDO> seckillApplyList) {
+    public List<SeckillApplyDO> add(@Valid @RequestBody @NotEmpty(message = "Application parameters are empty") List<SeckillApplyDO> seckillApplyList) {
 
         SeckillApplyDO applyDO = seckillApplyList.get(0);
         this.verifyParam(seckillApplyList, applyDO.getSeckillId());
@@ -101,9 +101,9 @@ public class SeckillApplySellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除限时抢购申请")
+    @ApiOperation(value = "Delete the flash sale application")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的限时抢购申请主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "To delete flash sale application primary key", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -114,15 +114,15 @@ public class SeckillApplySellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个限时抢购申请")
+    @ApiOperation(value = "Query a flash sale application")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的限时抢购申请主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "To query flash sale application primary key", required = true, dataType = "int", paramType = "path")
     })
     public SeckillApplyDO get(@PathVariable Integer id) {
         SeckillApplyDO seckillApply = this.seckillApplyManager.getModel(id);
-        //验证越权操作
+        // Verify unauthorized operations
         if (seckillApply == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
 
         return seckillApply;
@@ -130,15 +130,15 @@ public class SeckillApplySellerController {
 
 
     /**
-     * 验证参数的正确性
+     * Verify the correctness of the parameters
      *
      * @param applyDOList
-     * @param seckillId   限时抢购活动id
+     * @param seckillId   Flash salesid
      */
     private void verifyParam(List<SeckillApplyDO> applyDOList, Integer seckillId) {
 
 
-        //根据限时抢购活动id 读取所有的时刻集合
+        // Read all time sets according to flash sale activity ID
         List<SeckillRangeDO> list = this.seckillRangeManager.getList(seckillId);
         List<Integer> rangIdList = new ArrayList<>();
 
@@ -147,66 +147,66 @@ public class SeckillApplySellerController {
         }
 
         /**
-         * 存储参加活动的商品id，用来判断同一个商品不能重复参加某个活动
+         * Store merchandise for the eventidIs used to judge that the same commodity cannot participate in a certain activity repeatedly
          */
         Map<Integer, Integer> map = new HashMap<>();
 
         for (SeckillApplyDO applyDO : applyDOList) {
 
             if (applyDO.getSeckillId() == null || applyDO.getSeckillId().intValue() == 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "限时抢购活动ID参数异常");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Flash salesIDParameters of the abnormal");
             } else {
                 SeckillDO seckillVO = this.seckillManager.getModel(seckillId);
 
-                //活动申请最后时间
+                // Last time for application
                 long applyEndTime = seckillVO.getApplyEndTime();
 
-                //服务器当前时间
+                // Current server time
                 long nowTime = DateUtil.getDateline();
 
-                //当前时间大于活动最后申请时间，不能申请
+                // Application cannot be made because the current time is longer than the last application time
                 if (nowTime > applyEndTime) {
-                    throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "已超过活动最后申请时间");
+                    throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The deadline for application has passed");
                 }
 
             }
 
             if (applyDO.getTimeLine() == null) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "时刻参数异常");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Time parameter anomaly");
             } else {
 
-                //判断此活动的时刻集合是否包含正要添加的时刻,如果不包含说明时刻参数有异常
+                // Determines if the moment set for this activity contains the moment to be added, if not, the moment parameter is abnormal
                 if (!rangIdList.contains(applyDO.getTimeLine())) {
-                    throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "时刻参数异常");
+                    throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Time parameter anomaly");
                 }
             }
 
             if (applyDO.getStartDay() == null || applyDO.getStartDay().intValue() == 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "活动开始时间参数异常");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The activity start time parameter is abnormal");
             }
 
             if (applyDO.getGoodsId() == null || applyDO.getGoodsId().intValue() == 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "商品ID参数异常");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "productIDParameters of the abnormal");
             }
 
             if (StringUtil.isEmpty(applyDO.getGoodsName())) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "商品名称参数异常");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The commodity name parameter is abnormal");
             }
 
             if (applyDO.getPrice() == null || applyDO.getPrice() < 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "抢购价参数不能小于0");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Snap up price parameter cannot be less than0");
             }
 
             if (applyDO.getSoldQuantity() == null || applyDO.getSoldQuantity().intValue() <= 0) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "售空数量参数不能小于0");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "Short selling quantity parameter should not be less than0");
             }
 
             if (applyDO.getPrice() > applyDO.getOriginalPrice()) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "活动价格不能大于商品原价");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The activity price cannot exceed the original price of the goods");
             }
 
             if (map.get(applyDO.getGoodsId()) != null) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, applyDO.getGoodsName() + ",该商品不能同时参加多个时间段的活动");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, applyDO.getGoodsName() + ",The product cannot participate in activities of multiple time periods at the same time");
             }
 
             map.put(applyDO.getGoodsId(), applyDO.getGoodsId());

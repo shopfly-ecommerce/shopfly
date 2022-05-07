@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 收款单实体
+ * Receipt entity
  *
  * @author xlp
  * @version v2.0
@@ -45,74 +45,74 @@ public class PayLog implements Serializable {
     private static final long serialVersionUID = 7244927488352294L;
 
     /**
-     * 收款单ID
+     * voucherID
      */
     @Id(name = "pay_log_id")
     @ApiModelProperty(hidden = true)
     private Integer payLogId;
 
     /**
-     * 收款单流水号
+     * Receipt serial number
      */
     @Column(name = "pay_log_sn")
-    @ApiModelProperty(name = "order_sn", value = "收款单流水号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Receipt serial number", required = false)
     private String payLogSn;
 
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
 
     /**
-     * 支付类型 PaymentTypeEnum
+     * Payment typePaymentTypeEnum
      */
     @Column(name = "pay_type")
-    @ApiModelProperty(name = "pay_type", value = "支付类型", required = false)
+    @ApiModelProperty(name = "pay_type", value = "Payment type", required = false)
     private String payType;
 
     /**
-     * 支付方式 alipay,wechat
+     * Method of paymentalipay,wechat
      */
     @Column(name = "pay_way")
-    @ApiModelProperty(name = "pay_way", value = "支付方式", required = false)
+    @ApiModelProperty(name = "pay_way", value = "Method of payment", required = false)
     private String payWay;
 
     /**
-     * 付款时间
+     * Time of payment
      */
     @Column(name = "pay_time")
-    @ApiModelProperty(name = "pay_time", value = "付款时间", required = false)
+    @ApiModelProperty(name = "pay_time", value = "Time of payment", required = false)
     private Long payTime;
 
     /**
-     * 付款金额
+     * The payment amount
      */
     @Column(name = "pay_money")
-    @ApiModelProperty(name = "pay_money", value = "付款金额", required = false)
+    @ApiModelProperty(name = "pay_money", value = "The payment amount", required = false)
     private Double payMoney;
 
     /**
-     * 付款会员名
+     * Paying Member name
      */
     @Column(name = "pay_member_name")
-    @ApiModelProperty(name = "pay_member_name", value = "付款会员名", required = false)
+    @ApiModelProperty(name = "pay_member_name", value = "Paying Member name", required = false)
     private String payMemberName;
 
     /**
-     * 付款状态
+     * Payment status
      */
     @Column(name = "pay_status")
-    @ApiModelProperty(name = "pay_status", value = "付款状态", required = false)
+    @ApiModelProperty(name = "pay_status", value = "Payment status", required = false)
     private String payStatus;
 
 
     /**
-     * 支付方式返回的流水号
+     * The serial number returned by payment method
      */
     @Column(name = "pay_order_no")
-    @ApiModelProperty(name = "pay_order_no", value = "支付方式返回的交易号", required = false)
+    @ApiModelProperty(name = "pay_order_no", value = "Payment method returns the transaction number", required = false)
     private String payOrderNo;
 
     @PrimaryKeyField

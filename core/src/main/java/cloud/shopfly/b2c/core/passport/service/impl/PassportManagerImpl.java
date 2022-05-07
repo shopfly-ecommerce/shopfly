@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 会员账号管理实现
+ * Member account management implementation
  *
  * @author zh
  * @version v7.0
@@ -65,29 +65,29 @@ public class PassportManagerImpl implements PassportManager {
     @Override
     public void sendRegisterSmsCode(String mobile) {
         if (!Validator.isMobile(mobile)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "手机号码格式不正确！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The mobile phone number format is incorrect！");
         }
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.getMemberByMobile(mobile);
         if (member != null) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "该手机号已经被占用！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The phone number has been occupied！");
         }
-        //发送验证码短信
-        smsClient.sendSmsMessage("注册", mobile, SceneType.REGISTER);
+        // Send verification code SMS messages
+        smsClient.sendSmsMessage("Register", mobile, SceneType.REGISTER);
     }
 
     @Override
     public void sendLoginSmsCode(String mobile) {
         if (!Validator.isMobile(mobile)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "手机号码格式不正确！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The mobile phone number format is incorrect！");
         }
-        //校验会v员是否存在
+        // Verify whether the v member exists
         Member member = memberManager.getMemberByMobile(mobile);
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "该手机号未注册！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The phone number is unregistered！");
         }
-        //发送验证码短信
-        smsClient.sendSmsMessage("登录", mobile, SceneType.LOGIN);
+        // Send verification code SMS messages
+        smsClient.sendSmsMessage("Sign in", mobile, SceneType.LOGIN);
     }
 
     @Override
@@ -102,17 +102,17 @@ public class PassportManagerImpl implements PassportManager {
             return JsonUtil.objectToJson(map);
 
         }
-        throw new ResourceNotFoundException("当前会员不存在");
+        throw new ResourceNotFoundException("Current member does not exist");
     }
 
     @Override
     public void sendFindPasswordCode(String mobile) {
-        //校验会员是否存在
+        // Verify membership exists
         Member member = memberManager.getMemberByMobile(mobile);
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "该手机号未注册");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The phone number is unregistered");
         }
-        smsClient.sendSmsMessage("找回密码", mobile, SceneType.VALIDATE_MOBILE);
+        smsClient.sendSmsMessage("Retrieve password", mobile, SceneType.VALIDATE_MOBILE);
     }
 
     @Override
@@ -121,24 +121,24 @@ public class PassportManagerImpl implements PassportManager {
     }
 
     /**
-     * 校验refresh token是否有效
+     * checkrefresh tokenThe validity of
      * @param buyer
      */
     private void validRefreshToken(Buyer buyer) {
-        //根据uid获取用户,获得当前会员是buyer还是seller
+        // Obtain the user according to the UID, and obtain whether the current member is buyer or Seller
         Member member = this.memberManager.getModel(buyer.getUid());
 
         if (member == null) {
-            throw new ServiceException(MemberErrorCode.E109.code(), "当前token已经失效[会员不存在]");
+            throw new ServiceException(MemberErrorCode.E109.code(), "The currenttokenHave failed[Membership does not exist]");
         }
-        //如果会员token刷新时，会员已经失效，则不颁发新的token
+        // If the member token is invalid when the member token is refreshed, no new token is issued
         if (member.getDisabled() == -1) {
-            throw new ServiceException(MemberErrorCode.E109.code(), "当前token已经失效");
+            throw new ServiceException(MemberErrorCode.E109.code(), "The currenttokenHave failed");
         }
     }
 
     /**
-     * 设置refresh token  返回数据Map
+     * Set up therefresh token  Return the dataMap
      * @param token
      * @return
      */

@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.member.model.dto.CommentQueryParam;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 咨询业务层
+ * Consulting business layer
  *
  * @author fk
  * @version v1.0
@@ -30,39 +30,39 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface MemberAskManager {
 
     /**
-     * 查询咨询列表
+     * Query query list
      *
-     * @param param 查询条件
+     * @param param Query conditions
      * @return Page
      */
     Page list(CommentQueryParam param);
 
     /**
-     * 添加咨询
+     * Add consulting
      *
-     * @param askContent 咨询
-     * @param goodsId    商品id
-     * @return MemberAsk 咨询
+     * @param askContent consulting
+     * @param goodsId    productid
+     * @return MemberAsk consulting
      */
     MemberAsk add(String askContent, Integer goodsId);
 
     /**
-     * 删除咨询
+     * Delete the consulting
      *
-     * @param id 咨询主键
+     * @param id Consulting the primary key
      */
     void delete(Integer id);
 
     /**
-     * 获取咨询
+     * Get advice
      *
-     * @param id 咨询主键
-     * @return MemberAsk  咨询
+     * @param id Consulting the primary key
+     * @return MemberAsk  consulting
      */
     MemberAsk getModel(Integer id);
 
     /**
-     * 回复咨询
+     * Reply to consulting
      *
      * @param replyContent
      * @param askId
@@ -71,17 +71,17 @@ public interface MemberAskManager {
     MemberAsk reply(String replyContent, Integer askId);
 
     /**
-     * 卖家获取未回复的咨询数量
+     * The seller gets the number of unanswered inquiries
      *
      * @return
      */
     Integer getNoReplyCount();
 
     /**
-     * 管理端审核会员咨询信息
+     * The management end reviews member consultation information
      *
      * @param askId
-     * @param authStatus WAIT_AUDIT("待审核"),PASS_AUDIT("审核通过"),REFUSE_AUDIT("审核拒绝");
+     * @param authStatus WAIT_AUDIT("To audit"),PASS_AUDIT("approved"),REFUSE_AUDIT("Audit refused to");
      */
     void auth(Integer askId, String authStatus);
 }

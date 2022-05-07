@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 优惠券实体
+ * Coupon entity
  * @author Snow
  * @version v2.0
  * @since v7.0.0
@@ -43,54 +43,54 @@ public class CouponDO implements Serializable {
 
     private static final long serialVersionUID = 8587456467004980L;
 
-    /**主键*/
+    /**A primary key*/
     @Id(name = "coupon_id")
     @ApiModelProperty(hidden=true)
     private Integer couponId;
 
-    /**优惠券名称*/
+    /**Coupon name*/
     @Column(name = "title")
-    @ApiModelProperty(name="title",value="优惠券名称",required=true)
+    @ApiModelProperty(name="title",value="Coupon name",required=true)
     private String title;
 
-    /**优惠券面额*/
+    /**Coupon face value*/
     @Column(name = "coupon_price")
-    @ApiModelProperty(name="coupon_price",value="优惠券面额",required=false)
+    @ApiModelProperty(name="coupon_price",value="Coupon face value",required=false)
     private Double couponPrice;
 
-    /**优惠券门槛价格*/
+    /**Coupon threshold price*/
     @Column(name = "coupon_threshold_price")
-    @ApiModelProperty(name="coupon_threshold_price",value="优惠券门槛价格",required=false)
+    @ApiModelProperty(name="coupon_threshold_price",value="Coupon threshold price",required=false)
     private Double couponThresholdPrice;
 
-    /**使用起始时间*/
+    /**Start time of use*/
     @Column(name = "start_time")
-    @ApiModelProperty(name="start_time",value="使用起始时间",required=false)
+    @ApiModelProperty(name="start_time",value="Start time of use",required=false)
     private Long startTime;
 
-    /**使用截止时间*/
+    /**Use deadline*/
     @Column(name = "end_time")
-    @ApiModelProperty(name="end_time",value="使用截止时间",required=false)
+    @ApiModelProperty(name="end_time",value="Use deadline",required=false)
     private Long endTime;
 
-    /**发行量*/
+    /**circulation*/
     @Column(name = "create_num")
-    @ApiModelProperty(name="create_num",value="发行量",required=false)
+    @ApiModelProperty(name="create_num",value="circulation",required=false)
     private Integer createNum;
 
-    /**每人限领数量*/
+    /**Limit the amount per person*/
     @Column(name = "limit_num")
-    @ApiModelProperty(name="limit_num",value="每人限领数量",required=false)
+    @ApiModelProperty(name="limit_num",value="Limit the amount per person",required=false)
     private Integer limitNum;
 
-    /**已被使用的数量*/
+    /**The amount that has been used*/
     @Column(name = "used_num")
-    @ApiModelProperty(name="used_num",value="已被使用的数量",required=false)
+    @ApiModelProperty(name="used_num",value="The amount that has been used",required=false)
     private Integer usedNum;
 
-    /**已被领取的数量*/
+    /**The amount that has been claimed*/
     @Column(name = "received_num")
-    @ApiModelProperty(name="received_num",value="已被领取的数量",required=false)
+    @ApiModelProperty(name="received_num",value="The amount that has been claimed",required=false)
     private Integer receivedNum;
 
     public String getTitle() {

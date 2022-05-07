@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 热门关键字实体
+ * Hot keyword entities
  *
  * @author fk
  * @version v1.0
@@ -44,23 +44,23 @@ public class HotKeyword implements Serializable {
     private static final long serialVersionUID = 9828142765402249L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 文字内容
+     * Written content
      */
     @Column(name = "hot_name")
-    @ApiModelProperty(name = "hot_name", value = "文字内容", required = true)
-    @NotEmpty(message = "关键字不能为空")
+    @ApiModelProperty(name = "hot_name", value = "Written content", required = true)
+    @NotEmpty(message = "The keyword cannot be empty")
     private String hotName;
     /**
-     * 排序
+     * sort
      */
     @Column(name = "sort")
-    @ApiModelProperty(name = "sort", value = "排序", required = false)
+    @ApiModelProperty(name = "sort", value = "sort", required = false)
     private Integer sort;
 
     @PrimaryKeyField

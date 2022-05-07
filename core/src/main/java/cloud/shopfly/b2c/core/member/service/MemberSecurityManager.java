@@ -16,46 +16,46 @@
 package cloud.shopfly.b2c.core.member.service;
 
 /**
- * 会员安全业务
+ * Member Security Business
  *
  * @author zh
  * @version v7.0
- * @date 18/4/23 下午3:16
+ * @date 18/4/23 In the afternoon3:16
  * @since v7.0
  */
 public interface MemberSecurityManager {
 
     /**
-     * 发送绑定手机号码的验证码
+     * Send the verification code bound to the mobile phone number
      *
      * @param mobile
      */
     void sendBindSmsCode(String mobile);
 
     /**
-     * 发送手机验证验证码
+     * Send the mobile phone verification code
      *
      * @param mobile
      */
     void sendValidateSmsCode(String mobile);
 
     /**
-     * 修改密码
+     * Change the password
      *
-     * @param memberId 用户id
-     * @param password 密码
+     * @param memberId The userid
+     * @param password Password
      */
     void updatePassword(Integer memberId, String password);
 
     /**
-     * 手机绑定
+     * Mobile phone binding
      *
      * @param mobile
      */
     void bindMobile(String mobile);
 
     /**
-     * 手机更换绑定
+     * Mobile phone replacement binding
      *
      * @param mobile
      */

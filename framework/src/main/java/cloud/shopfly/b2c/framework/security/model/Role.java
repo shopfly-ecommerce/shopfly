@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.framework.security.model;
 
 /**
- * 角色字义
+ * Character meaning
  * Created by kingapex on 2018/3/11.
  *
  * @author kingapex
@@ -27,16 +27,16 @@ package cloud.shopfly.b2c.framework.security.model;
 public enum Role {
 
     /**
-     * 买家角色
+     * The buyer role
      */
     BUYER,
 
     /**
-     * 卖家角色
+     * The seller role
      */
     SELLER,
     /**
-     * 店员角色
+     * The clerk role
      */
     CLERK
 

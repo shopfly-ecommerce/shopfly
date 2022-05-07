@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.core.promotion.pintuan.model;
 
 /**
  * Created by kingapex on 2019-01-24.
- * 拼团订单状态
+ * Group order status
  *
  * @author kingapex
  * @version 1.0
@@ -27,27 +27,27 @@ package cloud.shopfly.b2c.core.promotion.pintuan.model;
 public enum PintuanOrderStatus {
 
     /**
-     * 新订单
+     * The new orders
      */
     new_order,
 
     /**
-     * 待成团
+     * To stay together
      */
     wait,
 
     /**
-     * 已经支付
+     * Have to pay
      */
     pay_off,
 
     /**
-     * 已成团
+     * Have to make
      */
     formed,
 
     /**
-     * 已取消
+     * Has been cancelled
      */
     cancel
 }

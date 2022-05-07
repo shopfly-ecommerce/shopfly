@@ -18,15 +18,15 @@ package cloud.shopfly.b2c.core.system.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description 消息模版开启状态枚举类
+ * @Description The message template turns on the state enumeration class
  * @ClassName MessageOpenStatusEnum
- * @since v7.0 下午4:44 2018/7/5
+ * @since v7.0 In the afternoon4:44 2018/7/5
  */
 public enum MessageOpenStatusEnum {
-    //开启中
-    OPEN("开启中"),
-    //关闭中
-    CLOSED("关闭中");
+    // In the open
+    OPEN("In the open"),
+    // In the closed
+    CLOSED("In the closed");
 
     private String description;
 

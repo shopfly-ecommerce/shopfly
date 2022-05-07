@@ -34,19 +34,19 @@ import java.io.Serializable;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ShipTemplateChildBaseVO implements Serializable {
 
-    @ApiParam("首重／首件")
+    @ApiParam("The first heavy／The first thing")
     @Column(name = "first_company")
     private Double firstCompany;
 
-    @ApiParam("运费")
+    @ApiParam("freight")
     @Column(name = "first_price")
     private Double firstPrice;
 
-    @ApiParam("续重／需件")
+    @ApiParam("Continued heavy／To be a")
     @Column(name = "continued_company")
     private Double continuedCompany;
 
-    @ApiParam("续费")
+    @ApiParam("renewal")
     @Column(name = "continued_price")
     private Double continuedPrice;
 

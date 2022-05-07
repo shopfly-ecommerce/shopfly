@@ -24,71 +24,71 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * 站点设置
+ * General
  *
  * @author zh
  * @version v7.0
- * @date 18/5/30 下午3:08
+ * @date 18/5/30 In the afternoon3:08
  * @since v7.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SiteSetting {
     /**
-     * 站点名称
+     * The site name
      */
-    @ApiModelProperty(name = "site_name", value = "站点名称")
+    @ApiModelProperty(name = "site_name", value = "The site name")
     private String siteName;
     /**
-     * 网站标题
+     * Site title
      */
-    @ApiModelProperty(name = "title", value = "网站标题")
+    @ApiModelProperty(name = "title", value = "Site title")
     private String title;
     /**
-     * 网站关键字
+     * Site keywords
      */
-    @ApiModelProperty(name = "keywords", value = "网站关键字")
+    @ApiModelProperty(name = "keywords", value = "Site keywords")
     private String keywords;
     /**
-     * 网站描述
+     * Description
      */
-    @ApiModelProperty(name = "descript", value = "网站描述")
+    @ApiModelProperty(name = "descript", value = "Description")
     private String descript;
     /**
-     * 网站是否开启，0开启，-1关闭
+     * If the website is open,0Open,-1close
      */
-    @ApiModelProperty(name = "siteon", value = "网站是否开启，1开启，0关闭")
-    @Min(message = "必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "网站是否关闭不能为空")
+    @ApiModelProperty(name = "siteon", value = "If the website is open,1Open,0close")
+    @Min(message = "The value must be a number and,1To open,0To shut down", value = 0)
+    @Max(message = "The value must be a number and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Whether the site is closed cannot be empty")
     private Integer siteon;
     /**
-     * 关闭原因
+     * Close the reason
      */
-    @ApiModelProperty(name = "close_reson", value = "关闭原因")
+    @ApiModelProperty(name = "close_reson", value = "Close the reason")
     private String closeReson;
     /**
-     * 网站logo
+     * Sitelogo
      */
-    @ApiModelProperty(name = "logo", value = "网站logo")
+    @ApiModelProperty(name = "logo", value = "Sitelogo")
     private String logo;
 
     /**
-     * 加密秘钥
+     * Add the secret key
      */
-    @ApiModelProperty(name = "global_auth_key", value = "加密秘钥")
+    @ApiModelProperty(name = "global_auth_key", value = "Add the secret key")
     private String globalAuthKey;
     /**
-     * 默认图片
+     * Default image
      */
-    @ApiModelProperty(name = "default_img", value = "默认图片")
+    @ApiModelProperty(name = "default_img", value = "Default image")
     private String defaultImg;
     /**
-     * 测试模式
+     * Test mode
      */
-    @ApiModelProperty(name = "test_mode", value = "测试模式,1为开启,0为关闭")
-    @Min(message = "必须为数字且,1为开启,0为关闭", value = 0)
-    @Max(message = "必须为数字且,1为开启,0为关闭", value = 1)
-    @NotNull(message = "是否为测试模式不能为空")
+    @ApiModelProperty(name = "test_mode", value = "Test mode,1To open,0To shut down")
+    @Min(message = "The value must be a number and,1To open,0To shut down", value = 0)
+    @Max(message = "The value must be a number and,1To open,0To shut down", value = 1)
+    @NotNull(message = "Test mode Cannot be null")
     public Integer testMode;
 
     public String getSiteName() {

@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.promotion.seckill.model.vo;
 
 /**
- * 注释
+ * annotation
  *
  * @author Snow create in 2018/3/20
  * @version v2.0

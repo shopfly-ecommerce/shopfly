@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 百度Ueditor配置及文件上传支持
+ * baiduUeditorConfiguration and file upload support
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -46,19 +46,19 @@ public class UeditorBaseController {
 
 
     /**
-     * 文件上传接口
+     * File upload interface
      */
     @Autowired
     private FileManager fileManager;
 
     /**
-     * 配置内容常量，用于缓存配置信息，避免每次由硬盘读取
+     * The configuration content constant is used to cache configuration information so that it is not read by the hard disk every time
      */
     private static String config;
 
     @GetMapping(value = "/",produces = "application/javascript")
-    @ApiOperation(value = "获取ueditor配置")
-    @ApiImplicitParam(name = "callback", value = "jsonp的callback", required = true, dataType = "String")
+    @ApiOperation(value = "To obtainueditorconfiguration")
+    @ApiImplicitParam(name = "callback", value = "jsonpthecallback", required = true, dataType = "String")
     public String config(String callback) throws JSONException {
 
        return "/**/"+callback+"("+ getConfig() +");";
@@ -66,9 +66,9 @@ public class UeditorBaseController {
     }
 
     /**
-     * 获取配置<br>
-     * 如果config中已经存在，则直接返回，否则由硬盘读取<br>
-     * 读取文件为/resource/ueditor_config.json<br><br>
+     * Access to the configuration<br>
+     * ifconfigOtherwise, the disk will read it<br>
+     * Read the file as/resource/ueditor_config.json<br><br>
      * @return
      */
     private String getConfig() {
@@ -81,28 +81,28 @@ public class UeditorBaseController {
     }
 
     /**
-     * 文件上传<br>
-     * 接受POST请求<br>
-     * 同时支持多择文件上传和截图上传
-     * @param upfile 文件流
+     * File upload<br>
+     * acceptPOSTrequest<br>
+     * You can upload multiple files and screenshots
+     * @param upfile File stream
      * @return
      * @throws JSONException
      * @throws IOException
      */
     @PostMapping(value = "/")
-    @ApiOperation(value = "ueditor文件/图片上传")
+    @ApiOperation(value = "ueditorfile/Image upload")
     public Map upload( MultipartFile upfile) throws JSONException, IOException {
         Map result = new HashMap(16);
         if (upfile != null && upfile.getOriginalFilename() != null) {
 
-            //文件类型
+            // The file type
             String contentType= upfile.getContentType();
-            //获取文件名称后缀
+            // Gets the file name suffix
             String ext = contentType.substring(contentType.lastIndexOf("/") + 1, contentType.length());
 
             if(!FileUtil.isAllowUpImg(ext)){
 
-                result.put("state","不允许上传的文件格式，请上传gif,jpg,png,jpeg,mp4格式文件。");
+                result.put("state","File format not allowed to upload, please uploadgif,jpg,png,jpeg,mp4Format file.");
                 return  result;
 
             }
@@ -125,7 +125,7 @@ public class UeditorBaseController {
 
         }else{
 
-            result.put("state","没有读取要上传的文件");
+            result.put("state","The file to upload was not read");
             return  result;
         }
 

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 商品标签控制器
+ * Commodity label controller
  * @author fk
  * @version v2.0
  * @since v7.0.0
@@ -35,17 +35,17 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("/seller/goods/tags")
-@Api(description = "商品标签相关API")
+@Api(description = "Product label correlationAPI")
 public class TagsSellerController {
 	
 	@Autowired
 	private TagsManager tagsManager;
 				
 
-	@ApiOperation(value	= "查询商品标签列表", response = TagsDO.class)
+	@ApiOperation(value	= "Example Query the commodity label list", response = TagsDO.class)
 	@ApiImplicitParams({
-		 @ApiImplicitParam(name	= "page_no",	value =	"页码",	required = true, dataType = "int",	paramType =	"query"),
-		 @ApiImplicitParam(name	= "page_size",	value =	"每页显示数量",	required = true, dataType = "int",	paramType =	"query")
+		 @ApiImplicitParam(name	= "page_no",	value =	"The page number",	required = true, dataType = "int",	paramType =	"query"),
+		 @ApiImplicitParam(name	= "page_size",	value =	"Display quantity per page",	required = true, dataType = "int",	paramType =	"query")
 	})
 	@GetMapping
 	public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize)	{
@@ -53,11 +53,11 @@ public class TagsSellerController {
 		return	this.tagsManager.list(pageNo,pageSize);
 	}
 	
-	@ApiOperation(value	= "查询某标签下的商品")
+	@ApiOperation(value	= "Query items under a label")
 	@ApiImplicitParams({
-		 @ApiImplicitParam(name	= "page_no",	value =	"页码",	required = true, dataType = "int",	paramType =	"query"),
-		 @ApiImplicitParam(name	= "page_size",	value =	"每页显示数量",	required = true, dataType = "int",	paramType =	"query"),
-		 @ApiImplicitParam(name	= "tag_id",	value =	"标签id",	required = true, dataType = "int",	paramType =	"path")
+		 @ApiImplicitParam(name	= "page_no",	value =	"The page number",	required = true, dataType = "int",	paramType =	"query"),
+		 @ApiImplicitParam(name	= "page_size",	value =	"Display quantity per page",	required = true, dataType = "int",	paramType =	"query"),
+		 @ApiImplicitParam(name	= "tag_id",	value =	"The labelid",	required = true, dataType = "int",	paramType =	"path")
 	})
 	@GetMapping("/{tag_id}/goods")
 	public Page listGoods(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @PathVariable("tag_id") Integer tagId){
@@ -65,10 +65,10 @@ public class TagsSellerController {
 		return this.tagsManager.queryTagGoods(tagId,pageNo,pageSize);
 	}
 	
-	@ApiOperation(value	= "保存某标签下的商品")
+	@ApiOperation(value	= "Save an item under a label")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name	= "tag_id",	value =	"标签id",	required = true, dataType = "int",	paramType =	"path"),
-		@ApiImplicitParam(name	= "goods_ids",	value =	"要保存的商品id",	required = true, dataType = "int",	paramType =	"path"),
+		@ApiImplicitParam(name	= "tag_id",	value =	"The labelid",	required = true, dataType = "int",	paramType =	"path"),
+		@ApiImplicitParam(name	= "goods_ids",	value =	"Goods to be savedid",	required = true, dataType = "int",	paramType =	"path"),
 	})
 	@PutMapping("/{tag_id}/goods/{goods_ids}")
 	public String saveGoods( @PathVariable("tag_id") Integer tagId,@PathVariable("goods_ids")Integer[] goodsIds){

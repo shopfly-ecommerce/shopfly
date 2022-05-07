@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.framework.auth.Token;
 import cloud.shopfly.b2c.framework.auth.TokenParseException;
 
 /**
- * token业务管理接口
+ * tokenService management interface
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -30,25 +30,25 @@ public interface TokenManager {
 
 
     /**
-     * 创建token
+     * createtoken
      * @param user
      * @return
      */
     Token create(AuthUser user);
 
     /**
-     * 解析token
+     * parsingtoken
      * @param token
-     * @return 用户对象
+     * @return The user object
      */
     <T>  T parse(Class<T> clz, String token) throws TokenParseException;
 
 
     /**
-     * 创建token
+     * createtoken
      * @param user
-     * @param tokenOutTime token超时时间
-     * @param refreshTokenOutTime  refreshToken超时时间
+     * @param tokenOutTime tokentimeout
+     * @param refreshTokenOutTime  refreshTokentimeout
      * @return
      */
     Token create(AuthUser user, Integer tokenOutTime, Integer refreshTokenOutTime);

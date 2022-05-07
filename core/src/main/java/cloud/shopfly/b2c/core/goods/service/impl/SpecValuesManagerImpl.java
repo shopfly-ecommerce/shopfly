@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 规格值业务类
+ * Specification value business class
  * @author fk
  * @version v2.0
  * @since v7.0.0
@@ -84,10 +84,10 @@ public class SpecValuesManagerImpl implements SpecValuesManager {
 	@Transactional( propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public List<SpecValuesDO> saveSpecValue(Integer specId, String[] valueList) {
 
-		//查询规格是否存在
+		// Check whether specifications exist
 		SpecificationDO spec = specificationManager.getModel(specId);
 		if(spec == null){
-			throw new ServiceException(GoodsErrorCode.E306.code(),"所属规格不存在");
+			throw new ServiceException(GoodsErrorCode.E306.code(),"The owning specification does not exist");
 		}
 		String sql = "delete from es_spec_values where spec_id=? ";
 

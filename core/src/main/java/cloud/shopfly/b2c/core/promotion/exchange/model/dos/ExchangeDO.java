@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 积分兑换实体
+ * Points exchange entity
  *
  * @author Snow
  * @version v7.0.0
@@ -45,57 +45,57 @@ public class ExchangeDO implements Serializable {
     private static final long serialVersionUID = 2173041743628504L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "exchange_id")
     @ApiModelProperty(hidden = true)
     private Integer exchangeId;
 
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goodsId", value = "商品id", required = false)
+    @ApiModelProperty(name = "goodsId", value = "productid", required = false)
     private Integer goodsId;
 
     /**
-     * 商品所属积分分类
+     * Goods belong to the classification of points
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "categoryId", value = "商品所属积分分类", required = false)
+    @ApiModelProperty(name = "categoryId", value = "Goods belong to the classification of points", required = false)
     private Integer categoryId;
 
     /**
-     * 是否允许兑换
+     * Whether exchange is allowed
      */
     @Column(name = "enable_exchange")
-    @ApiModelProperty(name = "enable_exchange", value = "是否允许兑换。0:否，1:是", required = false, allowableValues = "0,1")
+    @ApiModelProperty(name = "enable_exchange", value = "Whether exchange is allowed.0:No,1:is", required = false, allowableValues = "0,1")
     private Integer enableExchange;
 
     /**
-     * 兑换所需金额
+     * Amount required for exchange
      */
     @Column(name = "exchange_money")
-    @ApiModelProperty(name = "exchange_money", value = "兑换所需金额")
+    @ApiModelProperty(name = "exchange_money", value = "Amount required for exchange")
     private Double exchangeMoney;
 
     /**
-     * 兑换所需积分
+     * Redemption points required
      */
     @Column(name = "exchange_point")
-    @ApiModelProperty(name = "exchange_point", value = "兑换所需积分")
+    @ApiModelProperty(name = "exchange_point", value = "Redemption points required")
     private Integer exchangePoint;
 
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称")
+    @ApiModelProperty(name = "goods_name", value = "Name")
     private String goodsName;
 
     @Column(name = "goods_price")
-    @ApiModelProperty(name = "goods_price", value = "商品原价")
+    @ApiModelProperty(name = "goods_price", value = "Product  price")
     private Double goodsPrice;
 
     @Column(name = "goods_img")
-    @ApiModelProperty(name = "goods_img", value = "商品图片")
+    @ApiModelProperty(name = "goods_img", value = "Commodity images")
     private String goodsImg;
 
 

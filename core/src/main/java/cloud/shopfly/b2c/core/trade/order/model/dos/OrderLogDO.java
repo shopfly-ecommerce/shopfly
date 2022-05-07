@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 订单日志表实体
+ * Order log table entity
  *
  * @author Snow
  * @version v7.0.0
@@ -45,45 +45,45 @@ public class OrderLogDO implements Serializable {
     private static final long serialVersionUID = 435282086399754L;
 
     /**
-     * 主键ID
+     * A primary keyID
      */
     @Id(name = "log_id")
     @ApiModelProperty(hidden = true)
     private Integer logId;
 
     /**
-     * 订单编号
+     * Order no.
      */
     @Column(name = "order_sn")
-    @ApiModelProperty(name = "order_sn", value = "订单编号", required = false)
+    @ApiModelProperty(name = "order_sn", value = "Order no.", required = false)
     private String orderSn;
 
     /**
-     * 操作者id
+     * The operatorid
      */
     @Column(name = "op_id")
-    @ApiModelProperty(name = "op_id", value = "操作者id", required = false)
+    @ApiModelProperty(name = "op_id", value = "The operatorid", required = false)
     private Integer opId;
 
     /**
-     * 操作者名称
+     * Operator name
      */
     @Column(name = "op_name")
-    @ApiModelProperty(name = "op_name", value = "操作者名称", required = false)
+    @ApiModelProperty(name = "op_name", value = "Operator name", required = false)
     private String opName;
 
     /**
-     * 日志信息
+     * Log information
      */
     @Column(name = "message")
-    @ApiModelProperty(name = "message", value = "日志信息", required = false)
+    @ApiModelProperty(name = "message", value = "Log information", required = false)
     private String message;
 
     /**
-     * 操作时间
+     * Operating time
      */
     @Column(name = "op_time")
-    @ApiModelProperty(name = "op_time", value = "操作时间", required = false)
+    @ApiModelProperty(name = "op_time", value = "Operating time", required = false)
     private Long opTime;
 
     @PrimaryKeyField

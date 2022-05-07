@@ -27,12 +27,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商家中心，商品收藏统计实现类
+ * Business center, commodity collection statistics implementation class
  *
  * @author mengyuanming
  * @version 2.0
  * @since 7.0
- * 2018年4月20日下午4:35:26
+ * 2018years4month20On the afternoon4:35:26
  */
 @Service
 public class CollectFrontStatisticsManagerImpl implements CollectFrontStatisticsManager {
@@ -42,28 +42,28 @@ public class CollectFrontStatisticsManagerImpl implements CollectFrontStatistics
     private DaoSupport daoSupport;
 
     /**
-     * 商品收藏数量统计
+     * Commodity collection quantity statistics
      *
-     * @return simpleChart 简单图表数据
+     * @return simpleChart Simple chart data
      */
     @Override
     public SimpleChart getChart() {
 
-        // 从es_sss_goods_data表中查询，商品名称，收藏数量
+        // Select * from es_SSS_GOOds_data
         String sql = " SELECT goods_id,favorite_num,goods_name FROM es_sss_goods_data ORDER BY favorite_num DESC LIMIT 50 ";
 
         List<Map<String, Object>> list = this.daoSupport.queryForList(sql);
 
-        // 收藏数量数组，对应chart数据
+        // Collection quantity array, corresponding to chart data
         String[] data = new String[list.size()];
 
-        // 商品名数组，对应chart数据名称
+        // An array of commodity names that correspond to chart data names
         String[] localName = new String[list.size()];
 
-        // x轴刻度，从1开始，以数据量为准，没有数据则为0
+        // The X-axis scale, starting at 1, is based on the amount of data, and 0 if there is no data
         String[] xAxis = new String[list.size()];
 
-        // 如果有数据，则加入数组
+        // If there is data, add it to the array
         if (!list.isEmpty()) {
             int i = 0;
             for (Map<String, Object> map : list) {
@@ -74,23 +74,23 @@ public class CollectFrontStatisticsManagerImpl implements CollectFrontStatistics
             }
         }
 
-        ChartSeries series = new ChartSeries("收藏数", data, localName);
+        ChartSeries series = new ChartSeries("Collect the number", data, localName);
 
-        // 数据，x轴刻度，y轴刻度
+        // Data, x scale, y scale
         return new SimpleChart(series, xAxis, new String[0]);
     }
 
     /**
-     * 商品收藏统计表格
+     * Commodity collection statistics table
      *
-     * @param pageNo，页码
-     * @param pageSize，页面数据量
-     * @return Page 分页数据
+     * @param pageNoThe page number,
+     * @param pageSize, page data volume
+     * @return Page Paging data
      */
     @Override
     public Page getPage(Integer pageNo, Integer pageSize) {
 
-        // 获取商品名，收藏数量，商品价格的正在出售的商品，按收藏数量排序
+        // Gets the item name, quantity of collection, and price of the item being sold, sorted by quantity of collection
         String sql = "select goods_id,goods_name,favorite_num,price from es_sss_goods_data where  market_enable = 1 order by favorite_num desc";
 
         return this.daoSupport.queryForPage(sql, pageNo, pageSize);

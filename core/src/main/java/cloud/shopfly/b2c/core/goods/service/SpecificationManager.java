@@ -23,7 +23,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 规格项业务层
+ * Specification business layer
  * 
  * @author fk
  * @version v2.0
@@ -32,55 +32,55 @@ import java.util.List;
 public interface SpecificationManager {
 
 	/**
-	 * 查询规格项列表
+	 * Example Query the specification list
 	 * 
 	 * @param page
-	 *            页码
+	 *            The page number
 	 * @param pageSize
-	 *            每页数量
+	 *            Number each page
 	 * @return Page
 	 */
 	Page list(int page, int pageSize);
 
 	/**
-	 * 添加规格项
+	 * Add specification item
 	 * 
 	 * @param specification
-	 *            规格项
-	 * @return Specification 规格项
+	 *            Specification items
+	 * @return Specification Specification items
 	 */
 	SpecificationDO add(SpecificationDO specification);
 
 	/**
-	 * 修改规格项
+	 * Modifying Specifications
 	 * 
 	 * @param specification
-	 *            规格项
+	 *            Specification items
 	 * @param id
-	 *            规格项主键
-	 * @return Specification 规格项
+	 *            Primary key of specifications
+	 * @return Specification Specification items
 	 */
 	SpecificationDO edit(SpecificationDO specification, Integer id);
 
 	/**
-	 * 删除规格项
+	 * Deleting specifications
 	 * 
 	 * @param ids
-	 *            规格项主键
+	 *            Primary key of specifications
 	 */
 	void delete(Integer[] ids);
 
 	/**
-	 * 获取规格项
+	 * Obtaining specifications
 	 * 
 	 * @param id
-	 *            规格项主键
-	 * @return Specification 规格项
+	 *            Primary key of specifications
+	 * @return Specification Specification items
 	 */
 	SpecificationDO getModel(Integer id);
 
 	/**
-	 * 查询分类绑定的规格，系统规格
+	 * Query category binding specifications and system specifications
 	 * 
 	 * @param categoryId
 	 * @return
@@ -88,7 +88,7 @@ public interface SpecificationManager {
 	List<SelectVO> getCatSpecification(Integer categoryId);
 
 	/**
-	 * 商家查询某分类的规格
+	 * Merchant queries the specifications of a category
 	 *
 	 * @param categoryId
 	 * @return

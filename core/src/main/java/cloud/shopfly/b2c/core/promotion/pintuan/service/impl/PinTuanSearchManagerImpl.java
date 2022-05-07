@@ -49,7 +49,7 @@ import java.util.List;
 
 /**
  * Created by kingapex on 2019-01-21.
- * 拼团搜索业务实现者
+ * Group search business implementer
  *
  * @author kingapex
  * @version 1.0
@@ -91,7 +91,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
 
-        // 分类检索
+        // Classification retrieval
         if (categoryId != null) {
 
             CategoryDO category = goodsClient.getCategory(categoryId);
@@ -123,7 +123,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
     @Override
     public void addIndex(PtGoodsDoc goodsDoc) {
 
-        //对cat path特殊处理
+        // Special processing for CAT path
         CategoryDO categoryDO = goodsClient.getCategory(goodsDoc.getCategoryId());
         goodsDoc.setCategoryPath(HexUtil.encode(categoryDO.getCategoryPath()));
 
@@ -136,7 +136,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
         elasticsearchTemplate.index(indexQuery);
         if (logger.isDebugEnabled()) {
-            logger.debug("将拼团商品将拼团商品ID[" + goodsDoc.getGoodsId() + "] " + goodsDoc + " 写入索引");
+            logger.debug("Group goods will be group goodsID[" + goodsDoc.getGoodsId() + "] " + goodsDoc + " Write the index");
         }
     }
 
@@ -166,8 +166,8 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
             return true;
         } catch (Exception e) {
-            logger.error("为拼团商品[" + goodsName + "]生成索引报错", e);
-            debugger.log("为拼团商品[" + goodsName + "]生成索引报错", StringUtil.getStackTrace(e));
+            logger.error("For group goods[" + goodsName + "]Error generating index", e);
+            debugger.log("For group goods[" + goodsName + "]Error generating index", StringUtil.getStackTrace(e));
             return false;
         }
 
@@ -175,7 +175,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
     }
 
     /**
-     * 向es写入索引
+     * toesWrite the index
      *
      * @param skuId
      */
@@ -186,7 +186,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
         elasticsearchTemplate.delete(indexName, EsSettings.PINTUAN_TYPE_NAME, "" + skuId);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("将拼团商品ID[" + skuId + "]删除索引");
+            logger.debug("Goods will be groupedID[" + skuId + "]Remove the index");
         }
     }
 
@@ -217,17 +217,17 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
     @Override
     public void syncIndexByPinTuanId(Integer pinTuanId) {
-        //查询出数据库中的拼团商品
+        // Query the cluster goods in the database
         String sql = "select * from es_pintuan_goods where pintuan_id=? ";
         List<PinTuanGoodsVO> dbList = tradeDaoSupport.queryForList(sql, PinTuanGoodsVO.class, pinTuanId);
 
-        //查询出索引出的商品
+        // Query for indexed items
         BoolQueryBuilder bqb = QueryBuilders.boolQuery();
         bqb.must(QueryBuilders.termQuery("pinTuanId", pinTuanId));
 
         List<PtGoodsDoc> esList = queryList(bqb);
 
-        //同步数据
+        // Synchronous data
         sync(dbList, esList);
 
     }
@@ -240,7 +240,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
         Long now = DateUtil.getDateline();
 
-        //查询出数据库中的拼团商品
+        // Query the cluster goods in the database
         String sql = "select g.* from es_pintuan_goods g,es_pintuan pt where g.pintuan_id = pt.promotion_id and  g.goods_id=? and   pt.start_time<? and pt.end_time>?  ";
         List<PinTuanGoodsVO> dbTempList = tradeDaoSupport.queryForList(sql, PinTuanGoodsVO.class, goodsId, now, now);
 
@@ -253,12 +253,12 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
         }
 
 
-        //根据商品id查询出索引中的商品
+        // Query the item in the index based on the item ID
         BoolQueryBuilder bqb = QueryBuilders.boolQuery();
         bqb.must(QueryBuilders.termQuery("goodsId", goodsId));
 
         List<PtGoodsDoc> esList = queryList(bqb);
-        //同步数据
+        // Synchronous data
         sync(dbList, esList);
 
     }
@@ -275,7 +275,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
 
     /**
-     * 由es中查询拼团sku列表
+     * byesQuery groupskuThe list of
      *
      * @param bqb BoolQueryBuilder
      * @return
@@ -293,29 +293,29 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
     }
 
     /**
-     * 对比数据库和es中的两个集合，以数据库的为准，同步es中的数据
+     * Compare databases withesThe two collections, whichever is the database, are synchronizedesThe data in the
      *
-     * @param dbList 数据库集合
-     * @param esList es中的集合
+     * @param dbList Database collection
+     * @param esList esIn the collection
      */
     private void sync(List<PinTuanGoodsVO> dbList, List<PtGoodsDoc> esList) {
 
-        //按数据库中的来循环
+        // Loop through the database
         dbList.forEach(dbGoods -> {
 
             PtGoodsDoc goodsDoc = findFromList(esList, dbGoods.getSkuId());
 
-            //在索引中没找到说明新增了
+            // I cant find it in the index
             if (goodsDoc == null) {
                 this.addIndex(dbGoods);
 
             } else {
 
-                //看看售价变没变
+                // See if the price has changed
                 Double salesPrice = goodsDoc.getSalesPrice();
                 Double dbPrice = dbGoods.getSalesPrice();
 
-                //价格发生变化了
+                // The price has changed
                 if (!salesPrice.equals(dbPrice)) {
                     goodsDoc.setSalesPrice(dbPrice);
                     IndexQuery indexQuery = new IndexQueryBuilder().withId("" + goodsDoc.getSkuId()).withObject(goodsDoc).build();
@@ -325,12 +325,12 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
 
         });
 
-        //大小不一样，说明可能会发生了删除的
+        // The size is different, indicating that deletion may have occurred
         if (esList.size() != dbList.size()) {
             esList.forEach(goodsDoc -> {
                 boolean result = findFormList(dbList, goodsDoc.getSkuId());
 
-                //没找到，说明删除了
+                // If its not found, its deleted
                 if (!result) {
                     delIndex(goodsDoc.getSkuId());
                 }
@@ -342,7 +342,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
     }
 
     /**
-     * 查询 数据库的列表中没有
+     * Not in the list of query databases
      *
      * @param dbList
      * @param skuId
@@ -358,7 +358,7 @@ public class PinTuanSearchManagerImpl implements PinTuanSearchManager {
     }
 
     /**
-     * 查找索引列表中有没有
+     * Look in the index list
      *
      * @param list
      * @param skuId

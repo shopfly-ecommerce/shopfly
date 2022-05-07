@@ -16,11 +16,11 @@
 package cloud.shopfly.b2c.core.statistics.service;
 
 /**
- * 统计数据填充
+ * Statistical data filling
  * @author liushuai
  * @version v1.0
  * @since v7.0
- * 2018/8/14 下午1:03
+ * 2018/8/14 In the afternoon1:03
  * @Description:
  *
  */
@@ -28,7 +28,7 @@ public interface SyncopateTableManager {
 
 
     /**
-     * 每日数据填充
+     * Daily data filling
      */
     void everyDay();
 }

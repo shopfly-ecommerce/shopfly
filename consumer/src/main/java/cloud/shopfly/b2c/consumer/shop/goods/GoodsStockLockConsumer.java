@@ -72,7 +72,7 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
 
     /**
-     * 处理订单创建扣减库存
+     * Process order creation deduction inventory
      *
      * @param tradeVO
      */
@@ -80,20 +80,20 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
     public void onTradeIntoDb(TradeVO tradeVO) {
 
         if (tradeVO == null) {
-            throw new ResourceNotFoundException("交易不存在");
+            throw new ResourceNotFoundException("The deal doesnt exist.");
         }
-        //获取交易中的订单集合
+        // Gets the collection of orders in the transaction
         List<OrderDTO> orderDTOS = tradeVO.getOrderList();
 
-        //此变量标识订单是否全部更新成功，只有订单状态全部更新成功，交易状态才可以更新为已确认，
-        // 只要有一个订单更新状态失败，则交易失败，但是不影响订单
+        // This variable identifies whether the order has been updated successfully. Only when the order status has been updated successfully, the transaction status can be updated to confirmed.
+        // If only one order update status fails, the transaction fails, but the order is not affected
         boolean bool = true;
 
         for (OrderDTO order : orderDTOS) {
             bool = orderIntoDb(order);
         }
 
-        //处理交易,如果此交易中有一个订单状态更新失败，则此交易状态为出库失败
+        // Process a transaction in which an order status update fails, then the transaction status is failed to eject
         if (!bool) {
             this.updateTradeState(tradeVO.getTradeSn(), 0, OrderStatusEnum.INTODB_ERROR);
         } else {
@@ -104,7 +104,7 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
 
     /**
-     * 订单入库
+     * Order is put in storage
      *
      * @param order
      * @return
@@ -112,28 +112,28 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
     private boolean orderIntoDb(OrderDTO order) {
 
 
-        //-------------先尝试锁优惠库存-------------
-        //如果锁库失败，自行回滚
+        // ------------- try locking discount inventory ------------- first
+        // If the library lock fails, roll back by itself
         boolean promotionLockResult = lockPromotionStock(order);
 
         OrderStatusEnum status;
 
         boolean normalLockResult = false;
 
-        //-------------尝试锁普通库存------
-        //如果优惠库存锁成功，尝试锁普通库存
+        // ------------- try to lock normal inventory ------
+        // If the preferential stock lock is successful, try locking regular stock
         if (promotionLockResult) {
-            //如果锁库失败，自行回滚(不需调用者处理)
+            // If the lock fails, roll back (without caller handling)
             normalLockResult = lockNormalStock(order);
         }
 
         boolean lockResult = normalLockResult && promotionLockResult;
 
-        //如果锁库成功，订单状态为出库成功，即OrderStatusEnum.CONFIRM;
-        //但如果金额为零，则直接付款成功
+        // If the warehouse is locked successfully, the order status is successful, that is, OrderStatusEnum.CONFIRM;
+        // But if the amount is zero, the direct payment is successful
         if (lockResult) {
 
-            //如果代支付金额为0，则状态变成已付款
+            // If the agent payment amount is 0, the state becomes paid
             if (order.getNeedPayMoney() == 0 && !order.getPaymentType().equals(PaymentTypeEnum.COD.value())) {
                 status = OrderStatusEnum.PAID_OFF;
             } else {
@@ -141,18 +141,18 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
             }
 
         } else {
-            //锁库失败
+            // Lock library failure
             status = OrderStatusEnum.INTODB_ERROR;
         }
 
-        //-------------更新订单状态------------
-        // 如果订单状态更新失败，重试三次，如果最终失败则回滚库存
+        // ------------- Update order status ------------
+        // If the order status update fails, retry three times, and roll back the inventory if it finally fails
         boolean updateResult = this.updateState(order.getSn(), 0, status);
 
-        //如果更新成功则发mq消息
+        // Send an MQ message if the update is successful
         if (updateResult) {
 
-            //此处说明订单状态更新成功，则发送订单状态变化消息
+            // If the order status is updated successfully, the order status change message is sent
             OrderStatusChangeMsg orderStatusChangeMsg = new OrderStatusChangeMsg();
             orderStatusChangeMsg.setOldStatus(OrderStatusEnum.NEW);
             orderStatusChangeMsg.setNewStatus(status);
@@ -167,31 +167,31 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
         } else {
 
-            //-----回滚所有的库存 -----
+            // ----- Roll back all inventory -----
 
-            //回滚普通商品的库存
+            // Roll back the inventory of common goods
             rollbackNormal(order);
 
-            //回滚优惠库存
+            // Roll back preferential inventory
             rollbackPromotionStock(order);
 
 
         }
 
-        //订单锁库成功 并且状态更新成功才算成功
+        // The order is successfully locked and the status update is successful
         return updateResult && lockResult;
 
     }
 
 
     /***
-     * 回滚普通库存
+     * Roll back normal inventory
      * @param order
      */
     private void rollbackNormal(OrderDTO order) {
         List<CartSkuVO> skuList = order.getSkuList();
 
-        //获取订单中的sku信息
+        // Get the SKU information in the order
         List<GoodsQuantityVO> goodsQuantityVOList = buildQuantityList(skuList);
 
         rollbackReduce(goodsQuantityVOList);
@@ -199,22 +199,22 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
     }
 
     /**
-     * 锁普通商品库存
+     * Lock general merchandise inventory
      *
      * @param order
      * @return
      */
     private boolean lockNormalStock(OrderDTO order) {
 
-        //获取订单中的sku信息
+        // Get the SKU information in the order
         List<CartSkuVO> skuList = order.getSkuList();
         List<GoodsQuantityVO> goodsQuantityVOList = buildQuantityList(skuList);
 
-        //扣减正常库存，注意：如果不成功，库存在脚本里已经回滚，程序不需要回滚
+        // Subtract the normal inventory. Note: If this is unsuccessful, the inventory is already rolled back in the script and the program does not need to be rolled back
         boolean normalResult = goodsQuantityClient.updateSkuQuantity(goodsQuantityVOList);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("订单【" + order.getSn() + "】商品锁库存结果为：" + normalResult);
+            logger.debug("The order【" + order.getSn() + "】The result of commodity lock inventory is：" + normalResult);
         }
 
         return normalResult;
@@ -222,7 +222,7 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
 
     /**
-     * 根据购物车列表构建要扣减的库存列表
+     * Build a list of inventory to deduct from the shopping cart list
      *
      * @param skuList
      * @return
@@ -238,10 +238,10 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
             goodsQuantity.setSkuId(sku.getSkuId());
             goodsQuantity.setGoodsId(sku.getGoodsId());
 
-            //设置为负数，要减掉的
+            // Set it to negative, subtract it
             goodsQuantity.setQuantity(0 - sku.getNum());
 
-            //设置为要扣减可用库存
+            // Set to deduct available inventory
             goodsQuantity.setQuantityType(QuantityType.enable);
             goodsQuantityVOList.add(goodsQuantity);
 
@@ -252,17 +252,17 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
 
     /**
-     * 回滚优惠库存
+     * Roll back preferential inventory
      *
      * @param order
      */
     private void rollbackPromotionStock(OrderDTO order) {
 
-        //获取订单中的sku信息
+        // Get the SKU information in the order
         List<CartSkuVO> skuList = order.getSkuList();
-        //限时抢购
+        // flash
         List<PromotionDTO> promotionDTOSekillList = new ArrayList<>();
-        //团购
+        // A bulk
         List<PromotionDTO> promotionDTOGroupBuyList = new ArrayList<>();
 
         buildPromotionList(skuList, promotionDTOSekillList, promotionDTOGroupBuyList);
@@ -274,11 +274,11 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
 
     /**
-     * 构建促销活动列表
+     * Build a list of promotions
      *
      * @param skuList
-     * @param callbackSekillList 要构建的秒杀列表
-     * @param callbackGroupList  要构建的团购列表
+     * @param callbackSekillList The second kill list to build
+     * @param callbackGroupList  A group purchase list to build
      */
     private void buildPromotionList(List<CartSkuVO> skuList, List<PromotionDTO> callbackSekillList, List<PromotionDTO> callbackGroupList) {
 
@@ -288,9 +288,9 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
             if (singleList != null && singleList.size() > 0) {
                 for (CartPromotionVo promotionGoodsVO : singleList) {
 
-                    //如果优惠库存充足才可以是秒杀订单
+                    // If the preferential inventory is sufficient, it can be a second kill order
                     if (sku.getPurchaseNum() > 0) {
-                        //判断是否参加的限时抢购的活动
+                        // A flash sale to decide whether to participate
                         if (promotionGoodsVO.getPromotionType().equals(PromotionTypeEnum.SECKILL.name())) {
                             PromotionDTO promotionDTO = new PromotionDTO();
                             promotionDTO.setActId(promotionGoodsVO.getActivityId());
@@ -316,7 +316,7 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
     }
 
     /**
-     * 扣减优惠库存
+     * Discount inventory
      *
      * @param order
      * @return
@@ -325,26 +325,26 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
 
         boolean lockResult = false;
 
-        //获取订单中的sku信息
+        // Get the SKU information in the order
         List<CartSkuVO> skuList = order.getSkuList();
-        //限时抢购
+        // flash
         List<PromotionDTO> promotionDTOSekillList = new ArrayList<>();
-        //团购
+        // A bulk
         List<PromotionDTO> promotionDTOGroupBuyList = new ArrayList<>();
 
         buildPromotionList(skuList, promotionDTOSekillList, promotionDTOGroupBuyList);
 
 
-        //扣减限时抢购库存
+        // Discount flash sale inventory
         boolean sekillResult = true;
         if (promotionDTOSekillList.size() > 0) {
             sekillResult = this.seckillApplyManager.addSoldNum(promotionDTOSekillList);
             if (logger.isDebugEnabled()) {
-                logger.debug("秒杀锁库存结果为：" + sekillResult);
+                logger.debug("The result of the SEC lock inventory is：" + sekillResult);
             }
         }
 
-        //扣减团购库存
+        // Deduct group purchase inventory
         boolean groupBuyResult = true;
         if (promotionDTOGroupBuyList.size() > 0) {
             groupBuyResult = this.groupbuyGoodsManager.cutQuantity(order.getSn(), promotionDTOGroupBuyList);
@@ -367,64 +367,64 @@ public class GoodsStockLockConsumer implements TradeIntoDbEvent {
     }
 
     /**
-     * 修改订单状态
+     * Modify order status
      *
-     * @param sn    订单sn
-     * @param times 次数
-     * @return 是否修改成功
+     * @param sn    The ordersn
+     * @param times The number of
+     * @return Check whether the modification is successful.
      */
     private boolean updateState(String sn, Integer times, OrderStatusEnum status) {
         try {
-            // 失败三次后直接返回
+            // Return directly after three failures
             if (times >= 3) {
-                logger.error("订单状态重试三次后更新失败,订单号为" + sn + ",重试");
+                logger.error("The order status update failed after three attempts,The order number for" + sn + ",retry");
                 return false;
             }
-            // 更改订单状态为已确认
+            // Change the order status to Confirmed
             boolean result = orderClient.updateOrderStatus(sn, status);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("更新订单【" + sn + "】状态为[" + status + "]第[" + times + "次]结果：" + result);
+                logger.debug("Update the order【" + sn + "】The status of[" + status + "]The first[" + times + "time]The results of：" + result);
             }
             if (!result) {
-                // 如果更新失败，则等待1秒重试
+                // If the update fails, wait 1 second and try again
                 Thread.sleep(1000);
                 return updateState(sn, ++times, status);
             } else {
                 return true;
             }
         } catch (Exception e) {
-            logger.error("订单状态更新失败,订单号为" + sn + ",重试" + ++times + "次,消息" + e.getMessage());
+            logger.error("Order status update failed,The order number for" + sn + ",retry" + ++times + "time,The message" + e.getMessage());
             updateState(sn, ++times, status);
         }
         return true;
     }
 
     /**
-     * 修改订单状态
+     * Modify order status
      *
-     * @param sn          订单sn
-     * @param times       次数
-     * @param orderStatus 订单状态
-     * @return 是否修改成功
+     * @param sn          The ordersn
+     * @param times       The number of
+     * @param orderStatus Status
+     * @return Check whether the modification is successful.
      */
     private boolean updateTradeState(String sn, Integer times, OrderStatusEnum orderStatus) {
         try {
-            // 失败三次后直接返回
+            // Return directly after three failures
             if (times >= 3) {
-                logger.error("交易状态重试三次后更新失败,交易号为" + sn + ",重试");
+                logger.error("The transaction status update failed after three attempts,Transaction number is" + sn + ",retry");
                 return false;
             }
-            // 更改交易状态为已确认
+            // Change the transaction status to Confirmed
             if (!orderClient.updateTradeStatus(sn, orderStatus)) {
-                // 如果更新失败，则等待1秒重试
+                // If the update fails, wait 1 second and try again
                 Thread.sleep(1000);
                 return updateTradeState(sn, ++times, orderStatus);
             } else {
                 return true;
             }
         } catch (Exception e) {
-            logger.error("交易状态更新失败,订单号为" + sn + ",重试" + ++times + "次,消息" + e.getMessage());
+            logger.error("Transaction status update failed,The order number for" + sn + ",retry" + ++times + "time,The message" + e.getMessage());
             updateState(sn, ++times, orderStatus);
         }
         return false;

@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品sku业务类
+ * productskuBusiness class
  *
  * @author fk
  * @author kingapex
@@ -63,8 +63,8 @@ import java.util.Map;
  * @since v7.0.0 2018-03-21 11:48:40
  * <p>
  * version 3.0 written by kingapex 2019-02-22 :<br/>
- * <li>sku表通过hashcode字段来确定是否有规格变化</li>
- * <li>通过lua脚本来更新库存</li>
+ * <li>skuTable byhashcodeField to determine if there has been a specification change</li>
+ * <li>throughluaScripts update inventory</li>
  */
 @Service
 public class GoodsSkuManagerImpl implements GoodsSkuManager {
@@ -101,9 +101,9 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
                 "select s.* from es_goods_sku s inner join es_goods g on g.goods_id = s.goods_id");
         List<Object> term = new ArrayList<>();
 
-        //基础查询
+        // Based on the query
         SearchUtil.baseQuery(goodsQueryParam, term, sqlBuffer);
-        //分类查询
+        // Classification of query
         SearchUtil.categoryQuery(goodsQueryParam, term, sqlBuffer, daoSupport);
 
         sqlBuffer.append(" order by g.goods_id desc");
@@ -131,36 +131,36 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     public void add(List<GoodsSkuVO> skuList, GoodsDO goods) {
 
         List<GoodsSkuDO> newSkuList = new ArrayList<>();
-        // 如果有规格
+        // If there is a specification
         if (skuList != null && skuList.size() > 0) {
-            // 添加商品sku
+            // Add a commodity SKU
             this.addGoodsSku(skuList, goods);
 
-            //转为do
+            // To do
             skuList.forEach(skuVO -> {
                 skuVO.setGoodsId(goods.getGoodsId());
                 newSkuList.add(skuVO);
             });
         } else {
-            // 添加没有规格的sku信息
+            // Example Add skU information without specifications
             GoodsSkuDO newSku = this.addNoSku(goods);
             newSkuList.add(newSku);
         }
 
-        //为新增的sku增加库存
+        // Increase inventory for new SKUs
         updateStock(newSkuList);
     }
 
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void edit(List<GoodsSkuVO> skuList, GoodsDO goods) {
-        //新增的sku列表，用于同步这些sku的缓存
+        // A new list of SKUs to synchronize the cache of these SKUs
         List<GoodsSkuDO> newSkuList  =new ArrayList<>();
 
-        // 如果编辑的时候sku数据有变化(包括规格项组合变了，有规格改成无规格，无规格改成有规格) hasChanged=1 规格有改变
+        // If skU data is changed during the editing (including the combination of specifications is changed to no specifications or no specifications is changed to yes specifications) hasChanged=1 The specifications are changed
         Integer goodsId = goods.getGoodsId();
 
-        //生成这个商品的所有sku的集合，不在这个集后的要删除
+        // The set of all skUs that generated this item, those not following this set will be deleted
         String hashCodeStr = "";
 
         if (skuList != null) {
@@ -175,34 +175,34 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
                 }
                 hashCodeStr = hashCodeStr + "" + hashCode;
 
-                //新增的sku
+                // The new sku
                 if (goodsSkuVO.getSkuId() == null || goodsSkuVO.getSkuId() == 0) {
                     GoodsSkuDO newSku =  add(goodsSkuVO, goods);
                     newSku.setGoodsId(goodsId);
                     newSkuList.add(newSku);
                 } else {
-                    //更新已经存在的
+                    // Update existing
                     update(goodsSkuVO, goods);
                 }
             }
         }
 
 
-        //清除不存在的sku的缓存及数据库
+        // Clear the cache and database of non-existent SKUs
         cleanNotExits(hashCodeStr,goodsId);
 
 
-        //没有规格的商品，用goods_id和hash_code=-1做为条件
+        // For items without specifications, use goods_id and hash_code=-1 as conditions
         if (skuList == null || skuList.isEmpty()) {
 
-            //查找是否有不带规格的sku，如果有则更新，没有则添加一个
+            // Find if there are skUs without specifications, update them if there are, and add one if not
             int count = daoSupport.queryForInt("select count(0) from es_goods_sku where goods_id=? and hash_code =-1", goods.getGoodsId());
             if (count > 0) {
-                // 修改没有规格的sku信息
+                // Example Modify skU information without specifications
                 GoodsSkuDO goodsSku = new GoodsSkuDO();
                 BeanUtils.copyProperties(goods, goodsSku);
                 goodsSku.setQuantity(goods.getQuantity() == null ? 0 : goods.getQuantity());
-                //没有规格的sku的hashcode 为-1
+                // Skus with no specification have a hashcode of -1
                 goodsSku.setHashCode(-1);
 
                 Map map = new HashMap(16);
@@ -219,11 +219,11 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
         }
 
         if (newSkuList != null && !newSkuList.isEmpty()) {
-            //为新增的sku增加库存
+            // Increase inventory for new SKUs
             updateStock(newSkuList);
         }
 
-        //重新计算库存
+        // Recalculate inventory
         reCountGoodsStock(goodsId);
 
     }
@@ -241,9 +241,9 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
 
     @Override
     public GoodsSkuVO getSkuFromCache(Integer skuId) {
-        // 从缓存读取sku信息
+        // Read SKU information from the cache
         GoodsSkuVO skuVo = (GoodsSkuVO) cache.get(CachePrefix.SKU.getPrefix() + skuId);
-        // 缓存中没有找到商品，或者最后修改时间为空（表示数据异常），从数据库中查询
+        // No item is found in the cache, or the last modification time is empty (indicating a data exception), queried from the database
         if (skuVo == null || skuVo.getLastModify() == null) {
             GoodsSkuDO sku = this.getModel(skuId);
             if (sku == null) {
@@ -252,7 +252,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
             skuVo = new GoodsSkuVO();
             BeanUtils.copyProperties(sku, skuVo);
 
-            //以下信息由商品中获取
+            // The following information is obtained from the product
             GoodsDO goods = this.daoSupport.queryForObject(GoodsDO.class, sku.getGoodsId());
 
             skuVo.setLastModify(goods.getLastModify());
@@ -264,7 +264,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
             cache.put(CachePrefix.SKU.getPrefix() + skuId, skuVo);
             return skuVo;
         } else {
-            //填充sku中的库存信息
+            // Populate the inventory information in the SKU
             fillStock(skuVo);
         }
         return skuVo;
@@ -276,19 +276,19 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * 为sku填充库存信息<br/>
-     * 库存的信息存储在单独的缓存key中<br/>
-     * 由缓存中读取出sku的可用库存和实际库存，并分别设置到sku库存信息中，以保证库存的实时正确性<br/>
+     * forskuFill inventory information<br/>
+     * Inventory information is stored in a separate cachekeyIn the<br/>
+     * Read from the cacheskuAvailable stock and actual stock, and set to respectivelyskuInventory information in order to ensure the real-time accuracy of inventory<br/>
      *
      * @param goodsSkuVO
      */
     private void fillStock(GoodsSkuVO goodsSkuVO) {
-        //获取缓存中sku的实际库存
+        // Gets the actual inventory of SKUs in the cache
         String cacheActualStock = stringRedisTemplate.opsForValue().get(StockCacheKeyUtil.skuActualKey(goodsSkuVO.getSkuId()));
-        //获取缓存中sku的可用库存
+        // Gets the available inventory of SKUs in the cache
         String cacheEnableStock = stringRedisTemplate.opsForValue().get(StockCacheKeyUtil.skuEnableKey(goodsSkuVO.getSkuId()));
 
-        //如果以上两项都不为空，也就是缓存中都存在，那么就将缓存中的库存信息set进sku对象中
+        // If neither item is empty, that is, both items are present in the cache, then the cache inventory information is set into the SKU object
         if (StringUtil.notEmpty(cacheActualStock) && StringUtil.notEmpty(cacheEnableStock)) {
             goodsSkuVO.setQuantity(StringUtil.toInt(cacheActualStock, goodsSkuVO.getQuantity()));
             goodsSkuVO.setEnableQuantity(StringUtil.toInt(cacheEnableStock, goodsSkuVO.getEnableQuantity()));
@@ -297,9 +297,9 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * 添加没有规格的sku信息
+     * Add without specificationsskuinformation
      *
-     * @param goods 商品信息
+     * @param goods Product information
      * @return
      */
     private GoodsSkuDO addNoSku(GoodsDO goods) {
@@ -314,7 +314,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * 增加sku集合
+     * increaseskuA collection of
      *
      * @param skuList
      * @param goods
@@ -334,7 +334,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
         sku.setEnableQuantity(sku.getQuantity());
         sku.setGoodsName(goods.getGoodsName());
         sku.setCategoryId(goods.getCategoryId());
-        // 得到规格值的json
+        // Get json for the spec value
         Map map  = getSpecListJson(skuVO.getSpecList());
         sku.setSpecs((String) map.get("spec_json"));
         sku.setGoodsId(goods.getGoodsId());
@@ -355,7 +355,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * 同步库存
+     * Synchronization of inventory
      *
      * @param skuList
      */
@@ -366,27 +366,27 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
         });
         goodsQuantityManager.updateSkuQuantity(quantityList);
 
-        //如果商品库存缓冲池开启了，那么需要立即同步数据库的商品库存，以保证商品库存显示正常
+        // If the item inventory buffer pool is enabled, the item inventory in the database needs to be synchronized immediately to ensure that the item inventory displays properly
         if (shopflyConfig.isStock()) {
             goodsQuantityManager.syncDataBase();
         }
     }
 
     /**
-     * sku转为库存信息并压入list
+     * skuConvert to inventory information and press inlist
      *
-     * @param quantityList 要压入的库存list
+     * @param quantityList Inventory to be pressed inlist
      * @param sku          sku
      */
     private void addStockToList(List<GoodsQuantityVO> quantityList, GoodsSkuDO sku) {
-        //实际库存vo
+        // Actual inventory VO
         GoodsQuantityVO actualQuantityVO = new GoodsQuantityVO();
         actualQuantityVO.setQuantity(sku.getQuantity());
         actualQuantityVO.setGoodsId(sku.getGoodsId());
         actualQuantityVO.setSkuId(sku.getSkuId());
         actualQuantityVO.setQuantityType(QuantityType.actual);
 
-        //可用库存vo
+        // Available stock VO
         GoodsQuantityVO enableQuantityVO = new GoodsQuantityVO();
         enableQuantityVO.setQuantity(sku.getQuantity());
         enableQuantityVO.setGoodsId(sku.getGoodsId());
@@ -398,10 +398,10 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * sku中的spec字段的操作，返回json
+     * skuIn thespecField operation, returnsjson
      *
-     * @param specList 规格值集合
-     * @return 规格值json
+     * @param specList Set of specification values
+     * @return valuesjson
      */
     private Map getSpecListJson(List<SpecValueVO> specList) {
         Map<String, Object> map = new HashMap<>();
@@ -417,7 +417,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
                 specvalue.setThumbnail(goodsGallery.getThumbnail());
                 thumbnail = goodsGallery.getThumbnail();
                 specvalue.setTiny(goodsGallery.getTiny());
-                // 规格只有第一个规格有图片，所以找到有图片的规格后就可跳出循环
+                // Only the first specification has a picture, so you can jump out of the loop when you find a specification that has a picture
                 break;
             }
         }
@@ -427,7 +427,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * 生成规格的哈希值
+     * Generate hash values for specifications
      *
      * @param specValueVOList
      * @return
@@ -445,7 +445,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * 重新计算商品的库存
+     * Recalculate inventory of goods
      * @param goodsId
      */
     private void reCountGoodsStock(Integer goodsId) {
@@ -454,11 +454,11 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
         Integer quantity  = map.get("quantity").intValue();
         Integer enableQuantity =  map.get("enable_quantity").intValue();
 
-        //更新数据库的库存
+        // Update the database inventory
         sql = "update es_goods set quantity=?,enable_quantity=? where goods_id=?";
         daoSupport.execute(sql, quantity, enableQuantity, goodsId);
 
-        //更新缓存的库存
+        // Update the cached inventory
         stringRedisTemplate.opsForValue().set(StockCacheKeyUtil.goodsActualKey(goodsId), ""+quantity);
         stringRedisTemplate.opsForValue().set(StockCacheKeyUtil.goodsEnableKey(goodsId), ""+enableQuantity);
 
@@ -473,7 +473,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
     }
 
     /**
-     * 清除不存在的sku的缓存及数据库
+     * Remove what doesnt existskuCaches and databases
      * @param hashCodeStr
      * @param goodsId
      */
@@ -491,7 +491,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
         List<String> keys = StockCacheKeyUtil.skuKeys(skuIdList);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("删除keys:");
+            logger.debug("deletekeys:");
             logger.debug(keys.toString());
         }
 
@@ -500,7 +500,7 @@ public class GoodsSkuManagerImpl implements GoodsSkuManager {
             stringRedisTemplate.delete(keys);
         }
 
-        //批量删除要删除的：hashcode 不存在的 ，但不能是hashcode=-1的，因为有可能是没有规格导致的skuList为空
+        // Delete the skuList that does not exist in hashcode, but cannot be hashcode=-1, because it is possible that the skuList is empty because there is no specification
         if (StringUtil.isEmpty(hashCodeStr)) {
             daoSupport.execute("delete from es_goods_sku where goods_id=? and hash_code!=-1 ", goodsId);
         } else {

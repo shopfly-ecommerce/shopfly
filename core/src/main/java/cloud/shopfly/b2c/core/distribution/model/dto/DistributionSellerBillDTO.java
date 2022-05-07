@@ -23,20 +23,20 @@ import java.io.Serializable;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-09-07 上午7:58
+ * 2018-09-07 In the morning7:58
  */
 public class DistributionSellerBillDTO implements Serializable {
 
     /**
-     * 商家id
+     * merchantsid
      */
     private Integer sellerId;
     /**
-     * 支出总计
+     * Spending a total of
      */
     private Double countExpenditure;
     /**
-     * 支出退换
+     * Spending return
      */
     private Double returnExpenditure;
 

@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 区域表
+ * Area table
  *
  * @author cs
  * @version v1.0
@@ -50,15 +50,15 @@ public class RateAreaDO implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ApiParam(value = "地区父子数据")
+    @ApiParam(value = "Regional parent-child data")
     @Column(name = "area_json")
     private String areaJson;
 
-    @ApiParam(value = "地区‘，‘分隔   示例参数：北京，山西，天津，上海")
+    @ApiParam(value = "region‘，‘Separate example parameters：Beijing, Shanxi, Tianjin, Shanghai")
     @Column(name = "area")
     private String area;
 
-    @ApiModelProperty(value = "地区id‘，‘分隔  示例参数：1，2，3，4 ",hidden = true)
+    @ApiModelProperty(value = "regionid‘，‘Separate example parameters：1，2，3，4 ",hidden = true)
     @Column(name = "area_id")
     private String areaId;
 

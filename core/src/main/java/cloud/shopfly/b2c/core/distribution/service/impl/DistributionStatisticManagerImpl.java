@@ -34,7 +34,7 @@ import java.util.*;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-06-13 上午8:37
+ * 2018-06-13 In the morning8:37
  */
 @Service
 public class DistributionStatisticManagerImpl implements DistributionStatisticManager {
@@ -85,7 +85,7 @@ public class DistributionStatisticManagerImpl implements DistributionStatisticMa
             xAxis[i] = i + 1 + "";
         }
 
-        ChartSeries chartSeries = new ChartSeries("订单金额统计", data, new String[0]);
+        ChartSeries chartSeries = new ChartSeries("Order amount statistics", data, new String[0]);
 
         SimpleChart simpleChart = new SimpleChart(chartSeries, xAxis, new String[0]);
 
@@ -159,7 +159,7 @@ public class DistributionStatisticManagerImpl implements DistributionStatisticMa
             xAxis[i] = i + 1 + "";
         }
 
-        ChartSeries chartSeries = new ChartSeries("订单提成统计", data, new String[0]);
+        ChartSeries chartSeries = new ChartSeries("Order commission statistics", data, new String[0]);
 
         SimpleChart simpleChart = new SimpleChart(chartSeries, xAxis, new String[0]);
         return simpleChart;
@@ -205,7 +205,7 @@ public class DistributionStatisticManagerImpl implements DistributionStatisticMa
             xAxis[i] = i + 1 + "";
         }
 
-        ChartSeries chartSeries = new ChartSeries("订单数量统计", data, new String[0]);
+        ChartSeries chartSeries = new ChartSeries("Order quantity statistics", data, new String[0]);
 
         SimpleChart simpleChart = new SimpleChart(chartSeries, xAxis, new String[0]);
 

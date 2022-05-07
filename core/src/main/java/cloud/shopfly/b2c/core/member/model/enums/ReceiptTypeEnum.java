@@ -18,23 +18,23 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zh
  * @version v1.0
- * @Description: 发票类型枚举
+ * @Description: Invoice type enumeration
  * @date 2018/5/3 11:12
  * @since v7.0.0
  */
 public enum ReceiptTypeEnum {
     /**
-     * 电子普通发票
+     * Electronic invoice
      */
-    ELECTRO("电子普通发票"),
+    ELECTRO("Electronic invoice"),
     /**
-     * 增值税普通发票
+     * VAT general invoice
      */
-    VATORDINARY("增值税普通发票"),
+    VATORDINARY("VAT general invoice"),
     /**
-     * 增值税专用发票
+     * VAT special invoice
      */
-    VATOSPECIAL("增值税专用发票");
+    VATOSPECIAL("VAT special invoice");
 
     private String text;
 

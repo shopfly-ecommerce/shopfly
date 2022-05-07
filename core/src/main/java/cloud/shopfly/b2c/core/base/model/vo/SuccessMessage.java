@@ -21,7 +21,7 @@ package cloud.shopfly.b2c.core.base.model.vo;
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-05-11 上午9:03
+ * 2018-05-11 In the morning9:03
  */
 public class SuccessMessage {
 

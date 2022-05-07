@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
 /**
- * 消息模版业务类
+ * Message template business class
  * @author zjp
  * @version v7.0.0
  * @since v7.0.0

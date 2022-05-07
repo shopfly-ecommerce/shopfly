@@ -20,21 +20,21 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 帮助中心
+ * @Description: Help center
  * @date 2018/8/14 10:38
  * @since v7.0.0
  */
 public interface StaticsPageHelpClient {
 
     /**
-     * 获取帮助页面总数
+     * Get the total number of help pages
      * @return
      */
     Integer count();
 
 
     /**
-     * 分页获取帮助
+     * Paging for help
      * @param page
      * @param pageSize
      * @return

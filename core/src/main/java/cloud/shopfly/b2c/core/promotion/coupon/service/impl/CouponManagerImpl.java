@@ -35,7 +35,7 @@ import java.util.List;
 
 
 /**
- * 优惠券业务类
+ * Coupon business
  *
  * @author Snow
  * @version v2.0
@@ -58,7 +58,7 @@ public class CouponManagerImpl implements CouponManager {
 
         if (startTime != null && endTime != null) {
 
-            //endTime前端传过来的是开始时间2019-08-08 00:00:00  取日期拼接结束时间
+            // EndTime indicates the start time and endTime
             String day = DateUtil.toString(endTime, "yyyy-MM-dd");
             day += " 23:59:59";
             endTime = DateUtil.getDateline(day,"yyyy-MM-dd hh:mm:ss");
@@ -126,7 +126,7 @@ public class CouponManagerImpl implements CouponManager {
     public void verifyAuth(Integer id) {
         CouponDO couponDO = this.getModel(id);
         if (couponDO == null) {
-            throw new NoPermissionException("无权操作或者数据不存在");
+            throw new NoPermissionException("No operation or data does not exist");
         }
     }
 
@@ -166,7 +166,7 @@ public class CouponManagerImpl implements CouponManager {
 
         StringBuffer sql = new StringBuffer("select * from es_coupon");
 
-        //获取当前时间
+        // Get the current time
         Long currentTime = DateUtil.getDateline();
 
         if (status == 1) {
@@ -181,7 +181,7 @@ public class CouponManagerImpl implements CouponManager {
     }
 
     /**
-     * 验证是否可修改和删除
+     * Verify that it can be modified and deleted
      *
      * @param id
      */
@@ -189,9 +189,9 @@ public class CouponManagerImpl implements CouponManager {
         CouponDO couponDO = this.getModel(id);
         long nowTime = DateUtil.getDateline();
 
-        //如果当前时间大于起始时间，小于终止时间，标识活动已经开始了，不可修改和删除。
+        // If the current time is greater than the start time and smaller than the end time, the activity has started and cannot be modified or deleted.
         if (couponDO.getStartTime().longValue() < nowTime && couponDO.getEndTime().longValue() > nowTime) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动已经开始，不能进行编辑删除操作");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The activity has started. You cannot edit or delete the activity");
         }
 
 

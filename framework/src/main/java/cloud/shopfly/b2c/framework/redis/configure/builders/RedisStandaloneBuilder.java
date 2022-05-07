@@ -32,12 +32,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 独立模式构建器
- * v2.0: 新增手动配置方式,by kingapex 2017-12-26
+ * Standalone schema builder
+ * v2.0: Added the manual configuration mode,by kingapex 2017-12-26
  * @author fk,kingapex
  * @version v2.0
  * @since v6.4
- * 2017年10月27日 下午2:37:04
+ * 2017years10month27On the afternoon2:37:04
  */
 @SuppressWarnings("AlibabaUndefineMagicConstant")
 @Service
@@ -61,25 +61,25 @@ public class RedisStandaloneBuilder  implements IRedisBuilder {
 
 
     /**
-     * 构建redis cluster的配置
-     * @return redis cluster的配置
+     * buildredis clusterThe configuration of the
+     * @return redis clusterThe configuration of the
      */
     public RedisStandaloneConfiguration buildStandaloneConfig(){
 
 
-        //cache cloud rest api配置方式
+        // Cache Cloud REST API configuration mode
         if(RedisConfigType.rest.name().equals(config.getConfigType() )){
             RedisStandaloneConfiguration configuration = createRestStandaloneConfig();
             return  configuration;
         }
 
-        //手动配置方式
+        // Manual configuration
         if(RedisConfigType.manual.name().equals(config.getConfigType() )){
             RedisStandaloneConfiguration  configuration = createManualStandaloneConfig();
             return  configuration;
         }
 
-        throw  new RuntimeException("redis 配置错误：错误的redis.config.type，只允许com.enation.eop.sdk.config.redis.configure.RedisConfigType中定义的值");
+        throw  new RuntimeException("redis Configuration error：The wrongredis.config.type, allowing onlycom.enation.eop.sdk.config.redis.configure.RedisConfigTypeValues defined in");
 
 
     }
@@ -88,14 +88,14 @@ public class RedisStandaloneBuilder  implements IRedisBuilder {
 
 
     /**
-     * 构建手动方式的 redis Standalone 配置
+     * Build manualredis Standalone configuration
      * @return
      */
     private RedisStandaloneConfiguration createManualStandaloneConfig(){
 
         String host = config.getHost();
         if(StringUtil.isEmpty(host)){
-            throw new RuntimeException("redis 配置错误：redis.host为空");
+            throw new RuntimeException("redis Configuration error：redis.hostIs empty");
         }
 
 
@@ -115,7 +115,7 @@ public class RedisStandaloneBuilder  implements IRedisBuilder {
 
 
     /**
-     * 构建rest方式的 Standalone 配置
+     * buildrestThe way ofStandalone configuration
      * @return
      */
     private RedisStandaloneConfiguration createRestStandaloneConfig(){
@@ -128,7 +128,7 @@ public class RedisStandaloneBuilder  implements IRedisBuilder {
 
         String  appId = config.getRestAppid();
         /**
-         * 心跳返回的请求为空；
+         * The heartbeat returned a null request；
          */
 
         if (response == null || response.isEmpty()) {
@@ -136,7 +136,7 @@ public class RedisStandaloneBuilder  implements IRedisBuilder {
         }
 
         /**
-         * 心跳返回的请求无效；
+         * Invalid request returned by heartbeat；
          */
         ObjectMapper mapper = new ObjectMapper();
         JsonNode responseJson = null;
@@ -151,7 +151,7 @@ public class RedisStandaloneBuilder  implements IRedisBuilder {
         }
 
         /**
-         * 从心跳中提取HostAndPort，构造JedisPool实例；
+         * From the heartbeatHostAndPort,JedisPoolThe instance；
          */
         String instance = responseJson.get("standalone").asText();
         String[] instanceArr = instance.split(":");

@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 菜单管理业务类
+ * Menu management business class
  *
  * @author zh
  * @version v7.0
@@ -59,21 +59,21 @@ public class MenuManagerImpl implements MenuManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Menu add(MenuVO menuVO) {
-        //对菜单的唯一标识做校验
+        // Validates the unique identifier of the menu
         Menu valMenu = this.getMenuByIdentifier(menuVO.getIdentifier());
         if (valMenu != null) {
-            throw new ServiceException(SystemErrorCode.E913.code(), "菜单唯一标识重复");
+            throw new ServiceException(SystemErrorCode.E913.code(), "The menu uniquely identifies duplication");
         }
-        //判断父级菜单是否有效
+        // Check whether the parent menu is valid
         Menu parentMenu = this.getModel(menuVO.getParentId());
         if (!menuVO.getParentId().equals(0) && parentMenu == null) {
-            throw new ResourceNotFoundException("父级菜单不存在");
+            throw new ResourceNotFoundException("The parent menu does not exist");
         }
-        //校验菜单级别是否超出限制
+        // Verify that menu levels exceed limits
         if (!menuVO.getParentId().equals(0) && parentMenu.getGrade() >= 3) {
-            throw new ServiceException(SystemErrorCode.E914.code(), "菜单级别最多为3级");
+            throw new ServiceException(SystemErrorCode.E914.code(), "The maximum menu level is3level");
         }
-        //对菜单名称进行重复校验
+        // Check menu names repeatedly
         String sql = "select * from es_menu where title = ?";
         Menu menuResult = this.systemDaoSupport.queryForObject(sql, Menu.class, menuVO.getTitle());
         if (menuResult != null && menuResult.getDeleteFlag().equals(-1)) {
@@ -81,9 +81,9 @@ public class MenuManagerImpl implements MenuManager {
             menuResult.setDeleteFlag(0);
             return this.updateMenu(menuResult);
         }else if (menuResult != null){
-            throw new ServiceException(SystemErrorCode.E925.code(), "菜单名称重复");
+            throw new ServiceException(SystemErrorCode.E925.code(), "Duplicate menu names");
         }else {
-            //执行保存操作
+            // Perform the save operation
             Menu menu = new Menu();
             BeanUtil.copyProperties(menuVO, menu);
             menu.setDeleteFlag(0);
@@ -96,17 +96,17 @@ public class MenuManagerImpl implements MenuManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Menu edit(Menu menu, Integer id) {
-        //校验当前菜单是否存在
+        // Verify whether the current menu exists
         Menu valMenu = this.getModel(id);
         if (valMenu == null) {
-            throw new ResourceNotFoundException("当前菜单不存在");
+            throw new ResourceNotFoundException("The current menu does not exist");
         }
-        //校验菜单唯一标识重复
+        // The verification menu uniquely identifies duplication
         valMenu = this.getMenuByIdentifier(menu.getIdentifier());
         if (valMenu != null && !valMenu.getId().equals(id)) {
-            throw new ServiceException(SystemErrorCode.E913.code(), "菜单唯一标识重复");
+            throw new ServiceException(SystemErrorCode.E913.code(), "The menu uniquely identifies duplication");
         }
-        //对菜单名称进行重复校验
+        // Check menu names repeatedly
         boolean bool = false;
         String sql = "select * from es_menu where title = ?";
         List<Menu> menus = this.systemDaoSupport.queryForList(sql, Menu.class, menu.getTitle());
@@ -117,28 +117,28 @@ public class MenuManagerImpl implements MenuManager {
             }
         }
         if (bool) {
-            throw new ServiceException(SystemErrorCode.E925.code(), "菜单名称重复");
+            throw new ServiceException(SystemErrorCode.E925.code(), "Duplicate menu names");
         }
         menu.setId(id);
-        //执行修改
+        // Implement changes
         return this.updateMenu(menu);
     }
 
     /**
-     * 执行修改菜单操作
+     * Modify the menu
      *
-     * @param menu 菜单对象
-     * @return 菜单对象
+     * @param menu The menu object
+     * @return The menu object
      */
     private Menu updateMenu(Menu menu) {
-        //判断父级菜单是否有效
+        // Check whether the parent menu is valid
         Menu parentMenu = this.getModel(menu.getParentId());
         if (!menu.getParentId().equals(0) && parentMenu == null) {
-            throw new ResourceNotFoundException("父级菜单不存在");
+            throw new ResourceNotFoundException("The parent menu does not exist");
         }
-        //校验菜单级别是否超出限制
+        // Verify that menu levels exceed limits
         if (!menu.getParentId().equals(0) && parentMenu.getGrade() >= 3) {
-            throw new ServiceException(SystemErrorCode.E914.code(), "菜单级别最多为3级");
+            throw new ServiceException(SystemErrorCode.E914.code(), "The maximum menu level is3level");
         }
         String menuPath = null;
         if (menu.getParentId().equals(0)) {
@@ -160,7 +160,7 @@ public class MenuManagerImpl implements MenuManager {
     public void delete(Integer id) {
         Menu menu = this.getModel(id);
         if (menu == null) {
-            throw new ResourceNotFoundException("当前菜单不存在");
+            throw new ResourceNotFoundException("The current menu does not exist");
         }
         this.systemDaoSupport.execute("update es_menu set delete_flag = -1 where id = ?", id);
         this.systemDaoSupport.execute("update es_menu set delete_flag = -1 where parent_id = ?", id);
@@ -188,11 +188,11 @@ public class MenuManagerImpl implements MenuManager {
     }
 
     /**
-     * 在一个集合中查找子
+     * Find children in a collection
      *
-     * @param menuList 所有菜单集合
-     * @param parentid 父id
-     * @return 找到的子集合
+     * @param menuList Collection of all menus
+     * @param parentid The fatherid
+     * @return Subset found
      */
     private List<MenusVO> getChildren(List<MenusVO> menuList, Integer parentid) {
         List<MenusVO> children = new ArrayList<MenusVO>();

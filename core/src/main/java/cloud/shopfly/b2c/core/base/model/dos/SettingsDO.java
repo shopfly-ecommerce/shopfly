@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 系统设置实体
+ * System setup entity
 <<<<<<< HEAD
 =======
  *
@@ -48,24 +48,24 @@ public class SettingsDO implements Serializable {
     private static final long serialVersionUID = 3372606354638487L;
 
     /**
-     * 系统设置id
+     * System Settingsid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 系统配置信息
+     * System Configuration information
      */
     @Column(name = "cfg_value")
-    @NotEmpty(message = "系统配置信息不能为空")
-    @ApiModelProperty(name = "cfg_value", value = "系统配置信息", required = true)
+    @NotEmpty(message = "The system configuration information cannot be empty")
+    @ApiModelProperty(name = "cfg_value", value = "System Configuration information", required = true)
     private String cfgValue;
     /**
-     * 业务设置标识
+     * Service setting identifier
      */
     @Column(name = "cfg_group")
-    @NotEmpty(message = "业务设置标识不能为空")
-    @ApiModelProperty(name = "cfg_group", value = "业务设置标识", required = true)
+    @NotEmpty(message = "The service setting identifier cannot be empty")
+    @ApiModelProperty(name = "cfg_group", value = "Service setting identifier", required = true)
     private String cfgGroup;
 
 

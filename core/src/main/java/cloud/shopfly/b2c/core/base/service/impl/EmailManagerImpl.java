@@ -43,12 +43,12 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * 邮件发送实现
+ * Mail sending implementation
  *
  * @author zh
  * @version v7.0
  * @since v7.0
- * 2018年3月26日 下午3:23:04
+ * 2018years3month26On the afternoon3:23:04
  */
 @Service
 public class EmailManagerImpl implements EmailManager {
@@ -65,7 +65,7 @@ public class EmailManagerImpl implements EmailManager {
     private DaoSupport systemDaoSupport;
 
     /**
-     * 通过java Transport发送邮件  支持ssl
+     * throughjava TransportSend Mail Supportssl
      *
      * @param emailVO
      */
@@ -94,95 +94,95 @@ public class EmailManagerImpl implements EmailManager {
                                 smtp.getPassword());
                     }
                 });
-        // 发送邮件
+        // Send E-mail
         try {
             Message mailMessage = new MimeMessage(sendMailSession);
-            // 创建邮件发送者地址
+            // Create the sender address
             Address from = new InternetAddress(smtp.getUsername(), smtp.getMailFrom());
-            // 设置邮件消息的发送者
+            // Sets the sender of the mail message
             mailMessage.setFrom(from);
-            // 创建邮件的接收者地址，并设置到邮件消息中
+            // Create the recipient address of the message and set it in the mail message
             Address to = new InternetAddress(emailVO.getEmail());
             mailMessage.setRecipient(Message.RecipientType.TO, to);
-            // 设置邮件消息的主题
+            // Set the subject of the mail message
             mailMessage.setSubject(emailVO.getTitle());
-            // 设置邮件消息发送的时间
+            // Set the time when email messages are sent
             mailMessage.setSentDate(new Date());
-            // 设置邮件消息的主要内容
+            // Sets the main content of the mail message
             mailMessage.setContent(emailVO.getContent(), "text/html;charset=utf-8");
             Transport.send(mailMessage);
-            debugger.log("邮件发送成功");
+            debugger.log("Email sent successfully");
         } catch (MessagingException e) {
-            debugger.log("邮件发送失败:", StringUtil.getStackTrace(e));
+            debugger.log("Email sending failure:", StringUtil.getStackTrace(e));
             e.printStackTrace();
             emailVO.setErrorNum(1);
             emailVO.setSuccess(0);
-            throw new ServiceException(SystemErrorCode.E904.code(), "邮件发送失败！");
+            throw new ServiceException(SystemErrorCode.E904.code(), "Email sending failure！");
         } catch (UnsupportedEncodingException e) {
-            debugger.log("邮件发送失败:", StringUtil.getStackTrace(e));
+            debugger.log("Email sending failure:", StringUtil.getStackTrace(e));
 
             e.printStackTrace();
             emailVO.setErrorNum(1);
             emailVO.setSuccess(0);
-            throw new ServiceException(SystemErrorCode.E904.code(), "邮件发送失败！");
+            throw new ServiceException(SystemErrorCode.E904.code(), "Email sending failure！");
         }
         emailVO.setErrorNum(0);
         emailVO.setSuccess(1);
-        //向库中插入
+        // Insert into the library
         this.add(emailVO);
 
     }
 
     /**
-     * 通过javamail 发送邮件 暂不支持ssl
+     * throughjavamail Sending emails is not supportedssl
      *
      * @param emailVO
      */
     @Override
     public void sendMailByMailSender(SmtpDO smtp, EmailVO emailVO) {
-        //否则使用javaMailSender
+        // Otherwise, use javaMailSender
         JavaMailSender javaMailSender = new JavaMailSenderImpl();
 
         ((JavaMailSenderImpl) javaMailSender).setHost(smtp.getHost());
         ((JavaMailSenderImpl) javaMailSender).setUsername(smtp.getUsername());
         ((JavaMailSenderImpl) javaMailSender).setPassword(smtp.getPassword());
         ((JavaMailSenderImpl) javaMailSender).setPort(smtp.getPort());
-        //设置发送者
+        // Setting the sender
         try {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-            //设置邮件标题
+            // Set email Subject
             helper.setSubject(emailVO.getTitle());
-            //设置邮件内容
+            // Setting email Content
             helper.setText(emailVO.getContent());
 
-            //设置邮件 收件人
+            // Setting Email Recipients
             helper.setTo(emailVO.getEmail());
 
             helper.setFrom(smtp.getMailFrom());
-            //发送邮件
+            // Send E-mail
             javaMailSender.send(message);
-            debugger.log("邮件发送成功");
+            debugger.log("Email sent successfully");
 
         } catch (Exception e) {
-            debugger.log("邮件发送失败:", StringUtil.getStackTrace(e));
+            debugger.log("Email sending failure:", StringUtil.getStackTrace(e));
 
             e.printStackTrace();
             emailVO.setErrorNum(1);
             emailVO.setSuccess(0);
-            throw new ServiceException(SystemErrorCode.E904.code(), "邮件发送失败！");
+            throw new ServiceException(SystemErrorCode.E904.code(), "Email sending failure！");
         }
-        //向库中插入
+        // Insert into the library
         this.add(emailVO);
     }
 
 
     /**
-     * 添加发邮件记录
+     * Add an email sending record
      *
-     * @param email 邮件信息
-     * @return 邮件信息
+     * @param email Email messages
+     * @return Email messages
      */
     private EmailDO add(EmailVO email) {
         EmailDO emailDO = new EmailDO();
@@ -190,7 +190,7 @@ public class EmailManagerImpl implements EmailManager {
         emailDO.setTitle(email.getTitle());
         emailDO.setContent(email.getContent());
         emailDO.setType(email.getTitle());
-        //默认假设成功
+        // Default assumption success
         emailDO.setSuccess(email.getSuccess());
         emailDO.setLastSend(DateUtil.getDateline());
         emailDO.setErrorNum(email.getErrorNum());
@@ -206,16 +206,16 @@ public class EmailManagerImpl implements EmailManager {
 
     @Override
     public void sendEmail(EmailVO emailVO) {
-        //获取当钱的smtp服务器
+        // Get when money is sent to the SMTP server
         SmtpDO smtp = smtpManager.getCurrentSmtp();
 
-        debugger.log("找到smtp服务器：",smtp.toString());
-        //根据对ssl的支付 分别走不同的发送方法
+        debugger.log("findsmtpThe server：",smtp.toString());
+        // The sending method is different depending on the payment to SSL
         if (smtp.getOpenSsl() == 1 || "smtp.qq.com".equals(smtp.getHost())) {
-            debugger.log("使用ssl");
+            debugger.log("usessl");
             this.sendMailByTransport(smtp, emailVO);
         } else {
-            debugger.log("不使用ssl");
+            debugger.log("Do not usessl");
 
             this.sendMailByMailSender(smtp, emailVO);
         }

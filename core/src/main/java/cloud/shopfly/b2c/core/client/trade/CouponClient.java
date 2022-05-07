@@ -20,22 +20,22 @@ import cloud.shopfly.b2c.core.promotion.coupon.model.dos.CouponDO;
 /**
  * @author zh
  * @version v2.0
- * @Description: 优惠券单对外接口
+ * @Description: Coupon sheet external interface
  * @date 2018/7/26 11:21
  * @since v7.0.0
  */
 public interface CouponClient {
     /**
-     * 获取优惠券
+     * Get coupons
      *
-     * @param id 优惠券主键
-     * @return Coupon  优惠券
+     * @param id Coupon primary key
+     * @return Coupon  coupons
      */
     CouponDO getModel(Integer id);
 
 
     /**
-     * 增加被领取数量
+     * Increase the number of claims
      *
      * @param couponId
      */

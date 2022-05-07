@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.framework.rabbitmq;
 
 /**
- * 发送的消息对象
+ * The sent message object
  *
  * @author fk
  * @version v7.2.0

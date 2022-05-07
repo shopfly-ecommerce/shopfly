@@ -40,11 +40,11 @@ import java.util.List;
 /**
  * @author zjp
  * @version v7.0
- * @Description 售后相关API
+ * @Description After sales relatedAPI
  * @ClassName AfterSaleSellerController
- * @since v7.0 上午9:38 2018/5/10
+ * @since v7.0 In the morning9:38 2018/5/10
  */
-@Api("售后相关API")
+@Api("After sales relatedAPI")
 @RestController
 @RequestMapping("/seller/after-sales")
 @Validated
@@ -53,19 +53,19 @@ public class AfterSaleSellerController {
     @Autowired
     private AfterSaleManager afterSaleManager;
 
-    @ApiOperation(value = "审核退款/退货", response = AdminRefundApprovalVO.class)
+    @ApiOperation(value = "The processing of the refund/Return of the goods", response = AdminRefundApprovalVO.class)
     @PostMapping(value = "/audits/{sn}")
-    @ApiImplicitParam(name = "sn", value = "退款单sn", required = true, dataType = "String", paramType = "path")
+    @ApiImplicitParam(name = "sn", value = "Refund singlesn", required = true, dataType = "String", paramType = "path")
     public AdminRefundApprovalVO audit(@Valid AdminRefundApprovalVO refundApproval, @PathVariable("sn") String sn) {
         refundApproval.setSn(sn);
         afterSaleManager.approval(refundApproval, Permission.ADMIN);
         return refundApproval;
     }
 
-    @ApiOperation(value = "入库操作")
+    @ApiOperation(value = "Warehouse operation")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sn", value = "退款单编号", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "remark", value = "入库备注", required = false, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "sn", value = "Refund Slip No.", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "remark", value = "Treasury note", required = false, dataType = "String", paramType = "query")
     })
     @PostMapping(value = "/stock-ins/{sn}")
     public String stockIn(@PathVariable("sn") String sn, String remark) {
@@ -73,11 +73,11 @@ public class AfterSaleSellerController {
         return "";
     }
 
-    @ApiOperation(value = "退款", response = FinanceRefundApprovalVO.class)
+    @ApiOperation(value = "A refund", response = FinanceRefundApprovalVO.class)
     @PostMapping(value = "/refunds/{sn}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sn", value = "退款(货)编号", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "remark", value = "退款备注", required = false, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "sn", value = "A refund(cargo)Serial number", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "remark", value = "The refund note", required = false, dataType = "String", paramType = "query")
     })
     public String sellerRefund(@Valid FinanceRefundApprovalVO refundApply, @PathVariable("sn") @ApiIgnore String sn) {
         refundApply.setSn(sn);
@@ -85,34 +85,34 @@ public class AfterSaleSellerController {
         return "";
     }
 
-    @ApiOperation(value = "查看退款(货)详细", response = RefundDetailDTO.class)
-    @ApiImplicitParam(name = "sn", value = "退款(货)编号", required = true, dataType = "String", paramType = "path")
+    @ApiOperation(value = "To see a refund(cargo)detailed", response = RefundDetailDTO.class)
+    @ApiImplicitParam(name = "sn", value = "A refund(cargo)Serial number", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/refunds/{sn}")
     public RefundDetailDTO sellerDetail(@PathVariable("sn") String sn) {
 
         return this.afterSaleManager.getDetail(sn);
     }
 
-    @ApiOperation(value = "查看退款(货)列表", response = RefundDTO.class)
+    @ApiOperation(value = "To see a refund(cargo)The list of", response = RefundDTO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "分页数", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Number of pages", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping(value = "/refunds")
-    public Page sellerDetail(RefundQueryParamVO queryParam, @ApiIgnore @NotNull(message = "页码不能为空") Integer pageNo, @ApiIgnore @NotNull(message = "每页数量不能为空") Integer pageSize) {
+    public Page sellerDetail(RefundQueryParamVO queryParam, @ApiIgnore @NotNull(message = "The page number cannot be blank") Integer pageNo, @ApiIgnore @NotNull(message = "The number of pages cannot be empty") Integer pageSize) {
 
         queryParam.setPageNo(pageNo);
         queryParam.setPageSize(pageSize);
         return this.afterSaleManager.query(queryParam);
     }
 
-    @ApiOperation(value = "退款单导出excel",response = ExportRefundExcelVO.class)
+    @ApiOperation(value = "Refund Receipt Exportexcel",response = ExportRefundExcelVO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "start_time" , value = "开始时间" , required = true , dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "end_time" , value = "结束时间" , required = true , dataType = "long", paramType = "query")
+            @ApiImplicitParam(name = "start_time" , value = "The start time" , required = true , dataType = "long", paramType = "query"),
+            @ApiImplicitParam(name = "end_time" , value = "The end of time" , required = true , dataType = "long", paramType = "query")
     })
     @GetMapping(value = "/exports/excel")
-    public List<ExportRefundExcelVO> exportExcel(@ApiIgnore @NotNull(message = "开始时间不能为空") long startTime, @ApiIgnore @NotNull(message = "结束时间不能为空") long endTime){
+    public List<ExportRefundExcelVO> exportExcel(@ApiIgnore @NotNull(message = "The start time cannot be empty") long startTime, @ApiIgnore @NotNull(message = "The end time cannot be empty") long endTime){
 
         return afterSaleManager.exportExcel(startTime,endTime);
     }

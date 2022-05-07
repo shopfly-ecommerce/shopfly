@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 支付帐单实体
+ * Billing entity
  *
  * @author fk
  * @version v2.0
@@ -43,61 +43,61 @@ public class PaymentBillDO implements Serializable {
     private static final long serialVersionUID = 4389253275250473L;
 
     /**
-     * 主键id
+     * A primary keyid
      */
     @Id(name = "bill_id")
     @ApiModelProperty(hidden = true)
     private Integer billId;
     /**
-     * 交易单号
+     * Transaction number
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "单号", required = false)
+    @ApiModelProperty(name = "sn", value = "Order no.", required = false)
     private String sn;
     /**
-     * 支付账单编号（提交给第三方平台单号）
+     * Bill No.（Submit the tracking number to the third-party platform）
      */
     @Column(name = "out_trade_no")
-    @ApiModelProperty(name = "out_trade_no", value = "提交给第三方平台单号", required = false)
+    @ApiModelProperty(name = "out_trade_no", value = "Submit the tracking number to the third-party platform", required = false)
     private String outTradeNo;
     /**
-     * 第三方平台返回交易号
+     * The third party platform returns the transaction number
      */
     @Column(name = "return_trade_no")
-    @ApiModelProperty(name = "return_trade_no", value = "第三方平台返回交易号", required = false)
+    @ApiModelProperty(name = "return_trade_no", value = "The third party platform returns the transaction number", required = false)
     private String returnTradeNo;
     /**
-     * 是否已支付
+     * Whether paid or not
      */
     @Column(name = "is_pay")
-    @ApiModelProperty(name = "is_pay", value = "是否已支付", required = false)
+    @ApiModelProperty(name = "is_pay", value = "Whether paid or not", required = false)
     private Integer isPay;
     /**
-     * 交易类型
+     * Transaction type
      */
     @Column(name = "trade_type")
-    @ApiModelProperty(name = "trade_type", value = "交易类型", required = false)
+    @ApiModelProperty(name = "trade_type", value = "Transaction type", required = false)
     private String tradeType;
     /**
-     * 支付方式名称
+     * Name of Payment Method
      */
     @Column(name = "payment_name")
-    @ApiModelProperty(name = "payment_name", value = "支付方式名称", required = false)
+    @ApiModelProperty(name = "payment_name", value = "Name of Payment Method", required = false)
     private String paymentName;
     /**
-     * 支付参数
+     * Pay parameters
      */
     @Column(name = "pay_config")
-    @ApiModelProperty(name = "pay_config", value = "支付参数", required = false)
+    @ApiModelProperty(name = "pay_config", value = "Pay parameters", required = false)
     private String payConfig;
     /**
-     * 交易金额
+     * Transaction amount
      */
     @Column(name = "trade_price")
     private Double tradePrice;
 
     /**
-     * 支付插件id
+     * Pay the plug-inid
      */
     @Column(name = "payment_plugin_id")
     private String paymentPluginId;

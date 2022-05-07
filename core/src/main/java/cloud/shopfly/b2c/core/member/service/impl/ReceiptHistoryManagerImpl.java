@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 发票历史业务类
+ * Invoice history business class
  *
  * @author zh
  * @version v7.0.0
@@ -47,7 +47,7 @@ public class ReceiptHistoryManagerImpl implements ReceiptHistoryManager {
 
     @Override
     public Page list(int page, int pageSize) {
-        //金额为0的发票不显示
+        // Invoices with a value of 0 will not be displayed
         StringBuffer sqlBuffer = new StringBuffer("select * from es_receipt_history where receipt_amount != 0 ");
         sqlBuffer.append(" order by add_time desc");
         Page webPage = this.memberDaoSupport.queryForPage(sqlBuffer.toString(), page, pageSize, ReceiptHistory.class);
@@ -73,13 +73,13 @@ public class ReceiptHistoryManagerImpl implements ReceiptHistoryManager {
 
     @Override
     public ReceiptHistoryVO getReceiptDetail(Integer historyId) {
-        //获取发票详细信息
+        // Get invoice details
         StringBuffer sqlBuffer = new StringBuffer("select * from es_receipt_history where history_id = ?");
         ReceiptHistory receiptHistory = this.memberDaoSupport.queryForObject(sqlBuffer.toString(), ReceiptHistory.class, historyId);
         if (receiptHistory == null) {
             return new ReceiptHistoryVO();
         }
-        //查询订单信息
+        // Query order information
         OrderDetailDTO orderDetailDTO = orderClient.getModel(receiptHistory.getOrderSn());
         ReceiptHistoryVO receiptHistoryVO = new ReceiptHistoryVO(receiptHistory, orderDetailDTO);
 

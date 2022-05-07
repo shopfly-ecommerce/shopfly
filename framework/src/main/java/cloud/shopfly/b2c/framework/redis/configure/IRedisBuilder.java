@@ -18,23 +18,23 @@ package cloud.shopfly.b2c.framework.redis.configure;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 /**
- * redis构建接口
+ * redisBuild interfaces
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年10月27日 下午2:05:40
+ * 2017years10month27On the afternoon2:05:40
  */
 public interface IRedisBuilder {
 
 	/**
-	 * 构建连接
-	 * @param  config redis配置
+	 * Build connection
+	 * @param  config redisconfiguration
 	 * @return
 	 */
 	RedisConnectionFactory buildConnectionFactory(RedisConnectionConfig config);
 	
 	/**
-	 * 类型
+	 * type
 	 * @return
 	 */
     RedisType getType();

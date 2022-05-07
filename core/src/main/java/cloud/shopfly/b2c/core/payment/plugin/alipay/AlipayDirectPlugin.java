@@ -38,7 +38,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 支付宝支付插件
+ * @Description: Alipay payment plug-in
  * @date 2018/4/12 10:25
  * @since v7.0.0
  */
@@ -63,7 +63,7 @@ public class AlipayDirectPlugin implements PaymentPluginManager {
     @Override
     public Map pay(PayBill bill) {
 
-        //使用支付客户端判断调用哪个执行者
+        // Use the payment client to determine which performer to call
         if (bill.getClientType().equals(ClientType.PC)) {
 
             return aliPayPaymentExecutor.onPay(bill);
@@ -88,7 +88,7 @@ public class AlipayDirectPlugin implements PaymentPluginManager {
 
     @Override
     public String getPluginName() {
-        return "支付宝";
+        return "Alipay";
     }
 
     @Override
@@ -108,7 +108,7 @@ public class AlipayDirectPlugin implements PaymentPluginManager {
 
         config.setKey(ClientType.PC.getDbColumn() + "&" + ClientType.WAP.getDbColumn() + "&" + ClientType.NATIVE.getDbColumn() + "&" + ClientType.REACT.getDbColumn());
         config.setConfigList(configList);
-        config.setName("是否开启");
+        config.setName("Whether open");
 
         resultList.add(config);
 

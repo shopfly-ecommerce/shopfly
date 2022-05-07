@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 草稿商品业务类
+ * Draft commodity business class
  * 
  * @author fk
  * @version v2.0
@@ -90,14 +90,14 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 	@Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public DraftGoodsDO add(GoodsDTO goodsVO) {
 
-		// 没有规格给这个字段塞0
+		// There is no specification to fill this field with 0
 		goodsVO.setHaveSpec(StringUtil.isNotEmpty(goodsVO.getSkuList()) ? 1 : 0);
 
 		DraftGoodsDO draftGoods = new DraftGoodsDO(goodsVO);
-		// 商品状态 是否可用
+		// Whether the status of the item is available
 		draftGoods.setCreateTime(DateUtil.getDateline());
 		draftGoods.setQuantity(goodsVO.getQuantity());
-		// 相册
+		// Photo album
 		List<GoodsGalleryDO> galleryList = goodsVO.getGoodsGalleryList();
 		if (StringUtil.isNotEmpty(galleryList)) {
 			List<String> list = new ArrayList<>();
@@ -107,16 +107,16 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 			draftGoods.setOriginal(JsonUtil.objectToJson(list));
 		}
 
-		// 添加草稿箱商品
+		// Add draft box goods
 		this.daoSupport.insert(draftGoods);
-		// 获取添加商品的商品ID
+		// Gets the ID of the item to which the item is added
 		Integer draftGoodsId = this.daoSupport.getLastId("es_draft_goods");
 		draftGoods.setDraftGoodsId(draftGoodsId);
-		// 添加商品参数
+		// Add commodity parameters
 		if (StringUtil.isNotEmpty(goodsVO.getGoodsParamsList())) {
 			draftGoodsParamsManager.addParams(goodsVO.getGoodsParamsList(), draftGoodsId);
 		}
-		// 添加商品sku信息
+		// Add product SKU information
 		draftGoodsSkuManager.add(goodsVO, draftGoodsId);
 
 		return draftGoods;
@@ -128,12 +128,12 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 
 		DraftGoodsDO draftGoods = this.getModel(id);
 		if(draftGoods == null){
-			throw new ServiceException(GoodsErrorCode.E308.code(),"无权操作");
+			throw new ServiceException(GoodsErrorCode.E308.code(),"Have the right to operate");
 		}
 
 		DraftGoodsDO goods = new DraftGoodsDO(goodsVO);
 		goods.setQuantity(goodsVO.getQuantity());
-		// 修改后的图片列表
+		// List of modified images
 		List<GoodsGalleryDO> galleryList = goodsVO.getGoodsGalleryList();
 		List<String> listNew = new ArrayList<>();
 		if (StringUtil.isNotEmpty(galleryList)) {
@@ -145,12 +145,12 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 		goods.setOriginal(JsonUtil.objectToJson(listNew));
 
 		this.daoSupport.update(goods, id);
-		// 处理参数信息
-		// 添加商品参数
+		// Processing parameter Information
+		// Add commodity parameters
 		if (StringUtil.isNotEmpty(goodsVO.getGoodsParamsList())) {
 			this.draftGoodsParamsManager.addParams(goodsVO.getGoodsParamsList(), id);
 		}
-		// 处理规格信息
+		// Processing specification information
 		this.draftGoodsSkuManager.add(goodsVO, id);
 
 		return goods;
@@ -175,7 +175,7 @@ public class DraftGoodsManagerImpl implements DraftGoodsManager {
 		DraftGoodsVO draftGoodsVO = this.daoSupport.queryForObject("select * from es_draft_goods where draft_goods_id = ?", DraftGoodsVO.class,id);
 		draftGoodsVO.setCategoryName(goodsQueryManager.queryCategoryPath(draftGoodsVO.getCategoryId()));
 
-		//商品分类赋值
+		// Item category assignment
 		Integer categoryId = draftGoodsVO.getCategoryId();
 		CategoryDO category = categoryManager.getModel(categoryId);
 		String sql = "select name,category_id from es_category " +

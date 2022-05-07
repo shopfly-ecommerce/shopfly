@@ -30,9 +30,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 购物车sku渲染实现<br>
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#购物车显示" >购物车显示</a>
+ * The shopping cartskuRendering implementation<br>
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#Shopping cart display" >Shopping cart display</a>
  *
  * @author kingapex
  * @version 1.0
@@ -50,10 +50,10 @@ public class CartSkuRendererImpl implements CartSkuRenderer {
     @Override
     public void renderSku(List<CartVO> cartList, CartType cartType) {
 
-        //获取原始数据
+        // Get raw data
         List<CartSkuOriginVo> originList = cartOriginDataManager.read();
 
-        //用原始数据渲染购物车
+        // Render shopping cart with raw data
         for (CartSkuOriginVo originVo : originList) {
 
             innerRunder(originVo, cartList, cartType);
@@ -64,16 +64,16 @@ public class CartSkuRendererImpl implements CartSkuRenderer {
 
     @Override
     public void renderSku(List<CartVO> cartList, CartSkuFilter cartSkuFilter, CartType cartType) {
-        //获取原始数据
+        // Get raw data
         List<CartSkuOriginVo> originList = cartOriginDataManager.read();
 
-        //用原始数据渲染购物车
+        // Render shopping cart with raw data
         for (CartSkuOriginVo originVo : originList) {
 
-            //转换为购物车skuvo
+            // Convert to shopping cart Skuvo
             CartSkuVO skuVO = toSkuVo(originVo);
 
-            //如果过滤成功才继续
+            // Continue if the filter succeeds
             if (!cartSkuFilter.accept(skuVO)) {
                 continue;
             }
@@ -85,7 +85,7 @@ public class CartSkuRendererImpl implements CartSkuRenderer {
 
 
     /**
-     * 内部化用的渲染方法
+     * Internal rendering methods
      *
      * @param originVo
      * @param cartList
@@ -94,7 +94,7 @@ public class CartSkuRendererImpl implements CartSkuRenderer {
     private void innerRunder(CartSkuOriginVo originVo, List<CartVO> cartList, CartType cartType) {
         Integer sellerId = originVo.getSellerId();
         String sellerName = originVo.getSellerName();
-        //转换为购物车skuvo
+        // Convert to shopping cart Skuvo
         CartSkuVO skuVO = toSkuVo(originVo);
         CartVO cartVO = CartUtil.findCart(sellerId, cartList);
         if (cartVO == null) {
@@ -102,12 +102,12 @@ public class CartSkuRendererImpl implements CartSkuRenderer {
             cartList.add(cartVO);
         }
 
-        //压入到当前店铺的sku列表中
+        // Press into the list of SKUs for the current store
         cartVO.getSkuList().add(skuVO);
     }
 
     /**
-     * 将一个 CartSkuOriginVo转为  CartSkuVO
+     * Will aCartSkuOriginVotoCartSkuVO
      *
      * @param originVo
      * @return
@@ -115,7 +115,7 @@ public class CartSkuRendererImpl implements CartSkuRenderer {
     @SuppressWarnings("Duplicates")
     private CartSkuVO toSkuVo(CartSkuOriginVo originVo) {
 
-        // 生成一个购物项
+        // Generate a shopping item
         CartSkuVO skuVO = new CartSkuVO();
         skuVO.setSellerId(originVo.getSellerId());
         skuVO.setSellerName(originVo.getSellerName());
@@ -139,11 +139,11 @@ public class CartSkuRendererImpl implements CartSkuRenderer {
         skuVO.setSellerId(originVo.getSellerId());
         skuVO.setSellerName(originVo.getSellerName());
 
-        //设置可用的活动列表
+        // Set up a list of available activities
         skuVO.setSingleList(originVo.getSingleList());
         skuVO.setGroupList(originVo.getGroupList());
 
-        //计算小计
+        // Calculate subtotals
         double subTotal = CurrencyUtil.mul(skuVO.getNum(), skuVO.getOriginalPrice());
         skuVO.setSubtotal(subTotal);
 

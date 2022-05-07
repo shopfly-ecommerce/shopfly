@@ -16,22 +16,22 @@
 package cloud.shopfly.b2c.framework.security.model;
 
 /**
- * 管理员角色
+ * Administrator Role
  *
  * @author zh
  * @version v7.0
- * @date 18/6/27 上午10:09
+ * @date 18/6/27 In the morning10:09
  * @since v7.0
  */
 
 public class Admin extends User{
 
     /**
-     * 是否是超级管理员
+     * Yes No Super administrator
      */
     private Integer founder;
     /**
-     * 权限
+     * permissions
      */
     private String role;
 

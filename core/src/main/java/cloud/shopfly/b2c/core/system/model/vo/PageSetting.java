@@ -22,25 +22,25 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 静态页设置
+ * Static page setup
  *
  * @author chopper
  * @version v7.0
- * @date 18/5/30 下午3:08
+ * @date 18/5/30 In the afternoon3:08
  * @since v7.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PageSetting {
     /**
-     * 静态也地址
+     * Static address
      */
-    @ApiModelProperty(name = "static_page_address", value = "站点地址")
+    @ApiModelProperty(name = "static_page_address", value = "The site address")
     @NotEmpty
     private String staticPageAddress;
     /**
-     * wap站点静态页地址
+     * wapSite static page address
      */
-    @ApiModelProperty(name = "static_page_wap_address", value = "wap站点地址")
+    @ApiModelProperty(name = "static_page_wap_address", value = "wapThe site address")
     @NotEmpty
     private String staticPageWapAddress;
 

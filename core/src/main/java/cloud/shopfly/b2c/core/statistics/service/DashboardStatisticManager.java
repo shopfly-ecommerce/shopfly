@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.statistics.service;
 import cloud.shopfly.b2c.core.statistics.model.vo.ShopDashboardVO;
 
 /**
- * 首页仪表盘
+ * Home dashboard
  *
  * @author mengyuanming
  * @version 2.0
@@ -28,9 +28,9 @@ import cloud.shopfly.b2c.core.statistics.model.vo.ShopDashboardVO;
 public interface DashboardStatisticManager {
 
     /**
-     * 获取仪表盘数据
+     * Get dashboard data
      *
-     * @return 仪表盘数据展示类
+     * @return Dashboard data display class
      */
     ShopDashboardVO getData();
 

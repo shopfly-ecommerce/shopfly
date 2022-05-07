@@ -20,60 +20,60 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 平台联系方式
+ * Platform contact Information
  *
  * @author zh
  * @version v7.0
- * @date 18/5/30 下午3:08
+ * @date 18/5/30 In the afternoon3:08
  * @since v7.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class InformationSetting {
     /**
-     * 平台地址
+     * Platform to address
      */
-    @ApiModelProperty(name = "address", value = "平台地址")
+    @ApiModelProperty(name = "address", value = "Platform to address")
     private String address;
 
     /**
-     * 省id
+     * provinceid
      */
-    @ApiModelProperty(name = "province_id", value = "省id", required = false)
+    @ApiModelProperty(name = "province_id", value = "provinceid", required = false)
     private Integer provinceId;
     /**
-     * 市id
+     * The cityid
      */
-    @ApiModelProperty(name = "city_id", value = "市id", required = false)
+    @ApiModelProperty(name = "city_id", value = "The cityid", required = false)
     private Integer cityId;
     /**
-     * 县id
+     * countyid
      */
-    @ApiModelProperty(name = "county_id", value = "县id", required = false)
+    @ApiModelProperty(name = "county_id", value = "countyid", required = false)
     private Integer countyId;
     /**
-     * 镇id
+     * The town ofid
      */
-    @ApiModelProperty(name = "town_id", value = "镇id", required = false)
+    @ApiModelProperty(name = "town_id", value = "The town ofid", required = false)
     private Integer townId;
     /**
-     * 省
+     * province
      */
-    @ApiModelProperty(name = "province", value = "省", required = false)
+    @ApiModelProperty(name = "province", value = "province", required = false)
     private String province;
     /**
-     * 市
+     * The city
      */
-    @ApiModelProperty(name = "city", value = "市", required = false)
+    @ApiModelProperty(name = "city", value = "The city", required = false)
     private String city;
     /**
-     * 县
+     * county
      */
-    @ApiModelProperty(name = "county", value = "县", required = false)
+    @ApiModelProperty(name = "county", value = "county", required = false)
     private String county;
     /**
-     * 镇
+     * The town of
      */
-    @ApiModelProperty(name = "town", value = "镇", required = false)
+    @ApiModelProperty(name = "town", value = "The town of", required = false)
     private String town;
     /**
      * qq

@@ -16,18 +16,18 @@
 package cloud.shopfly.b2c.core.aftersale.model.enums;
 
 /**
- * 申请售后类型枚举类
+ * Application aftermarket type enumeration class
  *
  * @author zjp
  * @version v7.0
- * @since v7.0 上午9:38 2018/5/3
+ * @since v7.0 In the morning9:38 2018/5/3
  */
 public enum RefundTypeEnum {
 
-    //取消订单
-    CANCEL_ORDER("取消订单"),
-    //申请售后
-    AFTER_SALE("申请售后");
+    // Cancel the order
+    CANCEL_ORDER("Cancel the order"),
+    // Apply for after sales
+    AFTER_SALE("Apply for after sales");
 
     private String description;
 

@@ -18,32 +18,32 @@ package cloud.shopfly.b2c.core.payment.model.enums;
 /**
  * @author fk
  * @version v2.0
- * @Description: 中国银联客户端使用配置参数
+ * @Description: The China UnionPay client uses configuration parameters
  * @date 2018/4/11 17:05
  * @since v7.0.0
  */
 public enum UnionpayConfigItem {
 
     /**
-     * 中国银联商户代码
+     * Merchant code of China Unionpay
      */
-    mer_id("中国银联商户代码"),
+    mer_id("Merchant code of China Unionpay"),
     /**
-     * 签名证书路径
+     * Signature Certificate Path
      */
-    sign_cert("签名证书路径"),
+    sign_cert("Signature Certificate Path"),
     /**
-     * 签名证书密码
+     * Signature certificate password
      */
-    pwd("签名证书密码"),
+    pwd("Signature certificate password"),
     /**
-     * 验证签名证书目录
+     * Verify the signature certificate directory
      */
-    validate_cert("验证签名证书目录"),
+    validate_cert("Verify the signature certificate directory"),
     /**
-     * 敏感信息加密证书路径
+     * Sensitive information encryption certificate path
      */
-    encrypt_cert("敏感信息加密证书路径");
+    encrypt_cert("Sensitive information encryption certificate path");
 
     private String text;
 

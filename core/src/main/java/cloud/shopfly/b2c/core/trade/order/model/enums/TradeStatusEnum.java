@@ -16,24 +16,24 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 交易状态
+ * Transaction status
  *
  * @author Snow
  * @version v1.0
- * @date 2017年8月18日下午9:20:46
+ * @date 2017years8month18On the afternoon9:20:46
  * @since v6.4.0
  */
 public enum TradeStatusEnum {
 
     /**
-     * 新订单
+     * The new orders
      */
-    NEW("新订单"),
+    NEW("The new orders"),
 
     /**
-     * 已付款
+     * Payment has been
      */
-    PAID_OFF("已付款");
+    PAID_OFF("Payment has been");
 
     private String description;
 

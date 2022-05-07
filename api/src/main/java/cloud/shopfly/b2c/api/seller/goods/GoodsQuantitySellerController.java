@@ -41,14 +41,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品库存维护
+ * Commodity inventory maintenance
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午11:23:05
+ * 2018years3month23The morning of11:23:05
  */
-@Api(description = "商家中心商品库存单独维护api")
+@Api(description = "Store center merchandise inventory is maintained separatelyapi")
 @RestController
 @RequestMapping("/seller/goods/{goods_id}/quantity")
 @Validated
@@ -61,10 +61,10 @@ public class GoodsQuantitySellerController {
     @Autowired
     private ShopflyConfig shopflyConfig;
 
-    @ApiOperation(value = "商家单独维护库存接口", notes = "商家单独维护库存接口时使用")
+    @ApiOperation(value = "The merchant maintains the inventory interface separately", notes = "The merchant maintains the inventory interface separately时使用")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_id", value = "商品id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "sku_quantity_list", value = "库存集合，是个数组", required = true, dataType = "GoodsSkuQuantityDTO", paramType = "body", allowMultiple = true),
+            @ApiImplicitParam(name = "goods_id", value = "productid", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "sku_quantity_list", value = "Inventory collection, its an array", required = true, dataType = "GoodsSkuQuantityDTO", paramType = "body", allowMultiple = true),
     })
     @PutMapping
     public void updateQuantity(@ApiIgnore @Valid @RequestBody List<GoodsSkuQuantityDTO> skuQuantityList, @PathVariable("goods_id") Integer goodsId) {
@@ -72,10 +72,10 @@ public class GoodsQuantitySellerController {
         CacheGoods goods = goodsQueryManager.getFromCache(goodsId);
 
         if (goods == null) {
-            throw new ServiceException(GoodsErrorCode.E307.code(), "没有操作权限");
+            throw new ServiceException(GoodsErrorCode.E307.code(), "No operation permission");
         }
 
-        // 原有的sku集合
+        // The original collection of SKUs
         List<GoodsSkuVO> skuList = goods.getSkuList();
         Map<Integer, GoodsSkuVO> skuMap = new HashMap<>(skuList.size());
         for (GoodsSkuVO sku : skuList) {
@@ -83,29 +83,29 @@ public class GoodsQuantitySellerController {
         }
 
 
-        //要更新的库存列表
+        // Inventory list to update
         List<GoodsQuantityVO> stockList = new ArrayList<>();
 
         for (GoodsSkuQuantityDTO quantity : skuQuantityList) {
 
             if (quantity.getQuantityCount() == null || quantity.getQuantityCount() < 0) {
-                throw new ServiceException(GoodsErrorCode.E307.code(), "sku总库存不能为空或负数");
+                throw new ServiceException(GoodsErrorCode.E307.code(), "skuTotal inventory cannot be empty or negative");
             }
 
             GoodsSkuVO sku = skuMap.get(quantity.getSkuId());
             if (sku == null) {
-                throw new ServiceException(GoodsErrorCode.E307.code(), "商品sku不存在");
+                throw new ServiceException(GoodsErrorCode.E307.code(), "productskuThere is no");
             }
-            //待发货数
+            // Pending Shipment
             Integer waitRogCount = sku.getQuantity() - sku.getEnableQuantity();
-            //判断库存是否小于待发货数
+            // Determine whether the inventory is less than the number of goods to be shipped
             if (quantity.getQuantityCount() < waitRogCount) {
-                throw new ServiceException(GoodsErrorCode.E307.code(), "sku库存数不能小于待发货数");
+                throw new ServiceException(GoodsErrorCode.E307.code(), "skuThe number of inventory should not be less than the number of goods to be shipped");
             }
 
-            //实际库存
+            // The actual inventory
             GoodsQuantityVO actualQuantityVo = new GoodsQuantityVO();
-            //用传递的数量-现有的，就是变化的，如传递的是2000，原来是200，则就+1800，如果传递的是100，原来是200则就是-100
+            // So if you take the number of passes -- the number of passes now, its changing, so if you pass 2000, it was 200, then its plus 1800, and if you pass 100, it was 200 then its minus 100
             int stockNum = quantity.getQuantityCount() - sku.getQuantity();
             actualQuantityVo.setQuantity(stockNum);
             actualQuantityVo.setGoodsId(goodsId);
@@ -114,7 +114,7 @@ public class GoodsQuantitySellerController {
 
             stockList.add(actualQuantityVo);
 
-            //clone 一个quantity vo 设置为更新可用库存
+            // Clone a quantity VO set to update available inventory
             try {
                 GoodsQuantityVO enableVo = (GoodsQuantityVO) actualQuantityVo.clone();
                 enableVo.setQuantityType(QuantityType.enable);
@@ -125,12 +125,12 @@ public class GoodsQuantitySellerController {
 
         }
 
-        //更新库存
+        // Update the inventory
         this.goodsQuantityManager.updateSkuQuantity(stockList);
 
-        //如果商品库存缓冲池开启了，那么需要立即同步数据库的商品库存，以保证商品库存显示正常
+        // If the item inventory buffer pool is enabled, the item inventory in the database needs to be synchronized immediately to ensure that the item inventory displays properly
         if (shopflyConfig.isStock()) {
-            //立即同步数据库的库存
+            // Synchronize the database inventory immediately
             goodsQuantityManager.syncDataBase();
         }
     }

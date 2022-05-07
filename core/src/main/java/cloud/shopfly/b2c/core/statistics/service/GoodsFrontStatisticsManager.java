@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 商品分析manager接口
+ * Product analysismanagerinterface
  *
  * @author xin
  * @version v1.0, 2015-12-29
@@ -31,58 +31,58 @@ import java.util.List;
 public interface GoodsFrontStatisticsManager {
 
     /**
-     * 获取商品详情
+     * Obtain product details
      *
-     * @param pageNo    当前页码
-     * @param pageSize  每页数据量
-     * @param catId     商品分类id
-     * @param goodsName 商品名称
-     * @return Page 分页对象
+     * @param pageNo    The current page number
+     * @param pageSize  Data volume per page
+     * @param catId     Categoryid
+     * @param goodsName Name
+     * @return Page Paging object
      */
     Page getGoodsDetail(Integer pageNo, Integer pageSize, Integer catId, String goodsName);
 
     /**
-     * 获取商品价格数据，分页数据
+     * Get commodity price data, paging data
      *
-     * @param sections       区间List  格式：0 100 200
-     * @param searchCriteria 时间与店铺id相关参数
-     * @return SimpleChart简单图表数据
+     * @param sections       intervalList  format：0 100 200
+     * @param searchCriteria Time and shopidRelated parameters
+     * @return SimpleChartSimple chart data
      */
     SimpleChart getGoodsPriceSales(List<Integer> sections, SearchCriteria searchCriteria);
 
     /**
-     * 获取商品下单金额排行前30，分页数据
+     * Get the order amount ranking of goods30, paging data
      *
-     * @param searchCriteria 时间相关参数
-     * @param topNum         top数
-     * @return Page 分页对象
+     * @param searchCriteria Time dependent parameter
+     * @param topNum         topThe number
+     * @return Page Paging object
      */
     Page getGoodsOrderPriceTopPage(int topNum, SearchCriteria searchCriteria);
 
     /**
-     * 获取下单商品数量排行前30，分页数据
+     * Gets the order quantity ranking30, paging data
      *
-     * @param searchCriteria 时间相关参数
-     * @param topNum         名次 默认为30
-     * @return Page 分页对象
+     * @param searchCriteria Time dependent parameter
+     * @param topNum         The ranking defaults to30
+     * @return Page Paging object
      */
     Page getGoodsNumTopPage(int topNum, SearchCriteria searchCriteria);
 
     /**
-     * 获取商品下单金额排行前30，图表数据
+     * Get the order amount ranking of goods30, chart data
      *
-     * @param topNum         top数
-     * @param searchCriteria 时间相关参数
-     * @return SimpleChart 简单图表数据
+     * @param topNum         topThe number
+     * @param searchCriteria Time dependent parameter
+     * @return SimpleChart Simple chart data
      */
     SimpleChart getGoodsOrderPriceTop(Integer topNum, SearchCriteria searchCriteria);
 
     /**
-     * 获取商品下单数量排行前30，图表数据
+     * Get top order quantity ranking of goods30, chart data
      *
-     * @param topNum         top数
-     * @param searchCriteria 时间相关参数
-     * @return SimpleChart 简单图表数据
+     * @param topNum         topThe number
+     * @param searchCriteria Time dependent parameter
+     * @return SimpleChart Simple chart data
      */
     SimpleChart getGoodsNumTop(Integer topNum, SearchCriteria searchCriteria);
 }

@@ -18,32 +18,32 @@ package cloud.shopfly.b2c.core.base.model.vo;
 import java.util.List;
 
 /**
- * 配置文件映射实体
+ * Configuration files map entities
  *
  * @author dongxin
  * @version v1.0
  * @since v6.4.0
- * 2017年8月15日 上午11:35:42
+ * 2017years8month15The morning of11:35:42
  */
 public class ConfigItem {
     /**
-     * 配置文件name值
+     * The configuration filenamevalue
      */
     private String name;
     /**
-     * 配置文件name映射文本值
+     * The configuration filenameMapped text value
      */
     private String text;
     /**
-     * 配置文件显示在浏览器时，input的type属性
+     * When the configuration file is displayed in the browser,inputthetypeattribute
      */
     private String type;
     /**
-     * 配置的值
+     * The value of the configuration
      */
     private Object value;
     /**
-     * 如果是select 是需要将可选项传递到前天
+     * If it isselect Yes you need to pass the option to the day before yesterday
      */
     private List<RadioOption> options;
 

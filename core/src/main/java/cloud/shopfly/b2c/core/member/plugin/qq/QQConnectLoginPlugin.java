@@ -43,9 +43,9 @@ import java.util.regex.Pattern;
 /**
  * @author zjp
  * @version v7.0
- * @Description qq信任登录插件类
+ * @Description qqTrust the login plug-in class
  * @ClassName QqAbstractConnectLoginPlugin
- * @since v7.0 上午11:17 2018/6/5
+ * @since v7.0 In the morning11:17 2018/6/5
  */
 @Component
 public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
@@ -64,7 +64,7 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
 
 
         String uuid = UUID.randomUUID().toString();
-        debugger.log("生成uuid", uuid);
+        debugger.log("generateuuid", uuid);
 
         String callBack = this.getCallBackUrl(ConnectTypeEnum.QQ.value());
 
@@ -83,13 +83,13 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
     @Override
     public Auth2Token loginCallback() {
 
-        debugger.log("进入QQConnectLoginPlugin回调");
+        debugger.log("Enter theQQConnectLoginPluginThe callback");
 
         Map map = initConnectSetting();
 
         HttpServletRequest request = ThreadContextHolder.getHttpRequest();
 
-        //通过Authorization Code获取Access Token
+        // Obtain Access tokens using Authorization Code
         String code = request.getParameter("code");
         String redirectUri = this.getCallBackUrl(ConnectTypeEnum.QQ.value());
 
@@ -101,11 +101,11 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
                 "&redirect_uri=" + redirectUri;
 
 
-        debugger.log("向qq发出请求，请求地址为：", url);
+        debugger.log("toqqMake a request, request address is：", url);
 
         String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
 
-        debugger.log("返回结果为:", content);
+        debugger.log("The return result is:", content);
 
 
         String accessToken = "";
@@ -114,17 +114,17 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
             accessToken = matcher.group(1);
         }
 
-        debugger.log("生成accessToken", accessToken);
+        debugger.log("generateaccessToken", accessToken);
 
         url = "https://graph.qq.com/oauth2.0/me?access_token=" + accessToken;
 
 
-        debugger.log("向支付宝发出请求，请求地址为：", url);
+        debugger.log("Send a request to Alipay, the request address is：", url);
 
 
         content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
 
-        debugger.log("返回结果为", content);
+        debugger.log("The return result is", content);
 
         String unionId = "";
         Matcher unionIdMatcher = unionidPattern.matcher(content);
@@ -132,7 +132,7 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
             unionId = unionIdMatcher.group(1);
         }
 
-        debugger.log("得到unionId:", unionId);
+        debugger.log("getunionId:", unionId);
 
         Auth2Token auth2Token = new Auth2Token();
         auth2Token.setUnionid(unionId);
@@ -146,7 +146,7 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
 
         Map map = initConnectSetting();
 
-        //获取会员信息
+        // Get membership information
         String url = "https://graph.qq.com/user/get_user_info?" +
                 "access_token=" + auth2Token.getAccessToken() +
                 "&oauth_consumer_key=" + map.get("qq_pc_app_id").toString() +
@@ -154,9 +154,9 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
         String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
         JSONObject json = JSONObject.fromObject(content);
         String gender = json.getString("gender");
-        //完善会员信息
+        // Improve member information
         member.setNickname(json.getString("nickname"));
-        if ("男".equals(gender)) {
+        if ("male".equals(gender)) {
             member.setSex(1);
         } else {
             member.setSex(0);
@@ -182,7 +182,7 @@ public class QQConnectLoginPlugin extends AbstractConnectLoginPlugin {
             connectSettingParametersVO.setName(qqConnectConfigGroup.getText());
             list.add(connectSettingParametersVO);
         }
-        connectSetting.setName("QQ参数配置");
+        connectSetting.setName("QQParameter configuration");
         connectSetting.setType(ConnectTypeEnum.QQ.value());
         connectSetting.setConfig(JsonUtil.objectToJson(list));
         return connectSetting;

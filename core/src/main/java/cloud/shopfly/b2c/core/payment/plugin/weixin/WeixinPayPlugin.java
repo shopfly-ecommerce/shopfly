@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信支付插件
+ * @Description: Wechat pay plug-in
  * @date 2018/4/12 10:25
  * @since v7.0.0
  */
@@ -63,12 +63,12 @@ public class WeixinPayPlugin implements PaymentPluginManager {
     @Override
     public Map pay(PayBill bill) {
 
-        //使用支付客户端判断调用哪个执行者
+        // Use the payment client to determine which performer to call
         if (bill.getClientType().equals(ClientType.PC)) {
 
             return weixinPaymentExecutor.onPay(bill);
         }
-        //小程序
+        // Small program
         if (bill.getClientType().equals(ClientType.MINI)) {
 
             return weixinPaymentMiniExecutor.onPay(bill);
@@ -97,12 +97,12 @@ public class WeixinPayPlugin implements PaymentPluginManager {
 
     @Override
     public String getPluginName() {
-        return "微信";
+        return "WeChat";
     }
 
     @Override
     public void onReturn(TradeType tradeType) {
-        //微信支付没有同步回调，不需要实现
+        // Wechat Pay does not have a synchronous callback and does not need to be implemented
     }
 
     @Override
@@ -139,7 +139,7 @@ public class WeixinPayPlugin implements PaymentPluginManager {
     public List<ClientConfig> definitionClientConfig() {
         List<ClientConfig> resultList = new ArrayList<>();
 
-        // 是否开启pc和wap
+        // Whether to enable PC and WAP
         ClientConfig config = new ClientConfig();
 
         List<PayConfigItem> configList = new ArrayList<>();
@@ -152,10 +152,10 @@ public class WeixinPayPlugin implements PaymentPluginManager {
         }
         config.setKey(ClientType.PC.getDbColumn() + "&" + ClientType.WAP.getDbColumn());
         config.setConfigList(configList);
-        config.setName("是否开启PC和WAP");
+        config.setName("Whether openPCandWAP");
 
         resultList.add(config);
-        //======================app原生配置==================================
+        // = = = = = = = = = = = = = = = = = = = = = = app native configuration = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         ClientConfig configApp = new ClientConfig();
 
         List<PayConfigItem> configListApp = new ArrayList<>();
@@ -168,7 +168,7 @@ public class WeixinPayPlugin implements PaymentPluginManager {
         }
         configApp.setKey(ClientType.NATIVE.getDbColumn());
         configApp.setConfigList(configListApp);
-        configApp.setName("是否开启APP原生");
+        configApp.setName("Whether openAPPnative");
 
         resultList.add(configApp);
         //=========================app RN=================================
@@ -184,11 +184,11 @@ public class WeixinPayPlugin implements PaymentPluginManager {
         }
         configAppReact.setKey(ClientType.REACT.getDbColumn());
         configAppReact.setConfigList(configListAppReact);
-        configAppReact.setName("是否开启APP-RN");
+        configAppReact.setName("Whether openAPP-RN");
 
         resultList.add(configAppReact);
 
-        //======================小程序配置==================================
+        // = = = = = = = = = = = = = = = = = = = = = = small application configuration = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         ClientConfig configMini = new ClientConfig();
 
         List<PayConfigItem> configListMini = new ArrayList<>();
@@ -201,7 +201,7 @@ public class WeixinPayPlugin implements PaymentPluginManager {
         }
         configMini.setKey(ClientType.MINI.getDbColumn());
         configMini.setConfigList(configListMini);
-        configMini.setName("是否开启小程序");
+        configMini.setName("Whether to start a small program");
 
         resultList.add(configMini);
 

@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 国家
+ * countries
  * @author kingapex
  * @version 1.0
  * @data 2022/4/20 14:55

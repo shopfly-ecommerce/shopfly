@@ -22,21 +22,21 @@ import java.util.List;
 /**
  * @author fk
  * @version v2.0
- * @Description: 售后client
+ * @Description: after-salesclient
  * @date 2018/8/13 16:01
  * @since v7.0.0
  */
 public interface AfterSaleClient {
 
     /**
-     * 查询退款单状态
+     * Query the status of the refund slip
      */
     void queryRefundStatus();
 
     /**
-     * 获取退货单的商品列表
-     * @param sn 退款单号
-     * @return 退货商品列表
+     * Get a list of items for the return
+     * @param sn The refund number
+     * @return List of Returned Goods
      */
     List<RefundGoodsDO> getRefundGoods(String sn);
 

@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @author Chopper
  * @version v1.0
  * @since v7.0
- * 2018-08-14 下午2:37
+ * 2018-08-14 In the afternoon2:37
  */
 @Service
 @ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
@@ -38,9 +38,9 @@ public class GoodsDataClientDefaultImpl implements GoodsDataClient {
     private GoodsDataManager goodsDataManager;
 
     /**
-     * 新增商品
+     * The new goods
      *
-     * @param goodsIds 商品id
+     * @param goodsIds productid
      */
     @Override
     public void addGoods(Integer[] goodsIds) {
@@ -48,9 +48,9 @@ public class GoodsDataClientDefaultImpl implements GoodsDataClient {
     }
 
     /**
-     * 修改商品
+     * Modify the goods
      *
-     * @param goodsIds 商品id
+     * @param goodsIds productid
      */
     @Override
     public void updateGoods(Integer[] goodsIds) {
@@ -58,9 +58,9 @@ public class GoodsDataClientDefaultImpl implements GoodsDataClient {
     }
 
     /**
-     * 删除商品
+     * Delete the goods
      *
-     * @param goodsIds 商品id
+     * @param goodsIds productid
      */
     @Override
     public void deleteGoods(Integer[] goodsIds) {
@@ -68,7 +68,7 @@ public class GoodsDataClientDefaultImpl implements GoodsDataClient {
     }
 
     /**
-     * 修改商品收藏数量
+     * Modify the collection quantity of goods
      *
      * @param goodsData
      */
@@ -78,7 +78,7 @@ public class GoodsDataClientDefaultImpl implements GoodsDataClient {
     }
 
     /**
-     * 下架所有商品
+     * Take all merchandise off the shelves
      */
     @Override
     public void underAllGoods() {

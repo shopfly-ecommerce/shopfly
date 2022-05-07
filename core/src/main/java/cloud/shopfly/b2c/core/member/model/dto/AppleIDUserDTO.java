@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * AppleID登陆用户信息实体
+ * AppleIDLogin user information entity
  *
  * @author snow
  * @version v1.0

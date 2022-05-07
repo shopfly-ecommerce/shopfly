@@ -26,27 +26,27 @@ import java.util.List;
 /**
  * @author zjp
  * @version v7.0
- * @Description 售后申请参数VO
+ * @Description After-sale application parametersVO
  * @ClassName RefundApplyVO
- * @since v7.0 上午11:28 2018/7/4
+ * @since v7.0 In the morning11:28 2018/7/4
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class RefundApplyVO {
 
-    @ApiModelProperty(name = "original_way", value = "是否支持原路退回")
+    @ApiModelProperty(name = "original_way", value = "Whether to support the original way back")
     private String originalWay;
 
-    @ApiModelProperty(name = "return_money", value = "退款金额")
+    @ApiModelProperty(name = "return_money", value = "The refund amount")
     private Double returnMoney;
 
-    @ApiModelProperty(name = "return_point", value = "退款积分")
+    @ApiModelProperty(name = "return_point", value = "Refund integral")
     private Integer returnPoint;
 
-    @ApiModelProperty(name = "order", value = "订单明细")
+    @ApiModelProperty(name = "order", value = "The order details")
     private OrderDetailVO order;
 
-    @ApiModelProperty(name = "sku_list", value = "货品列表")
+    @ApiModelProperty(name = "sku_list", value = "The item list")
     private List<RefundSkuVO> skuList;
 
     public String getOriginalWay() {

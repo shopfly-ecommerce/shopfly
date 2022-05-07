@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * @author fk
  * @version v1.0
- * @Description: 商家查询商品使用
+ * @Description: Merchants inquire about the use of goods
  * @date 2018/5/21 14:36
  * @since v7.0.0
  */
@@ -43,73 +43,73 @@ public class GoodsVO implements Serializable {
     @ApiModelProperty(value = "id")
     private Integer goodsId;
 
-    @ApiModelProperty(name = "category_id", value = "分类id")
+    @ApiModelProperty(name = "category_id", value = "Categoriesid")
     private Integer categoryId;
 
-    @ApiModelProperty(value = "分类名称")
+    @ApiModelProperty(value = "name")
     private String categoryName;
 
-    @ApiModelProperty(name = "brand_id", value = "品牌id")
+    @ApiModelProperty(name = "brand_id", value = "brandid")
     private Integer brandId;
 
-    @ApiModelProperty(name = "goods_name", value = "商品名称")
+    @ApiModelProperty(name = "goods_name", value = "Name")
     private String goodsName;
 
-    @ApiModelProperty(name = "sn", value = "商品编号")
+    @ApiModelProperty(name = "sn", value = "SN")
     private String sn;
 
-    @ApiModelProperty(name = "price", value = "商品价格")
+    @ApiModelProperty(name = "price", value = "Price")
     private Double price;
 
-    @ApiModelProperty(name = "cost", value = "成本价格")
+    @ApiModelProperty(name = "cost", value = "Cost price")
     private Double cost;
 
-    @ApiModelProperty(name = "mktprice", value = "市场价格")
+    @ApiModelProperty(name = "mktprice", value = "Marking price")
     private Double mktprice;
 
-    @ApiModelProperty(name = "weight", value = "重量")
+    @ApiModelProperty(name = "weight", value = "Weight")
     private Double weight;
 
-    @ApiModelProperty(name = "goods_transfee_charge", value = "谁承担运费0：买家承担，1：卖家承担")
+    @ApiModelProperty(name = "goods_transfee_charge", value = "Who bears the freight0：The buyer bears,1：The seller bear")
     private Integer goodsTransfeeCharge;
 
-    @ApiModelProperty(name = "intro", value = "详情")
+    @ApiModelProperty(name = "intro", value = "details")
     private String intro;
 
-    @ApiModelProperty(name = "have_spec", value = "是否有规格0没有1有")
+    @ApiModelProperty(name = "have_spec", value = "Are there specifications?0There is no1There are")
     private Integer haveSpec;
 
-    @ApiModelProperty(name = "quantity", value = "库存")
+    @ApiModelProperty(name = "quantity", value = "Inventory")
     private Integer quantity;
 
-    @ApiModelProperty(name = "market_enable", value = "是否上架，1上架 0下架")
+    @ApiModelProperty(name = "market_enable", value = "Whether its on the shelf,1save0off")
     private Integer marketEnable;
 
-    @ApiModelProperty(name = "goods_gallery_list", value = "商品相册")
+    @ApiModelProperty(name = "goods_gallery_list", value = "Photo album")
     private List<GoodsGalleryDO> goodsGalleryList;
 
-    @ApiModelProperty(name = "page_title", value = "seo标题", required = false)
+    @ApiModelProperty(name = "page_title", value = "seo title", required = false)
     private String pageTitle;
 
-    @ApiModelProperty(name = "meta_keywords", value = "seo关键字", required = false)
+    @ApiModelProperty(name = "meta_keywords", value = "seokeyword", required = false)
     private String metaKeywords;
 
-    @ApiModelProperty(name = "meta_description", value = "seo描述", required = false)
+    @ApiModelProperty(name = "meta_description", value = "seo describe", required = false)
     private String metaDescription;
 
-    @ApiModelProperty(name = "template_id", value = "运费模板id,不需要运费模板时值是0")
+    @ApiModelProperty(name = "template_id", value = "The freight templateid,不需要The freight template时值是0")
     private Integer templateId;
 
-    @ApiModelProperty(value = "可用库存")
+    @ApiModelProperty(value = "Available")
     private Integer enableQuantity;
 
-    @ApiModelProperty(name = "goods_type", value = "商品类型NORMAL普通POINT积分")
+    @ApiModelProperty(name = "goods_type", value = "TypeNORMALordinaryPOINTpoint")
     private String goodsType;
 
-    @ApiModelProperty(name = "category_ids", value = "分类id数组")
+    @ApiModelProperty(name = "category_ids", value = "CategoriesidAn array of")
     private Integer[] categoryIds;
 
-    @ApiModelProperty(name = "exchange", value = "积分兑换对象")
+    @ApiModelProperty(name = "exchange", value = "Redemption object")
     private ExchangeDO exchange;
 
     public GoodsVO() {

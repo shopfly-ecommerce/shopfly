@@ -29,12 +29,12 @@ import java.util.List;
 
 
 /**
- * 存储方案VO
+ * Storage solutionVO
  *
  * @author zh
  * @version v1.0
  * @since v1.0
- * 2018年3月22日 上午9:39:08
+ * 2018years3month22The morning of9:39:08
  */
 @Component
 public class UploadFactory {
@@ -52,19 +52,19 @@ public class UploadFactory {
 
 
     /**
-     * 获取存储方案对象
+     * Gets the storage scheme object
      *
-     * @return 实例化的存储方案对象
+     * @return Instantiated storage scheme object
      */
     public Uploader getUploader() {
         UploaderVO uploaderVo = (UploaderVO) cache.get(CachePrefix.UPLOADER.getPrefix().toString());
-        //如果为空则要到库中读取
+        // If it is empty, read from the library
         if (uploaderVo == null) {
-            //由数据库中查询存储方案
+            // Query the storage scheme from the database
             String sql = "SELECT * FROM es_uploader WHERE open = 1";
             UploaderDO upload = this.systemDaoSupport.queryForObject(sql, UploaderDO.class);
             if (upload == null) {
-                throw new ResourceNotFoundException("未找到开启的存储方案");
+                throw new ResourceNotFoundException("The enabled storage scheme is not found");
             }
             uploaderVo = new UploaderVO();
             uploaderVo.setConfig(upload.getConfig());
@@ -75,7 +75,7 @@ public class UploadFactory {
     }
 
     /**
-     * 根据beanid获取出存储方案
+     * According to thebeanidObtain the storage scheme
      *
      * @param beanid
      * @return
@@ -86,8 +86,8 @@ public class UploadFactory {
                 return iUploader;
             }
         }
-        //如果走到这里，说明找不到可用的存储方案
-        throw new ResourceNotFoundException("未找到可用的文件存储方案");
+        // If you go to this point, it indicates that no available storage scheme is found
+        throw new ResourceNotFoundException("No available file storage scheme was found");
     }
 
 

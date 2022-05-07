@@ -30,7 +30,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
- * 存储方案实体
+ * Storage scheme entity
  * @author zh
  * @version v7.0.0
  * @since v7.0.0
@@ -43,28 +43,28 @@ public class UploaderDO implements Serializable {
 
 	private static final long serialVersionUID = 3081675229152673L;
 
-	/**储存id*/
+	/**storageid*/
 	@Id(name = "id")
 	@ApiModelProperty(hidden=true)
 	private Integer id;
-	/**存储名称*/
+	/**Store name*/
 	@Column(name = "name")
-	@NotEmpty(message="存储名称不能为空")
-	@ApiModelProperty(name="name",value="存储名称",required=true)
+	@NotEmpty(message="The storage name cannot be empty")
+	@ApiModelProperty(name="name",value="Store name",required=true)
 	private String name;
-	/**是否开启*/
+	/**Whether open*/
 	@Column(name = "open")
-	@ApiModelProperty(name="open",value="是否开启",required=false)
+	@ApiModelProperty(name="open",value="Whether open",required=false)
 	private Integer open;
-	/**存储配置*/
+	/**Storage configuration*/
 	@Column(name = "config")
-	@NotEmpty(message="存储配置不能为空")
-	@ApiModelProperty(name="config",value="存储配置",required=true)
+	@NotEmpty(message="The storage configuration cannot be empty")
+	@ApiModelProperty(name="config",value="Storage configuration",required=true)
 	private String config;
-	/**存储插件id*/
+	/**Memory cardid*/
 	@Column(name = "bean")
-	@NotEmpty(message="存储插件id不能为空")
-	@ApiModelProperty(name="bean",value="存储插件id",required=true)
+	@NotEmpty(message="Memory cardidCant be empty")
+	@ApiModelProperty(name="bean",value="Memory cardid",required=true)
 	private String bean;
 
 	public UploaderDO(UploaderVO uploaderVO) {

@@ -26,12 +26,12 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 
 /**
- * 商品sku
+ * productsku
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月21日 上午11:50:42
+ * 2018years3month21The morning of11:50:42
  */
 @ApiModel
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -42,22 +42,22 @@ public class GoodsSkuVO extends GoodsSkuDO {
      */
     private static final long serialVersionUID = -666090547834195127L;
 
-    @ApiModelProperty(name = "spec_list", value = "规格列表", required = false)
+    @ApiModelProperty(name = "spec_list", value = "Specification list", required = false)
     private List<SpecValueVO> specList;
 
-    @ApiModelProperty(name = "goods_transfee_charge", value = "谁承担运费0：买家承担，1：卖家承担", hidden = true)
+    @ApiModelProperty(name = "goods_transfee_charge", value = "Who bears the freight0：The buyer bears,1：The seller bear", hidden = true)
     private Integer goodsTransfeeCharge;
 
-    @ApiModelProperty(value = "是否被删除 0 删除 1 未删除", hidden = true)
+    @ApiModelProperty(value = "Deleted or not0 delete1 未delete", hidden = true)
     private Integer disabled;
 
-    @ApiModelProperty(value = "上架状态  0下架 1上架", hidden = true)
+    @ApiModelProperty(value = "On state0off1save", hidden = true)
     private Integer marketEnable;
 
-    @ApiModelProperty(name = "goods_type", value = "商品类型NORMAL普通POINT积分")
+    @ApiModelProperty(name = "goods_type", value = "TypeNORMALordinaryPOINTpoint")
     private String goodsType;
 
-    @ApiModelProperty(value = "最后修改时间", hidden = true)
+    @ApiModelProperty(value = "Last Modified time", hidden = true)
     private Long lastModify;
 
     public List<SpecValueVO> getSpecList() {

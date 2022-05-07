@@ -24,7 +24,7 @@ import java.lang.annotation.*;
 /**
  * @author fk
  * @version v2.0
- * @Description: 排序关键字验证
+ * @Description: Sort keyword validation
  * @date 2018/4/311:42
  * @since v7.0.0
  */
@@ -34,7 +34,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SortType {
 
-    String message() default "不正确的状态 , 应该是 'up', 'down'其中之一";
+    String message() default "Incorrect status, It should be'up', 'down'One of them";
 
     Class<?>[] groups() default {};
 

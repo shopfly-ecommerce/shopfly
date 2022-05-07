@@ -50,9 +50,9 @@ import java.util.Map;
 /**
  * @author zjp
  * @version v7.0
- * @Description 消息模版发送站内信
+ * @Description Message template sends in-station messages
  * @ClassName NoticeSendMessageConsumer
- * @since v7.0 上午11:43 2018/7/9
+ * @since v7.0 In the morning11:43 2018/7/9
  */
 @Component
 public class NoticeSendMessageConsumer extends AbstractMessage implements OrderStatusChangeEvent, RefundStatusChangeEvent, GoodsChangeEvent, MemberLoginEvent, MemberRegisterEvent, TradeIntoDbEvent, GoodsCommentEvent {
@@ -95,39 +95,39 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
 
         MessageTemplateDO messageTemplate = null;
 
-        //订单支付提醒
+        // Order Payment reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.PAID_OFF.name())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("paymentTime", DateUtil.toString(orderDO.getPaymentTime(), "yyyy-MM-dd"));
 
-            // 店铺订单支付提醒
+            // Store order payment reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSPAY);
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 noticeLogDO.setType(NoticeTypeEnum.ORDER.value());
                 noticeLogDO.setNoticeContent(this.replaceContent(messageTemplate.getContent(), valuesMap));
                 this.sendShopNotice(noticeLogDO);
             }
 
-            // 会员订单支付提醒
+            // Member order payment reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSPAY);
             if (messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     sendMemberNotice(this.replaceContent(messageTemplate.getContent(), valuesMap), DateUtil.getDateline(), orderDO.getMemberId());
                 }
             }
         }
 
-        //订单收货提醒
+        // Order receipt reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.ROG.name())) {
 
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("finishTime", DateUtil.toString(DateUtil.getDateline(), "yyyy-MM-dd"));
 
-            // 店铺订单收货提醒
+            // Store order receipt reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSRECEIVE);
             if (messageTemplate != null) {
                 if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
@@ -136,7 +136,7 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
                     this.sendShopNotice(noticeLogDO);
                 }
             }
-            //会员订单收货提醒
+            // Member order receipt reminder
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSRECEIVE);
             if (messageTemplate != null) {
                 if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
@@ -145,27 +145,27 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
             }
         }
 
-        //订单取消提醒
+        // Order Cancellation Reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.CANCELLED.name())) {
 
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("ordersSn", orderDO.getSn());
             valuesMap.put("cancelTime", DateUtil.toString(DateUtil.getDateline(), "yyyy-MM-dd"));
 
-            // 发送会员消息
+            // Send membership messages
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSCANCEL);
             if (messageTemplate != null) {
 
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     sendMemberNotice(this.replaceContent(messageTemplate.getContent(), valuesMap), DateUtil.getDateline(), orderDO.getMemberId());
                 }
             }
 
-            // 发送店铺消息
+            // Send store messages
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSCANCEL);
             if (messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     noticeLogDO.setNoticeContent(this.replaceContent(messageTemplate.getContent(), valuesMap));
                     noticeLogDO.setType(NoticeTypeEnum.ORDER.value());
@@ -174,12 +174,12 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
             }
         }
 
-        //订单发货提醒
+        // Order shipping Reminder
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.SHIPPED.name())) {
-            // 会员消息发送
+            // Member Message sending
             messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERORDERSSEND);
             if (messageTemplate != null) {
-                // 判断是否开启
+                // Check whether the function is enabled.
                 if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                     Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                     valuesMap.put("ordersSn", orderDO.getSn());
@@ -197,14 +197,14 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
         NoticeLogDO noticeLogDO = new NoticeLogDO();
         OrderDetailDTO orderDetailDTO = orderClient.getModel(refundChangeMsg.getRefund().getOrderSn());
 
-        //退货/款提醒
+        // Return/payment reminder
         if (refundChangeMsg.getRefundStatusEnum().equals(RefundStatusEnum.APPLY)) {
             if (orderDetailDTO != null) {
 
                 MessageTemplateDO messageTemplate = null;
 
-                // 会员信息发送
-                // 记录会员订单取消信息（会员中心查看）
+                // Member Information sending
+                // Record cancellation information of member order (check in member Center)
                 if (refundChangeMsg.getRefund().getRefuseType().equals(RefuseTypeEnum.RETURN_MONEY.value())) {
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERREFUNDUPDATE);
                 }
@@ -213,7 +213,7 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
                 }
 
                 if (messageTemplate != null) {
-                    // 判断是否开启
+                    // Check whether the function is enabled.
                     if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         Map<String, Object> valuesMap = new HashMap<String, Object>(2);
                         valuesMap.put("refundSn", refundChangeMsg.getRefund().getSn());
@@ -221,7 +221,7 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
                     }
                 }
 
-                // 店铺信息发送
+                // Store Information sending
                 messageTemplate = null;
                 if (refundChangeMsg.getRefund().getRefuseType().equals(RefuseTypeEnum.RETURN_GOODS.value())) {
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPRETURN);
@@ -231,9 +231,9 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
                     messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPREFUND);
                 }
 
-                // 记录店铺订单取消信息（商家中心查看）
+                // Record store order cancellation information (view in merchant center)
                 if (messageTemplate != null) {
-                    // 判断是否开启
+                    // Check whether the function is enabled.
                     if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                         Map<String, Object> valuesMap = new HashMap<String, Object>(2);
                         valuesMap.put("refundSn", refundChangeMsg.getRefund().getSn());
@@ -250,17 +250,17 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
     @Override
     public void goodsChange(GoodsChangeMsg goodsChangeMsg) {
         NoticeLogDO noticeLogDO = new NoticeLogDO();
-        //商品下架消息提醒
+        // Notification of merchandise removal
         if (GoodsChangeMsg.UNDER_OPERATION == goodsChangeMsg.getOperationType() && !StringUtil.isEmpty(goodsChangeMsg.getMessage())) {
-            //发送店铺消息
+            // Send store messages
             for (Integer goodsId : goodsChangeMsg.getGoodsIds()) {
 
                 CacheGoods goods = goodsClient.getFromCache(goodsId);
-                // 记录店铺订单取消信息（商家中心查看）
+                // Record store order cancellation information (view in merchant center)
                 MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPGOODSMARKETENABLE);
                 if (messageTemplate != null) {
 
-                    // 判断是否开启
+                    // Check whether the function is enabled.
                     if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
 
                         Map<String, Object> valuesMap = new HashMap<String, Object>(2);
@@ -279,12 +279,12 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
     public void memberLogin(MemberLoginMsg memberLoginMsg) {
         Member member = memberClient.getModel(memberLoginMsg.getMemberId());
         MessageTemplateDO messageTemplate = null;
-        // 记录会员登陆成功信息（会员中心查看）
+        // Record member login success information (check in member center)
         messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERLOGINSUCCESS);
 
-        // 判断站内信是否开启
+        // Check whether the station message is open
         if (messageTemplate != null) {
-            // 判断短信是否开启
+            // Check whether SMS is enabled
             if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 Map<String, Object> valuesMap = new HashMap<String, Object>(2);
                 valuesMap.put("name", member.getUname());
@@ -299,10 +299,10 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
     @Override
     public void memberRegister(MemberRegisterMsg memberRegisterMsg) {
         Member member = memberClient.getModel(memberRegisterMsg.getMember().getMemberId());
-        //会员注册成功提醒
+        // Member registration success reminder
         MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.MEMBERREGISTESUCCESS);
         if (messageTemplate != null) {
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 Map<String, Object> valuesMap = new HashMap<String, Object>(2);
                 valuesMap.put("loginTime", DateUtil.toString(DateUtil.getDateline(), "yyyy-MM-dd"));
@@ -314,12 +314,12 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
 
     @Override
     public void onTradeIntoDb(TradeVO tradeVO) {
-        //店铺新订单创建提醒
+        // Store new order creation reminder
         NoticeLogDO noticeLogDO = new NoticeLogDO();
         List<OrderDTO> orderList = tradeVO.getOrderList();
         for (OrderDTO orderDTO : orderList) {
             MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSNEW);
-            // 判断是否开启
+            // Check whether the function is enabled.
             if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
                 Map<String, Object> valuesMap = new HashMap<String, Object>(4);
                 valuesMap.put("ordersSn", orderDTO.getSn());
@@ -333,10 +333,10 @@ public class NoticeSendMessageConsumer extends AbstractMessage implements OrderS
 
     @Override
     public void goodsComment(GoodsCommentMsg goodsCommentMsg) {
-        //商品评价提醒
+        // Product Evaluation Reminder
         NoticeLogDO noticeLogDO = new NoticeLogDO();
         MessageTemplateDO messageTemplate = messageTemplateClient.getModel(MessageCodeEnum.SHOPORDERSEVALUATE);
-        // 判断是否开启
+        // Check whether the function is enabled.
         if (messageTemplate.getNoticeState().equals(MessageOpenStatusEnum.OPEN.value())) {
             Map<String, Object> valuesMap = new HashMap<String, Object>(4);
             valuesMap.put("sn", goodsCommentMsg.getComment().getOrderSn());

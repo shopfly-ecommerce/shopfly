@@ -27,11 +27,11 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.io.Serializable;
 
 /**
- * 订单DTO
+ * The orderDTO
  *
  * @author kingapex
  * @version 1.0
- * @since v7.0.0 2017年3月22日下午9:28:30
+ * @since v7.0.0 2017years3month22On the afternoon9:28:30
  */
 @SuppressWarnings("AlibabaPojoMustOverrideToString")
 @ApiIgnore
@@ -40,166 +40,166 @@ public class OrderDTO extends CartDO implements Serializable {
 
     private static final long serialVersionUID = 8206833000476657708L;
 
-    @ApiModelProperty(value = "交易编号")
+    @ApiModelProperty(value = "Transaction number")
     private String tradeSn;
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String sn;
 
-    @ApiModelProperty(value = "收货信息")
+    @ApiModelProperty(value = "Receiving information")
     private ConsigneeVO consignee;
 
-    @ApiModelProperty(value = "配送方式")
+    @ApiModelProperty(value = "Shipping type")
     private Integer shippingId;
 
-    @ApiModelProperty(value = "支付方式")
+    @ApiModelProperty(value = "Method of payment")
     private String paymentType;
 
-    @ApiModelProperty(value = "发货时间")
+    @ApiModelProperty(value = "The delivery time")
     private Long shipTime;
 
-    @ApiModelProperty(value = "发货时间类型")
+    @ApiModelProperty(value = "Delivery time type")
     private String receiveTime;
 
-    @ApiModelProperty(value = "会员id")
+    @ApiModelProperty(value = "membersid")
     private Integer memberId;
 
-    @ApiModelProperty(value = "会员姓名")
+    @ApiModelProperty(value = "Member name")
     private String memberName;
 
-    @ApiModelProperty(value = "订单备注")
+    @ApiModelProperty(value = "The order note")
     private String remark;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Last update")
     private Long createTime;
 
 
-    @ApiModelProperty(value = "配送方式名称")
+    @ApiModelProperty(value = "Name of delivery method")
     private String shippingType;
 
-    @ApiModelProperty(value = "订单状态")
+    @ApiModelProperty(value = "Status")
     private String orderStatus;
 
-    @ApiModelProperty(value = "付款状态")
+    @ApiModelProperty(value = "Payment status")
     private String payStatus;
 
-    @ApiModelProperty(value = "配送状态")
+    @ApiModelProperty(value = "Shipment status")
     private String shipStatus;
 
-    @ApiModelProperty(value = "收货人姓名")
+    @ApiModelProperty(value = "Name of consignee")
     private String shipName;
 
-    @ApiModelProperty(value = "订单价格")
+    @ApiModelProperty(value = "The order price")
     private Double orderPrice;
 
-    @ApiModelProperty(value = "配送费")
+    @ApiModelProperty(value = "The shipping fee,")
     private Double shippingPrice;
 
-    @ApiModelProperty(value = "评论状态")
+    @ApiModelProperty(value = "Review status")
     private String commentStatus;
 
-    @ApiModelProperty(value = "是否已经删除")
+    @ApiModelProperty(value = "Has been deleted?")
     private Integer disabled;
 
-    @ApiModelProperty(value = "支付方式id")
+    @ApiModelProperty(value = "Method of paymentid")
     private Integer paymentMethodId;
 
-    @ApiModelProperty(value = "支付插件id")
+    @ApiModelProperty(value = "Pay the plug-inid")
     private String paymentPluginId;
 
-    @ApiModelProperty(value = "支付方式名称")
+    @ApiModelProperty(value = "Name of Payment Method")
     private String paymentMethodName;
 
-    @ApiModelProperty(value = "付款账号")
+    @ApiModelProperty(value = "Payment account")
     private String paymentAccount;
 
-    @ApiModelProperty(value = "商品数量")
+    @ApiModelProperty(value = "The number")
     private Integer goodsNum;
 
-    @ApiModelProperty(value = "发货仓库id")
+    @ApiModelProperty(value = "The delivery warehouseid")
     private Integer warehouseId;
 
-    @ApiModelProperty(value = "取消原因")
+    @ApiModelProperty(value = "Cancel the reason")
     private String cancelReason;
 
-    @ApiModelProperty(value = "收货地址省Id")
+    @ApiModelProperty(value = "Delivery address provinceId")
     private Integer shipProvinceId;
 
-    @ApiModelProperty(value = "收货地址市Id")
+    @ApiModelProperty(value = "Shipping address cityId")
     private Integer shipCityId;
 
-    @ApiModelProperty(value = "收货地址区Id")
+    @ApiModelProperty(value = "Receiving address areaId")
     private Integer shipRegionId;
 
-    @ApiModelProperty(value = "收货地址街道Id")
+    @ApiModelProperty(value = "Delivery address StreetId")
     private Integer shipTownId;
 
-    @ApiModelProperty(value = "收货省")
+    @ApiModelProperty(value = "Receiving provinces")
     private String shipProvince;
 
-    @ApiModelProperty(value = "收货地址市")
+    @ApiModelProperty(value = "Shipping address city")
     private String shipCity;
 
-    @ApiModelProperty(value = "收货地址区")
+    @ApiModelProperty(value = "Receiving address area")
     private String shipRegion;
 
-    @ApiModelProperty(value = "收货地址街道")
+    @ApiModelProperty(value = "Delivery address Street")
     private String shipTown;
 
-    @ApiModelProperty(value = "签收时间")
+    @ApiModelProperty(value = "To sign for the time")
     private Long signingTime;
 
-    @ApiModelProperty(value = "签收人姓名")
+    @ApiModelProperty(value = "Name of consignee")
     private String theSign;
 
-    @ApiModelProperty(value = "管理员备注")
+    @ApiModelProperty(value = "Administrator Remarks")
     private String adminRemark;
 
-    @ApiModelProperty(value = "收货地址id")
+    @ApiModelProperty(value = "Shipping addressid")
     private Integer addressId;
 
-    @ApiModelProperty(value = "应付金额")
+    @ApiModelProperty(value = "Amount payable")
     private Double needPayMoney;
 
-    @ApiModelProperty(value = "发货单号")
+    @ApiModelProperty(value = "Invoice no.")
     private String shipNo;
 
-    @ApiModelProperty(value = "物流公司Id")
+    @ApiModelProperty(value = "Logistics companyId")
     private Integer logiId;
 
-    @ApiModelProperty(value = "物流公司名称")
+    @ApiModelProperty(value = "Name of logistics Company")
     private String logiName;
 
-    @ApiModelProperty(value = "是否需要发票")
+    @ApiModelProperty(value = "Do you need an invoice?")
     private Integer needReceipt;
 
-    @ApiModelProperty(value = "抬头")
+    @ApiModelProperty(value = "Look up")
     private String receiptTitle;
 
-    @ApiModelProperty(value = "内容")
+    @ApiModelProperty(value = "content")
     private String receiptContent;
 
-    @ApiModelProperty(value = "售后状态")
+    @ApiModelProperty(value = "After state")
     private String serviceStatus;
 
-    @ApiModelProperty(value = "订单来源")
+    @ApiModelProperty(value = "Source of the order")
     private String clientType;
-    @ApiModelProperty(value = "发票信息")
+    @ApiModelProperty(value = "The invoice information")
     private ReceiptVO receiptVO;
 
     /**
      * @see OrderTypeEnum
-     * 因增加拼团业务新增订单类型字段 kingapex 2019/1/28 on v7.1.0
+     * Added order type field due to added group servicekingapex 2019/1/28 on v7.1.0
      */
-    @ApiModelProperty(value = "订单类型")
+    @ApiModelProperty(value = "Order type")
     private String orderType;
 
 
     /**
-     * 订单的扩展数据
-     * 为了增加订单的扩展性，个性化的业务可以将个性化数据（如拼团所差人数）存在此字段 kingapex 2019/1/28 on v7.1.0
+     * Extended data for orders
+     * To increase the scalability of orders, personalized business can personalize data（Such as the number of people missing from the group）This field existskingapex 2019/1/28 on v7.1.0
      */
-    @ApiModelProperty(value = "扩展数据", hidden = true)
+    @ApiModelProperty(value = "Extension data", hidden = true)
     private String orderData;
 
 
@@ -208,7 +208,7 @@ public class OrderDTO extends CartDO implements Serializable {
     }
 
     /**
-     * 无参构造器
+     * No parameter constructor
      */
     public OrderDTO() {
 
@@ -216,7 +216,7 @@ public class OrderDTO extends CartDO implements Serializable {
 
 
     /**
-     * 用一个购物车购造订单
+     * Build orders with a shopping cart
      *
      * @param cart
      */
@@ -224,7 +224,7 @@ public class OrderDTO extends CartDO implements Serializable {
 
         super(cart.getSellerId(), cart.getSellerName());
 
-        // 初始化产品及优惠数据
+        // Initialize product and offer data
         this.setWeight(cart.getWeight());
         this.setPrice(cart.getPrice());
         this.setSkuList(cart.getSkuList());

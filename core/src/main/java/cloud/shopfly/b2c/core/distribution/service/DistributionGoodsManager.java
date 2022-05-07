@@ -20,18 +20,18 @@ import cloud.shopfly.b2c.core.distribution.model.dos.DistributionGoods;
 import java.util.List;
 
 /**
- * 分销商品接口
+ * Commodity Distribution Interface
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/14 上午12:37
+ * 2018/6/14 In the morning12:37
  */
 public interface DistributionGoodsManager {
 
     /**
-     * 设置分销商品提现设置
+     * Set up withdrawal Settings for distributed goods
      *
      * @param distributionGoods
      * @return
@@ -39,14 +39,14 @@ public interface DistributionGoodsManager {
     DistributionGoods edit(DistributionGoods distributionGoods);
 
     /**
-     * 删除
+     * delete
      *
      * @param id
      */
     void delete(Integer id);
 
     /**
-     * 获取model
+     * To obtainmodel
      *
      * @param goodsId
      * @return
@@ -55,7 +55,7 @@ public interface DistributionGoodsManager {
 
 
     /**
-     * 获取分销返佣商品
+     * Get distribution rebate merchandise
      * @param goodsIds
      * @return
      */

@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 导航栏业务类
+ * Navigation bar business class
  *
  * @author fk
  * @version v1.0
@@ -68,18 +68,18 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public SiteNavigation add(SiteNavigation siteNavigation) {
 
-        //移动端图片地址必填
+        // Mobile image Address This parameter is mandatory
         if (ClientType.MOBILE.name().equals(siteNavigation.getClientType())) {
             if (StringUtil.isEmpty(siteNavigation.getImage())) {
-                throw new ServiceException(SystemErrorCode.E953.code(), "移动端导航，图片必传");
+                throw new ServiceException(SystemErrorCode.E953.code(), "Mobile navigation, pictures will be transmitted");
             }
         }
-        //导航名称长度不能超过6
+        // The length of the navigation name cannot exceed 6
         if (siteNavigation.getNavigationName().length() > 12) {
-            throw new ServiceException(SystemErrorCode.E953.code(), "导航栏菜单名称已经超出最大限制");
+            throw new ServiceException(SystemErrorCode.E953.code(), "The navigation bar menu name has exceeded the maximum limit");
         }
 
-        /**查询数据库sort最大值方便给新添加的数据赋值*/
+        /**Querying the databasesortThe maximum value is easy to assign to newly added data*/
         Integer sort = this.daoSupport.queryForInt("select MAX(sort) from es_site_navigation");
         siteNavigation.setSort(sort + 1);
 
@@ -100,18 +100,18 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
 
         SiteNavigation siteNav = this.getModel(id);
         if (siteNav == null) {
-            throw new ServiceException(SystemErrorCode.E953.code(), "导航栏不存在，请正确操作");
+            throw new ServiceException(SystemErrorCode.E953.code(), "The navigation bar does not exist. Please operate correctly");
         }
 
-        //移动端图片地址必填
+        // Mobile image Address This parameter is mandatory
         if (ClientType.MOBILE.name().equals(siteNavigation.getClientType())) {
             if (StringUtil.isEmpty(siteNavigation.getImage())) {
-                throw new ServiceException(SystemErrorCode.E953.code(), "移动端导航，图片必传");
+                throw new ServiceException(SystemErrorCode.E953.code(), "Mobile navigation, pictures will be transmitted");
             }
         }
-        //导航名称长度不能超过6
+        // The length of the navigation name cannot exceed 6
         if (siteNavigation.getNavigationName().length() > 12) {
-            throw new ServiceException(SystemErrorCode.E953.code(), "导航栏菜单名称已经超出最大限制");
+            throw new ServiceException(SystemErrorCode.E953.code(), "The navigation bar menu name has exceeded the maximum limit");
         }
 
         siteNavigation.setSort(siteNav.getSort());
@@ -129,7 +129,7 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
 
         SiteNavigation siteNav = this.getModel(id);
         if (siteNav == null) {
-            throw new ServiceException(SystemErrorCode.E953.code(), "导航栏不存在，请正确操作");
+            throw new ServiceException(SystemErrorCode.E953.code(), "The navigation bar does not exist. Please operate correctly");
         }
 
         this.avigationChange(siteNav);
@@ -147,23 +147,23 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
 
         SiteNavigation siteNav = this.getModel(id);
         if (siteNav == null) {
-            throw new ServiceException(SystemErrorCode.E953.code(), "导航栏不存在，请正确操作");
+            throw new ServiceException(SystemErrorCode.E953.code(), "The navigation bar does not exist. Please operate correctly");
         }
 
         Integer menuSort = siteNav.getSort();
         String sql = "";
-        /**判断是否操作是下移或者上移 up上移 否则 下移*/
+        /**Determines whether the operation is moved down or upupMove up or move down*/
         if ("up".equals(sort)) {
             sql = "select * from es_site_navigation where sort >? and client_type=? order by sort asc limit 1";
         } else {
             sql = "select * from es_site_navigation where sort < ? and client_type= ? order by sort desc limit 1 ";
         }
-        /** 当前记录的上或者下一条记录 */
+        /** The previous or next record to the current record*/
         SiteNavigation operationSiteMenu = this.daoSupport.queryForObject(sql, SiteNavigation.class, siteNav.getSort(), siteNav.getClientType());
-        /**如果为null 则为最顶级或者最下级*/
+        /**If it isnull Is the highest or lowest level*/
         if (operationSiteMenu != null) {
             Integer operMenuSort = operationSiteMenu.getSort();
-            /** 改变当前记录的排序 */
+            /** Changes the order of the current record*/
             siteNav.setSort(operMenuSort);
             this.daoSupport.update(siteNav, siteNav.getNavigationId());
             operationSiteMenu.setSort(menuSort);
@@ -192,7 +192,7 @@ public class SiteNavigationManagerImpl implements SiteNavigationManager {
     }
 
     /**
-     * 导航栏变化清除缓存，发送mq消息
+     * Navigation bar changes clear cache, sendmqThe message
      *
      * @param siteNav
      */

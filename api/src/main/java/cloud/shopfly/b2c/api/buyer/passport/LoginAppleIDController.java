@@ -29,14 +29,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * IOS-APP端 AppleID登录
+ * IOS-APPendAppleIDSign in
  *
  * @author snow
  * @version v1.0
  * @since v7.2.2
  * 2020-12-16
  */
-@Api(description = "IOS-APP端 AppleID登录")
+@Api(description = "IOS-APPendAppleIDSign in")
 @RestController
 @RequestMapping("/apple")
 @Validated
@@ -45,7 +45,7 @@ public class LoginAppleIDController {
     @Autowired
     private LoginAppleIDManager loginAppleIDManager;
 
-    @ApiOperation(value = "APP登陆")
+    @ApiOperation(value = "APPlanding")
     @PostMapping("/app/login/{uuid}")
     public Map appLogin(@PathVariable String uuid, AppleIDUserDTO appleIDUserDTO){
         System.out.println(uuid);

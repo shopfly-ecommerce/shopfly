@@ -27,7 +27,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 订单相关
+ * Order related
  *
  * @author Snow create in 2018/5/14
  * @version v2.0
@@ -35,41 +35,41 @@ import java.util.List;
  */
 public interface OrderQueryManager {
     /**
-     * 读取订单状态的订单数
+     * Read the order number of the order status
      *
-     * @param memberId 会员id
+     * @param memberId membersid
      * @return
      */
     OrderStatusNumVO getOrderStatusNum(Integer memberId);
 
     /**
-     * 读取会员所有的订单数量
+     * Read all order numbers of members
      *
-     * @param memberId 会员id
+     * @param memberId membersid
      * @return
      */
     Integer getOrderNumByMemberId(Integer memberId);
 
     /**
-     * 读取会员(评论状态)订单数量
+     * Read the member(Review status)The order number
      *
      * @param memberId
-     * @param commentStatus 评论状态
+     * @param commentStatus Review status
      * @return
      */
     Integer getOrderCommentNumByMemberId(Integer memberId, String commentStatus);
 
     /**
-     * 读取一个订单详细<br/>
+     * Read an order detail<br/>
      *
-     * @param orderSn 订单编号 必传
-     * @param buyerId 用户编号
+     * @param orderSn Order number must be uploaded
+     * @param buyerId The user id
      * @return
      */
     OrderDetailVO getModel(String orderSn, Integer buyerId);
 
     /**
-     * 查询一个订单的详细
+     * Query the details of an order
      *
      * @param orderSn
      * @return
@@ -77,31 +77,31 @@ public interface OrderQueryManager {
     OrderDetailDTO getModel(String orderSn);
 
     /**
-     * 获取某订单的订单项
+     * Gets the order item for an order
      *
-     * @param orderSn 订单编号
+     * @param orderSn Order no.
      * @return
      */
     List<OrderItemsDO> orderItems(String orderSn);
 
     /**
-     * 获取订单可退款总额
-     * @param orderSn 订单编号
+     * Get the total refundable amount of the order
+     * @param orderSn Order no.
      * @return
      */
     double getOrderRefundPrice(String orderSn);
 
 
     /**
-     * 查询订单表列表
+     * Query the order table list
      *
-     * @param paramDTO 参数对象
+     * @param paramDTO Parameter object
      * @return Page
      */
     Page list(OrderQueryParam paramDTO);
 
     /**
-     * 读取订单列表根据交易编号
+     * Read the order list according to the transaction number
      *
      * @param tradeSn
      * @param memberId
@@ -110,22 +110,22 @@ public interface OrderQueryManager {
     List<OrderDetailVO> getOrderByTradeSn(String tradeSn, Integer memberId);
 
     /**
-     * 读取订单列表根据交易编号——系统内部使用 OrderClient
+     * Read the order list according to the transaction number——System internal useOrderClient
      * @param tradeSn
      * @return
      */
     List<OrderDetailDTO> getOrderByTradeSn(String tradeSn);
 
     /**
-     * 根据订单sn读取，订单的流程
+     * According to the ordersnThe process of reading the order
      *
-     * @param orderSn 订单编号
+     * @param orderSn Order no.
      * @return
      */
     List<OrderFlowNode> getOrderFlow(String orderSn);
 
     /**
-     * 查询一个订单DO
+     * Querying an orderDO
      * @param orderSn
      * @return
      */

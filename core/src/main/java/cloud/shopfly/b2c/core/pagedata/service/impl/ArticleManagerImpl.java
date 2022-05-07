@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文章业务类
+ * Article business Class
  *
  * @author fk
  * @version v1.0
@@ -69,7 +69,7 @@ public class ArticleManagerImpl implements ArticleManager {
         }
         if (categoryId != null) {
             List<ArticleCategory> articleCategorys = daoSupport.queryForList("select * from es_article_category where parent_id = ?", ArticleCategory.class, categoryId);
-            //如果是对底级分类查询 则只需要查询其分类就可以，否则需要将其下级分类数据全部查询出来
+            // For bottom-level classification query, you only need to query its classification; otherwise, you need to query all the lower-level classification data
             if (articleCategorys.size() <= 0) {
                 condition.add(" a.category_id = ?");
                 term.add(categoryId);
@@ -109,7 +109,7 @@ public class ArticleManagerImpl implements ArticleManager {
 
         Article art = this.getModel(id);
         if (art == null) {
-            throw new ServiceException(SystemErrorCode.E955.code(), "文章不存在，请正确操作");
+            throw new ServiceException(SystemErrorCode.E955.code(), "Article does not exist, please operate correctly");
         }
         article.setShowPosition(art.getShowPosition());
         article.setModifyTime(DateUtil.getDateline());
@@ -123,7 +123,7 @@ public class ArticleManagerImpl implements ArticleManager {
 
         Article article = this.getModel(id);
         if (article == null || !ArticleShowPosition.valueOf(article.getShowPosition()).equals(ArticleShowPosition.OTHER)) {
-            throw new ServiceException(SystemErrorCode.E952.code(), "该文章不可删除，只可修改");
+            throw new ServiceException(SystemErrorCode.E952.code(), "This article cannot be deleted, only modified");
         }
 
         this.daoSupport.delete(Article.class, id);

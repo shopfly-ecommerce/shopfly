@@ -18,25 +18,25 @@ package cloud.shopfly.b2c.core.pagedata.service;
 import java.util.List;
 
 /**
- * 静态页面帮助页面
+ * Static page Help page
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/7/17 下午3:27
+ * 2018/7/17 In the afternoon3:27
  * @Description:
  *
  */
 public interface StaticsPageHelpManager {
 
     /**
-     * 获取帮助页面总数
+     * Get the total number of help pages
      * @return
      */
     Integer count();
 
 
     /**
-     * 分页获取帮助
+     * Paging for help
      * @param page
      * @param pageSize
      * @return

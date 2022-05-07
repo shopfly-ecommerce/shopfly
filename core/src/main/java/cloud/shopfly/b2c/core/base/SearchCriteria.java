@@ -25,67 +25,67 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * 搜索参数
+ * The search parameters
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/4/28 下午5:09
+ * 2018/4/28 In the afternoon5:09
  */
 @ApiModel
 public class SearchCriteria implements Serializable {
 
     private static final long serialVersionUID = -1570682583055253820L;
 
-    @ApiModelProperty(name = "cycle_type", value = "周期 YEAR:年 MONTH:月", required = true, allowableValues = "YEAR,MONTH")
+    @ApiModelProperty(name = "cycle_type", value = "cycleYEAR:yearsMONTH:month", required = true, allowableValues = "YEAR,MONTH")
     private String cycleType;
 
-    @ApiModelProperty(name = "year",value = "年份", example = "2016")
+    @ApiModelProperty(name = "year",value = "year", example = "2016")
     private Integer year;
 
-    @ApiModelProperty(name = "month",value = "月份", example = "11")
+    @ApiModelProperty(name = "month",value = "in", example = "11")
     private Integer month;
 
-    @ApiModelProperty(name = "category_id",value = "分类id 0全部", example = "0")
+    @ApiModelProperty(name = "category_id",value = "Categoriesid 0all", example = "0")
     private Integer categoryId;
 
 
     /**
-     * @param cycleType 日期类型
-     * @param year      年
-     * @param month     月
+     * @param cycleType The date type
+     * @param year      years
+     * @param month     month
      */
     public static void checkDataParams(String cycleType, Integer year, Integer month) throws StatisticsException {
         if (cycleType == null || year == null) {
-            throw new StatisticsException("日期类型及年份不可为空");
+            throw new StatisticsException("Date type and year cannot be empty");
         }
         if (cycleType.equals(QueryDateType.MONTH.value()) && month == null) {
-            throw new StatisticsException("按月查询时，月份不可为空");
+            throw new StatisticsException("When the query is performed by month, the month cannot be empty");
         }
     }
 
     /**
-     * 校验参数
+     * Calibration parameters
      *
-     * @param searchCriteria 参数对象
-     * @param checkDate      校验日期
-     * @param checkCategory  校验分类
-     * @throws StatisticsException 抛出自定义统计异常
+     * @param searchCriteria Parameter object
+     * @param checkDate      Check the date
+     * @param checkCategory  Check classification
+     * @throws StatisticsException Throw custom statistical exceptions
      */
     public static void checkDataParams(SearchCriteria searchCriteria, boolean checkDate, boolean checkCategory) throws StatisticsException {
 
         if (checkDate) {
             if (searchCriteria.getCycleType() == null || searchCriteria.getYear() == null) {
-                throw new StatisticsException("日期类型及年份不可为空");
+                throw new StatisticsException("Date type and year cannot be empty");
             }
             if (searchCriteria.getCycleType().equals(QueryDateType.MONTH.value()) && searchCriteria.getMonth() == null) {
-                throw new StatisticsException("按月查询时，月份不可为空");
+                throw new StatisticsException("When the query is performed by month, the month cannot be empty");
             }
         }
         if (checkCategory) {
             if (searchCriteria.getCategoryId() == null) {
-                throw new StatisticsException("商品分类不可为空");
+                throw new StatisticsException("The category of goods cannot be empty");
             }
         }
     }

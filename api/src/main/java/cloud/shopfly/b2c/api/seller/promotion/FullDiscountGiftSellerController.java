@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 满优惠赠品控制器
+ * Full discount gift controller
  *
  * @author Snow
  * @version v7.0.0
@@ -43,7 +43,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/promotion/full-discount-gifts")
-@Api(description = "满优惠赠品相关API")
+@Api(description = "Full discount related giftsAPI")
 @Validated
 public class FullDiscountGiftSellerController {
 
@@ -51,11 +51,11 @@ public class FullDiscountGiftSellerController {
     private FullDiscountGiftManager fullDiscountGiftManager;
 
 
-    @ApiOperation(value = "查询满优惠赠品列表", response = FullDiscountGiftDO.class)
+    @ApiOperation(value = "Check the full discount gift list", response = FullDiscountGiftDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "keyword", value = "关键字查询", dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "keyword", value = "Keyword query", dataType = "String", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, String keyword) {
@@ -64,18 +64,18 @@ public class FullDiscountGiftSellerController {
     }
 
 
-    @ApiOperation(value = "添加满优惠赠品", response = FullDiscountGiftDO.class)
+    @ApiOperation(value = "Add full discount gift", response = FullDiscountGiftDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "gift_name", value = "赠品名称", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "gift_price", value = "赠品金额", required = true, dataType = "double", paramType = "query"),
-            @ApiImplicitParam(name = "gift_img", value = "赠品图片", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "actual_store", value = "库存", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "gift_name", value = "Name of gift", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "gift_price", value = "Gift amount", required = true, dataType = "double", paramType = "query"),
+            @ApiImplicitParam(name = "gift_img", value = "Gifts pictures", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "actual_store", value = "Inventory", required = true, dataType = "int", paramType = "query"),
     })
     @PostMapping
-    public FullDiscountGiftDO add(@ApiIgnore @NotEmpty(message = "请填写赠品名称") String giftName,
-                                  @ApiIgnore @NotNull(message = "请填写赠品金额") Double giftPrice,
-                                  @ApiIgnore @NotEmpty(message = "请上传赠品图片") String giftImg,
-                                  @ApiIgnore @NotNull(message = "请填写库存") Integer actualStore) {
+    public FullDiscountGiftDO add(@ApiIgnore @NotEmpty(message = "Please fill in the name of the gift") String giftName,
+                                  @ApiIgnore @NotNull(message = "Please fill in the amount of gift") Double giftPrice,
+                                  @ApiIgnore @NotEmpty(message = "Please upload pictures of the gifts") String giftImg,
+                                  @ApiIgnore @NotNull(message = "Please fill in the inventory") Integer actualStore) {
 
         FullDiscountGiftDO giftDO = new FullDiscountGiftDO();
         giftDO.setGiftName(giftName);
@@ -83,16 +83,16 @@ public class FullDiscountGiftSellerController {
         giftDO.setGiftImg(giftImg);
         giftDO.setActualStore(actualStore);
 
-        //设置赠品可用库存(添加时可用库存=实际库存)
+        // Set available inventory for giveaways (Available inventory when adding = actual inventory)
         giftDO.setEnableStore(actualStore);
 
-        //添加赠品创建时间
+        // Added the creation time of giveaways
         giftDO.setCreateTime(DateUtil.getDateline());
 
-        //设置赠品类型(1.0版本赠品类型默认为0：普通赠品)
+        // Set the gift type (version 1.0 gift type defaults to 0: normal gift)
         giftDO.setGiftType(0);
 
-        //默认不禁用
+        // Disable by default
         giftDO.setDisabled(0);
 
         this.fullDiscountGiftManager.add(giftDO);
@@ -101,20 +101,20 @@ public class FullDiscountGiftSellerController {
     }
 
     @PutMapping(value = "/{gift_id}")
-    @ApiOperation(value = "修改满优惠赠品", response = FullDiscountGiftDO.class)
+    @ApiOperation(value = "Modify full discount gifts", response = FullDiscountGiftDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "gift_id", value = "赠品id", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "gift_name", value = "赠品名称", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "gift_name", value = "赠品名称", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "gift_price", value = "赠品金额", required = true, dataType = "double", paramType = "query"),
-            @ApiImplicitParam(name = "gift_img", value = "赠品图片", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "actual_store", value = "库存", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "gift_id", value = "The giftsid", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "gift_name", value = "Name of gift", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "gift_name", value = "Name of gift", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "gift_price", value = "Gift amount", required = true, dataType = "double", paramType = "query"),
+            @ApiImplicitParam(name = "gift_img", value = "Gifts pictures", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "actual_store", value = "Inventory", required = true, dataType = "int", paramType = "query"),
     })
     public FullDiscountGiftDO edit(@ApiIgnore @PathVariable("gift_id") Integer giftId,
-                                   @ApiIgnore @NotEmpty(message = "请填写赠品名称") String giftName,
-                                   @ApiIgnore @NotNull(message = "请填写赠品金额") Double giftPrice,
-                                   @ApiIgnore @NotEmpty(message = "请上传赠品图片") String giftImg,
-                                   @ApiIgnore @NotNull(message = "请填写库存") Integer actualStore) {
+                                   @ApiIgnore @NotEmpty(message = "Please fill in the name of the gift") String giftName,
+                                   @ApiIgnore @NotNull(message = "Please fill in the amount of gift") Double giftPrice,
+                                   @ApiIgnore @NotEmpty(message = "Please upload pictures of the gifts") String giftImg,
+                                   @ApiIgnore @NotNull(message = "Please fill in the inventory") Integer actualStore) {
 
         this.fullDiscountGiftManager.verifyAuth(giftId);
         FullDiscountGiftDO giftDO = new FullDiscountGiftDO();
@@ -124,16 +124,16 @@ public class FullDiscountGiftSellerController {
         giftDO.setGiftImg(giftImg);
         giftDO.setActualStore(actualStore);
 
-        //设置赠品可用库存(添加时可用库存=实际库存)
+        // Set available inventory for giveaways (Available inventory when adding = actual inventory)
         giftDO.setEnableStore(actualStore);
 
-        //添加赠品创建时间
+        // Added the creation time of giveaways
         giftDO.setCreateTime(DateUtil.getDateline());
 
-        //设置赠品类型(1.0版本赠品类型默认为0：普通赠品)
+        // Set the gift type (version 1.0 gift type defaults to 0: normal gift)
         giftDO.setGiftType(0);
 
-        //默认不禁用
+        // Disable by default
         giftDO.setDisabled(0);
 
         this.fullDiscountGiftManager.edit(giftDO, giftId);
@@ -143,9 +143,9 @@ public class FullDiscountGiftSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除满优惠赠品")
+    @ApiOperation(value = "Delete full discount gifts")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的满优惠赠品主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "To remove the full discount giveaway main key", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -157,21 +157,21 @@ public class FullDiscountGiftSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个满优惠赠品")
+    @ApiOperation(value = "Query for a full discount giveaway")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的满优惠赠品主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "To query the full discount gift master key", required = true, dataType = "int", paramType = "path")
     })
     public FullDiscountGiftDO get(@PathVariable Integer id) {
 
         FullDiscountGiftDO fullDiscountGift = this.fullDiscountGiftManager.getModel(id);
-        //验证越权操作
+        // Verify unauthorized operations
         if (fullDiscountGift == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
         return fullDiscountGift;
     }
 
-    @ApiOperation(value = "查询满优惠赠品集合", response = FullDiscountGiftDO.class)
+    @ApiOperation(value = "Query full discount gift collection", response = FullDiscountGiftDO.class)
     @GetMapping(value = "/all")
     public List<FullDiscountGiftDO> listAll() {
         return this.fullDiscountGiftManager.listAll();

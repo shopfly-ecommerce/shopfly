@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 评论图片业务类
+ * Comment picture business class
  *
  * @author fk
  * @version v1.0

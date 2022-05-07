@@ -17,7 +17,7 @@ package cloud.shopfly.b2c.core.base.context;
 
 
 /**
- * 地区对象
+ * Region object
  *
  * @author kingapex
  * @version 1.0
@@ -26,35 +26,35 @@ package cloud.shopfly.b2c.core.base.context;
  */
 public class Region {
     /**
-     * 城市id
+     * cityid
      */
     private Integer cityId;
     /**
-     * 镇id
+     * The town ofid
      */
     private Integer townId;
     /**
-     * 县区id
+     * countyid
      */
     private Integer countyId;
     /**
-     * 省id
+     * provinceid
      */
     private Integer provinceId;
     /**
-     * 省名称
+     * The name of the province
      */
     private String province;
     /**
-     * 县区名称
+     * The name of the county
      */
     private String county;
     /**
-     * 城市名称
+     * The city name
      */
     private String city;
     /**
-     * 镇名称
+     * Name of the town
      */
     private String town;
 

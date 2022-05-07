@@ -20,8 +20,8 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CartSkuOriginVo;
 import java.util.List;
 
 /**
- * 购物车原始数据业务类<br/>
- * 负责对购物车原始数据{@link CartSkuOriginVo}在缓存中的读写
+ * Shopping cart raw data business class<br/>
+ * Responsible for shopping cart raw data{@link CartSkuOriginVo}Read and write in the cache
  *
  * @author kingapex
  * @version 1.0
@@ -32,25 +32,25 @@ public interface CartOriginDataManager {
 
 
     /**
-     * 由缓存中读取数据
+     * Read data from the cache
      *
-     * @return 列表
+     * @return The list of
      */
     List<CartSkuOriginVo> read();
 
 
     /**
-     * 向缓存中写入数据
+     * Writes data to the cache
      *
-     * @param skuId      要写入的skuid
-     * @param num        要加入购物车的数量
-     * @param activityId 要参加的活动
+     * @param skuId      Want to writeskuid
+     * @param num        Quantity to be added to cart
+     * @param activityId Activities to attend
      * @return
      */
     CartSkuOriginVo add(int skuId, int num, Integer activityId);
 
     /**
-     * 立即购买
+     * Buy now
      *
      * @param skuId
      * @param num
@@ -59,17 +59,17 @@ public interface CartOriginDataManager {
     void buy(Integer skuId, Integer num, Integer activityId);
 
     /**
-     * 更新数量
+     * Update the number
      *
-     * @param skuId 要更新的sku id
-     * @param num   要更新的数量
+     * @param skuId To update thesku id
+     * @param num   Number of updates to be made
      * @return
      */
     CartSkuOriginVo updateNum(int skuId, int num);
 
 
     /**
-     * 更新选中状态
+     * Update selected Status
      *
      * @param skuId
      * @param checked
@@ -79,7 +79,7 @@ public interface CartOriginDataManager {
 
 
     /**
-     * 更新某个店铺的所有商品的选中状态
+     * Updates the selected status of all items in a store
      *
      * @param sellerId
      * @param checked
@@ -88,7 +88,7 @@ public interface CartOriginDataManager {
 
 
     /**
-     * 更新全部的选中状态
+     * Update all selected status
      *
      * @param checked
      */
@@ -96,19 +96,19 @@ public interface CartOriginDataManager {
 
 
     /**
-     * 批量删除
+     * Batch delete
      *
      * @param skuIds
      */
     void delete(Integer[] skuIds);
 
     /**
-     * 清空购物车
+     * Empty shopping cart
      */
     void clean();
 
     /**
-     * 清除掉购物车中已经选中的商品
+     * Clear the cart of items already selected
      */
     void cleanChecked();
 

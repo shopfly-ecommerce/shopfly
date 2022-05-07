@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * @author cs
  * @version v2.0
- * @Description: 地区VO
+ * @Description: regionVO
  * @date 2018/8/22 15:16
  * @since v7.0.0
  */
@@ -47,7 +47,7 @@ public class AreaVO  implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ApiModelProperty("子地区列表")
+    @ApiModelProperty("List of subregions")
     private List<AreaVO> children;
 
 

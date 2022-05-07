@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.payment;
 
 /**
- * 支付异常码
+ * Payment exception code
  * Created by kingapex on 2018/3/13.
  *
  * @author kingapex
@@ -27,40 +27,40 @@ package cloud.shopfly.b2c.core.payment;
 public enum PaymentErrorCode {
 
     /**
-     * 不存在的交易
+     * A deal that doesnt exist
      */
-    E500("不存在的交易"),
+    E500("A deal that doesnt exist"),
     /**
-     * 不存在的支付方式
+     * Payment method that does not exist
      */
-    E501("不存在的支付方式"),
+    E501("Payment method that does not exist"),
     /**
-     * 未开启的支付方式
+     * Open payment method
      */
-    E502("未开启的支付方式"),
+    E502("Open payment method"),
     /**
-     * 支付回调验证失败
+     * Payment callback validation failed
      */
-    E503("支付回调验证失败"),
+    E503("Payment callback validation failed"),
     /**
-     * 支付账单不存在
+     * Paying bills does not exist
      */
-    E504("支付账单不存在"),
+    E504("Paying bills does not exist"),
     /**
-     * 支付方式参数不正确
+     * The payment mode parameters are incorrect
      */
-    E505("支付方式参数不正确"),
+    E505("The payment mode parameters are incorrect"),
     /**
-     * 订单状态不正确，无法支付
+     * The order status is incorrect and cannot be paid
      */
-    E506("订单状态不正确无法支付"),
+    E506("The order status is incorrect and cannot be paid"),
 
     /**
-     * 没有找到适合的回调器
+     * No suitable callback was found
      */
-    E507("没有找到适合的回调器"),
+    E507("No suitable callback was found"),
 
-    E509("openid不能为空");
+    E509("openidCant be empty");
 
     private String describe;
 
@@ -69,7 +69,7 @@ public enum PaymentErrorCode {
     }
 
     /**
-     * 获取异常码
+     * Get exception code
      *
      * @return
      */

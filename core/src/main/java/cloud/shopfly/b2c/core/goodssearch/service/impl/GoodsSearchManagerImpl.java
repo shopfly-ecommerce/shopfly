@@ -61,12 +61,12 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * 基于es的商品检索
+ * Based on theesProduct search
  *
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年9月18日 上午11:42:06
+ * 2017years9month18The morning of11:42:06
  */
 @Service
 public class GoodsSearchManagerImpl implements GoodsSearchManager {
@@ -103,9 +103,9 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
         SearchRequestBuilder searchRequestBuilder;
         try {
             searchRequestBuilder = this.createQuery(goodsSearch);
-            //设置分页信息
+            // Setting paging Information
             searchRequestBuilder.setFrom((pageNo - 1) * pageSize).setSize(pageSize);
-            // 设置是否按查询匹配度排序
+            // Set whether to sort by query match
             searchRequestBuilder.setExplain(true);
             SearchResponse response = searchRequestBuilder.execute().actionGet();
 
@@ -141,11 +141,11 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
         SearchRequestBuilder searchRequestBuilder;
         try {
             searchRequestBuilder = this.createQuery(goodsSearch);
-            //分类
+            // Categories
             AggregationBuilder categoryTermsBuilder = AggregationBuilders.terms("categoryAgg").field("categoryId").size(Integer.MAX_VALUE);
-            //品牌
+            // brand
             AggregationBuilder brandTermsBuilder = AggregationBuilders.terms("brandAgg").field("brand").size(Integer.MAX_VALUE);
-            //参数
+            // parameter
             AggregationBuilder valuesBuilder = AggregationBuilders.terms("valueAgg").field("params.value").size(Integer.MAX_VALUE);
             AggregationBuilder paramsNameBuilder = AggregationBuilders.terms("nameAgg").field("params.name").subAggregation(valuesBuilder).size(Integer.MAX_VALUE);
             AggregationBuilder avgBuild = AggregationBuilders.nested("paramsAgg", "params").subAggregation(paramsNameBuilder);
@@ -159,7 +159,7 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
 
             Map<String, Object> map = new HashMap<>(16);
 
-            //分类
+            // Categories
             LongTerms categoryTerms = (LongTerms) aggMap.get("categoryAgg");
             List<LongTerms.Bucket> categoryBuckets = categoryTerms.getBuckets();
 
@@ -175,17 +175,17 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
             }
 
             List<SearchSelector> selectedCat = CatUrlUtils.getCatDimSelected(categoryBuckets, allCatList, catPath);
-            //已经选择的分类
+            // Categories that have been selected
             map.put("selected_cat", selectedCat);
 
-            //品牌
+            // brand
             LongTerms brandTerms = (LongTerms) aggMap.get("brandAgg");
             List<LongTerms.Bucket> brandBuckets = brandTerms.getBuckets();
             List<BrandDO> brandList = brandManager.getAllBrands();
             List<SearchSelector> brandDim = SelectorUtil.createBrandSelector(brandBuckets, brandList);
             map.put("brand", brandDim);
 
-            //参数
+            // parameter
             InternalNested paramsAgg = (InternalNested) aggMap.get("paramsAgg");
             InternalAggregations paramTerms = paramsAgg.getAggregations();
             Map<String, Aggregation> nameMap = paramTerms.asMap();
@@ -208,7 +208,7 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
 
 
     /**
-     * 构建查询条件
+     * Build query criteria
      *
      * @return
      * @throws Exception
@@ -224,29 +224,29 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
 
-        // 关键字检索
+        // Keyword search
         if (!StringUtil.isEmpty(keyword)) {
             QueryStringQueryBuilder queryString = new QueryStringQueryBuilder(keyword).field("goodsName");
             queryString.defaultOperator(Operator.AND);
             queryString.analyzer("ik_max_word");
             boolQueryBuilder.must(queryString);
         }
-        // 品牌搜素
+        // Brand search
         if (brand != null) {
             boolQueryBuilder.must(QueryBuilders.termQuery("brand", brand));
         }
-        // 分类检索
+        // Classification retrieval
         if (cat != null) {
 
             CategoryDO category = categoryManager.getModel(cat);
             if (category == null) {
-                throw new ServiceException("", "该分类不存在");
+                throw new ServiceException("", "The category does not exist");
             }
 
             boolQueryBuilder.must(QueryBuilders.wildcardQuery("categoryPath", HexUtil.encode(category.getCategoryPath()) + "*"));
         }
 
-        // 参数检索
+        // Parameter retrieval
         String prop = goodsSearch.getProp();
         if (!StringUtil.isEmpty(prop)) {
             String[] propArray = prop.split(Separator.SEPARATOR_PROP);
@@ -259,7 +259,7 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
             }
         }
 
-        //价格搜索
+        // Price search
         if (!StringUtil.isEmpty(price)) {
             String[] pricear = price.split(Separator.SEPARATOR_PROP_VLAUE);
             double min = StringUtil.toDouble(pricear[0], 0.0);
@@ -271,14 +271,14 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
             boolQueryBuilder.must(QueryBuilders.rangeQuery("price").from(min).to(max).includeLower(true).includeUpper(true));
         }
 
-        // 删除的商品不显示
+        // Deleted items are not displayed
         boolQueryBuilder.must(QueryBuilders.termQuery("disabled", "1"));
-        // 未上架的商品不显示
+        // Items not on the shelves will not be displayed
         boolQueryBuilder.must(QueryBuilders.termQuery("marketEnable", "1"));
 
         searchRequestBuilder.setQuery(boolQueryBuilder);
 
-        //排序
+        // sort
         String sortField = goodsSearch.getSort();
 
         String sortId = "goodsId";
@@ -291,7 +291,7 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
 
             sortId = sortMap.get("id");
 
-            // 如果是默认排序
+            // If its sort by default
             if ("def".equals(sortId)) {
                 sortId = "goodsId";
             }
@@ -307,7 +307,7 @@ public class GoodsSearchManagerImpl implements GoodsSearchManager {
         }
 
 
-        // 根据评论数量排序
+        // Sort by number of comments
         if ("grade".equals(sortId)) {
             searchRequestBuilder.addSort("commentNum", sort);
         } else {

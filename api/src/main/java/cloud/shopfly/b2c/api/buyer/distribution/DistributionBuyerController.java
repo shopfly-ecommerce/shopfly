@@ -35,17 +35,17 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 分销商控制器
+ * Distributor controller
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/23 上午8:34
+ * 2018/5/23 In the morning8:34
  */
 
 @RestController
-@Api(description = "分销商api")
+@Api(description = "distributorsapi")
 @RequestMapping("/distribution")
 public class DistributionBuyerController {
 
@@ -55,7 +55,7 @@ public class DistributionBuyerController {
 
 
     @GetMapping(value = "/lower-list")
-    @ApiOperation("获取下级分销商")
+    @ApiOperation("Acquisition of sub-distributors")
     public List<DistributionVO> getLowerDistributorList() {
         Buyer buyer = UserContext.getBuyer();
         if (buyer == null) {
@@ -64,12 +64,12 @@ public class DistributionBuyerController {
         try {
             return this.distributionManager.getLowerDistributorTree(buyer.getUid());
         } catch (Exception e) {
-            logger.error("获取下级的分销商列表出错", e);
+            logger.error("There was an error getting the sub-distributor list", e);
             throw new DistributionException(DistributionErrorCode.E1000.code(), DistributionErrorCode.E1000.des());
         }
     }
 
-    @ApiOperation("获取推荐我的人")
+    @ApiOperation("Get people to refer me")
     @GetMapping(value = "/recommend-me")
     public SuccessMessage recommendMe() {
         Buyer buyer = UserContext.getBuyer();
@@ -78,13 +78,13 @@ public class DistributionBuyerController {
         }
         try {
             DistributionDO distributor = this.distributionManager.getDistributorByMemberId(buyer.getUid());
-            //对分销商做非空校验
+            // Perform non-null checks on distributors
             if (distributor == null) {
                 throw new DistributionException(DistributionErrorCode.E1000.code(), DistributionErrorCode.E1000.des());
             }
             return new SuccessMessage(this.distributionManager.getUpMember());
         } catch (Exception e) {
-            logger.error("获取下级的分销商列表出错", e);
+            logger.error("There was an error getting the sub-distributor list", e);
             throw new DistributionException(DistributionErrorCode.E1000.code(), DistributionErrorCode.E1000.des());
         }
     }

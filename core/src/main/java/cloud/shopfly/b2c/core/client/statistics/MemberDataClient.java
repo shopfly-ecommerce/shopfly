@@ -18,21 +18,21 @@ package cloud.shopfly.b2c.core.client.statistics;
 import cloud.shopfly.b2c.core.member.model.dos.Member;
 
 /**
- * 会员信息收集manager
+ * Member Information Collectionmanager
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/8 下午4:10
+ * 2018/5/8 In the afternoon4:10
  */
 
 public interface MemberDataClient {
 
     /**
-     * 会员注册
+     * Registered members
      *
-     * @param member 会员
+     * @param member members
      */
     void register(Member member);
 

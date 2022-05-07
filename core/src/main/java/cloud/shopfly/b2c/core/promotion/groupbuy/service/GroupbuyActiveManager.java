@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 团购活动表业务层
+ * Group purchase activity sheet business layer
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -30,52 +30,52 @@ import java.util.List;
 public interface GroupbuyActiveManager	{
 
 	/**
-	 * 查询团购活动表列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
+	 * Query group purchase activity list
+	 * @param page The page number
+	 * @param pageSize Number each page
 	 * @return Page
 	 */
 	Page list(int page, int pageSize);
 
 	/**
-	 * 添加团购活动表
-	 * @param groupbuyActive 团购活动表
-	 * @return GroupbuyActive 团购活动表
+	 * Add group purchase activity table
+	 * @param groupbuyActive Group buying activity sheet
+	 * @return GroupbuyActive Group buying activity sheet
 	 */
 	GroupbuyActiveDO add(GroupbuyActiveDO groupbuyActive);
 
 	/**
-	* 修改团购活动表
-	* @param groupbuyActive 团购活动表
-	* @param id 团购活动表主键
-	* @return GroupbuyActive 团购活动表
+	* Modify the group purchase activity table
+	* @param groupbuyActive Group buying activity sheet
+	* @param id Group purchase activity table primary key
+	* @return GroupbuyActive Group buying activity sheet
 	*/
 	GroupbuyActiveDO edit(GroupbuyActiveDO groupbuyActive, Integer id);
 
 	/**
-	 * 删除团购活动表
-	 * @param id 团购活动表主键
+	 * Delete the group purchase activity table
+	 * @param id Group purchase activity table primary key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取团购活动表
-	 * @param id 团购活动表主键
-	 * @return GroupbuyActive  团购活动表
+	 * Get group purchase activity sheet
+	 * @param id Group purchase activity table primary key
+	 * @return GroupbuyActive  Group buying activity sheet
 	 */
 	GroupbuyActiveDO getModel(Integer id);
 
 
 	/**
-	 * 读取正在进行的活动列表
+	 * Read a list of ongoing activities
 	 * @return
 	 */
 	List<GroupbuyActiveDO> getActiveList();
 
 
 	/**
-	 * 验证操作权限<br/>
-	 * 如有问题直接抛出权限异常
+	 * Verifying operation rights<br/>
+	 * Throw a permission exception if there is a problem
 	 * @param id
 	 */
 	void verifyAuth(Integer id);

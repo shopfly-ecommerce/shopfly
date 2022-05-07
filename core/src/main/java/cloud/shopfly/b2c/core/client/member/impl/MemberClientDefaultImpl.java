@@ -31,11 +31,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 会员业务默认实现
+ * Member services are implemented by default
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 上午11:52
+ * @date 18/7/27 In the morning11:52
  * @since v7.0
  */
 @Service
@@ -72,7 +72,7 @@ public class MemberClientDefaultImpl implements MemberClient {
     }
 
     /**
-     * 更新登录次数
+     * Update login times
      *
      * @param memberId
      * @param now

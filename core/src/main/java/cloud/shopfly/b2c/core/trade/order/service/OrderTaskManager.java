@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade.order.service;
 
 /**
- * 订单任务
+ * Order task
  * @author Snow create in 2018/7/13
  * @version v2.0
  * @since v7.0.0
@@ -24,32 +24,32 @@ package cloud.shopfly.b2c.core.trade.order.service;
 public interface OrderTaskManager {
 
     /**
-     * 款到发货，新订单未付款，自动变更：自动取消
+     * Payment to delivery, new order not paid, automatic change：Automatically cancelled
      */
     void cancelTask();
 
     /**
-     * 发货之后，自动变更：确认收货
+     * Automatic change after delivery：Confirm the goods
      */
     void rogTask();
 
     /**
-     * 确认收货后，自动变更：完成
+     * Automatic change after confirming receipt of goods：complete
      */
     void completeTask();
 
     /**
-     * 货到付款订单，自动变更：已付款
+     * Cash on delivery orders automatically change：Payment has been
      */
     void payTask();
 
     /**
-     * 订单完成后，没有申请过售后，自动变更：售后超时
+     * After the order is completed, there is no application for after-sales, automatic change：After a timeout
      */
     void serviceTask();
 
     /**
-     * 订单完成后，多少天后，评论自动变更：好评。
+     * Comments automatically change after how many days after the order is completed：Good reviews.
      */
     void commentTask();
 

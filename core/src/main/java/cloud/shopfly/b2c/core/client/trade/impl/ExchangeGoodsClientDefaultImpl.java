@@ -61,7 +61,7 @@ public class ExchangeGoodsClientDefaultImpl implements ExchangeGoodsClient {
     }
 
     /**
-     * 删除某个商品的积分兑换信息
+     * Delete the point exchange information of a product
      *
      * @param goodsId
      * @return

@@ -24,7 +24,7 @@ import java.lang.annotation.*;
 /**
  * @author fk
  * @version v2.0
- * @Description: 页面类型验证
+ * @Description: Page type validation
  * @date 2018/4/3 11:42
  * @since v7.0.0
  */
@@ -34,7 +34,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PageType {
 
-    String message() default "不正确的页面类型";
+    String message() default "Incorrect page type";
 
     Class<?>[] groups() default {};
 

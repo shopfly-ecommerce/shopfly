@@ -65,7 +65,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 购物车促销信息处理实现类
+ * Shopping cart promotion information processing implementation class
  *
  * @author kingapex
  * @version 1.0
@@ -115,7 +115,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
     private String getOriginKey() {
         String cacheKey = "";
-        //如果会员登陆了，则要以会员id为key
+        // If the member logs in, the member ID is the key
         Buyer buyer = UserContext.getBuyer();
         if (buyer != null) {
             cacheKey = CachePrefix.CART_PROMOTION_PREFIX.getPrefix() + buyer.getUid();
@@ -124,9 +124,9 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
     }
 
     /**
-     * 由缓存中读取出用户选择的促销信息
+     * Read the user selected promotional information from the cache
      *
-     * @return 用户选择的促销信息
+     * @return User-selected promotional messages
      */
     @Override
     public SelectedPromotionVo getSelectedPromotion() {
@@ -148,7 +148,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
         for (CartVO cartVO : cartList) {
             List<CartSkuVO> skuList = cartVO.getSkuList();
             for (CartSkuVO skuVO : skuList) {
-                //如果商品失效，
+                // If the product fails,
                 if (skuVO.getInvalid() == 1) {
                     continue;
                 }
@@ -159,7 +159,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
         long now = DateUtil.getDateline();
 
-        //查询所有正在进行的满减活动
+        // Query all active full reduction activities
         String sql = "select fd.*,pg.goods_id from es_full_discount fd left join es_promotion_goods pg on fd.fd_id = pg.activity_id  " +
                 " where  fd.start_time <? and fd.end_time>? and  pg.goods_id in  (" + goodsIdStr + ") order by fd.fd_id asc";
 
@@ -168,13 +168,13 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
         List<FullDiscountVO> fullDiscountVOList = new ArrayList<>();
 
-        //上一个活动id，在变化时说明要生成新的vo
+        // The previous active ID, when changed, indicates that a new VO is to be generated
         Integer preFdId = null;
         FullDiscountVO fullDiscountVO = null;
         for (FullDiscountWithGoodsId fullDiscountWithGoodsId : list) {
             Integer fdid = fullDiscountWithGoodsId.getFdId();
 
-            //需要生成新vo
+            // A new VO needs to be generated
             if (!fdid.equals(preFdId)) {
                 fullDiscountVO = new FullDiscountVO();
                 BeanUtils.copyProperties(fullDiscountWithGoodsId, fullDiscountVO);
@@ -194,7 +194,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
     @Override
     public void usePromotion(Integer skuId, Integer activityId, PromotionTypeEnum promotionType) {
-        Assert.notNull(promotionType, "未知的促销类型");
+        Assert.notNull(promotionType, "Unknown type of promotion");
 
         try {
 
@@ -223,21 +223,21 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
                 promotionVO.setActivityId(groupbuyGoodsVO.getActId());
             }
 
-            //单品立减活动
+            // Single product reduction activity
             if (PromotionTypeEnum.MINUS.equals(promotionType)) {
                 MinusVO minusVO = this.minusManager.getFromDB(activityId);
                 promotionVO.setMinusVO(minusVO);
                 promotionVO.setActivityId(minusVO.getMinusId());
             }
 
-            //第二件半价活动
+            // The second half price event
             if (PromotionTypeEnum.HALF_PRICE.equals(promotionType)) {
                 HalfPriceVO halfPriceVO = this.halfPriceManager.getFromDB(activityId);
                 promotionVO.setHalfPriceVO(halfPriceVO);
                 promotionVO.setActivityId(halfPriceVO.getHpId());
             }
 
-            //限时抢购活动
+            // Flash sales
             if (PromotionTypeEnum.SECKILL.equals(promotionType)) {
                 GoodsSkuVO goodsSkuVO = goodsClient.getSkuFromCache(skuId);
                 SeckillGoodsVO seckillGoodsVO = this.seckillManager.getSeckillGoods(goodsSkuVO.getGoodsId());
@@ -247,12 +247,12 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
             String cacheKey = this.getOriginKey();
             cache.put(cacheKey, selectedPromotionVo);
             if (logger.isDebugEnabled()){
-                logger.debug("使用促销：" + promotionVO);
-                logger.debug("促销信息为:" + selectedPromotionVo);
+                logger.debug("Use of sales promotion：" + promotionVO);
+                logger.debug("The promotional information is:" + selectedPromotionVo);
             }
         } catch (Exception e) {
-            logger.error("使用促销出错", e);
-            throw new ServiceException(TradeErrorCode.E462.code(), "使用促销出错");
+            logger.error("Error in using promotions", e);
+            throw new ServiceException(TradeErrorCode.E462.code(), "Error in using promotions");
         }
 
 
@@ -263,31 +263,31 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
         Buyer buyer = UserContext.getBuyer();
         MemberCoupon memberCoupon = this.memberCouponClient.getModel(buyer.getUid(), mcId);
-        //如果优惠券Id为0并且优惠券为空则取消优惠券使用
+        // If the coupon Id is 0 and the coupon is empty, cancel the coupon
         if (mcId.equals(0)) {
             this.cleanCoupon();
             return;
         }
-        //如果优惠券为空则抛出异常
+        // If the coupon is empty, an exception is thrown
         if (memberCoupon == null) {
-            throw new ServiceException(TradeErrorCode.E455.code(), "当前优惠券不存在");
+            throw new ServiceException(TradeErrorCode.E455.code(), "Current coupon does not exist");
         }
-        //校验优惠券的限额
+        // Check coupon limits
         if (totalPrice < memberCoupon.getCouponThresholdPrice()) {
-            throw new ServiceException(TradeErrorCode.E455.code(), "未达到优惠券使用最低限额");
+            throw new ServiceException(TradeErrorCode.E455.code(), "The minimum coupon limit has not been reached");
         }
         CouponVO couponVO = CartUtil.setCouponParam(memberCoupon);
 
         SelectedPromotionVo selectedPromotionVo = getSelectedPromotion();
 
         if (!CouponValidateUtil.validateCoupon(selectedPromotionVo)) {
-            throw new ServiceException(TradeErrorCode.E455.code(), "您选择的商品包含积分兑换的商品不能使用优惠券！");
+            throw new ServiceException(TradeErrorCode.E455.code(), "You cant use coupons for items that include points for redemption！");
         }
 
         selectedPromotionVo.setCoupon( couponVO);
         if (logger.isDebugEnabled()){
-            logger.debug("使用优惠券：" + couponVO);
-            logger.debug("促销信息为:" + selectedPromotionVo);
+            logger.debug("Use coupons：" + couponVO);
+            logger.debug("The promotional information is:" + selectedPromotionVo);
         }
         String cacheKey = this.getOriginKey();
         cache.put(cacheKey, selectedPromotionVo);
@@ -303,7 +303,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
 
     /**
-     * 删除一组sku的促销，
+     * To delete a set ofskuThe promotion,
      *
      * @param skuIds
      */
@@ -319,7 +319,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
         List<PromotionVO> newList = deleteBySkus(skuIds, promotionList);
 
-        //如果新list是空的，表明这个店铺已经没有促销活动了，如果不为空则清除相关促销活动
+        // If the new list is empty, it indicates that the store has no promotional activities. If it is not empty, relevant promotional activities will be cleared
         if (newList.isEmpty()) {
 
             selectedPromotionVo.setSinglePromotionList(null);
@@ -329,7 +329,7 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
             selectedPromotionVo.setSinglePromotionList(newList);
         }
 
-        //重新压入缓存
+        // Reload the cache
         String cacheKey = this.getOriginKey();
         cache.put(cacheKey, selectedPromotionVo);
 
@@ -343,16 +343,16 @@ public class CartPromotionManagerImpl implements CartPromotionManager {
 
 
     /**
-     * 从促销活动列表中删除一批sku的活动
+     * Delete a batch from the promotional listskuThe activities of the
      *
-     * @param skuids             skuid数组
-     * @param skuPromotionVoList 要清理的活动列表
-     * @return 清理后的活动列表
+     * @param skuids             skuidAn array of
+     * @param skuPromotionVoList List of activities to clean up
+     * @return A list of cleaned activities
      */
     private List<PromotionVO> deleteBySkus(Integer[] skuids, List<PromotionVO> skuPromotionVoList) {
         List<PromotionVO> newList = new ArrayList<>();
         for (PromotionVO promotionVO : skuPromotionVoList) {
-            //如果skuid数组中不包含，则不压入新list中
+            // If it is not in the SKUID array, it is not pressed into the new list
             if (!ArrayUtils.contains(skuids, promotionVO.getSkuId())) {
                 newList.add(promotionVO);
             }

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 会员站内消息历史业务类
+ * Member station message history business class
  *
  * @author zh
  * @version v7.0.0
@@ -50,7 +50,7 @@ public class MemberNoticeLogManagerImpl implements MemberNoticeLogManager {
         StringBuffer sqlBuffer = new StringBuffer("select * from es_member_notice_log where member_id = ? and is_del = 1");
         List<Object> term = new ArrayList<>();
         term.add(UserContext.getBuyer().getUid());
-        //校验是否已读参数是否为空，不为空则加入查询条件进行查询
+        // Check whether the read parameter is empty. If the read parameter is not empty, add the read parameter to the query condition
         if (read != null) {
             sqlBuffer.append(" and is_read = ?");
             term.add(read);
@@ -67,9 +67,9 @@ public class MemberNoticeLogManagerImpl implements MemberNoticeLogManager {
         memberNoticeLog.setContent(content);
         memberNoticeLog.setMemberId(memberId);
         memberNoticeLog.setTitle(title);
-        //是否删除默认正常状态
+        // Whether to delete the default normal state
         memberNoticeLog.setIsDel(1);
-        //是否已读默认未读
+        // Read Or not The default value is not read
         memberNoticeLog.setIsRead(0);
         memberNoticeLog.setSendTime(sendTime);
         memberNoticeLog.setReceiveTime(DateUtil.getDateline());

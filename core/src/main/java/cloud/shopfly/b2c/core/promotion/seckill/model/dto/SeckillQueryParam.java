@@ -20,26 +20,26 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 限时抢购查询参数
+ * Flash sale query parameters
  * @author Snow create in 2018/6/21
  * @version v2.0
  * @since v7.0.0
  */
 public class SeckillQueryParam {
 
-    @ApiModelProperty(value = "页码")
+    @ApiModelProperty(value = "The page number")
     private Integer pageNo;
 
-    @ApiModelProperty(value = "每页条数")
+    @ApiModelProperty(value = "Number each page")
     private Integer pageSize;
 
-    @ApiModelProperty(value = "限时抢购活动ID")
+    @ApiModelProperty(value = "Flash salesID")
     private Integer seckillId;
 
-    @ApiModelProperty(value = "关键字")
+    @ApiModelProperty(value = "keyword")
     private String keywords;
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "Status")
     private String status;
 
 

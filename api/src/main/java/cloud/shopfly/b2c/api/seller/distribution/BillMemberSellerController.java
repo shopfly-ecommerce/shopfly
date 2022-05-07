@@ -34,15 +34,15 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 
 /**
- * 分销会员结算单控制器
+ * Distribution member statement controller
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/24 下午2:39
+ * 2018/5/24 In the afternoon2:39
  */
-@Api(description = "分销会员结算单控制器")
+@Api(description = "Distribution member statement controller")
 @RestController
 @RequestMapping("/seller/distribution/bill/member")
 public class BillMemberSellerController {
@@ -50,12 +50,12 @@ public class BillMemberSellerController {
     @Autowired
     private BillMemberManager billMemberManager;
 
-    @ApiOperation("分销商分页")
+    @ApiOperation("Distributor paging")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "total_id", value = "总结算单id", required = false, paramType = "query", dataType = "int", allowMultiple = false),
-            @ApiImplicitParam(name = "page_size", value = "页码大小", required = false, paramType = "query", dataType = "int", allowMultiple = false),
-            @ApiImplicitParam(name = "page_no", value = "页码", required = false, paramType = "query", dataType = "int", allowMultiple = false),
-            @ApiImplicitParam(name = "uname", value = "会员名", required = false, paramType = "query", dataType = "String", allowMultiple = false)
+            @ApiImplicitParam(name = "total_id", value = "General statementid", required = false, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "page_size", value = "Page size", required = false, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = false, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "uname", value = "Member name", required = false, paramType = "query", dataType = "String", allowMultiple = false)
     })
     @GetMapping
     public Page<BillMemberVO> page(@ApiIgnore Integer totalId, @ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, String uname) {
@@ -71,8 +71,8 @@ public class BillMemberSellerController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("获取某个业绩详情")
-    @ApiImplicitParam(name = "id", value = "业绩单id", required = false, paramType = "query", dataType = "int", allowMultiple = false)
+    @ApiOperation("Get specific performance details")
+    @ApiImplicitParam(name = "id", value = "Results singleid", required = false, paramType = "query", dataType = "int", allowMultiple = false)
     public BillMemberVO billMemberVO(@PathVariable Integer id) {
         try {
             return new BillMemberVO(billMemberManager.getBillMember(id));
@@ -84,10 +84,10 @@ public class BillMemberSellerController {
 
 
     @GetMapping("/down")
-    @ApiOperation("获取某个分销商下级业绩")
+    @ApiOperation("Obtain the performance of a sub-distributor")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "当前页面 业绩单id", required = false, paramType = "query", dataType = "int", allowMultiple = false),
-            @ApiImplicitParam(name = "member_id", value = "会员id", required = false, paramType = "query", dataType = "int", allowMultiple = false)
+            @ApiImplicitParam(name = "id", value = "Current page performance sheetid", required = false, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "member_id", value = "membersid", required = false, paramType = "query", dataType = "int", allowMultiple = false)
     })
     public List<BillMemberVO> downBillMemberVO(Integer id, @ApiIgnore Integer memberId) {
         try {
@@ -99,9 +99,9 @@ public class BillMemberSellerController {
         }
     }
 
-    @ApiOperation("导出会员结算单")
+    @ApiOperation("Export member statement")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "total_id", value = "总结算单id", required = false, paramType = "query", dataType = "int", allowMultiple = false),
+            @ApiImplicitParam(name = "total_id", value = "General statementid", required = false, paramType = "query", dataType = "int", allowMultiple = false),
     })
     @GetMapping("/export")
     public List<BillMemberVO> export(@ApiIgnore Integer totalId) {

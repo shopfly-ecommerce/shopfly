@@ -46,7 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 拼团业务类
+ * Group business class
  *
  * @author admin
  * @version vv1.0.0
@@ -57,7 +57,7 @@ import java.util.List;
 public class PintuanManagerImpl implements PintuanManager {
 
     /**
-     * 评团促销前缀
+     * Review group promotion prefix
      */
     private static final String TRIGGER_PREFIX = "pintuan_promotion_";
 
@@ -85,7 +85,7 @@ public class PintuanManagerImpl implements PintuanManager {
         List<String> where = new ArrayList<>();
         List param = new ArrayList<>();
 
-        //如果卖家访问
+        // If the seller visits
         if (!StringUtil.isEmpty(keyword)) {
             where.add(" promotion_name like (?) ");
             param.add("%" + keyword + "%");
@@ -114,13 +114,13 @@ public class PintuanManagerImpl implements PintuanManager {
         this.verifyParam(pintuan.getStartTime(), pintuan.getEndTime());
         pintuan.setStatus(PromotionStatusEnum.WAIT.name());
         pintuan.setCreateTime(DateUtil.getDateline());
-        //可操作状态为nothing，代表活动不可以执行任何操作
+        // The actionable state is nothing, which means that the activity cannot perform any operations
         pintuan.setOptionStatus(PintuanOptionEnum.NOTHING.name());
         this.tradeDaoSupport.insert(pintuan);
         Integer pintuanId = this.tradeDaoSupport.getLastId("es_pintuan");
         pintuan.setPromotionId(pintuanId);
 
-        //创建活动 启用延时任务
+        // Create an activity to enable delayed tasks
         PintuanChangeMsg pintuanChangeMsg = new PintuanChangeMsg();
         pintuanChangeMsg.setPintuanId(pintuan.getPromotionId());
         pintuanChangeMsg.setOptionType(1);
@@ -132,9 +132,9 @@ public class PintuanManagerImpl implements PintuanManager {
     @Override
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Pintuan edit(Pintuan pintuan, Integer id) {
-        //获取拼团活动
+        // Get a group event
         Pintuan oldPintaun = this.getModel(id);
-        //校验拼团是否可以被操作
+        // Verify whether a group can be operated
         if (pintuan.getStatus().equals(PromotionStatusEnum.UNDERWAY.name())) {
             throw new ServiceException(PintuanErrorCode.E5017.code(), PintuanErrorCode.E5017.describe());
         }
@@ -172,7 +172,7 @@ public class PintuanManagerImpl implements PintuanManager {
 
 
     /**
-     * 开始一个活动
+     * Start an activity
      *
      * @param promotionId
      */
@@ -181,20 +181,20 @@ public class PintuanManagerImpl implements PintuanManager {
 
         Pintuan pintuan = this.getModel(promotionId);
 
-        //如果还在活动时间内
-        //修改状态为进行中，活动可操作状态变成可以关闭
+        // If its still active
+        // Change the state to In progress and the actionable state to closed
         if (pintuan.getEndTime() > DateUtil.getDateline()) {
             this.tradeDaoSupport.execute("update es_pintuan set status = ? ,option_status=? where promotion_id = ?", PromotionStatusEnum.UNDERWAY.name(), PintuanOptionEnum.CAN_CLOSE.name(), promotionId);
             pintuanGoodsManager.addIndex(promotionId);
         } else {
-            //活动时间范围外，修改状态为已结束，活动可操作状态变成nothing
+            // Outside the activity time range, the modified state is finished and the actionable state becomes nothing
             this.tradeDaoSupport.execute("update es_pintuan set status = ? ,option_status=? where promotion_id = ?", PromotionStatusEnum.END.name(), PintuanOptionEnum.NOTHING.name(), promotionId);
         }
 
     }
 
     /**
-     * 停止一个活动
+     * Stop an activity
      *
      * @param promotionId
      */
@@ -203,14 +203,14 @@ public class PintuanManagerImpl implements PintuanManager {
 
         Pintuan pintuan = this.getModel(promotionId);
 
-        //如果结束时间小于当前时间
-        // 可以操作为开启状态，活动状态为已结束
+        // If the end time is smaller than the current time
+        // The operation state is on, and the activity state is ended
         if (pintuan.getEndTime() > DateUtil.getDateline()) {
-            //表示可以再次开启，则不处理未成团订单，因为可以开启
+            // Indicates that it can be opened again. Unformed orders are not processed because it can be opened
             this.tradeDaoSupport.execute("update es_pintuan set status = ? ,option_status=? where promotion_id = ?", PromotionStatusEnum.END.name(), PintuanOptionEnum.CAN_OPEN.name(), promotionId);
         } else {
             this.tradeDaoSupport.execute("update es_pintuan set status = ? ,option_status=? where promotion_id = ?", PromotionStatusEnum.END.name(), PintuanOptionEnum.NOTHING.name(), promotionId);
-            //查询所有该活动下的未成团订单（未付款，已付款未成团）
+            // Query all ungrouped orders for this activity (unpaid, paid ungrouped)
             String sql = "select * from es_pintuan_order where (order_status = ? or order_status = ?) and pintuan_id = ?";
 
             List<PintuanOrder> orderList = this.tradeDaoSupport.queryForList(sql, PintuanOrder.class, PintuanOrderStatus.new_order.name(), PintuanOrderStatus.wait.name(), promotionId);
@@ -224,7 +224,7 @@ public class PintuanManagerImpl implements PintuanManager {
     }
 
     /**
-     * 手动停止一个活动
+     * Manually stop an activity
      *
      * @param promotionId
      */
@@ -238,7 +238,7 @@ public class PintuanManagerImpl implements PintuanManager {
     }
 
     /**
-     * 手动开始一个活动
+     * Start an activity manually
      *
      * @param promotionId
      */
@@ -252,10 +252,10 @@ public class PintuanManagerImpl implements PintuanManager {
     }
 
     /**
-     * 校验 是否可以手动操作
+     * Verify whether the operation can be performed manually
      *
-     * @param promotionId 拼团id
-     * @param type        1开启检测 0结束检测
+     * @param promotionId Spell groupid
+     * @param type        1Open test0End of test
      * @return
      */
     private boolean check(Integer promotionId, Integer type) {
@@ -266,31 +266,31 @@ public class PintuanManagerImpl implements PintuanManager {
             throw new ServiceException(PintuanErrorCode.E5013.code(), PintuanErrorCode.E5013.describe());
         }
 
-        //时间段不对，不许操作
+        // Time segment is not correct, do not operate
         if (pintuan.getStartTime() > DateUtil.getDateline() || pintuan.getEndTime() < DateUtil.getDateline()) {
             return false;
         }
-        //开启
+        // open
         if (type == 1) {
-            //如果活动已经结束 可以操作开始
+            // If the activity has ended, the operation can be started
             return pintuan.getStatus().equals(PromotionStatusEnum.END.name());
         } else {
-            //如果活动进行中 可以操作停止
+            // You can stop an activity if it is in progress
             return pintuan.getStatus().equals(PromotionStatusEnum.UNDERWAY.name());
         }
     }
 
     /**
-     * 验证参数
+     * Validate parameter
      *
-     * @param startTime 活动开始时间
-     * @param endTime   活动结束时间
+     * @param startTime Activity start time
+     * @param endTime   End time
      */
     private void verifyParam(long startTime, long endTime) {
 
-        // 开始时间不能大于结束时间
+        // The start time cannot be later than the end time
         if (startTime > endTime) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "活动起始时间不能大于活动结束时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The start time cannot be later than the end time");
         }
 
     }

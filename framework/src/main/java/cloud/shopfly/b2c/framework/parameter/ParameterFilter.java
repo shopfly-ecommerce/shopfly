@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * 入参拦截,对request重新包装，目前只处理了emoji表情的拦截
+ * The intercept refs,rightrequestRepackaged, so far only processedemojiExpression interception
  * @author fk
  * @version v2.0
  * @since v7.2.0

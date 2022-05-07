@@ -16,15 +16,15 @@
 package cloud.shopfly.b2c.consumer.core.event;
 
 /**
- * 站内消息
+ * Messages
  * @author fk
  * @version v2.0
- * @since v7.0 2018年3月23日 上午10:16:59
+ * @since v7.0 2018years3month23The morning of10:16:59
  */
 public interface MemberMessageEvent {
 
 	/**
-	 * 会员站内消息消费
+	 * Message consumption within member sites
 	 * 
 	 * @param messageId
 	 */

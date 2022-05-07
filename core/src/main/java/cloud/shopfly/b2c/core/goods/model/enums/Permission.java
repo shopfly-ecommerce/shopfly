@@ -17,26 +17,26 @@ package cloud.shopfly.b2c.core.goods.model.enums;
 
 
 /**
- * 权限枚举
+ * Rights enumerated
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月20日 上午10:39:41
+ * 2018years3month20The morning of10:39:41
  */
 public enum Permission {
     /**
-     * 买家权限
+     * Buyers permissions
      */
     BUYER,
 
     /**
-     * 管理员权限
+     * Administrator rights
      */
     ADMIN,
 
     /**
-     * 不验证权限
+     * Not verifying permissions
      */
     CLIENT
 

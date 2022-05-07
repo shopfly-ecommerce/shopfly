@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * QQ登陆用户信息实体
+ * QQLogin user information entity
  *
  * @author cs
  * @version v1.0
@@ -43,22 +43,22 @@ public class QQUserDTO implements Serializable {
     @ApiModelProperty(name = "unionid", value = "unionid", required = true)
     private String unionid;
 
-    @ApiModelProperty(name = "headimgurl", value = "头像", required = false,hidden = true)
+    @ApiModelProperty(name = "headimgurl", value = "Head portrait", required = false,hidden = true)
     private String headimgurl;
 
-    @ApiModelProperty(name = "accessToken", value = "app端登陆传入access_token", required = true)
+    @ApiModelProperty(name = "accessToken", value = "appEnd login incomingaccess_token", required = true)
     private String accesstoken;
 
-    @ApiModelProperty(name = "nickName", value = "用户昵称", required = false)
+    @ApiModelProperty(name = "nickName", value = "The user nickname", required = false)
     private String nickname;
 
-    @ApiModelProperty(name = "gender", value = "性别", required = false)
+    @ApiModelProperty(name = "gender", value = "gender", required = false)
     private String gender;
 
     @ApiModelProperty(name = "country", value = "Country name", required = false)
     private String country;
 
-    @ApiModelProperty(name = "city", value = "城市", required = false)
+    @ApiModelProperty(name = "city", value = "city", required = false)
     private String city;
 
     public String getGender() {

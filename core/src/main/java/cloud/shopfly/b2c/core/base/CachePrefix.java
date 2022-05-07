@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.base;
 
 /**
- * 缓存前缀
+ * Prefix cache
  * Created by kingapex on 2018/3/19.
  *
  * @author kingapex
@@ -32,68 +32,68 @@ public enum CachePrefix {
     TOKEN,
 
     /**
-     * 系统设置
+     * System Settings
      */
     SETTING,
 
     /**
-     * 快递平台
+     * Delivery platform
      */
     EXPRESS,
 
     /**
-     * 图片验证码
+     * Image verification code
      */
     CAPTCHA,
 
     /**
-     * 热门关键字
+     * Hot keywords
      */
     HOT_KEYWORD,
 
     /**
-     * 商品
+     * product
      */
     GOODS,
 
     /**
-     * 商品sku
+     * productsku
      */
     SKU,
 
     /**
-     * sku库存
+     * skuInventory
      */
     SKU_STOCK,
 
     /**
-     * 商品库存
+     * inventory
      */
     GOODS_STOCK,
 
     /**
-     * 商品分类
+     * Category
      */
     GOODS_CAT,
     /**
-     * 浏览次数
+     * viewed
      */
     VISIT_COUNT,
     /**
-     * 存储方案
+     * Storage solution
      */
     UPLOADER,
     /**
-     * 地区
+     * region
      */
     REGION,
 
     /**
-     * 短信网关
+     * SMS gateway
      */
     SPlATFORM,
     /**
-     * 短信验证码前缀
+     * SMS verification code prefix
      */
     _CODE_PREFIX,
     /**
@@ -101,164 +101,164 @@ public enum CachePrefix {
      */
     SMTP,
     /**
-     * 系统设置
+     * System Settings
      */
     SETTINGS,
     /**
-     * 电子面单
+     * Electronic surface single
      */
     WAYBILL,
     /**
-     * 短信验证码
+     * SMS verification code
      */
     SMS_CODE,
     /**
-     * 短信验证
+     * Message authentication
      */
     SMS_VERIFY,
     /**
-     * 管理员角色权限对照表
+     * Mapping table of administrator role permissions
      */
     ADMIN_URL_ROLE,
 
     /**
-     * 手机验证标识
+     * Mobile phone identification
      */
     MOBILE_VALIDATE,
 
     /**
-     * 店铺运费模版列表
+     * List of store freight templates
      */
     SHIP_TEMPLATE,
 
     /**
-     * 店铺中某个运费模版
+     * A shipping template in the store
      */
     SHIP_TEMPLATE_ONE,
 
-    //================促销=================
+    // = = = = = = = = = = = = = = = = promotion = = = = = = = = = = = = = = = = =
     /**
-     * 促销活动
+     * Sales promotion activity
      */
     PROMOTION_KEY,
 
     /**
-     * 单品立减
+     * Item set
      */
     STORE_ID_MINUS_KEY,
 
     /**
-     * 第二件半价
+     * The second one is half price
      */
     STORE_ID_HALF_PRICE_KEY,
 
     /**
-     * 满优惠
+     * With preferential
      */
     STORE_ID_FULL_DISCOUNT_KEY,
 
     /**
-     * 限时抢购活动缓存key前缀
+     * Flash sale activity cachekeyThe prefix
      */
     STORE_ID_SECKILL_KEY,
 
     /**
-     * 团购活动缓存key前缀
+     * Group purchase activity cachekeyThe prefix
      */
     STORE_ID_GROUP_BUY_KEY,
 
     /**
-     * 积分商品缓存key前缀
+     * Integral Goods CachekeyThe prefix
      */
     STORE_ID_EXCHANGE_KEY,
 
 
-    //================交易=================
+    // = = = = = = = = = = = = = = = = deal = = = = = = = = = = = = = = = = =
 
     /**
-     * 购物车原始数据
+     * Shopping cart raw data
      */
     CART_ORIGIN_DATA_PREFIX,
 
     /**
-     * 立即购买sku
+     * Buy nowsku
      */
     CART_SKU_PREFIX,
 
     /**
-     * 购物车视图
+     * Shopping cart view
      */
     CART_MEMBER_ID_PREFIX,
 
     /**
-     * 购物车，用户选择的促销信息
+     * Shopping cart, user-selected promotional information
      */
     CART_PROMOTION_PREFIX,
 
 
     /**
-     * 交易_交易价格的前缀
+     * trading_trading价格的前缀
      */
     PRICE_SESSION_ID_PREFIX,
 
     /**
-     * 交易_交易单
+     * trading_trading单
      */
     TRADE_SESSION_ID_PREFIX,
 
 
     /**
-     * 结算参数
+     * Settlement parameter
      */
     CHECKOUT_PARAM_ID_PREFIX,
 
     /**
-     * 交易单号前缀
+     * Transaction order number prefix
      */
     TRADE_SN_CACHE_PREFIX,
 
     /**
-     * 订单编号前缀
+     * Order Number prefix
      */
     ORDER_SN_CACHE_PREFIX,
     /**
-     * 订单编号标记
+     * Order number mark
      */
     ORDER_SN_SIGN_CACHE_PREFIX,
     /**
-     * 订单编号前缀
+     * Order Number prefix
      */
     PAY_LOG_SN_CACHE_PREFIX,
 
     /**
-     * 交易
+     * trading
      */
     TRADE,
 
     /**
-     * 商品好评率
+     * Product praise rate
      */
     GOODS_GRADE,
     /**
-     * 所有地区
+     * All regions
      */
     REGIONALL,
     /**
-     * 分级别地区缓存
+     * Hierarchical region caching
      */
     REGIONLIDEPTH,
 
     /**
-     * 站点导航栏
+     * Site navigation bar
      */
     SITE_NAVIGATION,
     /**
-     * 信任登录
+     * Trust the login
      */
     CONNECT_LOGIN,
 
     /**
-     * 敏感词
+     * Sensitive words
      */
     SENSITIVE_WORDS,
     /**
@@ -266,15 +266,15 @@ public enum CachePrefix {
      */
     SESSION_KEY,
     /**
-     * 支付参数
+     * Pay parameters
      */
     PAYMENT_CONFIG,
     /**
-     * 上线人员
+     * Online personnel
      */
     DISTRIBUTION_UP,
     /**
-     * 会员短链接
+     * Membership short link
      */
     MEMBER_SU;
 

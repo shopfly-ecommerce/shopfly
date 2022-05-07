@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.framework.security;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 认证业务类
+ * Authentication business class
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -28,7 +28,7 @@ public interface AuthenticationService {
 
 
     /**
-     * 认证
+     * certification
      * @param req
      */
     void auth(HttpServletRequest req);

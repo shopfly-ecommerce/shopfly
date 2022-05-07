@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 订单出库状态枚举
+ * Order outbound status enumeration
  *
  * @author Snow create in 2018/7/10
  * @version v2.0
@@ -25,19 +25,19 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 public enum OrderOutStatusEnum {
 
     /**
-     * 等待出库
+     * Waiting for outbound
      */
-    WAIT("等待出库"),
+    WAIT("Waiting for outbound"),
 
     /**
-     * 出库成功
+     * Outbound success
      */
-    SUCCESS("出库成功"),
+    SUCCESS("Outbound success"),
 
     /**
-     * 出库失败
+     * Outbound failure
      */
-    FAIL("出库失败");
+    FAIL("Outbound failure");
 
 
     private String description;

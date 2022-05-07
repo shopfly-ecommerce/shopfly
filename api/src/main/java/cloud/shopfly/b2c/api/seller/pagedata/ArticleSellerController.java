@@ -30,7 +30,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 文章控制器
+ * Article controller
  *
  * @author fk
  * @version v1.0
@@ -39,19 +39,19 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/pages/articles")
-@Api(description = "文章相关API")
+@Api(description = "The article relatedAPI")
 public class ArticleSellerController {
 
     @Autowired
     private ArticleManager articleManager;
 
 
-    @ApiOperation(value = "查询文章列表", response = ArticleDetail.class)
+    @ApiOperation(value = "Query the list of articles", response = ArticleDetail.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "name", value = "文章名称", dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "category_id", value = "文章分类", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "The article name", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "category_id", value = "The article classification", dataType = "string", paramType = "query"),
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, String name, @ApiIgnore Integer categoryId) {
@@ -60,7 +60,7 @@ public class ArticleSellerController {
     }
 
 
-    @ApiOperation(value = "添加文章", response = Article.class)
+    @ApiOperation(value = "Add the article", response = Article.class)
     @PostMapping
     public Article add(@Valid Article article) {
 
@@ -70,9 +70,9 @@ public class ArticleSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改文章", response = Article.class)
+    @ApiOperation(value = "Modify the article", response = Article.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public Article edit(@Valid Article article, @PathVariable Integer id) {
 
@@ -83,9 +83,9 @@ public class ArticleSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除文章")
+    @ApiOperation(value = "Delete articles")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的文章主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the article to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -96,9 +96,9 @@ public class ArticleSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个文章")
+    @ApiOperation(value = "Query an article")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的文章主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the article to be queried", required = true, dataType = "int", paramType = "path")
     })
     public Article get(@PathVariable Integer id) {
 

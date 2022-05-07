@@ -23,12 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 订单状态扫描
+ * Order status scan
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-07-05 下午2:11
+ * 2018-07-05 In the afternoon2:11
  */
 @Component
 public class OrderStatusCheckJob implements EveryDayExecute {
@@ -39,54 +39,54 @@ public class OrderStatusCheckJob implements EveryDayExecute {
     private OrderTaskManager orderTaskManager;
 
     /**
-     * 每晚23:30执行
+     * Every night,23:30perform
      */
     @Override
     public void everyDay() {
-        /** 自动取消 */
+        /** Automatically cancelled*/
         try {
-            // 款到发货，新订单24小时未付款要自动取消
+            // The new order will be cancelled automatically if it is not paid within 24 hours
             this.orderTaskManager.cancelTask();
         } catch (Exception e) {
-            logger.error("自动取消出错", e);
+            logger.error("Autocancel error", e);
         }
 
-        /** 自动确认收货 */
+        /** Automatic confirmation of receipt*/
         try {
-            // 发货之后10天要自动确认收货
+            // Automatically confirm receipt of goods 10 days after shipment
             this.orderTaskManager.rogTask();
         } catch (Exception e) {
-            logger.error("自动确认收货出错", e);
+            logger.error("Automatic confirmation of receipt error", e);
         }
 
-        /** 自动完成天数 */
+        /** Automatic completion days*/
         try {
-            // 确认收货7天后标记为完成
+            // Mark completed 7 days after confirmation of receipt
            this.orderTaskManager.completeTask();
         } catch (Exception e) {
-            logger.error("订单7天后标记为完成出错", e);
+            logger.error("The order7The days after are marked as completion errors", e);
         }
 
-        /** 自动支付天数 */
+        /** Automatic payment days*/
         try {
             this.orderTaskManager.payTask();
         } catch (Exception e) {
-            logger.error("订单自动支付完成出错", e);
+            logger.error("Order automatic payment completion error", e);
         }
 
-        /** 售后失效天数 */
+        /** Number of days after sale*/
         try {
-            // 完成后一个月没有申请售后，标记为售后过期
+            // If there is no after-sale application within one month after completion, it will be marked as after-sale expired
             this.orderTaskManager.serviceTask();
         } catch (Exception e) {
-            logger.error("订单标记为售后过期出错", e);
+            logger.error("The order was marked as after sale expired error", e);
         }
 
         try {
-            // 超过14天不能评价，并自动好评
+            // Can not be evaluated for more than 14 days, and automatically praise
             this.orderTaskManager.commentTask();
         } catch (Exception e) {
-            logger.error("订单超过14天不能评价出错", e);
+            logger.error("Order more than14Days can not be evaluated wrong", e);
         }
 
     }

@@ -22,7 +22,7 @@ import cloud.shopfly.b2c.framework.database.Page;
 import java.util.List;
 
 /**
- * 满优惠赠品业务层
+ * Full preferential gift business layer
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -31,59 +31,59 @@ import java.util.List;
 public interface FullDiscountGiftManager	{
 
 	/**
-	 * 查询满优惠赠品列表
-	 * @param page 页码
-	 * @param pageSize 每页数量
-	 * @param keyword 关键字
+	 * Check the full discount gift list
+	 * @param page The page number
+	 * @param pageSize Number each page
+	 * @param keyword keyword
 	 * @return Page
 	 */
 	Page list(int page, int pageSize, String keyword);
 
 	/**
-	 * 添加满优惠赠品
-	 * @param fullDiscountGift 满优惠赠品
-	 * @return FullDiscountGift 满优惠赠品
+	 * Add full discount gift
+	 * @param fullDiscountGift Full discount free gift
+	 * @return FullDiscountGift Full discount free gift
 	 */
 	FullDiscountGiftDO add(FullDiscountGiftDO fullDiscountGift);
 
 	/**
-	 * 修改满优惠赠品
-	 * @param fullDiscountGift 满优惠赠品
-	 * @param id 满优惠赠品主键
-	 * @return FullDiscountGift 满优惠赠品
+	 * Modify full discount gifts
+	 * @param fullDiscountGift Full discount free gift
+	 * @param id Full discount gift master key
+	 * @return FullDiscountGift Full discount free gift
 	 */
 	FullDiscountGiftDO edit(FullDiscountGiftDO fullDiscountGift, Integer id);
 
 	/**
-	 * 删除满优惠赠品
-	 * @param id 满优惠赠品主键
+	 * Delete full discount gifts
+	 * @param id Full discount gift master key
 	 */
 	void delete(Integer id);
 
 	/**
-	 * 获取满优惠赠品
-	 * @param id 满优惠赠品主键
-	 * @return FullDiscountGift  满优惠赠品
+	 * Get full discount gift
+	 * @param id Full discount gift master key
+	 * @return FullDiscountGift  Full discount free gift
 	 */
 	FullDiscountGiftDO getModel(Integer id);
 
 
 	/**
-	 * 验证操作权限<br/>
-	 * 如有问题直接抛出权限异常
+	 * Verifying operation rights<br/>
+	 * Throw a permission exception if there is a problem
 	 * @param id
 	 */
 	void verifyAuth(Integer id);
 
 	/**
-	 * 增加赠品库存
+	 * Increase your gift inventory
 	 * @param giftList
 	 * @return
 	 */
 	boolean addGiftQuantity(List<FullDiscountGiftDO> giftList);
 
 	/**
-	 * 增加赠品可用库存
+	 * Increase the inventory available for freebies
 	 * @param giftList
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public interface FullDiscountGiftManager	{
 
 
 	/**
-	 * 减少赠品库存
+	 * Reduce your gift inventory
 	 * @param giftList
 	 * @param type
 	 * @return
@@ -99,7 +99,7 @@ public interface FullDiscountGiftManager	{
 	boolean reduceGiftQuantity(List<FullDiscountGiftDO> giftList, QuantityType type);
 
 	/**
-	 * 获取商家所有赠品数据集合
+	 * Get a collection of all of the merchants gift data
 	 * @return
 	 */
 	List<FullDiscountGiftDO> listAll();

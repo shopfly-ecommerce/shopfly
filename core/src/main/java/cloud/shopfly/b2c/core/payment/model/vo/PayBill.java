@@ -21,7 +21,7 @@ import cloud.shopfly.b2c.core.payment.model.enums.TradeType;
 import java.io.Serializable;
 
 /**
- * 支付账单，
+ * Pay the bills,
  *
  * @author fk
  * @version v2.0
@@ -32,39 +32,39 @@ public class PayBill implements Serializable {
 
 
     /**
-     * 编号（交易或订单编号，或其它要扩展的其它类型编号）
+     * Serial number（交易或订单Serial number，或其它要扩展的其它类型Serial number）
      */
     private String sn;
 
     /**
-     * 账单编号,要传递给第三方平台的，不要管，系统自动生成
+     * The bill number,To pass to the third party platform, do not care, the system automatically generated
      */
     private String billSn;
 
     /**
-     * 要支付的金额
+     * The amount to be paid
      */
     private Double orderPrice;
 
     /**
-     * normal:正常的网页跳转
-     * qr:二维码扫描
+     * normal:Normal web page redirect
+     * qr:Qr code scanning
      */
     private String payMode;
 
     /**
-     * 交易类型
+     * Transaction type
      */
     private TradeType tradeType;
 
 
     /**
-     * 客户端类型
+     * Client type
      */
     private ClientType clientType;
 
     /**
-     * 支付插件
+     * Pay the plug-in
      */
     private String pluginId;
 

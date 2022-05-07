@@ -26,11 +26,11 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * redis的cache实现
+ * redisthecacheimplementation
  *
  * @author fk
  * @version v6.4
- * @since v6.4 2017年9月25日 下午4:32:49
+ * @since v6.4 2017years9month25On the afternoon4:32:49
  */
 @Component
 public class RedisCacheImpl implements Cache {
@@ -85,7 +85,7 @@ public class RedisCacheImpl implements Cache {
     }
 
     /**
-     * 删除
+     * delete
      *
      * @param key
      */

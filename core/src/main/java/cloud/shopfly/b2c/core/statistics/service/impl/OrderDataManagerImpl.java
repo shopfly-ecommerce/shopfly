@@ -34,13 +34,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 订单实现
+ * Order to achieve
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/22 下午10:11
+ * 2018/6/22 In the afternoon10:11
  */
 @Service
 public class OrderDataManagerImpl implements OrderDataManager {
@@ -90,7 +90,7 @@ public class OrderDataManagerImpl implements OrderDataManager {
 
 
     /**
-     * 获取第二级别分类。
+     * Gets the second level classification.
      *
      * @param path
      * @return
@@ -98,9 +98,9 @@ public class OrderDataManagerImpl implements OrderDataManager {
     private Integer getIndustry(String path) {
         try {
             String pattern = "(0\\|)(\\d+)";
-            // 创建 Pattern 对象
+            // Create Pattern object
             Pattern r = Pattern.compile(pattern);
-            // 现在创建 matcher 对象
+            // Now create the Matcher object
             Matcher m = r.matcher(path);
             if (m.find()) {
                 return new Integer(m.group(2));

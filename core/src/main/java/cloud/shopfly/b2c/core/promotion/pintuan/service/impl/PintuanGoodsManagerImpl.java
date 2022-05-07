@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 拼团商品业务类
+ * Group commodity business class
  *
  * @author admin
  * @version vv1.0.0
@@ -90,7 +90,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
 
         this.tradeDaoSupport.insert(pintuanGoods);
         if (logger.isDebugEnabled()) {
-            logger.debug("将拼团商品" + pintuanGoods + "写入数据库");
+            logger.debug("Goods will be grouped" + pintuanGoods + "Write to database");
         }
 
         return pintuanGoods;
@@ -108,14 +108,14 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
         for (int i = 0; i < pintuanGoodsList.size(); i++) {
             skuIds[i] = pintuanGoodsList.get(i).getSkuId();
         }
-        //拼团促销活动
+        // Group promotion
         List<PromotionAbnormalGoods> promotionAbnormalGoods = this.checkPromotion(skuIds, pintuan.getStartTime(), pintuan.getEndTime(), pintuan.getPromotionId());
 
         StringBuffer stringBuffer = new StringBuffer();
         if (promotionAbnormalGoods.size() > 0) {
             promotionAbnormalGoods.forEach(pGoods -> {
-                stringBuffer.append("商品【" + pGoods.getGoodsName() + "】参与【" + PromotionTypeEnum.valueOf(pGoods.getPromotionType()).getPromotionName() + "】活动,");
-                stringBuffer.append("时间冲突【" + DateUtil.toString(pGoods.getStartTime(), "yyyy-MM-dd HH:mm:ss") + "~" + DateUtil.toString(pGoods.getEndTime(), "yyyy-MM-dd HH:mm:ss") + "】;");
+                stringBuffer.append("product【" + pGoods.getGoodsName() + "】To participate in【" + PromotionTypeEnum.valueOf(pGoods.getPromotionType()).getPromotionName() + "】activity,");
+                stringBuffer.append("Time conflict【" + DateUtil.toString(pGoods.getStartTime(), "yyyy-MM-dd HH:mm:ss") + "~" + DateUtil.toString(pGoods.getEndTime(), "yyyy-MM-dd HH:mm:ss") + "】;");
             });
             throw new ServiceException(PintuanErrorCode.E5015.code(), stringBuffer.toString());
         }
@@ -126,9 +126,9 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
 
             pintuanGoodsDO.setPintuanId(pintuan.getPromotionId());
             GoodsSkuVO skuVo = goodsClient.getSkuFromCache(pintuanGoodsDO.getSkuId());
-            //验证拼团价格和原始价格
+            // Verify group price and original price
             if (pintuanGoodsDO.getSalesPrice() > skuVo.getPrice()) {
-                throw new ServiceException(PintuanErrorCode.E5015.code(), skuVo.getGoodsName() + ",此商品的拼团价格不能大于商品销售价格");
+                throw new ServiceException(PintuanErrorCode.E5015.code(), skuVo.getGoodsName() + ",The group price of this commodity shall not be greater than the sales price of the commodity");
             }
             pintuanGoodsDO.setSellerId(skuVo.getSellerId());
             pintuanGoodsDO.setSellerName(skuVo.getSellerName());
@@ -144,9 +144,9 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
 
         });
 
-        //如果拼团活动是进行中的状态，则同步商品
+        // Synchronizes goods if the group activity is in progress
         if (pintuan.getStatus().equals(PromotionStatusEnum.UNDERWAY.name())) {
-            //同步es
+            // Synchronous es
             pinTuanSearchManager.syncIndexByPinTuanId(pintuanId);
         }
 
@@ -173,7 +173,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     /**
-     * 获取拼团商品
+     * Get group goods
      *
      * @param pintuanId
      * @param skuId
@@ -197,10 +197,10 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
             pinTuanGoodsVO = list.get(0);
         }
         if (pinTuanGoodsVO == null) {
-            throw new ResourceNotFoundException("skuid为" + skuId + "的拼团商品不存在");
+            throw new ResourceNotFoundException("skuidfor" + skuId + "Group goods do not exist");
         }
 
-        //计算剩余秒数为结束时间减掉当前时间（秒数）
+        // Calculate the remaining seconds as the end time minus the current time (seconds)
         long currTime = DateUtil.getDateline();
         pinTuanGoodsVO.setTimeLeft(pinTuanGoodsVO.getEndTime() - currTime);
 
@@ -215,7 +215,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
         String sql = "select sku_id from es_pintuan_goods where goods_id=? and pintuan_id = ?";
         List<Map> list = tradeDaoSupport.queryForList(sql, goodsId, pintuanId);
 
-        //将参加了拼团的sku压入到新list中
+        // Push the skUS that participated in the group into the new list
         List<GoodsSkuVO> newList = new ArrayList<>();
         skuList.forEach(goodsSkuVO -> {
             list.forEach(map -> {
@@ -231,10 +231,10 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     /**
-     * 更新已团数量
+     * Update the number of groups
      *
-     * @param id  拼团商品id
-     * @param num 数量
+     * @param id  Spell mass goodsid
+     * @param num Quantity
      */
     @Override
     public void addQuantity(Integer id, Integer num) {
@@ -242,7 +242,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     /**
-     * 获取某活动所有商品
+     * Get all goods for an event
      *
      * @param promotionId
      * @return
@@ -258,8 +258,8 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
             GoodsSkuVO goodsSkuVO = goodsClient.getSkuFromCache(skuId);
             Integer quantity = 0;
             if (null == goodsSkuVO) {
-                logger.error("错误：sku数据为空，相关信息为" + pinTuanGoodsVO.toString());
-                // 无法使用break，lambda只能用reburn
+                logger.error("error：skuThe data is empty and the related information is" + pinTuanGoodsVO.toString());
+                // Cant use break, lambda can only use reburn
                 // break;
                 return;
             } else {
@@ -274,7 +274,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     /**
-     * 关闭一个活动的促销商品索引
+     * Close the promotional items index for an event
      *
      * @param promotionId
      */
@@ -284,7 +284,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     /**
-     * 开启一个活动的促销商品索引
+     * Open an index of promotional items for an event
      *
      * @param promotionId
      */
@@ -305,12 +305,12 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
 
 
     /**
-     * 商品查询
+     * Goods query
      *
-     * @param page        页码
-     * @param pageSize    分页大小
-     * @param promotionId 促销id
-     * @param name        商品名称
+     * @param page        The page number
+     * @param pageSize    Page size
+     * @param promotionId Sales promotionid
+     * @param name        Name
      * @return
      */
     @Override
@@ -329,48 +329,48 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
     }
 
     /**
-     * 查询指定时间范围，是否有参与其他活动
+     * Queries whether you have participated in other activities within the specified time range
      *
-     * @param skuIds    SKUid集合
-     * @param startTime 开始时间
-     * @param endTime   结束时间
+     * @param skuIds    SKUidA collection of
+     * @param startTime The start time
+     * @param endTime   The end of time
      */
     @Override
     public List<PromotionAbnormalGoods> checkPromotion(Integer[] skuIds, Long startTime, Long endTime, Integer promotionId) {
 
 
-        //何为冲突
+        // What is a conflict
         //（1）
-        //                       校验时间
+        // Check the time
         //                  --》【              】《--
-        // ******************************************************************       时间轴
-        //                已经存在 活动
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
+        // Activity already exists
         //       --》【              】《--
-        // ******************************************************************       时间轴
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
 
         //（2）
-        //                       校验时间
+        // Check the time
         //                  --》【              】《--
-        // ******************************************************************       时间轴
-        //                                       已经存在 活动
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
+        // Activity already exists
         //                              --》【              】《--
-        // ******************************************************************       时间轴
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
 
         //（3）
-        //                       校验时间
+        // Check the time
         //                  --》【              】《--
-        // ******************************************************************       时间轴
-        //                       已经存在 活动
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
+        // Activity already exists
         //        --》【                               】《--
-        // ******************************************************************       时间轴
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
 
         //（4）
-        //                       校验时间
+        // Check the time
         //                  --》【              】《--
-        // ******************************************************************       时间轴
-        //                       已经存在 活动
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
+        // Activity already exists
         //                      --》【     】《--
-        // ******************************************************************       时间轴
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * the timeline
         List term = new ArrayList();
         for (Integer skuid :
                 skuIds) {
@@ -386,7 +386,7 @@ public class PintuanGoodsManagerImpl implements PintuanGoodsManager {
         term.add(endTime);
         term.add(startTime);
         term.add(promotionId);
-        //查询时间轴以外的促销活动商品
+        // Query for promotional items outside the timeline
         List<PintuanGoodsDTO> promotionGoodsDOS = this.tradeDaoSupport.queryForList("select * from es_pintuan_goods pg left join es_pintuan p on pg.pintuan_id=p.promotion_id " +
                         " where sku_id in (" + SqlUtil.getInSql(skuIds) + ") and ( (start_time < ? and end_time > ?) or (start_time < ? and end_time > ?) or(start_time < ? and end_time > ?) or(start_time < ? and end_time > ?))" +
                         " and pg.pintuan_id != ? ",

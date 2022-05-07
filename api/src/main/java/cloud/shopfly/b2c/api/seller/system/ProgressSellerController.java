@@ -27,37 +27,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 进度控制器
+ * Schedule controller
  *
  * @author kingapex
  * @version v1.0
  * @since v1.0
- * 2015年5月13日 下午5:57:48
+ * 2015years5month13On the afternoon5:57:48
  */
 @RestController
 @RequestMapping("/seller/task")
-@Api(description = "进度控制器")
+@Api(description = "Schedule controller")
 public class ProgressSellerController {
 
     @Autowired
     private ProgressManager progressManager;
 
-    @ApiOperation("检测是否有任务正在进行,有任务返回任务id,无任务返回404")
-    @ApiImplicitParam(name = "task_id", value = "任务id", dataType = "String", paramType = "path", required = true, example = "page_create")
+    @ApiOperation("Check whether there are tasks in progress,There is a task return taskid,No Task return404")
+    @ApiImplicitParam(name = "task_id", value = "taskid", dataType = "String", paramType = "path", required = true, example = "page_create")
     @GetMapping(value = "/{task_id}")
     public String hasTask(@PathVariable("task_id") String taskId) {
 
-        /** 如果redis中有此id 视为有任务进行 */
+        /** ifredisIn theid Deemed to be on a mission*/
         if (progressManager.getProgress(taskId) != null) {
             return taskId;
         }
 
-        throw new ResourceNotFoundException("进度不存在");
+        throw new ResourceNotFoundException("Progress does not exist");
     }
 
 
-    @ApiOperation("查看任务进度")
-    @ApiImplicitParam(name = "task_id", value = "任务id", dataType = "String", paramType = "path", required = true, example = "page_create")
+    @ApiOperation("Viewing the Task Progress")
+    @ApiImplicitParam(name = "task_id", value = "taskid", dataType = "String", paramType = "path", required = true, example = "page_create")
     @GetMapping(value = "/{task_id}/progress")
     public ProgressVo viewProgress(@PathVariable("task_id") String taskId) {
 
@@ -65,7 +65,7 @@ public class ProgressSellerController {
         if (taskProgress == null) {
             return new ProgressVo(100, ProgressEnum.SUCCESS.name());
         }
-        /** 如果是完成或者出错 需要移除任务 */
+        /** Remove the task if it is complete or faulty*/
         if (!taskProgress.getTaskStatus().equals(ProgressEnum.DOING.name())) {
             progressManager.remove(taskId);
         }
@@ -74,8 +74,8 @@ public class ProgressSellerController {
 
     }
 
-    @ApiOperation("清除某任务")
-    @ApiImplicitParam(name = "task_id", value = "任务id", dataType = "String", paramType = "path", required = true, example = "page_create")
+    @ApiOperation("Clearing a Task")
+    @ApiImplicitParam(name = "task_id", value = "taskid", dataType = "String", paramType = "path", required = true, example = "page_create")
     @DeleteMapping(value = "/{task_id}")
     public String clear(@PathVariable("task_id") String taskId) {
         progressManager.remove(taskId);

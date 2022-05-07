@@ -23,11 +23,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 手机号码校验实现
+ * Mobile phone number verification is realized
  *
  * @author zh
  * @version v7.0
- * @date 18/5/9 下午3:08
+ * @date 18/5/9 In the afternoon3:08
  * @since v7.0
  */
 public class MobileValidator implements ConstraintValidator<Mobile, String> {

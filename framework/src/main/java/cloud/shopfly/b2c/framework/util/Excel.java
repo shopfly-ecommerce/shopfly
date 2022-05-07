@@ -25,7 +25,7 @@ import java.io.*;
 import java.util.Date;
 
 /**
- * excel 工具类
+ * excel Utility class
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -34,27 +34,27 @@ import java.util.Date;
 public class Excel {
 
     /**
-     * sheet名字
+     * sheetThe name
      */
     private String sheetName;
 
     /**
-     * 本次操作的workbook 对象，会在构造器中初始化
+     * Of this operationworkbook Object is initialized in the constructor
      */
     private XSSFWorkbook workbook;
 
     /**
-     * 本次操作的sheet 对象，会在构造器中初始化
+     * Of this operationsheet Object is initialized in the constructor
      */
     private  XSSFSheet sheet ;
 
     /**
-     * cell的样式，可以通过 setCellStyle方法来个性化
+     * cellThe style can be passedsetCellStyleWays to personalize
      */
     protected CellStyle style;
 
     /**
-     * 行号号
+     * The line number,
      */
     int rowNum = 0;
 
@@ -67,7 +67,7 @@ public class Excel {
 
 
     /**
-     * 构造器，对各种excel对象进行初始化
+     * Constructor for variousexcelObject is initialized
      * @param sheetName
      */
     public Excel(String sheetName){
@@ -81,9 +81,9 @@ public class Excel {
 
 
     /**
-     * 构造一个sheet
-     * @param sheetName sheet的名字
-     * @return 对象自己
+     * To construct asheet
+     * @param sheetName sheetThe name of the
+     * @return Object itself
      */
     public Excel sheet(String sheetName){
         this.sheetName = sheetName;
@@ -95,24 +95,24 @@ public class Excel {
     }
 
     /**
-     * 定义一行数据
-     * @param datas 行数据
-     * @return 本excel对象
+     * Define a row of data
+     * @param datas Rows of data
+     * @return thisexcelobject
      */
     public Excel row( Object ... datas){
 
-        //创建一行
+        // Create a line
         Row row = sheet.createRow(rowNum++);
         int colNum = 0;
         for (Object field : datas) {
 
-            //创建一列
+            // Create a list of
             Cell cell = row.createCell(colNum++);
 
-            //设置样式
+            // Set the style
             cell.setCellStyle(style);
 
-            //写入数据
+            // Write data
             if (field instanceof String) {
                 cell.setCellValue((String) field);
             } else if (field instanceof Integer) {
@@ -139,8 +139,8 @@ public class Excel {
 
 
     /**
-     * 将workbook对象输出到流
-     * @param outputStream 要输出的流
+     * willworkbookObject output to the stream
+     * @param outputStream The stream to be output
      * @throws IOException
      */
     public void write(OutputStream outputStream) throws IOException {
@@ -150,7 +150,7 @@ public class Excel {
     }
 
     /**
-     * 定义cell的样式
+     * definecellThe style of the
      */
     protected  void setCellStyle(){
         style.setBorderBottom(BorderStyle.THIN);

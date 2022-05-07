@@ -49,8 +49,8 @@ import java.util.Map;
 
 /**
  * Created by kingapex on 2019-01-24.
- * 拼团订单业务实现类<br/>
- * 实现了拼团订单开团和参团 *
+ * Group order business implementation class<br/>
+ * The realization of a group of orders to open and participate in the group*
  *
  * @author kingapex
  * @version 1.0
@@ -95,24 +95,24 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
         PintuanOrder pintuanOrder;
         PinTuanGoodsVO pinTuanGoodsVO = pintuanGoodsManager.getDetail(skuId);
 
-        //拼团订单不为空，表示要参团
+        // The group order is not empty, which means to participate in the group
         if (pinTuanOrderId != null) {
             pintuanOrder = getMainOrderById(pinTuanOrderId);
             if (pintuanOrder == null) {
                 if (logger.isErrorEnabled()) {
-                    logger.error("试图参加拼团，但拼团订单[" + pinTuanOrderId + "]不存在");
+                    logger.error("Try to join the group, but the group order[" + pinTuanOrderId + "]There is no");
                 }
-                throw new ResourceNotFoundException("拼团订单[" + pinTuanOrderId + "]不存在");
+                throw new ResourceNotFoundException("Spell group order[" + pinTuanOrderId + "]There is no");
             }
 
 
             if (logger.isDebugEnabled()) {
-                logger.debug("参加拼团订单：");
+                logger.debug("Join a group order：");
                 logger.debug(pintuanOrder);
             }
         } else {
 
-            //创建拼团
+            // Create a spell group
             pintuanOrder = new PintuanOrder();
             pintuanOrder.setEndTime(pinTuanGoodsVO.getEndTime());
             pintuanOrder.setOfferedNum(0);
@@ -124,27 +124,27 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
             pintuanOrder.setOrderStatus(PintuanOrderStatus.new_order.name());
             pintuanOrder.setGoodsName(pinTuanGoodsVO.getGoodsName());
 
-            //新增一个拼团订单
+            // Add a group order
             this.tradeDaoSupport.insert(pintuanOrder);
             pinTuanOrderId = this.tradeDaoSupport.getLastId("es_pintuan_order");
             pintuanOrder.setOrderId(pinTuanOrderId);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("创建一个新的拼团订单：");
+                logger.debug("Create a new group order：");
                 logger.debug(pintuanOrder);
             }
         }
 
-        //创建子订单
+        // Create a suborder
         PintuanChildOrder childOrder = new PintuanChildOrder();
         childOrder.setSkuId(skuId);
         childOrder.setOrderStatus(PintuanOrderStatus.wait.name());
 
-        //拼团活动id
+        // Group activity ID
         childOrder.setPintuanId(pinTuanGoodsVO.getPintuanId());
         childOrder.setOrderSn(order.getSn());
 
-        //拼团订单id
+        // Group order ID
         childOrder.setOrderId(pintuanOrder.getOrderId());
         childOrder.setMemberId(order.getMemberId());
         childOrder.setMemberName(order.getMemberName());
@@ -154,7 +154,7 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
         tradeDaoSupport.insert(childOrder);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("创建一个新的子订单：");
+            logger.debug("Create a new suborder：");
             logger.debug(childOrder);
         }
         return pintuanOrder;
@@ -165,18 +165,18 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     public void payOrder(OrderDO order) {
 
         String orderSn = order.getSn();
-        //查找子订单
+        // Find suborders
         PintuanChildOrder childOrder = this.getChildByOrderSn(orderSn);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("订单【" + order.getSn() + "】支付成功，获得其对应拼团子订单为：");
+            logger.debug("The order【" + order.getSn() + "】支付成功，获得其对应拼团子The order为：");
             logger.debug(childOrder);
         }
 
-        //查找主订单
+        // Find the master order
         PintuanOrder pintuanOrder = this.getMainOrderById(childOrder.getOrderId());
 
-        //加入一个参团者
+        // Join a participant
         Member member = memberClient.getModel(order.getMemberId());
         Participant participant = new Participant();
         participant.setId(member.getMemberId());
@@ -185,64 +185,64 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
         pintuanOrder.appendParticipant(participant);
 
 
-        //成团人数
+        // The number of clusters
         Integer requiredNum = pintuanOrder.getRequiredNum();
 
-        //已参团人数
+        // Number of participants
         Integer offeredNum = pintuanOrder.getOfferedNum();
 
-        //新增一人
+        // The new one
         offeredNum++;
         pintuanOrder.setOfferedNum(offeredNum);
 
-        //如果已经成团 如果系统设置两人成团，实际三人付款，那么也成团
+        // If the group is already formed if the system sets the group to two and the actual payment is made by three, then the group is formed
         if (offeredNum >= requiredNum) {
 
             if (logger.isDebugEnabled()) {
-                logger.debug("拼团订单：" + pintuanOrder + "已经成团");
+                logger.debug("Spell group order：" + pintuanOrder + "Have clouds");
             }
 
             pintuanOrder.setOrderStatus(PintuanOrderStatus.formed.name());
 
-            //更新拼团订单
+            // Update group orders
             tradeDaoSupport.update(pintuanOrder, pintuanOrder.getOrderId());
 
             formed(pintuanOrder.getOrderId());
 
             if (logger.isDebugEnabled()) {
-                logger.debug("更新所有子订单及普通订单为已成团");
+                logger.debug("Update all sub-orders and regular orders as formed");
             }
         } else {
 
             if (logger.isDebugEnabled()) {
                 logger.debug("offeredNum[" + offeredNum + "],requiredNum[" + requiredNum + "]");
-                logger.debug("拼团订单：" + pintuanOrder + "尚未成团");
+                logger.debug("Spell group order：" + pintuanOrder + "Has yet to form a smooth dough");
             }
 
-            //更新拼团订单为待成团
+            // Update group order to be group
             pintuanOrder.setOrderStatus(PintuanOrderStatus.wait.name());
 
-            //更新子订单为已支付状态
+            // Update suborder to paid status
             tradeDaoSupport.execute("update es_pintuan_child_order set order_status=? where child_order_id=?", PintuanOrderStatus.pay_off.name(), childOrder.getChildOrderId());
 
-            //更新拼团订单
+            // Update group orders
             tradeDaoSupport.update(pintuanOrder, pintuanOrder.getOrderId());
         }
 
-        //第一个人，即为创建拼团的人，那么配置定时任务进行处理
+        // The first person, the one who created the group, configure the scheduled task for processing
         if (pintuanOrder.getOfferedNum() == 1) {
-            //标记延时任务处理这个订单，活动结束时   延时取消/自动成团
+            // Mark delayed tasks to process this order, delay cancellation/auto-group at the end of the activity
             timeTrigger.add("pintuanOrderHandlerTriggerExecuter", pintuanOrder.getOrderId(), pintuanOrder.getEndTime(), "pintuan_order_handler_" + pintuanOrder.getOrderId());
         }
 
 
-        //更新拼团成团人数，更新本订单，也要更新整个团的订单
+        // Update the number of group members, update this order, but also to update the entire group of orders
         updatePintuanPerson(pintuanOrder, requiredNum - offeredNum);
 
     }
 
     /**
-     * 根据id获取模型
+     * According to theidAccess model
      *
      * @param id
      * @return
@@ -253,14 +253,14 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     }
 
     /**
-     * 更新拼团成团人数
+     * Update the number of players in a group
      *
-     * @param pintuanOrder 拼团主订单
-     * @param num          数量
+     * @param pintuanOrder Group master order
+     * @param num          Quantity
      */
     private void updatePintuanPerson(PintuanOrder pintuanOrder, Integer num) {
 
-        //根据主订单查询所有的子订单
+        // Query all suborders based on the master order
         String sql = "select o.order_data,o.sn from  es_pintuan_child_order pc inner join es_order o on pc.order_sn = o.sn  and pc.order_id = ?";
         List<Map> list = this.tradeDaoSupport.queryForList(sql, pintuanOrder.getOrderId());
 
@@ -271,15 +271,15 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
 
             PersonalizedData personalizedData = new PersonalizedData(orderData);
             Map map = new HashMap<>();
-            //还差几人成团
+            // Were a few people short of a group
             map.put("owesPersonNums", num);
             personalizedData.setPersonalizedData(OrderDataKey.pintuan, map);
 
             if (logger.isDebugEnabled()) {
-                logger.debug("拼团订单" + sn + "还差成团人数:" + num);
+                logger.debug("Spell group order" + sn + "We still need the size of the group:" + num);
             }
 
-            //更新订单的个性化数据
+            // Update personalization data for orders
             tradeDaoSupport.execute("update es_order set order_data=? where sn=?", personalizedData.getData(), sn);
 
 
@@ -289,13 +289,13 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     }
 
     /**
-     * 某个拼团订单成团操作
+     * A group order group operation
      *
      * @param pinTuanOrderId
      */
     private void formed(Integer pinTuanOrderId) {
 
-        //订单
+        // The order
         PintuanOrder pintuanOrder = this.getMainOrderById(pinTuanOrderId);
 
         String sql = "select order_sn from es_pintuan_child_order where order_id =?";
@@ -303,12 +303,12 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
         List<Map> list = tradeDaoSupport.queryForList(sql, pinTuanOrderId);
         list.forEach(map -> {
             String orderSn = map.get("order_sn").toString();
-            //更新订单状态为已成团
+            // Update order status to Formed
             tradeDaoSupport.execute("update es_order set order_status=? where sn=?", OrderStatusEnum.FORMED.name(), orderSn);
 
         });
 
-        //更新所有子订单为已经成团
+        // Update all suborders as already formed
         tradeDaoSupport.execute("update es_pintuan_child_order set order_status=? where order_id=?", PintuanOrderStatus.formed.name(), pinTuanOrderId);
 
         PintuanGoodsDO goodsDO = pintuanGoodsManager.getModel(pintuanOrder.getPintuanId(), pintuanOrder.getSkuId());
@@ -338,7 +338,7 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     }
 
     /**
-     * 读取某订单的所有子订单
+     * Reads all suborders of an order
      *
      * @param orderId
      * @return
@@ -350,52 +350,52 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     }
 
     /**
-     * 处理拼团订单
+     * Deal with group orders
      *
-     * @param orderId 订单id
+     * @param orderId The orderid
      */
     @Override
     public void handle(Integer orderId) {
 
-        //处理订单
+        // Process orders
         PintuanOrder pintuanOrder = this.getMainOrderById(orderId);
 
         Pintuan pintuan = pintuanManager.getModel(pintuanOrder.getPintuanId());
 
         List<PintuanChildOrder> pintuanChildOrders = this.getPintuanChild(pintuanOrder.getOrderId());
 
-        //如果未开启虚拟成团
+        // If virtual group is not enabled
         if (pintuan.getEnableMocker().equals(0)) {
-            //成团人数<参团人数
+            // Number of members < number of participants
             if (pintuanOrder.getOfferedNum() < pintuanOrder.getRequiredNum()) {
                 pintuanChildOrders.forEach(child -> {
                     BuyerCancelOrderVO buyerCancelOrderVO = new BuyerCancelOrderVO();
-                    buyerCancelOrderVO.setRefundReason("系统取消订单");
+                    buyerCancelOrderVO.setRefundReason("System cancel order");
                     buyerCancelOrderVO.setOrderSn(child.getOrderSn());
                     afterSaleManager.sysCancelOrder(buyerCancelOrderVO);
                 });
             }
-        }//虚拟成团&&未成团
+        }//Virtual clusters&&No clouds
         else if (pintuanOrder.getRequiredNum() - pintuanOrder.getOfferedNum() > 0) {
 
-            //修改订单信息
+            // Modify order information
             int num = pintuanOrder.getRequiredNum() - pintuanOrder.getOfferedNum();
             pintuanOrder.setOfferedNum(pintuanOrder.getRequiredNum());
-            //匿名参团人
+            // Anonymous participants
             for (int i = 0; i < num; i++) {
                 Participant participant = new Participant();
                 participant.setId(-1);
-                participant.setName("小强");
+                participant.setName("Jack Bauer");
                 participant.setFace("http://image.com/normal/912BDD3146AE4BE19831DB9F357A34D8.jpeg");
                 pintuanOrder.appendParticipant(participant);
             }
-            //更新订单的个性化数据
+            // Update personalization data for orders
             Map map = new HashMap(1);
             map.put("order_id", pintuanOrder.getOrderId());
-            //该商品已经成团
+            // The goods are already packaged
             pintuanOrder.setOrderStatus(PintuanOrderStatus.formed.name());
             this.tradeDaoSupport.update("es_pintuan_order", pintuanOrder, map);
-            //更新这个拼团订单成团了
+            // Update this group order group
             this.formed(orderId);
         }
 
@@ -403,7 +403,7 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
 
 
     /**
-     * 根据订单编号找到拼团子订单
+     * Find the group order according to the order number
      *
      * @param orderSn
      * @return
@@ -414,10 +414,10 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     }
 
     /**
-     * 通过订单获取skuid
+     * Obtain by orderskuid
      *
-     * @param order 普通订单do
-     * @return 这个订单对应的skuid
+     * @param order Regular ordersdo
+     * @return This order corresponds toskuid
      */
     private Integer getSkuId(OrderDO order) {
         String itemsJson = order.getItemsJson();
@@ -433,10 +433,10 @@ public class PintuanOrderManagerImpl implements PintuanOrderManager {
     }
 
     /**
-     * 查找此sku待成团的订单<br/>
+     * To find theskuOrders to group<br/>
      *
      * @param skuId
-     * @return 如果存在这个sku的拼团订单则返回，否则返回null
+     * @return If this existsskuIs returned, otherwise returnednull
      */
     private PintuanOrder getBySkuId(Integer skuId) {
         String sql = "select * from es_pintuan_order where sku_id=?";

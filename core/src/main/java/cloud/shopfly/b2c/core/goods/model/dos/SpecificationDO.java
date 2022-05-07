@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 规格项实体
+ * Specification entity
  *
  * @author fk
  * @version v2.0
@@ -44,29 +44,29 @@ public class SpecificationDO implements Serializable {
     private static final long serialVersionUID = 5111769180376075L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "spec_id")
     @ApiModelProperty(hidden = true)
     private Integer specId;
     /**
-     * 规格项名称
+     * Specification Name
      */
     @Column(name = "spec_name")
-    @NotEmpty(message = "规格项名称不能为空")
-    @ApiModelProperty(name = "spec_name", value = "规格项名称", required = true)
+    @NotEmpty(message = "The specification name cannot be empty")
+    @ApiModelProperty(name = "spec_name", value = "Specification Name", required = true)
     private String specName;
     /**
-     * 是否被删除0 删除   1  没有删除
+     * Deleted or not0 delete1  没有delete
      */
     @Column(name = "disabled")
     @ApiModelProperty(hidden = true)
     private Integer disabled;
     /**
-     * 规格描述
+     * Specifications describe
      */
     @Column(name = "spec_memo")
-    @ApiModelProperty(name = "spec_memo", value = "规格描述", required = false)
+    @ApiModelProperty(name = "spec_memo", value = "Specifications describe", required = false)
     private String specMemo;
 
     public SpecificationDO() {

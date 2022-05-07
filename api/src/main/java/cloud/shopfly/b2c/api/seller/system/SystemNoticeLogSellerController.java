@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 店铺站内消息控制器
+ * Store station message controller
  *
  * @author zjp
  * @version v7.0.0
@@ -36,19 +36,19 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("/seller/systems/notice-logs")
-@Api(description = "店铺站内消息相关API")
+@Api(description = "Store site message relatedAPI")
 public class SystemNoticeLogSellerController {
 
     @Autowired
     private NoticeLogManager noticeLogManager;
 
 
-    @ApiOperation(value = "查询店铺站内消息列表")
+    @ApiOperation(value = "Query the message list in the store")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "is_read", value = "是否已读 1已读 0未读", required = false, dataType = "int", paramType = "query", allowableValues = "0,1"),
-            @ApiImplicitParam(name = "type", value = "消息类型", required = false, dataType = "String", paramType = "query", allowableValues = ",ORDER,GOODS,AFTERSALE")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "is_read", value = "Have read1read0unread", required = false, dataType = "int", paramType = "query", allowableValues = "0,1"),
+            @ApiImplicitParam(name = "type", value = "Message type", required = false, dataType = "String", paramType = "query", allowableValues = ",ORDER,GOODS,AFTERSALE")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize, @ApiIgnore Integer isRead, String type) {
@@ -57,9 +57,9 @@ public class SystemNoticeLogSellerController {
     }
 
     @DeleteMapping(value = "/{ids}")
-    @ApiOperation(value = "删除店铺站内消息")
+    @ApiOperation(value = "Delete messages in the shop site")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ids", value = "要删除的消息主键", required = true, dataType = "int", paramType = "path", allowMultiple = true)
+            @ApiImplicitParam(name = "ids", value = "Primary key of the message to delete", required = true, dataType = "int", paramType = "path", allowMultiple = true)
     })
     public void delete(@PathVariable("ids") Integer[] ids) {
 
@@ -68,9 +68,9 @@ public class SystemNoticeLogSellerController {
     }
 
     @PutMapping(value = "/{ids}/read")
-    @ApiOperation(value = "将消息设置为已读")
+    @ApiOperation(value = "Set the message to read")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ids", value = "要设置为已读消息的id", required = true, dataType = "int", paramType = "path", allowMultiple = true)
+            @ApiImplicitParam(name = "ids", value = "To be set to read messagesid", required = true, dataType = "int", paramType = "path", allowMultiple = true)
     })
     public String read(@PathVariable Integer[] ids) {
         this.noticeLogManager.read(ids);

@@ -21,7 +21,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Created by kingapex on 2019-01-22.
- * 拼团商品信息VO
+ * Group commodity informationVO
  *
  * @author kingapex
  * @version 1.0
@@ -30,22 +30,22 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class PinTuanGoodsVO extends PintuanGoodsDO {
 
-    @ApiModelProperty(name = "required_num", value = "成团人数")
+    @ApiModelProperty(name = "required_num", value = "The number of clusters")
     private Integer requiredNum;
 
-    @ApiModelProperty(name = "time_left", value = "剩余时间，秒数")
+    @ApiModelProperty(name = "time_left", value = "Time remaining, number of seconds")
     private Long timeLeft;
 
-    @ApiModelProperty(name = "promotion_rule", value = "拼团规则")
+    @ApiModelProperty(name = "promotion_rule", value = "Spelling a mass of rules")
     private String promotionRule;
 
-    @ApiModelProperty(name = "limit_num", value = "限购数量")
+    @ApiModelProperty(name = "limit_num", value = "The amount for purchasing")
     private Integer limitNum;
 
-    @ApiModelProperty(hidden = true, value = "结束时间戳")
+    @ApiModelProperty(hidden = true, value = "End time stamp")
     private Long endTime;
 
-    @ApiModelProperty(name = "enable_quantity", value = "可用库存")
+    @ApiModelProperty(name = "enable_quantity", value = "Available")
     private Integer enableQuantity;
 
     public Integer getRequiredNum() {

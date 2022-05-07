@@ -34,19 +34,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 字串工具类
+ * String utility class
  *
- * @author kingapex 2010-1-6下午01:52:58
+ * @author kingapex 2010-1-6In the afternoon01:52:58
  */
 @SuppressWarnings("AlibabaUndefineMagicConstant")
 public class StringUtil {
     protected static final Log logger = LogFactory.getLog(StringUtil.class);
 
     /**
-     * MD5加密
+     * MD5encryption
      *
-     * @param str     内容
-     * @param charset 编码方式
+     * @param str     content
+     * @param charset encoding
      * @throws Exception
      */
     public static String md5(String str, String charset) throws Exception {
@@ -66,7 +66,7 @@ public class StringUtil {
 
 
     /**
-     * 将数组成str连接成字符串
+     * The count ofstrConcatenate string
      *
      * @param str
      * @param array
@@ -103,7 +103,7 @@ public class StringUtil {
     }
 
     /**
-     * MD5加密方法
+     * MD5Encryption methods
      *
      * @param str String
      * @return String
@@ -134,7 +134,7 @@ public class StringUtil {
 
 
     /**
-     * 验证Email地址是否有效
+     * validationEmailWhether the address is valid
      *
      * @param sEmail
      * @return
@@ -145,7 +145,7 @@ public class StringUtil {
     }
 
     /**
-     * 验证字符最大长度
+     * Maximum length of a verification character
      *
      * @param str
      * @return
@@ -158,7 +158,7 @@ public class StringUtil {
     }
 
     /**
-     * 验证字符最小长度
+     * Minimum length of verification characters
      *
      * @param str
      * @return
@@ -171,10 +171,10 @@ public class StringUtil {
     }
 
     /**
-     * 验证一个字符串是否为空
+     * Verifies that a string is empty
      *
      * @param str
-     * @return 如果为空返回真，如果不为空返回假
+     * @return Returns true if null and false if not null
      */
 
     public static boolean isEmpty(String str) {
@@ -188,7 +188,7 @@ public class StringUtil {
     }
 
     /**
-     * 验证两个字符串是否相等且不能为空
+     * Verifies that two strings are equal and cannot be empty
      *
      * @param str1
      * @param str2
@@ -202,10 +202,10 @@ public class StringUtil {
     }
 
     /**
-     * 将字串转为数字
+     * Converts a string to a number
      *
      * @param str
-     * @param checked 如果为treu格式不正确抛出异常
+     * @param checked If it istreuImproperly formatted throws an exception
      * @return
      */
     public static int toInt(String str, boolean checked) {
@@ -217,7 +217,7 @@ public class StringUtil {
             value = Integer.parseInt(str);
         } catch (Exception ex) {
             if (checked) {
-                throw new RuntimeException("整型数字格式不正确");
+                throw new RuntimeException("The integer number format is incorrect");
             } else {
                 return 0;
             }
@@ -226,10 +226,10 @@ public class StringUtil {
     }
 
     /**
-     * 将object转为数字
+     * willobjectConverted to digital
      *
-     * @param obj     需要转object的对象
-     * @param checked 如果为true格式不正确抛出异常
+     * @param obj     Need to turnobjectThe object of
+     * @param checked If it istrueImproperly formatted throws an exception
      * @return
      */
     public static int toInt(Object obj, boolean checked) {
@@ -241,7 +241,7 @@ public class StringUtil {
             value = Integer.parseInt(obj.toString());
         } catch (Exception ex) {
             if (checked) {
-                throw new RuntimeException("整型数字格式不正确");
+                throw new RuntimeException("The integer number format is incorrect");
             } else {
                 return 0;
             }
@@ -250,10 +250,10 @@ public class StringUtil {
     }
 
     /**
-     * 将一个字串转为int，如果无空，则返回默认值
+     * Converts a string tointIf there is no null, the default value is returned
      *
-     * @param str          要转换的数字字串
-     * @param defaultValue 默认值
+     * @param str          The numeric string to convert
+     * @param defaultValue The default value
      * @return
      */
     public static Integer toInt(String str, Integer defaultValue) {
@@ -270,7 +270,7 @@ public class StringUtil {
     }
 
     /**
-     * 将字符型转为Int型
+     * Converts the character type toInttype
      *
      * @param str
      * @return
@@ -306,10 +306,10 @@ public class StringUtil {
     }
 
     /**
-     * 将一个字串转为double
+     * Converts a string todouble
      *
      * @param str
-     * @param checked 如果为treu格式不正确抛出异常
+     * @param checked If it istreuImproperly formatted throws an exception
      * @return
      */
     public static Double toDouble(String str, boolean checked) {
@@ -321,7 +321,7 @@ public class StringUtil {
             value = Double.valueOf(str);
         } catch (Exception ex) {
             if (checked) {
-                throw new RuntimeException("数字格式不正确");
+                throw new RuntimeException("The number format is incorrect");
             } else {
                 return 0D;
             }
@@ -330,17 +330,17 @@ public class StringUtil {
     }
 
     /**
-     * 将一个object转为double 如果object 为 null 则返回0；
+     * Will aobjecttodouble ifobject fornull It returns0；
      *
-     * @param obj     需要转成Double的对象
-     * @param checked 如果为true格式不正确抛出异常
+     * @param obj     Need to be converted toDoubleThe object of
+     * @param checked If it istrueImproperly formatted throws an exception
      * @return
      */
     public static Double toDouble(Object obj, boolean checked) {
         Double value = 0d;
         if (obj == null) {
             if (checked) {
-                throw new RuntimeException("数字格式不正确");
+                throw new RuntimeException("The number format is incorrect");
             } else {
                 return 0D;
             }
@@ -349,7 +349,7 @@ public class StringUtil {
             value = Double.valueOf(obj.toString());
         } catch (Exception ex) {
             if (checked) {
-                throw new RuntimeException("数字格式不正确");
+                throw new RuntimeException("The number format is incorrect");
             } else {
                 return 0D;
             }
@@ -372,7 +372,7 @@ public class StringUtil {
     }
 
     /**
-     * 把数组转换成String
+     * Convert the array toString
      *
      * @param array
      * @return
@@ -393,7 +393,7 @@ public class StringUtil {
     }
 
     /**
-     * 将一个list转为以split分隔的string
+     * Will alistSwitched tosplitseparatedstring
      *
      * @param list
      * @param split
@@ -414,7 +414,7 @@ public class StringUtil {
     }
 
     /**
-     * 得到WEB-INF的绝对路径
+     * getWEB-INFAbsolute path of
      *
      * @return
      */
@@ -436,7 +436,7 @@ public class StringUtil {
     }
 
     /**
-     * 得到根目录绝对路径(不包含WEB-INF)
+     * Get the absolute root directory path(Does not containWEB-INF)
      *
      * @return
      */
@@ -458,18 +458,18 @@ public class StringUtil {
         }
 
         if (filePath.startsWith("jar")) {
-            // 当class文件在jar文件中时，返回”jar:file:/F:/ …”样的路径
+            // When the class file is in a JAR file, return "jar:file:/F:/... The path of the sample
             filePath = filePath.substring(10);
         } else if (filePath.startsWith("file")) {
-            // 当class文件在jar文件中时，返回”file:/F:/ …”样的路径
+            // When the class file is in a JAR file, return "file:/F:/..." The path of the sample
             filePath = filePath.substring(6);
         } else if (filePath.startsWith("zip:")) {
-            // weblogic发布war的情况
+            // Weblogic releases war
             filePath = filePath.substring(4);
         } else if (filePath.startsWith("vfs:")) {
             filePath = filePath.substring(5);
         } else if (filePath.startsWith("/vfs:")) {
-            // jboss发布war的情况
+            // Jboss releases war
             filePath = filePath.substring(6);
         }
         if (System.getProperty("os.name").toLowerCase().indexOf("window") < 0) {
@@ -483,7 +483,7 @@ public class StringUtil {
     }
 
     /**
-     * 格式化页码
+     * Formatted page number
      *
      * @param page
      * @return
@@ -502,7 +502,7 @@ public class StringUtil {
     }
 
     /**
-     * 将计量单位字节转换为相应单位
+     * Converts the unit of measurement byte to the corresponding unit
      *
      * @param fileSize
      * @return
@@ -528,7 +528,7 @@ public class StringUtil {
     }
 
     /**
-     * 得到一个32位随机字符
+     * To get a32Bit random character
      *
      * @return
      */
@@ -540,7 +540,7 @@ public class StringUtil {
     }
 
     /**
-     * 将中文汉字转成UTF8编码
+     * Convert Chinese characters intoUTF8coding
      *
      * @param str
      * @return
@@ -580,13 +580,13 @@ public class StringUtil {
     }
 
     /**
-     * 得到一个数字的大写(一到十之内)
+     * You get a capital number(Within one to ten)
      *
      * @param num
      * @return
      */
     public static String getChineseNum(int num) {
-        String[] chineseNum = new String[]{"一", "二", "三", "四", "五", "六", "七", "八", "九", "十"};
+        String[] chineseNum = new String[]{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
         return chineseNum[num];
     }
 
@@ -609,7 +609,7 @@ public class StringUtil {
     private static final Pattern HTMLPATTERN = Pattern.compile("<[^<|^>]*>");
 
     /**
-     * 去除HTML 元素
+     * Get rid ofHTML The element
      *
      * @param element
      * @return
@@ -648,7 +648,7 @@ public class StringUtil {
     }
 
     /**
-     * 转义字串的$
+     * Escape string$
      *
      * @param str
      * @return
@@ -707,11 +707,11 @@ public class StringUtil {
     }
 
     /**
-     * Object转String的方法
+     * ObjectturnStringThe method of
      *
-     * @param o       需要转String的对象
-     * @param checked 是否检测异常
-     * @return String 转换之后的字符串
+     * @param o       Need to turnStringThe object of
+     * @param checked Check whether abnormalities are detected.
+     * @return String The converted string
      */
     public static String toString(Object o, boolean checked) {
         String value = "";
@@ -721,7 +721,7 @@ public class StringUtil {
 
             } catch (Exception e) {
                 if (checked) {
-                    throw new RuntimeException("String类型不正确");
+                    throw new RuntimeException("StringIncorrect type");
                 }
             }
         }
@@ -729,10 +729,10 @@ public class StringUtil {
     }
 
     /**
-     * Object转String的方法 若为空，或者转换出现异常
+     * ObjectturnString的方法若为空，或者turn换出现异常
      *
-     * @param o 需要转String的对象
-     * @return 转换之后的字符串
+     * @param o Need to turnStringThe object of
+     * @return The converted string
      */
     public static String toString(Object o) {
         String value = "";
@@ -760,7 +760,7 @@ public class StringUtil {
     }
 
     /**
-     * 处理树型码 获取本级别最大的code 如:301000 返回301999
+     * Process tree code to get the largest of this levelcode Such as:301000 return301999
      *
      * @param code
      * @return
@@ -782,7 +782,7 @@ public class StringUtil {
     }
 
     /**
-     * 去掉sql的注释
+     * To get rid ofsqlThe annotation
      */
     public static String delSqlComment(String content) {
         String pattern = "/\\*(.|[\r\n])*?\\*/";
@@ -812,14 +812,14 @@ public class StringUtil {
         try {
             keyword = URLDecoder.decode(keyword, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            logger.error("解码失败:", e);
+            logger.error("Decoding failure:", e);
         }
 
         return keyword;
     }
 
     /**
-     * 进行解析
+     * parsing
      *
      * @param regex
      * @param rpstr
@@ -833,7 +833,7 @@ public class StringUtil {
     }
 
     /**
-     * 脚本过滤
+     * Script filtering
      *
      * @param source
      * @return
@@ -853,7 +853,7 @@ public class StringUtil {
     }
 
     /**
-     * 格式化HTML代码
+     * formattingHTMLcode
      *
      * @param htmlContent
      * @return
@@ -866,7 +866,7 @@ public class StringUtil {
     }
 
     /**
-     * 动态添加表前缀，对没有前缀的表增加前缀
+     * Dynamically add a prefix to a table that does not have a prefix
      *
      * @param table
      * @param prefix
@@ -905,7 +905,7 @@ public class StringUtil {
     }
 
     /**
-     * 得到异常的字串
+     * Gets the exception string
      *
      * @param aThrowable
      * @return
@@ -919,10 +919,10 @@ public class StringUtil {
     }
 
     /**
-     * 判断Integer是否为空
+     * judgeIntegerWhether is empty
      *
-     * @param i           需要校验的Integer对象
-     * @param includeZero 是否包含0
+     * @param i           To be checkedIntegerobject
+     * @param includeZero Does it include0
      * @return
      */
     public static boolean isEmpty(Integer i, boolean includeZero) {
@@ -935,7 +935,7 @@ public class StringUtil {
     }
 
     /**
-     * 不为空的判断
+     * Judgment that is not empty
      *
      * @param str
      * @return
@@ -945,19 +945,19 @@ public class StringUtil {
     }
 
     /**
-     * 是否是整数
+     * Is it an integer?
      */
     private static final Pattern PATTERNINTEGER = Pattern.compile("^[-\\+]?[\\d]*$");
 
     /**
-     * 是否是小数
+     * Decimal or not
      */
     private static final Pattern PATTERNDOUBLE = Pattern.compile("^[-\\+]?[.\\d]*$");
 
     /**
-     * 判断是否是数字，传入字符串，判断是否是数字，true 是 false 否
+     * Check if its a number, pass in a string, check if its a number,true isfalse no
      *
-     * @param str 字符串
+     * @param str string
      * @return
      */
     public static boolean isNumber(String str) {
@@ -966,10 +966,10 @@ public class StringUtil {
     }
 
     /**
-     * 判断一个数组是否为空，并且长度大于0 by fk
+     * Determines whether an array is empty and has a length greater than or equal to0 by fk
      *
      * @param list
-     * @return true 不空/false 空
+     * @return true Dont empty/false empty
      */
     public static boolean isNotEmpty(List list) {
 
@@ -977,7 +977,7 @@ public class StringUtil {
     }
 
     /**
-     * 将下划线转成大写字母
+     * Change the underline to uppercase letters
      *
      * @param columnName
      * @return
@@ -1000,10 +1000,10 @@ public class StringUtil {
     }
 
     /**
-     * 拼接id
+     * Joining togetherid
      *
      * @param ids  ids
-     * @param term 参数集合
+     * @param term Parameter collection
      * @return
      */
     public static String getIdStr(Integer[] ids, List<Integer> term) {
@@ -1016,7 +1016,7 @@ public class StringUtil {
     }
 
     /**
-     * 生成uuid
+     * generateuuid
      *
      * @return uuid
      */
@@ -1028,9 +1028,9 @@ public class StringUtil {
     }
 
     /**
-     * 判断是否是wap访问
+     * Determine whether or notwapaccess
      *
-     * @return 是否是wap
+     * @return Whether it iswap
      */
     public static boolean isWap() {
         boolean flag = false;
@@ -1054,7 +1054,7 @@ public class StringUtil {
     }
 
     /**
-     * 对象转map
+     * Object to turnmap
      *
      * @param obj
      * @return

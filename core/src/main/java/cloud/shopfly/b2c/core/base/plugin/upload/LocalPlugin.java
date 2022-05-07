@@ -37,12 +37,12 @@ import java.util.*;
 
 
 /**
- * 本地上传插件
+ * Local upload plug-in
  *
  * @author zh
  * @version v7.0
  * @since v7.0
- * 2018年3月22日 下午7:40:27
+ * 2018years3month22On the afternoon7:40:27
  */
 @SuppressWarnings("unchecked")
 @Component
@@ -61,15 +61,15 @@ public class LocalPlugin implements Uploader {
         ConfigItem nginxOpen = new ConfigItem();
         nginxOpen.setType("radio");
         nginxOpen.setName("nginx_open");
-        nginxOpen.setText("nginx支持");
+        nginxOpen.setText("nginxsupport");
         List<RadioOption> options = new ArrayList<>();
         RadioOption radioOption = new RadioOption();
-        radioOption.setLabel("不支持");
+        radioOption.setLabel("Does not support");
         radioOption.setValue(0);
         options.add(radioOption);
 
         radioOption = new RadioOption();
-        radioOption.setLabel("支持");
+        radioOption.setLabel("support");
         radioOption.setValue(1);
         options.add(radioOption);
         nginxOpen.setOptions(options);
@@ -78,12 +78,12 @@ public class LocalPlugin implements Uploader {
         ConfigItem resourceUrl = new ConfigItem();
         resourceUrl.setType("text");
         resourceUrl.setName("static_server_domain");
-        resourceUrl.setText("域名");
+        resourceUrl.setText("The domain name");
 
         ConfigItem serviceUrl = new ConfigItem();
         serviceUrl.setType("text");
         serviceUrl.setName("static_server_path");
-        serviceUrl.setText("路径");
+        serviceUrl.setText("The path");
 
         list.add(nginxOpen);
         list.add(resourceUrl);
@@ -97,9 +97,9 @@ public class LocalPlugin implements Uploader {
     }
 
     /**
-     * 删除本地图片
+     * Delete a local image
      *
-     * @param filePath 文件全路径
+     * @param filePath Full file path
      */
     @Override
     public void deleteFile(String filePath, Map config) {
@@ -112,7 +112,7 @@ public class LocalPlugin implements Uploader {
     }
 
     /**
-     * 获取时间
+     * To get the time
      */
     private String getTimePath() {
         Calendar now = Calendar.getInstance();
@@ -142,41 +142,41 @@ public class LocalPlugin implements Uploader {
         if (AbstractRequestUtil.isMobile()) {
             serverName = domainHelper.getMobileDomain();
         }
-        //参数校验
+        // Parameter calibration
         if (input.getStream() == null) {
             throw new IllegalArgumentException("file or filename object is null");
         }
 
         /********************************
-         *          生成文件名
+         *          Generate file name
          *********************************/
-        //获取文件名词
+        // Get file nouns
         String fileName = input.getName();
-        //获取文件后缀
+        // Get file suffixes
         String ext = input.getExt();
-        //  拼接文件名
+        // Splicing file name
         fileName = DateUtil.toString(new Date(), "mmss") + StringUtil.getRandStr(4) + "." + ext;
 
         /********************************
-         *    生成访问url及磁盘路径
+         *    Generate the accessurlAnd disk path
          *********************************/
         String subPath=  "/images/" + scene + "/"+fileName;
-        //  返回浏览器路径
+        // Back to browser path
         String  url = serverName + subPath;
 
-        //项目或 fat jar 根目录
+        // Project or FAT JAR root directory
         ApplicationHome home = new ApplicationHome(WebInterceptorConfigurer.class);
         File jarFile = home.getSource();
         String rootPath = jarFile.getParentFile().toString();
-        // 磁盘路径 = root path + subPath
+        // Disk path = root path + subPath
         String filePath = rootPath+ subPath;
 
 
-        //写入文件
+        // Written to the file
         FileUtil.write(input.getStream(), filePath);
         try {
             if ("goods".equals(scene)) {
-                //生成缩略图
+                // Generate thumbnails
                 createThumbnail(filePath);
             }
 
@@ -184,7 +184,7 @@ public class LocalPlugin implements Uploader {
             e.printStackTrace();
         }
 
-        //  返回浏览器
+        // Back to browser
         FileVO file = new FileVO();
         file.setName(fileName);
         file.setUrl(url);
@@ -196,23 +196,23 @@ public class LocalPlugin implements Uploader {
     private SettingClient settingClient;
 
     /**
-     * 为原图生成缩略图
+     * Generate thumbnails for the original image
      * @param origin
      */
     private void createThumbnail(String origin) throws IOException {
 
-        //获取相册的图片规格设置
+        // Gets the photo specification Settings for an album
         String photoSizeSettingJson = settingClient.get(SettingGroup.GOODS);
         GoodsSettingVO photoSizeSetting = JsonUtil.jsonToObject(photoSizeSettingJson, GoodsSettingVO.class);
 
-        //缩略图
+        // The thumbnail
         String thumbnail = getThumbnailUrl(origin, photoSizeSetting.getThumbnailWidth(), photoSizeSetting.getThumbnailHeight());
-        //小图
+        // insets
         String small = getThumbnailUrl(origin, photoSizeSetting.getSmallWidth(), photoSizeSetting.getSmallHeight());
-        //大图
+        // A larger version
         String big = getThumbnailUrl(origin, photoSizeSetting.getBigWidth(), photoSizeSetting.getBigHeight());
 
-        //生成各种规格的缩略图
+        // Generate thumbnails of various specifications
         ImageUtil.createThumbnail(origin,thumbnail,photoSizeSetting.getThumbnailWidth(), photoSizeSetting.getThumbnailHeight());
         ImageUtil.createThumbnail(origin,small,photoSizeSetting.getSmallWidth(), photoSizeSetting.getSmallHeight());
         ImageUtil.createThumbnail(origin,big,photoSizeSetting.getBigWidth(), photoSizeSetting.getBigHeight());
@@ -220,24 +220,24 @@ public class LocalPlugin implements Uploader {
     }
 
     /**
-     * 生成缩略图全路径 本地存储缩略图格式为 原图片名称_宽x高.原图片名称后缀
-     * 如原图路径为/User/2017/03/04/original.jpg，需要生成100x100的图片 则缩略图全路径为
+     * Generate thumbnail full path Local storage Thumbnail format is the original image name_widexhigh.The suffix of the original picture name
+     * As shown in the original figure, path is/User/2017/03/04/original.jpg, need to generate100x100The thumbnail full path is
      * /User/2017/03/04/original.jpg_100x100.jpg
      */
     @Override
     public String getThumbnailUrl(String url, Integer width, Integer height) {
-        // 截图原图后缀
+        // The suffix of the original screenshot
         String suffix = url.substring(url.lastIndexOf("."), url.length());
-        // 缩略图全路径
+        // Thumbnail full path
         String thumbnailPah = url + "_" + width + "x" + height + suffix;
-        // 返回缩略图全路径
+        // Returns the thumbnail full path
         return thumbnailPah;
 
     }
 
     @Override
     public String getPluginName() {
-        return "本地存储";
+        return "The local store";
     }
 
     @Override

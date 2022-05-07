@@ -28,12 +28,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 会员站内消息consumer
+ * Member station messagesconsumer
  *
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年10月14日 上午11:27:15
+ * 2017years10month14The morning of11:27:15
  */
 @Component
 public class MemberMessageConsumer implements MemberMessageEvent {
@@ -52,7 +52,7 @@ public class MemberMessageConsumer implements MemberMessageEvent {
     public void memberMessage(int messageId) {
         Message message = messageClient.get(messageId);
         if (message != null) {
-            //发送类型    0  全站   1   部分
+            // Send type 0 Full station 1 part
             Integer sendType = message.getSendType();
             List<String> memberIdsRes;
             String memberIds;

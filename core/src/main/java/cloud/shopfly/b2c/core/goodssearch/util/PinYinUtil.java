@@ -24,17 +24,17 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 /**
- * 拼音工具
+ * Pinyin tool
  * @author fk
  * @version v6.4
  * @since v6.4
- * 2017年9月15日 下午5:00:52
+ * 2017years9month15On the afternoon5:00:52
  */
 public class PinYinUtil {
 
 	
 	public static void main(String[] args) {
-		String str="shopfly网店系统";
+		String str="shopflyOnline system";
 		String pinyin  = getPingYin(str);
 		System.out.println(pinyin);
 		
@@ -43,7 +43,7 @@ public class PinYinUtil {
 	}
 	
 	 /**
-     * 得到 全拼
+     * Get the whole put together
      * 
      * @param src
      * @return
@@ -60,7 +60,7 @@ public class PinYinUtil {
         int t0 = t1.length;
         try {
             for (int i = 0; i < t0; i++) {
-                // 判断是否为汉字字符
+                // Check whether it is a Chinese character
                 if (Character.toString(t1[i]).matches("[\\u4E00-\\u9FA5]+")) {
                     t2 = PinyinHelper.toHanyuPinyinStringArray(t1[i], t3);
                     t4 += t2[0];
@@ -76,7 +76,7 @@ public class PinYinUtil {
     }
 
     /**
-     * 得到中文首字母
+     * Get Chinese initials
      * 
      * @param str
      * @return
@@ -100,7 +100,7 @@ public class PinYinUtil {
    
 
     /**
-     * 将字符串转移为ASCII码
+     * Transfer the string toASCIIcode
      * 
      * @param cnStr
      * @return

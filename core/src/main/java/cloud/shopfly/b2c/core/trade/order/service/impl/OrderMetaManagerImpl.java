@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 订单元信息
+ * Order meta-information
  *
  * @author Snow create in 2018/6/27
  * @version v2.0

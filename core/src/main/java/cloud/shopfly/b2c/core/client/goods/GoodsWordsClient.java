@@ -18,26 +18,26 @@ package cloud.shopfly.b2c.core.client.goods;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品分词client
+ * @Description: Commodity participleclient
  * @date 2018/8/21 11:04
  * @since v7.0.0
  */
 public interface GoodsWordsClient {
 
     /**
-     * 删除某个分词
+     * Delete a participle
      * @param words
      */
     void delete(String words);
 
     /**
-     * 添加一组分词，存在累加数量，不存在新增
+     * Add a component word, there is cumulative quantity, there is no new
      * @param words
      */
     void addWords(String words);
 
     /**
-     * 删除
+     * delete
      */
     void delete();
 

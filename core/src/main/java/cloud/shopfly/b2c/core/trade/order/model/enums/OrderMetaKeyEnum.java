@@ -16,7 +16,7 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 订单元Key
+ * Order yuanKey
  *
  * @author Snow create in 2018/7/5
  * @version v2.0
@@ -25,36 +25,36 @@ package cloud.shopfly.b2c.core.trade.order.model.enums;
 public enum OrderMetaKeyEnum {
 
     /**
-     * 使用的积分
+     * Integral used
      */
-    POINT("使用的积分"),
+    POINT("Integral used"),
 
     /**
-     * 赠送的积分
+     * Bonus points
      */
-    GIFT_POINT("赠送的积分"),
+    GIFT_POINT("Bonus points"),
 
     /**
-     * 赠送的优惠券
+     * Complimentary coupons
      */
-    COUPON("赠送的优惠券"),
+    COUPON("Complimentary coupons"),
 
     /**
-     * 优惠券抵扣金额
+     * Coupon deduction amount
      */
-    COUPON_PRICE("优惠券抵扣金额"),
+    COUPON_PRICE("Coupon deduction amount"),
 
     /**
-     * 满减金额
+     * Full amount reduction
      */
-    FULL_MINUS("满减金额"),
+    FULL_MINUS("Full amount reduction"),
 
     /**
-     * 赠品
+     * The gifts
      */
-    GIFT("赠品"),
+    GIFT("The gifts"),
 
-    CASH_BACK("返现");
+    CASH_BACK("Cash back");
 
     private String description;
 

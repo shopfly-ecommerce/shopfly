@@ -25,11 +25,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 组合商品活动模型
+ * Portfolio goods activity model
  *
  * @author Snow
  * @version v1.0
- * 2017年08月23日16:06:48
+ * 2017years08month23day16:06:48
  * @since v6.4
  */
 @SuppressWarnings("AlibabaPojoMustOverrideToString")
@@ -42,42 +42,42 @@ public class GroupPromotionVO implements Serializable {
     private static final long serialVersionUID = 3188594102818543304L;
 
     /**
-     * 促销活动工具类型 存储PromotionTypeEnum.XXX.getType();
+     * Promotional tool type storePromotionTypeEnum.XXX.getType();
      */
-    @ApiModelProperty(value = "促销活动工具类型")
+    @ApiModelProperty(value = "Type of promotional tools")
     private String promotionType;
 
     /**
-     * 根据以上的活动工具类型 存储对应的Vo<br>
-     * 例如：上面的类型为groupbuy，那么此处的则为GroupbuyVo
+     * Store corresponding tools according to the above active tool typeVo<br>
+     * For example,：The type above isgroupbuy, then the value here isGroupbuyVo
      */
-    @ApiModelProperty(value = "活动详情")
+    @ApiModelProperty(value = "Event details")
     private Object activityDetail;
 
-    @ApiModelProperty(value = "商品集合")
+    @ApiModelProperty(value = "Goods collection")
     private List<CartSkuVO> skuList;
 
     /**
-     * 商家价格小计 = 商品集合中小计的总和。
+     * Merchant price subtotal= The sum of the small sums in a collection of goods.
      */
-    @ApiModelProperty(value = "商品价格小计")
+    @ApiModelProperty(value = "Commodity prices subtotal")
     private Double subtotal;
 
 
-    @ApiModelProperty(value = "是否是组合活动,1为是组合活动，2为单品活动")
+    @ApiModelProperty(value = "Is it a combined activity,1In order to combine activities,2For single product activities")
     private Integer isGroup;
 
-    @ApiModelProperty(value = "差额")
+    @ApiModelProperty(value = "The difference")
     private Double spreadPrice;
 
-    @ApiModelProperty(value = "优惠金额")
+    @ApiModelProperty(value = "Discount amount")
     private Double discountPrice;
 
     /**
-     * 购物车页-满优惠活动是否选中状态
-     * 1为选中
+     * The shopping cart page-Whether full discount is selected
+     * 1For the selected
      */
-    @ApiModelProperty(value = "活动是否选中.1为选中,0未选中")
+    @ApiModelProperty(value = "Activity selected.1For the selected,0uncheck")
     private Integer checked;
 
 

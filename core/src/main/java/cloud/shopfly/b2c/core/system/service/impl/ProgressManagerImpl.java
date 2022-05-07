@@ -25,13 +25,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 进度管理实现
+ * Implementation of Schedule Management
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 下午3:10
+ * 2018/5/22 In the afternoon3:10
  */
 @Component
 public class ProgressManagerImpl implements ProgressManager {
@@ -68,13 +68,13 @@ public class ProgressManagerImpl implements ProgressManager {
     @Override
     public void taskBegin(String key, Integer count) {
         try {
-            //新建任务
+            // A new task
             TaskProgress tk = new TaskProgress(count);
-            //存储任务
+            // Storage tasks
             this.putProgress(key, tk);
         } catch (Exception e) {
             if (logger.isErrorEnabled()) {
-                logger.error("新建任务失败" + e);
+                logger.error("Failed to create a task" + e);
             }
 
         }
@@ -83,17 +83,17 @@ public class ProgressManagerImpl implements ProgressManager {
     @Override
     public void taskEnd(String key, String message) {
         try {
-            //获取任务
+            // Access to task
             TaskProgress tk = this.getProgress(key);
             if (tk != null) {
                 tk.step(message);
                 tk.success();
-                //更新进度 重新放入缓存
+                // Update progress is put back into the cache
                 this.putProgress(key, tk);
             }
         } catch (Exception e) {
             if (logger.isErrorEnabled()) {
-                logger.error("任务结束异常" + e);
+                logger.error("End of Task Exception" + e);
             }
 
         }
@@ -110,7 +110,7 @@ public class ProgressManagerImpl implements ProgressManager {
             }
         } catch (Exception e) {
             if (logger.isErrorEnabled()) {
-                logger.error("任务异常" + e);
+                logger.error("Abnormal task" + e);
             }
         }
     }
@@ -139,7 +139,7 @@ public class ProgressManagerImpl implements ProgressManager {
             }
         } catch (Exception e) {
             if (logger.isErrorEnabled()) {
-                logger.error("更新任务失败" + e);
+                logger.error("Update task failed" + e);
             }
 
         }

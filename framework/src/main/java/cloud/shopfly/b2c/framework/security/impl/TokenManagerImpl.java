@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * token管理基于twt的实现
+ * tokenManagement based ontwtThe implementation of the
  * @author kingapex
  * @version 1.0
  * @since 7.1.0

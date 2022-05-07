@@ -29,32 +29,32 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 商家统计 商品收藏前50
+ * Business statistics before collection of goods50
  *
  * @author mengyuanming
  * @version 2.0
  * @since 7.0
- * 2018年4月18日下午5:02:50
+ * 2018years4month18On the afternoon5:02:50
  */
 @RestController
 @RequestMapping("/seller/statistics/collect")
-@Api(description = "商家统计  商品收藏前50")
+@Api(description = "Business statistics before collection of goods50")
 public class CollectStatisticsSellerController {
 
     @Autowired
     private CollectFrontStatisticsManager collectFrontStatisticsManager;
 
-    @ApiOperation(value = "收藏统计", response = SimpleChart.class)
+    @ApiOperation(value = "Collect statistics", response = SimpleChart.class)
     @GetMapping(value = "/chart")
     public SimpleChart getChart() {
         return this.collectFrontStatisticsManager.getChart();
     }
 
-    @ApiOperation(value = "收藏列表数据", response = Page.class)
+    @ApiOperation(value = "Favorite list data", response = Page.class)
     @GetMapping(value = "/page")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "当前页码，默认为1", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "页内数据量，默认为10", dataType = "int", paramType = "query")})
+            @ApiImplicitParam(name = "page_no", value = "Current page number, default is1", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "The amount of data in a page, default is10", dataType = "int", paramType = "query")})
     public Page getPage(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
         return this.collectFrontStatisticsManager.getPage(pageNo, pageSize);
     }

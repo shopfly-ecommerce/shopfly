@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- * 站内消息实体
+ * Intra-site message entity
  *
  * @author zh
  * @version v7.0.0
@@ -33,29 +33,29 @@ import javax.validation.constraints.NotNull;
  */
 public class MessageVO {
     /**
-     * 标题
+     *  title
      */
-    @Length(min = 2, max = 30, message = "站内消息标题必须在2-30个字符之间")
-    @ApiModelProperty(name = "title", value = "标题", required = false)
+    @Length(min = 2, max = 30, message = "In-site message headers must be in2-30Between characters")
+    @ApiModelProperty(name = "title", value = " title", required = false)
     private String title;
     /**
-     * 消息内容
+     * The message content
      */
-    @NotEmpty(message = "站内消息内容不能为空")
-    @Length(min = 0, max = 500, message = "站内消息内容不能超过500个字符")
-    @ApiModelProperty(name = "content", value = "消息内容", required = false)
+    @NotEmpty(message = "The station message content cannot be empty")
+    @Length(min = 0, max = 500, message = "The station message content cannot exceed500A character")
+    @ApiModelProperty(name = "content", value = "The message content", required = false)
     private String content;
     /**
-     * 会员id
+     * membersid
      */
-    @ApiModelProperty(name = "member_ids", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_ids", value = "membersid", required = false)
     private String memberIds;
     /**
-     * 发送类型
+     * Send type
      */
-    @NotNull(message = "发送类型不能为空")
-    @Range(min = 0, max = 1, message = "发送类型参数错误")
-    @ApiModelProperty(name = "send_type", value = "发送类型,0全站，1指定会员", required = false)
+    @NotNull(message = "The send type cannot be empty")
+    @Range(min = 0, max = 1, message = "The send type parameter is incorrect")
+    @ApiModelProperty(name = "send_type", value = "Send type,0Total station,1The specified member", required = false)
     private Integer sendType;
 
 

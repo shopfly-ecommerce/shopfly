@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 会员积分表业务类
+ * Member points form business class
  *
  * @author zh
  * @version v7.0.0

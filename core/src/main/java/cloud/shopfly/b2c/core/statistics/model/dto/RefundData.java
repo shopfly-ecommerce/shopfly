@@ -24,33 +24,33 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Map;
 
 /**
- * 退货数据
+ * Returns the data
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018/3/25 下午10:49
+ * 2018/3/25 In the afternoon10:49
  */
 
 @Table(name = "es_sss_refund_data")
 public class RefundData {
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "A primary keyid")
     @Id
     private Integer id;
 
-    @ApiModelProperty(value = "售后订单sn")
+    @ApiModelProperty(value = "After sales ordersn")
     @Column(name = "refund_sn")
     private String refundSn;
 
-    @ApiModelProperty(value = "订单sn")
+    @ApiModelProperty(value = "The ordersn")
     @Column(name = "order_sn")
     private String orderSn;
 
-    @ApiModelProperty(value = "退款金额")
+    @ApiModelProperty(value = "The refund amount")
     @Column(name = "refund_price")
     private Double refundPrice;
 
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Creation date")
     @Column(name = "create_time")
     private Long createTime;
 

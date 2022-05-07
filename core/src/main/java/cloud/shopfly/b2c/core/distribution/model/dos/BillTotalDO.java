@@ -24,13 +24,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 总结算单
+ * General statement
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 上午10:40
+ * 2018/5/21 In the morning10:40
  */
 
 @Table(name = "es_bill_total")
@@ -45,64 +45,64 @@ public class BillTotalDO {
     private Integer id;
 
     /**
-     * 开始时间
+     * The start time
      */
     @Column(name = "start_time")
-    @ApiModelProperty(value = "开始时间")
+    @ApiModelProperty(value = "The start time")
     private Long startTime;
     /**
-     * 结束时间
+     * The end of time
      */
     @Column(name = "end_time")
-    @ApiModelProperty(value = "结束时间")
+    @ApiModelProperty(value = "The end of time")
     private Long endTime;
     /**
-     * 订单数
+     * orders
      */
     @Column(name = "order_count")
-    @ApiModelProperty(value = "订单数")
+    @ApiModelProperty(value = "orders")
     private Integer orderCount;
     /**
-     * 最终结算金额
+     * Final settlement amount
      */
     @Column(name = "final_money")
-    @ApiModelProperty(value = "最终结算金额")
+    @ApiModelProperty(value = "Final settlement amount")
     private Double finalMoney;
     /**
-     * 提成金额
+     * Commission amount
      */
     @Column(name = "push_money")
-    @ApiModelProperty(value = "提成金额")
+    @ApiModelProperty(value = "Commission amount")
     private Double pushMoney;
     /**
-     * 订单金额
+     * Amount
      */
     @Column(name = "order_money")
-    @ApiModelProperty(value = "订单金额")
+    @ApiModelProperty(value = "Amount")
     private Double orderMoney;
     /**
-     * 退还订单金额
+     * Refund of order amount
      */
     @Column(name = "return_order_money")
-    @ApiModelProperty(value = "退还订单金额")
+    @ApiModelProperty(value = "Refund of order amount")
     private Double returnOrderMoney;
     /**
-     * 退还订单数量
+     * Refunded order quantity
      */
     @Column(name = "return_order_count")
-    @ApiModelProperty(value = "退还订单数量")
+    @ApiModelProperty(value = "Refunded order quantity")
     private Integer returnOrderCount;
     /**
-     * 退还提成金额
+     * Refund the commission amount
      */
     @Column(name = "return_push_money")
-    @ApiModelProperty(value = "退还提成金额")
+    @ApiModelProperty(value = "Refund the commission amount")
     private Double returnPushMoney;
     /**
      * sn
      */
     @Column(name = "sn")
-    @ApiModelProperty(value = "编号")
+    @ApiModelProperty(value = "Serial number")
     private String sn;
 
     public Integer getId() {

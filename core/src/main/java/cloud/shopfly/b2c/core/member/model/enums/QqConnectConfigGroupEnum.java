@@ -18,31 +18,31 @@ package cloud.shopfly.b2c.core.member.model.enums;
 /**
  * @author zjp
  * @version v7.0
- * @Description qq信任登录参数组枚举类
+ * @Description qqTrusted login parameter group enumeration class
  * @ClassName QqConnectConfigGroupEnum
- * @since v7.0 下午8:05 2018/6/28
+ * @since v7.0 In the afternoon8:05 2018/6/28
  */
 public enum QqConnectConfigGroupEnum {
     /**
-     * 网页端参数 （PC，WAP，微信网页端）
+     * Webpage parameters（PC，WAP, wechat web terminal）
      */
-    pc("网页端参数 （PC，WAP，微信网页端）"),
+    pc("Webpage parameters（PC，WAP, wechat web terminal）"),
     /**
-     * 原生-APP参数(安卓)
+     * native-APPparameter(The android)
      */
-    native_android("原生-APP参数(安卓)"),
+    native_android("native-APPparameter(The android)"),
     /**
-     * 原生-APP参数(IOS)
+     * native-APPparameter(IOS)
      */
-    native_ios("原生-APP参数(IOS)"),
+    native_ios("native-APPparameter(IOS)"),
     /**
-     * RN-APP参数(安卓)
+     * RN-APPparameter(The android)
      */
-    rn_android("RN-APP参数(安卓)"),
+    rn_android("RN-APPparameter(The android)"),
     /**
-     * RN-APP参数(IOS)
+     * RN-APPparameter(IOS)
      */
-    rn_ios("RN-APP参数(IOS)");
+    rn_ios("RN-APPparameter(IOS)");
 
     private String text;
 

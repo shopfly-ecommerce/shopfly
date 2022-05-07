@@ -19,7 +19,7 @@ import cloud.shopfly.b2c.framework.security.model.Buyer;
 import cloud.shopfly.b2c.framework.security.model.Seller;
 
 /**
- * 用户信息hold接口
+ * The user informationholdinterface
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -28,13 +28,13 @@ import cloud.shopfly.b2c.framework.security.model.Seller;
 public interface UserHolder {
 
     /**
-     * 获取seller
+     * To obtainseller
      * @return
      */
     Seller getSeller();
 
     /**
-     * 获取buyer
+     * To obtainbuyer
      * @return
      */
     Buyer getBuyer();

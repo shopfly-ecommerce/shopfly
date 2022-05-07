@@ -23,11 +23,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 会员信息消费者
+ * Member information consumer
  *
  * @author zh
  * @version v7.0
- * @date 18/12/26 下午4:39
+ * @date 18/12/26 In the afternoon4:39
  * @since v7.0
  */
 @Component
@@ -40,9 +40,9 @@ public class MemberInfoConsumer implements MemberInfoChangeEvent {
 
     @Override
     public void memberInfoChange(Integer memberId) {
-        //获取用户信息
+        // Obtaining User information
         Member member = memberClient.getModel(memberId);
-        //修改用户评论信息
+        // Example Modify user comment information
         memberCommentClient.editComment(member.getMemberId(), member.getFace());
 
     }

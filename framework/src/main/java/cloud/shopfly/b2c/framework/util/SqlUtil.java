@@ -19,16 +19,16 @@ import java.util.List;
 
 
 /**
- * sql语句拼接工具类
+ * sqlStatement concatenation utility class
  *
  * @author zjp
  * @version v1.0
  * @since v6.4.0
- * 2017年12月1日 下午4:51:28
+ * 2017years12month1On the afternoon4:51:28
  */
 public class SqlUtil {
     /**
-     * sql拼接
+     * sqlJoining together
      *
      * @param list
      * @return
@@ -49,7 +49,7 @@ public class SqlUtil {
     }
 
     /**
-     * 拼接成sql的?形式，term中会将对应的值加上
+     * Joining together into asqlthe?Form,term中会将对应the值加上
      *
      * @param list
      * @param term
@@ -68,7 +68,7 @@ public class SqlUtil {
     }
 
     /****
-     * 处理sql，将条件变成？可以自行传递参数进去
+     * To deal withsqlAnd change the condition to？You can pass parameters in by yourself
      * @param params
      * @return
      */

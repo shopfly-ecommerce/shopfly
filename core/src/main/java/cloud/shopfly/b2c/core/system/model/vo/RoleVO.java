@@ -23,11 +23,11 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
- * 权限vo
+ * permissionsvo
  *
  * @author zh
  * @version v7.0
- * @date 18/6/25 上午10:59
+ * @date 18/6/25 In the morning10:59
  * @since v7.0
  */
 
@@ -36,21 +36,21 @@ public class RoleVO {
     @ApiModelProperty(hidden = true)
     private Integer roleId;
     /**
-     * 角色名称
+     * Character name
      */
-    @NotEmpty(message = "角色名称不能为空")
-    @ApiModelProperty(name = "role_name", value = "角色名称", required = true)
+    @NotEmpty(message = "The role name cannot be empty")
+    @ApiModelProperty(name = "role_name", value = "Character name", required = true)
     private String roleName;
     /**
-     * 角色描述
+     * Role description
      */
-    @ApiModelProperty(name = "role_describe", value = "角色描述", required = true)
+    @ApiModelProperty(name = "role_describe", value = "Role description", required = true)
     private String roleDescribe;
 
     /**
-     * 角色所拥有的菜单权限
+     * Menu permissions of the role
      */
-    @ApiModelProperty(name = "menus", value = "角色所拥有的菜单权限", required = true)
+    @ApiModelProperty(name = "menus", value = "Menu permissions of the role", required = true)
     private List<Menus> menus;
 
     public RoleVO(RoleDO roleDO) {

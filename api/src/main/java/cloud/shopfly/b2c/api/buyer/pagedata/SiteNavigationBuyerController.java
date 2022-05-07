@@ -28,7 +28,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 
 /**
- * 导航栏控制器
+ * Navigation bar controller
  *
  * @author fk
  * @version v1.0
@@ -37,16 +37,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/pages/site-navigations")
-@Api(description = "导航栏相关API")
+@Api(description = "Navigation bar correlationAPI")
 public class SiteNavigationBuyerController {
 
     @Autowired
     private SiteNavigationManager siteNavigationManager;
 
 
-    @ApiOperation(value = "查询导航栏列表", response = SiteNavigation.class)
+    @ApiOperation(value = "Query the navigation bar list", response = SiteNavigation.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "client_type", value = "客户端类型", required = true, dataType = "string", paramType = "query", allowableValues = "PC,MOBILE"),
+            @ApiImplicitParam(name = "client_type", value = "Client type", required = true, dataType = "string", paramType = "query", allowableValues = "PC,MOBILE"),
     })
     @GetMapping
     public List<SiteNavigation> list(@ApiIgnore String clientType) {

@@ -29,10 +29,10 @@ import java.io.Serializable;
  * @author Snow
  * @version 1.0
  * @since v7.0.0
- * 2017年12月14日 16:58:55
+ * 2017years12month14day16:58:55
  */
 @SuppressWarnings("AlibabaPojoMustOverrideToString")
-@ApiModel(description = "活动商品vo")
+@ApiModel(description = "Activities of goodsvo")
 public class SeckillGoodsDTO implements Serializable {
 
 	/**
@@ -40,34 +40,34 @@ public class SeckillGoodsDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 5327491947477140478L;
 
-	@ApiModelProperty(value = "商品id")
+	@ApiModelProperty(value = "productid")
 	private Integer goodsId;
 
-	@ApiModelProperty(value = "商品图片")
+	@ApiModelProperty(value = "Commodity images")
 	private String goodsImage;
 
-	@ApiModelProperty(value = "商品名称")
+	@ApiModelProperty(value = "Name")
 	private String goodsName;
 
-	@ApiModelProperty(value = "商品普通价格")
+	@ApiModelProperty(value = "General commodity price")
 	private Double originalPrice;
 
-	@ApiModelProperty(value = "是否可销售")
+	@ApiModelProperty(value = "Marketable or not")
 	private Boolean salesEnable;
 
-	@ApiModelProperty(value = "秒杀活动价格")
+	@ApiModelProperty(value = "Second kill activity price")
 	private Double seckillPrice;
 
-	@ApiModelProperty(value = "商品规格id")
+	@ApiModelProperty(value = "Skuid")
 	private Integer skuId;
 
-	@ApiModelProperty(value = "已售数量")
+	@ApiModelProperty(value = "The number sold")
 	private Integer soldNum;
 
-	@ApiModelProperty(value = "售空数量")
+	@ApiModelProperty(value = "The number sold out")
 	private Integer soldQuantity;
 
-	@ApiModelProperty(value = "不同规格下的页面url")
+	@ApiModelProperty(value = "Pages with different specificationsurl")
 	private String url;
 
 	public SeckillGoodsDTO(){

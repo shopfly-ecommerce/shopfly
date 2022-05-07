@@ -24,33 +24,33 @@ import cloud.shopfly.b2c.framework.database.Page;
 
 
 /**
- * 分销Order Manager接口
+ * distributionOrder Managerinterface
  *
  * @author Chopper
  * @version v1.0
  * @since v6.1
- * 2016年10月2日 下午5:24:14
+ * 2016years10month2On the afternoon5:24:14
  */
 public interface DistributionOrderManager {
 
     /**
-     * 根据sn获得分销商订单详情
+     * According to thesnGet distributor order details
      *
-     * @param orderSn 订单编号
+     * @param orderSn Order no.
      * @return FxOrderDO
      */
     DistributionOrderDO getModelByOrderSn(String orderSn);
 
     /**
-     * 根据id获得分销商订单详情
+     * According to theidGet distributor order details
      *
-     * @param orderId 订单id
+     * @param orderId The orderid
      * @return FxOrderDO
      */
     DistributionOrderDO getModel(Integer orderId);
 
     /**
-     * 保存一条数据
+     * Save a piece of data
      *
      * @param distributionOrderDO
      * @return
@@ -58,24 +58,24 @@ public interface DistributionOrderManager {
     DistributionOrderDO add(DistributionOrderDO distributionOrderDO);
 
     /**
-     * 通过订单id，计算出各个级别的返利金额并保存到数据库
+     * Through the orderid, calculate the rebate amount of each level and save it in the database
      *
-     * @param orderSn 订单编号
-     * @return 计算结果 true 成功， false 失败
+     * @param orderSn Order no.
+     * @return The calculation resultstrue Success, false failure
      */
     boolean calCommission(String orderSn);
 
 
     /**
-     * 通过订单id，把各个级别的返利金额增加到分销商冻结金额中
+     * Through the orderid, add the rebate amount of each level to the frozen amount of distributor
      *
-     * @param orderSn 订单sn
-     * @return 操作结果 true 成功， false 失败
+     * @param orderSn The ordersn
+     * @return Operating resultstrue Success, false failure
      */
     boolean addDistributorFreeze(String orderSn);
 
     /**
-     * 分销商退货订单分页
+     * Distributor return orders are paginated
      *
      * @param pagesize
      * @param page
@@ -87,7 +87,7 @@ public interface DistributionOrderManager {
 
 
     /**
-     * 结算单订单查询
+     * Settlement order inquiry
      *
      * @param pageSize
      * @param page
@@ -99,7 +99,7 @@ public interface DistributionOrderManager {
 
 
     /**
-     * 结算单订单查询
+     * Settlement order inquiry
      *
      * @param pageSize
      * @param page
@@ -110,30 +110,30 @@ public interface DistributionOrderManager {
     Page<DistributionOrderVO> pageDistributionTotalBillOrder(Integer pageSize, Integer page, Integer memberId, Integer billId);
 
     /**
-     * 根据会员id获取营业额
+     * According to the membershipidAcquisition of turnover
      *
-     * @param memberId 会员id
-     * @return 营业额
+     * @param memberId membersid
+     * @return turnover
      */
     double getTurnover(int memberId);
 
     /**
-     * 根据购买人增加上级人员订单数量
+     * Increase order quantity of superior staff according to buyer
      *
-     * @param buyMemberId 购买人会员id
+     * @param buyMemberId Buyer membershipid
      */
     void addOrderNum(int buyMemberId);
 
     /**
-     * 结算订单
+     * To settle the order
      *
      * @param order
      */
     void confirm(OrderDO order);
     /**
-     * 计算商品模板退款时需要退的返利金额
+     * Calculate the rebate amount to be returned when the commodity template is refunded
      *
-     * @param refundDO   退款信息
+     * @param refundDO   The refund information
      */
     void calReturnCommission(RefundDO refundDO);
 }

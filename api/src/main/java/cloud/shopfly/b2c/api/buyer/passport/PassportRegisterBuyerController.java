@@ -45,16 +45,16 @@ import javax.validation.constraints.Pattern;
 
 
 /**
- * 会员登录注册API
+ * Member login and registrationAPI
  *
  * @author zh
  * @version v7.0
  * @since v7.0
- * 2018年3月23日 上午10:12:12
+ * 2018years3month23The morning of10:12:12
  */
 @RestController
 @RequestMapping("/passport")
-@Api(description = "会员注册API")
+@Api(description = "Registered membersAPI")
 @Validated
 public class PassportRegisterBuyerController {
 
@@ -70,34 +70,34 @@ public class PassportRegisterBuyerController {
     private ShopflyConfig shopflyConfig;
 
     @PostMapping(value = "/register/smscode/{mobile}")
-    @ApiOperation(value = "发送验证码")
+    @ApiOperation(value = "Send verification code")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uuid", value = "uuid客户端的唯一标识", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "captcha", value = "图片验证码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "uuid", value = "uuidUnique identifier of the client", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "captcha", value = "Image verification code", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "mobile", value = "Mobile phone number", required = true, dataType = "String", paramType = "path"),
     })
-    public String smsCode(@NotEmpty(message = "uuid不能为空") String uuid, @NotEmpty(message = "图片验证码不能为空") String captcha, @PathVariable("mobile") String mobile) {
+    public String smsCode(@NotEmpty(message = "uuidCant be empty") String uuid, @NotEmpty(message = "图片验证码Cant be empty") String captcha, @PathVariable("mobile") String mobile) {
         boolean isPass = captchaClient.valid(uuid, captcha, SceneType.REGISTER.name());
         if (!isPass) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "图片验证码不正确！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The image verification code is incorrect！");
         }
         passportManager.sendRegisterSmsCode(mobile);
-        //清除缓存图片验证码信息
+        // Clear the image verification code information from the cache
         captchaClient.deleteCode(uuid, captcha, SceneType.REGISTER.name());
         return shopflyConfig.getSmscodeTimout() / 60 + "";
     }
 
     @PostMapping("/register/pc")
-    @ApiOperation(value = "PC注册")
+    @ApiOperation(value = "PCRegister")
     public MemberVO registerForPC(@Valid MemberDTO memberDTO) {
         boolean bool = smsClient.valid(SceneType.REGISTER.name(), memberDTO.getMobile(), memberDTO.getSmsCode());
         if (!bool) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "短信验证码错误");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The SMS verification code is incorrect");
         }
-        //对用户名的校验处理
+        // Verification of user names
         String username = memberDTO.getUsername();
         if (username.contains("@")) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "用户名中不能包含@等特殊字符！");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The value cannot be a user name@And other special characters！");
         }
         Member member = new Member();
         member.setUname(memberDTO.getUsername());
@@ -106,21 +106,21 @@ public class PassportRegisterBuyerController {
         member.setMobile(memberDTO.getMobile());
         member.setSex(1);
         member.setRegisterIp(ThreadContextHolder.getHttpRequest().getRemoteAddr());
-        //注册
+        // Register
         memberManager.register(member);
-        //登录
+        // Sign in
         return memberManager.login(member.getUname(), memberDTO.getPassword());
 
     }
 
 
     @PostMapping("/register/wap")
-    @ApiOperation(value = "wap注册")
+    @ApiOperation(value = "wapRegister")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "mobile", value = "Mobile phone number", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "Password", required = true, dataType = "String", paramType = "query")
     })
-    public MemberVO registerForWap(@Mobile String mobile, @Pattern(regexp = "[a-fA-F0-9]{32}", message = "密码格式不正确") String password) {
+    public MemberVO registerForWap(@Mobile String mobile, @Pattern(regexp = "[a-fA-F0-9]{32}", message = "The password format is incorrect") String password) {
         Member member = new Member();
         member.setMobile(mobile);
         member.setSex(1);
@@ -128,9 +128,9 @@ public class PassportRegisterBuyerController {
         member.setUname("m_" + mobile);
         member.setNickname("m_" + mobile);
         member.setRegisterIp(ThreadContextHolder.getHttpRequest().getRemoteAddr());
-        //注册
+        // Register
         memberManager.register(member);
-        //获取token
+        // Access token
         return memberManager.login(member.getUname(), password);
     }
 

@@ -20,10 +20,10 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.CouponVO;
 import cloud.shopfly.b2c.core.trade.cart.model.vo.PromotionRule;
 
 /**
- * 优惠规则构建器<br/>
- * 负责购物车优惠券的渲染
- * 文档请参考：<br/>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#促销规则的构建" >促销规则的构建</a>
+ * Preference rule builder<br/>
+ * Responsible for rendering shopping cart coupons
+ * Please refer to the documentation.：<br/>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html#The construction of promotion rules" >The construction of promotion rules</a>
  *
  * @author kingapex
  * @version 1.0
@@ -33,7 +33,7 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.PromotionRule;
 public interface CartCouponRuleBuilder {
 
     /**
-     * 构建优惠券促销规则
+     * Build coupon promotion rules
      *
      * @param cartVO
      * @param couponVO

@@ -25,13 +25,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 订单状态改变消费
+ * Order status changes consumption
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/8 下午6:44
+ * 2018/5/8 In the afternoon6:44
  */
 @Component
 public class DataOrderConsumer implements OrderStatusChangeEvent {
@@ -51,7 +51,7 @@ public class DataOrderConsumer implements OrderStatusChangeEvent {
                 this.orderDataClient.change(orderStatusChangeMsg.getOrderDO());
             }
         } catch (Exception e) {
-            logger.error("订单变更消息异常:",e);
+            logger.error("The order change message is abnormal:",e);
             e.printStackTrace();
         }
     }

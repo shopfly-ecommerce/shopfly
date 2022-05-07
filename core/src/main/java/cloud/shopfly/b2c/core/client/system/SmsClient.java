@@ -19,38 +19,38 @@ import cloud.shopfly.b2c.core.base.SceneType;
 import cloud.shopfly.b2c.core.base.model.vo.SmsSendVO;
 
 /**
- * 发短信客户端
+ * SMS client
  *
  * @author zh
  * @version v7.0
- * @date 18/7/27 上午11:48
+ * @date 18/7/27 In the morning11:48
  * @since v7.0
  */
 
 public interface SmsClient {
     /**
-     * 验证手机验证码
+     * Verify the mobile phone verification code
      *
-     * @param scene  业务场景
-     * @param mobile 手机号码
-     * @param code   手机验证码
-     * @return 是否通过校验 true通过，false不通过
+     * @param scene  The business scenario
+     * @param mobile Mobile phone number
+     * @param code   Mobile verification code
+     * @return Whether it passes the verificationtrueThrough the,falseNot through
      */
     boolean valid(String scene, String mobile, String code);
 
 
     /**
-     * 发送(发送手机短信)消息
+     * send(send手机短信)The message
      *
-     * @param byName    操作，替换内容
-     * @param mobile    手机号码
-     * @param sceneType 操作类型
+     * @param byName    Action, replace content
+     * @param mobile    Mobile phone number
+     * @param sceneType Operation type
      */
     void sendSmsMessage(String byName, String mobile, SceneType sceneType);
 
 
     /**
-     * 真实发送手机短信
+     * Send actual SMS messages
      *
      * @param smsSendVO
      */

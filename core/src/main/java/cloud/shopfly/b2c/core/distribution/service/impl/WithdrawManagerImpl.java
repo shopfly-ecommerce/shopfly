@@ -42,13 +42,13 @@ import java.util.Map;
 
 
 /**
- * 提现设置实现
+ * Withdrawal setup implementation
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/22 下午12:57
+ * 2018/5/22 In the afternoon12:57
  */
 
 @Service
@@ -119,7 +119,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
         apply.setMemberId(memberId);
         apply.setMemberName(UserContext.getBuyer().getUsername());
         this.daoSupport.insert("es_withdraw_apply", apply);
-        // 修改可提现金额
+        // Modify withdrawal amount
         String sql = "update es_distribution set can_rebate=can_rebate-?,withdraw_frozen_price=withdraw_frozen_price+? where member_id =?";
         this.daoSupport.execute(sql, applyMoney, applyMoney, memberId);
     }
@@ -131,7 +131,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
         if (wdo == null) {
             throw new DistributionException(DistributionErrorCode.E1004.code(), DistributionErrorCode.E1004.des());
         }
-        //如果审核过
+        // If it has been reviewed
         if (wdo.getInspectTime() != null) {
             if (wdo.getInspectTime() != 0) {
                 throw new DistributionException(DistributionErrorCode.E1002.code(), DistributionErrorCode.E1002.des());
@@ -140,14 +140,14 @@ public class WithdrawManagerImpl implements WithdrawManager {
         if (StringUtil.isEmpty(auditResult)) {
             throw new DistributionException(DistributionErrorCode.E1005.code(), DistributionErrorCode.E1005.des());
         }
-        // 审核时间
+        // Audit time
         Long auditingTime = DateUtil.getDateline();
-        //审核通过
+        // approved
         if (auditResult.equals(WithdrawStatusEnum.FAIL_AUDITING.name())) {
             String applySql = "update es_withdraw_apply set status=?,inspect_time=?,inspect_remark=? where id=?";
             this.daoSupport.execute(applySql, auditResult, auditingTime, remark, applyId);
 
-            // 将要提现的金额返还
+            // Return the amount to be withdrawn
             String applysql = "select * from es_withdraw_apply where id=?";
             WithdrawApplyDO apply = this.daoSupport.queryForObject(applysql, WithdrawApplyDO.class, applyId);
 
@@ -164,7 +164,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
 
     @Override
     public void transfer(Integer applyId, String remark) {
-        //如果审核过
+        // If it has been reviewed
         WithdrawApplyDO wdo = this.getModel(applyId);
         if (wdo == null) {
             throw new DistributionException(DistributionErrorCode.E1004.code(), DistributionErrorCode.E1004.des());
@@ -229,7 +229,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
     }
 
     /**
-     * 转换page
+     * conversionpage
      * @param page
      * @return
      */

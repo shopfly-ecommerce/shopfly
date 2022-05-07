@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.system.model.vo.MessageVO;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 站内消息业务层
+ * The intra-site message business layer
  *
  * @author zh
  * @version v7.0.0
@@ -30,27 +30,27 @@ import cloud.shopfly.b2c.framework.database.Page;
 public interface MessageManager {
 
     /**
-     * 查询站内消息列表
+     * Query the intra-station message list
      *
-     * @param page     页码
-     * @param pageSize 每页数量
+     * @param page     The page number
+     * @param pageSize Number each page
      * @return Page
      */
     Page list(int page, int pageSize);
 
     /**
-     * 添加站内消息
+     * Add intra-site messages
      *
-     * @param messageVO 站内消息
-     * @return Message 站内消息
+     * @param messageVO Messages
+     * @return Message Messages
      */
     Message add(MessageVO messageVO);
 
     /**
-     * 通过id查询站内消息
+     * throughidQuery intra-station messages
      *
-     * @param id 消息id
-     * @return 站内消息对象
+     * @param id The messageid
+     * @return Intra-site message object
      */
     Message get(Integer id);
 }

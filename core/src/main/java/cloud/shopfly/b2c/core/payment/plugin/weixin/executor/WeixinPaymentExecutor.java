@@ -42,7 +42,7 @@ import java.util.TreeMap;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信pc端
+ * @Description: WeChatpcend
  * @date 2018/4/1810:12
  * @since v7.0.0
  */
@@ -59,7 +59,7 @@ public class WeixinPaymentExecutor extends WeixinPuginConfig {
     private Debugger debugger;
 
     /**
-     * 支付
+     * pay
      *
      * @param bill
      * @return
@@ -74,33 +74,33 @@ public class WeixinPaymentExecutor extends WeixinPuginConfig {
         try {
             Map<String, String> map = super.createUnifiedOrder(bill, params);
 
-            // 返回结果
+            // Returns the result
             String resultCode = map.get("result_code");
             Form form = new Form();
             if (SUCCESS.equals(resultCode)) {
-                debugger.log("创建预付订单成功");
+                debugger.log("The prepaid order was successfully created");
                 String codeUrl = map.get("code_url");
                 String qr = codeUrl.replaceAll(QR_URL_PREFIX, "");
                 String outTradeNo = bill.getBillSn();
                 String gateWay = (domainHelper.getCallback() + "/order/pay/weixin/qrpage/" + outTradeNo + "/" + qr + "");
-                debugger.log("生成gateway:");
+                debugger.log("generategateway:");
                 debugger.log(gateWay);
                 result.put("bill_sn",outTradeNo);
                 result.put("gateway_url",gateWay);
 
                 return result;
             } else {
-                debugger.log("创建预付订单失败");
+                debugger.log("Failed to create prepaid order");
 
             }
         } catch (Exception e) {
-            this.logger.error("微信生成支付二维码错误", e);
+            this.logger.error("Wechat generated payment QR code error", e);
         }
         return null;
     }
 
     /**
-     * 异步回调
+     * An asynchronous callback
      *
      * @param tradeType
      * @param clientType
@@ -121,7 +121,7 @@ public class WeixinPaymentExecutor extends WeixinPuginConfig {
 
             Map<String, String> params = WeixinUtil.xmlToMap(document);
             if (logger.isDebugEnabled()) {
-                logger.info("微信支付回调----->" + JsonUtil.objectToJson(params));
+                logger.info("Wechat Pay callback----->" + JsonUtil.objectToJson(params));
             }
             String returnCode = params.get("return_code");
             String resultCode = params.get("result_code");
@@ -131,53 +131,53 @@ public class WeixinPaymentExecutor extends WeixinPuginConfig {
                 String sign = WeixinUtil.createSign(params, key);
                 if (sign.equals(params.get("sign"))) {
 
-                    // 本商城交易号
+                    // Transaction number of this mall
                     String outTradeNo = params.get("out_trade_no");
-                    // 微信支付订单号
+                    // Wechat Pay order No
                     String returnTradeNo = params.get("transaction_id");
-                    // 支付金额
+                    // Pay the amount
                     double payPrice = StringUtil.toDouble(params.get("total_fee"), 0d);
-                    // 传回来的是分，转为元
+                    // What comes back is a fraction, which goes to elements
                     payPrice = CurrencyUtil.mul(payPrice, 0.01);
 
                     if (logger.isDebugEnabled()) {
-                        logger.info("支付成功:outTradeNo/returnTradeNo----->" + outTradeNo + "/" + returnTradeNo);
+                        logger.info("Pay for success:outTradeNo/returnTradeNo----->" + outTradeNo + "/" + returnTradeNo);
                     }
                     this.paySuccess(outTradeNo, returnTradeNo, tradeType, payPrice);
 
                     map.put("return_code", SUCCESS);
-                    // 标记为成功
+                    // Mark as successful
                     cache.put(CACHE_KEY_PREFIX + outTradeNo, "ok", 120);
 
 
                 } else {
                     map.put("return_code", "FAIL");
-                    map.put("return_msg", "签名失败");
-                    this.logger.error("微信签名失败");
+                    map.put("return_msg", "Signature failure");
+                    this.logger.error("Wechat signature failed. Procedure");
                 }
             } else {
                 map.put("return_code", "FAIL");
-                this.logger.error("微信验签失败");
+                this.logger.error("Wechat visa verification failed");
             }
 
         } catch (Exception e) {
             map.put("return_code", "FAIL");
             map.put("return_msg", "");
-            this.logger.error("微信通知的结果为失败", e);
+            this.logger.error("The result of wechat notification is failure", e);
         }
         HttpServletResponse response = ThreadContextHolder.getHttpResponse();
         response.setHeader("Content-Type", "text/xml");
         try {
             return WeixinUtil.mapToXml(map);
         } catch (Exception e) {
-            this.logger.error("微信通知的结果为失败", e);
-            return "出现错误";
+            this.logger.error("The result of wechat notification is failure", e);
+            return "There is an error";
         }
 
     }
 
     /**
-     * 查询账单状态
+     * Querying bill Status
      *
      * @param bill
      * @return
@@ -194,7 +194,7 @@ public class WeixinPaymentExecutor extends WeixinPuginConfig {
         params.put("mch_id", mchId);
         params.put("nonce_str", StringUtil.getRandStr(10));
         params.put("out_trade_no", bill.getBillSn());
-        // 应付转为分
+        // Conversion to points payable
         Double money = bill.getOrderPrice();
         if (money != null) {
             params.put("total_fee", toFen(money));
@@ -207,14 +207,14 @@ public class WeixinPaymentExecutor extends WeixinPuginConfig {
             Document resultDoc = WeixinUtil.post("https://api.mch.weixin.qq.com/pay/orderquery", xml);
             Map<String, String> returnParams = WeixinUtil.xmlToMap(resultDoc);
 
-            // 返回结果
+            // Returns the result
             String returnCode = returnParams.get("return_code");
             String resultCode = returnParams.get("result_code");
             String tradeState = returnParams.get("trade_state");
             if (SUCCESS.equals(returnCode) || SUCCESS.equals(resultCode)) {
                 if (SUCCESS.equals(tradeState)) {
-                    //在这里不做更改订单状态的操作，而是在异步通知中来完成
-                    //原因是：这个查询是用户体验相关的，在订单已经支付状态时（异步通知可能成功了），此处可能返回fail
+                    // Instead of changing the order status, you do it in an asynchronous notification
+                    // The reason for this is that the query is user experience specific and may return FAIL when the order has already been paid (the asynchronous notification may have succeeded)
                     return SUCCESS;
                 } else {
                     return "FAIL";
@@ -226,7 +226,7 @@ public class WeixinPaymentExecutor extends WeixinPuginConfig {
 
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("微信支付查询失败", e);
+            logger.error("Failed to query wechat Payment", e);
             return "FAIL";
         }
 

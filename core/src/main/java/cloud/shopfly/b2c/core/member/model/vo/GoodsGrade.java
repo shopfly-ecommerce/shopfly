@@ -18,17 +18,17 @@ package cloud.shopfly.b2c.core.member.model.vo;
 /**
  * @author fk
  * @version v1.0
- * @Description: 商品好平率
+ * @Description: Goods have a good flat rate
  * @date 2018/5/4 10:45
  * @since v7.0.0
  */
 public class GoodsGrade {
     /**
-     * 商品id
+     * productid
      */
     private Integer goodsId;
     /**
-     * 好评率
+     * rating
      */
     private Double goodRate;
 

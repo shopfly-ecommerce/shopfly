@@ -31,7 +31,7 @@ import java.io.Serializable;
 
 
 /**
- * 参数组实体
+ * Parameter group entity
  *
  * @author fk
  * @version v2.0
@@ -46,28 +46,28 @@ public class ParameterGroupDO implements Serializable {
     private static final long serialVersionUID = 2394621849767871L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "group_id")
     @ApiModelProperty(hidden = true)
     private Integer groupId;
     /**
-     * 参数组名称
+     * Parameter group name
      */
     @Column(name = "group_name")
-    @ApiModelProperty(name = "group_name", value = "参数组名称", required = true)
-    @NotEmpty(message = "参数组名称不能为空")
-    @Length(max = 50, message = "参数组名称不能超过50字")
+    @ApiModelProperty(name = "group_name", value = "Parameter group name", required = true)
+    @NotEmpty(message = "The parameter group name cannot be empty")
+    @Length(max = 50, message = "Parameter group names cannot exceed50word")
     private String groupName;
     /**
-     * 关联分类id
+     * Associative classificationid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "category_id", value = "关联分类id", required = true)
-    @NotNull(message = "关联的分类不能为空")
+    @ApiModelProperty(name = "category_id", value = "Associative classificationid", required = true)
+    @NotNull(message = "The classification of an association cannot be empty")
     private Integer categoryId;
     /**
-     * 排序
+     * sort
      */
     @Column(name = "sort")
     @ApiModelProperty(hidden = true)

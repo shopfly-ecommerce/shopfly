@@ -18,34 +18,34 @@ package cloud.shopfly.b2c.core.system.model.vo;
 import java.util.List;
 
 /**
- * 菜单权限vo 用于权限菜单的参数传递及展示
+ * Menu permissionsvo Parameter transfer and display for permission menu
  *
  * @author zh
  * @version v7.0
- * @date 18/6/25 上午9:59
+ * @date 18/6/25 In the morning9:59
  * @since v7.0
  */
 
 public class Menus {
     /**
-     * 菜单标题
+     * The menu title
      */
     private String title;
     /**
-     * 菜单唯一标识
+     * Menu unique identifier
      */
     private String identifier;
     /**
-     * 此菜单是否选中
+     * Whether this menu is selected
      */
     private boolean checked;
     /**
-     * 菜单的权限表达式
+     * Menu permission expression
      */
     private String authRegular;
 
     /**
-     * 子菜单
+     * Sub menu
      */
     private List<Menus> children;
 

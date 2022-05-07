@@ -24,58 +24,58 @@ import java.util.List;
 
 
 /**
- * 会员结算单
+ * Member statement
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 上午10:51
+ * 2018/5/21 In the morning10:51
  */
 
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class BillMemberVO {
 
 
-    @ApiModelProperty(value = "总结算单id", name = "total_id")
+    @ApiModelProperty(value = "General statementid", name = "total_id")
     private Integer totalId;
-    @ApiModelProperty(value = "结算单id", name = "id")
+    @ApiModelProperty(value = "statementsid", name = "id")
     private Integer id;
 
-    @ApiModelProperty(value = "会员id", name = "member_id")
+    @ApiModelProperty(value = "membersid", name = "member_id")
     private Integer memberId;
 
-    @ApiModelProperty(value = "会员名称", name = "member_name")
+    @ApiModelProperty(value = "Member name", name = "member_name")
     private String memberName;
 
-    @ApiModelProperty(value = "开始时间", name = "start_time")
+    @ApiModelProperty(value = "The start time", name = "start_time")
     private Long startTime;
 
-    @ApiModelProperty(value = "结束时间", name = "end_time")
+    @ApiModelProperty(value = "The end of time", name = "end_time")
     private Long endTime;
 
-    @ApiModelProperty(value = "最终结算金额", name = "final_money")
+    @ApiModelProperty(value = "Final settlement amount", name = "final_money")
     private Double finalMoney;
 
-    @ApiModelProperty(value = "提成金额", name = "push_money")
+    @ApiModelProperty(value = "Commission amount", name = "push_money")
     private Double pushMoney;
 
-    @ApiModelProperty(value = "订单数量", name = "order_count")
+    @ApiModelProperty(value = "The order number", name = "order_count")
     private Integer orderCount;
 
-    @ApiModelProperty(value = "订单金额", name = "order_money")
+    @ApiModelProperty(value = "Amount", name = "order_money")
     private Double orderMoney;
 
-    @ApiModelProperty(value = "返还订单金额", name = "return_order_money")
+    @ApiModelProperty(value = "Return order amount", name = "return_order_money")
     private Double returnOrderMoney;
 
-    @ApiModelProperty(value = "返还订单数", name = "return_order_count")
+    @ApiModelProperty(value = "Return order number", name = "return_order_count")
     private Integer returnOrderCount;
 
-    @ApiModelProperty(value = "返还订单金额", name = "return_push_money")
+    @ApiModelProperty(value = "Return order amount", name = "return_push_money")
     private Double returnPushMoney;
 
-    @ApiModelProperty(value = "编号", name = "sn")
+    @ApiModelProperty(value = "Serial number", name = "sn")
     private String sn;
 
     private List<BillMemberVO> item;

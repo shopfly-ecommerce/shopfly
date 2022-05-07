@@ -30,11 +30,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 商品索引
+ * Commodity index
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:30:12
+ * @since v7.0.0 2018years3month23The morning of10:30:12
  */
 @Component
 public class GoodsIndexInitReceiver {
@@ -45,7 +45,7 @@ public class GoodsIndexInitReceiver {
 	private List<GoodsIndexInitEvent> events;
 
 	/**
-	 * 初始化商品索引
+	 * Initialize the commodity index
 	 *
 	 */
 	@RabbitListener(bindings = @QueueBinding(
@@ -60,7 +60,7 @@ public class GoodsIndexInitReceiver {
 				try {
 					event.createGoodsIndex();
 				} catch (Exception e) {
-					logger.error("初始化商品索引出错", e);
+					logger.error("Error initializing commodity index", e);
 				}
 			}
 		}

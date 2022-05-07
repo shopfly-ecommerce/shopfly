@@ -26,7 +26,7 @@ import java.io.Serializable;
 
 
 /**
- * 标签商品关联实体
+ * Label the entity associated with the commodity
  *
  * @author fk
  * @version v2.0
@@ -41,16 +41,16 @@ public class TagGoodsDO implements Serializable {
     private static final long serialVersionUID = 9467335201085494L;
 
     /**
-     * 标签id
+     * The labelid
      */
     @Column(name = "tag_id")
-    @ApiModelProperty(name = "tag_id", value = "标签id", required = false)
+    @ApiModelProperty(name = "tag_id", value = "The labelid", required = false)
     private Integer tagId;
     /**
-     * 商品id
+     * productid
      */
     @Column(name = "goods_id")
-    @ApiModelProperty(name = "goods_id", value = "商品id", required = false)
+    @ApiModelProperty(name = "goods_id", value = "productid", required = false)
     private Integer goodsId;
 
     public TagGoodsDO() {

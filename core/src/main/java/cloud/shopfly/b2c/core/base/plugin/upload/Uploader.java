@@ -24,68 +24,68 @@ import java.util.Map;
 
 
 /**
- * 存储方案参数接口
+ * Storage scheme parameter interface
  *
  * @author zh
  * @version v2.0
  * @since v7.0
- * 2018年3月19日 下午4:54:28
+ * 2018years3month19On the afternoon4:54:28
  */
 public interface Uploader {
 
     /**
-     * 配置各个存储方案的参数
+     * Configure the parameters of each storage solution
      *
-     * @return 参数列表
+     * @return The list of parameters
      */
     List<ConfigItem> definitionConfigItem();
 
     /**
-     * 上传文件
+     * Upload a file
      *
-     * @param input  上传对象
-     * @param scene  业务场景
-     * @param config 配置信息
+     * @param input  Upload object
+     * @param scene  The business scenario
+     * @param config Configuration information
      * @return
      */
     FileVO upload(FileDTO input, String scene, Map config);
 
     /**
-     * 删除文件
+     * Delete the file
      *
-     * @param filePath 文件地址
-     * @param config   配置信息
+     * @param filePath Address of the file
+     * @param config   Configuration information
      */
     void deleteFile(String filePath, Map config);
 
     /**
-     * 获取插件ID
+     * To get the pluginID
      *
-     * @return 插件beanId
+     * @return The plug-inbeanId
      */
     String getPluginId();
 
     /**
-     * 生成缩略图路径
+     * Generate thumbnail path
      *
-     * @param url    原图片全路径
-     * @param width  需要生成图片尺寸的宽
-     * @param height 需要生成图片尺寸的高
-     * @return 生成的缩略图路径
+     * @param url    Full path of the original image
+     * @param width  Need to generate the width of the image size
+     * @param height Need to generate the height of the image size
+     * @return Generated thumbnail path
      */
     String getThumbnailUrl(String url, Integer width, Integer height);
 
     /**
-     * 存储方案是否开启
+     * Whether the storage scheme is enabled
      *
-     * @return 0 不开启  1 开启
+     * @return 0 Dont open1 open
      */
     Integer getIsOpen();
 
     /**
-     * 获取插件名称
+     * Get the plug-in name
      *
-     * @return 插件名称
+     * @return The plug-in name
      */
     String getPluginName();
 

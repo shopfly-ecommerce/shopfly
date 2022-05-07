@@ -21,26 +21,26 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 订单取消
+ * Order cancellation
  *
  * @author Snow create in 2018/5/15
  * @version v2.0
  * @since v7.0.0
  */
 
-@ApiModel(description = "订单取消")
+@ApiModel(description = "Order cancellation")
 public class CancelVO {
 
 
-    @ApiModelProperty(value = "订单编号")
+    @ApiModelProperty(value = "Order no.")
     private String orderSn;
 
 
-    @ApiModelProperty(value = "取消原因")
+    @ApiModelProperty(value = "Cancel the reason")
     private String reason;
 
 
-    @ApiModelProperty(hidden = true, value = "操作人")
+    @ApiModelProperty(hidden = true, value = "Operation of")
     private String operator;
 
 

@@ -31,65 +31,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 购物车模型
+ * Shopping cart model
  *
  * @author Snow
  * @version 1.0
  * @since v7.0.0
- * 2018年03月20日14:21:39
+ * 2018years03month20day14:21:39
  */
 
-@ApiModel(description = "购物车")
+@ApiModel(description = "The shopping cart")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CartDO implements Serializable {
 
 
     private static final long serialVersionUID = 1466001652922300536L;
 
-    @ApiModelProperty(value = "卖家id")
+    @ApiModelProperty(value = "The sellerid")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "选中的配送方式id")
+    @ApiModelProperty(value = "Selected delivery modeid")
     private Integer shippingTypeId;
 
 
-    @ApiModelProperty(value = "选中的配送方式名称")
+    @ApiModelProperty(value = "Name of the selected delivery mode")
     private String shippingTypeName;
 
 
-    @ApiModelProperty(value = "卖家店名")
+    @ApiModelProperty(value = "The seller name")
     private String sellerName;
 
 
-    @ApiModelProperty(value = "购物车重量")
+    @ApiModelProperty(value = "Shopping cart weight")
     private Double weight;
 
-    @ApiModelProperty(value = "购物车价格")
+    @ApiModelProperty(value = "Shopping cart price")
     private PriceDetailVO price;
 
-    @ApiModelProperty(value = "购物车中的产品列表")
+    @ApiModelProperty(value = "A list of products in the shopping cart")
     private List<CartSkuVO> skuList;
 
-    @ApiModelProperty(value = "已使用的优惠券列表")
+    @ApiModelProperty(value = "List of coupons used")
     private List<CouponVO> couponList;
 
-    @ApiModelProperty(value = "赠品列表")
+    @ApiModelProperty(value = "Gift list")
     private List<FullDiscountGiftDO> giftList;
 
-    @ApiModelProperty(value = "赠送优惠券列表")
+    @ApiModelProperty(value = "Free coupon list")
     private List<CouponVO> giftCouponList;
 
-    @ApiModelProperty(value = "赠送积分")
+    @ApiModelProperty(value = "Present integral")
     private Integer giftPoint;
 
-    @ApiModelProperty(value = "是否失效：0:正常 1:已失效")
+    @ApiModelProperty(value = "Whether the failure：0:normal1:Has the failure")
     private Integer invalid;
 
     public CartDO() {
     }
 
     /**
-     * 在构造器中初始化属主、产品列表、促销列表及优惠券列表
+     * Initializes the owner in the constructor、Product list、List of promotions and coupons
      */
     public CartDO(int sellerId, String sellerName) {
 
@@ -105,7 +105,7 @@ public class CartDO implements Serializable {
 
 
     /**
-     * 清空优惠信息功能，不清空优惠券
+     * Empty the offer information function, do not empty coupons
      */
     public void clearPromotion() {
         if (price != null) {

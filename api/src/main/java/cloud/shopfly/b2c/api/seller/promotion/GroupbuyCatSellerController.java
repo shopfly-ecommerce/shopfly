@@ -32,7 +32,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 团购分类控制器
+ * Group purchase classification controller
  *
  * @author Snow create in 2018/7/12
  * @version v2.0
@@ -40,16 +40,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/promotion/group-buy-cats")
-@Api(description = "团购分类相关API")
+@Api(description = "Group purchase classification relatedAPI")
 @Validated
 public class GroupbuyCatSellerController {
 
     @Autowired
     private GroupbuyCatManager groupbuyCatManager;
 
-    @ApiOperation(value	= "查询团购分类列表", response = GroupbuyGoodsDO.class)
+    @ApiOperation(value	= "Query the group purchase category list", response = GroupbuyGoodsDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name	= "parent_id",	value =	"父分类id", dataType = "int",	paramType =	"path"),
+            @ApiImplicitParam(name	= "parent_id",	value =	"The parent categoryid", dataType = "int",	paramType =	"path"),
     })
     @GetMapping("/{parent_id}/children")
     public List<GroupbuyCatDO> list(@ApiIgnore @PathVariable("parent_id") Integer parentId)	{
@@ -60,10 +60,10 @@ public class GroupbuyCatSellerController {
         return list;
     }
 
-    @ApiOperation(value	= "查询团购分类列表", response = GroupbuyCatDO.class)
+    @ApiOperation(value	= "Query the group purchase category list", response = GroupbuyCatDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name	= "page_no",	value =	"页码",	dataType = "int",	paramType =	"query"),
-            @ApiImplicitParam(name	= "page_size",	value =	"每页显示数量", dataType = "int",	paramType =	"query")
+            @ApiImplicitParam(name	= "page_no",	value =	"The page number",	dataType = "int",	paramType =	"query"),
+            @ApiImplicitParam(name	= "page_size",	value =	"Display quantity per page", dataType = "int",	paramType =	"query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize)	{
@@ -71,7 +71,7 @@ public class GroupbuyCatSellerController {
     }
 
 
-    @ApiOperation(value	= "添加团购分类", response = GroupbuyCatDO.class)
+    @ApiOperation(value	= "Add group Purchase category", response = GroupbuyCatDO.class)
     @PostMapping
     public GroupbuyCatDO add(@Valid GroupbuyCatDO groupbuyCat)	{
 
@@ -81,9 +81,9 @@ public class GroupbuyCatSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value	= "修改团购分类", response = GroupbuyCatDO.class)
+    @ApiOperation(value	= "Modify group purchase classification", response = GroupbuyCatDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name	= "id",	value =	"主键",	required = true, dataType = "int",	paramType =	"path")
+            @ApiImplicitParam(name	= "id",	value =	"A primary key",	required = true, dataType = "int",	paramType =	"path")
     })
     public	GroupbuyCatDO edit(@Valid GroupbuyCatDO groupbuyCat, @PathVariable Integer id) {
 
@@ -94,9 +94,9 @@ public class GroupbuyCatSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value	= "删除团购分类")
+    @ApiOperation(value	= "Delete group purchase category")
     @ApiImplicitParams({
-            @ApiImplicitParam(name	= "id",	value =	"要删除的团购分类主键",	required = true, dataType = "int",	paramType =	"path")
+            @ApiImplicitParam(name	= "id",	value =	"The group purchase classification key to delete",	required = true, dataType = "int",	paramType =	"path")
     })
     public	String	delete(@PathVariable Integer id) {
         this.groupbuyCatManager.delete(id);
@@ -105,9 +105,9 @@ public class GroupbuyCatSellerController {
 
 
     @GetMapping(value =	"/{id}")
-    @ApiOperation(value	= "查询一个团购分类")
+    @ApiOperation(value	= "Query a group purchase category")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",	value = "要查询的团购分类主键",	required = true, dataType = "int",	paramType = "path")
+            @ApiImplicitParam(name = "id",	value = "To query the group purchase classification key",	required = true, dataType = "int",	paramType = "path")
     })
     public	GroupbuyCatDO get(@PathVariable	Integer	id)	{
         GroupbuyCatDO groupbuyCat = this.groupbuyCatManager.getModel(id);

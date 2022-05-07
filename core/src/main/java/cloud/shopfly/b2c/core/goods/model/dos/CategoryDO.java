@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 商品分类实体
+ * Commodity classification entity
  *
  * @author fk
  * @version v2.0
@@ -45,54 +45,54 @@ public class CategoryDO implements Serializable {
     private static final long serialVersionUID = 1964321416223565L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "category_id")
     @ApiModelProperty(hidden = true)
     private Integer categoryId;
 
     /**
-     * 分类名称
+     * name
      */
     @Column()
-    @ApiModelProperty(value = "分类名称", required = true)
-    @NotEmpty(message = "分类名称不能为空")
+    @ApiModelProperty(value = "name", required = true)
+    @NotEmpty(message = "The category name cannot be empty")
     private String name;
 
     /**
-     * 分类父id
+     * Classification of the fatherid
      */
     @Column(name = "parent_id")
-    @ApiModelProperty(name = "parent_id", value = "分类父id，顶 0", required = true)
-    @NotNull(message = "父分类不能为空")
+    @ApiModelProperty(name = "parent_id", value = "Classification of the fatheridAnd the top0", required = true)
+    @NotNull(message = "The parent category cannot be empty")
     private Integer parentId;
 
     /**
-     * 分类父子路径
+     * Classified parent path
      */
     @Column(name = "category_path")
     @ApiModelProperty(hidden = true)
     private String categoryPath;
 
     /**
-     * 该分类下商品数量
+     * Quantity of goods under this category
      */
     @Column(name = "goods_count")
     @ApiModelProperty(hidden = true)
     private Integer goodsCount;
 
     /**
-     * 分类排序
+     * sort
      */
     @Column(name = "category_order")
-    @ApiModelProperty(name = "category_order", value = "分类排序", required = false)
+    @ApiModelProperty(name = "category_order", value = "sort", required = false)
     private Integer categoryOrder;
 
     /**
-     * 分类图标
+     * Classification of icon
      */
     @Column()
-    @ApiModelProperty(value = "分类图标", required = false)
+    @ApiModelProperty(value = "Classification of icon", required = false)
     private String image;
 
     @PrimaryKeyField

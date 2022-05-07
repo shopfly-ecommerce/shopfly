@@ -24,7 +24,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 赠品VO
+ * The giftsVO
  *
  * @author Snow create in 2018/4/9
  * @version v2.0
@@ -33,16 +33,16 @@ import java.io.Serializable;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GiftVO implements Serializable {
 
-    @ApiModelProperty(value = "赠品ID")
+    @ApiModelProperty(value = "The giftsID")
     private Integer giftId;
 
-    @ApiModelProperty(value = "商家ID")
+    @ApiModelProperty(value = "merchantsID")
     private Integer sellerId;
 
-    @ApiModelProperty(value = "赠品名称")
+    @ApiModelProperty(value = "Name of gift")
     private String giftName;
 
-    @ApiModelProperty(value = "数量")
+    @ApiModelProperty(value = "Quantity")
     private Integer giftNum;
 
 

@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.member.constraint.annotation;
 /**
  * @author fk
  * @version v1.0
- * @Description: 商品评分
+ * @Description: Commodity grade
  * @date 2018/4/11 10:27
  * @since v7.0.0
  */
@@ -35,7 +35,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface GradeType {
 
-    String message() default "商品评分不正确";
+    String message() default "The product score is not correct";
 
     Class<?>[] groups() default {};
 

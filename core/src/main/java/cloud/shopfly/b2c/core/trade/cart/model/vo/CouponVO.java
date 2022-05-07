@@ -25,14 +25,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 /**
- * 优惠券
+ * coupons
  *
  * @author kingapex
  * @version v2.0
  * @since v7.0.0
- * 2017年3月22日下午1:03:52
+ * 2017years3month22On the afternoon1:03:52
  */
-@ApiModel(description = "优惠券")
+@ApiModel(description = "coupons")
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CouponVO implements Serializable {
 
@@ -42,38 +42,38 @@ public class CouponVO implements Serializable {
     private static final long serialVersionUID = -5236361119763282449L;
 
     /**
-     * 记录下单时使用的会员优惠券ID
+     * Record the membership coupons used when placing the orderID
      */
-    @ApiModelProperty(value = "会员优惠券id")
+    @ApiModelProperty(value = "Membership couponid")
     private Integer memberCouponId;
 
     /**
-     * 记录下单时赠送的优惠券ID
+     * Keep track of coupons given when you place an orderID
      */
-    @ApiModelProperty(value = "优惠券id")
+    @ApiModelProperty(value = "couponsid")
     private Integer couponId;
 
-    @ApiModelProperty(value = "金额")
+    @ApiModelProperty(value = "The amount of")
     private Double amount;
 
-    @ApiModelProperty(value = "有效期")
+    @ApiModelProperty(value = "The period of validity")
     private Long endTime;
 
-    @ApiModelProperty(value = "使用条件")
+    @ApiModelProperty(value = "Conditions of use")
     private String useTerm;
 
 
-    @ApiModelProperty(value = "优惠券门槛金额")
+    @ApiModelProperty(value = "Coupon threshold amount")
     private Double couponThresholdPrice;
 
-    @ApiModelProperty(value = "是否可用，1为可用，0为不可用")
+    @ApiModelProperty(value = "Whether it is available,1As the available,0For is not available")
     private int enable;
 
-    @ApiModelProperty(value = "是否被选中，1为选中，0为不选中")
+    @ApiModelProperty(value = "Whether or not they are selected,1For the selected,0Is not selected")
     private int selected;
 
 
-    @ApiModelProperty(name = "error_msg", value = "错误信息，结算页使用")
+    @ApiModelProperty(name = "error_msg", value = "Error message used on settlement page")
     private String errorMsg;
 
     public Integer getMemberCouponId() {

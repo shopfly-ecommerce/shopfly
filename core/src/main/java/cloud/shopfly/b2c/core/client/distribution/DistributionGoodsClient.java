@@ -18,19 +18,19 @@ package cloud.shopfly.b2c.core.client.distribution;
 import cloud.shopfly.b2c.core.distribution.model.dos.DistributionGoods;
 
 /**
- * 分销商品客户端
+ * Distribute goods client
  *
  * @author liushuai
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/8/14 下午1:31
+ * 2018/8/14 In the afternoon1:31
  */
 public interface DistributionGoodsClient {
 
 
     /**
-     * 修改分销商品提现设置
+     * Modify withdrawal Settings of distributed goods
      *
      * @param distributionGoods
      * @return
@@ -38,7 +38,7 @@ public interface DistributionGoodsClient {
     DistributionGoods edit(DistributionGoods distributionGoods);
 
     /**
-     * 获取分销设置
+     * Get distribution Settings
      *
      * @param goodsId
      * @return
@@ -46,7 +46,7 @@ public interface DistributionGoodsClient {
     DistributionGoods getModel(Integer goodsId);
 
     /**
-     * 删除
+     * delete
      *
      * @param id
      */

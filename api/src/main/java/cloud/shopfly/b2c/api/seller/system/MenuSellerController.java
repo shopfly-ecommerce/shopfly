@@ -32,7 +32,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 菜单管理控制器
+ * Menu management controller
  *
  * @author zh
  * @version v7.0
@@ -41,16 +41,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/systems/menus")
-@Api(description = "菜单管理相关API")
+@Api(description = "Menu management relatedAPI")
 public class MenuSellerController {
 
     @Autowired
     private MenuManager menuManager;
 
 
-    @ApiOperation(value = "根据父id查询所有菜单", response = Menu.class)
+    @ApiOperation(value = "According to the fatheridQuery all menus", response = Menu.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "parent_id", value = "菜单父id，如果查询顶级菜单则传0", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "parent_id", value = "The menu of the fatherid, if the top-level menu is queried0", required = true, dataType = "int", paramType = "path")
     })
     @GetMapping("/{parent_id}/children")
     public List<MenusVO> getMenuTree(@PathVariable("parent_id") @ApiIgnore Integer parentId) {
@@ -58,16 +58,16 @@ public class MenuSellerController {
     }
 
 
-    @ApiOperation(value = "添加菜单", response = Menu.class)
+    @ApiOperation(value = "Add menu", response = Menu.class)
     @PostMapping
     public Menu add(@Valid MenuVO menu) {
         return this.menuManager.add(menu);
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改菜单", response = Menu.class)
+    @ApiOperation(value = "Modify the menu", response = Menu.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public Menu edit(@Valid MenuVO menuVO, @PathVariable Integer id) {
         Menu menu = new Menu();
@@ -77,9 +77,9 @@ public class MenuSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除菜单")
+    @ApiOperation(value = "Delete menu")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的菜单管理主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The menu to delete manages the primary key", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
         this.menuManager.delete(id);
@@ -88,9 +88,9 @@ public class MenuSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个菜单")
+    @ApiOperation(value = "Querying a menu")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的菜单管理主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The menu to query manages the primary key", required = true, dataType = "int", paramType = "path")
     })
     public Menu get(@PathVariable Integer id) {
         Menu menu = this.menuManager.getModel(id);

@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 楼层业务类
+ * Floor business class
  *
  * @author fk
  * @version v1.0
@@ -78,7 +78,7 @@ public class PageDataManagerImpl implements PageDataManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PageData add(PageData page) {
         this.daoSupport.insert(page);
-        //发送消息
+        // Send a message
         this.sendFocusChangeMessage(page.getClientType());
         return page;
     }
@@ -87,7 +87,7 @@ public class PageDataManagerImpl implements PageDataManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PageData edit(PageData page, Integer id) {
         this.daoSupport.update(page, id);
-        //发送消息
+        // Send a message
         this.sendFocusChangeMessage(page.getClientType());
         return page;
     }
@@ -96,7 +96,7 @@ public class PageDataManagerImpl implements PageDataManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Integer id) {
         this.daoSupport.delete(Page.class, id);
-        //发送消息
+        // Send a message
         PageData page = this.getModel(id);
         this.sendFocusChangeMessage(page.getClientType());
     }
@@ -112,7 +112,7 @@ public class PageDataManagerImpl implements PageDataManager {
     public PageData queryPageData(String clientType, String pageType) {
         PageData page = this.getByType(clientType, pageType);
         if (page == null) {
-            throw new ServiceException(SystemErrorCode.E806.code(), "楼层找不到");
+            throw new ServiceException(SystemErrorCode.E806.code(), "Floor not found");
         }
         constructPageData(page);
         return page;
@@ -124,7 +124,7 @@ public class PageDataManagerImpl implements PageDataManager {
     @Transactional( propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public PageData editByType(PageData pageData) {
         PageData data = this.getByType(pageData.getClientType(), pageData.getPageType());
-        //首次保存
+        // Save for the first time
         if (data == null) {
             this.daoSupport.insert(pageData);
             pageData.setPageId(this.daoSupport.getLastId(""));
@@ -149,7 +149,7 @@ public class PageDataManagerImpl implements PageDataManager {
     }
 
     /**
-     * 重新渲染楼层数据
+     * Re-render floor data
      *
      * @param page
      */
@@ -182,7 +182,7 @@ public class PageDataManagerImpl implements PageDataManager {
                             } catch (Exception e) {
                                 logger.error(e);
                             }
-                            //如果商品被删除则返回空数据
+                            // Null data is returned if the item is deleted
                             if (goods == null || goods.getDisabled() == 0) {
                                 blockMap.put("block_value", null);
                                 break;
@@ -209,7 +209,7 @@ public class PageDataManagerImpl implements PageDataManager {
     }
 
     /**
-     * 发送首页变化消息
+     * Send home page change messages
      *
      * @param clientType
      */

@@ -23,13 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 可提现金额计算
+ * The withdrawal amount is calculated
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/23 上午7:46
+ * 2018/5/23 In the morning7:46
  */
 @Service
 public class WithdrawCountJob implements EveryDayExecute {
@@ -43,14 +43,14 @@ public class WithdrawCountJob implements EveryDayExecute {
 
 
     /**
-     * 每天执行结算
+     * Perform daily settlement
      */
     @Override
     public void everyDay() {
         try {
             withdrawCountClient.everyDay();
         } catch (Exception e) {
-            logger.error("每日将解锁金额自动添加到可提现金额异常：",e);
+            logger.error("The unlock amount will be automatically added to the withdrawal amount anomaly every day：",e);
         }
     }
 }

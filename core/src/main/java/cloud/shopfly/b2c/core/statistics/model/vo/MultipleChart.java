@@ -23,18 +23,18 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 多数据统计图VO
+ * Multi-data statistics chartVO
  *
  * @author chopper
  * @version v1.0
  * @since v7.0
- * 2018-04-09 上午10:51
+ * 2018-04-09 In the morning10:51
  */
 
 @JsonNaming(value = MultipleChart.class)
 public class MultipleChart extends BaseChart implements Serializable {
 
-    @ApiModelProperty(value = "表数据")
+    @ApiModelProperty(value = "Table data")
     private List<ChartSeries> series;
 
     public List<ChartSeries> getSeries() {

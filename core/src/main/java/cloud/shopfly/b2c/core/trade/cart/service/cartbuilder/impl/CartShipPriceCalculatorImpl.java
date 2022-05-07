@@ -44,7 +44,7 @@ public class CartShipPriceCalculatorImpl implements CartShipPriceCalculator {
     public void countShipPrice(List<CartVO> cartList) {
         shippingManager.setShippingPrice(cartList);
         if (logger.isDebugEnabled()) {
-            logger.debug("购物车处理运费结果为：");
+            logger.debug("Shopping cart processing freight result is：");
             logger.debug(cartList.toString());
         }
     }

@@ -32,7 +32,7 @@ import java.io.Serializable;
 
 
 /**
- * 满优惠赠品实体
+ * Full preferential gift entity
  * @author Snow
  * @version v7.0.0
  * @since v7.0.0
@@ -45,56 +45,56 @@ public class FullDiscountGiftDO implements Serializable {
 
     private static final long serialVersionUID = 953152013470095L;
 
-    /**赠品id*/
+    /**The giftsid*/
     @Id(name = "gift_id")
     @ApiModelProperty(hidden=true)
     private Integer giftId;
 
-    /**赠品名称*/
+    /**Name of gift*/
     @Column(name = "gift_name")
-    @ApiModelProperty(name="gift_name",value="赠品名称",required=false)
+    @ApiModelProperty(name="gift_name",value="Name of gift",required=false)
     private String giftName;
 
-    /**赠品金额*/
+    /**Gift amount*/
     @Column(name = "gift_price")
-    @ApiModelProperty(name="gift_price",value="赠品金额",required=false)
+    @ApiModelProperty(name="gift_price",value="Gift amount",required=false)
     private Double giftPrice;
 
-    /**赠品图片*/
+    /**Gifts pictures*/
     @Column(name = "gift_img")
-    @NotEmpty(message = "请上传赠品图片")
-    @ApiModelProperty(name="gift_img",value="赠品图片",required=false)
+    @NotEmpty(message = "Please upload pictures of the gifts")
+    @ApiModelProperty(name="gift_img",value="Gifts pictures",required=false)
     private String giftImg;
 
-    /**库存*/
+    /**Inventory*/
     @Column(name = "actual_store")
-    @NotNull(message = "请填写库存")
-    @ApiModelProperty(name="actual_store",value="库存",required=false)
+    @NotNull(message = "Please fill in the inventory")
+    @ApiModelProperty(name="actual_store",value="Inventory",required=false)
     private Integer actualStore;
 
-    /**赠品类型*/
+    /**Gift type*/
     @Column(name = "gift_type")
-    @ApiModelProperty(name="gift_type",value="赠品类型",required=false)
+    @ApiModelProperty(name="gift_type",value="Gift type",required=false)
     private Integer giftType;
 
-    /**可用库存*/
+    /**Available*/
     @Column(name = "enable_store")
-    @ApiModelProperty(name="enable_store",value="可用库存",required=false)
+    @ApiModelProperty(name="enable_store",value="Available",required=false)
     private Integer enableStore;
 
-    /**活动时间*/
+    /**The activity time*/
     @Column(name = "create_time")
-    @ApiModelProperty(name="create_time",value="活动时间",required=false)
+    @ApiModelProperty(name="create_time",value="The activity time",required=false)
     private Long createTime;
 
-    /**活动商品id*/
+    /**Activities of goodsid*/
     @Column(name = "goods_id")
-    @ApiModelProperty(name="goods_id",value="活动商品id",required=false)
+    @ApiModelProperty(name="goods_id",value="Activities of goodsid",required=false)
     private Integer goodsId;
 
-    /**是否禁用*/
+    /**Whether to disable*/
     @Column(name = "disabled")
-    @ApiModelProperty(name="disabled",value="是否禁用",required=false)
+    @ApiModelProperty(name="disabled",value="Whether to disable",required=false)
     private Integer disabled;
 
     @PrimaryKeyField

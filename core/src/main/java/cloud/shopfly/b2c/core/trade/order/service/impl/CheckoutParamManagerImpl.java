@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 结算参数 业务层实现类
+ * Settlement parameters business layer implementation class
  *
  * @author Snow create in 2018/4/8
  * @version v2.0
@@ -57,7 +57,7 @@ public class CheckoutParamManagerImpl implements CheckoutParamManager {
     public CheckoutParamVO getParam() {
         CheckoutParamVO param = this.read();
 
-        //如果session中没有 new一个，并赋给默认值
+        // If there is no new in session, assign the default value
         if (param == null) {
 
             param = new CheckoutParamVO();
@@ -68,18 +68,18 @@ public class CheckoutParamManagerImpl implements CheckoutParamManager {
             if (address != null) {
                 addrId = address.getAddrId();
             }
-            //默认配送地址
+            // Default shipping address
             param.setAddressId(addrId);
 
-            //默认支付方式
+            // Default payment method
             param.setPaymentType(PaymentTypeEnum.defaultType());
 
-            //默认不需要发票
+            // No invoice is required by default
             ReceiptVO receipt = new ReceiptVO();
             param.setReceipt(receipt);
 
-            //默认时间
-            param.setReceiveTime("任意时间");
+            // The default time
+            param.setReceiveTime("At any time");
 
             this.write(param);
         }
@@ -153,14 +153,14 @@ public class CheckoutParamManagerImpl implements CheckoutParamManager {
 //                continue;
 //            }
 //            if(regions.getCod() == 0){
-//                throw new NoPermissionException("["+regions.getLocalName() + "]不支持货到付款");
+//                throw new NoPermissionException("["+regions.getLocalName() + "]Cash on delivery is not supported");
 //            }
 //        }
     }
 
 
     /**
-     * 读取Key
+     * readKey
      *
      * @return
      */
@@ -171,7 +171,7 @@ public class CheckoutParamManagerImpl implements CheckoutParamManager {
 
 
     /**
-     * 写入map值
+     * writemapvalue
      *
      * @param paramVO
      */
@@ -205,18 +205,18 @@ public class CheckoutParamManagerImpl implements CheckoutParamManager {
 
 
     /**
-     * 由Reids中读取出参数
+     * byReidsRead fetch parameters in
      */
     private CheckoutParamVO read() {
         String key = getRedisKey();
         Map<String, Object> map = this.cache.getHash(key);
 
-        //如果还没有存过则返回null
+        // Returns NULL if it has not been saved
         if (map == null || map.isEmpty()) {
             return null;
         }
 
-        //如果取到了，则取出来生成param
+        // If it does, it is fetched to generate param
         Integer addressId = (Integer) map.get(CheckoutParamName.ADDRESS_ID);
         PaymentTypeEnum paymentType = (PaymentTypeEnum) map.get(CheckoutParamName.PAYMENT_TYPE);
         ReceiptVO receipt = (ReceiptVO) map.get(CheckoutParamName.RECEIPT);
@@ -230,7 +230,7 @@ public class CheckoutParamManagerImpl implements CheckoutParamManager {
         param.setAddressId(addressId);
         param.setReceipt(receipt);
         if (receiveTime == null) {
-            receiveTime = "任意时间";
+            receiveTime = "At any time";
         }
         param.setReceiveTime(receiveTime);
         param.setRemark(remark);

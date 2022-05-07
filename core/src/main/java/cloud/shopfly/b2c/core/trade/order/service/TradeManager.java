@@ -18,7 +18,7 @@ package cloud.shopfly.b2c.core.trade.order.service;
 import cloud.shopfly.b2c.core.trade.order.model.vo.TradeVO;
 
 /**
- * 交易管理
+ * Transaction management
  * @author Snow create in 2018/4/9
  * @version v2.0
  * @since v7.0.0
@@ -26,8 +26,8 @@ import cloud.shopfly.b2c.core.trade.order.model.vo.TradeVO;
 public interface TradeManager {
 
     /**
-     * 交易创建
-     * @param clientType  客户的类型
+     * Trade creation
+     * @param clientType  Types of customers
      * @return
      */
     TradeVO createTrade(String clientType);

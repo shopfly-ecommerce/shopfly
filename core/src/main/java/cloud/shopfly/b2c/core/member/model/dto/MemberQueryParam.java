@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 /**
- * 会员参数传递
+ * Member parameter passing
  *
  * @author zh
  * @version v7.0.0
@@ -36,61 +36,61 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class MemberQueryParam {
     /**
-     * 会员登陆用户名
+     * Member login user name
      */
-    @ApiModelProperty(name = "uname", value = "会员登陆用户名")
+    @ApiModelProperty(name = "uname", value = "Member login user name")
     private String uname;
     /**
-     * 邮箱
+     * email
      */
-    @ApiModelProperty(name = "email", value = "邮箱")
+    @ApiModelProperty(name = "email", value = "email")
     private String email;
     /**
-     * 会员手机号码
+     * Member mobile Phone Number
      */
-    @ApiModelProperty(name = "mobile", value = "会员手机号码")
+    @ApiModelProperty(name = "mobile", value = "Member mobile Phone Number")
     private String mobile;
     /**
-     * 会员性别
+     * Member of the gender
      */
-    @ApiModelProperty(name = "sex", value = "会员性别,1为男，0为女")
+    @ApiModelProperty(name = "sex", value = "Member of the gender,1For men,0For female")
     private Integer sex;
 
     @RegionFormat
-    @ApiModelProperty(name = "region", value = "地区")
+    @ApiModelProperty(name = "region", value = "region")
     private Region region;
     /**
-     * 开始时间
+     * The start time
      */
-    @ApiModelProperty(name = "start_time", value = "开始时间")
+    @ApiModelProperty(name = "start_time", value = "The start time")
     private String startTime;
     /**
-     * 结束时间
+     * The end of time
      */
-    @ApiModelProperty(name = "end_time", value = "结束时间")
+    @ApiModelProperty(name = "end_time", value = "The end of time")
     private String endTime;
     /**
-     * 关键字
+     * keyword
      */
-    @ApiModelProperty(name = "keyword", value = "关键字")
+    @ApiModelProperty(name = "keyword", value = "keyword")
     private String keyword;
     /**
-     * 页码
+     * The page number
      */
-    @ApiModelProperty(name = "page_no", value = "页码", required = true)
+    @ApiModelProperty(name = "page_no", value = "The page number", required = true)
     private Integer pageNo;
 
     /**
-     * 会员状态
+     * The member state
      */
     @Column(name = "disabled")
-    @ApiModelProperty(name = "disabled", value = "会员状态,0为正常.-1为删除，在会员回收站中", required = false)
+    @ApiModelProperty(name = "disabled", value = "The member state,0For the normal.-1For deletion, in the member recycle bin", required = false)
     private Integer disabled;
 
     /**
-     * 分页数
+     * Number of pages
      */
-    @ApiModelProperty(name = "page_size", value = "分页数", required = true)
+    @ApiModelProperty(name = "page_size", value = "Number of pages", required = true)
     private Integer pageSize;
 
     public String getUname() {

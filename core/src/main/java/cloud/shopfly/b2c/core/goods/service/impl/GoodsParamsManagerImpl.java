@@ -33,12 +33,12 @@ import java.util.Map;
 
 
 /**
- * 商品参数
+ * Product parameters
  *
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月21日 下午5:30:11
+ * 2018years3month21On the afternoon5:30:11
  */
 @Service
 public class GoodsParamsManagerImpl implements GoodsParamsManager {
@@ -52,7 +52,7 @@ public class GoodsParamsManagerImpl implements GoodsParamsManager {
     public List<GoodsParamsGroupVO> queryGoodsParams(Integer categoryId, Integer goodsId) {
 
         String sql = "select * from es_parameter_group where category_id = ?";
-        //查询参数组
+        // Querying parameter Groups
         List<ParameterGroupDO> groupList = this.daoSupport.queryForList(sql, ParameterGroupDO.class, categoryId);
         sql = "select p.*,gp.param_value,p.group_id "
                 + "from es_parameters p "
@@ -70,7 +70,7 @@ public class GoodsParamsManagerImpl implements GoodsParamsManager {
     public List<GoodsParamsGroupVO> queryGoodsParams(Integer categoryId) {
 
         String sql = "select * from es_parameter_group where category_id = ?";
-        //查询参数组
+        // Querying parameter Groups
         List<ParameterGroupDO> groupList = this.daoSupport.queryForList(sql, ParameterGroupDO.class, categoryId);
         sql = "select * from es_parameters where category_id = ? order by sort ";
 
@@ -96,7 +96,7 @@ public class GoodsParamsManagerImpl implements GoodsParamsManager {
     }
 
     /**
-     * 拼装返回值
+     * Assemble return value
      *
      * @param groupList
      * @param paramList

@@ -1,7 +1,7 @@
 /*
- * 易族智汇（北京）科技有限公司 版权所有。
- * 未经许可，您不得使用此文件。
- * 官方地址：www.javamall.com.cn
+ * Yi family of hui（Beijing）All Rights Reserved.
+ * You may not use this file without permission.
+ * The official address：www.javamall.com.cn
  */
 package cloud.shopfly.b2c.core.goods.model.dos;
 
@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * 商品实体
+ * Commodity entity
  *
  * @author fk
  * @version v2.0
@@ -33,203 +33,203 @@ public class GoodsDO implements Serializable {
     private static final long serialVersionUID = 9115135430405642L;
 
     /**
-     * 主键
+     * A primary key
      */
     @Id(name = "goods_id")
     @ApiModelProperty(hidden = true)
     private Integer goodsId;
     /**
-     * 商品名称
+     * Name
      */
     @Column(name = "goods_name")
-    @ApiModelProperty(name = "goods_name", value = "商品名称", required = false)
+    @ApiModelProperty(name = "goods_name", value = "Name", required = false)
     private String goodsName;
     /**
-     * 商品编号
+     * SN
      */
     @Column(name = "sn")
-    @ApiModelProperty(name = "sn", value = "商品编号", required = false)
+    @ApiModelProperty(name = "sn", value = "SN", required = false)
     private String sn;
     /**
-     * 品牌id
+     * brandid
      */
     @Column(name = "brand_id")
-    @ApiModelProperty(name = "brand_id", value = "品牌id", required = false)
+    @ApiModelProperty(name = "brand_id", value = "brandid", required = false)
     private Integer brandId;
     /**
-     * 分类id
+     * Categoriesid
      */
     @Column(name = "category_id")
-    @ApiModelProperty(name = "category_id", value = "分类id", required = false)
+    @ApiModelProperty(name = "category_id", value = "Categoriesid", required = false)
     private Integer categoryId;
     /**
-     * 商品类型normal普通point积分
+     * Typenormalordinarypointpoint
      */
     @Column(name = "goods_type")
-    @ApiModelProperty(name = "goods_type", value = "商品类型NORMAL普通POINT积分", required = false)
+    @ApiModelProperty(name = "goods_type", value = "TypeNORMALordinaryPOINTpoint", required = false)
     private String goodsType;
     /**
-     * 重量
+     * Weight
      */
     @Column(name = "weight")
-    @ApiModelProperty(name = "weight", value = "重量", required = false)
+    @ApiModelProperty(name = "weight", value = "Weight", required = false)
     private Double weight;
     /**
-     * 上架状态 1上架 0下架
+     * On state1save0off
      */
     @Column(name = "market_enable")
-    @ApiModelProperty(name = "market_enable", value = "上架状态 1上架  0下架", required = false)
+    @ApiModelProperty(name = "market_enable", value = "On state1save0off", required = false)
     private Integer marketEnable;
     /**
-     * 详情
+     * details
      */
     @Column(name = "intro")
-    @ApiModelProperty(name = "intro", value = "详情", required = false)
+    @ApiModelProperty(name = "intro", value = "details", required = false)
     private String intro;
     /**
-     * 商品价格
+     * Price
      */
     @Column(name = "price")
-    @ApiModelProperty(name = "price", value = "商品价格", required = false)
+    @ApiModelProperty(name = "price", value = "Price", required = false)
     private Double price;
     /**
-     * 成本价格
+     * Cost price
      */
     @Column(name = "cost")
-    @ApiModelProperty(name = "cost", value = "成本价格", required = false)
+    @ApiModelProperty(name = "cost", value = "Cost price", required = false)
     private Double cost;
     /**
-     * 市场价格
+     * Marking price
      */
     @Column(name = "mktprice")
-    @ApiModelProperty(name = "mktprice", value = "市场价格", required = false)
+    @ApiModelProperty(name = "mktprice", value = "Marking price", required = false)
     private Double mktprice;
     /**
-     * 是否有规格0没有 1有
+     * Are there specifications?0There is no1There are
      */
     @Column(name = "have_spec")
-    @ApiModelProperty(name = "have_spec", value = "是否有规格0没有 1有", required = false)
+    @ApiModelProperty(name = "have_spec", value = "Are there specifications?0There is no1There are", required = false)
     private Integer haveSpec;
     /**
-     * 创建时间
+     * Last update
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Last update", required = false)
     private Long createTime;
     /**
-     * 最后修改时间
+     * Last Modified time
      */
     @Column(name = "last_modify")
-    @ApiModelProperty(name = "last_modify", value = "最后修改时间", required = false)
+    @ApiModelProperty(name = "last_modify", value = "Last Modified time", required = false)
     private Long lastModify;
     /**
-     * 浏览数量
+     * Browse the number
      */
     @Column(name = "view_count")
-    @ApiModelProperty(name = "view_count", value = "浏览数量", required = false)
+    @ApiModelProperty(name = "view_count", value = "Browse the number", required = false)
     private Integer viewCount;
     /**
-     * 购买数量
+     * Purchase quantity
      */
     @Column(name = "buy_count")
-    @ApiModelProperty(name = "buy_count", value = "购买数量", required = false)
+    @ApiModelProperty(name = "buy_count", value = "Purchase quantity", required = false)
     private Integer buyCount;
     /**
-     * 是否被删除0 删除 1未删除
+     * Deleted or not0 delete1未delete
      */
     @Column(name = "disabled")
-    @ApiModelProperty(name = "disabled", value = "是否被删除0 删除 1未删除", required = false)
+    @ApiModelProperty(name = "disabled", value = "Deleted or not0 delete1未delete", required = false)
     private Integer disabled;
     /**
-     * 库存
+     * Inventory
      */
     @Column(name = "quantity")
-    @ApiModelProperty(name = "quantity", value = "库存", required = false)
+    @ApiModelProperty(name = "quantity", value = "Inventory", required = false)
     private Integer quantity;
     /**
-     * 可用库存
+     * Available
      */
     @Column(name = "enable_quantity")
-    @ApiModelProperty(name = "enable_quantity", value = "可用库存", required = false)
+    @ApiModelProperty(name = "enable_quantity", value = "Available", required = false)
     private Integer enableQuantity;
     /**
-     * 如果是积分商品需要使用的积分
+     * If its a points product, you need to use points
      */
     @Column(name = "point")
-    @ApiModelProperty(name = "point", value = "如果是积分商品需要使用的积分", required = false)
+    @ApiModelProperty(name = "point", value = "If its a points product, you need to use points", required = false)
     private Integer point;
     /**
-     * seo标题
+     * seo title
      */
     @Column(name = "page_title")
-    @ApiModelProperty(name = "page_title", value = "seo标题", required = false)
+    @ApiModelProperty(name = "page_title", value = "seo title", required = false)
     private String pageTitle;
     /**
-     * seo关键字
+     * seokeyword
      */
     @Column(name = "meta_keywords")
-    @ApiModelProperty(name = "meta_keywords", value = "seo关键字", required = false)
+    @ApiModelProperty(name = "meta_keywords", value = "seokeyword", required = false)
     private String metaKeywords;
     /**
-     * seo描述
+     * seo describe
      */
     @Column(name = "meta_description")
-    @ApiModelProperty(name = "meta_description", value = "seo描述", required = false)
+    @ApiModelProperty(name = "meta_description", value = "seo describe", required = false)
     private String metaDescription;
     /**
-     * 商品好评率
+     * Product praise rate
      */
     @Column(name = "grade")
-    @ApiModelProperty(name = "grade", value = "商品好评率", required = false)
+    @ApiModelProperty(name = "grade", value = "Product praise rate", required = false)
     private Double grade;
     /**
-     * 缩略图路径
+     * Thumbnail path
      */
     @Column(name = "thumbnail")
-    @ApiModelProperty(name = "thumbnail", value = "缩略图路径", required = false)
+    @ApiModelProperty(name = "thumbnail", value = "Thumbnail path", required = false)
     private String thumbnail;
     /**
-     * 大图路径
+     * A larger image path
      */
     @Column(name = "big")
-    @ApiModelProperty(name = "big", value = "大图路径", required = false)
+    @ApiModelProperty(name = "big", value = "A larger image path", required = false)
     private String big;
     /**
-     * 小图路径
+     * Insets path
      */
     @Column(name = "small")
-    @ApiModelProperty(name = "small", value = "小图路径", required = false)
+    @ApiModelProperty(name = "small", value = "Insets path", required = false)
     private String small;
     /**
-     * 原图路径
+     * The original path
      */
     @Column(name = "original")
-    @ApiModelProperty(name = "original", value = "原图路径", required = false)
+    @ApiModelProperty(name = "original", value = "The original path", required = false)
     private String original;
     /**
-     * 评论数量
+     * Comment number
      */
     @Column(name = "comment_num")
-    @ApiModelProperty(name = "comment_num", value = "评论数量", required = false)
+    @ApiModelProperty(name = "comment_num", value = "Comment number", required = false)
     private Integer commentNum;
     /**
-     * 运费模板id
+     * The freight templateid
      */
     @Column(name = "template_id")
-    @ApiModelProperty(name = "template_id", value = "运费模板id", required = false)
+    @ApiModelProperty(name = "template_id", value = "The freight templateid", required = false)
     private Integer templateId;
     /**
-     * 谁承担运费0：买家承担，1：卖家承担
+     * Who bears the freight0：The buyer bears,1：The seller bear
      */
     @Column(name = "goods_transfee_charge")
-    @ApiModelProperty(name = "goods_transfee_charge", value = "谁承担运费0：买家承担，1：卖家承担", required = false)
+    @ApiModelProperty(name = "goods_transfee_charge", value = "Who bears the freight0：The buyer bears,1：The seller bear", required = false)
     private Integer goodsTransfeeCharge;
 
     /**
-     * 下架原因
+     * From the shelves because
      */
     @Column(name = "under_message")
-    @ApiModelProperty(name = "under_message", value = "下架原因", required = false)
+    @ApiModelProperty(name = "under_message", value = "From the shelves because", required = false)
     private String underMessage;
 
 

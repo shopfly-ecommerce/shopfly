@@ -22,7 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
- * 默认用户holder
+ * The default userholder
  * @author kingapex
  * @version 1.0
  * @since 7.1.0
@@ -52,7 +52,7 @@ public class DefaultUserHolder implements  UserHolder{
         if (authentication == null) {
             return null;
         }
-        //如果含有买家权限则读取卖家信息并返回
+        // If it contains buyer permission, it reads seller information and returns
         Object someOne = authentication.getDetails();
         if (someOne != null && someOne instanceof Buyer) {
             return (Buyer) someOne;

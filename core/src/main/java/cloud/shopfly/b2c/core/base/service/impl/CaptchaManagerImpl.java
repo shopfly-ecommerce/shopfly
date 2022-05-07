@@ -35,12 +35,12 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * 图片服务器实现
+ * Picture server implementation
  *
  * @author zh
  * @version v2.0
  * @since v7.0.0
- * 2018年3月19日 上午9:56:03
+ * 2018years3month19The morning of9:56:03
  */
 @Service
 public class CaptchaManagerImpl implements CaptchaManager {
@@ -55,9 +55,9 @@ public class CaptchaManagerImpl implements CaptchaManager {
 
     @Override
     public boolean valid(String uuid, String code, String scene) {
-        //从传入参数组织key
+        // Organize keys from incoming parameters
         String valCode = CachePrefix.CAPTCHA.getPrefix() + uuid + "_" + scene;
-        //redis中获取验证码
+        // Obtain the verification code in Redis
         Object obj = cache.get(valCode);
 
         if (obj != null && obj.toString().toLowerCase().equals(code.toLowerCase())) {
@@ -79,20 +79,20 @@ public class CaptchaManagerImpl implements CaptchaManager {
 
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        // 获取图形上下文
+        // Getting the graphics Context
         Graphics g = image.getGraphics();
 
-        // 生成随机类
+        // Generate random class
         Random random = new Random();
 
-        // 设定背景色
+        // Set the background color
         g.setColor(getRandColor(200, 250));
         g.fillRect(0, 0, width, height);
 
-        // 设定字体
+        // Set the font
         g.setFont(this.getFont());
 
-        // 随机产生155条干扰线，使图象中的认证码不易被其它程序探测到
+        // 155 interference lines are randomly generated to make the authentication code in the image difficult to be detected by other programs
         g.setColor(getRandColor(160, 200));
         for (int i = 0; i < 155; i++) {
             int x = random.nextInt(width);
@@ -104,9 +104,9 @@ public class CaptchaManagerImpl implements CaptchaManager {
 
         String sRand = "";
         int car = captchars.length - 1;
-        //获取站点设置
+        // Get site Settings
         String siteSettingJson = settingManager.get(SettingGroup.SITE);
-        //解析站点设置
+        // Resolving site Settings
         SiteSetting siteSetting = JsonUtil.jsonToObject(siteSettingJson, SiteSetting.class);
         for (int i = 0; i < 4; i++) {
             String rand = "" + captchars[generator.nextInt(car) + 1];
@@ -114,16 +114,16 @@ public class CaptchaManagerImpl implements CaptchaManager {
                 rand = "1";
             }
             sRand += rand;
-            // 调用函数出来的颜色相同，可能是因为种子太接近，所以只能直接生成
+            // Calling the function yields the same color, probably because the seeds are so close that they can only be generated directly
             g.setColor(new Color(30 + random.nextInt(80), 30 + random.nextInt(80), 30 + random.nextInt(80)));
             g.drawString(rand, 30 * i + 20, 58);
         }
         cache.put(CachePrefix.CAPTCHA.getPrefix() + uuid + "_" + scene, sRand.toLowerCase(), shopflyConfig.getCaptchaTimout());
-        // 图象生效
+        // The image effect
         g.dispose();
-        // 输出图象到页面
+        // Output images to pages
         HttpServletResponse resp = ThreadContextHolder.getHttpResponse();
-        //设置头信息为图片类型
+        // Set header information to image type
         resp.setHeader("Pragma", "No-cache");
         resp.setHeader("Cache-Control", "no-cache");
         resp.setDateHeader("Expires", 0);
@@ -138,7 +138,7 @@ public class CaptchaManagerImpl implements CaptchaManager {
 
     }
 
-    protected Color getRandColor(int fc, int bc) {// 给定范围获得随机颜色
+    protected Color getRandColor(int fc, int bc) {// Get a random color for a given range
         Random random = new Random();
         if (fc > 255) {
             fc = 255;
@@ -153,7 +153,7 @@ public class CaptchaManagerImpl implements CaptchaManager {
     }
 
     /**
-     * 产生随机字体
+     * Generate random fonts
      *
      * @return
      */

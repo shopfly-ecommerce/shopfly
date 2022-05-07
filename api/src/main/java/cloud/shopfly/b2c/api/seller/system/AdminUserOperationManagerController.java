@@ -31,7 +31,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * 平台管理员控制器
+ * Platform Administrator Controller
  *
  * @author zh
  * @version v7.0
@@ -40,7 +40,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/seller/systems/manager/admin-users")
-@Api("平台管理员管理相关API")
+@Api("Platform administrator management relatedAPI")
 @Validated
 public class AdminUserOperationManagerController {
 
@@ -48,10 +48,10 @@ public class AdminUserOperationManagerController {
     private AdminUserManager adminUserManager;
 
 
-    @ApiOperation(value = "查询平台管理员列表", response = AdminUser.class)
+    @ApiOperation(value = "Example Query the platform administrator list", response = AdminUser.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", required = true, dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", required = true, dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize) {
@@ -59,16 +59,16 @@ public class AdminUserOperationManagerController {
     }
 
 
-    @ApiOperation(value = "添加平台管理员", response = AdminUser.class)
+    @ApiOperation(value = "Adding a Platform Administrator", response = AdminUser.class)
     @PostMapping
     public AdminUser add(@Valid AdminUserVO adminUserVO) {
         return this.adminUserManager.add(adminUserVO);
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改平台管理员", response = AdminUser.class)
+    @ApiOperation(value = "Modifying a Platform Administrator", response = AdminUser.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
     public AdminUser edit(@Valid AdminUserVO adminUserVO, @PathVariable Integer id) {
         return this.adminUserManager.edit(adminUserVO, id);
@@ -76,9 +76,9 @@ public class AdminUserOperationManagerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除平台管理员")
+    @ApiOperation(value = "Deleting a Platform Administrator")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的平台管理员主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "The platform administrator primary key to delete", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
         this.adminUserManager.delete(id);
@@ -87,9 +87,9 @@ public class AdminUserOperationManagerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个平台管理员")
+    @ApiOperation(value = "Example Query a platform administrator")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的平台管理员主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Primary key of the platform administrator to be queried", required = true, dataType = "int", paramType = "path")
     })
     public AdminUser get(@PathVariable Integer id) {
 

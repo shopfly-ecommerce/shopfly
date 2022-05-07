@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 微信相关config
+ * @Description: WeChat relatedconfig
  * @date 2018/4/1810:14
  * @since v7.0.0
  */
@@ -41,7 +41,7 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
     public static final String QR_URL_PREFIX = "weixin://wxpay/bizpayurl[?]pr=";
     public static final String CACHE_KEY_PREFIX = "pay_";
 
-    public final String siteName = "shopfly商城订单";
+    public final String siteName = "shopflyMall orders";
 
 
     @Override
@@ -52,7 +52,7 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
 
 
     /**
-     * double转成分
+     * doubleTurn ingredients
      *
      * @param money
      * @return
@@ -67,11 +67,11 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
 
 
     /**
-     * 组装参数生成预付订单
+     * Assembly parameters generate prepaid orders
      *
      * @param bill
      * @param params
-     * @return 微信返回信息和支付参数
+     * @return Wechat returns information and payment parameters
      */
     protected Map<String, String> createUnifiedOrder(PayBill bill, Map<String, String> params) {
 
@@ -87,14 +87,14 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
         params.put("nonce_str", StringUtil.getRandStr(10));
         params.put("body", siteName);
         params.put("out_trade_no", bill.getBillSn());
-        // 应付转为分
+        // Conversion to points payable
         Double money = bill.getOrderPrice();
         if (money != null) {
             params.put("total_fee", toFen(money));
         }
         params.put("notify_url", this.getCallBackUrl(bill.getTradeType(), bill.getClientType()));
         if (logger.isDebugEnabled()) {
-            logger.info("微信回调地址：" + this.getCallBackUrl(bill.getTradeType(), bill.getClientType()));
+            logger.info("Wechat callback address：" + this.getCallBackUrl(bill.getTradeType(), bill.getClientType()));
         }
 
         String sign = WeixinUtil.createSign(params, config.getKey());
@@ -103,7 +103,7 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
             String xml = WeixinUtil.mapToXml(params);
 
             if (logger.isDebugEnabled()) {
-                logger.info("微信支付请求参数如下：");
+                logger.info("The wechat payment request parameters are as follows：");
                 logger.info(xml);
             }
 
@@ -112,7 +112,7 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
             Map resultMap = WeixinUtil.xmlToMap(resultDoc);
 
             xml = WeixinUtil.mapToXml(resultMap);
-            logger.debug("微信返回值为：");
+            logger.debug("Wechat returns a value of：");
             logger.debug(xml);
 
 
@@ -120,14 +120,14 @@ public class WeixinPuginConfig extends AbstractPaymentPlugin {
 
             return resultMap;
         } catch (Exception e) {
-            this.logger.error("生成参数失败", e);
+            this.logger.error("Failed to generate parameters", e);
         }
 
         return null;
     }
 
     /**
-     * 获取ip
+     * To obtainip
      *
      * @return
      */

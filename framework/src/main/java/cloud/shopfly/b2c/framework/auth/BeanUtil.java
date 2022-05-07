@@ -60,14 +60,14 @@ public class BeanUtil {
 
     public static List<Field> getFields(Class clz) {
         List<Field> fields = new ArrayList<>();
-        //获取所有属性(包含父类)
+        // Get all attributes (including parent classes)
         fields = getParentField(clz, fields);
         return fields;
     }
 
 
     /**
-     * 递归获取所有父类的属性
+     * Recursively gets the attributes of all the parent classes
      *
      * @param calzz
      * @param list
@@ -87,7 +87,7 @@ public class BeanUtil {
 
 
     /**
-     * 将数组转换成List
+     * Convert the array toList
      *
      * @param fields
      * @return add by liuyulei 2019-02-14

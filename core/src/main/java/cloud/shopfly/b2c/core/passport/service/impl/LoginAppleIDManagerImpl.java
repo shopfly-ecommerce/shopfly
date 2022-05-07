@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * AppleID登陆相关接口
+ * AppleIDLogin related interface
  * @author snow
  * @version v1.0
  * @since v7.2.2
@@ -88,29 +88,29 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
     }
 
     /**
-     * 根据UnionId登陆
+     * According to theUnionIdlanding
      * @param
      * @return
      */
     private Map loginByUnionId(String uuid, AppleIDUserDTO userDTO, Integer tokenOutTime, Integer refreshTokenOutTime, ConnectTypeEnum loginType){
         Map res = new HashMap(16);
-        //通过unionid查找会员(es_connect表)
+        // Find members by unionID (ES_CONNECT table)
         ConnectDO connectDO = findMemberByUnionId(userDTO.getOpenid());
         Member member = null;
         if(connectDO==null){
-            //没找到注册一个
+            // Couldnt find one registered
             member = registerBy(userDTO,loginType);
         }else{
             member = findMemberById(connectDO.getMemberId(),userDTO.getOpenid(),loginType);
         }
-        //存储uuid和unionId的关系
+        // Stores the relationship between uUID and unionId
         Auth2Token auth2Token = new Auth2Token();
         auth2Token.setType(loginType.value());
         auth2Token.setUnionid(userDTO.getOpenid());
-        //openid用于注册绑定时获取登录的微信的信息
+        // Openid is used to obtain wechat information when registering binding
         auth2Token.setOpneId(userDTO.getOpenid());
         if (logger.isDebugEnabled()) {
-            logger.debug("QQ登录openId为：" + userDTO.getOpenid());
+            logger.debug("QQSign inopenIdfor：" + userDTO.getOpenid());
         }
         cache.put(CachePrefix.CONNECT_LOGIN.getPrefix() + uuid, auth2Token);
         MemberVO memberVO = this.connectWeChatLoginHandle(member, uuid,tokenOutTime,refreshTokenOutTime);
@@ -121,7 +121,7 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
     }
 
     /**
-     * 根据unionId查询connect
+     * According to theunionIdThe queryconnect
      * @param unionId
      * @return
      */
@@ -135,7 +135,7 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
     }
 
     /**
-     * 注册
+     * Register
      * @param userDTO
      * @return
      */
@@ -159,16 +159,16 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
         member.setDisabled(0);
         member.setNickname(username);
         member.setSex(1);
-        //设置会员等级积分为0
+        // Set the membership level score to 0
         member.setGradePoint(0);
-        //设置会员消费积分为0
+        // Set member consumption points to 0
         member.setConsumPoint(0);
-        //设置会员是否完善了个人信息 0：否，1：是
+        // Set whether the member has completed the personal information 0: no, 1: yes
         member.setInfoFull(0);
         memberDaoSupport.insert("es_member",member);
         member.setMemberId( memberDaoSupport.getLastId("es_member"));
         addConnect(userDTO, member,loginType);
-        //组织数据结构发送会员注册消息
+        // The organization data structure sends membership registration messages
         MemberRegisterMsg memberRegisterMsg = new MemberRegisterMsg();
         memberRegisterMsg.setMember(member);
         memberRegisterMsg.setUuid(ThreadContextHolder.getHttpRequest().getHeader("uuid"));
@@ -177,13 +177,13 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
     }
 
     private void addConnect(AppleIDUserDTO userDTO, Member member, ConnectTypeEnum loginType) {
-        //写入UnionId
+        // Write UnionId
         ConnectDO connect = new ConnectDO();
         connect.setMemberId(member.getMemberId());
         connect.setUnionType(ConnectTypeEnum.APPLEID.value());
         connect.setUnionId(userDTO.getOpenid());
         memberDaoSupport.insert("es_connect",connect);
-        //写入openId
+        // Write the openId
         connect = new ConnectDO();
         connect.setMemberId(member.getMemberId());
         connect.setUnionType(loginType.value());
@@ -192,7 +192,7 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
     }
 
     /**
-     * 根据用户id查询用户信息
+     * According to the useridQuerying User Information
      * @param memberId
      * @param openid
      * @param loginType
@@ -200,7 +200,7 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
      */
     private Member findMemberById(Integer memberId, String openid, ConnectTypeEnum loginType) {
         Member member = memberManager.getModel(memberId);
-        //查看当前登陆终端该账户openid是否已记录，如果未记录则新增记录
+        // Check whether the openID of the current login terminal account is recorded. If not, add a record
         ConnectDO aDo = connectManager.getConnect(memberId,loginType.value());;
         if (aDo==null){
             ConnectDO connect = new ConnectDO();
@@ -213,15 +213,15 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
     }
 
     public MemberVO connectWeChatLoginHandle(Member member, String uuid,Integer tokenOutTime,Integer refreshTokenOutTime) {
-        //初始化会员信息
+        // Initialize member information
         MemberVO memberVO = this.convertWechatMember(member, uuid,tokenOutTime,refreshTokenOutTime);
-        //发送登录消息
+        // Sending a Login message
         this.sendMessage(member);
         return memberVO;
     }
 
     /**
-     * 生成member的token
+     * generatememberthetoken
      *
      * @param member
      * @param uuid
@@ -229,29 +229,29 @@ public class LoginAppleIDManagerImpl implements LoginAppleIDManager {
      */
     private MemberVO convertWechatMember(Member member, String uuid,Integer tokenOutTime,Integer refreshTokenOutTime) {
         if (!member.getDisabled().equals(0)) {
-            throw new ServiceException(MemberErrorCode.E107.code(), "当前账号已经禁用，请联系管理员");
+            throw new ServiceException(MemberErrorCode.E107.code(), "The current account is disabled. Contact the administrator");
         }
-        //新建买家用户角色对象
+        // Create a buyer user role object
         Buyer buyer = new Buyer();
-        //设置用户ID
+        // Setting a User ID
         buyer.setUid(member.getMemberId());
-        //设置用户名称
+        // Setting a User Name
         buyer.setUsername(member.getUname());
-        //设置uuid
+        // Set the uuid
         buyer.setUuid(uuid);
-        //创建Token
+        // Create a Token
         Token token = tokenManager.create(buyer,tokenOutTime,refreshTokenOutTime);
-        //获取访问Token
+        // Obtaining an Access Token
         String accessToken = token.getAccessToken();
-        //获取刷新Token
+        // Obtaining the Refresh Token
         String refreshToken = token.getRefreshToken();
-        //组织返回数据
+        // Organization returns data
         MemberVO memberVO = new MemberVO(member, accessToken, refreshToken);
         return memberVO;
     }
 
     /**
-     * 发送登录消息
+     * Sending a Login message
      * @param member
      */
     private void sendMessage(Member member) {

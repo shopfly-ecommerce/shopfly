@@ -17,11 +17,11 @@ package cloud.shopfly.b2c.core.promotion.pintuan.model;
 
 /**
  *
- * 拼团操作枚举值
+ * Enumeration value for group operation
  * @author liushuai
  * @version v1.0
  * @since v7.0
- * 2019/2/26 上午10:40
+ * 2019/2/26 In the morning10:40
  * @Description:
  *
  */
@@ -30,13 +30,13 @@ public enum PintuanOptionEnum {
 
 
     /**
-     * 拼团操作枚举值
+     * Enumeration value for group operation
      */
-    CAN_OPEN ("可以开启"),
+    CAN_OPEN ("You can open"),
 
-    CAN_CLOSE("可以关闭"),
+    CAN_CLOSE("You can turn off"),
 
-    NOTHING("没有什么可以操作的");
+    NOTHING("Nothing to manipulate");
 
     private String name;
 

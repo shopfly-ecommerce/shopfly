@@ -18,12 +18,12 @@ package cloud.shopfly.b2c.framework.exception;
 import org.springframework.http.HttpStatus;
 
 /**
- * 资源找不到异常
+ * The resource cannot be found abnormally
  *
  * @author Kingapex
  * @version v1.0
  * @since v7.0.0
- * 2017年8月15日 下午1:02:50
+ * 2017years8month15On the afternoon1:02:50
  */
 public class ResourceNotFoundException extends ServiceException {
 

@@ -25,13 +25,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 分销商
+ * distributors
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/21 上午11:25
+ * 2018/5/21 In the morning11:25
  */
 
 @Table(name = "es_distribution")
@@ -40,119 +40,119 @@ import io.swagger.annotations.ApiModelProperty;
 public class DistributionDO {
 
     /**
-     * 主键id
+     * A primary keyid
      */
     @Id(name = "id")
     @ApiModelProperty(hidden = true)
     private Integer id;
 
     /**
-     * 关联会员的id
+     * Associated memberid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(value = "会员id", required = true)
+    @ApiModelProperty(value = "membersid", required = true)
     private Integer memberId;
 
 
     /**
-     * 会员名称
+     * Member name
      */
     @Column(name = "member_name")
-    @ApiModelProperty(value = "会员名称", required = true)
+    @ApiModelProperty(value = "Member name", required = true)
     private String memberName;
 
 
     /**
-     * 关系路径
+     * Relationship between the path
      */
     @Column()
-    @ApiModelProperty(value = "关系路径", required = true)
+    @ApiModelProperty(value = "Relationship between the path", required = true)
     private String path;
 
     /**
-     * 2级分销商id（上上级）
+     * 2Level distributorsid（On the superior）
      */
     @Column(name = "member_id_lv2")
-    @ApiModelProperty(name = "member_id_lv2", value = "2级分销商id（上上级）", required = true)
+    @ApiModelProperty(name = "member_id_lv2", value = "2Level distributorsid（On the superior）", required = true)
     private Integer memberIdLv2;
 
     /**
-     * 1级分销商id（上级）
+     * 1Level distributorsid（The superior）
      */
     @Column(name = "member_id_lv1")
-    @ApiModelProperty(name = "member_id_lv1", value = "1级分销商id（上级）", required = true)
+    @ApiModelProperty(name = "member_id_lv1", value = "1Level distributorsid（The superior）", required = true)
     private Integer memberIdLv1;
 
     /**
-     * 下线人数
+     * The number of referrals
      */
     @Column(name = "downline")
-    @ApiModelProperty(value = "下线人数", required = true)
+    @ApiModelProperty(value = "The number of referrals", required = true)
     private Integer downline = 0;
 
     /**
-     * 提成相关订单数
+     * Commission related order number
      */
     @Column(name = "order_num")
-    @ApiModelProperty(name = "order_num", value = "提成相关订单数", required = true)
+    @ApiModelProperty(name = "order_num", value = "Commission related order number", required = true)
     private Integer orderNum = 0;
 
     /**
-     * 返利总额
+     * The total amount of the rebate
      */
     @Column(name = "rebate_total")
-    @ApiModelProperty(name = "rebate_total", value = "返利总额", required = true)
+    @ApiModelProperty(name = "rebate_total", value = "The total amount of the rebate", required = true)
     private Double rebateTotal = 0D;
 
     /**
-     * 营业额总额
+     * Total turnover
      */
     @Column(name = "turnover_price")
-    @ApiModelProperty(name = "turnover_price", value = "营业额总额", required = true)
+    @ApiModelProperty(name = "turnover_price", value = "Total turnover", required = true)
     private Double turnoverPrice = 0D;
 
     /**
-     * 可提现金额
+     * Withdrawal amount
      */
     @Column(name = "can_rebate")
-    @ApiModelProperty(name = "can_rebate", value = "可提现金额", required = true)
+    @ApiModelProperty(name = "can_rebate", value = "Withdrawal amount", required = true)
     private Double canRebate = 0D;
 
     /**
-     * 返利金额冻结
+     * The rebate amount is frozen
      */
     @Column(name = "commission_frozen")
-    @ApiModelProperty(name = "commission_frozen", value = "冻结金额", required = true)
+    @ApiModelProperty(name = "commission_frozen", value = "Amount frozen", required = true)
     private Double commissionFrozen = 0D;
 
 
     /**
-     * 提现冻结
+     * Withdrawal to freeze
      */
     @Column(name = "withdraw_frozen_price")
-    @ApiModelProperty(name = "withdraw_frozen_price", value = "冻结金额", required = true)
+    @ApiModelProperty(name = "withdraw_frozen_price", value = "Amount frozen", required = true)
     private Double withdrawFrozenPrice = 0D;
 
     /**
-     * 使用模板id
+     * Use the templateid
      */
     @Column(name = "current_tpl_id")
-    @ApiModelProperty(name = "current_tpl_id", value = "使用模板id", required = true)
+    @ApiModelProperty(name = "current_tpl_id", value = "Use the templateid", required = true)
     private Integer currentTplId;
 
 
     /**
-     * 使用模板id
+     * Use the templateid
      */
     @Column(name = "current_tpl_name")
-    @ApiModelProperty(name = "current_tpl_name", value = "使用模板名称", required = true)
+    @ApiModelProperty(name = "current_tpl_name", value = "Using template names", required = true)
     private String currentTplName;
 
     /**
-     * 创建时间
+     * Last update
      */
     @Column(name = "create_time")
-    @ApiModelProperty(name = "create_time", value = "创建时间", required = false)
+    @ApiModelProperty(name = "create_time", value = "Last update", required = false)
     private Long createTime;
 
 

@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品索引
+ * @Description: Commodity index
  * @date 2018/8/14 14:13
  * @since v7.0.0
  */

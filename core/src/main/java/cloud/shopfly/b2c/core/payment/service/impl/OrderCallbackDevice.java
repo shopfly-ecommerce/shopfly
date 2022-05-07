@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 订单支付回调器
+ * Order payment callback
  *
  * @author kingapex
  * @version 1.0
@@ -39,7 +39,7 @@ public class OrderCallbackDevice implements PaymentCallbackDevice {
     private OrderClient orderClient;
 
     /**
-     * 调用订单client完成对订单支付状态的修改
+     * Call to orderclientComplete the modification of order payment status
      *
      * @param outTradeNo
      * @param returnTradeNo
@@ -51,7 +51,7 @@ public class OrderCallbackDevice implements PaymentCallbackDevice {
     }
 
     /**
-     * 定义交易类型
+     * Defining transaction types
      *
      * @return
      */

@@ -16,22 +16,22 @@
 package cloud.shopfly.b2c.core.trade.order.model.enums;
 
 /**
- * 订单状态
+ * Status
  * @author Snow
  * @version 1.0
  * @since v7.0.0
- * 2017年3月31日下午2:44:54
+ * 2017years3month31On the afternoon2:44:54
  */
 public enum PayStatusEnum {
 
-	/** 新订单 */
-	PAY_NO("新订单"),
+	/** The new orders*/
+	PAY_NO("The new orders"),
 
-	/** 部分支付 */
-	PAY_PARTIAL("部分支付"),
+	/** Part of the payment*/
+	PAY_PARTIAL("Part of the payment"),
 
-	/** 已付款 */
-	PAY_YES("已付款");
+	/** Payment has been*/
+	PAY_YES("Payment has been");
 
 	private String description;
 

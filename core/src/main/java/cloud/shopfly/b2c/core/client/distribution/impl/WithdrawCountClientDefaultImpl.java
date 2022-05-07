@@ -24,13 +24,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 可提现金额计算
+ * The withdrawal amount is calculated
  *
  * @author Chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/5/23 上午7:46
+ * 2018/5/23 In the morning7:46
  */
 @Service
 @ConditionalOnProperty(value = "shopfly.product", havingValue = "stand")
@@ -43,7 +43,7 @@ public class WithdrawCountClientDefaultImpl implements WithdrawCountClient {
     private WithdrawCountManager withdrawCountManager;
 
     /**
-     * 每天执行结算
+     * Perform daily settlement
      */
     @Override
     public void everyDay() {

@@ -20,7 +20,7 @@ import cloud.shopfly.b2c.core.pagedata.model.FocusPicture;
 import java.util.List;
 
 /**
- * 焦点图业务层
+ * Focus map business layer
  * @author fk
  * @version v1.0
  * @since v7.0.0
@@ -29,36 +29,36 @@ import java.util.List;
 public interface FocusPictureManager {
 
 	/**
-	 * 查询焦点图列表
-	 * @param clientType 客户端类型
+	 * Query the list of focus graphs
+	 * @param clientType Client type
 	 * @return List
 	 */
 	List list(String clientType);
 	/**
-	 * 添加焦点图
-	 * @param cmsFocusPicture 焦点图
-	 * @return FocusPicture 焦点图
+	 * Add focus diagram
+	 * @param cmsFocusPicture Focus figure
+	 * @return FocusPicture Focus figure
 	 */
 	FocusPicture add(FocusPicture cmsFocusPicture);
 
 	/**
-	* 修改焦点图
-	* @param cmsFocusPicture 焦点图
-	* @param id 焦点图主键
-	* @return FocusPicture 焦点图
+	* Modify focus diagram
+	* @param cmsFocusPicture Focus figure
+	* @param id Focus graph primary key
+	* @return FocusPicture Focus figure
 	*/
 	FocusPicture edit(FocusPicture cmsFocusPicture, Integer id);
 	
 	/**
-	 * 删除焦点图
-	 * @param id 焦点图主键
+	 * Delete focus diagram
+	 * @param id Focus graph primary key
 	 */
 	void delete(Integer id);
 	
 	/**
-	 * 获取焦点图
-	 * @param id 焦点图主键
-	 * @return FocusPicture  焦点图
+	 * Get focus map
+	 * @param id Focus graph primary key
+	 * @return FocusPicture  Focus figure
 	 */
 	FocusPicture getModel(Integer id);
 

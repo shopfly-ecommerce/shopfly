@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 
 /**
- * 团购活动表实体
+ * Group purchase activity table entity
  *
  * @author Snow
  * @version v7.0.0
@@ -45,59 +45,59 @@ public class GroupbuyActiveDO implements Serializable {
     private static final long serialVersionUID = 8396241558782003L;
 
     /**
-     * 活动Id
+     * activityId
      */
     @Id(name = "act_id")
     @ApiModelProperty(hidden = true)
     private Integer actId;
 
     /**
-     * 活动名称
+     * The name of the event
      */
     @Column(name = "act_name")
-    @ApiModelProperty(name = "act_name", value = "活动名称", required = false)
+    @ApiModelProperty(name = "act_name", value = "The name of the event", required = false)
     private String actName;
 
     /**
-     * 活动开启时间
+     * Activity opening time
      */
     @Column(name = "start_time")
-    @ApiModelProperty(name = "start_time", value = "活动开启时间", required = false)
+    @ApiModelProperty(name = "start_time", value = "Activity opening time", required = false)
     private Long startTime;
 
     /**
-     * 团购结束时间
+     * Group purchase end time
      */
     @Column(name = "end_time")
-    @ApiModelProperty(name = "end_time", value = "团购结束时间", required = false)
+    @ApiModelProperty(name = "end_time", value = "Group purchase end time", required = false)
     private Long endTime;
 
     /**
-     * 团购报名截止时间
+     * Deadline for group purchase registration
      */
     @Column(name = "join_end_time")
-    @ApiModelProperty(name = "join_end_time", value = "团购报名截止时间", required = false)
+    @ApiModelProperty(name = "join_end_time", value = "Deadline for group purchase registration", required = false)
     private Long joinEndTime;
 
     /**
-     * 团购添加时间
+     * Add time for group purchase
      */
     @Column(name = "add_time")
-    @ApiModelProperty(name = "add_time", value = "团购添加时间", required = false)
+    @ApiModelProperty(name = "add_time", value = "Add time for group purchase", required = false)
     private Long addTime;
 
     /**
-     * 团购活动标签Id
+     * Group purchase activity tagsId
      */
     @Column(name = "act_tag_id")
-    @ApiModelProperty(name = "act_tag_id", value = "团购活动标签Id", required = false)
+    @ApiModelProperty(name = "act_tag_id", value = "Group purchase activity tagsId", required = false)
     private Integer actTagId;
 
     /**
-     * 参与团购商品数量
+     * Participate in group purchase quantity
      */
     @Column(name = "goods_num")
-    @ApiModelProperty(name = "goods_num", value = "参与团购商品数量", required = false)
+    @ApiModelProperty(name = "goods_num", value = "Participate in group purchase quantity", required = false)
     private Integer goodsNum;
 
 

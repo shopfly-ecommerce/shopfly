@@ -46,7 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 满优惠活动业务类
+ * Full discount activities business class
  *
  * @author Snow
  * @version v7.0.0
@@ -86,17 +86,17 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
         List<FullDiscountVO> fullDiscountVOList = webPage.getData();
         for (FullDiscountVO fullDiscountVO : fullDiscountVOList) {
             long nowTime = DateUtil.getDateline();
-            //当前时间小于活动的开始时间 则为活动未开始
+            // If the current time is less than the start time of the activity, the activity has not started
             if (nowTime < fullDiscountVO.getStartTime().longValue()) {
-                fullDiscountVO.setStatusText("活动未开始");
+                fullDiscountVO.setStatusText("Activity not started");
                 fullDiscountVO.setStatus(PromotionStatusEnum.WAIT.toString());
-                //大于活动的开始时间，小于活动的结束时间
+                // Greater than the start time of the activity and less than the end time of the activity
             } else if (fullDiscountVO.getStartTime().longValue() < nowTime && nowTime < fullDiscountVO.getEndTime()) {
-                fullDiscountVO.setStatusText("正在进行中");
+                fullDiscountVO.setStatusText("In progress");
                 fullDiscountVO.setStatus(PromotionStatusEnum.UNDERWAY.toString());
 
             } else {
-                fullDiscountVO.setStatusText("活动已结束");
+                fullDiscountVO.setStatusText("Activity is over");
                 fullDiscountVO.setStatus(PromotionStatusEnum.END.toString());
             }
         }
@@ -115,7 +115,7 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
 
         this.daoSupport.insert(fullDiscountDO);
 
-        // 获取活动Id
+        // Get active Id
         Integer id = this.daoSupport.getLastId("es_full_discount");
         fullDiscountVO.setFdId(id);
         fullDiscountDO.setFdId(id);
@@ -127,7 +127,7 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
         detailDTO.setPromotionType(PromotionTypeEnum.FULL_DISCOUNT.name());
         detailDTO.setTitle(fullDiscountVO.getTitle());
 
-        //将活动商品入库
+        // Warehousing of moving goods
         this.promotionGoodsManager.add(fullDiscountVO.getGoodsList(), detailDTO);
         cache.put(PromotionCacheKeys.getFullDiscountKey(id), fullDiscountDO);
 
@@ -146,7 +146,7 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
 
         this.daoSupport.update(fullDiscountDO, id);
 
-        //删除之前的活动与商品的对照关系
+        // Delete the previous activity and product comparison relationship
         PromotionDetailDTO detailDTO = new PromotionDetailDTO();
         detailDTO.setStartTime(fullDiscountVO.getStartTime());
         detailDTO.setEndTime(fullDiscountVO.getEndTime());
@@ -154,7 +154,7 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
         detailDTO.setPromotionType(PromotionTypeEnum.FULL_DISCOUNT.name());
         detailDTO.setTitle(fullDiscountVO.getTitle());
 
-        //将活动商品入库
+        // Warehousing of moving goods
         this.promotionGoodsManager.edit(fullDiscountVO.getGoodsList(), detailDTO);
         cache.put(PromotionCacheKeys.getFullDiscountKey(fullDiscountVO.getFdId()), fullDiscountDO);
 
@@ -162,18 +162,18 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
     }
 
     /**
-     * 获取DO对象
+     * To obtainDOobject
      * @param fullDiscountVO
      * @return
      */
     private FullDiscountDO getFullDiscountDO(FullDiscountVO fullDiscountVO){
 
-        //是否是全部商品参与
+        // Whether all goods are involved
         if (fullDiscountVO.getRangeType() == 1) {
             List<PromotionGoodsDTO> goodsDTOList = new ArrayList<>();
             PromotionGoodsDTO goodsDTO = new PromotionGoodsDTO();
             goodsDTO.setGoodsId(-1);
-            goodsDTO.setGoodsName("全部商品");
+            goodsDTO.setGoodsName("All the goods");
             goodsDTO.setThumbnail("");
             goodsDTOList.add(goodsDTO);
             fullDiscountVO.setGoodsList(goodsDTOList);
@@ -193,7 +193,7 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
 
         this.verifyStatus(id);
         this.daoSupport.delete(FullDiscountDO.class, id);
-        //删除活动对照表
+        // Delete the activity table
         this.promotionGoodsManager.delete(id, PromotionTypeEnum.FULL_DISCOUNT.name());
         this.cache.remove(PromotionCacheKeys.getFullDiscountKey(id));
     }
@@ -207,7 +207,7 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
         }
 
         if (fullDiscountDO == null) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动不存在");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "Activity does not exist");
         }
 
         FullDiscountVO fullDiscountVO = new FullDiscountVO();
@@ -215,7 +215,7 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
 
         List<PromotionGoodsDO> goodsDOList = this.promotionGoodsManager.getPromotionGoods(fdId, PromotionTypeEnum.FULL_DISCOUNT.name());
         if (goodsDOList.isEmpty()) {
-            throw new ServiceException(PromotionErrorCode.E401.code(), "此活动没有商品参与");
+            throw new ServiceException(PromotionErrorCode.E401.code(), "There is no merchandise involved");
         }
 
         Integer[] goodsIds = new Integer[goodsDOList.size()];
@@ -240,26 +240,26 @@ public class FullDiscountManagerImpl extends AbstractPromotionRuleManagerImpl im
     @Override
     public void verifyAuth(Integer id) {
         FullDiscountVO fullDiscountVO = this.getModel(id);
-        //验证越权操作
+        // Verify unauthorized operations
         if (fullDiscountVO == null) {
-            throw new NoPermissionException("无权操作");
+            throw new NoPermissionException("Have the right to operate");
         }
     }
 
 
     /**
-     * 验证此活动是否可进行编辑删除操作<br/>
-     * 如有问题则抛出异常
+     * Verify that this activity is editable and deleted<br/>
+     * Throw an exception if there is a problem
      *
-     * @param id 活动id
+     * @param id activityid
      */
     private void verifyStatus(Integer id) {
         FullDiscountVO fullDiscountVO = this.getModel(id);
         long nowTime = DateUtil.getDateline();
 
-        //如果活动起始时间小于现在时间，活动已经开始了。
+        // If the start time is less than the present time, the activity has already started.
         if (fullDiscountVO.getStartTime().longValue() < nowTime && fullDiscountVO.getEndTime().longValue() > nowTime) {
-            throw new ServiceException(PromotionErrorCode.E400.code(), "活动已经开始，不能进行编辑删除操作");
+            throw new ServiceException(PromotionErrorCode.E400.code(), "The activity has started. You cannot edit or delete the activity");
         }
     }
 

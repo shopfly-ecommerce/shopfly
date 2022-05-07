@@ -20,15 +20,15 @@ import java.util.List;
 
 /**
  * 
- * sql语句拼接工具类
+ * sqlStatement concatenation utility class
  * @author zjp
  * @version v1.0
  * @since v6.4.0
- * 2017年12月1日 下午4:51:28
+ * 2017years12month1On the afternoon4:51:28
  */
 public class SqlSplicingUtil {
 	/**
-	 * sql拼接
+	 * sqlJoining together
 	 * @param list
 	 * @return
 	 */

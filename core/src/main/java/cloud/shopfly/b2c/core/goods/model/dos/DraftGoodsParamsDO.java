@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 
 /**
- * 草稿商品参数表实体
+ * Draft commodity parameter sheet entities
  *
  * @author fk
  * @version v2.0
@@ -49,28 +49,28 @@ public class DraftGoodsParamsDO implements Serializable {
     @ApiModelProperty(hidden = true)
     private Integer id;
     /**
-     * 草稿ID
+     * The draftID
      */
     @Column(name = "draft_goods_id")
-    @ApiModelProperty(name = "draft_goods_id", value = "草稿ID", required = false)
+    @ApiModelProperty(name = "draft_goods_id", value = "The draftID", required = false)
     private Integer draftGoodsId;
     /**
-     * 参数ID
+     * parameterID
      */
     @Column(name = "param_id")
-    @ApiModelProperty(name = "param_id", value = "参数ID", required = false)
+    @ApiModelProperty(name = "param_id", value = "parameterID", required = false)
     private Integer paramId;
     /**
-     * 参数名
+     * Parameter names
      */
     @Column(name = "param_name")
-    @ApiModelProperty(name = "param_name", value = "参数名", required = false)
+    @ApiModelProperty(name = "param_name", value = "Parameter names", required = false)
     private String paramName;
     /**
-     * 参数值
+     * The parameter value
      */
     @Column(name = "param_value")
-    @ApiModelProperty(name = "param_value", value = "参数值", required = false)
+    @ApiModelProperty(name = "param_value", value = "The parameter value", required = false)
     private String paramValue;
 
     public DraftGoodsParamsDO() {

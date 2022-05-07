@@ -44,12 +44,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 商品库存增加/扣减
+ * Commodity inventory increases/deductions
  *
  * @author fk
  * @version v1.0
  * @since v7.0.0
- * 2018年6月22日 上午10:18:20
+ * 2018years6month22The morning of10:18:20
  */
 @Service
 public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, RefundStatusChangeEvent {
@@ -67,18 +67,18 @@ public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, Refu
 
 
     /**
-     * 订单变化处理
+     * Order change processing
      *
      * @param orderMessage
      */
     @Override
     public void orderChange(OrderStatusChangeMsg orderMessage) {
-        //发货
+        // The delivery
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.SHIPPED.name())) {
-            //获取订单信息
+            // Get order information
             OrderDO order = orderMessage.getOrderDO();
             String itemsJson = order.getItemsJson();
-            //订单中的sku集合
+            // The collection of SKUs in the order
             List<OrderSkuVO> list = JsonUtil.jsonToList(itemsJson, OrderSkuVO.class);
             List<GoodsQuantityVO> quantityVOList = new ArrayList<>();
             for (OrderSkuVO sku : list) {
@@ -86,21 +86,21 @@ public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, Refu
 
                 goodsQuantity.setGoodsId(sku.getGoodsId());
 
-                //设置为要减掉的库存
+                // Set to inventory to be cut
                 goodsQuantity.setQuantity(0 - sku.getNum());
-                //发货要减少实际的库存
+                // Shipping to reduce the actual inventory
                 goodsQuantity.setQuantityType(QuantityType.actual);
 
                 goodsQuantity.setSkuId(sku.getSkuId());
 
                 quantityVOList.add(goodsQuantity);
             }
-            //扣减库存
+            // Deducting the inventory
             goodsQuantityClient.updateSkuQuantity(quantityVOList);
 
         }
 
-        //付款前 订单取消
+        // Order cancelled before payment
         if (orderMessage.getNewStatus().name().equals(OrderStatusEnum.CANCELLED.name()) && orderMessage.getOrderDO().getPayStatus().equals(PayStatusEnum.PAY_NO.name())) {
 
             List<GoodsQuantityVO> quantityVOList = new ArrayList<>();
@@ -115,7 +115,7 @@ public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, Refu
                 goodsQuantity.setQuantity(sku.getNum());
                 goodsQuantity.setGoodsId(sku.getGoodsId());
 
-                //取消订单要恢复下单时占用的可用库存
+                // Cancellation Of an order The available stock to be occupied in order to resume an order
                 goodsQuantity.setQuantity(sku.getNum());
                 goodsQuantity.setQuantityType(QuantityType.enable);
                 goodsQuantity.setSkuId(sku.getSkuId());
@@ -132,9 +132,9 @@ public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, Refu
     @Override
     public void refund(RefundChangeMsg refundChangeMsg) {
         RefundDO refund = refundChangeMsg.getRefund();
-        //获取当前订单信息
+        // Get current order information
         OrderDetailDTO orderDetailDTO = orderClient.getModel(refundChangeMsg.getRefund().getOrderSn());
-        //退款 当商家审核已通过且未发货 增加可用库存
+        // Refund increases available inventory when merchant review has been approved and not shipped
         boolean bool = refund.getRefuseType().equals(RefuseTypeEnum.RETURN_MONEY.name()) && orderDetailDTO.getShipStatus().equals(ShipStatusEnum.SHIP_NO.name()) && refundChangeMsg.getRefundStatusEnum().name().equals(RefundStatusEnum.PASS.name());
         List<RefundGoodsDO> goodsList = afterSaleClient.getRefundGoods(refund.getSn());
         if (bool) {
@@ -142,7 +142,7 @@ public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, Refu
             List<GoodsQuantityVO> quantityVOList = new ArrayList<>();
 
             for (RefundGoodsDO goods : goodsList) {
-                // 商品入库
+                // Commodity warehousing
                 GoodsQuantityVO goodsQuantity = new GoodsQuantityVO();
                 goodsQuantity.setSkuId(goods.getSkuId());
                 goodsQuantity.setGoodsId(goods.getGoodsId());
@@ -155,31 +155,31 @@ public class GoodsQuantityChangeConsumer implements OrderStatusChangeEvent, Refu
 
         }
 
-        //退货且订单入库，增加库存
+        // Return goods and order into storage, increase inventory
         bool = refund.getRefuseType().equals(RefuseTypeEnum.RETURN_GOODS.name()) && refundChangeMsg.getRefundStatusEnum().equals(RefundStatusEnum.STOCK_IN);
         if (bool) {
 
             List<GoodsQuantityVO> quantityVOList = new ArrayList<>();
 
             for (RefundGoodsDO goods : goodsList) {
-                // 商品入库
+                // Commodity warehousing
                 GoodsQuantityVO goodsQuantity = new GoodsQuantityVO();
                 goodsQuantity.setSkuId(goods.getSkuId());
                 goodsQuantity.setGoodsId(goods.getGoodsId());
                 goodsQuantity.setQuantity(goods.getReturnNum());
 
-                //先增加实际库存
+                // Increase the actual inventory first
                 goodsQuantity.setQuantityType(QuantityType.actual);
                 quantityVOList.add(goodsQuantity);
             }
 
-            //先增加实际库存
+            // Increase the actual inventory first
             goodsQuantityClient.updateSkuQuantity(quantityVOList);
 
             quantityVOList.forEach(goodsQuantityVO -> {
                 goodsQuantityVO.setQuantityType(QuantityType.enable);
             });
-            //再增加可用库存
+            // Increase the available inventory
             goodsQuantityClient.updateSkuQuantity(quantityVOList);
         }
 

@@ -22,11 +22,11 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.SelectedPromotionVo;
 import java.util.List;
 
 /**
- * 购物车促销信息渲染器<br/>
- * 使用{@link SelectedPromotionVo}物料生产出
+ * Shopping cart promotion information renderer<br/>
+ * use{@link SelectedPromotionVo}Material production
  * {@link PromotionRule}
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >购物车架构</a>
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >Shopping cart architecture</a>
  *
  * @author kingapex
  * @version 1.0
@@ -37,7 +37,7 @@ public interface CartPromotionRuleRenderer {
 
 
     /**
-     * 对购物车进行渲染促销数据
+     * Render the shopping cart with promotional data
      * @param cartList
      * @param includeCoupon
      */

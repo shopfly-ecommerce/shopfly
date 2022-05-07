@@ -27,13 +27,13 @@ public class PaypalPaymentJob implements EveryTenMinutesExecute {
 
     @Override
     public void everyTenMinutes() {
-        //查询所有待支付的订单
+        // Query all orders to be paid
 
         List<PaymentBillDO> list = this.paymentBillManager.getWaitPay();
 
-        //循环查询支付状态
+        // Loop to query payment status
 //        for (PaymentBillDO billDO: list) {
-//            System.out.println("订单号 = " + billDO.getSn());
+//            System.out.println("The order number= " + billDO.getSn());
 //            PayParam param = new PayParam();
 //            param.setSn(billDO.getSn());
 //            param.setTradeType(billDO.getTradeType());

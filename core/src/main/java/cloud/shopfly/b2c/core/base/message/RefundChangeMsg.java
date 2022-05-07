@@ -21,13 +21,13 @@ import cloud.shopfly.b2c.core.aftersale.model.enums.RefundStatusEnum;
 import java.io.Serializable;
 
 /**
- * 退货退款消息
+ * Return and Refund Message
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/6/19 上午10:36
+ * 2018/6/19 In the morning10:36
  */
 public class RefundChangeMsg implements Serializable {
 
@@ -36,7 +36,7 @@ public class RefundChangeMsg implements Serializable {
     private RefundDO refund;
 
     /**
-     * 售后状态
+     * After state
      */
     private RefundStatusEnum refundStatusEnum;
 

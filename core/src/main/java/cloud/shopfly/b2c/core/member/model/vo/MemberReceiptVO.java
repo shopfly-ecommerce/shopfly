@@ -23,7 +23,7 @@ import java.io.Serializable;
 
 
 /**
- * 会员发票实体VO
+ * Member invoice entityVO
  *
  * @author zh
  * @version v7.0.0
@@ -35,30 +35,30 @@ public class MemberReceiptVO implements Serializable {
 
     private static final long serialVersionUID = 8050258384276672902L;
     /**
-     * 发票类型
+     * Invoice type
      */
-    @ApiModelProperty(name = "receipt_type", value = "枚举，ELECTRO:电子普通发票，VATORDINARY：增值税普通发票，VATOSPECIAL：增值税专用发票", required = false, hidden = true)
+    @ApiModelProperty(name = "receipt_type", value = "Enumeration,ELECTRO:Electronic general invoice,VATORDINARY：VAT general invoice,VATOSPECIAL：VAT special invoice", required = false, hidden = true)
     private String receiptType;
     /**
-     * 发票抬头
+     * The invoice looked up
      */
-    @ApiModelProperty(name = "receipt_title", value = "发票抬头", required = false)
+    @ApiModelProperty(name = "receipt_title", value = "The invoice looked up", required = false)
     private String receiptTitle;
     /**
-     * 发票内容
+     * The invoice content
      */
-    @ApiModelProperty(name = "receipt_content", value = "发票内容", required = false)
+    @ApiModelProperty(name = "receipt_content", value = "The invoice content", required = false)
     private String receiptContent;
     /**
-     * 发票税号
+     * The invoice id number
      */
-    @ApiModelProperty(name = "tax_no", value = "发票税号", required = false)
+    @ApiModelProperty(name = "tax_no", value = "The invoice id number", required = false)
     private String taxNo;
 
     /**
-     * 增值税普通发票赋值
+     * VAT ordinary invoice value assignment
      *
-     * @param ordinaryReceiptVO 增值税普通发票
+     * @param ordinaryReceiptVO VAT general invoice
      */
     public MemberReceiptVO(OrdinaryReceiptVO ordinaryReceiptVO) {
         this.receiptType = ordinaryReceiptVO.getReceiptType();

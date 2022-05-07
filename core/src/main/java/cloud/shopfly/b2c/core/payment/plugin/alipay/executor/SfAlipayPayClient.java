@@ -29,11 +29,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * shopfly 阿里支付客户端
+ * shopfly Ali Pay client
  *
  * @author zh
  * @version v7.0
- * @date 18/7/19 下午3:21
+ * @date 18/7/19 In the afternoon3:21
  * @since v7.0
  */
 
@@ -52,7 +52,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
     private String charset;
 
     static {
-        //清除安全设置
+        // Clear Security Settings
         Security.setProperty("jdk.certpath.disabledAlgorithms", "");
     }
 
@@ -137,7 +137,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
     public <T extends AlipayResponse> T pageExecute(AlipayRequest<T> request,
                                                     String httpMethod) throws AlipayApiException {
         RequestParametersHolder requestHolder = getRequestHolderWithSign(request, null, null);
-        // 打印完整请求报文
+        // Prints the complete request packet
         if (AlipayLogger.isBizDebugEnabled()) {
             AlipayLogger.logBizDebug(getRedirectUrl(requestHolder));
         }
@@ -154,10 +154,10 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
             rsp.setBody(getRedirectUrl(requestHolder));
         } else {
             /*******************************************************************************
-             * 注意：
-             *     这个类的作用就是覆写这里，目的是形成 shopfly 前端需要的form 和form item格式
-             * 原因：
-             *     前后端分离，vue无法通过form表单跳转
+             * Pay attention to：
+             *     The purpose of this class is to overwrite this, to formshopfly Front-end requiredform andform itemformat
+             * why：
+             *     Separation of the front and back ends,vueUnable to getformForm a jump
              *******************************************************************************/
             rsp.setBody(JsonUtil.objectToJson(this.getFormData(requestHolder)));
         }
@@ -166,7 +166,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
 
 
     /**
-     * 组装接口参数，处理加密、签名逻辑
+     * Assemble interface parameters to handle encryption、Signature logic
      *
      * @param request
      * @param accessToken
@@ -180,7 +180,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
         RequestParametersHolder requestHolder = new RequestParametersHolder();
         AlipayHashMap appParams = new AlipayHashMap(request.getTextParams());
 
-        // 仅当API包含biz_content参数且值为空时，序列化bizModel填充bizContent
+        // Serialized bizModel populates bizContent only if the API contains the biz_CONTENT parameter and its value is null
         try {
             if (request.getClass().getMethod("getBizContent") != null
                     && StringUtils.isEmpty(appParams.get(AlipayConstants.BIZ_CONTENT_KEY))
@@ -189,23 +189,23 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
                         new JSONWriter().write(request.getBizModel(), true));
             }
         } catch (NoSuchMethodException e) {
-            // 找不到getBizContent则什么都不做
+            // Do nothing if you cant find getBizContent
         } catch (SecurityException e) {
             AlipayLogger.logBizError(e);
         }
 
-        // 只有新接口和设置密钥才能支持加密
+        // Only new interfaces and set keys can support encryption
         if (request.isNeedEncrypt()) {
 
             if (StringUtils.isEmpty(appParams.get(AlipayConstants.BIZ_CONTENT_KEY))) {
 
-                throw new AlipayApiException("当前API不支持加密请求");
+                throw new AlipayApiException("The currentAPIEncrypted requests are not supported");
             }
 
-            // 需要加密必须设置密钥和加密算法
+            // To encrypt, you must set the key and encryption algorithm
             if (!StringUtils.areNotEmpty(this.encryptKey, this.encryptType)) {
 
-                throw new AlipayApiException("API请求要求加密，则必须设置密钥和密钥类型：encryptKey=" + encryptKey
+                throw new AlipayApiException("APIIf the request requires encryption, the key and key type must be set：encryptKey=" + encryptKey
                         + ",encryptType=" + encryptType);
             }
 
@@ -267,7 +267,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
     }
 
     /**
-     * 组织参数
+     * Tissue parameters
      *
      * @param requestHolder
      * @return
@@ -295,7 +295,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
     }
 
     /**
-     * 获取POST请求的base url
+     * To obtainPOSTThe request ofbase url
      *
      * @param requestHolder
      * @return
@@ -324,7 +324,7 @@ public class SfAlipayPayClient extends DefaultAlipayClient {
 
 
     /**
-     * GET模式下获取跳转链接
+     * GETGet jump link in mode
      *
      * @param requestHolder
      * @return

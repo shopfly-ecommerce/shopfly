@@ -21,19 +21,19 @@ import cloud.shopfly.b2c.core.base.SearchCriteria;
 import cloud.shopfly.b2c.framework.database.Page;
 
 /**
- * 会员相关统计
+ * Membership statistics
  *
  * @author chopper
  * @version v1.0
  * @Description:
  * @since v7.0
- * 2018/4/16 下午1:54
+ * 2018/4/16 In the afternoon1:54
  */
 
 public interface MemberStatisticManager {
 
     /**
-     * 获取新增会员数量
+     * Get the number of new members
      *
      * @param searchCriteria
      * @return
@@ -41,7 +41,7 @@ public interface MemberStatisticManager {
     SimpleChart getIncreaseMember(SearchCriteria searchCriteria);
 
     /**
-     * 获取新增会员数量 表格
+     * Obtain the number of new members form
      *
      * @param searchCriteria
      * @return
@@ -49,7 +49,7 @@ public interface MemberStatisticManager {
     Page getIncreaseMemberPage(SearchCriteria searchCriteria);
 
     /**
-     * 获取会员下单量
+     * Get member orders
      *
      * @param searchCriteria
      * @return
@@ -57,7 +57,7 @@ public interface MemberStatisticManager {
     SimpleChart getMemberOrderQuantity(SearchCriteria searchCriteria);
 
     /**
-     * 获取会员下单量 表格
+     * Obtain member order form
      *
      * @param searchCriteria
      * @return
@@ -65,7 +65,7 @@ public interface MemberStatisticManager {
     Page getMemberOrderQuantityPage(SearchCriteria searchCriteria);
 
     /**
-     * 获取下单商品数量 表格
+     * Obtain order quantity form
      *
      * @param searchCriteria
      * @return
@@ -73,7 +73,7 @@ public interface MemberStatisticManager {
     SimpleChart getMemberGoodsNum(SearchCriteria searchCriteria);
 
     /**
-     * 获取下单商品数量 表格
+     * Obtain order quantity form
      *
      * @param searchCriteria
      * @return
@@ -81,7 +81,7 @@ public interface MemberStatisticManager {
     Page getMemberGoodsNumPage(SearchCriteria searchCriteria);
 
     /**
-     * 获取下单总金额
+     * Obtain the total order amount
      *
      * @param searchCriteria
      * @return
@@ -89,7 +89,7 @@ public interface MemberStatisticManager {
     SimpleChart getMemberMoney(SearchCriteria searchCriteria);
 
     /**
-     * 获取下单总金额 表格
+     * Obtain the order total amount form
      *
      * @param searchCriteria
      * @return

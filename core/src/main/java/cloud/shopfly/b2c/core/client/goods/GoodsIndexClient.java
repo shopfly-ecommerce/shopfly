@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品索引
+ * @Description: Commodity index
  * @date 2018/8/14 14:11
  * @since v7.0.0
  */
@@ -29,29 +29,29 @@ public interface GoodsIndexClient {
 
 
     /**
-     * 将某个商品加入索引<br>
+     * Adds an item to an index<br>
      * @param goods
      */
     void addIndex(Map goods);
 
     /**
-     * 更新某个商品的索引
+     * Update an index for an item
      * @param goods
      */
     void updateIndex(Map goods);
 
 
     /**
-     * 更新
+     * update
      * @param goods
      */
     void deleteIndex(Map goods);
 
     /**
-     * 初始化索引
+     * Initializing indexes
      * @param list
      * @param index
-     * @return  是否是生成成功
+     * @return  Is the generation successful?
      */
     boolean addAll(List<Map<String, Object>> list, int index);
 

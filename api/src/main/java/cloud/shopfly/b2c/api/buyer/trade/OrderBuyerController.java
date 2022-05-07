@@ -49,14 +49,14 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 
 /**
- * 会员订单相关控制器
+ * Member order related controller
  *
  * @author Snow create in 2018/5/14
  * @version v2.0
  * @since v7.0.0
  */
 
-@Api(description = "会员订单API")
+@Api(description = "Member of the orderAPI")
 @RestController
 @RequestMapping("/trade/orders")
 @Validated
@@ -81,16 +81,16 @@ public class OrderBuyerController {
     private SettingClient settingClient;
 
 
-    @ApiOperation(value = "查询会员订单列表")
+    @ApiOperation(value = "Query membership order list")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods_name", value = "商品名称关键字", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "key_words", value = "关键字", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "order_status", value = "订单状态", dataType = "String", paramType = "query",
+            @ApiImplicitParam(name = "goods_name", value = "Product name keyword", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "key_words", value = "keyword", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "order_status", value = "Status", dataType = "String", paramType = "query",
                     allowableValues = "ALL,WAIT_PAY,WAIT_SHIP,WAIT_ROG,CANCELLED,COMPLETE,WAIT_COMMENT,REFUND",
-                    example = "ALL:所有订单,WAIT_PAY:待付款,WAIT_SHIP:待发货,WAIT_ROG:待收货," +
-                            "CANCELLED:已取消,COMPLETE:已完成,WAIT_COMMENT:待评论,REFUND:售后中"),
-            @ApiImplicitParam(name = "page_no", value = "页数", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "条数", dataType = "int", paramType = "query"),
+                    example = "ALL:All orders,WAIT_PAY:For the payment,WAIT_SHIP:To send the goods,WAIT_ROG:For the goods," +
+                            "CANCELLED:Has been cancelled,COMPLETE:Has been completed,WAIT_COMMENT:To comment on,REFUND:In the after-sale"),
+            @ApiImplicitParam(name = "page_no", value = "Number of pages", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "A number of", dataType = "int", paramType = "query"),
     })
     @GetMapping()
     public Page<OrderLineVO> list(@ApiIgnore String keyWords, @ApiIgnore String goodsName, @ApiIgnore String orderStatus,
@@ -102,7 +102,7 @@ public class OrderBuyerController {
             }
             OrderTagEnum.valueOf(orderStatus);
         } catch (Exception e) {
-            throw new ServiceException(TradeErrorCode.E455.code(), "订单状态参数错误");
+            throw new ServiceException(TradeErrorCode.E455.code(), "The order status parameter is incorrect");
         }
 
         Buyer buyer = UserContext.getBuyer();
@@ -116,7 +116,7 @@ public class OrderBuyerController {
 
         Page page = this.orderQueryManager.list(param);
 
-        //货到付款的订单不允许线上支付
+        // Online payment is not allowed for cash on delivery orders
         List<OrderLineVO> list = page.getData();
         for (OrderLineVO order : list) {
             if (PaymentTypeEnum.COD.value().equals(order.getPaymentType())) {
@@ -129,9 +129,9 @@ public class OrderBuyerController {
     }
 
 
-    @ApiOperation(value = "查询单个订单明细")
+    @ApiOperation(value = "Example Query the details of a single order")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "path")
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "path")
     })
     @GetMapping(value = "/{order_sn}")
     public OrderDetailVO get(@ApiIgnore @PathVariable("order_sn") String orderSn) {
@@ -142,7 +142,7 @@ public class OrderBuyerController {
             detailVO.setReceiptHistory(memberHistoryReceiptClient.getReceiptHistory(orderSn));
         }
 
-        //货到付款的订单不允许线上支付
+        // Online payment is not allowed for cash on delivery orders
         if (PaymentTypeEnum.COD.value().equals(detailVO.getPaymentType())) {
             detailVO.getOrderOperateAllowableVO().setAllowPay(false);
         }
@@ -151,9 +151,9 @@ public class OrderBuyerController {
     }
 
 
-    @ApiOperation(value = "确认收货")
+    @ApiOperation(value = "Confirm the goods")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "path")
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "path")
     })
     @PostMapping(value = "/{order_sn}/rog")
     public String rog(@ApiIgnore @PathVariable("order_sn") String orderSn) {
@@ -168,10 +168,10 @@ public class OrderBuyerController {
     }
 
 
-    @ApiOperation(value = "取消订单")
+    @ApiOperation(value = "Cancel the order")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "reason", value = "取消原因", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "reason", value = "Cancel the reason", required = true, dataType = "String", paramType = "query"),
     })
     @PostMapping(value = "/{order_sn}/cancel")
     public String cancel(@ApiIgnore @PathVariable("order_sn") String orderSn, String reason) {
@@ -188,7 +188,7 @@ public class OrderBuyerController {
     }
 
 
-    @ApiOperation(value = "查询订单状态的数量")
+    @ApiOperation(value = "Query the quantity of order status")
     @GetMapping(value = "/status-num")
     public OrderStatusNumVO getStatusNum() {
         Buyer buyer = UserContext.getBuyer();
@@ -196,9 +196,9 @@ public class OrderBuyerController {
     }
 
 
-    @ApiOperation(value = "根据交易编号查询订单列表")
+    @ApiOperation(value = "Query the order list by transaction number")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "trade_sn", value = "交易编号", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "trade_sn", value = "Transaction number", required = true, dataType = "String", paramType = "path"),
     })
     @GetMapping(value = "/{trade_sn}/list")
     public List<OrderDetailVO> getOrderList(@ApiIgnore @PathVariable("trade_sn") String tradeSn) {
@@ -208,10 +208,10 @@ public class OrderBuyerController {
     }
 
 
-    @ApiOperation(value = "根据交易编号或者订单编号查询收银台数据")
+    @ApiOperation(value = "Query cash register data according to transaction number or order number")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "trade_sn", value = "交易编号", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "trade_sn", value = "Transaction number", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", dataType = "String", paramType = "query")
     })
     @GetMapping(value = "/cashier")
     public CashierVO getCashier(@ApiIgnore String tradeSn, @ApiIgnore String orderSn) {
@@ -247,7 +247,7 @@ public class OrderBuyerController {
             createTime = detailVO.getCreateTime();
 
         } else {
-            throw new ServiceException(TradeErrorCode.E455.code(), "参数错误");
+            throw new ServiceException(TradeErrorCode.E455.code(), "Parameter error");
         }
 
         CashierVO cashierVO = new CashierVO();
@@ -264,18 +264,18 @@ public class OrderBuyerController {
     }
 
 
-    @ApiOperation(value = "订单流程图数据", notes = "订单流程图数据")
+    @ApiOperation(value = "Order flow chart data", notes = "Order flow chart data")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单sn", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "order_sn", value = "The ordersn", required = true, dataType = "String", paramType = "path"),
     })
     @GetMapping(value = "/{order_sn}/flow")
     public List<OrderFlowNode> getOrderStatusFlow(@ApiIgnore @PathVariable(name = "order_sn") String orderSn) {
         return this.orderQueryManager.getOrderFlow(orderSn);
     }
 
-    @ApiOperation(value = "查询订单日志")
+    @ApiOperation(value = "Querying order Logs")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order_sn", value = "订单编号", required = true, dataType = "String", paramType = "path")
+            @ApiImplicitParam(name = "order_sn", value = "Order no.", required = true, dataType = "String", paramType = "path")
     })
     @GetMapping(value = "/{order_sn}/log")
     public List<OrderLogDO> getList(@ApiIgnore @PathVariable("order_sn") String orderSn) {
@@ -284,9 +284,9 @@ public class OrderBuyerController {
     }
 
     /**
-     * 计算距离订单自动失效时间
-     * @param createTime  订单创建时间
-     * @return   倒计时  单位:秒
+     * Calculate the automatic invalidation time from the order
+     * @param createTime  Order Creation time
+     * @return   Countdown unit:seconds
      */
     private Long handlecountDown(Long createTime){
 

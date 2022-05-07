@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 团购商品库存日志表业务类
+ * Group purchase commodity inventory log table business class
  *
  * @author xlp
  * @version v1.0
@@ -59,7 +59,7 @@ public class GroupbuyQuantityLogManagerImpl implements GroupbuyQuantityLogManage
         for (GroupbuyQuantityLog log : logList) {
             log.setQuantity(log.getQuantity());
             log.setOpTime(DateUtil.getDateline());
-            log.setReason("取消订单，回滚库存");
+            log.setReason("Cancel the order and roll back inventory");
             log.setLogId(null);
             this.add(log);
             result.add(log);

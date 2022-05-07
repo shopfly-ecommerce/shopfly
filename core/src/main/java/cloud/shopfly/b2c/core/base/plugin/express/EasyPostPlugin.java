@@ -31,11 +31,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * EasyPost 快递实现
+ * EasyPost Express implementation
  *
  * @author cs
  * @version v7.2.3
- * @date 22/4/26 下午3:52
+ * @date 22/4/26 In the afternoon3:52
  * @since v7.0
  */
 @Component

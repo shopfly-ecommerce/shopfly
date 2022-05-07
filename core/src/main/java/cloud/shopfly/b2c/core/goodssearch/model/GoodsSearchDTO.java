@@ -25,7 +25,7 @@ import java.io.Serializable;
 /**
  * @author fk
  * @version v2.0
- * @Description: 商品搜索传输对象
+ * @Description: Commodity search transfer object
  * @date 2018/6/19 16:15
  * @since v7.0.0
  */
@@ -33,21 +33,21 @@ import java.io.Serializable;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GoodsSearchDTO implements Serializable {
 
-    @ApiModelProperty(name = "page_no", value = "页码")
+    @ApiModelProperty(name = "page_no", value = "The page number")
     private Integer pageNo;
-    @ApiModelProperty(name = "page_size", value = "每页数量")
+    @ApiModelProperty(name = "page_size", value = "Number each page")
     private Integer pageSize;
-    @ApiModelProperty(name = "keyword", value = "关键字")
+    @ApiModelProperty(name = "keyword", value = "keyword")
     private String keyword;
-    @ApiModelProperty(name = "category", value = "分类")
+    @ApiModelProperty(name = "category", value = "Categories")
     private Integer category;
-    @ApiModelProperty(name = "brand", value = "品牌")
+    @ApiModelProperty(name = "brand", value = "brand")
     private Integer brand;
-    @ApiModelProperty(name = "price", value = "价格",example = "10_30")
+    @ApiModelProperty(name = "price", value = "Price",example = "10_30")
     private String price;
-    @ApiModelProperty(name = "sort", value = "排序:关键字_排序",allowableValues = "def_asc,def_desc,price_asc,price_desc,buynum_asc,buynum_desc,grade_asc,grade_desc")
+    @ApiModelProperty(name = "sort", value = "sort:keyword_sort",allowableValues = "def_asc,def_desc,price_asc,price_desc,buynum_asc,buynum_desc,grade_asc,grade_desc")
     private String sort;
-    @ApiModelProperty(name = "prop", value = "属性:参数名_参数值@参数名_参数值",example = "屏幕类型_LED@屏幕尺寸_15英寸")
+    @ApiModelProperty(name = "prop", value = "attribute:Parameter names_The parameter value@Parameter names_The parameter value",example = "Screen type_LED@The screen size_15inches")
     private String prop;
 
     public Integer getPageNo() {

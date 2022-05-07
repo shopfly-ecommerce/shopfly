@@ -21,7 +21,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * 限时抢购商品申请VO
+ * Flash sale applicationVO
  *
  * @author Snow create in 2018/6/28
  * @version v2.0
@@ -29,7 +29,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class SeckillApplyVO extends SeckillApplyDO {
 
-    @ApiModelProperty(value="状态文字值")
+    @ApiModelProperty(value="Status text value")
     private String statusText;
 
     public String getStatusText() {

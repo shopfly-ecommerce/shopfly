@@ -18,16 +18,16 @@ package cloud.shopfly.b2c.consumer.core.event;
 import cloud.shopfly.b2c.core.base.message.CategoryChangeMsg;
 
 /**
- * 商品分类变化事件
+ * Product classification change event
  * @author fk
  * @version v2.0
  * @since v7.0.0
- * 2018年3月23日 上午10:24:31
+ * 2018years3month23The morning of10:24:31
  */
 public interface CategoryChangeEvent {
 
 	/**
-	 * 商品分类变化后需要执行的方法
+	 * Methods to be implemented after a change in commodity classification
 	 * @param categoryChangeMsg
 	 */
     void categoryChange(CategoryChangeMsg categoryChangeMsg);

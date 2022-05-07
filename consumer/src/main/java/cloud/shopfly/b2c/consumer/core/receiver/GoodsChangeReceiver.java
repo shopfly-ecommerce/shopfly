@@ -31,11 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 商品变化消费者
+ * Commodity change consumer
  * 
  * @author fk
  * @version v2.0
- * @since v7.0.0 2018年3月23日 上午10:29:54
+ * @since v7.0.0 2018years3month23The morning of10:29:54
  */
 @Component
 public class GoodsChangeReceiver {
@@ -46,7 +46,7 @@ public class GoodsChangeReceiver {
 	private List<GoodsChangeEvent> events;
 
 	/**
-	 * 商品变化
+	 * Goods change
 	 * 
 	 * @param goodsChangeMsg
 	 */
@@ -61,7 +61,7 @@ public class GoodsChangeReceiver {
 				try {
 					event.goodsChange(goodsChangeMsg);
 				} catch (Exception e) {
-					logger.error("处理商品变化消息出错", e);
+					logger.error("Error processing commodity change message", e);
 				}
 			}
 		}

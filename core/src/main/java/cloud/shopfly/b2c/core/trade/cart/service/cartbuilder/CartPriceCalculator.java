@@ -22,11 +22,11 @@ import cloud.shopfly.b2c.core.trade.cart.model.vo.PromotionRule;
 import java.util.List;
 
 /**
- * 购物车价格计算器<br/>
- * 对购物车中的{@link PromotionRule}进行计算
- * 形成{@link PriceDetailVO}
- * 文档请参考：<br>
- * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >购物车架构</a>
+ * Shopping cart price calculator<br/>
+ * On the shopping cart{@link PromotionRule}To calculate
+ * The formation of{@link PriceDetailVO}
+ * Please refer to the documentation.：<br>
+ * <a href="http://doc.javamall.com.cn/current/achitecture/jia-gou/ding-dan/cart-and-checkout.html" >Shopping cart architecture</a>
  *
  * @author kingapex
  * @version 1.0
@@ -37,7 +37,7 @@ public interface CartPriceCalculator {
 
 
     /**
-     * 计算购物车价格
+     * Calculate shopping cart prices
      *
      * @param cartList
      * @return

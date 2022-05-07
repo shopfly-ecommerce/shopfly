@@ -29,7 +29,7 @@ import java.io.Serializable;
 
 
 /**
- * 会员发票实体
+ * Member invoice entity
  *
  * @author zh
  * @version v7.0.0
@@ -44,70 +44,70 @@ public class MemberReceipt implements Serializable {
     private static final long serialVersionUID = 4743090485786622L;
 
     /**
-     * 会员发票id
+     * Member of the invoiceid
      */
     @Id(name = "receipt_id")
     @ApiModelProperty(hidden = true)
     private Integer receiptId;
     /**
-     * 会员id
+     * membersid
      */
     @Column(name = "member_id")
-    @ApiModelProperty(name = "member_id", value = "会员id", required = false)
+    @ApiModelProperty(name = "member_id", value = "membersid", required = false)
     private Integer memberId;
     /**
-     * 发票类型
+     * Invoice type
      */
     @Column(name = "receipt_type")
-    @ApiModelProperty(name = "receipt_type", value = "发票类型", required = false)
+    @ApiModelProperty(name = "receipt_type", value = "Invoice type", required = false)
     private String receiptType;
     /**
-     * 发票抬头
+     * The invoice looked up
      */
     @Column(name = "receipt_title")
-    @ApiModelProperty(name = "receipt_title", value = "发票抬头", required = false)
+    @ApiModelProperty(name = "receipt_title", value = "The invoice looked up", required = false)
     private String receiptTitle;
     /**
-     * 发票内容
+     * The invoice content
      */
     @Column(name = "receipt_content")
-    @ApiModelProperty(name = "receipt_content", value = "发票内容", required = false)
+    @ApiModelProperty(name = "receipt_content", value = "The invoice content", required = false)
     private String receiptContent;
     /**
-     * 发票税号
+     * The invoice id number
      */
     @Column(name = "tax_no")
-    @ApiModelProperty(name = "tax_no", value = "发票税号", required = false)
+    @ApiModelProperty(name = "tax_no", value = "The invoice id number", required = false)
     private String taxNo;
     /**
-     * 注册地址
+     * The registered address
      */
     @Column(name = "reg_addr")
-    @ApiModelProperty(name = "reg_addr", value = "注册地址", required = false)
+    @ApiModelProperty(name = "reg_addr", value = "The registered address", required = false)
     private String regAddr;
     /**
-     * 注册电话
+     * Registered telephone
      */
     @Column(name = "reg_tel")
-    @ApiModelProperty(name = "reg_tel", value = "注册电话", required = false)
+    @ApiModelProperty(name = "reg_tel", value = "Registered telephone", required = false)
     private String regTel;
     /**
-     * 开户银行
+     * bank
      */
     @Column(name = "bank_name")
-    @ApiModelProperty(name = "bank_name", value = "开户银行", required = false)
+    @ApiModelProperty(name = "bank_name", value = "bank", required = false)
     private String bankName;
     /**
-     * 银行账户
+     * The bank account
      */
     @Column(name = "bank_account")
-    @ApiModelProperty(name = "bank_account", value = "银行账户", required = false)
+    @ApiModelProperty(name = "bank_account", value = "The bank account", required = false)
     private String bankAccount;
     /**
-     * 是否为默认
+     * Default or not
      */
     @Column(name = "is_default")
-    @ApiModelProperty(name = "is_default", value = "是否为默认", required = false)
+    @ApiModelProperty(name = "is_default", value = "Default or not", required = false)
     private Integer isDefault;
 
     @PrimaryKeyField
@@ -129,13 +129,13 @@ public class MemberReceipt implements Serializable {
 
     public String getReceiptType() {
         if (ReceiptTypeEnum.ELECTRO.name().equals(receiptType)) {
-            return "电子普通发票";
+            return "Electronic invoice";
         }
         if (ReceiptTypeEnum.VATORDINARY.name().equals(receiptType)) {
-            return "增值税普通发票";
+            return "VAT general invoice";
         }
         if (ReceiptTypeEnum.VATOSPECIAL.name().equals(receiptType)) {
-            return "增值税专用发票";
+            return "VAT special invoice";
         }
         return receiptType;
     }

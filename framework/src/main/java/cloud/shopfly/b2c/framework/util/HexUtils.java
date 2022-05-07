@@ -23,7 +23,7 @@ import java.io.UnsupportedEncodingException;
  * @author Dawei
  * @version v1.0
  * @since v7.0.0
- * 2018年3月23日 上午10:26:41
+ * 2018years3month23The morning of10:26:41
  */
 public class HexUtils {
 
@@ -31,7 +31,7 @@ public class HexUtils {
             '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     /**
-     * 将字节数组转换为Hex字符串
+     * Converts a byte array toHexstring
      * @param bytes
      * @return
      */
@@ -45,7 +45,7 @@ public class HexUtils {
     }
 
     /**
-     * 将Hex字符串转换为字节数组
+     * willHexA string is converted to a byte array
      * @param str
      * @return
      */

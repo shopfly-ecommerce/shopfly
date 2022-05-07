@@ -23,8 +23,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ServletModelAttribu
 import javax.servlet.ServletRequest;
 
 /**
- * 蛇形转驼峰参数转换器
- * 用于非基本类型
+ * Snake-to-hump parameter converter
+ * Used for non-basic types
  * Created by kingapex on 2018/3/20.
  *
  * @author kingapex
@@ -36,19 +36,19 @@ public class SnakeToCamelModelAttributeMethodProcessor extends ServletModelAttri
 
 
     /**
-     * 构造函数
+     * The constructor
      *
-     * @param annotationNotRequired 注解是否必须
+     * @param annotationNotRequired Whether annotations are required
      */
     public SnakeToCamelModelAttributeMethodProcessor(boolean annotationNotRequired) {
         super(annotationNotRequired);
     }
 
     /**
-     * 绑定蛇形转驼峰Binder
+     * Binding serpentine turning humpBinder
      *
-     * @param binder  spring 机制传琛来的binder
-     * @param request spring机制的web request
+     * @param binder  spring Its from the mechanicsbinder
+     * @param request springThe mechanisms ofweb request
      */
     @Override
     @InitBinder

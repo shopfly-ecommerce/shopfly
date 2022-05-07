@@ -24,7 +24,7 @@ import java.util.Map;
 public interface LoginManager {
 
     /**
-     * 根据UnionId登陆
+     * According to theUnionIdlanding
      * @param loginUserDTO
      * @return
      */

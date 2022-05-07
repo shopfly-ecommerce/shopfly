@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 限时抢购活动控制器
+ * Flash sale activity controller
  *
  * @author Snow
  * @version v7.0.0
@@ -48,7 +48,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller/promotion/seckills")
-@Api(description = "限时抢购活动相关API")
+@Api(description = "Flash sale relatedAPI")
 @Validated
 public class SeckillSellerController {
 
@@ -56,11 +56,11 @@ public class SeckillSellerController {
     private SeckillManager seckillManager;
 
 
-    @ApiOperation(value = "查询限时抢购列表", response = SeckillDO.class)
+    @ApiOperation(value = "Query flash sale lists", response = SeckillDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page_no", value = "页码", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "page_size", value = "每页显示数量", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "keywords", value = "关键字", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "page_no", value = "The page number", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page_size", value = "Display quantity per page", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "keywords", value = "keyword", dataType = "int", paramType = "query")
     })
     @GetMapping
     public Page<SeckillVO> list(@ApiIgnore Integer pageNo, @ApiIgnore Integer pageSize,String keywords) {
@@ -69,7 +69,7 @@ public class SeckillSellerController {
     }
 
 
-    @ApiOperation(value = "添加限时抢购入库", response = SeckillVO.class)
+    @ApiOperation(value = "Add flash sale to store", response = SeckillVO.class)
     @PostMapping
     public SeckillDTO add(@Valid @RequestBody SeckillDTO seckill) {
         this.verifyParam(seckill);
@@ -79,11 +79,11 @@ public class SeckillSellerController {
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "修改限时抢购入库", response = SeckillDO.class)
+    @ApiOperation(value = "Modify flash sale to store", response = SeckillDO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "A primary key", required = true, dataType = "int", paramType = "path")
     })
-    public SeckillDTO edit(@Valid @RequestBody SeckillDTO seckill, @PathVariable @NotNull(message = "限时抢购ID参数错误") Integer id) {
+    public SeckillDTO edit(@Valid @RequestBody SeckillDTO seckill, @PathVariable @NotNull(message = "flashIDParameter error") Integer id) {
         this.verifyParam(seckill);
         this.seckillManager.edit(seckill, id);
         return seckill;
@@ -91,9 +91,9 @@ public class SeckillSellerController {
 
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "删除限时抢购入库")
+    @ApiOperation(value = "Delete flash sale to store")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的限时抢购入库主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Flash store to delete home key", required = true, dataType = "int", paramType = "path")
     })
     public String delete(@PathVariable Integer id) {
 
@@ -103,9 +103,9 @@ public class SeckillSellerController {
     }
 
     @DeleteMapping(value = "/{id}/close")
-    @ApiOperation(value = "关闭限时抢购")
+    @ApiOperation(value = "Close flash sales")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要关闭的限时抢购入库主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "To close the flash store store main key", required = true, dataType = "int", paramType = "path")
     })
     public String close(@PathVariable Integer id) {
 
@@ -116,9 +116,9 @@ public class SeckillSellerController {
 
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "查询一个限时抢购入库")
+    @ApiOperation(value = "Query a flash sale to store")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的限时抢购入库主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Flash sale to query into the main key", required = true, dataType = "int", paramType = "path")
     })
     public SeckillDTO get(@PathVariable Integer id) {
         SeckillDTO seckillVO = this.seckillManager.getModelAndRange(id);
@@ -126,9 +126,9 @@ public class SeckillSellerController {
     }
 
     @GetMapping(value = "/{id}/seckill-applys")
-    @ApiOperation(value = "查询一个限时抢购入库的已经申请的商品")
+    @ApiOperation(value = "Query a flash sale for an item that has been applied for storage")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要查询的限时抢购入库主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "id", value = "Flash sale to query into the main key", required = true, dataType = "int", paramType = "path")
     })
     public SeckillVO getApply(@PathVariable Integer id) {
         SeckillVO seckillVO = this.seckillManager.getModelAndApplys(id);
@@ -136,15 +136,15 @@ public class SeckillSellerController {
     }
 
 
-    @ApiOperation(value = "发布限时抢购活动")
+    @ApiOperation(value = "Launch a flash sale")
     @PostMapping("/{seckill_id}/release")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "seckill_id", value = "要查询的限时抢购入库主键", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "seckill_id", value = "Flash sale to query into the main key", required = true, dataType = "int", paramType = "path")
     })
     public SeckillDTO publish(@Valid @RequestBody SeckillDTO seckill, @ApiIgnore @PathVariable("seckill_id") Integer seckillId) {
 
         this.verifyParam(seckill);
-        //发布状态
+        // Post status
         seckill.setSeckillStatus(SeckillStatusEnum.RELEASE.name());
         if (seckillId == null || seckillId == 0) {
             seckillManager.add(seckill);
@@ -156,49 +156,49 @@ public class SeckillSellerController {
     }
 
     /**
-     * 验证参数
+     * Validate parameter
      *
      * @param seckillVO
      */
     private void verifyParam(SeckillDTO seckillVO) {
-        //获取活动开始时间
+        // Gets the start time of the activity
         long startDay = seckillVO.getStartDay();
 
-        //获取活动开始当天0点的时间
+        // Gets the time of 0 o clock on the day the event starts
         String startDate = DateUtil.toString(startDay, "yyyy-MM-dd");
         long startTime = DateUtil.getDateline(startDate + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
 
-        //获取报名截止时间
+        // Get the registration deadline
         long applyTime = seckillVO.getApplyEndTime();
 
-        //获取当前时间
+        // Get the current time
         long currentTime = DateUtil.getDateline();
 
-        //获取当天开始时间
+        // Get the start time of the day
         String currentDay = DateUtil.toString(currentTime, "yyyy-MM-dd");
         long currentStartTime = DateUtil.getDateline(currentDay + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
 
-        //活动时间小于当天开始时间
+        // The activity time is shorter than the start time of the day
         if (startDay < currentStartTime) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "活动时间不能小于当前时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The active time cannot be smaller than the current time");
         }
-        //报名截止时间小于当前时间
+        // The deadline for registration is less than the current time
         if (applyTime < currentTime) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "报名截止时间不能小于当前时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The registration deadline cannot be less than the current time");
         }
-        //报名截止时间大于活动开始当天的起始时间
+        // The deadline for registration is longer than the start time of the event
         if (applyTime > startTime) {
-            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "报名截止时间不能大于活动开始时间");
+            throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The deadline for registration should not be longer than the start time of the activity");
         }
 
         List<Integer> termList = new ArrayList<>();
         for (Integer time : seckillVO.getRangeList()) {
             if (termList.contains(time)) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "抢购区间的值不能重复");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The value of the panic buying interval cannot be repeated");
             }
-            //抢购区间的值不在0到23范围内
+            // The value of the rush zone is not in the range of 0 to 23
             if (time < 0 || time > 23) {
-                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "抢购区间必须在0点到23点的整点时刻");
+                throw new ServiceException(SystemErrorCodeV1.INVALID_REQUEST_PARAMETER, "The buying interval must be within0Point to the23The hour of one");
             }
             termList.add(time);
         }

@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 配置文件映射实体
+ * Configuration files map entities
  *
  * @author fk
  * @version v2.0
@@ -32,19 +32,19 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PayConfigItem {
     /**
-     * 配置文件name值
+     * The configuration filenamevalue
      */
-    @ApiModelProperty(name = "配置参数name值，以后台返回为准")
+    @ApiModelProperty(name = "Configuration parametersnameValue, whichever is returned from the background")
     private String name;
     /**
-     * 配置文件name映射文本值
+     * The configuration filenameMapped text value
      */
     @ApiModelProperty(hidden = true)
     private String text;
     /**
-     * 配置的值
+     * The value of the configuration
      */
-    @ApiModelProperty(name = "配置参数值，界面添加为准")
+    @ApiModelProperty(name = "Set the parameter values")
     private String value;
 
     public String getName() {

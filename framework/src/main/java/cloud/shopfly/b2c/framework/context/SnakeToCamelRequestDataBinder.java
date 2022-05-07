@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 蛇形转驼峰数据绑定器
+ * Serpentine hump data binder
  * Created by kingapex on 2018/3/20.
  *
  * @author kingapex
@@ -40,26 +40,26 @@ public class SnakeToCamelRequestDataBinder extends ExtendedServletRequestDataBin
 
 
     /**
-     * 构造器，根据spring机制机要求存在
+     * Constructor, according tospringThe machine needs to exist
      *
-     * @param target     spring 机制传递 target
-     * @param objectName spring 机制传递 objectName
+     * @param target     spring Mechanism fortarget
+     * @param objectName spring Mechanism forobjectName
      */
     public SnakeToCamelRequestDataBinder(Object target, String objectName) {
         super(target, objectName);
     }
 
     /**
-     * 对蛇形参数绑定值
+     * Bind values to snake parameters
      *
-     * @param mpvs    spring 机制传递   mpvs
-     * @param request spring 机制传递  request
+     * @param mpvs    spring Mechanism formpvs
+     * @param request spring Mechanism forrequest
      */
     @Override
     protected void addBindValues(MutablePropertyValues mpvs, ServletRequest request) {
         super.addBindValues(mpvs, request);
 
-        //处理JsonProperty注释的对象
+        // Objects that handle JsonProperty annotations
         Class<?> targetClass = getTarget().getClass();
         Field[] fields = targetClass.getDeclaredFields();
         for (Field field : fields) {

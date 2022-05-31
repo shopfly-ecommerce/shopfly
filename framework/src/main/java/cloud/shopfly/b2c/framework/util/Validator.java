@@ -38,7 +38,7 @@ public class Validator {
 	/**
 	 * Regular expression：Verify the phone number
 	 */
-	public static final String REGEX_MOBILE = "^0?(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[0-9])[0-9]{8}$";
+	public static final String REGEX_MOBILE = "^[\\d+]+$";
 
 	/**
 	 * Regular expression：Validation email
@@ -219,11 +219,5 @@ public class Validator {
 		}
 
 		return Pattern.matches(REGEX_POSITIVE_INT, num+"");
-	}
-
-	public static void main(String[] args) {
-		//String username = "30003001155115454x";
-		Integer num = 12;
-		System.out.println(Validator.isPositiveInt(num));
 	}
 }

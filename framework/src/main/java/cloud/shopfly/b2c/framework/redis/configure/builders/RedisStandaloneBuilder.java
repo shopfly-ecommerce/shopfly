@@ -104,6 +104,8 @@ public class RedisStandaloneBuilder  implements IRedisBuilder {
 
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration( host,port);
 
+        configuration.setDatabase(config.getDatabase());
+
         if(StringUtil.notEmpty(password)) {
             configuration.setPassword(RedisPassword.of(password));
         }

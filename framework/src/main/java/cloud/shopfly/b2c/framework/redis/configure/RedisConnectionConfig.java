@@ -107,6 +107,9 @@ public class RedisConnectionConfig {
 	@Value("${redis.sentinel.nodes:''}")
 	private String sentinelNodes;
 
+	@Value("${redis.database:0}")
+	private int database;
+
 
 	private  Integer maxIdle;
 
@@ -115,7 +118,13 @@ public class RedisConnectionConfig {
 
 	private Long maxWaitMillis;
 
+	public int getDatabase() {
+		return database;
+	}
 
+	public void setDatabase(int database) {
+		this.database = database;
+	}
 	public String getHost() {
 		return host;
 	}
